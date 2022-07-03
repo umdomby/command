@@ -25,6 +25,8 @@ which node
 which nodejs  
 which npm  
 
+
+--Option 3 — Installing Node Using the Node Version Manager  
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.0/install.sh | bash  
 export NVM_DIR="$HOME/.nvm"  
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm  
@@ -43,6 +45,7 @@ npm config set prefix '~/.npm-global'
 PATH="$HOME/.npm-global/bin:$PATH"  
 source ~/.profile  
 
+--Option 2 — Installing Node.js with Apt Using a NodeSource PPA  
 sudo apt-get remove nodejs  
 sudo apt-get remove npm  
 Then go to /etc/apt/sources.list.d and remove any node list if you have. Then do a 
