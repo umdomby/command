@@ -26,7 +26,9 @@ which nodejs
 which npm  
 
 
---Option 3 — Installing Node Using the Node Version Manager  
+--Option 3 — Installing Node Using the Node Version Manager
+ln -s "$(which node)" /usr/local/bin/node
+
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.0/install.sh | bash  
 export NVM_DIR="$HOME/.nvm"  
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm  
