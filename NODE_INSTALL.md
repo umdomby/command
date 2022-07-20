@@ -25,7 +25,7 @@ which node
 which nodejs  
 which npm  
 
-
+###############################################################################
 --Option 3 — Installing Node Using the Node Version Manager
 ln -s "$(which node)" /usr/local/bin/node
 
