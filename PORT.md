@@ -16,3 +16,8 @@ sudo setcap cap_net_bind_service=+ep /usr/local/node
 
 Вы можете остановить все службы, использующие порт 80, используя следующую команду:  
 net stop http  
+
+
+navatar@navatar-X58-USB3:~$ ps -e | grep telegram
+3316 ?        00:02:17 telegram-deskto
+navatar@navatar-X58-USB3:~$ kill -9 3316

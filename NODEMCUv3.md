@@ -8,6 +8,6 @@ https://nodemcu.readthedocs.io/en/release/flash/
 sudo apt install python3-pip    
 pip install pyserial  
 pip install esptool
-esptool.py --port /dev/ttyUSB1 write_flash -fm dio 0x00000 firmware.bin  
+esptool.py --port /dev/ttyUSB0 write_flash -fm dio 0x00000 firmware.bin  
 
 
