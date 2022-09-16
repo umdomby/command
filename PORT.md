@@ -19,5 +19,7 @@ net stop http
 
 
 navatar@navatar-X58-USB3:~$ ps -e | grep telegram
-3316 ?        00:02:17 telegram-deskto
+3316 ?        00:02:17 telegram-desktop
 navatar@navatar-X58-USB3:~$ kill -9 3316
+
+killall -9 firefox
