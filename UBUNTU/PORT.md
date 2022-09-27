@@ -1,5 +1,6 @@
 netstat -ntlp | grep LISTEN  
-sudo kill -9 `sudo lsof -t -i:3000`  or  sudo kill -9 $(sudo lsof -t -i:9001)  
+sudo kill -9 `sudo lsof -t -i:3000`  or  sudo kill -9 $(sudo lsof -t -i:9001)
+sudo kill -9 `sudo lsof -t -i:8081`
 
 sudo kill -9 -ID-  
 

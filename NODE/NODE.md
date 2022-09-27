@@ -11,12 +11,7 @@ nvm use v16.14.0
 
 nvm current node -v  # Checks your current version  
 nvm install <version>  # Example: nvm install 12.14.1  
-yarn config set ignore-engines true  
-
-#Error: error:0308010C:digital envelope routines::unsupported
-export NODE_OPTIONS=--openssl-legacy-provider
-or
-"start": "react-scripts --openssl-legacy-provider start"
+yarn config set ignore-engines true
 
 #reinstall  
 sudo apt-get remove nodejs  
