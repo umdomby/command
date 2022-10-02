@@ -1,0 +1,27 @@
+const camerasRef = useRef();
+
+const addDispaly = async () => {
+  camerasRef.current = await getConnectedDevices('videoinput');
+  console.log(camerasRef.current)
+  return camerasRef.current
+};
+
+useEffect( () => {
+    getConnectedDevices('videoinput').then(cameras => camerasRef.current = cameras);
+
+    //or
+    (async()=>{
+    camerasRef.current = await getConnectedDevices('videoinput');
+    console.log(arr)
+    })();
+
+    //or
+    addDispaly()
+
+    //or
+    const fetchData = async () => {
+        camerasRef.current = await getConnectedDevices('videoinput');
+        console.log(camerasRef.current)
+    }
+    etchData();
+}, [])
