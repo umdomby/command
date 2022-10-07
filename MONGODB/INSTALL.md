@@ -18,7 +18,7 @@ Ubuntu 22.04 обновил libssl до версии 3 и не предлага�
 Затем удалите только что созданный файл списка фокальной безопасности:  
 #rm /etc/apt/sources.list.d/focal-security.list  
 
-https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
+HTTPS_REACT://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
 
 #sudo systemctl start mongod  
 #sudo systemctl daemon-reload  
@@ -29,11 +29,11 @@ https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
 #mongosh  
 
 COMPAS
-https://www.mongodb.com/docs/compass/current/install/
-#wget https://downloads.mongodb.com/compass/mongodb-compass_1.33.1_amd64.deb  
+HTTPS_REACT://www.mongodb.com/docs/compass/current/install/
+#wget HTTPS_REACT://downloads.mongodb.com/compass/mongodb-compass_1.33.1_amd64.deb  
 #sudo dpkg -i mongodb-compass_1.33.1_amd64.deb  
 
-https://stackoverflow.com/questions/68742794/mongodb-failed-result-core-dump  
+HTTPS_REACT://stackoverflow.com/questions/68742794/mongodb-failed-result-core-dump  
 
 
 
@@ -54,11 +54,11 @@ https://stackoverflow.com/questions/68742794/mongodb-failed-result-core-dump
 
 5. Импортируйте открытый ключ, используемый системой управления пакетами:
 
-   wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+   wget -qO - HTTPS_REACT://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 
 6. Следующая инструкция предназначена для Ubuntu 20.04 (Focal):
 
-   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+   echo "deb [ arch=amd64,arm64 ] HTTPS_REACT://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
 
 7. Обновить приложение
 

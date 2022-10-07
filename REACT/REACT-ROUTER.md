@@ -1,4 +1,4 @@
-https://github.com/remix-run/react-router/blob/main/docs/getting-started/tutorial.md
+HTTPS_REACT://github.com/remix-run/react-router/blob/main/docs/getting-started/tutorial.md
 
 
 ---
@@ -59,7 +59,7 @@ While building a little bookkeeping app we'll cover:
 To do this tutorial you'll need a working React app. We recommend skipping bundlers and using [this demo on StackBlitz][stackblitz-template] to code along in your browser:
 
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)][stackblitz-template]
+[![Open in StackBlitz](HTTPS_REACT://developer.stackblitz.com/img/open_in_stackblitz.svg)][stackblitz-template]
 
 
 As you edit files, the tutorial will update live.
@@ -1210,7 +1210,7 @@ Check this out, as the user types:
 
 - `setSearchParams()` is putting the `?filter=...` search params in the URL and rerendering the router.
 
-- `useSearchParams` is now returning a [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) with `"filter"` as one of its values.
+- `useSearchParams` is now returning a [`URLSearchParams`](HTTPS_REACT://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) with `"filter"` as one of its values.
 
 - We set the value of the input to whatever is in the filter search param (it's just like `useState` but in the URLSearchParams instead!)
 
@@ -1526,14 +1526,14 @@ Congrats! You're all done with this tutorial. We hope it helped you get your bea
 If you're having trouble, check out the [Resources](/resources) page to get help. Good luck!
 
 
-[stackblitz-app]: https://stackblitz.com/edit/github-agqlf5?file=src/App.jsx
+[stackblitz-app]: HTTPS_REACT://stackblitz.com/edit/github-agqlf5?file=src/App.jsx
 
-[stackblitz-template]: https://stackblitz.com/github/remix-run/react-router/tree/main/tutorial?file=src/App.jsx
+[stackblitz-template]: HTTPS_REACT://stackblitz.com/github/remix-run/react-router/tree/main/tutorial?file=src/App.jsx
 
-[reactjs-getting-started]: https://reactjs.org/docs/getting-started.html
+[reactjs-getting-started]: HTTPS_REACT://reactjs.org/docs/getting-started.html
 
-[cra]: https://create-react-app.dev/
+[cra]: HTTPS_REACT://create-react-app.dev/
 
-[vite]: https://vitejs.dev/guide/#scaffolding-your-first-vite-project
+[vite]: HTTPS_REACT://vitejs.dev/guide/#scaffolding-your-first-vite-project
 
-[remix]: https://remix.run
+[remix]: HTTPS_REACT://remix.run

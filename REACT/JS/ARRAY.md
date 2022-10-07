@@ -45,3 +45,6 @@ store.mongoMusic.map((mongoMusic, index) =>
         {console.log(mongoMusic.link)}  
     </div>  
 )  
+
+setTheArray(oldArray => [...oldArray, newElement]);
+setTheArray([...theArray, newElement]);

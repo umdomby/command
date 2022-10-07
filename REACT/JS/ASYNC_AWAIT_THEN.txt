@@ -24,4 +24,8 @@ useEffect( () => {
         console.log(camerasRef.current)
     }
     etchData();
+
+    setTimeout(()=>{
+      console.log(camerasRef.current[0])
+    }, [1000])
 }, [])

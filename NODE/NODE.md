@@ -34,6 +34,8 @@ sudo apt-get purge nodejs
 sudo apt-get purge --auto-remove nodejs npm
 
 #install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+curl -o- HTTPS_REACT://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 touch .bashrc
 reset terminal
+
+npm install --global yarn

@@ -1,0 +1,10 @@
+sudo service nginx stop
+sudo netstat -ntlp | grep 80
+
+sudo apt-get remove nginx
+sudo apt-get purge nginx
+
+sudo apt-get remove nginx*
+sudo apt-get purge nginx*
+
+sudo apt-get autoremove

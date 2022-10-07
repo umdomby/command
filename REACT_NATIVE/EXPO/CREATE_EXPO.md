@@ -1,6 +1,6 @@
-https://www.youtube.com/watch?v=K-aD8ClG1FQ  
+HTTPS_REACT://www.youtube.com/watch?v=K-aD8ClG1FQ  
 
-https://reactnative.dev/docs/environment-setup  
+HTTPS_REACT://reactnative.dev/docs/environment-setup  
 npm install -g expo-cli  
 expo init SR  
 install Android Expo Go  

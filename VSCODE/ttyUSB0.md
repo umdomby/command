@@ -14,6 +14,6 @@ sudo reboot
 Найдите эту строку и закомментируйте ее:  
 ENV{PRODUCT}=="1a86/7523/*", ENV{BRLTTY_BRAILLE_DRIVER}="bm", GOTO="brltty_usb_run"  
 reboot  
-Подробнее о https://unix.stackexchange.com/questions/670636/unable-to-use-usb-dongle-based-on-usb-serial-converter-chip
+Подробнее о HTTPS_REACT://unix.stackexchange.com/questions/670636/unable-to-use-usb-dongle-based-on-usb-serial-converter-chip
 
 #? sudo apt remove brltty

@@ -1,4 +1,4 @@
-https://github.com/ant-media/Ant-Media-Server/wiki/Turn-Server-Installation
+HTTPS_REACT://github.com/ant-media/Ant-Media-Server/wiki/Turn-Server-Installation
 apt-get update && apt-get install coturn
 
 Установить TURN-сервер  

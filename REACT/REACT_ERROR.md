@@ -4,3 +4,8 @@ npx create-react-app@5.0.1 .
 export NODE_OPTIONS=--openssl-legacy-provider
 or
 "start": "react-scripts --openssl-legacy-provider start"
+
+
+HTTPS=true
+#ERROR HTTPS 3000 port
+DANGEROUSLY_DISABLE_HOST_CHECK=true

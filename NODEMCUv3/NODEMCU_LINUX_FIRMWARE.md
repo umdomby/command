@@ -3,7 +3,7 @@ dmesg | grep tty
 OR   
 ls -l /dev/ttyUSB* && ls -l /dev/ttyS*  
 
-https://nodemcu.readthedocs.io/en/release/flash/  
+HTTPS_REACT://nodemcu.readthedocs.io/en/release/flash/  
 
 sudo apt install python3-pip    
 pip install pyserial  

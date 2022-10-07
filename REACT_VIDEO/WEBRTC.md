@@ -1,1 +1,1 @@
-https://webrtc.org/getting-started/media-devices?hl=ru  
+HTTPS_REACT://webrtc.org/getting-started/media-devices?hl=ru  

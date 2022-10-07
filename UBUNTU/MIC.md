@@ -1,4 +1,4 @@
-https://kumarvinay.com/how-to-enable-bluetooth-headset-microphone-support-in-ubuntu-20-04/
+HTTPS_REACT://kumarvinay.com/how-to-enable-bluetooth-headset-microphone-support-in-ubuntu-20-04/
 
 Installing Pipewire in ubuntu 20.04  
 To Install pipewire, you need to add a pipewire repository. Type the following command in Terminal:  
