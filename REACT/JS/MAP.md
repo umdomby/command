@@ -1,10 +1,8 @@
+```js
 const value = []
-
-
 const sendMusicMongo = (link) => {
 
 }
-
 <div>
     {value.map((mongoMusic, index) =>
         <div
@@ -15,3 +13,6 @@ const sendMusicMongo = (link) => {
         </div>
     )}
 </div>
+
+```
+

@@ -1,4 +1,12 @@
 netstat -ntlp | grep LISTEN  
+or  
+sudo lsof -nP -i | grep LISTEN  
+
+Вы можете использовать lsof, чтобы увидеть, какое приложение прослушивает порт 80:
+```
+sudo lsof -i TCP:80
+```
+
 sudo kill -9 `sudo lsof -t -i:3000`  or  sudo kill -9 $(sudo lsof -t -i:9001)
 sudo kill -9 `sudo lsof -t -i:8081`
 sudo kill -9 `sudo lsof -t -i:8000`

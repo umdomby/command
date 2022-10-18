@@ -33,10 +33,6 @@ HTTPS_REACT://www.mongodb.com/docs/compass/current/install/
 #wget HTTPS_REACT://downloads.mongodb.com/compass/mongodb-compass_1.33.1_amd64.deb  
 #sudo dpkg -i mongodb-compass_1.33.1_amd64.deb  
 
-HTTPS_REACT://stackoverflow.com/questions/68742794/mongodb-failed-result-core-dump  
-
-
-
 1. Остановите mongodпроцесс, введя следующую команду:
 
    sudo service mongod stop
@@ -54,11 +50,11 @@ HTTPS_REACT://stackoverflow.com/questions/68742794/mongodb-failed-result-core-du
 
 5. Импортируйте открытый ключ, используемый системой управления пакетами:
 
-   wget -qO - HTTPS_REACT://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+   wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 
 6. Следующая инструкция предназначена для Ubuntu 20.04 (Focal):
 
-   echo "deb [ arch=amd64,arm64 ] HTTPS_REACT://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
 
 7. Обновить приложение
 
@@ -67,4 +63,14 @@ HTTPS_REACT://stackoverflow.com/questions/68742794/mongodb-failed-result-core-du
 8.Установите монгодб
 
     sudo apt-get install mongodb-org=4.4.8 mongodb-org-server=4.4.8 mongodb-org-shell=4.4.8 mongodb-org-mongos=4.4.8 mongodb-org-tools=4.4.8
-    
+
+9.Используйте mongod --version, чтобы проверить, успешно ли он установлен .
+
+10. Если вы столкнулись с какой-либо ошибкой при использованииmongod
+
+    sudo mkdir /data
+    cd /data
+    sudo mkdir db
+    sudo pkill -f mongod
+
+11.Затем используйте команду sudo mongod.
