@@ -1,3 +1,11 @@
+Вариант 2 — Установка Node.js с помощью Apt через архив NodeSource PPA
+Вариант 3 — Установка Node с помощью Node Version Manager
+nvm list-remote
+nvm list
+nvm install v20.11.1
+nvm use v20.11.1
+nvm alias default v20.11.1
+
 Если вы использовали Homebrew , запустите:  
 
 brew update  # This updates Homebrew to latest version  

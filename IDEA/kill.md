@@ -1,0 +1,1 @@
+killall java -9  

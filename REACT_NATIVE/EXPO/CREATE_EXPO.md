@@ -1,3 +1,6 @@
+yarn create expo-app name  
+yarn expo start  
+
 HTTPS_REACT://www.youtube.com/watch?v=K-aD8ClG1FQ  
 
 HTTPS_REACT://reactnative.dev/docs/environment-setup  

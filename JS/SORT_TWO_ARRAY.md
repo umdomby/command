@@ -1,3 +1,4 @@
+```js
 const pairs = Array.from({length: clientsNumber})
     .reduce((acc, next, index, arr) => {
         if (index % 2 === 0) {
@@ -6,3 +7,4 @@ const pairs = Array.from({length: clientsNumber})
 
         return acc;
     }, []);
+```

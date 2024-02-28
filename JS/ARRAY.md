@@ -1,3 +1,5 @@
+```js
+
 console.log(JSON.parse(JSON.stringify(store.mongoMusic)))  
 const arr = JSON.parse(JSON.stringify(store.mongoMusic))  
 console.log(arr)  
@@ -48,3 +50,4 @@ store.mongoMusic.map((mongoMusic, index) =>
 
 setTheArray(oldArray => [...oldArray, newElement]);
 setTheArray([...theArray, newElement]);
+```
