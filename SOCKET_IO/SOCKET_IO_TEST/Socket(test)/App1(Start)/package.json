@@ -1,0 +1,33 @@
+{
+  "name": "robotics",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+  },
+  "scripts": {
+    "start": "cd client && react-scripts --openssl-legacy-provider start",
+    "https": "sudo kill -9 `sudo lsof -t -i:443` & cd client && yarn https",
+    "server1": "cd server && yarn server1",
+    "server2": "cd server && yarn server2",
+    "server3": "cd server && yarn server3",
+    "build": "cd client && yarn build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

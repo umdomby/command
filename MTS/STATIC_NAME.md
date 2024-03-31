@@ -1,1 +1,1 @@
-http://375336895728.dyndns.mts.by:4747/
+http://375333333333.dyndns.mts.by:4747/
