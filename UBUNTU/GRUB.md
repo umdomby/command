@@ -1,0 +1,1 @@
+sudo rm /boot/grub/grub. cfg
