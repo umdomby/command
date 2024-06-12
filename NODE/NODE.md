@@ -16,6 +16,7 @@ which node
 node -v
 nvm list-remote
 nvm use v16.14.0
+nvm alias default v22.3.0
 
 nvm current node -v  # Checks your current version  
 nvm install <version>  # Example: nvm install 12.14.1  

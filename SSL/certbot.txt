@@ -6,3 +6,8 @@ https://github.com/facebook/create-react-app/issues/12934 .
 create-react-app не поддерживает тип ключа Let's Encrypt по умолчанию ECDSA. Поэтому вам придется использовать сертификаты RSA. Чтобы сгенерировать сертификаты RSA с помощью certbot, используйте «--key-type».
 
 certbot certonly --key-type rsa
+
+
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot certonly --standalone

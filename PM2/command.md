@@ -1,4 +1,4 @@
-https://pm2.keymetrics.io/docs/usage/quick-start/
+зь2https://pm2.keymetrics.io/docs/usage/quick-start/
 
 pm2 start app.js
 
@@ -16,3 +16,5 @@ pm2 start ecosystem.config.js
 
 $ cd /path/to/my/app
 $ pm2 start env.js --watch --ignore-watch="node_modules"
+
+pm2 status

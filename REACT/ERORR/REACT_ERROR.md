@@ -4,6 +4,8 @@ npx create-react-app@5.0.1 .
 export NODE_OPTIONS=--openssl-legacy-provider
 or
 "start": "react-scripts --openssl-legacy-provider start"
+or
+"start": "SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
 
 
 HTTPS=true

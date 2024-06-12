@@ -11,3 +11,8 @@ Categories=System;
 Keywords=package;apt;dpkg;install
 
 Icon=gnome-mime-application-x-deb
+
+
+# or
+
+sudo apt install alacarte

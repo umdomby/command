@@ -1,3 +1,5 @@
+sudo netstat -ltpn
+
 netstat -ntlp | grep LISTEN  
 or  
 sudo lsof -nP -i | grep LISTEN  
@@ -39,5 +41,10 @@ navatar@navatar-X58-USB3:~$ ps -e | grep telegram
 navatar@navatar-X58-USB3:~$ kill -9 3316
 
 killall -9 firefox
+
+# port 80
+sudo apt-get install libcap2-bin
+sudo setcap cap_net_bind_service=+ep `readlink -f \`which node\``
+# Now, when you tell a Node application that you want it to run on port 80, it will not
 
 
