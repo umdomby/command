@@ -18,3 +18,5 @@ $ cd /path/to/my/app
 $ pm2 start env.js --watch --ignore-watch="node_modules"
 
 pm2 status
+
+pm2 start strapi --no-pmx --name="strapi" -- start
