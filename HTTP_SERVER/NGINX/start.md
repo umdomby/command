@@ -14,13 +14,9 @@ sudo service nginx stop
 sudo service nginx start
 sudo service nginx restart
 sudo systemctl reload nginx
-
-
-```
-nginx -t 
+nginx -t
 service nginx configtest
 
-```
 curl -4 www.serbot.online
 
 
