@@ -14,6 +14,7 @@ sudo kill -9 `sudo lsof -t -i:8081`
 sudo kill -9 `sudo lsof -t -i:8000`
 sudo kill -9 `sudo lsof -t -i:80`
 sudo kill -9 `sudo lsof -t -i:443`
+sudo kill -9 `sudo lsof -t -i:81`
 
 sudo kill -9 -ID-  
 

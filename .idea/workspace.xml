@@ -5,33 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/command.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HTTPs.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/Install2204.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/README" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/cert.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/chain.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/fullchain.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/privkey.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/ufw.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PROXY/manual.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UBUNTU/Apache.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UBUNTU/CONSOLE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UBUNTU/OpenPort.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CERTBOT/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/server.js.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/sites-availabe.conf.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HOSTvirtual.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HTTPs2204DigitalOcean.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/Install2204DigitalOcean.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/manual.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/node_modules.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMS/STRAPi/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/start.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMS/STRAPi/strapi.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/strapi.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/delete.txt" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/delete.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/install.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PM2/command.md" beforeDir="false" afterPath="$PROJECT_DIR$/PM2/command.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PM2/install.md" beforeDir="false" afterPath="$PROJECT_DIR$/PM2/install.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/HTTPS_REACT.js" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/HTTPS_REACT.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/HTTPS_SERVER_IO_CUCKOO.js" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/HTTPS_SERVER_IO_CUCKOO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HTTPs.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HTTPs.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/Install2204.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/Install2204.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/delete.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/delete.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PM2/ecosystem.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/PM2/ecosystem.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/CONNEC_PARAM.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/CONNEC_PARAM.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/PORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/PORT.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +91,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/pi/pi/IdeaProject/command/HTTP_SERVER/NGINX/cert",
+    "last_opened_file_path": "/home/pi/pi/IdeaProject/command/HTTP_SERVER/NGINX",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -112,11 +107,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/HTTP_SERVER/NGINX" />
       <recent name="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert" />
       <recent name="$PROJECT_DIR$/DigitalOcean" />
       <recent name="$PROJECT_DIR$/REACT/HTTPS" />
       <recent name="$PROJECT_DIR$/MONGODB" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/DATABASE" />
@@ -317,7 +312,11 @@
       <workItem from="1718220118012" duration="19000" />
       <workItem from="1718220160435" duration="926000" />
       <workItem from="1718223053876" duration="4299000" />
-      <workItem from="1718553154880" duration="16995000" />
+      <workItem from="1718553154880" duration="22545000" />
+      <workItem from="1718660461515" duration="1965000" />
+      <workItem from="1718743805762" duration="2783000" />
+      <workItem from="1718786744928" duration="13786000" />
+      <workItem from="1718829473856" duration="7509000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>
@@ -535,7 +534,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718217569288</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="edit">
+      <option name="closed" value="true" />
+      <created>1718640150855</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1718640150855</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

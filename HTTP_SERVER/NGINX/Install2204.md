@@ -1,3 +1,5 @@
+https://timeweb.cloud/tutorials/ubuntu/kak-ustanovit-nginx-na-ubuntu
+
 sudo apt update
 sudo apt install nginx
 sudo systemctl enable nginx
@@ -41,11 +43,17 @@ sudo ufw allow 'OpenSSH'
 sudo ufw status
 
 
+# Рассмотрим более детально главный файл конфигурации. 
+# Для этого откроем его для просмотра, используя редактор:
+sudo nano /etc/nginx/nginx.conf
+
+
 
 service nginx configtest
 
 # Теперь проверим его наличие в автозагрузке:
 sudo systemctl is-enabled nginx
+sudo systemctl disable nginx
 
 sudo systemctl start nginx
 sudo systemctl stop nginx

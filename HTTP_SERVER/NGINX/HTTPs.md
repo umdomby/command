@@ -1,7 +1,5 @@
 https://medium.com/@derrickmehaffy/using-strapi-in-production-with-https-717af82d1445
 
-
-
 # Lets create that file here: /etc/nginx/conf.d/upstream.conf :
 ```
 # Strapi upstream server
@@ -10,63 +8,67 @@ server localhost:1337;
 }
 ```
 
+sudo service nginx stop
+sudo rm /etc/nginx/sites-available/serbot.online.conf
+sudo rm /etc/nginx/sites-enabled/serbot.online.conf
+sudo rm /etc/nginx/sites-available/serbot.online.save
+sudo rm /etc/nginx/sites-available/strapi.conf
+sudo nano /etc/nginx/sites-available/serbot.online.conf
+sudo ln -s /etc/nginx/sites-available/serbot.online.conf /etc/nginx/sites-enabled/serbot.online.conf
 
 ```
-map $http_x_forwarded_host $custom_forwarded_host {
-  default "$server_name";
-  strapi "strapi";
-}
 server {
 # Listen HTTP
     listen 80;
-    server_name api.domain.com;
+    server_name serbot.online;
 # Define Root Location
-    root        /var/www/html;
-# Define LE Location
-    location ~ ^/.well-known/acme-challenge/ {
-      default_type "text/plain";
-      root         /var/www/html;
-    }
-# Else Redirect to HTTPS // API
-    location / {
-      return 301 https://$host$request_uri;
-    }
+    root /var/www/serbot.online/html;
+    index index.php index.html;
 }
 server {
 # Listen HTTPS
     listen 443 ssl;
-    server_name api.domain.com;
+    server_name serbot.online;
 # Root Location
-    root /var/www/html;
+    root /var/www/serbot.online/html;
+    index index.php index.html;
 # SSL Config
-    ssl_certificate /etc/letsencrypt/live/api.canonn.fyi/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/api.canonn.fyi/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-# Proxy Config
-    location / {
-        proxy_pass http://strapi;
-        proxy_http_version 1.1;
-        proxy_set_header X-Forwarded-Host $custom_forwarded_host;
-        proxy_set_header X-Forwarded-Server $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header Host $http_host;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "Upgrade";
-    }
+ ssl_certificate /etc/letsencrypt/live/serbot.online-0002/fullchain.pem; # managed by Certbot
+ ssl_certificate_key /etc/letsencrypt/live/serbot.online-0002/privkey.pem; # managed by Certbot
 }
 ```
-
+systemctl status nginx
+sudo service nginx stop
+sudo service nginx start
+sudo service nginx restart
+sudo systemctl reload nginx
+sudo nginx -t
 service nginx configtest
-service nginx restart
 
 # Delete the current symlink config
-rm /etc/nginx/sites-enabled/default
+sudo rm /etc/nginx/sites-enabled/default
+sudo rm /etc/nginx/sites-available/serbot.online
+sudo nano /etc/nginx/sites-available/serbot.online
 # Create a symlink for your new config
-ln -s /etc/nginx/sites-available/api.domain.com.conf /etc/nginx/sites-enabled/api.domain.com.conf
+ln -s /etc/nginx/sites-available/serbot.online /etc/nginx/sites-enabled/serbot.online
 # Check to make sure there are no errors in the Nginx Config
 service nginx configtest
 # If it passes with [OK] restart Nginx
 service nginx restart
+
+sudo rm /etc/nginx/sites-enabled/default
+sudo rm /etc/nginx/sites-available/default
+
+
+sudo snap install core; sudo snap refresh core
+sudo apt remove certbot
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --nginx -d serbot.online -d serbot.online
+
+# Проверка автоматического продления Certbot
+sudo systemctl status snap.certbot.renew.service
+
+# Чтобы протестировать процесс обновления, 
+# вы можете выполнить пробный прогон с помощью certbot:
+sudo certbot renew --dry-run

@@ -4,3 +4,5 @@
 yarn create strapi-app my-project
 
 yarn develop
+
+pm2 start strapi --no-pmx --name="strapi" -- start

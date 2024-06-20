@@ -1,7 +1,7 @@
 module.exports = {
     apps : [{
         name: "server",
-        script: "./server.js",
+        script: "./server.js.md",
         watch: true,
         //watch_delay: 1000,
         ignore_watch : ["node_modules"],
