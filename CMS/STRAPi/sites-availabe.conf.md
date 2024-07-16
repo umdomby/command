@@ -40,6 +40,9 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "Upgrade";
         proxy_pass_request_headers on;
+        
+        proxy_buffers 8 16k;
+        proxy_buffer_size 32k;
     }
 }
 ```

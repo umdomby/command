@@ -5,10 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
-      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/config_nginx_1.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1_MyProject/MyCMS/React/Registration.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1_MyProject/MyCMS/React/cyberbet.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1_MyProject/MyCMS/React/shop.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ANGULAR/lern.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ANGULAR/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/SHOP/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/E-commerce/1.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/E-commerce/Strapi-React.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Auth0.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Auth0_Strapi_React.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Category.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Lern.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Postman.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/email-provaders.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DATABASE/MsriaDB/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EXPRESS/index.js.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EXPRESS/server.js.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JS/localStorage.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEST/lern.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python/lern.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REDUX/lern.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/start.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/ufw.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/ufw.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/EXPRESS/package.json.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/sites-availabe.conf.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/sites-availabe.conf.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEST/NEST.md" beforeDir="false" afterPath="$PROJECT_DIR$/NEST/NEST.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/PORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/PORT.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,31 +84,31 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.ARRAY.js.executor": "Run",
-    "Node.js.ARRAY_SUM.js.executor": "Run",
-    "Node.js.FIELD.js.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/pi/pi/IdeaProject/command/HTTP_SERVER/NGINX",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.ARRAY.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.ARRAY_SUM.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.FIELD.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/pi/pi/IdeaProject/command/HTTP_SERVER/NGINX&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/HTTP_SERVER/NGINX" />
@@ -96,11 +118,11 @@
       <recent name="$PROJECT_DIR$/MONGODB" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/MyProject" />
       <recent name="$PROJECT_DIR$/DATABASE" />
       <recent name="$PROJECT_DIR$/CMS" />
       <recent name="$PROJECT_DIR$/SOCKET" />
       <recent name="$PROJECT_DIR$/REACT/BASE_CODE/BASE" />
-      <recent name="$PROJECT_DIR$/REACT/BASE_CODE" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.CHECK_FIELD.js">
@@ -299,6 +321,12 @@
       <workItem from="1718743805762" duration="2783000" />
       <workItem from="1718786744928" duration="13786000" />
       <workItem from="1718829473856" duration="15901000" />
+      <workItem from="1718911187968" duration="17622000" />
+      <workItem from="1719057925744" duration="6131000" />
+      <workItem from="1719161517523" duration="963000" />
+      <workItem from="1719179552755" duration="3104000" />
+      <workItem from="1719397988451" duration="4641000" />
+      <workItem from="1721068719233" duration="1184000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>
