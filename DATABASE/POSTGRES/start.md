@@ -1,5 +1,52 @@
+https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-22-04-quickstart
+
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+
+
+
+```
+listen_addresses = '*'
+затем откройте файл с именемpg_hba.conf
+
+sudo vi pg_hba.conf
+и добавьте эту строку в этот файл
+
+host  all  all 0.0.0.0/0 md5
+sudo /etc/init.d/postgresql restart2
+
+```
+
+sudo -i -u postgres
+\password postgres
+\q
+exit
+sudo -u postgres psql
+
+sudo -i -u postgres
+sudo -u postgres createuser --interactive
+sudo -u postgres createdb sammy
+
+sudo systemctl restart postgresql
+sudo service postgresql restart
+/etc/init.d/postgresql restart
+systemctl reload postgresql-14.service
+
+
+#reboot postgres
+```
+sudo apt-get --purge remove postgresql*
+sudo rm -r /etc/postgresql/
+sudo rm -r /etc/postgresql-common/
+sudo rm -r /var/lib/postgresql/
+sudo userdel -r postgres
+sudo groupdel postgres
+sudo apt-get install postgresql postgresql-client postgresql-contrib libpq-dev
+
+```
+
+
 sudo apt install postgresql
-https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-20-04
 
 sudo systemctl start postgresql.service
 sudo -i -u postgres
@@ -12,6 +59,7 @@ sudo service postgresql restart
 sudo service postgresql status
 sudo service postgresql start
 sudo service postgresql restart
+sudo service postgresql stop
 
 sudo systemctl status 'postgresql*'
 

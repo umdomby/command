@@ -48,3 +48,5 @@ touch .bashrc
 reset terminal
 
 npm install --global yarn
+npm install -g npm@10.8.2
+npm install npm@latest

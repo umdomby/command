@@ -1,3 +1,5 @@
+chmod -R 755 ./
+
 chmod 777 file
 
 chmod -R 777 ./

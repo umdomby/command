@@ -14,3 +14,5 @@
 Или в одну строку
 
 ```sudo -u postgres psql -c "ALTER USER postgres PASSWORD '<new-password>'```
+
+sudo service postgresql restart

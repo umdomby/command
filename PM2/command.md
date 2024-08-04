@@ -19,4 +19,11 @@ $ pm2 start env.js --watch --ignore-watch="node_modules"
 
 pm2 status
 
-pm2 start strapi --no-pmx --name="strapi" -- start
+pm2 start frontend --no-pmx --name="frontend" -- start
+pm2 startup ubuntu
+pm2 startup
+pm2 save
+
+listen EACCES: permission denied 0.0.0.0:80
+sudo apt-get install libcap2-bin
+sudo setcap cap_net_bind_service=+ep `readlink -f \`which node\``
