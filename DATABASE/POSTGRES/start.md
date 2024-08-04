@@ -4,7 +4,6 @@ sudo apt update
 sudo apt install postgresql postgresql-contrib
 
 
-
 ```
 listen_addresses = '*'
 затем откройте файл с именемpg_hba.conf
