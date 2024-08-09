@@ -7,3 +7,7 @@ wsl --set-version Ubuntu-20.04 2
 \\wsl$\Ubuntu\home\pi\projects\one
 Откройте настройки проекта: File → Settings → Tools → Terminal
 
+wsl --shutdown
+
+
+

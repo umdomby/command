@@ -4,6 +4,7 @@ sudo apt update
 sudo apt install postgresql postgresql-contrib
 
 
+
 ```
 listen_addresses = '*'
 затем откройте файл с именемpg_hba.conf
@@ -17,11 +18,17 @@ sudo /etc/init.d/postgresql restart2
 ```
 
 sudo -i -u postgres
+psql
 \password postgres
+
+alter system set ssl=off
+select pg_reload_conf()re
 \q
 exit
-sudo -u postgres psql
 
+
+sudo -u postgres
+psql "sslmode=require host=localhost dbname=evershop"
 sudo -i -u postgres
 sudo -u postgres createuser --interactive
 sudo -u postgres createdb sammy
@@ -43,7 +50,6 @@ sudo groupdel postgres
 sudo apt-get install postgresql postgresql-client postgresql-contrib libpq-dev
 
 ```
-
 
 sudo apt install postgresql
 

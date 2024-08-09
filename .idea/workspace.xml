@@ -5,32 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
-      <change afterPath="$PROJECT_DIR$/1_MyProject/MyCMS/React/Registration.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/1_MyProject/MyCMS/React/cyberbet.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/1_MyProject/MyCMS/React/shop.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ANGULAR/lern.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ANGULAR/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMS/SHOP/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/E-commerce/1.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/E-commerce/Strapi-React.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Auth0.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Auth0_Strapi_React.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Category.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Lern.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Postman.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMS/STRAPi/email-provaders.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DATABASE/MsriaDB/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EXPRESS/index.js.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EXPRESS/server.js.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JS/localStorage.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NEST/lern.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/lern.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REDUX/lern.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOCKER/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOCKER/Windows/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOCKER/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOCKER/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOCKER/work.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PM2/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/Deploy.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/MEDUSA/start.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/config/production.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/EXPRESS/package.json.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/sites-availabe.conf.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/sites-availabe.conf.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NEST/NEST.md" beforeDir="false" afterPath="$PROJECT_DIR$/NEST/NEST.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UBUNTU/PORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/PORT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/Docker.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/Docker.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/E-COMMERCE/EverShop.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/EverShop.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/E-COMMERCE/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/TYPESCRIPT/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/TYPESCRIPT/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WSL/IP.md" beforeDir="false" afterPath="$PROJECT_DIR$/WSL/IP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WSL/wsl.md" beforeDir="false" afterPath="$PROJECT_DIR$/WSL/wsl.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,15 +52,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/HTTP_SERVER/NGINX/delete.txt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/NODE/NVM.txt" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/REACT/HTTPS/HTTPS_REACT.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/REACT/HTTPS/HTTPS_SERVER_IO_CUCKOO.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/REACT/INPUT/BUTTON.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/REACT/INPUT/select.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/REACT/JS/ASYNC_AWAIT_THEN.txt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/REACT/JS/MAP.md" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/REACT/JS/onClick.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SSL/certbot.txt" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -84,45 +69,45 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Node.js.ARRAY.js.executor&quot;: &quot;Run&quot;,
-    &quot;Node.js.ARRAY_SUM.js.executor&quot;: &quot;Run&quot;,
-    &quot;Node.js.FIELD.js.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/pi/pi/IdeaProject/command/HTTP_SERVER/NGINX&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.ARRAY.js.executor": "Run",
+    "Node.js.ARRAY_SUM.js.executor": "Run",
+    "Node.js.FIELD.js.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/pi/projects/command/REACT/E-COMMERCE",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "settings.sync",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\pi\projects\command\REACT\E-COMMERCE" />
       <recent name="$PROJECT_DIR$/HTTP_SERVER/NGINX" />
       <recent name="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert" />
       <recent name="$PROJECT_DIR$/DigitalOcean" />
       <recent name="$PROJECT_DIR$/REACT/HTTPS" />
-      <recent name="$PROJECT_DIR$/MONGODB" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\pi\projects\command\DOCKER" />
       <recent name="$PROJECT_DIR$/MyProject" />
       <recent name="$PROJECT_DIR$/DATABASE" />
       <recent name="$PROJECT_DIR$/CMS" />
       <recent name="$PROJECT_DIR$/SOCKET" />
-      <recent name="$PROJECT_DIR$/REACT/BASE_CODE/BASE" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.CHECK_FIELD.js">
@@ -327,6 +312,12 @@
       <workItem from="1719179552755" duration="3104000" />
       <workItem from="1719397988451" duration="4641000" />
       <workItem from="1721068719233" duration="1184000" />
+      <workItem from="1722808912362" duration="4776000" />
+      <workItem from="1722951631168" duration="1417000" />
+      <workItem from="1722958583508" duration="1722000" />
+      <workItem from="1722984860533" duration="215000" />
+      <workItem from="1723107506080" duration="10532000" />
+      <workItem from="1723189410405" duration="4231000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>
@@ -560,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718883082307</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="edit">
+      <created>1722808936873</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1722808936873</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
