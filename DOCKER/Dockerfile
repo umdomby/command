@@ -13,3 +13,8 @@ RUN npm run build
 
 EXPOSE 80
 CMD ["npm", "run", "start"]
+
+##############
+WORKDIR /var/www/html
+COPY . /var/www/html
+EXPOSE 8081

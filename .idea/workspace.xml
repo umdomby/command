@@ -5,24 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
-      <change afterPath="$PROJECT_DIR$/DOCKER/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DOCKER/Windows/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DOCKER/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DOCKER/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DOCKER/work.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PM2/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/Deploy.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/MEDUSA/start.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/config/production.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Architecture/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOCKER/DockerfileFRONT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEST/ПродвинутыйBACKEND.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/start.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/start.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/Docker.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/Docker.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/lern.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REACT/E-COMMERCE/EverShop.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/EverShop.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REACT/E-COMMERCE/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOCKER/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/REACT/TYPESCRIPT/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/TYPESCRIPT/start.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WSL/IP.md" beforeDir="false" afterPath="$PROJECT_DIR$/WSL/IP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WSL/wsl.md" beforeDir="false" afterPath="$PROJECT_DIR$/WSL/wsl.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/ПродвинутыйFrontend.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/ПродвинутыйFRONTEND.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +70,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/pi/projects/command/REACT/E-COMMERCE",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/pi/projects/command/DOCKER",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -96,11 +86,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\pi\projects\command\DOCKER" />
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\REACT\E-COMMERCE" />
       <recent name="$PROJECT_DIR$/HTTP_SERVER/NGINX" />
       <recent name="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert" />
       <recent name="$PROJECT_DIR$/DigitalOcean" />
-      <recent name="$PROJECT_DIR$/REACT/HTTPS" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\DOCKER" />
@@ -318,6 +308,8 @@
       <workItem from="1722984860533" duration="215000" />
       <workItem from="1723107506080" duration="10532000" />
       <workItem from="1723189410405" duration="4231000" />
+      <workItem from="1723370557099" duration="897000" />
+      <workItem from="1723581210281" duration="3999000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>
