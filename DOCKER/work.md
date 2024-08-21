@@ -1,6 +1,7 @@
 sudo service docker start
 
 docker
+docker --version
 
 
 # docker run -d -p 80:80 docker/getting-started

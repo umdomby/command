@@ -5,14 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
-      <change afterPath="$PROJECT_DIR$/Architecture/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DOCKER/DockerfileFRONT" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NEST/ПродвинутыйBACKEND.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Architecture/img_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Architecture/img_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Architecture/img_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Architecture/img_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ENGLISH/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/Docker" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/JWT.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/ManyToMany.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/Postman.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/Sequelize.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/auth.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/bcryptjs.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/info.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/myback.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/src/app.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/src/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/src/app.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/src/users/users.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/src/users/users.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/src/users/users.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/NEST/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/Archakov/NEXT_Archakov.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/REACT-ROUTER-DOM/exact.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/REACT-ROUTER-DOM/useHistory.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/REACT-ROUTER-DOM/useParams.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SSD/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VIDEO/Downloader.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DOCKER/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REACT/TYPESCRIPT/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/TYPESCRIPT/start.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REACT/ПродвинутыйFrontend.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/ПродвинутыйFRONTEND.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Architecture/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/Architecture/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOCKER/work.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/work.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEST/NEST.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/NEST.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEST/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEST/ПродвинутыйBACKEND.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/ПродвинутыйBACKEND.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/ПродвинутыйFRONTEND.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/ПродвинутыйFRONTEND.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +98,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/pi/projects/command/DOCKER",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/pi/projects/command/NODE/NEST",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -86,18 +114,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\pi\projects\command\NODE\NEST" />
+      <recent name="\\wsl$\Ubuntu\home\pi\projects\command\NODE\NEST\src" />
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\DOCKER" />
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\REACT\E-COMMERCE" />
       <recent name="$PROJECT_DIR$/HTTP_SERVER/NGINX" />
-      <recent name="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert" />
-      <recent name="$PROJECT_DIR$/DigitalOcean" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\pi\projects\command\NODE" />
+      <recent name="\\wsl$\Ubuntu\home\pi\projects\command\REACT\NEXT" />
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\DOCKER" />
       <recent name="$PROJECT_DIR$/MyProject" />
       <recent name="$PROJECT_DIR$/DATABASE" />
-      <recent name="$PROJECT_DIR$/CMS" />
-      <recent name="$PROJECT_DIR$/SOCKET" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.CHECK_FIELD.js">
@@ -309,7 +337,8 @@
       <workItem from="1723107506080" duration="10532000" />
       <workItem from="1723189410405" duration="4231000" />
       <workItem from="1723370557099" duration="897000" />
-      <workItem from="1723581210281" duration="3999000" />
+      <workItem from="1723581210281" duration="8937000" />
+      <workItem from="1723836880710" duration="27826000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>
@@ -550,7 +579,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722808936873</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="edit">
+      <created>1723623839630</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1723623839630</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
