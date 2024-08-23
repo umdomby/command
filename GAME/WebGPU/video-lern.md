@@ -1,0 +1,4 @@
+https://www.youtube.com/@ukrknowledge/about
+https://www.youtube.com/@PracticalProgrammingwithDrXu/about
+
+https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbV9UekhxdDdZeDBfcG9lTHNCdFFLQ0dhekhhUXxBQ3Jtc0tuRDNYaWU2UGhRdDZESW9rSlV5cVJuT0xEblF1alVNSzJzZ0gwR2FjYUxfdkFyc2lwN3g4ZURfeXlwRk00WEpxb21hVmQ5aGV5SDR6dEVpTE9tQTUxNnE1eDIwblN6TDJiX2hwZGkwZlA2Tm5lRDVNTQ&q=https%3A%2F%2Fmatthias-research.github.io%2Fpages%2FtenMinutePhysics%2Findex.html&v=eOCjDi3ZW2o

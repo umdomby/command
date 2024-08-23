@@ -1,5 +1,10 @@
-sudo service docker start
+docker-compose build
+docker-compose up
 
+
+
+sudo service docker start
+sudo systemctl status docker
 docker
 docker --version
 
@@ -22,4 +27,7 @@ stop pause unpause kill
 #Dockerfile
 
 FROM nameImage
+
+
+
 

@@ -1,3 +1,6 @@
+docker-compose build
+docker-compose up
+
 #version
 $lsb_release –a
 
