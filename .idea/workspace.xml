@@ -5,33 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
-      <change afterPath="$PROJECT_DIR$/AI/console.aiven.io/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AI/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DATABASE/Redis/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GAME/Quake3.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GAME/WebGPU/star.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GAME/WebGPU/video-lern.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KAFKAJS/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Microservices/KAFKA/Kafka.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Microservices/KAFKA/lern.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Microservices/REDIS/Redis.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Microservices/lern.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Microservices/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSTMAN/tests.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SOCKET_IO/CHAT/lern.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SOCKET_IO/CHAT/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SOCKET_IO/REDIS/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SOCKET_IO/Redis.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TOOLs/Agile/Start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TS/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WORK/resume.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SOCKET_IO/Mongo-adapter/lern.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChatGPT/ChatGPT.md" beforeDir="false" afterPath="$PROJECT_DIR$/AI/ChatGPT/ChatGPT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATABASE/MONGODB/CONNECT.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/MONGODB/CONNECT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATABASE/MONGODB/INSTALL.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/MONGODB/INSTALL.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DOCKER/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/start.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DOCKER/work.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/work.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UBUNTU/PORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/PORT.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -330,7 +305,7 @@
       <workItem from="1723370557099" duration="897000" />
       <workItem from="1723581210281" duration="8937000" />
       <workItem from="1723836880710" duration="39350000" />
-      <workItem from="1724351399150" duration="13062000" />
+      <workItem from="1724351399150" duration="14569000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>
@@ -585,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1724278942374</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="edit">
+      <created>1724411824365</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1724411824366</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
