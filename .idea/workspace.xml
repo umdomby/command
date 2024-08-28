@@ -4,9 +4,317 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
-      <change afterPath="$PROJECT_DIR$/SOCKET_IO/Mongo-adapter/lern.md" afterDir="false" />
+    <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/NODE/Image_reSize.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NODE/packge.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STREAM/xbox.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UBUNTU/file.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WINDOWS/update.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/command.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/command.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1_MyProject/MyCMS/React/Registration.md" beforeDir="false" afterPath="$PROJECT_DIR$/1_MyProject/MyCMS/React/Registration.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1_MyProject/MyCMS/React/cyberbet.md" beforeDir="false" afterPath="$PROJECT_DIR$/1_MyProject/MyCMS/React/cyberbet.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1_MyProject/MyCMS/React/shop.md" beforeDir="false" afterPath="$PROJECT_DIR$/1_MyProject/MyCMS/React/shop.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AI/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/AI/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANDROID/AndroidServices.md" beforeDir="false" afterPath="$PROJECT_DIR$/ANDROID/AndroidServices.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANDROID/SCRCPY.md" beforeDir="false" afterPath="$PROJECT_DIR$/ANDROID/SCRCPY.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANGULAR/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/ANGULAR/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANGULAR/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/ANGULAR/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ARDUINO/CONNECT_ESP8266.md" beforeDir="false" afterPath="$PROJECT_DIR$/ARDUINO/CONNECT_ESP8266.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgoritmsDataStruct/Logics.md" beforeDir="false" afterPath="$PROJECT_DIR$/AlgoritmsDataStruct/Logics.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Architecture/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/Architecture/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BANK/card.md" beforeDir="false" afterPath="$PROJECT_DIR$/BANK/card.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BOOTSTRAP/button.md" beforeDir="false" afterPath="$PROJECT_DIR$/DESING/BOOTSTRAP/button.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CERTBOT/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/CERTBOT/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/SHOP/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/SHOP/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/E-commerce/Strapi-React.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/E-commerce/Strapi-React.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Auth0.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Auth0.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Auth0_Strapi_React.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Auth0_Strapi_React.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Category.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/UserGuide/Category.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/config_nginx_1.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/config_nginx_1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/project_strapi.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/project_strapi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/server.js.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/server.js.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/sites-availabe.conf.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/sites-availabe.conf.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMS/STRAPi/strapi.md" beforeDir="false" afterPath="$PROJECT_DIR$/CMS/STRAPi/strapi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COOKIE/COOKIE_SERVER/cookie.md" beforeDir="false" afterPath="$PROJECT_DIR$/COOKIE/COOKIE_SERVER/cookie.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CRYPTO_JS/ADD_SERVER/crypto.md" beforeDir="false" afterPath="$PROJECT_DIR$/CRYPTO_JS/ADD_SERVER/crypto.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/BOOTSTRAP/INSTALL.md" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/BOOTSTRAP/INSTALL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/INDEX.md" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/INDEX.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/MATERIAL-UI.md" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/MATERIAL-UI.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/SASS.md" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/SASS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/STYLE/CSS.md" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/STYLE/CSS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/MONGODB/4.4.8" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/MONGODB/4.4.8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/MONGODB/CODE/CRUD.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/MONGODB/CODE/CRUD.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/MONGODB/CODE/Object_keys.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/MONGODB/CODE/Object_keys.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/MONGODB/CONNECT.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/MONGODB/CONNECT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/MONGODB/INSTALL.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/MONGODB/INSTALL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/MONGODB/SSH" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/MONGODB/SSH" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/MONGODB/WINDOWS/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/MONGODB/WINDOWS/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/.env.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/.env.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/WINDOWS/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/WINDOWS/pg_hba.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/WINDOWS/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/WINDOWS/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/coding.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/coding.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/pgAdmin.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/pgAdmin.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/pgAdmin4.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/pgAdmin4.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/pg_hba.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/qery.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/qery.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/userPass.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/userPass.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/Redis/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/Redis/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/sequelize/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/sequelize/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DESING/CSS/media.md" beforeDir="false" afterPath="$PROJECT_DIR$/DESING/CSS/media.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOCKER/Docker.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/Docker.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOCKER/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOCKER/DockerfileFRONT" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/DockerfileFRONT" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOCKER/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOCKER/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOCKER/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOCKER/work.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCKER/work.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dart/Dart.md" beforeDir="false" afterPath="$PROJECT_DIR$/Dart/Dart.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DigitalOcean/Ac.md" beforeDir="false" afterPath="$PROJECT_DIR$/DigitalOcean/Ac.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DigitalOcean/FileZilla.md" beforeDir="false" afterPath="$PROJECT_DIR$/DigitalOcean/FileZilla.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DigitalOcean/PORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/DigitalOcean/PORT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DigitalOcean/SSH.md" beforeDir="false" afterPath="$PROJECT_DIR$/DigitalOcean/SSH.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DigitalOcean/install.md" beforeDir="false" afterPath="$PROJECT_DIR$/DigitalOcean/install.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DigitalOcean/pm2.md" beforeDir="false" afterPath="$PROJECT_DIR$/DigitalOcean/pm2.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXPRESS/INDEX.md" beforeDir="false" afterPath="$PROJECT_DIR$/EXPRESS/INDEX.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXPRESS/LinkToSite.js" beforeDir="false" afterPath="$PROJECT_DIR$/EXPRESS/LinkToSite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXPRESS/NEST.md" beforeDir="false" afterPath="$PROJECT_DIR$/EXPRESS/NEST.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXPRESS/env.js" beforeDir="false" afterPath="$PROJECT_DIR$/EXPRESS/env.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXPRESS/index.js.md" beforeDir="false" afterPath="$PROJECT_DIR$/EXPRESS/index.js.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXPRESS/package.json.md" beforeDir="false" afterPath="$PROJECT_DIR$/EXPRESS/package.json.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXPRESS/server.js.md" beforeDir="false" afterPath="$PROJECT_DIR$/EXPRESS/server.js.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FLUTTER/Flutter.md" beforeDir="false" afterPath="$PROJECT_DIR$/FLUTTER/Flutter.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FLUTTER/FlutterBackground.md" beforeDir="false" afterPath="$PROJECT_DIR$/FLUTTER/FlutterBackground.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FLUTTER/install.md" beforeDir="false" afterPath="$PROJECT_DIR$/FLUTTER/install.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GAME/WebGPU/star.md" beforeDir="false" afterPath="$PROJECT_DIR$/GAME/WebGPU/star.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GAME/WebGPU/video-lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/GAME/WebGPU/video-lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GIT/GITHUB_SET_IMAGE.md" beforeDir="false" afterPath="$PROJECT_DIR$/GIT/GITHUB_SET_IMAGE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GIT/GitHub.md" beforeDir="false" afterPath="$PROJECT_DIR$/GIT/GitHub.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GIT/NoGitAdd.md" beforeDir="false" afterPath="$PROJECT_DIR$/GIT/NoGitAdd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GIT/install_server_git.md" beforeDir="false" afterPath="$PROJECT_DIR$/GIT/install_server_git.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GIT/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/GIT/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GOOGLE/CHROME.md" beforeDir="false" afterPath="$PROJECT_DIR$/GOOGLE/CHROME.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/Apache2/INSTALL.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/Apache2/INSTALL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HOSTvirtual.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HOSTvirtual.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HTTPs.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HTTPs.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HTTPs2204DigitalOcean.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/HTTPs2204DigitalOcean.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/Install2204.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/Install2204.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/Install2204DigitalOcean.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/Install2204DigitalOcean.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/PM2.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/PM2.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/README" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/cert.pem" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/cert.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/chain.pem" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/chain.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/fullchain.pem" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/fullchain.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/privkey.pem" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/cert/privkey.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/delete.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/delete.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/frontend.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/frontend.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/manual.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/manual.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/virtual.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/virtual.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/virtualHTTPS.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/virtualHTTPS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/ufw.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/ufw.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IDEA/HOTKEYS.md" beforeDir="false" afterPath="$PROJECT_DIR$/IDEA/HOTKEYS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IPTV/IPTV.txt" beforeDir="false" afterPath="$PROJECT_DIR$/IPTV/IPTV.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JOY/HIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/JOY/HIDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JOY/MAP_JOY.md" beforeDir="false" afterPath="$PROJECT_DIR$/JOY/MAP_JOY.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JOY/setTimeout_JOY_BUTTON.md" beforeDir="false" afterPath="$PROJECT_DIR$/JOY/setTimeout_JOY_BUTTON.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/ARRAY.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/ARRAY.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/ARRAY_SUM.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/ARRAY_SUM.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/ASYNC_AWAIT_THEN.txt" beforeDir="false" afterPath="$PROJECT_DIR$/JS/ASYNC_AWAIT_THEN.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/Array/codeFunc.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/Array/codeFunc.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/Array/sort.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/Array/sort.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/CHECK_FIELD.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/CHECK_FIELD.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/JSON.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/JSON.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/MAP.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/MAP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/OPERATOR.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/OPERATOR.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/Regular.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/Regular.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/SORT_TWO_ARRAY.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/SORT_TWO_ARRAY.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/String.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/String.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/add.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/add.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/filter.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/filter.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/onClick.md" beforeDir="false" afterPath="$PROJECT_DIR$/JS/onClick.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservices/KAFKA/Kafka.md" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/KAFKA/Kafka.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservices/REDIS/Redis.md" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/REDIS/Redis.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservices/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/Microservices/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEXT/NEXT.md" beforeDir="false" afterPath="$PROJECT_DIR$/NEXT/NEXT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/ERROR_NODE_MODULES.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/ERROR_NODE_MODULES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/Docker" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/Docker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/ManyToMany.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/ManyToMany.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/NEST.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/NEST.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/Postman.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/Postman.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/Sequelize.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/Sequelize.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/auth.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/auth.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/.development.env" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/.development.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/.production.env" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/.production.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/nest-cli.json" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/nest-cli.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/auth/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/auth/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/auth/auth.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/auth/auth.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/auth/jwt-auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/auth/jwt-auth.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/auth/roles-auth.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/auth/roles-auth.decorator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/auth/roles.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/auth/roles.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/exceptions/validation.exception.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/exceptions/validation.exception.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/files/files.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/files/files.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/files/files.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/files/files.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/pipes/validation.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/pipes/validation.pipe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/posts/dto/create-post.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/posts/dto/create-post.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/posts/posts.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/posts/posts.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/posts/posts.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/posts/posts.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/posts/posts.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/posts/posts.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/posts/posts.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/posts/posts.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/roles/dto/create-role.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/roles/dto/create-role.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/roles/roles.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/roles/roles.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/roles/roles.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/roles/roles.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/roles/roles.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/roles/roles.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/roles/roles.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/roles/roles.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/roles/user-roles.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/roles/user-roles.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/users/dto/add-role.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/users/dto/add-role.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/users/dto/ban-user.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/users/dto/ban-user.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/users/dto/create-user.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/users/dto/create-user.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/users/users.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/users/users.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/users/users.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/users/users.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/users/users.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/users/users.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/src/users/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/src/users/users.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/tsconfig.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/tsconfig.build.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/back/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/back/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/bcryptjs.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/bcryptjs.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/myback.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/myback.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NEST/ПродвинутыйBACKEND.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NEST/ПродвинутыйBACKEND.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NODE.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NODE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NODE_RE_INSTALL.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NODE_RE_INSTALL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/NVM.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/NVM.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODE/YARN.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODE/YARN.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NODEMCUv3/NODEMCU_LINUX_FIRMWARE.md" beforeDir="false" afterPath="$PROJECT_DIR$/NODEMCUv3/NODEMCU_LINUX_FIRMWARE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PM2/command.md" beforeDir="false" afterPath="$PROJECT_DIR$/PM2/command.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PM2/ecosystem.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/PM2/ecosystem.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PM2/install.md" beforeDir="false" afterPath="$PROJECT_DIR$/PM2/install.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PM2/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/PM2/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POSTMAN/tests.md" beforeDir="false" afterPath="$PROJECT_DIR$/POSTMAN/tests.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROXY/manual.md" beforeDir="false" afterPath="$PROJECT_DIR$/PROXY/manual.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/Python/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/py.md" beforeDir="false" afterPath="$PROJECT_DIR$/Python/py.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/Archakov/NEXT_Archakov.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/Archakov/NEXT_Archakov.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/BASE/BASE.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/BASE/BASE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/BASE/BASE_OBSERVER.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/BASE/BASE_OBSERVER.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/BUTTON.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/BUTTON.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/HIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/HIDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/INPUT.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/INPUT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/localStorage.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/localStorage.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/select.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/select.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/setTimeout_input.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/INPUT/setTimeout_input.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/MODAL/MODAL.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/MODAL/MODAL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/MODAL/MODAL_OBSERVER.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/MODAL/MODAL_OBSERVER.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/setInterval.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/setInterval.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/BASE_CODE/setTimeout.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/BASE_CODE/setTimeout.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/E-COMMERCE/EVERSHOP/Deploy.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/EVERSHOP/Deploy.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/E-COMMERCE/EVERSHOP/EverShop.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/EVERSHOP/EverShop.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/E-COMMERCE/EVERSHOP/config/production.json" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/EVERSHOP/config/production.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/E-COMMERCE/EVERSHOP/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/EVERSHOP/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/E-COMMERCE/MEDUSA/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/E-COMMERCE/MEDUSA/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/ERORR/REACT_ERROR.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/ERORR/REACT_ERROR.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/ESLINT/ESLINT.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/ESLINT/ESLINT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/.env" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/HTTPS_REACT.js" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/HTTPS_REACT.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/HTTPS_SERVER_IO_CUCKOO.js" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/HTTPS_SERVER_IO_CUCKOO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/cert/servicerobotpro/cert.pem" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/cert/servicerobotpro/cert.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/cert/servicerobotpro/chain.pem" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/cert/servicerobotpro/chain.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/cert/servicerobotpro/fullchain.pem" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/cert/servicerobotpro/fullchain.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/cert/servicerobotpro/privkey.pem" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/cert/servicerobotpro/privkey.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/cert/umdomby/cert.pem" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/cert/umdomby/cert.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/cert/umdomby/chain.pem" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/cert/umdomby/chain.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/cert/umdomby/fullchain.pem" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/cert/umdomby/fullchain.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/cert/umdomby/privkey.pem" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/cert/umdomby/privkey.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/HTTPS/package.txt" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/HTTPS/package.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/INSTALL/INSTALL.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/INSTALL/INSTALL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/REACT-ROUTER-DOM/exact.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/REACT-ROUTER-DOM/exact.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/REACT-ROUTER-DOM/useHistory.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/REACT-ROUTER-DOM/useHistory.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/REDUX/REDUX.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/REDUX/REDUX.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/ROUTER/REACT_ROUTER.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/ROUTER/REACT_ROUTER.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/SHORTCUT_KEYS/KEYS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/SHORTCUT_KEYS/KEYS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/TYPESCRIPT/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/TYPESCRIPT/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/WEBPACK/WEBPACK.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/WEBPACK/WEBPACK.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/WEBSOCKET/WEBSOCKET.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/WEBSOCKET/WEBSOCKET.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/node_modules.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/node_modules.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/ПродвинутыйFRONTEND.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/ПродвинутыйFRONTEND.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT_NATIVE/EXPO/CREATE_EXPO.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT_NATIVE/EXPO/CREATE_EXPO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT_NATIVE/EXPO/Expo.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT_NATIVE/EXPO/Expo.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT_NATIVE/EXPO/STYLE.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT_NATIVE/EXPO/STYLE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT_VIDEO/TURN_SERVER.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT_VIDEO/TURN_SERVER.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT_VIDEO/WEBRTC.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT_VIDEO/WEBRTC.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REDUX/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/REDUX/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEO/seo.md" beforeDir="false" afterPath="$PROJECT_DIR$/SEO/seo.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/CHAT/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/CHAT/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/CHAT/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/CHAT/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/Mongo-adapter/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/Mongo-adapter/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/REDIS/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/REDIS/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/Redis.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/Redis.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/CLIENTs_PARAM.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/CLIENTs_PARAM.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/CONNEC_PARAM.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/CONNEC_PARAM.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/MANUAL_CUT.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/MANUAL_CUT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/MANUAL_FULL.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/MANUAL_FULL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/NAMESPACE.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/NAMESPACE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/ROOM.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/ROOM.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/Socket(test)/App1(Start)/App1.js" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/Socket(test)/App1(Start)/App1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/Socket(test)/App1(Start)/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/Socket(test)/App1(Start)/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/Socket(test)/App1(Start)/server1.js" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/SOCKET_IO_TEST/Socket(test)/App1(Start)/server1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/WEBRTC/CODE.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/WEBRTC/CODE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/WEBRTC/ProjectWebRTC.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/WEBRTC/ProjectWebRTC.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/install.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/install.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SOCKET_IO/lern.md" beforeDir="false" afterPath="$PROJECT_DIR$/SOCKET_IO/lern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SSD/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/SSD/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SSH/SSH.md" beforeDir="false" afterPath="$PROJECT_DIR$/SSH/SSH.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SSL/certbot.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SSL/certbot.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SSL/openssl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SSL/openssl.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Swift/Swift.md" beforeDir="false" afterPath="$PROJECT_DIR$/Swift/Swift.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TOOLs/Agile/Start.md" beforeDir="false" afterPath="$PROJECT_DIR$/TOOLs/Agile/Start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TS/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/TS/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Turn-Stun/install.md" beforeDir="false" afterPath="$PROJECT_DIR$/Turn-Stun/install.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/Apache.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/Apache.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/AppImage.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/AppImage.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/CHMOD.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/CHMOD.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/CONSOLE.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/CONSOLE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/GIT_SERVER/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/GIT_SERVER/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/GRUB.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/GRUB.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/ICON.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/ICON.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/INSTALL.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/INSTALL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/MIC.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/MIC.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/OpenPort.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/OpenPort.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/POPULAR_COMMAND.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/POPULAR_COMMAND.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/PORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/PORT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/Processes.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/Processes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/Sound.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/Sound.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/USER_DECKTOP.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/USER_DECKTOP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/find.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/find.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UBUNTU/ftp.md" beforeDir="false" afterPath="$PROJECT_DIR$/UBUNTU/ftp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VSCODE/VSCODE_GIT.md" beforeDir="false" afterPath="$PROJECT_DIR$/VSCODE/VSCODE_GIT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VSCODE/ttyUSB0.md" beforeDir="false" afterPath="$PROJECT_DIR$/VSCODE/ttyUSB0.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WINDOWS/priv.ppk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WINDOWS/pubkey" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WINDOWS/puttygen.md" beforeDir="false" afterPath="$PROJECT_DIR$/WINDOWS/puttygen.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WORK/resume.md" beforeDir="false" afterPath="$PROJECT_DIR$/WORK/resume.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WSL/IP.md" beforeDir="false" afterPath="$PROJECT_DIR$/WSL/IP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WSL/wsl.md" beforeDir="false" afterPath="$PROJECT_DIR$/WSL/wsl.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,31 +361,31 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.ARRAY.js.executor": "Run",
-    "Node.js.ARRAY_SUM.js.executor": "Run",
-    "Node.js.FIELD.js.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/pi/projects/command/SOCKET_IO/CHAT",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "settings.sync",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.ARRAY.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.ARRAY_SUM.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.FIELD.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/pi/Projects/GAME&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\SOCKET_IO\CHAT" />
@@ -87,11 +395,11 @@
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\NODE\NEST" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\pi\Projects\command\DESING" />
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\Microservices\REDIS" />
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\Microservices\KAFKA" />
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\Microservices" />
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\SOCKET_IO" />
-      <recent name="\\wsl$\Ubuntu\home\pi\projects\command" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.CHECK_FIELD.js">
@@ -122,14 +430,6 @@
         <item itemvalue="Node.js.ARRAY_SUM.js" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -306,6 +606,15 @@
       <workItem from="1723581210281" duration="8937000" />
       <workItem from="1723836880710" duration="39350000" />
       <workItem from="1724351399150" duration="14569000" />
+      <workItem from="1724619221175" duration="1096000" />
+      <workItem from="1724666425989" duration="2894000" />
+      <workItem from="1724680895978" duration="625000" />
+      <workItem from="1724685126477" duration="634000" />
+      <workItem from="1724751239742" duration="8271000" />
+      <workItem from="1724781517520" duration="4778000" />
+      <workItem from="1724788721011" duration="2692000" />
+      <workItem from="1724801296027" duration="5309000" />
+      <workItem from="1724833109144" duration="1305000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>

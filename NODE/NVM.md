@@ -18,9 +18,9 @@ nvm list-remote
 
 which node
 nvm list-remote
-nvm install v20.15.1
-nvm use v20.15.1
-nvm alias default v20.15.1
+nvm install v20.17.0
+nvm use v20.17.0
+nvm alias default v20.17.0
 node -v
 
 

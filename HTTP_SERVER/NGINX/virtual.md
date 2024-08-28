@@ -51,6 +51,22 @@ listen [::]:80;
 }
 ```
 
+```
+server {
+listen 80;
+listen [::]:80;
+
+        root /var/www/gamerecords.site/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name gamerecords.site www.gamerecords.site;
+
+        location / {
+                try_files $uri $uri/ /index.html;
+        }
+}
+```
+
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/gamerecords.site
 sudo nano /etc/nginx/sites-available/gamerecords.site
 
@@ -87,10 +103,11 @@ sudo ln -s /etc/nginx/sites-available/serbot.online /etc/nginx/sites-enabled/
 sudo ln -s /etc/nginx/sites-available/gamerecords.site /etc/nginx/sites-enabled/
 
 sudo systemctl restart nginx
+journalctl -xeu nginx.service
 
 sudo nano /etc/nginx/nginx.conf
 ```
-gzip_vary on;
+         gzip_vary on;
          gzip_proxied any;
          gzip_comp_level 6;
          gzip_buffers 16 8k;

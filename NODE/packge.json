@@ -1,0 +1,1 @@
+"start": "cd GAME-FRONTEND && yarn start & cd GAME-BACKEND && yarn nstart"

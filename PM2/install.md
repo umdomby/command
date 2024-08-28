@@ -16,6 +16,7 @@ pm2 save
 
 sudo systemctl start pm2-pi2
 
-
+pm2 logs 'process_name' --lines 500
+pm2 logs --lines 200
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04-ru
