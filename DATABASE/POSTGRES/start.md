@@ -3,7 +3,12 @@ https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ub
 sudo apt update
 sudo apt install postgresql postgresql-contrib
 
+sudo nano /etc/postgresql/14/main/postgresql.conf
+listen_address = '*'
 
+==> pg_hba.conf
+
+sudo service postgresql restart
 
 ```
 listen_addresses = '*'
@@ -21,8 +26,10 @@ sudo -i -u postgres
 psql
 \password postgres
 
+psql -h winhost -p 5432 -U postgres
+
 alter system set ssl=off
-select pg_reload_conf()re
+select pg_reload_conf()
 \q
 exit
 
@@ -30,14 +37,19 @@ exit
 sudo -u postgres
 psql "sslmode=require host=localhost dbname=evershop"
 sudo -i -u postgres
+createdb online_game
 sudo -u postgres createuser --interactive
-sudo -u postgres createdb sammy
+sudo -u postgres createdb online_game
+
+psql -h 192.168.0.151 -p 5432 -U postgres
+
+psql -h 127.0.0.1 -p 5432 -U postgres
 
 sudo systemctl restart postgresql
 sudo service postgresql restart
 /etc/init.d/postgresql restart
 systemctl reload postgresql-14.service
-
+systemctl status postgresql
 
 #reboot postgres
 ```

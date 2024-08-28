@@ -73,20 +73,11 @@ sudo nano /etc/nginx/sites-available/gamerecords.site
 #index index.html index.htm index.nginx-debian.html;
 ```
 server {
-listen 80;
-listen [::]:80;
 
-        root /var/www/gamerecords.site/html;
+        root /var/www/gamerecords.site/html/GAME/GAME-FRONTEND/build;
         index index.html index.htm index.nginx-debian.html;
+        server_name gamerecords.site;
 
-        server_name gamerecords.site www.gamerecords.site;
-
-        location / {
-                try_files $uri $uri/ =404;
-        }
-        
-        or
-        
         location / {
             proxy_pass http://localhost:8081;
             proxy_http_version 1.1;
@@ -96,6 +87,26 @@ listen [::]:80;
             proxy_cache_bypass $http_upgrade;
         }
 
+        listen [::]:443 ssl; # managed by Certbot
+        listen 443 ssl; # managed by Certbot
+        ssl_certificate /etc/letsencrypt/live/gamerecords.site/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/gamerecords.site/privkey.pem; # managed by Certbot
+        include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = gamerecords.site) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+listen 80;
+listen [::]:80;
+
+    server_name gamerecords.site www.gamerecords.site;
+    return 404; # managed by Certbot
+    
 }
 ```
 
@@ -103,7 +114,9 @@ sudo ln -s /etc/nginx/sites-available/serbot.online /etc/nginx/sites-enabled/
 sudo ln -s /etc/nginx/sites-available/gamerecords.site /etc/nginx/sites-enabled/
 
 sudo systemctl restart nginx
+sudo service nginx stop
 journalctl -xeu nginx.service
+nginx -t
 
 sudo nano /etc/nginx/nginx.conf
 ```
@@ -115,13 +128,7 @@ sudo nano /etc/nginx/nginx.conf
          gzip_types text/plain text/css application/json application/javascript
 ```
 
-server {
-server_name www.gamerecords.site
-return 301 $scheme://gamerecords.site$request_uri
-}
+netsh interface portproxy add v4tov4 listenport=80 listenaddress=192.168.0.151 connectport=80 connectaddress=172.24.152.235
+netsh interface portproxy add v4tov4 listenport=2005 listenaddress=192.168.0.151 connectport=2005 connectaddress=172.24.152.235
 
-server {
-server_name  www.gamerecords.site;
-rewrite ^(.*) https://gamerecords.site$1 permanent;
-}
 
