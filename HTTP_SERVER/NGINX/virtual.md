@@ -129,6 +129,6 @@ sudo nano /etc/nginx/nginx.conf
 ```
 
 netsh interface portproxy add v4tov4 listenport=80 listenaddress=192.168.0.151 connectport=80 connectaddress=172.24.152.235
-netsh interface portproxy add v4tov4 listenport=2005 listenaddress=192.168.0.151 connectport=2005 connectaddress=172.24.152.235
+netsh interface portproxy add v4tov4 listenport=5000 listenaddress=192.168.0.151 connectport=5000 connectaddress=172.24.152.235
 
 

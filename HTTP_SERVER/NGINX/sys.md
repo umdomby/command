@@ -24,6 +24,7 @@ sudo ufw allow 'Nginx HTTP'
 sudo ufw status
 or
 sudo ufw enable
+sudo ufw allow 5000
 ```
 Status: active
 
@@ -92,7 +93,8 @@ nano /var/log/nginx/error.log
 
 nano /etc/nginx/sites-enabled/gamerecords.site
 
-sudo rm /etc/nginx/sites-enabled/gamerecords.site
+sudo rm /etc/nginx/sites-enabled/server.gamerecords.site
+sudo rm /etc/nginx/sites-available/server.gamerecords.site
 
 # PowerShell
 netsh interface portproxy add v4tov4 listenport=80 listenaddress=192.168.0.151 connectport=80 connectaddress=172.24.152.235

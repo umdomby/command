@@ -28,7 +28,7 @@ wsl --shutdown
 delete
 netsh interface portproxy delete v4tov4 listenport=433 listenaddress=192.168.0.151
 netsh interface portproxy delete v4tov4 listenport=80 listenaddress=172.24.152.235
-netsh interface portproxy delete v4tov4 listenport=3000 listenaddress=0.0.0.0
+netsh interface portproxy delete v4tov4 listenport=2005 listenaddress=192.168.0.151
 netsh interface portproxy delete v4tov4 listenport=5432 listenaddress=192.168.0.151
 netsh interface portproxy dump
 

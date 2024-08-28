@@ -5,16 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/sys.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/wsl.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WSL/IP_POSTGRESS.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/SERVER.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/letsencrypt_access.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/pg_hba.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATABASE/POSTGRES/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/sys.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/sys.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/virtual.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/virtual.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WSL/IP.md" beforeDir="false" afterPath="$PROJECT_DIR$/WSL/IP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WSL/wsl.md" beforeDir="false" afterPath="$PROJECT_DIR$/WSL/wsl.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -320,6 +319,7 @@
       <workItem from="1724835325137" duration="7081000" />
       <workItem from="1724846262401" duration="5564000" />
       <workItem from="1724852948130" duration="2387000" />
+      <workItem from="1724861450073" duration="1941000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>
