@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
-      <change afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/SQL_query/query.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/SQL_query/rename_table_value.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REACT/BUTTON/start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REACT/FORM/form.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REACT/MAP/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/REACT/OBJECT/start.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATABASE/sequelize/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/sequelize/start.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REACT/MAP/code.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/MAP/code.md" afterDir="false" />
-    </list>
+    <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -321,7 +311,7 @@
       <workItem from="1724852948130" duration="2387000" />
       <workItem from="1724861450073" duration="6356000" />
       <workItem from="1724923270974" duration="6458000" />
-      <workItem from="1725001990209" duration="4949000" />
+      <workItem from="1725001990209" duration="5320000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>
@@ -599,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724865011660</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="edit">
+      <option name="closed" value="true" />
+      <created>1725049873863</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1725049873863</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
