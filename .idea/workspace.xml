@@ -5,15 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/SERVER.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/letsencrypt_access.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/SQL_query/query.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DATABASE/POSTGRES/SQL_query/rename_table_value.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/BUTTON/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/FORM/form.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/MAP/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/REACT/OBJECT/start.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/sys.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/sys.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/virtual.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/virtual.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WSL/IP.md" beforeDir="false" afterPath="$PROJECT_DIR$/WSL/IP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATABASE/sequelize/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/DATABASE/sequelize/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REACT/MAP/code.md" beforeDir="false" afterPath="$PROJECT_DIR$/REACT/MAP/code.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,7 +319,9 @@
       <workItem from="1724835325137" duration="7081000" />
       <workItem from="1724846262401" duration="5564000" />
       <workItem from="1724852948130" duration="2387000" />
-      <workItem from="1724861450073" duration="1941000" />
+      <workItem from="1724861450073" duration="6356000" />
+      <workItem from="1724923270974" duration="6458000" />
+      <workItem from="1725001990209" duration="4949000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>
@@ -589,7 +591,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724834599766</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="edit">
+      <option name="closed" value="true" />
+      <created>1724865011660</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1724865011660</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
