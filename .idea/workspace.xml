@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af296f73-87ff-42a4-8f57-f91fb8c8903a" name="Default Changelist" comment="edit">
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/SERVER.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/letsencrypt_access.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GIT/NoGitAdd.md" beforeDir="false" afterPath="$PROJECT_DIR$/GIT/NoGitAdd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/serbot.online.conf.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/sys.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/sys.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTP_SERVER/NGINX/virtual.md" beforeDir="false" afterPath="$PROJECT_DIR$/HTTP_SERVER/NGINX/virtual.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WSL/IP.md" beforeDir="false" afterPath="$PROJECT_DIR$/WSL/IP.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,14 +31,29 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="WARN_ABOUT_CRLF" value="false" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;umdomby&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/umdomby/command.git&quot;,
+    &quot;accountId&quot;: &quot;078c72b4-26e8-443c-91a0-54aad926f1e5&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/SSL/certbot.txt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/REACT/HTTPS/HTTPS_SERVER_IO_CUCKOO.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/REACT/HTTPS/HTTPS_REACT.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/REACT/HTTPS/HTTPS_SERVER_IO_CUCKOO.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SSL/certbot.txt" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2BPRxlS6gibXvfBYd4dD70OQrTu" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -39,13 +61,31 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.ARRAY.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.ARRAY_SUM.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.FIELD.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/pi/Projects/GAME&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu\home\pi\projects\command\SOCKET_IO\CHAT" />
@@ -63,6 +103,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Node.js.CHECK_FIELD.js">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ARRAY_SUM.js" type="NodeJSConfigurationType" temporary="true" path-to-node="$USER_HOME$/.nvm/versions/node/v16.17.1/bin/node" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/JS/ARRAY_SUM.js" working-dir="$PROJECT_DIR$/JS">
       <method v="2" />
     </configuration>
@@ -269,7 +320,6 @@
       <workItem from="1724846262401" duration="5564000" />
       <workItem from="1724852948130" duration="2387000" />
       <workItem from="1724861450073" duration="1941000" />
-      <workItem from="1725047180685" duration="1083000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1656806754348</created>
@@ -555,7 +605,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
