@@ -4,3 +4,5 @@
 # вы можете сделать это следующим образом:
 
 <input type="text" pattern="([0-1]{1}[0-9]{1}|20|21|22|23):[0-5]{1}[0-9]{1}" />
+
+https://stackoverflow.com/questions/14772142/24-hour-time-regex-for-html-5
