@@ -1,3 +1,5 @@
+https://dbasedev.ru/orm/sequelize/#_5
+
 https://my-js.org/docs/guide/sequelize/
 https://sequelize.org/docs/v7/querying/update/
 

@@ -1,5 +1,6 @@
 git rm --cache .env
 git rm -f --cached .env
+git rm -r --cached .env
 
 # отменить изменения в ветке перед git pull
 git checkout -f origin/main

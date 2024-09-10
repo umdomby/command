@@ -1,0 +1,1 @@
+https://sky.pro/wiki/javascript/poluchenie-pervogo-klyucha-obyekta-v-java-script-vstroennye-funktsii/
