@@ -1,3 +1,5 @@
+
+# Docker-compose — это система сборки, запуска и управления множеством контейнеров
 docker-compose build
 docker-compose up
 

@@ -1,3 +1,5 @@
+wsl -l -v
+
 ```
 wsl --install
 wsl -l -v
@@ -8,7 +10,7 @@ wsl --set-version Ubuntu-20.04 2
 Откройте настройки проекта: File → Settings → Tools → Terminal
 
 wsl --shutdown
-
+wsl --update
 
 
 

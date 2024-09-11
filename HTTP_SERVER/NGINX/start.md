@@ -28,7 +28,7 @@ sudo ufw enable
 sudo ufw status
 
 sudo ufw app list
-
+sudo ufw allow 80/tcp
 sudo ufw allow 1234/tcp
 sudo ufw allow from 111.111.111.111
 sudo ufw allow from 111.111.111.111 to any port 22

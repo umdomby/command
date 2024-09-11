@@ -1,9 +1,11 @@
 https://jino.ru/spravka/articles/nginx_server_blocks.html#установка-и-первичная-настройка-nginx
 
 sudo mkdir -p /var/www/serbot.online/html
+sudo mkdir -p /var/www/cryptoid.store/html
 sudo mkdir -p /var/www/gamerecords.site/html
 
 sudo chown -R $USER:$USER /var/www/serbot.online/html
+sudo chown -R $USER:$USER /var/www/cryptoid.store/html
 sudo chown -R $USER:$USER /var/www/gamerecords.site/html
 
 nano /var/www/serbot.online/html/index.html
@@ -35,6 +37,8 @@ nano /var/www/gamerecords.site/html/index.html
 
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/serbot.online
 sudo nano /etc/nginx/sites-available/serbot.online
+# sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/cryptoid.store
+# sudo nano /etc/nginx/sites-available/cryptoid.store
 ```
 server {
 listen 80;
@@ -56,10 +60,10 @@ server {
 listen 80;
 listen [::]:80;
 
-        root /var/www/gamerecords.site/html;
+        root /var/www/cryptoid.store/html;
         index index.html index.htm index.nginx-debian.html;
 
-        server_name gamerecords.site www.gamerecords.site;
+        server_name cryptoid.store www.cryptoid.store;
 
         location / {
                 try_files $uri $uri/ /index.html;
@@ -67,10 +71,9 @@ listen [::]:80;
 }
 ```
 
+# https cerbot
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/gamerecords.site
 sudo nano /etc/nginx/sites-available/gamerecords.site
-
-#index index.html index.htm index.nginx-debian.html;
 ```
 server {
 
@@ -111,6 +114,7 @@ listen [::]:80;
 ```
 
 sudo ln -s /etc/nginx/sites-available/serbot.online /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/cryptoid.store /etc/nginx/sites-enabled/
 sudo ln -s /etc/nginx/sites-available/gamerecords.site /etc/nginx/sites-enabled/
 
 sudo systemctl restart nginx
@@ -130,5 +134,7 @@ sudo nano /etc/nginx/nginx.conf
 
 netsh interface portproxy add v4tov4 listenport=80 listenaddress=192.168.0.151 connectport=80 connectaddress=172.24.152.235
 netsh interface portproxy add v4tov4 listenport=5000 listenaddress=192.168.0.151 connectport=5000 connectaddress=172.24.152.235
+netsh interface portproxy add v4tov4 listenport=5001 listenaddress=192.168.0.151 connectport=5001 connectaddress=172.24.152.235
+netsh interface portproxy add v4tov4 listenport=5002 listenaddress=192.168.0.151 connectport=5002 connectaddress=172.24.152.235
 
 
