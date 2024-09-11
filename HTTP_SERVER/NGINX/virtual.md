@@ -41,8 +41,6 @@ sudo nano /etc/nginx/sites-available/serbot.online
 # sudo nano /etc/nginx/sites-available/cryptoid.store
 ```
 server {
-listen 80;
-listen [::]:80;
 
         root /var/www/serbot.online/html;
         index index.html index.htm index.nginx-debian.html;
@@ -50,11 +48,40 @@ listen [::]:80;
         server_name serbot.online www.serbot.online;
 
         location / {
-                try_files $uri $uri/ /index.html;
+            proxy_pass http://localhost:8081;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
         }
+
+    listen [::]:444 ssl ipv6only=on; # managed by Certbot
+    listen 444 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/serbot.online/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/serbot.online/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = serbot.online) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+listen 80;
+listen [::]:80;
+
+        server_name serbot.online www.serbot.online;
+    return 404; # managed by Certbot
+
+
 }
 ```
-
+        location / {
+                try_files $uri $uri/ /index.html;
+        }
 ```
 server {
 listen 80;
@@ -66,9 +93,34 @@ listen [::]:80;
         server_name cryptoid.store www.cryptoid.store;
 
         location / {
-                try_files $uri $uri/ /index.html;
+            proxy_pass http://localhost:8082;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
         }
+    listen [::]:444 ssl ipv6only=on; # managed by Certbot
+    listen 444 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/cryptoid.store/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/cryptoid.store/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 }
+server {
+    if ($host = cryptoid.store) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+listen 80;
+listen [::]:80;
+
+    server_name cryptoid.store www.cryptoid.store;
+    return 404; # managed by Certbot
+    
+}
+
 ```
 
 # https cerbot
@@ -137,4 +189,11 @@ netsh interface portproxy add v4tov4 listenport=5000 listenaddress=192.168.0.151
 netsh interface portproxy add v4tov4 listenport=5001 listenaddress=192.168.0.151 connectport=5001 connectaddress=172.24.152.235
 netsh interface portproxy add v4tov4 listenport=5002 listenaddress=192.168.0.151 connectport=5002 connectaddress=172.24.152.235
 
+sudo apt remove certbot
+sudo apt update
+sudo apt install snapd
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --nginx
+sudo systemctl restart nginx
 

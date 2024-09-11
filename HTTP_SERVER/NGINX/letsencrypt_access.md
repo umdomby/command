@@ -1,7 +1,7 @@
 # Create group with root and nodeuser as members
 $ sudo addgroup nodecert
-$ sudo adduser nodeuser nodecert
-$ sudo adduser root nodecert
+$ sudo adduser pi nodecert
+$ sudo adduser root pi
 
 # Make the relevant letsencrypt folders owned by said group.
 $ sudo chgrp -R nodecert /etc/letsencrypt/live

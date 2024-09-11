@@ -12,13 +12,13 @@ sudo service postgresql restart
 
 ```
 listen_addresses = '*'
-затем откройте файл с именемpg_hba.conf
-
+затем откройте файл с именем pg_hba.conf
+sudo nano /etc/postgresql/14/main/pg_hba.conf
 sudo vi pg_hba.conf
 и добавьте эту строку в этот файл
 
 host  all  all 0.0.0.0/0 md5
-sudo /etc/init.d/postgresql restart2
+sudo /etc/init.d/postgresql restart
 
 ```
 
