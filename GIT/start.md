@@ -17,3 +17,14 @@ git branch --set-upstream-to=origin/main
 
 
 git checkout origin/main
+
+
+git pull --no-rebase
+git reset --hard HEAD
+git reset --hard HEAD~1 
+
+
+
+
+# Чтобы удалить конфликты, вы можете использовать
+git mergetool

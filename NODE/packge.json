@@ -1,1 +1,9 @@
-"start": "cd GAME-FRONTEND && yarn start & cd GAME-BACKEND && yarn nstart"
+{
+  "scripts": {
+    "start": "cd GAME-FRONTEND && yarn start & cd GAME-BACKEND && yarn nstart",
+    "pm2": "pm2 start bcryptoidstore.js",
+    "prod": "nodemon bcryptoidstore.js",
+    "dev": "nodemon bcryptoidstore.js",
+    "updata": "node updata.js"
+  }
+}

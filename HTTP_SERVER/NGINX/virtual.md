@@ -183,8 +183,8 @@ sudo nano /etc/nginx/nginx.conf
          gzip_http_version 1.1;
          gzip_types text/plain text/css application/json application/javascript
 ```
-
 netsh interface portproxy add v4tov4 listenport=80 listenaddress=192.168.0.151 connectport=80 connectaddress=172.24.152.235
+netsh interface portproxy add v4tov4 listenport=8080 listenaddress=192.168.0.151 connectport=8080 connectaddress=172.24.152.235
 netsh interface portproxy add v4tov4 listenport=5000 listenaddress=192.168.0.151 connectport=5000 connectaddress=172.24.152.235
 netsh interface portproxy add v4tov4 listenport=5001 listenaddress=192.168.0.151 connectport=5001 connectaddress=172.24.152.235
 netsh interface portproxy add v4tov4 listenport=5002 listenaddress=192.168.0.151 connectport=5002 connectaddress=172.24.152.235

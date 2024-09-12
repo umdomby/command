@@ -53,6 +53,8 @@ service nginx configtest
 
 # Теперь проверим его наличие в автозагрузке:
 sudo systemctl is-enabled nginx
+
+sudo systemctl enable nginx
 sudo systemctl disable nginx
 
 sudo systemctl start nginx

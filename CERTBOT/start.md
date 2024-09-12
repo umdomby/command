@@ -41,5 +41,15 @@ sudo certbot certonly --standalone
 sudo certbot certonly --webroot
 sudo certbot renew --dry-run
 
+# UPDATE SSL
+# Чтобы протестировать процесс обновления, можно сделать запуск «вхолостую» с помощью
+sudo certbot renew --dry-run
+
+sudo certbot renew
+sudo certbot renew --force-renewal
+sudo certbot renew --force-renewal --post-hook "systemctl reload nginx"
+
+
+
 
 
