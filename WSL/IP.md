@@ -1,3 +1,9 @@
+# Для просмотра существующих правил введите:
+netsh interface portproxy show all
+
+# Для сброса всех существующих правил используйте:
+netsh interface portproxy reset
+
 sudo apt install net-tools
 ifconfig
 
@@ -26,6 +32,7 @@ netsh interface portproxy add v4tov4 listenport=445 listenaddress=192.168.0.151 
 netsh interface portproxy add v4tov4 listenport=8082 listenaddress=192.168.0.151 connectport=8082 connectaddress=172.24.152.235
 netsh interface portproxy add v4tov4 listenport=8081 listenaddress=192.168.0.151 connectport=8081 connectaddress=172.24.152.235
 netsh interface portproxy add v4tov4 listenport=3306 listenaddress=192.168.0.151 connectport=3306 connectaddress=172.24.152.235
+netsh interface portproxy add v4tov4 listenport=1337 listenaddress=192.168.0.151 connectport=1337 connectaddress=172.24.152.235
 
 213.184.249.66:5432
 
@@ -54,6 +61,7 @@ netsh interface portproxy delete v4tov4 listenport=5002 listenaddress=192.168.0.
 netsh interface portproxy delete v4tov4 listenport=5003 listenaddress=192.168.0.151
 netsh interface portproxy delete v4tov4 listenport=5005 listenaddress=192.168.0.151
 netsh interface portproxy delete v4tov4 listenport=5000 listenaddress=192.168.0.151
+netsh interface portproxy delete v4tov4 listenport=1337 listenaddress=192.168.0.151
 netsh interface portproxy dump
 
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 \ listenport=3000 connectaddress=172.26.38.5 connectport=3000

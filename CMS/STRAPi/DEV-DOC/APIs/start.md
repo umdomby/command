@@ -1,0 +1,1 @@
+https://docs.strapi.io/dev-docs/api/content-api

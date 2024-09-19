@@ -11,3 +11,5 @@ https://youtu.be/c3JGBdxfYcU
 5. Микрофронтенд + монорепа + модульная
 ![img_4.png](img_4.png)
 
+
+https://youtu.be/8j29aAbtYWo
