@@ -16,3 +16,7 @@ yarn --version
 npm install -g serve
 serve -s build
 serve -s build -l 3000
+
+
+npm install npm@latest
+npm install -g npm@latest

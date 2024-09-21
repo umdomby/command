@@ -1,0 +1,1 @@
+https://strapi.io/blog/auth0-provider-and-strapi-tutorial-1
