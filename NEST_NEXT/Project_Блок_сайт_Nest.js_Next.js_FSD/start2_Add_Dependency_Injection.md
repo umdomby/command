@@ -1,23 +1,4 @@
-# tsconfig.json
-"strictNullChecks": true
-
-npx prisma init
-
-DATABASE_URL=postgres://postgres:Weterr123@localhost/startup?schema=public
-```
-model User {
-    id    Int    @id @default(autoincrement())
-    email String @unique
-}
-```
-
-npx prisma db push
-
-npx prisma generate
-```typescript
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
-```
+# ADD Dependency injection
 
 # Add new Service
 npx nest g mo db
@@ -27,7 +8,6 @@ npx nest g s db
 ```typescript
 import { Module } from '@nestjs/common';
 import { DbService } from './db.service';
-
 @Module({
   providers: [DbService],
   exports: [DbService],
@@ -38,7 +18,6 @@ export class DbModule {}
 ```typescript
 import {Injectable, OnModuleInit} from '@nestjs/common';
 import {PrismaClient} from "@prisma/client";
-
 @Injectable()
 export class DbService extends PrismaClient implements OnModuleInit {
     async onModuleInit() {
@@ -53,12 +32,10 @@ import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ApiOkResponse, ApiProperty } from '@nestjs/swagger';
 import { DbService } from './db/db.service';
-
 class HelloWorldDto {
   @ApiProperty()
   message: string;
 }
-
 @Controller()
 export class AppController {
   constructor(
@@ -77,5 +54,4 @@ export class AppController {
   }
 }
 ```
-
-
+# Finish = db.service.ts ```await this.$connect();``` hook connect DataBase

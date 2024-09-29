@@ -18,11 +18,12 @@ http://localhost:3000/api-yaml
 
 # add app.controller.ts
 ```typescript
+import { AppService } from './app.service';
+import {ApiOkResponse, ApiProperty} from "@nestjs/swagger";
 class HelloWorldDto {
     @ApiProperty()
     message: string;
 }
-
 @Controller()
 export class AppController {
     constructor(private readonly appService: AppService) {}
@@ -35,19 +36,4 @@ export class AppController {
         return { message: this.appService.getHello() };
     }
 }
-```
-
-
-
-
-
-```
-nest generate module users
-nest generate controller users
-nest generate service users
-
-npm i @nestjs/config
-npm i cross-env
-
-yarn add axios && yarn add react-router-dom
 ```
