@@ -55,3 +55,15 @@ export class AppController {
 }
 ```
 # FINISH = swagger : Try it out : Execute : Execute : CONSOLE []
+
+# push add to database
+npx prisma db push
+
+# generate client
+$ npx prisma generate
+
+$ npx prisma migrate
+
+$ npx prisma migrate reset
+
+$ npx prisma migrate dev init

@@ -1,4 +1,5 @@
 https://github.com/EvgenyParomov/block-list.git
+https://youtu.be/vrjPzp-bZJo
 
 # nestjs
 npm i -g @nestjs/cli
