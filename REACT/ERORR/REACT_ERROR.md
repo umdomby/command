@@ -16,3 +16,5 @@ SKIP_PREFLIGHT_CHECK=true
 HTTPS=true
 
 yarn add react-scripts
+
+npx install cross-env
