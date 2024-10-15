@@ -12,11 +12,10 @@
 
 
 @UseGuards(AuthGuard) // доступна сессия
-@SessionInfo() session: GetSessionInfoDto
+@SessionInfo()session: GetSessionInfoDto
 
 
 @Query() query: BlockListQueryDto
-
 ```
 
 

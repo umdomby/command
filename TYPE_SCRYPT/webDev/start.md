@@ -1,3 +1,12 @@
+npm install -g typescript
+
+npm cache clean --force
+
+# TypeScript. Полный курс
+https://youtu.be/5QnZ9AyDW6c
+
+https://www.youtube.com/playlist?list=PLNkWIWHIRwMEm1FgiLjHqSky27x5rXvQa
+
 ✔ 0:00 - Введение
 ✔ 4:19 - Базовые типы. Часть 1
 ✔ 12:00 - Базовые типы. Часть 2
@@ -11,3 +20,7 @@
 ✔ 1:00:28 - Общие типы
 ✔ 1:07:14 - Декораторы
 ✔ 1:14:19 - Утилиты
+
+# песочница
+https://www.typescriptlang.org/play
+

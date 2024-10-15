@@ -1,3 +1,7 @@
+npx create-next-app@latest
+
+https://next-js-my.vercel.app/
+
 # Next.js
 https://www.youtube.com/playlist?list=PLNkWIWHIRwMHjz7hM5o10BNc6dq0OMd2U
 
@@ -33,3 +37,25 @@ https://www.youtube.com/watch?v=GEfR69hL9y0
 ✔ 53:48 - Создание API (API Creation)
 ✔ 1:00:43 - Интеграция TypeScript (TypeScript Integration)
 ✔ 1:10:04 - Деплой на Vercel (Deploying To Vercel)
+
+
+```typescript
+try {
+    const response = await fetch(`${process.env.API_HOST}/socials`);
+    const data = await response.json();
+
+    if (!data) {
+        return {
+            notFound: true,
+        }
+    }
+
+    return {
+        props: { socials: data },
+    }
+}catch {
+    return {
+        props: { socials: null}
+    }
+}
+```
