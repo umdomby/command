@@ -1,3 +1,4 @@
+2
 ```
 sudo apt install curl
 curl -V

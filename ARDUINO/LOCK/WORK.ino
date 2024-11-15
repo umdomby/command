@@ -29,7 +29,7 @@ void loop() {
   // Занимаемся чем угодно
 
   static uint32_t rebootTimer = millis(); // Важный костыль против зависания модуля!
-  static uint32_t rebootLock = millis();
+  //static uint32_t rebootLock = millis();
   if (millis() - rebootTimer >= 1000) {   // Таймер с периодом 1000 мс
     rebootTimer = millis();               // Обновляем таймер
     digitalWrite(RST_PIN, HIGH);          // Сбрасываем модуль
@@ -38,10 +38,13 @@ void loop() {
     rfid.PCD_Init();                      // Инициализируем заново
   }
 
-  if (millis() - rebootLock >= 3000) {
-    digitalWrite(4, LOW);
-    //digitalWrite(6, LOW);
-  }
+  // if(digitalRead(4) == HIGH){
+  //   //Serial.println("digitalRead(4)");
+  //   if (millis() - rebootLock >= 3000) {
+  //     digitalWrite(4, LOW);
+  //     //digitalWrite(6, LOW);
+  //   }
+  // }
 
   if (!rfid.PICC_IsNewCardPresent()) return;  // Если новая метка не поднесена - вернуться в начало loop
   if (!rfid.PICC_ReadCardSerial()) return;    // Если метка не читается - вернуться в начало loop
@@ -70,8 +73,8 @@ void loop() {
   }
 
   for (uint8_t i = 0; i < 7; i++) {
-    Serial.print("i = ");
-    Serial.println(i);
+    //Serial.print("i = ");
+    //Serial.println(i);
     if (myInts[i] != myIntsKey[i]){
       Serial.println("RETURN");
       return;
@@ -80,12 +83,13 @@ void loop() {
       Serial.println("WORK ");
       digitalWrite(4, HIGH);
       //digitalWrite(6, HIGH);
-      rebootLock = millis(); 
-    //delay(3000);
+      //rebootLock = millis();
+      delay(3000);
+      digitalWrite(4, LOW);
     }
   }
 
-  
+
 
   // Serial.print("Data HEX:");                          // Выводим 16 байт в формате HEX
   // for (uint8_t i = 0; i < 16; i++) {

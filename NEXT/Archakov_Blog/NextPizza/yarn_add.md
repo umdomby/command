@@ -1,0 +1,1 @@
+yarn add axios bcrypt prisma zustand
