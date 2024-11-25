@@ -1,0 +1,26 @@
+GET http://localhost:3003/api/cart
+Content-Type: application/json
+
+###
+POST http://localhost:3003
+Content-Type: application/json
+
+{
+  "token": "646f0e63-73a1-4288-91d4-745f1daa4fff"
+}
+
+> {% client.global.set("cartToken", response.body.token); %}
+
+
+
+
+### GET Bearer
+GET http://localhost:3003/api/cart
+Content-Type: application/json
+Authorization: Bearer {{cartToken}}
+
+
+### GET Cookie
+GET http://localhost:3003/api/cart
+Content-Type: application/json
+Cookie: cartToken=646f0e63-73a1-4288-91d4-745f1daa4fff;

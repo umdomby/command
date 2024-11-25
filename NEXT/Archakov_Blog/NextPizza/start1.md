@@ -121,11 +121,62 @@ const currentItemId = items.find((item) => item.pizzaType === type && item.size 
 str.replace(/ /g, "/")
 str.replaceAll(" ", "/")
 ```
+# 10:11 comment Doc VSCode /**
+# sudo npm install -g jsdoc
+# shadcn Sheet --> right panel
 
+```jsx React.FC<React.PropsWithChildren>  ?
+export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {}
+```
+# figma --> maquette projects
 
+# cart get-cart-item0details.ts 10:47
+```jsx
+  if (ingredients) {
+    details.push(...ingredients.map((ingredient) => ingredient.name));
+  }
+```
+# count-button.tsx  two button and value center  and count-icon-button.tsx -->    + and -
+```jsx
+interface Props extends CartItemProps {
+    
+}
+```
+# localhost:3003/api/cart
+# 11:24 store/cart.ts  export type name={};   export interface name={};
+# cart to client
+..\lib\get-cart-details.ts
 
-
-
-
-
+# 13:15 react-hot-toast
+# 13:30 loading
+# 13:53 <Suspense/> use render client
+# 14:00 sort pizza \\wsl$\Ubuntu\home\pi\Projects\mynext\lib\find-pizzas.ts
+```
+export interface GetSearchParams {
+  query?: string;
+  sortBy?: string;
+  sizes?: string;
+  pizzaTypes?: string;
+  ingredients?: string;
+  priceFrom?: string;
+  priceTo?: string;
+}
+```
+# 15:40 CheckoutPage
+# 16:08:40 block className
+# Store Checkout Cart 16:15
+# View Products Checkout 16:23:51
+# React Form Input 16:37:20 \\wsl$\Ubuntu\home\pi\Projects\next-pizza\shared\components\shared\form
+# Zod 16:54:13 firstName: z.string().min(2, { message: 'Имя должно содержать не менее 2-х символов' }),
+# DaData 22:56:30 Search address 
+# AddressInput 17:20:59
+# <Controller render={()=><AddressInput/>}/>
+# Server Actions and Mutations NEXT
+# Send email order resend.com 18:15:47 
+# YOOKASSA 18:40:31
+# PAY YOOKASSA 18:56:20 actions.ts
+# confirm PAY \\wsl$\Ubuntu\home\pi\Projects\next-pizza\app\api\checkout\callback\route.ts
+# confirm PAY \\wsl$\Ubuntu\home\pi\Projects\mynext\@types\yookassa.ts
+# Tunnel 19:25:00  localtunnel
+# console.log(await prisma.product.findFirst(where:{id:9,},),);
 
