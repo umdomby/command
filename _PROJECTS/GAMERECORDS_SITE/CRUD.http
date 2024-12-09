@@ -1,0 +1,7 @@
+### GET request with a header
+GET https://gamerecords.site:5000/api/user/users
+Accept: application/json
+
+### GET request with a header
+GET https://gamerecords.site:5000/api/brand
+Accept: application/json

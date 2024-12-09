@@ -1,0 +1,1 @@
+# File -> Settings/Preferences -> Appearance & Behavior -> System Settings -> Project Opening -> Выбрать Open project in new window

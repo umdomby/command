@@ -1,3 +1,8 @@
+git push -f origin master
+
+u2 No/
+u33 ASa
+
 git reset --hard
 git pull
 
