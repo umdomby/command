@@ -1,3 +1,16 @@
+# one-to-many --> 'model Category' to 'model Product'
+```prisma
+model Category {
+    products Product[]
+}
+model Product {
+    category   Category @relation(fields: [categoryId], references: [id])
+    categoryId Int
+}
+```
+
+
+
 https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/one-to-many-relations
 
 # Отношения «один ко многим»
