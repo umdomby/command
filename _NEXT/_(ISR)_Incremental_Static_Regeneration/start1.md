@@ -1,3 +1,5 @@
+# 213.184.249.66
+
 # Incremental Static Regeneration (ISR)
 # https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration
 
@@ -6,10 +8,16 @@
 // request comes in, at most once every 60 seconds.
 # export const revalidate = 60  or             <Suspense> </Suspense>
 
-// We'll prerender only the params from `generateStaticParams` at build time.
-// If a request comes in for a path that hasn't been generated,
-// Next.js will server-render the page on-demand.
-# export const dynamicParams = true // or false, to 404 on unknown paths
+```tsx
+export const dynamic = 'force-dynamic'; // static by default, unless reading the request
+ 
+export function GET(request: Request) {
+  return new Response(`Hello from ${process.env.VERCEL_REGION}`);
+}
+```
+
+
+
 
 ### revalidatePath
 # Например, это действие сервера будет вызвано после добавления нового поста. 
@@ -25,7 +33,6 @@ export async function createPost() {
     revalidatePath('/posts')
 }
 ```
-
 
 ### revalidateTag
 # Для большинства случаев использования предпочтительнее перепроверка целых путей. 

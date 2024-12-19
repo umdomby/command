@@ -31,7 +31,7 @@ import {Controller, Get} from "@nestjs/common";
     export class AppController {
     @Get('/users')
     getUsers(){
-        return [{id: 1, name: 'My Project Nest JS'}]
+        return [{id: 1, name: 'My Project Nest _JS'}]
     }
 }
 ```

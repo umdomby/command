@@ -5,6 +5,9 @@ sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
 sudo certbot --nginx
 sudo systemctl restart nginx
+# sudo /sbin/iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+# --> sudo /sbin/iptables -t nat -I PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
 
     ssl_certificate /etc/letsencrypt/live/serbot.online/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/serbot.online/privkey.pem; # managed by Certbot

@@ -37,3 +37,22 @@ let data = await fetch('https://api.vercel.app/blog', { cache: 'no-store' })
 // Revalidate at most after 1 hour
 fetch(`https://...`, { next: { revalidate: 3600 } })
 ```
+
+# // Revalidate at most after 1 hour
+# fetch(`https://...`, { next: { revalidate: 3600 } })
+
+
+##### ####
+# // Cache data with a tag
+```tsx
+    fetch(`https://...`, { next: { tags: ['a', 'b', 'c'] } })
+     // Revalidate entries with a specific tag
+    revalidateTag('a')
+```
+
+// We'll prerender only the params from `generateStaticParams` at build time.
+// If a request comes in for a path that hasn't been generated,
+// Next.js will server-render the page on-demand.
+# export const dynamicParams = true // or false, to 404 on unknown paths
+
+# , { cache: 'no-store' })
