@@ -1,0 +1,25 @@
+измени функцию, prisma model где из gameRecords получить по три userId у которых timestate второе наименьшее (серебряная медаль), три userId для каждого productItemId даже если userId будут повторяться
+где productid = 1 categoryId = 1
+
+
+внеси изменения чтобы результат был не для одного userId, а для трёх
+
+
+prisma model где из gameRecords  получить медали (золото, серебро,бронзу) userId по timestate, по три медали для каждого productItemId
+где productid = 1 categoryId = 1
+
+
+напиши функцию, которая возвращала из prisma model "gameRecords" получала медали (золото, серебро, бронзу) и "userId"  для каждого "productItemId", где по полю "timestate" по убыванию времени. самое минимально - это золото, второе минимальное серебро, третье минимальное бронза для каждого "productItemId", где productid = 1 categoryId = 1
+
+
+ код работает его не изменяй, допиши код, где в консоли будет выводится для каждого userId количество золотых серебрянных и бронзовых медалей
+
+
+"countMedals" сейчас возвращает "userId" и количество золотых серебрянных и бронзовых медалей, допиши функцию, чтобы "countMedals" возвращал не "userId", а массив "fullName" из модели "User", где поле "userId" это поле "fullName" prisma
+
+
+getMedals() выводит в медалях "productItemId", "userId" перепиши код, так чтобы productItemId выводил в медалях поле "name" из модели "ProductItem",  а "userId" "fullName" из модели "User" , prisma, запиши так чтобы я мог вывести эти значения через ".map"
+
+измени в коде getMedals() чтобы он возвращал значения не в ID, а productItemId выводил в медалях поле "name" из модели "ProductItem",  а "userId" "fullName" из модели "User" , prisma
+
+getMedals() не правильно ведет подсчет золотых серебрянных и бронзовых медалей найди ошибку и исправь

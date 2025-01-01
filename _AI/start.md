@@ -1,3 +1,6 @@
+
+
+
 https://gemini.google.com/app
 
 https://chatgpt.com/
@@ -7,3 +10,6 @@ https://praktik-pro.ru/pl/fileservice/user/file/download/h/5034b814cc18cc7833b42
 
 # IMG
 https://openart.ai/create
+
+
+
