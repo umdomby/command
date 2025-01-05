@@ -7,3 +7,5 @@ import { useRef } from 'react';
   intervalRef.current = intervalId;
   inputRef.current = "1111";
 ```
+
+const selectCarRef = React.useRef<number | null>(null);
