@@ -14,6 +14,7 @@ namecheap.com
 ```
 umdomby
 umdom2@gmail.com
+Chrome
 ```
 
 ```
@@ -24,6 +25,7 @@ gamerecord_online
 https://github.com/Papirapi85/gamerecord_online.git
 Papirapi1985
 ardu.site
+ChromeDev
 ```
 
 ```
@@ -35,6 +37,7 @@ https://github.com/Papirapi1985/gamerecord_online_85.git empty
 Papirapi85
 https://gamerecord-online.vercel.app/
 gamerecord.online
+Firefox
 ```
 
 
