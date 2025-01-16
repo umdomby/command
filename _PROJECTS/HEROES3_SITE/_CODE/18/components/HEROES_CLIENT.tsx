@@ -30,12 +30,14 @@ const playerColors = {
 export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
     const { data: session } = useSession();
     const { data: bets, error, isLoading, mutate } = useSWR<Bet[]>('/api/get-bets', fetcher);
-    const [placeBetError, setPlaceBetError] = useState<{ [key: number]: string | null }>({});
+    const [placeBetError, setPlaceBetError] = useState<string | null>(null);
     const [closeBetError, setCloseBetError] = useState<string | null>(null);
     const [selectedWinner, setSelectedWinner] = useState<number | null>(null);
     const [potentialProfit, setPotentialProfit] = useState<{ [key: number]: number | null }>({});
     const [maxBets, setMaxBets] = useState<{ [key: number]: { player1: number; player2: number } }>({});
-    const [isBetDisabled, setIsBetDisabled] = useState<boolean>(false); // Состояние для отключения кнопки
+    const [isBetDisabled, setIsBetDisabled] = useState<{ [key: number]: boolean }>({});
+    const [placeBetErrors, setPlaceBetErrors] = useState<{ [key: number]: string | null }>({});
+
 
     useEffect(() => {
         let source = new EventSource('/api/sse');
@@ -75,11 +77,11 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
     const calculateMaxBet = (bet: Bet, player: PlayerChoice) => {
         const totalPlayer1 = bet.participants
             .filter(p => p.player === PlayerChoice.PLAYER1)
-            .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer1);
+            .reduce((sum, p) => sum + p.amount, bet.initBetPlayer1);
 
         const totalPlayer2 = bet.participants
             .filter(p => p.player === PlayerChoice.PLAYER2)
-            .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer2);
+            .reduce((sum, p) => sum + p.amount, bet.initBetPlayer2);
 
         const total = totalPlayer1 + totalPlayer2;
 
@@ -109,11 +111,11 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
             // Рассчитываем текущие суммы ставок на каждого игрока
             const totalPlayer1 = bet.participants
                 .filter(p => p.player === PlayerChoice.PLAYER1)
-                .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer1);
+                .reduce((sum, p) => sum + p.amount, bet.initBetPlayer1);
 
             const totalPlayer2 = bet.participants
                 .filter(p => p.player === PlayerChoice.PLAYER2)
-                .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer2);
+                .reduce((sum, p) => sum + p.amount, bet.initBetPlayer2);
 
             const total = totalPlayer1 + totalPlayer2;
 
@@ -185,14 +187,26 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
         const amount = parseInt(formData.get('amount') as string, 10);
 
         if (isNaN(amount) || amount <= 0) {
-            setPlaceBetError('Сумма должна быть положительным целым числом');
-            setIsBetDisabled(true); // Отключаем кнопку
+            setPlaceBetErrors((prev) => ({
+                ...prev,
+                [bet.id]: 'Сумма должна быть положительным целым числом',
+            }));
+            setIsBetDisabled((prev) => ({
+                ...prev,
+                [bet.id]: true,
+            }));
             return;
         }
 
         if (!user || user.points < amount) {
-            setPlaceBetError('Недостаточно баллов для совершения ставки');
-            setIsBetDisabled(true); // Отключаем кнопку
+            setPlaceBetErrors((prev) => ({
+                ...prev,
+                [bet.id]: 'Недостаточно баллов для совершения ставки',
+            }));
+            setIsBetDisabled((prev) => ({
+                ...prev,
+                [bet.id]: true,
+            }));
             return;
         }
 
@@ -202,19 +216,25 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
         const maxAllowedBet = calculateMaxBet(bet, player);
 
         if (amount > maxAllowedBet) {
-            setPlaceBetError(`Максимально допустимая ставка: ${maxAllowedBet.toFixed(2)}`);
-            setIsBetDisabled(true); // Отключаем кнопку
+            setPlaceBetErrors((prev) => ({
+                ...prev,
+                [bet.id]: `Максимально допустимая ставка: ${maxAllowedBet.toFixed(2)}`,
+            }));
+            setIsBetDisabled((prev) => ({
+                ...prev,
+                [bet.id]: true,
+            }));
             return;
         }
 
         // Проверка, не приведет ли ставка к снижению коэффициента до 1.05 или ниже
         const totalPlayer1 = bet.participants
             .filter(p => p.player === PlayerChoice.PLAYER1)
-            .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer1);
+            .reduce((sum, p) => sum + p.amount, bet.initBetPlayer1);
 
         const totalPlayer2 = bet.participants
             .filter(p => p.player === PlayerChoice.PLAYER2)
-            .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer2);
+            .reduce((sum, p) => sum + p.amount, bet.initBetPlayer2);
 
         const total = totalPlayer1 + totalPlayer2;
 
@@ -227,12 +247,21 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
 
         if ((player === PlayerChoice.PLAYER1 && updatedOddsPlayer1 <= 1.05) ||
             (player === PlayerChoice.PLAYER2 && updatedOddsPlayer2 <= 1.05)) {
-            setPlaceBetError('Ставка приведет к снижению коэффициента до 1.05 или ниже');
-            setIsBetDisabled(true); // Отключаем кнопку
+            setPlaceBetErrors((prev) => ({
+                ...prev,
+                [bet.id]: 'Ставка приведет к снижению коэффициента до 1.05 или ниже',
+            }));
+            setIsBetDisabled((prev) => ({
+                ...prev,
+                [bet.id]: true,
+            }));
             return;
         }
 
-        setIsBetDisabled(false); // Включаем кнопку
+        setIsBetDisabled((prev) => ({
+            ...prev,
+            [bet.id]: false,
+        }));
         handlePlaceBet(bet, amount, player);
     };
 
@@ -307,11 +336,11 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
                         {(() => {
                             const totalBetPlayer1 = bet.participants
                                 .filter((p) => p.player === PlayerChoice.PLAYER1)
-                                .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer1);
+                                .reduce((sum, p) => sum + p.amount, bet.initBetPlayer1);
 
                             const totalBetPlayer2 = bet.participants
                                 .filter((p) => p.player === PlayerChoice.PLAYER2)
-                                .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer2);
+                                .reduce((sum, p) => sum + p.amount, bet.initBetPlayer2);
 
                             const totalBets = totalBetPlayer1 + totalBetPlayer2;
 
@@ -401,15 +430,36 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
                                         onChange={(e) => {
                                             const value = parseInt(e.target.value, 10);
                                             if (isNaN(value) || value <= 0) {
-                                                setPlaceBetError((prev) => ({ ...prev, [bet.id]: 'Сумма должна быть положительным целым числом' }));
-                                                setIsBetDisabled(true); // Отключаем кнопку
-                                                setPotentialProfit((prev) => ({ ...prev, [bet.id]: null }));
+                                                setPlaceBetErrors((prev) => ({
+                                                    ...prev,
+                                                    [bet.id]: 'Сумма должна быть положительным целым числом',
+                                                }));
+                                                setIsBetDisabled((prev) => ({
+                                                    ...prev,
+                                                    [bet.id]: true,
+                                                }));
+                                                setPotentialProfit((prev) => ({
+                                                    ...prev,
+                                                    [bet.id]: null,
+                                                }));
                                             } else if (user && user.points < value) {
-                                                setPlaceBetError((prev) => ({ ...prev, [bet.id]: 'Недостаточно баллов для совершения ставки' }));
-                                                setIsBetDisabled(true); // Отключаем кнопку
-                                                setPotentialProfit((prev) => ({ ...prev, [bet.id]: null }));
+                                                setPlaceBetErrors((prev) => ({
+                                                    ...prev,
+                                                    [bet.id]: 'Недостаточно баллов для совершения ставки',
+                                                }));
+                                                setIsBetDisabled((prev) => ({
+                                                    ...prev,
+                                                    [bet.id]: true,
+                                                }));
+                                                setPotentialProfit((prev) => ({
+                                                    ...prev,
+                                                    [bet.id]: null,
+                                                }));
                                             } else {
-                                                setPlaceBetError((prev) => ({ ...prev, [bet.id]: null }));
+                                                setPlaceBetErrors((prev) => ({
+                                                    ...prev,
+                                                    [bet.id]: null,
+                                                }));
                                                 const selectedPlayer = (e.target.form?.elements.namedItem('player') as RadioNodeList)?.value;
                                                 if (selectedPlayer) {
                                                     const odds = selectedPlayer === PlayerChoice.PLAYER1 ? bet.currentOdds1 : bet.currentOdds2;
@@ -425,18 +475,39 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
                                                         .reduce((sum, p) => sum + p.amount, bet.initBetPlayer2);
 
                                                     if (selectedPlayer === PlayerChoice.PLAYER1 && potentialProfitValue > totalPlayer2 * 0.3) {
-                                                        setPlaceBetError((prev) => ({ ...prev, [bet.id]: 'Прибыль от ставки превышает 30% от суммы ставок на другого игрока' }));
-                                                        setIsBetDisabled(true); // Отключаем кнопку
+                                                        setPlaceBetErrors((prev) => ({
+                                                            ...prev,
+                                                            [bet.id]: 'Прибыль от ставки превышает 30% от суммы ставок на другого игрока',
+                                                        }));
+                                                        setIsBetDisabled((prev) => ({
+                                                            ...prev,
+                                                            [bet.id]: true,
+                                                        }));
                                                     } else if (selectedPlayer === PlayerChoice.PLAYER2 && potentialProfitValue > totalPlayer1 * 0.3) {
-                                                        setPlaceBetError((prev) => ({ ...prev, [bet.id]: 'Прибыль от ставки превышает 30% от суммы ставок на другого игрока' }));
-                                                        setIsBetDisabled(true); // Отключаем кнопку
+                                                        setPlaceBetErrors((prev) => ({
+                                                            ...prev,
+                                                            [bet.id]: 'Прибыль от ставки превышает 30% от суммы ставок на другого игрока',
+                                                        }));
+                                                        setIsBetDisabled((prev) => ({
+                                                            ...prev,
+                                                            [bet.id]: true,
+                                                        }));
                                                     } else {
-                                                        setIsBetDisabled(false); // Включаем кнопку
+                                                        setIsBetDisabled((prev) => ({
+                                                            ...prev,
+                                                            [bet.id]: false,
+                                                        }));
                                                     }
 
-                                                    setPotentialProfit((prev) => ({ ...prev, [bet.id]: potentialProfitValue }));
+                                                    setPotentialProfit((prev) => ({
+                                                        ...prev,
+                                                        [bet.id]: potentialProfitValue,
+                                                    }));
                                                 } else {
-                                                    setPotentialProfit((prev) => ({ ...prev, [bet.id]: null }));
+                                                    setPotentialProfit((prev) => ({
+                                                        ...prev,
+                                                        [bet.id]: null,
+                                                    }));
                                                 }
                                             }
                                         }}
@@ -449,13 +520,23 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
                                                 value={PlayerChoice.PLAYER1}
                                                 required
                                                 onChange={(e) => {
-                                                    const amount = parseInt((e.target.form?.elements.namedItem('amount') as HTMLInputElement)?.value, 10);
+                                                    const amountInput = e.target.form?.elements.namedItem('amount') as HTMLInputElement;
+                                                    const amount = parseInt(amountInput.value, 10);
                                                     if (!isNaN(amount) && amount > 0) {
-                                                        setPotentialProfit(amount * bet.currentOdds1);
+                                                        setPotentialProfit((prev) => ({
+                                                            ...prev,
+                                                            [bet.id]: amount * bet.currentOdds1,
+                                                        }));
+                                                    } else {
+                                                        setPotentialProfit((prev) => ({
+                                                            ...prev,
+                                                            [bet.id]: null,
+                                                        }));
                                                     }
                                                 }}
                                             />
-                                            <span className={playerColors[PlayerChoice.PLAYER1]}>{bet.player1.name}</span>
+                                            <span
+                                                className={playerColors[PlayerChoice.PLAYER1]}>{bet.player1.name}</span>
                                         </label>
                                         <label>
                                             <input
@@ -464,29 +545,39 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
                                                 value={PlayerChoice.PLAYER2}
                                                 required
                                                 onChange={(e) => {
-                                                    const amount = parseInt((e.target.form?.elements.namedItem('amount') as HTMLInputElement)?.value, 10);
+                                                    const amountInput = e.target.form?.elements.namedItem('amount') as HTMLInputElement;
+                                                    const amount = parseInt(amountInput.value, 10);
                                                     if (!isNaN(amount) && amount > 0) {
-                                                        setPotentialProfit(amount * bet.currentOdds2);
+                                                        setPotentialProfit((prev) => ({
+                                                            ...prev,
+                                                            [bet.id]: amount * bet.currentOdds2,
+                                                        }));
+                                                    } else {
+                                                        setPotentialProfit((prev) => ({
+                                                            ...prev,
+                                                            [bet.id]: null,
+                                                        }));
                                                     }
                                                 }}
                                             />
-                                            <span className={playerColors[PlayerChoice.PLAYER2]}>{bet.player2.name}</span>
+                                            <span
+                                                className={playerColors[PlayerChoice.PLAYER2]}>{bet.player2.name}</span>
                                         </label>
                                     </div>
-                                    {potentialProfit[bet.id] !== null && potentialProfit[bet.id] !== undefined && (
+                                    {potentialProfit[bet.id] !== null && (
                                         <p className="mt-2 text-green-600">
-                                            Потенциальная прибыль: {potentialProfit[bet.id].toFixed(2)} баллов
+                                            Потенциальная прибыль: {potentialProfit[bet.id]?.toFixed(2)} баллов
                                         </p>
                                     )}
                                     <Button
                                         type="submit"
-                                        className={`mt-2 w-full ${isBetDisabled ? 'bg-gray-400 cursor-not-allowed' : ''}`}
-                                        disabled={isBetDisabled}
+                                        className={`mt-2 w-full ${isBetDisabled[bet.id] ? 'bg-gray-400 cursor-not-allowed' : ''}`}
+                                        disabled={isBetDisabled[bet.id]}
                                     >
                                         Сделать ставку
                                     </Button>
                                 </form>
-                                {placeBetError[bet.id] && <p className="text-red-500">{placeBetError[bet.id]}</p>}
+                                {placeBetErrors[bet.id] && <p className="text-red-500">{placeBetErrors[bet.id]}</p>}
                             </div>
                         )}
 
@@ -501,7 +592,8 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
                                             value={bet.player1Id}
                                             onChange={() => setSelectedWinner(bet.player1Id)}
                                         />
-                                        <span className={playerColors[PlayerChoice.PLAYER1]}>{bet.player1.name}</span> выиграл
+                                        <span
+                                            className={playerColors[PlayerChoice.PLAYER1]}>{bet.player1.name}</span> выиграл
                                     </label>
                                     <label>
                                         <input
@@ -510,7 +602,8 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
                                             value={bet.player2Id}
                                             onChange={() => setSelectedWinner(bet.player2Id)}
                                         />
-                                        <span className={playerColors[PlayerChoice.PLAYER2]}>{bet.player2.name}</span> выиграл
+                                        <span
+                                            className={playerColors[PlayerChoice.PLAYER2]}>{bet.player2.name}</span> выиграл
                                     </label>
                                 </div>
                                 <Button

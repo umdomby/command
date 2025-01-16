@@ -20,8 +20,8 @@ import { clientCreateBet } from "@/app/actions";
 const createBetSchema = z.object({
     player1Id: z.coerce.number().int(), // Только целые числа
     player2Id: z.coerce.number().int(), // Только целые числа
-    totalBetPlayer1: z.number().int().min(50, { message: 'Минимальная ставка на игрока 1: 50 баллов' }), // Только целые числа
-    totalBetPlayer2: z.number().int().min(50, { message: 'Минимальная ставка на игрока 2: 50 баллов' }), // Только целые числа
+    initBetPlayer1: z.number().int().min(50, { message: 'Минимальная ставка на игрока 1: 50 баллов' }), // Только целые числа
+    initBetPlayer2: z.number().int().min(50, { message: 'Минимальная ставка на игрока 2: 50 баллов' }), // Только целые числа
     categoryId: z.coerce.number().int(), // Только целые числа
     productId: z.coerce.number().int(), // Только целые числа
     productItemId: z.coerce.number().int(), // Только целые числа
@@ -42,8 +42,8 @@ export const CreateBetForm: React.FC<Props> = ({ user, categories, products, pro
         defaultValues: {
             player1Id: players[0]?.id,
             player2Id: players[1]?.id,
-            totalBetPlayer1: 50,
-            totalBetPlayer2: 50,
+            initBetPlayer1: 50,
+            initBetPlayer2: 50,
             categoryId: categories[0]?.id,
             productId: products[0]?.id,
             productItemId: productItems[0]?.id,
@@ -53,33 +53,33 @@ export const CreateBetForm: React.FC<Props> = ({ user, categories, products, pro
     const [createBetError, setCreateBetError] = useState<string | null>(null);
 
     const onSubmit = async (values: z.infer<typeof createBetSchema>) => {
-        const { totalBetPlayer1, totalBetPlayer2 } = values;
+        const { initBetPlayer1, initBetPlayer2 } = values;
 
         // Проверка на минимальную сумму ставки
-        if (totalBetPlayer1 < 50 || totalBetPlayer2 < 50) {
+        if (initBetPlayer1 < 50 || initBetPlayer2 < 50) {
             setCreateBetError('Минимальная ставка на каждого игрока: 50 баллов');
             return;
         }
 
         // Проверка баланса пользователя
-        const totalBetAmount = totalBetPlayer1 + totalBetPlayer2;
+        const totalBetAmount = initBetPlayer1 + initBetPlayer2;
         if (user.points < totalBetAmount) {
             setCreateBetError('Недостаточно баллов для создания ставки');
             return;
         }
 
         // Рассчитываем коэффициенты
-        const totalBets = totalBetPlayer1 + totalBetPlayer2;
-        const currentOdds1 = totalBets / totalBetPlayer1;
-        const currentOdds2 = totalBets / totalBetPlayer2;
+        const totalBets = initBetPlayer1 + initBetPlayer2;
+        const currentOdds1 = totalBets / initBetPlayer1;
+        const currentOdds2 = totalBets / initBetPlayer2;
 
         const betData = {
             ...values,
             currentOdds1,
             currentOdds2,
             creatorId: user.id,
-            totalBetPlayer1: totalBetPlayer1,
-            totalBetPlayer2: totalBetPlayer2,
+            totalBetPlayer1: initBetPlayer1,
+            totalBetPlayer2: initBetPlayer2,
         };
 
         try {
@@ -141,7 +141,7 @@ export const CreateBetForm: React.FC<Props> = ({ user, categories, products, pro
                     {/* Поле для ставки на Player 1 */}
                     <FormField
                         control={form.control}
-                        name="totalBetPlayer1"
+                        name="initBetPlayer1"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Ставка на Player 1</FormLabel>
@@ -167,7 +167,7 @@ export const CreateBetForm: React.FC<Props> = ({ user, categories, products, pro
                     {/* Поле для ставки на Player 2 */}
                     <FormField
                         control={form.control}
-                        name="totalBetPlayer2"
+                        name="initBetPlayer2"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Ставка на Player 2</FormLabel>

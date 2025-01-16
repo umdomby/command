@@ -84,7 +84,7 @@ export async function clientCreateBet(formData: any) {
     }
 
     // Проверяем, что у пользователя достаточно баллов
-    const totalBetAmount = formData.totalBetPlayer1 + formData.totalBetPlayer2;
+    const totalBetAmount = formData.initBetPlayer1 + formData.initBetPlayer2;
     if (user.points < totalBetAmount) {
       throw new Error("Недостаточно баллов для создания ставки");
     }
@@ -99,12 +99,14 @@ export async function clientCreateBet(formData: any) {
         currentOdds2: formData.currentOdds2, // Инициализируем текущие коэффициенты
         player1Id: formData.player1Id,
         player2Id: formData.player2Id,
-        totalBetPlayer1: formData.totalBetPlayer1,
-        totalBetPlayer2: formData.totalBetPlayer2,
+        initBetPlayer1: formData.initBetPlayer1,
+        initBetPlayer2: formData.initBetPlayer2,
         categoryId: formData.categoryId,
         productId: formData.productId,
         productItemId: formData.productItemId,
         creatorId: formData.creatorId,
+        totalBetPlayer1: formData.initBetPlayer1, // Инициализируем сумму ставок на игрока 1
+        totalBetPlayer2: formData.initBetPlayer2, // Инициализируем сумму ставок на игрока 2
       },
     });
 
@@ -161,11 +163,11 @@ export async function placeBet(formData: { betId: number; userId: number; amount
     // Рассчитываем текущие суммы ставок на каждого игрока
     const totalPlayer1 = bet.participants
         .filter(p => p.player === PlayerChoice.PLAYER1)
-        .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer1);
+        .reduce((sum, p) => sum + p.amount, bet.initBetPlayer1);
 
     const totalPlayer2 = bet.participants
         .filter(p => p.player === PlayerChoice.PLAYER2)
-        .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer2);
+        .reduce((sum, p) => sum + p.amount, bet.initBetPlayer2);
 
     const total = totalPlayer1 + totalPlayer2;
 

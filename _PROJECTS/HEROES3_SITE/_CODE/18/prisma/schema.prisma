@@ -32,6 +32,8 @@ model Bet {
   player1Id       Int
   player2         Player           @relation(name: "Player2Bets", fields: [player2Id], references: [id])
   player2Id       Int
+  initBetPlayer1  Int // инициализация ставок на игрока 1
+  initBetPlayer2  Int // инициализация ставок на игрока 2
   currentOdds1    Float // Текущий коэффициент для игрока 1
   currentOdds2    Float // Текущий коэффициент для игрока 2
   totalBetPlayer1 Int // Сумма ставок на игрока 1
