@@ -92,8 +92,8 @@ export const products = [
     "id": 13,
     "name": "NFS HOT PURSUIT",
     "categoryId": 1,
-    "createdAt": "2024-09-06T23:17:48.571Z",
-    "updatedAt": "2024-09-06T23:17:48.571Z"
+    "createdAt": "2024-09-06T23:17--:48.571Z",
+    "updatedAt": "2024-09-06T23:17--:48.571Z"
   },
   {
     "id": 14,
@@ -200,7 +200,7 @@ export const productsItem =[
     "id": 8,
     "productId": 1,
     "name": "Bay Bridge",
-    "createdAt": "2024-08-09T15:28:17.228Z",
+    "createdAt": "2024-08-09T15:28:17--.228Z",
     "updatedAt": "2024-08-29T10:55:02.169Z"
   },
   {
@@ -291,7 +291,7 @@ export const productsItem =[
     "id": 21,
     "productId": 1,
     "name": "East Park",
-    "createdAt": "2024-08-10T16:04:17.860Z",
+    "createdAt": "2024-08-10T16:04:17--.860Z",
     "updatedAt": "2024-08-29T10:55:02.169Z"
   },
   {

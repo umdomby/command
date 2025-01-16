@@ -30,10 +30,10 @@ const playerColors = {
 export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
     const { data: session } = useSession();
     const { data: bets, error, isLoading, mutate } = useSWR<Bet[]>('/api/get-bets', fetcher);
-    const [placeBetError, setPlaceBetError] = useState<string | null>(null);
+    const [placeBetError, setPlaceBetError] = useState<{ [key: number]: string | null }>({});
     const [closeBetError, setCloseBetError] = useState<string | null>(null);
     const [selectedWinner, setSelectedWinner] = useState<number | null>(null);
-    const [potentialProfit, setPotentialProfit] = useState<number | null>(null);
+    const [potentialProfit, setPotentialProfit] = useState<{ [key: number]: number | null }>({});
     const [maxBets, setMaxBets] = useState<{ [key: number]: { player1: number; player2: number } }>({});
     const [isBetDisabled, setIsBetDisabled] = useState<boolean>(false); // Состояние для отключения кнопки
 
@@ -401,42 +401,42 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
                                         onChange={(e) => {
                                             const value = parseInt(e.target.value, 10);
                                             if (isNaN(value) || value <= 0) {
-                                                setPlaceBetError('Сумма должна быть положительным целым числом');
+                                                setPlaceBetError((prev) => ({ ...prev, [bet.id]: 'Сумма должна быть положительным целым числом' }));
                                                 setIsBetDisabled(true); // Отключаем кнопку
-                                                setPotentialProfit(null);
+                                                setPotentialProfit((prev) => ({ ...prev, [bet.id]: null }));
                                             } else if (user && user.points < value) {
-                                                setPlaceBetError('Недостаточно баллов для совершения ставки');
+                                                setPlaceBetError((prev) => ({ ...prev, [bet.id]: 'Недостаточно баллов для совершения ставки' }));
                                                 setIsBetDisabled(true); // Отключаем кнопку
-                                                setPotentialProfit(null);
+                                                setPotentialProfit((prev) => ({ ...prev, [bet.id]: null }));
                                             } else {
-                                                setPlaceBetError(null);
+                                                setPlaceBetError((prev) => ({ ...prev, [bet.id]: null }));
                                                 const selectedPlayer = (e.target.form?.elements.namedItem('player') as RadioNodeList)?.value;
                                                 if (selectedPlayer) {
                                                     const odds = selectedPlayer === PlayerChoice.PLAYER1 ? bet.currentOdds1 : bet.currentOdds2;
-                                                    const potentialProfit = value * odds;
+                                                    const potentialProfitValue = value * odds;
 
                                                     // Проверка, чтобы прибыль не превышала 30% от суммы ставок на другого игрока
                                                     const totalPlayer1 = bet.participants
                                                         .filter(p => p.player === PlayerChoice.PLAYER1)
-                                                        .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer1);
+                                                        .reduce((sum, p) => sum + p.amount, bet.initBetPlayer1);
 
                                                     const totalPlayer2 = bet.participants
                                                         .filter(p => p.player === PlayerChoice.PLAYER2)
-                                                        .reduce((sum, p) => sum + p.amount, bet.totalBetPlayer2);
+                                                        .reduce((sum, p) => sum + p.amount, bet.initBetPlayer2);
 
-                                                    if (selectedPlayer === PlayerChoice.PLAYER1 && potentialProfit > totalPlayer2 * 0.3) {
-                                                        setPlaceBetError('Прибыль от ставки превышает 30% от суммы ставок на другого игрока');
+                                                    if (selectedPlayer === PlayerChoice.PLAYER1 && potentialProfitValue > totalPlayer2 * 0.3) {
+                                                        setPlaceBetError((prev) => ({ ...prev, [bet.id]: 'Прибыль от ставки превышает 30% от суммы ставок на другого игрока' }));
                                                         setIsBetDisabled(true); // Отключаем кнопку
-                                                    } else if (selectedPlayer === PlayerChoice.PLAYER2 && potentialProfit > totalPlayer1 * 0.3) {
-                                                        setPlaceBetError('Прибыль от ставки превышает 30% от суммы ставок на другого игрока');
+                                                    } else if (selectedPlayer === PlayerChoice.PLAYER2 && potentialProfitValue > totalPlayer1 * 0.3) {
+                                                        setPlaceBetError((prev) => ({ ...prev, [bet.id]: 'Прибыль от ставки превышает 30% от суммы ставок на другого игрока' }));
                                                         setIsBetDisabled(true); // Отключаем кнопку
                                                     } else {
                                                         setIsBetDisabled(false); // Включаем кнопку
                                                     }
 
-                                                    setPotentialProfit(potentialProfit);
+                                                    setPotentialProfit((prev) => ({ ...prev, [bet.id]: potentialProfitValue }));
                                                 } else {
-                                                    setPotentialProfit(null);
+                                                    setPotentialProfit((prev) => ({ ...prev, [bet.id]: null }));
                                                 }
                                             }
                                         }}
@@ -473,9 +473,9 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
                                             <span className={playerColors[PlayerChoice.PLAYER2]}>{bet.player2.name}</span>
                                         </label>
                                     </div>
-                                    {potentialProfit !== null && (
+                                    {potentialProfit[bet.id] !== null && potentialProfit[bet.id] !== undefined && (
                                         <p className="mt-2 text-green-600">
-                                            Потенциальная прибыль: {potentialProfit.toFixed(2)} баллов
+                                            Потенциальная прибыль: {potentialProfit[bet.id].toFixed(2)} баллов
                                         </p>
                                     )}
                                     <Button
@@ -486,7 +486,7 @@ export const HEROES_CLIENT: React.FC<Props> = ({ className, user }) => {
                                         Сделать ставку
                                     </Button>
                                 </form>
-                                {placeBetError && <p className="text-red-500">{placeBetError}</p>}
+                                {placeBetError[bet.id] && <p className="text-red-500">{placeBetError[bet.id]}</p>}
                             </div>
                         )}
 
