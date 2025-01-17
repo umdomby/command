@@ -68,13 +68,16 @@ export const GlobalData = () => {
     }
 
     return (
-        <div>
-            <h1>Global Data</h1>
-            <p>Users Bet: {globalData.usersPlay}</p>
-            <p>Total Bet Points: {globalData.pointsBet}</p>
-            <p>Registered Users: {globalData.users}</p>
-            <p>Starting Points: {globalData.pointsStart}</p>
-            <p>Total User Points: {globalData.pointsAllUsers}</p>
+        <div style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
+            <p>Users: {globalData.users}</p>
+            <span>|</span>
+            <p>Start Points: {globalData.pointsStart}</p>
+            <span>|</span>
+            <p>Bet Points: {globalData.pointsAllUsers}</p>
+            <span>|</span>
+            <p>Bet open: {globalData.usersPlay}</p>
+            <span>|</span>
+            <p>Bet Points: {globalData.pointsBet}</p>
         </div>
     );
 };
