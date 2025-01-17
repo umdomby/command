@@ -10,28 +10,19 @@
    \wsl.localhost\Ubuntu-24.04\home\pi\Projects\heroes\app\actions.ts 
 7. // Проверка, не превышает ли ставка сумму другого игрока на 100% сделай не на 100% , а на 30% , сделай проверку на сервере
 
-Проверка, не превышает ли ставка сумму другого игрока на 100% сделай не на 100% , а на 30% , сделай проверку на сервере
 
 
-измени проверку на сервере сделай, чтобы при ставке прибыль не превышала 30% от поставленных ставок на другого игрока
-// Проверка, не превышает ли ставка сумму другого игрока на 30%
-if (player === PlayerChoice.PLAYER1 && amount > totalPlayer2 * 1.3) {
-throw new Error('Ставка превышает сумму другого игрока на 30%');
-}
-
-if (player === PlayerChoice.PLAYER2 && amount > totalPlayer1 * 1.3) {
-throw new Error('Ставка превышает сумму другого игрока на 30%');
-}
-
-// Проверка, чтобы прибыль не превышала 30% от суммы ставок на другого игрока
+\wsl.localhost\Ubuntu-24.04\home\pi\Projects\heroes\app\actions.ts placeBet не обновляет totalBetAmount в модели Bet
 
 
-В таблицу model BetParticipant amount ставки записываются корректно, а вот в 
-дальнейшем model Bet totalBetPlayer1 и totalBetPlayer2 не корректно, надо исправить
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\heroes\app\actions.ts function placeBet Рассчитываем максимальную ставку с учетом ограничения на прибыль
+для первого и второго игрока, нужно чтобы данные записывались model Bet поля maxBetPlayer1 и maxBetPlayer2
 
 
-// \\wsl.localhost\Ubuntu-24.04\home\pi\Projects\heroes\app\actions.ts Обновляем коэффициенты и общую сумму ставок await prisma.bet.update({ where: { id: betId }, data: { currentOdds1: updatedOddsPlayer1, currentOdds2: updatedOddsPlayer2, totalBetPlayer1: updatedTotalPlayer1, totalBetPlayer2: updatedTotalPlayer2, }, }); идет не правильное обновление
-Коэффициенты:{' '} <span className={playerColors[PlayerChoice.PLAYER1]}>{currentOdds1.toFixed(2)} -{' '} <span className={playerColors[PlayerChoice.PLAYER2]}>{currentOdds2.toFixed(2)} |{' '} Ставки на <span className={playerColors[PlayerChoice.PLAYER1]}>{bet.player1.name}:{' '} <span className={playerColors[PlayerChoice.PLAYER1]}>{totalBetPlayer1} |{' '} Ставки на <span className={playerColors[PlayerChoice.PLAYER2]}>{bet.player2.name}:{' '} <span className={playerColors[PlayerChoice.PLAYER2]}>{totalBetPlayer2} так же тут не правильное отображение
+
+максимальные ставки тут высчитываются, а мне нужно чтобы они вставлялись из базы из полей maxBetPlayer1 Int // Максимальная сумма ставок на игрока 1 maxBetPlayer2 Int // Максимальная сумма ставок на игрока
+учти чтобы переменная betId была определена в контексте
 
 
-\wsl.localhost\Ubuntu-24.04\home\pi\Projects\heroes\components\HEROES_CLIENT.tsx Потенциальная прибыль: Сумма должна быть положительным целым числом появляются во всех Input , а не в одном выбранном
+}; Прибыль от ставки превышает 30% от суммы ставок на другого игрока, уберите эту валидацию, учти чтобы переменная betId была определена в контексте
+
