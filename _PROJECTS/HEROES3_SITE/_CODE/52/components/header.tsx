@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { ProfileButton } from './profile-button';
 import { AuthModal } from './modals';
 import {ModeToggle} from "@/components/buttonTheme";
+import {Button} from "@/components/ui";
 
 
 interface Props {
@@ -42,10 +43,23 @@ export const Header: React.FC<Props> = ({  className }) => {
 
                 {/* Правая часть */}
                 <div className="flex items-center gap-3">
-                    <Link href="/create-bet" className="flex items-center gap-2">Создать ставку</Link>
-                    <ModeToggle/>
-                    <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)}/>
-                    <ProfileButton onClickSignIn={() => setOpenAuthModal(true)}/>
+                    <div>
+                        <Link href="/create-bet" className="flex items-center gap-2 mb-1">
+                            <Button className="h-5">
+                                Создать ставку
+                            </Button>
+                        </Link>
+                        <Link href="/rating" className="flex items-center gap-2 h-5">
+                            <Button className="h-5">
+                                Rating
+                            </Button>
+                        </Link>
+                    </div>
+                    <div>
+                        <ModeToggle />
+                        <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)}/>
+                        <ProfileButton onClickSignIn={() => setOpenAuthModal(true)}/>
+                    </div>
                 </div>
             </Container>
         </header>
