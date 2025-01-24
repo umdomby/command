@@ -345,7 +345,7 @@ export async function placeBet(formData: { betId: number; userId: number; amount
           totalBetPlayer2: newTotalBetPlayer2,
           totalBetAmount: totalPlayer1 + totalPlayer2 + amount,
           margin: totalMargin,
-          marginOverlap: bet.marginOverlap + marginOverlap,
+          marginOverlap: (bet.marginOverlap ?? 0) + marginOverlap, // Используем значение по умолчанию
           oddsBetPlayer1,
           oddsBetPlayer2,
           maxBetPlayer1: newMaxBetPlayer1,
