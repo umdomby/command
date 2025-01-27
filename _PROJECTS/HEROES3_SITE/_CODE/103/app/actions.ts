@@ -293,10 +293,13 @@ export async function placeBet(formData: { betId: number; userId: number; amount
       }
     }
 
-    // Обработка перекрестных ставок
+// Обработка перекрестных ставок
+// Своя ставка к чистой прибыли (profit) других пользователей поставивших ставку на другого игрока, начиная по дате создания.
     const oppositeParticipants = bet.participants
         .filter(p => p.player !== player && (p.isCovered === "OPEN" || p.isCovered === "PENDING") && p.overlap < p.amount * (p.odds - 1))
         .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+
+    console.log("Начальное значение remainingAmount:", remainingAmount);
 
     for (const participant of oppositeParticipants) {
       if (remainingAmount <= 0) break;
@@ -304,6 +307,10 @@ export async function placeBet(formData: { betId: number; userId: number; amount
       // Определяем прибыль, которую нужно покрыть
       const profitToCover = participant.amount * (participant.odds - 1) - participant.overlap;
       const overlap = Math.min(profitToCover, remainingAmount * (currentOdds - 1));
+
+      console.log(`Обработка участника ${participant.id}:`);
+      console.log("Прибыль для покрытия:", profitToCover);
+      console.log("Рассчитанный overlap:", overlap);
 
       // Обновляем противоположный overlap
       await prisma.betParticipant.update({
@@ -315,8 +322,10 @@ export async function placeBet(formData: { betId: number; userId: number; amount
       });
 
       remainingAmount -= overlap / (currentOdds - 1);
+      console.log("Обновлённое значение remainingAmount:", remainingAmount);
 
       if (overlap > 0 && overlap < profitToCover) {
+        console.log("Прерывание цикла, так как overlap меньше, чем profitToCover");
         break;
       }
     }
@@ -338,6 +347,7 @@ export async function placeBet(formData: { betId: number; userId: number; amount
 
     // Если осталась непокрытая сумма, обновляем overlapRemain
     if (remainingAmount > 0) {
+      console.log("Оставшееся значение после обработки всех участников:", remainingAmount);
       await prisma.betParticipant.update({
         where: { id: newParticipant.id },
         data: {
