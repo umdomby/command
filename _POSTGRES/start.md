@@ -1,3 +1,17 @@
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+host    all             all             127.0.0.1/32            md5
+host    all             all             ::1/128                 md5
+host    all             all             192.168.0.151/32            md5
+host    all             all             192.168.0.151/32             scram-sha-256
+host    all             all             192.168.0.151/24            md5
+host    all             all             192.168.0.151/24             scram-sha-256
+host    all             all             0.0.0.0/0            md5
+host    all             all             0.0.0.0/0            scram-sha-256
+
+
+
+
+
 https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-22-04-quickstart
 
 sudo apt update
