@@ -10,29 +10,32 @@ datasource db {
 }
 
 model User {
-  id                Int                    @id @default(autoincrement())
-  email             String                 @unique
-  cardId            String                 @unique @default(uuid()) // Используем UUID для уникальности
+  id                Int         @id @default(autoincrement())
+  email             String      @unique
+  cardId            String      @unique @default(uuid()) // Используем UUID для уникальности
   fullName          String
   provider          String?
   providerId        String?
   password          String
-  role              UserRole               @default(USER)
+  role              UserRole    @default(USER)
   img               String?
-  points            Float                  @default(1000) // баллы пользователя
-  p2pPlus           Int?                   @default(0)
-  p2pMinus          Int?                   @default(0)
+  points            Float       @default(1000) // баллы пользователя
+  p2pPlus           Int?        @default(0)
+  p2pMinus          Int?        @default(0)
   contact           Json? // поле для хранения контактных данных
   loginHistory      Json? // поле для хранения истории входов
-  betsCreated       Bet[]                  @relation("BetsCreated")
-  betsCLOSEDCreated BetCLOSED[]            @relation("BetsCLOSEDCreated")
-  orderP2PUser1     OrderP2P[]             @relation("OrderP2PUser1") // Отношение для user1
-  orderP2PUser2     OrderP2P[]             @relation("OrderP2PUser2") // Отношение для user2
-  betsPlaced        BetParticipant[]
-  betsCLOSEDPlaced  BetParticipantCLOSED[]
-  userP2PMoney      Json?
-  createdAt         DateTime               @default(now())
-  updatedAt         DateTime               @updatedAt
+  betsCreated       Bet[]       @relation("BetsCreated")
+  betsCLOSEDCreated BetCLOSED[] @relation("BetsCLOSEDCreated")
+  orderP2PUser1     OrderP2P[]  @relation("OrderP2PUser1") // Отношение для user1
+  orderP2PUser2     OrderP2P[]  @relation("OrderP2PUser2") // Отношение для user2
+  transferUser1     Transfer[]  @relation("TransferUser1") // Отношение для user1
+  transferUser2     Transfer[]  @relation("TransferUser2") // Отношение для user2
+
+  betsPlaced       BetParticipant[]
+  betsCLOSEDPlaced BetParticipantCLOSED[]
+  userP2PMoney     Json?
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
 }
 
 model OrderP2P {
@@ -41,13 +44,26 @@ model OrderP2P {
   orderP2PUser1Id Int
   orderP2PUser2   User?          @relation("OrderP2PUser2", fields: [orderP2PUser2Id], references: [id])
   orderP2PUser2Id Int?
-  orderP2PBuySell BuySell?
-  orderP2PPoints  Float?
-  orderP2PMoney   Json?
-  orderP2PChat    Json? // чат
+  orderP2PBuySell BuySell
+  orderP2PPoints  Float
+  orderP2PMoney   Json
+  orderP2PChat    Json?
   orderP2PStatus  OrderP2PStatus @default(OPEN)
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
+}
+
+model Transfer {
+  id              Int      @id @default(autoincrement())
+  transferUser1   User     @relation("TransferUser1", fields: [transferUser1Id], references: [id])
+  transferUser1Id Int
+  transferUser2   User?    @relation("TransferUser2", fields: [transferUser2Id], references: [id])
+  transferUser2Id Int?
+  transferPoints  Float
+  transfer        String   @default("") // Изменяем Text на String
+  transferStatus  Boolean?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model ContactDataEnum {
