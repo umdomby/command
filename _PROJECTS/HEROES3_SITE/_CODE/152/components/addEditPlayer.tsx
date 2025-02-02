@@ -1,110 +1,36 @@
-pup_ok_
-HotaGirl
-2BISHOP
-HILTYHA
-Master_of__mind
-yarostnayaKoshka
-kesZu_h3
-KnyazeMakarSumski
-KICK_FREAK
-Redwhait
-ViSoVi
-sstrattegy
-ARTI_da_KING
-YAR_
-newb1kk
-tyranuxus11
-Evlampich
-Pavllovich
-Sav1tarrr
-papashkaiz4atika
-Tender_cat
-Relig00s
-amieloo
-M_on_t
-RitoSux
-beZZdar_
-AnzhPri
-MeatWagonGG
-mrplane_
-ChambiQ
-akaStinger
-Tihiy__
-unutcon
-Daddy_Boka
-amieloo
-GomungulsTV
-HellLighT111
-Weronest
-VovastikMashina
-zherarrr
-Wukosha
-
-
-
-отвечай на русском коммментарии на русском,
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\heroes\app\(root)\add-player\page.tsx
-"use server";
-import { redirect } from 'next/navigation';
-import {getUserSession} from "@/components/lib/get-user-session";
-import {prisma} from "@/prisma/prisma-client";
-import {AddEditPlayer} from "@/components/addEditPlayer";
-import Loading from "@/app/(root)/loading";
-import React, {Suspense} from "react";
-import {Container} from "@/components/container";
-
-
-export default async function AddPlayerPage() {
-const session = await getUserSession();
-
-    if (!session) {
-        return redirect('/not-auth');
-    }
-
-    const user = await prisma.user.findFirst({ where: { id: Number(session?.id) } });
-
-    if (user?.role !== 'ADMIN') {
-        return redirect('/');
-    }
-    const players = await prisma.player.findMany();
-
-    return (
-        <Container className="w-[100%]">
-            <Suspense fallback={<Loading />}>
-                <AddEditPlayer user={user} players={players} />
-            </Suspense>
-        </Container>
-    );
-}
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\heroes\components\addEditPlayer.tsx
 'use client';
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { addEditPlayer, deletePlayer } from '@/app/actions';
 import { Player, User } from "@prisma/client";
 import { Input, Button } from "@/components/ui";
 import {
-Table,
-TableBody,
-TableCell, TableHead, TableHeader,
-TableRow,
+    Table,
+    TableBody,
+    TableCell, TableHead, TableHeader,
+    TableRow,
 } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
 interface Props {
-user: User;
-players: Player[];
-className?: string;
+    user: User;
+    players: Player[];
+    className?: string;
 }
 
 export const AddEditPlayer: React.FC<Props> = ({ user, players, className }) => {
-const [playerName, setPlayerName] = useState('');
-const [selectedPlayerId, setSelectedPlayerId] = useState<number | null>(null);
-const [message, setMessage] = useState('');
-const [messageType, setMessageType] = useState<'success' | 'error' | ''>('');
-const [isDialogOpen, setIsDialogOpen] = useState(false);
-const [playerToDelete, setPlayerToDelete] = useState<Player | null>(null);
-const [confirmName, setConfirmName] = useState('');
+    const [player, setPlayer] = React.useState<Player[]>(players);
+    const [playerName, setPlayerName] = useState('');
+    const [selectedPlayerId, setSelectedPlayerId] = useState<number | null>(null);
+    const [message, setMessage] = useState('');
+    const [messageType, setMessageType] = useState<'success' | 'error' | ''>('');
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [playerToDelete, setPlayerToDelete] = useState<Player | null>(null);
+    const [confirmName, setConfirmName] = useState('');
+
+    useEffect(() => {
+        setPlayer(players);
+    }, [players]);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -185,7 +111,7 @@ const [confirmName, setConfirmName] = useState('');
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {players.map((player) => (
+                    {player.map((player) => (
                         <TableRow key={player.id}>
                             <TableCell>{player.name}</TableCell>
                             <TableCell>
@@ -227,49 +153,3 @@ const [confirmName, setConfirmName] = useState('');
         </div>
     );
 };
-export async function addEditPlayer(playerId: number | null, playerName: string) {
-if (!playerName) {
-throw new Error('Имя игрока обязательно');
-}
-try {
-// Проверяем, существует ли игрок с таким именем
-const existingPlayer = await prisma.player.findUnique({
-where: { name: playerName },
-});
-
-        if (existingPlayer) {
-            // Уведомляем клиента, что игрок с таким именем уже существует
-            return { success: false, message: 'Игрок с таким именем уже существует' };
-        }
-
-        if (playerId) {
-            // Редактируем существующего игрока
-            await prisma.player.update({
-                where: { id: playerId },
-                data: { name: playerName },
-            });
-        } else {
-            // Добавляем нового игрока
-            await prisma.player.create({
-                data: { name: playerName },
-            });
-        }
-
-        return { success: true, message: 'Игрок успешно сохранен' };
-    } catch (error) {
-        console.error('Ошибка:', error);
-        throw new Error('Не удалось обновить игрока');
-    }
-}
-export async function deletePlayer(playerId: number) {
-try {
-await prisma.player.delete({
-where: { id: playerId },
-});
-return { success: true, message: 'Игрок успешно удален' };
-} catch (error) {
-console.error('Ошибка при удалении игрока:', error);
-throw new Error('Не удалось удалить игрока');
-}
-}
-предотавь полный обновленный код, чтобы после добавления обновления редактирования игрока , список обновлялся, приходил с базы данных обновленный список пользователей.
