@@ -23,7 +23,7 @@ export default async function AddPlayerPage() {
     const players = await prisma.player.findMany();
 
     return (
-        <Container className="w-[100%]">
+        <Container className="w-[96%]">
             <Suspense fallback={<Loading />}>
                 <AddEditPlayer user={user} players={players} />
             </Suspense>

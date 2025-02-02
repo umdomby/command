@@ -116,9 +116,7 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
 
 export async function clientCreateBet(formData: any) {
     const session = await getUserSession();
-    if (!session) {
-        throw new Error("User session is not available.");
-    }
+    if (!session || session.role !== 'ADMIN') {throw new Error('У вас нет прав для выполнения этой операции');}
 
     try {
         const user = await prisma.user.findUnique({
@@ -471,7 +469,8 @@ async function balanceOverlaps(betId: number) {
 
 // Функция для закрытия ставки
 export async function closeBet(betId: number, winnerId: number) {
-    'use server';
+    const session = await getUserSession();
+    if (!session || session.role !== 'ADMIN') {throw new Error('У вас нет прав для выполнения этой операции');}
 
     try {
         if (winnerId === null || winnerId === undefined) {
@@ -660,10 +659,12 @@ export async function closeBet(betId: number, winnerId: number) {
 }
 
 // Функция для добавления и редактирование имен игроков, админом
+
 export async function addEditPlayer(playerId: number | null, playerName: string) {
-    if (!playerName) {
-        throw new Error('Имя игрока обязательно');
-    }
+    const session = await getUserSession();
+    if (!session || session.role !== 'ADMIN') {throw new Error('У вас нет прав для выполнения этой операции');}
+    if (!playerName) {throw new Error('Имя игрока обязательно');}
+
     try {
         const existingPlayer = await prisma.player.findUnique({
             where: { name: playerName },
@@ -683,22 +684,27 @@ export async function addEditPlayer(playerId: number | null, playerName: string)
                 data: { name: playerName },
             });
         }
-        revalidatePath('/add-player')
+        revalidatePath('/add-player');
         return { success: true, message: 'Игрок успешно сохранен' };
     } catch (error) {
         console.error('Ошибка:', error);
         throw new Error('Не удалось обновить игрока');
     }
 }
+
 export async function deletePlayer(playerId: number) {
+    const session = await getUserSession();
+    if (!session || session.role !== 'ADMIN') {throw new Error('У вас нет прав для выполнения этой операции');}
+
     try {
         await prisma.player.delete({
             where: { id: playerId },
         });
-        revalidatePath('/add-player')
+        revalidatePath('/add-player');
         return { success: true, message: 'Игрок успешно удален' };
     } catch (error) {
         console.error('Ошибка при удалении игрока:', error);
         throw new Error('Не удалось удалить игрока');
     }
 }
+

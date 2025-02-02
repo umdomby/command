@@ -41,7 +41,7 @@ export default async function CreateBetPage() {
 
 
     return (
-        <Container className="flex flex-col my-10">
+        <Container className="flex flex-col my-10 w-[96%]">
             <Suspense fallback={<Loading/>}>
                 <CreateBetForm
                     user={user}

@@ -156,7 +156,7 @@ export const HEROES_CLIENT_CLOSED: React.FC<Props> = ({ user, closedBets }) => {
                                                                 {participant.player === 'PLAYER1' ? bet.player1.name : bet.player2.name}
                                                             </strong>
                                                             {','} Коэффициент: <span>{Math.floor(participant.odds * 100) / 100}</span>
-                                                            {','} Чистая прибыль: <span>{Math.floor(participant.profit * 100) / 100}</span>
+                                                            {','} Прибыль: <span>{Math.floor(participant.profit * 100) / 100}</span>
                                                             {','} Маржа: <span>{participant.margin !== null ? Math.floor(participant.margin * 100) / 100 : '0.00'}</span>
                                                             {','} {new Date(participant.createdAt).toLocaleString()}
                                                         </p>
@@ -184,7 +184,7 @@ export const HEROES_CLIENT_CLOSED: React.FC<Props> = ({ user, closedBets }) => {
                                                                 <br/>
                                                                 {participant.isWinner ? (
                                                                     <span className="text-green-500">
-                                                                        Прибыль: {Math.floor(participant.return * 100) / 100} Points
+                                                                        Возврат: {Math.floor(participant.return * 100) / 100} Points
                                                                     </span>
                                                                 ) : (
                                                                     <span
