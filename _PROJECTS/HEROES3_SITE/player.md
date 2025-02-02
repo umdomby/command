@@ -261,15 +261,3 @@ where: { name: playerName },
         throw new Error('Не удалось обновить игрока');
     }
 }
-export async function deletePlayer(playerId: number) {
-try {
-await prisma.player.delete({
-where: { id: playerId },
-});
-return { success: true, message: 'Игрок успешно удален' };
-} catch (error) {
-console.error('Ошибка при удалении игрока:', error);
-throw new Error('Не удалось удалить игрока');
-}
-}
-предотавь полный обновленный код, чтобы после добавления обновления редактирования игрока , список обновлялся, приходил с базы данных обновленный список пользователей.
