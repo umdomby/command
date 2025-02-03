@@ -69,4 +69,4 @@
 # + сделайте тут проверку что сумма ставок при создании не превышает 100 баллов. clientCreateBet +
 
 проект Next "next": "^15.1.4", "next-auth": "^4.24.11", "prisma": "^6.3.0", "zod": "^3.24.1", ui.shadcn.com 'next/form'
-примени стили interface Props { className?: string; }   = ({className}) используй таблицы кнопки инпуты shadcn чтобы все выглядело очень круто и культурно
+примени стили interface Props { className?: string; }   = ({className}) используй таблицы кнопки inputs shadcn чтобы все выглядело очень круто и культурно
