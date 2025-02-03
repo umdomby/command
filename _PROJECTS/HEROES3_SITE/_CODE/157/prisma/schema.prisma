@@ -1,0 +1,270 @@
+// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id                    Int                     @id @default(autoincrement())
+  email                 String                  @unique
+  cardId                String                  @unique @default(uuid()) // Используем UUID для уникальности
+  fullName              String
+  provider              String?
+  providerId            String?
+  password              String
+  role                  UserRole                @default(USER)
+  img                   String?
+  points                Float                   @default(1000) // баллы пользователя
+  p2pPlus               Int?                    @default(0)
+  p2pMinus              Int?                    @default(0)
+  contact               Json? // поле для хранения контактных данных
+  loginHistory          Json? // поле для хранения истории входов
+  betsCreated           Bet[]                   @relation("BetsCreated")
+  betsCLOSEDCreated     BetCLOSED[]             @relation("BetsCLOSEDCreated")
+  orderP2PUser1         OrderP2P[]              @relation("OrderP2PUser1") // Отношение для user1
+  orderP2PUser2         OrderP2P[]              @relation("OrderP2PUser2") // Отношение для user2
+  transferUser1         Transfer[]              @relation("TransferUser1") // Отношение для user1
+  transferUser2         Transfer[]              @relation("TransferUser2") // Отношение для user2
+  betsPlaced            BetParticipant[]
+  betsCLOSEDPlaced      BetParticipantCLOSED[]
+  userP2PMoney          Json?
+  referralUserIpAddress ReferralUserIpAddress[]
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+}
+
+model OrderP2P {
+  id              Int            @id @default(autoincrement())
+  orderP2PUser1   User           @relation("OrderP2PUser1", fields: [orderP2PUser1Id], references: [id])
+  orderP2PUser1Id Int
+  orderP2PUser2   User?          @relation("OrderP2PUser2", fields: [orderP2PUser2Id], references: [id])
+  orderP2PUser2Id Int?
+  orderP2PBuySell BuySell
+  orderP2PPoints  Float
+  orderP2PMoney   Json
+  orderP2PChat    Json?
+  orderP2PStatus  OrderP2PStatus @default(OPEN)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model Transfer {
+  id              Int      @id @default(autoincrement())
+  transferUser1   User     @relation("TransferUser1", fields: [transferUser1Id], references: [id])
+  transferUser1Id Int
+  transferUser2   User?    @relation("TransferUser2", fields: [transferUser2Id], references: [id])
+  transferUser2Id Int?
+  transferPoints  Float
+  transfer        String   @default("") // Изменяем Text на String
+  transferStatus  Boolean?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model ContactDataEnum {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+// export async function clientCreateBet(formData: any) actions.ts
+model Bet {
+  id              Int              @id @default(autoincrement())
+  player1         Player           @relation(name: "Player1Bets", fields: [player1Id], references: [id]) // ставки на игрока 1
+  player1Id       Int
+  player2         Player           @relation(name: "Player2Bets", fields: [player2Id], references: [id]) // ставки на игрока 2
+  player2Id       Int
+  initBetPlayer1  Float // инициализация ставок на игрока 1
+  initBetPlayer2  Float // инициализация ставок на игрока 2
+  totalBetPlayer1 Float // Сумма ставок на игрока 1
+  totalBetPlayer2 Float // Сумма ставок на игрока 2
+  oddsBetPlayer1  Float // Текущий коэффициент для игрока 1
+  oddsBetPlayer2  Float // Текущий коэффициент для игрока 2
+  maxBetPlayer1   Float // Максимальная сумма ставок на игрока 1
+  maxBetPlayer2   Float // Максимальная сумма ставок на игрока 2
+  overlapPlayer1  Float // Перекрытие на игрока 1
+  overlapPlayer2  Float // Перекрытие на игрока 2
+  totalBetAmount  Float            @default(0) // сумма всех ставок.
+  creator         User             @relation("BetsCreated", fields: [creatorId], references: [id]) // создатель события
+  creatorId       Int
+  status          BetStatus        @default(OPEN) // если статус = CLOSED то ставка закрыта, и перемещается в model BetCLOSED
+  participants    BetParticipant[]
+  categoryId      Int?
+  category        Category?        @relation(fields: [categoryId], references: [id])
+  productId       Int?
+  product         Product?         @relation(fields: [productId], references: [id])
+  productItemId   Int?
+  productItem     ProductItem?     @relation(fields: [productItemId], references: [id])
+  winnerId        Int? // кто победил PLAYER1 или PLAYER2
+  margin          Float? // в placeBet = 0
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+// export async function placeBet actions.ts
+model BetParticipant {
+  id        Int          @id @default(autoincrement())
+  betId     Int
+  bet       Bet          @relation(fields: [betId], references: [id])
+  userId    Int // пользователь который ставит ставку
+  user      User         @relation(fields: [userId], references: [id])
+  player    PlayerChoice // выбранный игрок в событии
+  amount    Float // ставка пользователя
+  odds      Float // Коэффициент ставки
+  profit    Float // Показывает пользователю потенциальную выигрышную сумму. Сюда не входит маржа. Сюда не входит ставка пользователя, тут чистый потенциальный выигрыш.
+  overlap   Float // на какую сумму перекрыто, именно с этого поля ничисляются выигранные суммы.
+  margin    Float // в placeBet = 0
+  isCovered IsCovered //   OPEN: не перекрыта совсем "0", CLOSED: полностью перекрыта "overlap = profit", PENDING: частично перекрыта "overlap < profit"
+  isWinner  Boolean      @default(false) // Победила ли ставка
+  createdAt DateTime     @default(now())
+}
+
+// закрытые ставки, после закрытия ставки model Bet переносится в model BetCLOSED
+model BetCLOSED {
+  id                 Int                    @id @default(autoincrement())
+  participantsCLOSED BetParticipantCLOSED[] @relation("BetCLOSEDParticipants") // Обратная связь
+  player1            Player                 @relation(name: "Player1BetsCLOSED", fields: [player1Id], references: [id])
+  player1Id          Int
+  player2            Player                 @relation(name: "Player2BetsCLOSED", fields: [player2Id], references: [id])
+  player2Id          Int
+  initBetPlayer1     Float // Инициализация ставок на игрока 1
+  initBetPlayer2     Float // Инициализация ставок на игрока 2
+  totalBetPlayer1    Float // Сумма ставок на игрока 1
+  totalBetPlayer2    Float // Сумма ставок на игрока 2
+  oddsBetPlayer1     Float // разница ставок перекрытия на игрока 1
+  oddsBetPlayer2     Float // разница ставок перекрытия на игрока 2
+  maxBetPlayer1      Float // Максимальная сумма ставок на игрока 1
+  maxBetPlayer2      Float // Максимальная сумма ставок на игрока 2
+  overlapPlayer1     Float // Перекрытие на игрока 1
+  overlapPlayer2     Float // Перекрытие на игрока 2
+  totalBetAmount     Float                  @default(0) // Общая сумма ставок
+  creator            User                   @relation("BetsCLOSEDCreated", fields: [creatorId], references: [id])
+  creatorId          Int
+  status             BetStatus              @default(CLOSED) // Статус ставки
+  categoryId         Int?
+  category           Category?              @relation(fields: [categoryId], references: [id])
+  productId          Int?
+  product            Product?               @relation(fields: [productId], references: [id])
+  productItemId      Int?
+  productItem        ProductItem?           @relation(fields: [productItemId], references: [id])
+  winnerId           Int? // ID победителя (без связи)
+  margin             Float? // вся маржа события
+  createdAt          DateTime               @default(now()) // Дата создания
+  updatedAt          DateTime               @updatedAt // Дата обновления
+}
+
+// закрыте ставки, после закрытия ставки model BetParticipant переносится в model BetParticipantCLOSED
+model BetParticipantCLOSED {
+  id          Int          @id @default(autoincrement())
+  betCLOSEDId Int
+  betCLOSED   BetCLOSED    @relation("BetCLOSEDParticipants", fields: [betCLOSEDId], references: [id]) // Обратная связь
+  userId      Int // пользователь который ставит ставку
+  user        User         @relation(fields: [userId], references: [id])
+  player      PlayerChoice // выбранный игрок в событии
+  amount      Float // ставка пользователя
+  odds        Float // Коэффициент ставки
+  profit      Float // Показывает пользователю потенциальную выигрышную сумму. Сюда не входит маржа. Сюда не входит ставка пользователя, тут чистый потенциальный выигрыш.
+  overlap     Float // на какую сумму перекрыто, именно с этого поля ничисляются выигранные суммы.
+  margin      Float // маржа пользователя, снимается после закрытия ставки, и только с выигарнной суммой, из поля overlap
+  isCovered   IsCovered //   OPEN: не перекрыта совсем "0", CLOSED: полностью перекрыта "overlap = profit", PENDING: частично перекрыта "overlap < profit"
+  return      Float // возвращаемая сумма пользователю после победы
+  isWinner    Boolean      @default(false) // Победила ли ставка
+  createdAt   DateTime     @default(now())
+}
+
+model GlobalData {
+  id             Int      @id @default(autoincrement())
+  usersPlay      Int // Количество пользователей, участвующих в открытых ставках
+  pointsBet      Float // Общая сумма ставок в открытых ставках
+  users          Int // Количество зарегистрированных пользователей
+  pointsStart    Float // Количество зарегистрированных пользователей * 1000 free
+  pointsAllUsers Float // Сумма баллов у пользователей  pointsAllStart - pointsAllUsers = pointsSystem
+  pointsAllStart Float?   @default(1000000) // start constantpoints нигде не используется.
+  pointsPay      Float? // сколько баллов куплено
+  margin         Float? // сумма маржи model Bet margin
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model ReferralUserIpAddress {
+  id                Int      @id @default(autoincrement())
+  userReferral      User     @relation(fields: [referralUserId], references: [id])
+  referralUserId    Int
+  referralIpAddress String
+  referralStatus    Boolean  @default(false)
+  referralPoints    Float    @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Player {
+  id                Int         @id @default(autoincrement())
+  name              String      @unique
+  player1Bets       Bet[]       @relation(name: "Player1Bets") // Relation for bets as player 1
+  player2Bets       Bet[]       @relation(name: "Player2Bets") // Relation for bets as player 2
+  player1BetsCLOSED BetCLOSED[] @relation(name: "Player1BetsCLOSED") // Relation for bets as player 1
+  player2BetsCLOSED BetCLOSED[] @relation(name: "Player2BetsCLOSED") // Relation for bets as player 2
+}
+
+model Category {
+  id         Int         @id @default(autoincrement())
+  name       String      @unique
+  products   Product[]
+  bets       Bet[]
+  betsCLOSED BetCLOSED[]
+}
+
+model Product {
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  category     Category      @relation(fields: [categoryId], references: [id])
+  categoryId   Int
+  productItems ProductItem[]
+  bets         Bet[]
+  betsCLOSED   BetCLOSED[]
+}
+
+model ProductItem {
+  id         Int         @id @default(autoincrement())
+  name       String      @unique
+  productId  Int
+  product    Product     @relation(fields: [productId], references: [id])
+  bets       Bet[]
+  betsCLOSED BetCLOSED[]
+}
+
+enum BetStatus {
+  OPEN
+  CLOSED
+  PENDING
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  BLOCK
+}
+enum IsCovered {
+  OPEN // overlap = 0
+  CLOSED // overlap = profit
+  PENDING // overlap < profit
+  CP
+}
+enum BuySell {
+  BUY
+  SELL
+}
+enum OrderP2PStatus {
+  OPEN
+  CLOSED
+  RETURN
+  CONTROL
+}
+enum PlayerChoice {
+  PLAYER1
+  PLAYER2
+}
