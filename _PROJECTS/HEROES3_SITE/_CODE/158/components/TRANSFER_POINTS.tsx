@@ -108,19 +108,19 @@ export const TRANSFER_POINTS: React.FC<Props> = ({ user, transferHistory, classN
             <Table className="mt-6">
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Дата</TableHead>
-                        <TableHead>Тип</TableHead>
-                        <TableHead>ID карты</TableHead>
-                        <TableHead>Баллы</TableHead>
+                        <TableHead className="text-center">Дата</TableHead>
+                        <TableHead className="text-center">Тип</TableHead>
+                        <TableHead className="text-center">ID карты</TableHead>
+                        <TableHead className="text-center">Баллы</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {transferHistory.map((transfer, index) => (
                         <TableRow key={index}>
-                            <TableCell>{new Date(transfer.createdAt).toLocaleDateString()}</TableCell>
-                            <TableCell>{transfer.transferUser1Id === user.id ? 'Исходящий' : 'Входящий'}</TableCell>
-                            <TableCell>{transfer.transferUser1Id === user.id ? transfer.transferUser2.cardId : transfer.transferUser1.cardId}</TableCell>
-                            <TableCell>{transfer.transferUser1Id === user.id ? `-${transfer.transferPoints}` : `+${transfer.transferPoints}`}</TableCell>
+                            <TableCell className="text-center">{new Date(transfer.createdAt).toLocaleDateString()}</TableCell>
+                            <TableCell className="text-center">{transfer.transferUser1Id === user.id ? 'Исходящий' : 'Входящий'}</TableCell>
+                            <TableCell className="text-center">{transfer.transferUser1Id === user.id ? transfer.transferUser2.cardId : transfer.transferUser1.cardId}</TableCell>
+                            <TableCell className="text-center">{transfer.transferUser1Id === user.id ? `-${transfer.transferPoints}` : `+${transfer.transferPoints}`}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
