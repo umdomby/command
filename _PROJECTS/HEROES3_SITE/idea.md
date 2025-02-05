@@ -76,3 +76,23 @@
 
 {Math.floor(user.points * 100) / 100}
 npx prisma migrate dev --name add_bank_details
+.replace(',', '.')
+мне нужно вводить положительное число с плавющей точкой или запятой, разреши мне вводить одну точку или одну запятую
+числа должны быть положительными, целыми, нельзя вводить первый ноль, первый ноль должен удаляться
+                            <Input
+                                type="text"
+                                value={detail.price.toString().replace('.', ',')}
+                                onInput={(e) => {
+                                    let value = e.currentTarget.value;
+                                    if (isValidNumberInput(value) || value === '') {
+                                        handlePriceChangeForBuy(index, value);
+                                    } else {
+                                        e.currentTarget.value = detail.price.toString().replace('.', ',');
+                                    }
+                                }}
+                                placeholder="Цена"
+                                className="ml-2"
+                            />
+
+1e-7 так не отображать, отображать как есть. Можно вводить значения такого плана 0,000000012 , при вводе точки - точка заменялась на запятую
+не могу вводить запятую не могу вводить точку, сделай так чтобы я мог вводить запятую, а точка вводилась как запятая
