@@ -101,3 +101,17 @@ npx prisma migrate dev --name add_bank_details
 можно вместо Select использовать выпадающий лист, чтобы с егоданных заносить значения в
 const [selectedBankDetailsForBuy, setSelectedBankDetailsForBuy] = useState<any[]>([]); // Выбранные банковские реквизиты для покупки
 const [selectedBankDetailsForSell, setSelectedBankDetailsForSell] = useState<any[]>([]); // Выбранные банковские реквизиты для продажи
+
+так же в selects нужно добавить кнопки, добавить все удалить все
+
+<AccordionTrigger disabled={order.orderP2PUser1Id === user.id}>
+
+disabled={order.orderP2PUser1Id === user.id}>
+{order.orderP2PBuySell === 'SELL' && order.orderP2PUser1Id === user.id && (
+
+                            {order.orderP2PBuySell === 'SELL' &&  order.orderP2PUser1Id !== user.id && (
+                                <Button className="ml-3 h-6" onClick={() => handleConcludeDealBuy(order)}
+                                        disabled={order.orderP2PUser1Id === user.id}>
+                                    Заключить сделку покупки
+                                </Button>
+                            )}
