@@ -71,7 +71,7 @@
 # + серверная валидация +
 # + сделайте тут проверку что сумма ставок при создании не превышает 100 баллов. clientCreateBet +
 
-проект Next "next": "^15.1.4", "next-auth": "^4.24.11", "prisma": "^6.3.0", "zod": "^3.24.1", ui.shadcn.com 'next/form'
+проект Next "next": "^15.1.4",  "prisma": "^6.3.0", "next-auth": "^4.24.11",  "zod": "^3.24.1", ui.shadcn.com 'next/form'
 примени стили interface Props { className?: string; }   = ({className}) используй таблицы кнопки inputs shadcn чтобы все выглядело очень круто и культурно
 
 {Math.floor(user.points * 100) / 100}
@@ -115,3 +115,8 @@ disabled={order.orderP2PUser1Id === user.id}>
                                     Заключить сделку покупки
                                 </Button>
                             )}
+
+    // Проверка, можно ли создать заявку
+    const isCreateOrderDisabled = (points: number, selectedDetails: any[]) => {
+        return points < 30 || selectedDetails.length === 0 || selectedDetails.some(detail => detail.price <= 0);
+    };
