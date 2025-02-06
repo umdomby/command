@@ -120,3 +120,5 @@ disabled={order.orderP2PUser1Id === user.id}>
     const isCreateOrderDisabled = (points: number, selectedDetails: any[]) => {
         return points < 30 || selectedDetails.length === 0 || selectedDetails.some(detail => detail.price <= 0);
     };
+
+// в заявке ограничение максимальных поинтов, и в редактировании цены в профиле за одну
