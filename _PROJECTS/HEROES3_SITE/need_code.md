@@ -71,3 +71,5 @@ disabled={order.orderP2PUser1Id === user.id}>
 // в заявке ограничение максимальных поинтов, и в редактировании цены в профиле за одну
 
 className={order.orderP2PUser1Id === user.id ? 'bg-gray-600' : 'bg-gray-500'}
+
+revalidatePath('/order-p2p-pending');
