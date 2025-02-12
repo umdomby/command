@@ -1,5 +1,5 @@
 
-проект Next "next": "^15.1.4",  "prisma": "^6.3.0", "next-auth": "^4.24.11",  "zod": "^3.24.1", ui.shadcn.com 'next/form'
+особенности проекта: Next "next": "^15.1.4",  "prisma": "^6.3.1",  ui.shadcn.com . "next-auth": "^4.24.11",  "zod": "^3.24.1", ui.shadcn.com 'next/form'
 примени стили interface Props { className?: string; }   = ({className}) используй таблицы кнопки inputs shadcn чтобы все выглядело очень круто и культурно
 
 {Math.floor(user.points * 100) / 100}
