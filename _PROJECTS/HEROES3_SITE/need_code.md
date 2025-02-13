@@ -73,3 +73,12 @@ disabled={order.orderP2PUser1Id === user.id}>
 className={order.orderP2PUser1Id === user.id ? 'bg-gray-600' : 'bg-gray-500'}
 
 revalidatePath('/order-p2p-pending');
+
+не удаляй и не изменяй комментарии , а также их не добавляй где это не требуется
+
+
+SELECT setval(pg_get_serial_sequence('"Bet3"', 'id'), coalesce(max(id)+1, 1), false) FROM "Bet3";
+SELECT setval(pg_get_serial_sequence('"BetParticipant3"', 'id'), coalesce(max(id)+1, 1), false) FROM "BetParticipant3";
+
+npx prisma generate
+npx prisma migrate dev --name init
