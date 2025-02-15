@@ -82,3 +82,5 @@ SELECT setval(pg_get_serial_sequence('"BetParticipant3"', 'id'), coalesce(max(id
 
 npx prisma generate
 npx prisma migrate dev --name init
+
+{Math.floor(user.points * 100) / 100}
