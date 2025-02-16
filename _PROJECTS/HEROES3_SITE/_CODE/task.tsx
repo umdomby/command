@@ -703,3 +703,58 @@ isCovered: PENDING
 Задание, сделай справидливое распределения выиграшей , чтобы сумма очков поставленных из системы должна быть равна сумме очков обратно вернувшиеся в систему.
     и не возвращай код пока сам не убедишься что он работает. Верни мне код который работает с данным условием! это должно быть реализовано в function closeBet
 оставляй все логи и все комментарии
+
+const totalWithInitPlayer1 = totalPlayer1Odds + (bet.initBetPlayer1 || 0); если totalPlayer1Odds больше 50 то это (bet.initBetPlayer1 || 0) = 0
+
+нужно раставить приоритеты для победителей
+У кого isCovered=OPEN нужно возвращать в return всю ставку amount.
+У кого isCovered=CLOSED  возвращать в return весь amount+overlap.
+Тут ВАЖННО! У кого isCovered=PENDING возвращать им всем в return всю ставку amount.
+потом посчитать сколько осталось поинтов (сумму их overlap минус сумму их вернувшимся amount) и распределить их между isCovered=PENDING равномерно по соотношению overlap к их amount
+- соблюдая условие - сумма очков поставленных из системы должна быть равна сумме очков обратно вернувшиеся в систему
+
+
+дорогой, здесь все работает, здесь работает самое главное условие - сумма очков поставленных из системы должна быть равна сумме очков обратно вернувшиеся в систему
+
+
+распредели приорететы: сначала возвращаем points - isCovered=OPEN нужно возвращать в return всю ставку amount, потом isCovered=CLOSED  возвращать в return весь amount+overlap. а потом уже isCovered=PENDING
+
+можно сюда дабавить - чтобы знать кому больше кому меньше нужно смотреть у кого overlap больше заполнен к profit - тому оставшиеся point отдавать больше. смотри соотношение overlap к profit в ставках
+
+маржа должна так добавляться у тех у кого ставка выиграла и isCovered не равн OPEN
+/ Вычитаем маржу у победителей
+
+isCovered не равен OPEN
+if (pointsToReturn > participant.amount) {
+    margin = (pointsToReturn - participant.amount) * MARGIN;
+}
+
+
+так же totalPointsToReturn:
+totalPointsToReturn += totalMargin
+// Обновляем поле returnBetAmount в BetCLOSED
+await prisma.betCLOSED.update({
+    where: { id: betClosed.id },
+    data: {
+        margin: Math.floor(totalMargin * 100) / 100,
+        returnBetAmount: Math.floor(totalPointsToReturn * 100) / 100, // Записываем сумму возвращенных баллов
+    },
+});
+
+
+
+добавь расчет маржи у победителей
+isCovered не равен OPEN
+if (pointsToReturn > participant.amount) {
+    margin = (pointsToReturn - participant.amount) * MARGIN;
+}
+маржа должна отниматься у return и пользователям возвращаться уже с вычтеной маржой
+
+
+
+логику оставь, запросов лишних не делай, должно сотаться -
+сумма очков поставленных из системы должна быть равна сумме очков обратно вернувшиеся в систему.
+    сначала нужно одать очки isCovered=OPEN amount to user.point, потом isCovered=CLOSED amount + overlap - маржа от overlap to user.point,
+    а потом равномерно распределить оставшиеся очки isCovered=PENDING to user.point.
+
+
