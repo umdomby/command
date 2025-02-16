@@ -1587,10 +1587,10 @@ export async function closeBet(betId: number, winnerId: number) {
       console.log('Total Margin:', totalMargin);
       const discrepancy = totalPointsToReturn + totalMargin - bet.totalBetAmount;
       // Проверяем, что сумма всех возвращаемых баллов плюс маржа равна общей сумме ставок
-      if (Math.abs(discrepancy) > 0.5) {
-        console.log("111111111 discrepancy " + discrepancy)
-        console.log("222222222 totalPointsToReturn " + totalPointsToReturn)
-        console.log("333333333 totalMargin " + totalMargin)
+      if (Math.abs(discrepancy) > 0.01) {
+        console.log("2 discrepancy " + discrepancy)
+        console.log("2 totalPointsToReturn " + totalPointsToReturn)
+        console.log("2 totalMargin " + totalMargin)
         totalMargin -= discrepancy; // Корректируем маржу
       }
 
@@ -2308,6 +2308,17 @@ export async function closeBet3(betId: number, winnerId: number) {
         });
       }
 
+      console.log('Total Points to Return:', totalPointsToReturn);
+      console.log('Total Margin:', totalMargin);
+      const discrepancy = totalPointsToReturn + totalMargin - bet.totalBetAmount;
+      // Проверяем, что сумма всех возвращаемых баллов плюс маржа равна общей сумме ставок
+      if (Math.abs(discrepancy) > 0.01) {
+        console.log("3 discrepancy " + discrepancy)
+        console.log("3 totalPointsToReturn " + totalPointsToReturn)
+        console.log("3 totalMargin " + totalMargin)
+        totalMargin -= discrepancy; // Корректируем маржу
+      }
+
       // Обновляем поле margin в BetCLOSED3
       await prisma.betCLOSED3.update({
         where: { id: betClosed.id },
@@ -2352,7 +2363,7 @@ export async function closeBet3(betId: number, winnerId: number) {
       throw new Error("Не удалось закрыть ставку.");
     }
   }
-}// Функция для закрытия ставки на 3 игрока
+} // Функция для закрытия ставки на 3 игрока
 export async function closeBetDraw3(betId: number) {
   const session = await getUserSession();
   if (!session || session.role !== 'ADMIN') {
@@ -3079,6 +3090,17 @@ export async function closeBet4(betId: number, winnerId: number) {
         });
       }
 
+      console.log('Total Points to Return:', totalPointsToReturn);
+      console.log('Total Margin:', totalMargin);
+      const discrepancy = totalPointsToReturn + totalMargin - bet.totalBetAmount;
+      // Проверяем, что сумма всех возвращаемых баллов плюс маржа равна общей сумме ставок
+      if (Math.abs(discrepancy) > 0.01) {
+        console.log("4 discrepancy " + discrepancy)
+        console.log("4 totalPointsToReturn " + totalPointsToReturn)
+        console.log("4 totalMargin " + totalMargin)
+        totalMargin -= discrepancy; // Корректируем маржу
+      }
+
       // Обновляем поле margin в BetCLOSED4
       await prisma.betCLOSED4.update({
         where: { id: betClosed.id },
@@ -3246,4 +3268,3 @@ export async function closeBetDraw4(betId: number) {
   }
 }// ничья на 4 игрока
 // Function to handle a draw for four players
-
