@@ -83,4 +83,6 @@ SELECT setval(pg_get_serial_sequence('"BetParticipant3"', 'id'), coalesce(max(id
 npx prisma generate
 npx prisma migrate dev --name init
 
-{Math.floor(user.points * 100) / 100}
+{Math.floor(variable * 100) / 100}
+
+// Функция для закрытия ставки на 3 игрока исправь код на три игрока, по аналогичной функции которую ты сделал для двухи игроков с справедливым распределением

@@ -1,0 +1,244 @@
+export async function closeBet(betId: number, winnerId: number) {
+    const session = await getUserSession();
+    if (!session || session.role !== 'ADMIN') {
+        throw new Error('У вас нет прав для выполнения этой операции');
+    }
+
+    try {
+        if (winnerId === null || winnerId === undefined) {
+            throw new Error("Не выбран победитель.");
+        }
+
+        await prisma.$transaction(async (prisma) => {
+            // Обновляем статус ставки и получаем данные
+            const bet = await prisma.bet.update({
+                where: { id: betId },
+                data: {
+                    status: 'CLOSED',
+                    winnerId: winnerId,
+                },
+                include: {
+                    participants: true,
+                    player1: true,
+                    player2: true,
+                },
+            });
+
+            if (!bet) {
+                throw new Error("Ставка не найдена");
+            }
+
+            // Создаем запись в BetCLOSED
+            const betClosed = await prisma.betCLOSED.create({
+                data: {
+                    player1Id: bet.player1Id,
+                    player2Id: bet.player2Id,
+                    initBetPlayer1: bet.initBetPlayer1,
+                    initBetPlayer2: bet.initBetPlayer2,
+                    totalBetPlayer1: bet.totalBetPlayer1,
+                    totalBetPlayer2: bet.totalBetPlayer2,
+                    maxBetPlayer1: bet.maxBetPlayer1,
+                    maxBetPlayer2: bet.maxBetPlayer2,
+                    totalBetAmount: bet.totalBetAmount,
+                    creatorId: bet.creatorId,
+                    status: 'CLOSED',
+                    categoryId: bet.categoryId,
+                    productId: bet.productId,
+                    productItemId: bet.productItemId,
+                    winnerId: bet.winnerId,
+                    margin: bet.margin,
+                    createdAt: bet.createdAt,
+                    updatedAt: bet.updatedAt,
+                    oddsBetPlayer1: bet.oddsBetPlayer1,
+                    oddsBetPlayer2: bet.oddsBetPlayer2,
+                    overlapPlayer1: bet.overlapPlayer1,
+                    overlapPlayer2: bet.overlapPlayer2,
+                    returnBetAmount: 0, // Инициализируем returnBetAmount
+                },
+            });
+
+            // Определяем победителя
+            const winningPlayer = bet.winnerId === bet.player1Id ? PlayerChoice.PLAYER1 : PlayerChoice.PLAYER2;
+
+            // Обновляем статус участников
+            await prisma.betParticipant.updateMany({
+                where: { betId: betId },
+                data: {
+                    isWinner: false,
+                },
+            });
+
+            await prisma.betParticipant.updateMany({
+                where: {
+                    betId: betId,
+                    player: winningPlayer,
+                },
+                data: {
+                    isWinner: true,
+                },
+            });
+
+            // Перераспределяем баллы
+            let allParticipants = await prisma.betParticipant.findMany({
+                where: { betId: betId },
+            });
+
+            let totalMargin = 0;
+            let totalPointsToReturn = 0; // Сумма всех возвращаемых баллов
+
+            // Сначала вычисляем общую прибыль победителей
+            let totalProfit = 0;
+            for (const participant of allParticipants) {
+                if (participant.isWinner) {
+                    totalProfit += participant.profit;
+                }
+            }
+
+            // Обрабатываем участников с isCovered = CLOSED
+            for (const participant of allParticipants) {
+                if (participant.isWinner && participant.isCovered === 'CLOSED') {
+                    const pointsToReturn = participant.amount + participant.profit;
+                    totalPointsToReturn += pointsToReturn;
+
+                    // Обновляем баллы пользователя
+                    await prisma.user.update({
+                        where: { id: participant.userId },
+                        data: {
+                            points: {
+                                increment: Math.round(pointsToReturn * 100) / 100,
+                            },
+                        },
+                    });
+
+                    // Создаем запись в BetParticipantCLOSED
+                    await prisma.betParticipantCLOSED.create({
+                        data: {
+                            betCLOSEDId: betClosed.id,
+                            userId: participant.userId,
+                            amount: participant.amount,
+                            odds: participant.odds,
+                            profit: participant.profit,
+                            player: participant.player,
+                            isWinner: participant.isWinner,
+                            margin: 0, // Маржа не взимается
+                            createdAt: participant.createdAt,
+                            isCovered: participant.isCovered,
+                            overlap: participant.overlap,
+                            return: Math.round(pointsToReturn * 100) / 100,
+                        },
+                    });
+                }
+            }
+
+            // Обрабатываем остальных участников, сортируя по убыванию overlap
+            allParticipants = allParticipants.filter(p => !(p.isWinner && p.isCovered === 'CLOSED'));
+            allParticipants.sort((a, b) => b.overlap - a.overlap);
+
+            // Теперь распределяем оставшиеся средства
+            for (const participant of allParticipants) {
+                let pointsToReturn = 0;
+                let margin = 0;
+
+                if (participant.isWinner) {
+                    if (participant.overlap === 0) {
+                        // Если overlap равен 0, возвращаем полную ставку без маржи
+                        pointsToReturn = participant.amount;
+                    } else {
+                        // Рассчитываем долю от общей суммы
+                        const share = participant.profit / totalProfit;
+                        pointsToReturn = bet.totalBetAmount * share;
+
+                        // Вычитаем маржу
+                        margin = Math.abs((participant.amount - pointsToReturn) * MARGIN);
+                        pointsToReturn -= margin;
+
+                        totalMargin += margin;
+                    }
+                }
+
+                console.log(`Participant ID: ${participant.id}, Points to Return: ${pointsToReturn}`);
+
+                // Обновляем баллы пользователя
+                if (pointsToReturn > 0) {
+                    await prisma.user.update({
+                        where: { id: participant.userId },
+                        data: {
+                            points: {
+                                increment: Math.round(pointsToReturn * 100) / 100,
+                            },
+                        },
+                    });
+                }
+
+                // Добавляем к общей сумме возвращаемых баллов
+                totalPointsToReturn += pointsToReturn;
+
+                // Создаем запись в BetParticipantCLOSED
+                await prisma.betParticipantCLOSED.create({
+                    data: {
+                        betCLOSEDId: betClosed.id,
+                        userId: participant.userId,
+                        amount: participant.amount,
+                        odds: participant.odds,
+                        profit: participant.profit,
+                        player: participant.player,
+                        isWinner: participant.isWinner,
+                        margin: Math.round(margin * 100) / 100,
+                        createdAt: participant.createdAt,
+                        isCovered: participant.isCovered,
+                        overlap: participant.overlap,
+                        return: Math.round(pointsToReturn * 100) / 100,
+                    },
+                });
+            }
+
+            console.log('Total Points to Return:', totalPointsToReturn);
+            console.log('Total Margin:', totalMargin);
+            const discrepancy = totalPointsToReturn + totalMargin - bet.totalBetAmount;
+            // Проверяем, что сумма всех возвращаемых баллов плюс маржа равна общей сумме ставок
+            if (Math.abs(discrepancy) > 0.5) {
+                console.log("111111111 discrepancy " + discrepancy)
+                console.log("222222222 totalPointsToReturn " + totalPointsToReturn)
+                console.log("333333333 totalMargin " + totalMargin)
+                totalMargin -= discrepancy; // Корректируем маржу
+            }
+
+            // Обновляем поле returnBetAmount в BetCLOSED
+            await prisma.betCLOSED.update({
+                where: { id: betClosed.id },
+                data: {
+                    margin: Math.round(totalMargin * 100) / 100,
+                    returnBetAmount: Math.round(totalPointsToReturn * 100) / 100, // Записываем сумму возвращенных баллов
+                },
+            });
+
+            // Удаляем участников и ставку
+            await prisma.betParticipant.deleteMany({
+                where: { betId: betId },
+            });
+
+            await prisma.bet.delete({
+                where: { id: betId },
+            });
+
+        });
+
+        // Ревалидация данных
+        revalidatePath('/');
+        revalidateTag('bets');
+        revalidateTag('user');
+
+        return { success: true, message: 'Ставка успешно закрыта' };
+    } catch (error) {
+        if (error === null || error === undefined) {
+            console.error('Ошибка при закрытии ставки: Неизвестная ошибка (error is null или undefined)');
+        } else if (error instanceof Error) {
+            console.error('Ошибка при закрытии ставки:', error.message);
+            console.error('Стек ошибки:', error.stack);
+        } else {
+            console.error('Ошибка при закрытии ставки:', error);
+        }
+
+        throw new Error('Не удалось закрыть ставку.');
+    }
+}
