@@ -21,11 +21,14 @@
 # + Защита - ADMIN
 # + настроить меню
 # + чат
+# + Распределение баллов при закрытии
+# + очищать поле ставки
 
--- Распределение баллов при закрытии
--- Организация Игры - ставка - маржа
+
+-- Организация Игры - ставка - маржа - выбор сразу или выбрать. выбор ставки - второй игрок может повышать ставку.
 -- Manual
--- очищать поле ставки
+-- регистрация в один клик
+-- P2P у вас есть открытые сделки.
 
 
 - Jebus Cross Fast 125. Взносы - POINTS
@@ -84,3 +87,29 @@
 # + удалить начальную ставку +
 # + серверная валидация +
 # + сделайте тут проверку что сумма ставок при создании не превышает 100 баллов. clientCreateBet +
+
+
+function calculateOdds(totalWithInitPlayer1: number, totalWithInitPlayer2: number) {
+const totalWithInit = totalWithInitPlayer1 + totalWithInitPlayer2;
+
+    // Calculate odds without margin
+    const oddsPlayer1 = totalWithInitPlayer1 === 0 ? 1 : totalWithInit / totalWithInitPlayer1;
+    const oddsPlayer2 = totalWithInitPlayer2 === 0 ? 1 : totalWithInit / totalWithInitPlayer2;
+
+    return {
+        // Округляем до двух знаков после запятой
+        oddsPlayer1: Math.floor((oddsPlayer1 * 100)) / 100,
+        oddsPlayer2: Math.floor((oddsPlayer2 * 100)) / 100,
+    };
+} // Функция для расчета коэффициентов
+
+Функция calculateOdds вычисляет коэффициенты для двух игроков на основе их общих сумм, включая начальные ставки. Вот простое объяснение:
+Общая сумма: Сложите общие суммы для обоих игроков (totalWithInitPlayer1 и totalWithInitPlayer2), чтобы получить общую сумму (totalWithInit).
+Вычисление коэффициентов:
+Для Игрока 1: Если totalWithInitPlayer1 равно нулю, коэффициент устанавливается равным 1. В противном случае, разделите общую сумму на totalWithInitPlayer1.
+Для Игрока 2: Если totalWithInitPlayer2 равно нулю, коэффициент устанавливается равным 1. В противном случае, разделите общую сумму на totalWithInitPlayer2.
+Округление: Вычисленные коэффициенты для обоих игроков округляются до двух знаков после запятой.
+Формула:
+Коэффициент для Игрока 1 = totalWithInit / totalWithInitPlayer1
+Коэффициент для Игрока 2 = totalWithInit / totalWithInitPlayer2
+Эта формула обеспечивает, что коэффициенты отражают долю каждого игрока в общей сумме.
