@@ -79,9 +79,11 @@ revalidatePath('/order-p2p-pending');
 
 SELECT setval(pg_get_serial_sequence('"Bet3"', 'id'), coalesce(max(id)+1, 1), false) FROM "Bet3";
 SELECT setval(pg_get_serial_sequence('"BetParticipant3"', 'id'), coalesce(max(id)+1, 1), false) FROM "BetParticipant3";
+SELECT setval(pg_get_serial_sequence('"Player"', 'id'), coalesce(max(id)+1, 1), false) FROM "Player";
 
 npx prisma generate
 npx prisma migrate dev --name init
+npx prisma migrate dev
 
 {Math.floor(variable * 100) / 100}
 
@@ -90,3 +92,18 @@ return Math.abs(num1 - num2) < Number.EPSILON;
 } //точное сравнение чисел
 переделай ставки на 3 игрока по аналогии как сделано на 2 игрока
 // Функция для закрытия ставки на 3 игрока исправь код на три игрока, по аналогичной функции которую ты сделал для двухи игроков с справедливым распределением
+
+```
+catch (error) {
+        if (error === null || error === undefined) {
+            console.error('Ошибка при регистрации игрока: Неизвестная ошибка (error is null или undefined)');
+        } else if (error instanceof Error) {
+            console.error('Ошибка при регистрации игрока:', error.message);
+            console.error('Стек ошибки:', error.stack);
+        } else {
+            console.error('Ошибка при регистрации игрока:', error);
+        }
+
+        throw new Error('Не удалось зарегистрироваться как игрок');
+    }
+```
