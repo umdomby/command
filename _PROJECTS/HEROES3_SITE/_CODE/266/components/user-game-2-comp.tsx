@@ -6,9 +6,16 @@ import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/co
 import Link from "next/link";
 import {gameUserBetRegistrations, removeGameUserBetRegistration} from "@/app/actions";
 import GameUserBetStatus = $Enums.GameUserBetStatus;
+import {Button} from "@/components/ui";
 
 interface Props {
     user: User;
+}
+interface GameUserBetDataUser {
+    userId: number;
+    betUser2: number;
+    gameUserBetDetails: string;
+    userTelegram: string;
 }
 
 export const UserGame2Comp: React.FC<Props> = ({user}) => {
@@ -64,14 +71,14 @@ export const UserGame2Comp: React.FC<Props> = ({user}) => {
 
     const handleRemoveBet = async (gameUserBetId: number) => {
         try {
-            // const result = await removeGameUserBetRegistration({
-            //     userId: user.id,
-            //     gameUserBetId: gameUserBetId
-            // });
-            //
-            // if (result) {
-            //     console.log("Регистрация успешно удалена");
-            // }
+            const result = await removeGameUserBetRegistration({
+                userId: user.id,
+                gameUserBetId: gameUserBetId
+            });
+
+            if (result) {
+                console.log("Регистрация успешно удалена");
+            }
         } catch (error) {
             console.error("Ошибка при удалении регистрации:", error);
         }
@@ -138,7 +145,7 @@ export const UserGame2Comp: React.FC<Props> = ({user}) => {
                 <div key={bet.id} className="border border-gray-700 mt-1">
                     <Accordion type="single" collapsible>
                         <AccordionItem value={`item-${bet.id}`}>
-                            <AccordionTrigger className={user.id === bet.gameUser1Bet.id ? 'bg-gray-500' : ''}>
+                            <AccordionTrigger className={user.id === bet.gameUser1Bet.id ? 'text-red-500' : ''}>
                                 <Table>
                                     <TableBody>
                                         <TableRow>
@@ -174,25 +181,55 @@ export const UserGame2Comp: React.FC<Props> = ({user}) => {
                             </AccordionTrigger>
                             <AccordionContent>
                                 <div className="p-4">
-                                    <div className="mb-2">Description: {bet.gameUserBetDetails}</div>
-                                    <div className="mb-2">Open Bet: {bet.gameUserBetOpen ? "Open" : "Closed"}</div>
-                                    <div className="mb-2">Participants:</div>
+                                    <div className="mb-2"><span
+                                        className="text-green-500">Description: </span> {bet.gameUserBetDetails}</div>
+                                    <div className="mb-2"><span
+                                        className="text-green-500">Open Bet: </span> {bet.gameUserBetOpen ? "Open" : "Closed"}
+                                    </div>
                                     <ul>
-                                        {Array.isArray(bet.gameUserBetDataUsers2) && bet.gameUserBetDataUsers2.map((participant, index) => (
-                                            <li key={index} className="flex justify-between items-center">
-                                                <span>
-                                                    User ID: {participant.userId}, Bet: {participant.betUser2}, Details: {participant.gameUserBetDetails}, Telegram: {participant.userTelegram}
-                                                </span>
-                                                {participant.userId === user.id && (
-                                                    <button
-                                                        onClick={() => handleRemoveBet(bet.id)}
-                                                        className="ml-2 p-1 bg-red-500 text-white rounded"
-                                                    >
-                                                        Удалить
-                                                    </button>
-                                                )}
-                                            </li>
-                                        ))}
+                                        {Array.isArray(bet.gameUserBetDataUsers2) && bet.gameUserBetDataUsers2.map((participant, index) => {
+                                            // Проверяем, что participant соответствует структуре GameUserBetDataUser
+                                            const isValidParticipant = (participant: any): participant is GameUserBetDataUser => {
+                                                return typeof participant === 'object' &&
+                                                    participant !== null &&
+                                                    'userId' in participant &&
+                                                    'betUser2' in participant &&
+                                                    'gameUserBetDetails' in participant &&
+                                                    'userTelegram' in participant;
+                                            };
+
+                                            if (isValidParticipant(participant)) {
+                                                return (
+                                                    <li key={index} className="flex justify-between items-center">
+                    <span>
+
+                        {participant.betUser2}{" "}
+                        {participant.userTelegram ? (
+                            <Link
+                                className="text-blue-500 hover:text-green-300 font-bold"
+                                href={participant.userTelegram.replace(/^@/, 'https://t.me/')}
+                                target="_blank"
+                            >
+                                {participant.userTelegram}
+                            </Link>
+                        ) : (
+                            <span className="text-gray-500">Скрыто</span>
+                        )}{" "}
+                        Details: {participant.gameUserBetDetails}
+                    </span>
+                                                        {participant.userId === user.id && (
+                                                            <Button
+                                                                onClick={() => handleRemoveBet(bet.id)}
+                                                                className="text-red-500 hover:text-blue-300 bg-grey-500 hover:bg-grey-500 font-bold h-5"
+                                                            >
+                                                                Удалить
+                                                            </Button>
+                                                        )}
+                                                    </li>
+                                                );
+                                            }
+                                            return null;
+                                        })}
                                     </ul>
                                     <div>
                                         {user.id === bet.gameUser1Bet.id ? (

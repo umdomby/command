@@ -1343,8 +1343,54 @@ export async function gameUserBetRegistrations(gameData: {
     }
 }
 
-export async function removeGameUserBetRegistration(){
+type GameUserBetDataUser = {
+    userId: number;
+    betUser2: number; // Замените `any` на конкретный тип, если он известен
+    gameUserBetDetails: string; // Замените `any` на конкретный тип, если он известен
+    userTelegram: string;
+};
 
+export async function removeGameUserBetRegistration(gameData: {
+    userId: number;
+    gameUserBetId: number;
+}) {
+    try {
+        const currentBet = await prisma.gameUserBet.findUnique({
+            where: { id: gameData.gameUserBetId },
+            select: { gameUserBetDataUsers2: true }
+        });
+
+        if (!currentBet) {
+            throw new Error("Ставка не найдена");
+        }
+
+        const gameUserBetDataUsers2: GameUserBetDataUser[] = Array.isArray(currentBet.gameUserBetDataUsers2)
+            ? currentBet.gameUserBetDataUsers2
+                .filter((entry): entry is GameUserBetDataUser => {
+                    return typeof entry === 'object' &&
+                        entry !== null &&
+                        'userId' in entry &&
+                        'betUser2' in entry &&
+                        'gameUserBetDetails' in entry &&
+                        'userTelegram' in entry;
+                })
+                .map(entry => entry as GameUserBetDataUser) // Преобразуем к нужному типу
+            : [];
+
+        const updatedData = gameUserBetDataUsers2.filter(
+            (entry) => entry.userId !== gameData.userId
+        );
+
+        const updatedBet = await prisma.gameUserBet.update({
+            where: { id: gameData.gameUserBetId },
+            data: { gameUserBetDataUsers2: updatedData }
+        });
+
+        return updatedBet;
+    } catch (error) {
+        console.error("Ошибка при удалении записи пользователя:", error);
+        throw new Error("Не удалось удалить запись пользователя");
+    }
 }
 
 
