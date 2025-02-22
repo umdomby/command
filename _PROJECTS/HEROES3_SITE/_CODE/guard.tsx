@@ -40,3 +40,8 @@ export async function gameUserBetDelete(gameUserBetId: number) {
         throw new Error('Не удалось удалить ставку');
     }
 }
+
+
+const user = await prisma.user.findUnique({
+    where: {id: userId},
+});
