@@ -5,11 +5,12 @@ import { redirect } from 'next/navigation';
 import React, { Suspense } from "react";
 import Loading from "@/app/(root)/loading";
 import { getUserSession } from "@/components/lib/get-user-session";
-import {OrderP2PClosed} from "@/components/OrderP2PClosed";
+import {OrderP2PClosedA} from "@/components/OrderP2PClosedA";
 
 
 
-export default async function OrderP2PClosedPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+
+export default async function OrderP2PClosedAdminPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
     const resolvedSearchParams = await searchParams; // Await the searchParams if it's a Promise
 
     const session = await getUserSession();
@@ -25,7 +26,7 @@ export default async function OrderP2PClosedPage({ searchParams }: { searchParam
     if (!user) {
         return redirect('/not-auth');
     }
-    if (user.role === 'BANED') {
+    if (user.role === 'BANED' || user.role !== 'ADMIN') {
         return redirect('/');
     }
 
@@ -37,11 +38,9 @@ export default async function OrderP2PClosedPage({ searchParams }: { searchParam
         where: {
             OR: [
                 {
-                    orderP2PUser1: { id: user.id },
                     orderP2PStatus: { in: ['CLOSED', 'RETURN'] }
                 },
                 {
-                    orderP2PUser2: { id: user.id },
                     orderP2PStatus: { in: ['CLOSED', 'RETURN'] }
                 }
             ]
@@ -75,11 +74,9 @@ export default async function OrderP2PClosedPage({ searchParams }: { searchParam
         where: {
             OR: [
                 {
-                    orderP2PUser1: { id: user.id },
                     orderP2PStatus: { in: ['CLOSED', 'RETURN'] }
                 },
                 {
-                    orderP2PUser2: { id: user.id },
                     orderP2PStatus: { in: ['CLOSED', 'RETURN'] }
                 }
             ]
@@ -91,7 +88,7 @@ export default async function OrderP2PClosedPage({ searchParams }: { searchParam
     return (
         <Container className="w-[100%]">
             <Suspense fallback={<Loading />}>
-                <OrderP2PClosed user={user} closeOrders={closeOrders} currentPage={page} totalPages={totalPages} />
+                <OrderP2PClosedA user={user} closeOrders={closeOrders} currentPage={page} totalPages={totalPages} />
             </Suspense>
         </Container>
     );

@@ -58,7 +58,7 @@ interface Props {
     totalPages: number;
 }
 
-export const OrderP2PClosed: React.FC<Props> = ({ user, closeOrders, className, currentPage, totalPages }) => {
+export const OrderP2PClosedA: React.FC<Props> = ({ user, closeOrders, className, currentPage, totalPages }) => {
     const [orders, setcloseOrders] = useState<OrderP2PWithUser[]>(closeOrders as OrderP2PWithUser[]);
     const router = useRouter();
 
@@ -94,7 +94,7 @@ export const OrderP2PClosed: React.FC<Props> = ({ user, closeOrders, className, 
         <div className={className}>
             <div className="flex justify-between items-center m-7">
                 Points: {Math.floor(user.points * 100) / 100}
-                <h1>Closed / Return</h1>
+                <h1>Closed / Return / Admin</h1>
                 <Link href="/order-p2p">
                     <span className="text-blue-500 hover:underline">
                         P2P Order

@@ -84,6 +84,11 @@ export const Access_admin: React.FC<Props> = ({className}) => {
                                                     ADMIN P2P PENDING
                                                 </DropdownMenuRadioItem>
                                             </Link>
+                                            <Link href="/order-p2p-closed-admin">
+                                                <DropdownMenuRadioItem value="order-p2p-closed-admin" className="cursor-pointer">
+                                                    ADMIN P2P CLOSED
+                                                </DropdownMenuRadioItem>
+                                            </Link>
                                             <Link href="/transfer-points-admin">
                                                 <DropdownMenuRadioItem value="transfer-points-admin" className="cursor-pointer">
                                                     ADMIN TRANSFER
