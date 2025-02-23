@@ -21,11 +21,11 @@ export async function GET(request: Request) {
                     OR: [
                         {
                             orderP2PUser1Id: parseInt(userId),
-                            orderP2PStatus: { in: ['PENDING', 'CLOSED', 'RETURN'] }
+                            orderP2PStatus: { in: ['PENDING'] }
                         },
                         {
                             orderP2PUser2Id: parseInt(userId),
-                            orderP2PStatus: { in: ['PENDING', 'CLOSED', 'RETURN'] }
+                            orderP2PStatus: { in: ['PENDING'] }
                         }
                     ]
                 },

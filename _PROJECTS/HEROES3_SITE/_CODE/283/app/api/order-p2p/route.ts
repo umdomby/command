@@ -24,12 +24,14 @@ export async function GET(request: Request) {
                         select: {
                             id: true,
                             cardId: true,
+                            telegram : true,
                         }
                     },
                     orderP2PUser2: {
                         select: {
                             id: true,
                             cardId: true,
+                            telegram: true,
                         }
                     }
                 }

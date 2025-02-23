@@ -33,11 +33,11 @@ export default async function OrderP2PPendingPage() {
             OR: [
                 {
                     orderP2PUser1: { id: user.id },
-                    orderP2PStatus: { in: ['PENDING', 'CLOSED', 'RETURN'] }
+                    orderP2PStatus: { in: ['PENDING'] }
                 },
                 {
                     orderP2PUser2: { id: user.id },
-                    orderP2PStatus: { in: ['PENDING', 'CLOSED', 'RETURN'] }
+                    orderP2PStatus: { in: ['PENDING'] }
                 }
             ]
         },

@@ -168,33 +168,46 @@ export const OrderP2PPending: React.FC<Props> = ({ user, openOrders, className})
                     </span>
                 </Link>
             </div>
+            <Table>
+                <TableBody>
+                    <TableRow className="no-hover-bg">
+                        <TableCell className="w-[20%] text-center">Telegram</TableCell>
+
+                        <TableCell className="w-[15%] text-center">BUY/SELL</TableCell>
+                        <TableCell className="w-[10%] text-center">Points</TableCell>
+
+                        <TableCell className="w-[25%] text-center">CardID</TableCell>
+                        <TableCell className="w-[15%] text-center">State</TableCell>
+                        <TableCell className="w-[15%] text-center">Date</TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
             <Accordion className="border border-gray-300 mt-4" type="multiple">
                 {orders.map((order) => (
                     <AccordionItem key={order.id} value={order.id.toString()}>
-                        <AccordionTrigger className={order.orderP2PStatus === "PENDING" ? 'bg-gray-400' : undefined}>
+                        <AccordionTrigger className={order.orderP2PStatus === "PENDING" ? 'text-amber-500' : 'text-green-500'}>
                             <Table>
                                 <TableBody>
                                     <TableRow className="no-hover-bg">
-                                        <TableCell className="w-1/4">
+                                        <TableCell
+                                            className="w-[20%] text-center "><Link className="ml-3 text-blue-500 hover:text-green-300 font-bold"
+                                                                                   href={order.orderP2PUser1.telegram.replace(/^@/, 'https://t.me/')}
+                                                                                   target="_blank">{order.orderP2PUser1.telegram}</Link></TableCell>
+
+                                        <TableCell className="w-[15%] text-center">{order.orderP2PBuySell === 'BUY' ? 'Покупает' : 'Продаёт'} </TableCell>
+                                        <TableCell className="w-[10%] text-center">{order.orderP2PPoints} </TableCell>
+
+                                        <TableCell className="w-[25%] text-center">
                                             <p>
                                                 {order.orderP2PUser1.cardId}
                                             </p>
                                         </TableCell>
-                                        <TableCell
-                                            className="w-1/4">{order.orderP2PBuySell === 'BUY' ? 'Покупает' : 'Продаёт'} {order.orderP2PPoints} Points</TableCell>
-                                        <TableCell className="w-1/4">
-                                            {order.orderP2PStatus === "PENDING" && (
-                                                <>
-                                                    <p>Сделка ждет завершения: </p>
-                                                    <p>
-                                                        Закроется через: {formatTime(countdowns[order.id] || 0)}
-                                                    </p>
-                                                </>
-                                            )}
-                                            {order.orderP2PStatus === "CLOSED" && <p>Сделка завершена</p>}
-                                            {order.orderP2PStatus === "RETURN" && <p>Сделка не состоялась</p>}
+                                        <TableCell className="w-[15%] text-center">
+                                            <p>
+                                                {order.orderP2PStatus}
+                                            </p>
                                         </TableCell>
-                                        <TableCell className="w-1/4">
+                                        <TableCell className="w-[15%] text-center">
                                             <p>
                                                 {new Date(order.createdAt).toLocaleString()}
                                             </p>

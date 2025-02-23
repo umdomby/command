@@ -37,12 +37,14 @@ export default async function OrderP2PPage() {
                 select: {
                     id: true,
                     cardId: true,
+                    telegram : true,
                 }
             },
             orderP2PUser2: {
                 select: {
                     id: true,
                     cardId: true,
+                    telegram : true,
                 }
             }
         }
