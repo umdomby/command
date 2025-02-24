@@ -1,3 +1,4 @@
+// user-game-2-closed.tsx
 "use client";
 import React, { useState, useEffect } from 'react';
 import { GameUserBet, User, Category, Product, ProductItem, $Enums, WinGameUserBet } from '@prisma/client';
@@ -6,9 +7,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Link from "next/link";
 import { gameRatingGameUsers } from "@/app/actions";
 import GameUserBetStatus = $Enums.GameUserBetStatus;
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui";
 import RatingUserEnum = $Enums.RatingUserEnum;
+import { useRouter } from 'next/navigation';
 
 interface Props {
     user: User;
@@ -32,10 +33,13 @@ interface Props {
         createdAt: Date;
         updatedAt: Date;
     })[];
+    currentPage: number;
+    totalPages: number;
 }
 
-export const UserGame2Closed: React.FC<Props> = ({ user, gameUserBetsData }) => {
+export const UserGame2Closed: React.FC<Props> = ({ user, gameUserBetsData, currentPage, totalPages }) => {
     const [gameUserBets, setGameUserBets] = useState<Props['gameUserBetsData']>([]);
+    const router = useRouter();
 
     useEffect(() => {
         setGameUserBets(gameUserBetsData);
@@ -53,6 +57,10 @@ export const UserGame2Closed: React.FC<Props> = ({ user, gameUserBetsData }) => 
         } catch (error) {
             console.error('Ошибка при отправке рейтинга:', error);
         }
+    };
+
+    const handlePageChange = (newPage: number) => {
+        router.push(`?page=${newPage}`);
     };
 
     return (
@@ -185,6 +193,21 @@ export const UserGame2Closed: React.FC<Props> = ({ user, gameUserBetsData }) => 
                     </Accordion>
                 </div>
             ))}
+            <div className="flex justify-center mt-4">
+                <Button className="btn btn-primary mx-2 w-[100px] h-7"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage <= 1}
+                >
+                    Previous
+                </Button>
+                <span className="mx-2">Page {currentPage} of {totalPages}</span>
+                <Button className="btn btn-primary mx-2 w-[100px] h-7"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage >= totalPages}
+                >
+                    Next
+                </Button>
+            </div>
         </div>
     );
 };

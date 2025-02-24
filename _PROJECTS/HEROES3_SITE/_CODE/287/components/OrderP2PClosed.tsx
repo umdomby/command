@@ -202,13 +202,15 @@ export const OrderP2PClosed: React.FC<Props> = ({ user, closeOrders, className, 
                 ))}
             </Accordion>
             <div className="pagination-buttons flex justify-center mt-6">
-                <Button onClick={handlePreviousPage} disabled={currentPage === 1}>
+                <Button className="btn btn-primary mx-2 w-[100px] h-7"
+                    onClick={handlePreviousPage} disabled={currentPage === 1}>
                     Previous
                 </Button>
                 <span className="mx-3 text-lg font-semibold">
                     Page {currentPage} of {totalPages}
                 </span>
-                <Button onClick={handleNextPage} disabled={currentPage >= totalPages}>
+                <Button className="btn btn-primary mx-2 w-[100px] h-7"
+                    onClick={handleNextPage} disabled={currentPage >= totalPages}>
                     Next
                 </Button>
             </div>

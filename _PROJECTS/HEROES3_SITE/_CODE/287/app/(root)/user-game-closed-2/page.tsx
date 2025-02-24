@@ -1,3 +1,4 @@
+// page.tsx
 "use server";
 
 import { prisma } from '@/prisma/prisma-client';
@@ -6,13 +7,15 @@ import { getUserSession } from "@/components/lib/get-user-session";
 import { Container } from '@/components/container';
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import {UserGame2Closed} from "@/components/user-game-2-closed";
+import { UserGame2Closed } from "@/components/user-game-2-closed";
 
-export default async function UserGameClosed2Page() {
+export default async function UserGameClosed2Page({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+    const resolvedSearchParams = await searchParams; // Await the searchParams if it's a Promise
+
     const session = await getUserSession();
 
     if (!session) {
-        redirect('/not-auth');
+        return redirect('/not-auth');
     }
 
     const user = await prisma.user.findFirst({ where: { id: Number(session?.id) } });
@@ -22,7 +25,6 @@ export default async function UserGameClosed2Page() {
     }
     const player = await prisma.player.findFirst({ where: { userId: Number(session?.id) } });
 
-    // Проверяем, существует ли объект player
     if (!player) {
         return (
             <div className="text-center">
@@ -40,11 +42,14 @@ export default async function UserGameClosed2Page() {
         );
     }
 
+    const page = parseInt(resolvedSearchParams.page ?? '1', 10);
+    const betsPerPage = 100;
+    const skip = (page - 1) * betsPerPage;
 
     const gameUserBetsData = await prisma.gameUserBet.findMany({
         where: {
             statusUserBet: {
-                in: ['CLOSED'], // Фильтрация по статусу
+                in: ['CLOSED'],
             },
         },
         include: {
@@ -55,15 +60,29 @@ export default async function UserGameClosed2Page() {
             productItem: true,
         },
         orderBy: {
-            createdAt: 'desc', // Sort by createdAt in descending order
+            createdAt: 'desc',
+        },
+        skip: skip,
+        take: betsPerPage,
+    });
+
+    const totalBets = await prisma.gameUserBet.count({
+        where: {
+            statusUserBet: {
+                in: ['CLOSED'],
+            },
         },
     });
+
+    const totalPages = Math.ceil(totalBets / betsPerPage);
 
     return (
         <Container className="flex flex-col my-10 w-[96%]">
             <UserGame2Closed
-                gameUserBetsData = {gameUserBetsData}
+                gameUserBetsData={gameUserBetsData}
                 user={user}
+                currentPage={page}
+                totalPages={totalPages}
             />
         </Container>
     );
