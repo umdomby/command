@@ -84,9 +84,12 @@ SELECT setval(pg_get_serial_sequence('"Bet3"', 'id'), coalesce(max(id)+1, 1), fa
 SELECT setval(pg_get_serial_sequence('"BetParticipant3"', 'id'), coalesce(max(id)+1, 1), false) FROM "BetParticipant3";
 SELECT setval(pg_get_serial_sequence('"Player"', 'id'), coalesce(max(id)+1, 1), false) FROM "Player";
 
+SELECT setval(pg_get_serial_sequence('"User"', 'id'), coalesce(max(id)+1, 1), false) FROM "User";
+
 npx prisma generate
 npx prisma migrate dev --name init
 npx prisma migrate dev
+npx prisma migrate reset
 
 {Math.floor(variable * 100) / 100}
 
