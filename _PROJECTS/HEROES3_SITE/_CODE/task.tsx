@@ -1,3 +1,3 @@
 
 
-добавить еще по одному Input в Купить Points и Продать Points после
+взнос: {turnir.startPointsTurnir}
