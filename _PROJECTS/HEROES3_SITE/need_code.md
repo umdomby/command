@@ -91,6 +91,9 @@ npx prisma migrate dev --name init
 npx prisma migrate dev
 npx prisma migrate reset
 
+npx prisma migrate dev --name add_is_processing_field
+
+
 {Math.floor(variable * 100) / 100}
 
 function areNumbersEqual(num1: number, num2: number): boolean {
