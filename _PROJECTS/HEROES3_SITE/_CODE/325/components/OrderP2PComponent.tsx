@@ -55,6 +55,7 @@ interface CourseValuta {
     RUS: number;
     BTC: number;
     USTD: number;
+    updatedAt: Date;
 }
 
 interface Props {
@@ -586,7 +587,9 @@ export const OrderP2PComponent: React.FC<Props> = ({
                         <span className="text-yellow-500"> RUS: {exchangeRates.RUS} </span>
                         <span className="text-emerald-500"> BTC: {exchangeRates.BTC} </span>
                         <span className="text-blue-500"> USTD: {exchangeRates.USTD} </span>
+                        <span className="text-red-500"><strong>HEROES: 0.01 </strong></span>
                     </div>
+                    <div className="text-gray-400">{new Date(exchangeRates.updatedAt).toLocaleString()}</div>
                 </div>
             )}</div>
 

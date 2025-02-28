@@ -92,7 +92,7 @@ npx prisma migrate dev
 npx prisma migrate reset
 
 npx prisma migrate dev --name add_is_processing_field
-
+{new Date(exchangeRates.updatedAt).toLocaleString()}
 
 {Math.floor(variable * 100) / 100}
 
