@@ -1,0 +1,1 @@
+{parseFloat(detail.price.replace(',', '.')).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 10 })}
