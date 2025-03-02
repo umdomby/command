@@ -1,3 +1,4 @@
+type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 Основные цвета:
 text-black
