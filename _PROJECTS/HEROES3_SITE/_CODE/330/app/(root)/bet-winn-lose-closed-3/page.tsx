@@ -32,7 +32,7 @@ export default async function Bet3ClosedPage({ searchParams }: { searchParams: P
             productItem: true
         },
         orderBy: {
-            createdAt: 'asc'
+            createdAt: 'desc'
         },
         skip: skip,
         take: betsPerPage,
