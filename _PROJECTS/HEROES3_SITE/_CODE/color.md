@@ -1,4 +1,11 @@
 type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+xs: 'text-[16px]',
+sm: 'text-[22px]',
+md: 'text-[26px]',
+lg: 'text-[32px]',
+xl: 'text-[40px]',
+'2xl': 'text-[48px]',
+
 
 Основные цвета:
 text-black
