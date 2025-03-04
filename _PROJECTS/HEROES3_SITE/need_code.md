@@ -1,5 +1,5 @@
 
-особенности проекта: Next "next": "^15.1.4",  "prisma": "^6.4.0",  shadcn , zod
+framework: Next "next": "^15.1.4",  "prisma": "^6.4.0",  shadcn , zod
 import { prisma } from '@/prisma/prisma-client';
 
 "next-auth": "^4.24.11",  "zod": "^3.24.1", ui.shadcn.com 'next/form'
