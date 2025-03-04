@@ -28,6 +28,7 @@ const createBetSchema3 = z.object({
     productId: z.coerce.number().int().nullable().optional(),
     productItemId: z.coerce.number().int().nullable().optional(),
     turnirBetId: z.coerce.number().int().nullable().optional(),
+    description: z.string().optional(),
 });
 
 interface Props {
@@ -123,7 +124,7 @@ export const CreateBetForm3: React.FC<Props> = ({ user, categories, products, pr
                             <FormItem>
                                 <FormLabel>Player 1</FormLabel>
                                 <FormControl>
-                                    <select {...field}>
+                                    <select {...field} value={field.value ?? ""}>
                                         {players.map((player) => (
                                             <option key={player.id} value={player.id}>{player.name}</option>
                                         ))}
@@ -142,7 +143,7 @@ export const CreateBetForm3: React.FC<Props> = ({ user, categories, products, pr
                             <FormItem>
                                 <FormLabel>Player 2</FormLabel>
                                 <FormControl>
-                                    <select {...field}>
+                                    <select {...field} value={field.value ?? ""}>
                                         {players.map((player) => (
                                             <option key={player.id} value={player.id}>{player.name}</option>
                                         ))}
@@ -161,7 +162,7 @@ export const CreateBetForm3: React.FC<Props> = ({ user, categories, products, pr
                             <FormItem>
                                 <FormLabel>Player 3</FormLabel>
                                 <FormControl>
-                                    <select {...field}>
+                                    <select {...field} value={field.value ?? ""}>
                                         {players.map((player) => (
                                             <option key={player.id} value={player.id}>{player.name}</option>
                                         ))}
@@ -258,7 +259,7 @@ export const CreateBetForm3: React.FC<Props> = ({ user, categories, products, pr
                             <FormItem>
                                 <FormLabel>Map</FormLabel>
                                 <FormControl>
-                                    <select {...field}>
+                                    <select {...field} value={field.value ?? ""}>
                                         <option value="">None</option> {/* Опция для выбора null */}
                                         {categories.map((category) => (
                                             <option key={category.id} value={category.id}>{category.name}</option>
@@ -278,7 +279,7 @@ export const CreateBetForm3: React.FC<Props> = ({ user, categories, products, pr
                             <FormItem>
                                 <FormLabel>Size</FormLabel>
                                 <FormControl>
-                                    <select {...field}>
+                                    <select {...field} value={field.value ?? ""}>
                                         <option value="">None</option> {/* Опция для выбора null */}
                                         {products.map((product) => (
                                             <option key={product.id} value={product.id}>{product.name}</option>
@@ -298,7 +299,7 @@ export const CreateBetForm3: React.FC<Props> = ({ user, categories, products, pr
                             <FormItem>
                                 <FormLabel>Product Item</FormLabel>
                                 <FormControl>
-                                    <select {...field}>
+                                    <select {...field} value={field.value ?? ""}>
                                         <option value="">None</option> {/* Опция для выбора null */}
                                         {productItems.map((productItem) => (
                                             <option key={productItem.id} value={productItem.id}>{productItem.name}</option>
@@ -317,7 +318,7 @@ export const CreateBetForm3: React.FC<Props> = ({ user, categories, products, pr
                             <FormItem>
                                 <FormLabel>Turnir Bet</FormLabel>
                                 <FormControl>
-                                    <select {...field}>
+                                    <select {...field} value={field.value ?? ""}>
                                         <option value="">None</option> {/* Опция для выбора null */}
                                         {turnirBet.map((turnirBet) => (
                                             <option key={turnirBet.id} value={turnirBet.id}>{turnirBet.name}</option>
