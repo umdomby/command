@@ -471,7 +471,7 @@ export const HEROES_CLIENT_2: React.FC<Props> = ({className, user}) => {
                         <span className="text-lime-500">
 
                             {bet.turnirBet && (
-                                bet.turnirBet.name === 'friendly' && <span>
+                                bet.turnirBet.name !== null && <span>
                                 {bet.category &&  (
                                     <span> {bet.category.name}</span>
                                 )}

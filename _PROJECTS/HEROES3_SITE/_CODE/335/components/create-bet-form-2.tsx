@@ -50,7 +50,7 @@ export const CreateBetForm2: React.FC<Props> = ({ user, categories, products, pr
             categoryId: categories[0]?.id,
             productId: products[0]?.id,
             productItemId: productItems[0]?.id,
-            turnirBetId: turnirBet[0]?.id, // Проверка на наличие и длину массива
+            turnirBetId: turnirBet[0]?.id || undefined,
             description: 'online',
         },
     });
@@ -258,23 +258,24 @@ export const CreateBetForm2: React.FC<Props> = ({ user, categories, products, pr
 
                     {/* Поле выбора TurnirBet */}
 
-                        <FormField
-                            control={form.control}
-                            name="turnirBetId"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Turnir Bet</FormLabel>
-                                    <FormControl>
-                                        <select {...field}>
-                                            {turnirBet.map((turnirBet) => (
-                                                <option key={turnirBet.id} value={turnirBet.id}>{turnirBet.name}</option>
-                                            ))}
-                                        </select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                    <FormField
+                        control={form.control}
+                        name="turnirBetId"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Turnir Bet</FormLabel>
+                                <FormControl>
+                                    <select {...field}>
+                                        <option value="">None</option> {/* Опция для выбора null */}
+                                        {turnirBet.map((turnirBet) => (
+                                            <option key={turnirBet.id} value={turnirBet.id}>{turnirBet.name}</option>
+                                        ))}
+                                    </select>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
 
 
                     {/* Поле для описания */}

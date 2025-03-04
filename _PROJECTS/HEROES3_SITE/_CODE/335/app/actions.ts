@@ -1787,7 +1787,7 @@ export async function clientCreateBet(formData: any) {
                 totalBetPlayer2: 0, // Инициализируем сумму ставок на игрока 2
                 margin: 0, // Инициализируем общую маржу
                 description: formData.description,
-                turnirBetId: formData.turnirBetId,
+                turnirBetId: formData.turnirBetId || null,
             },
         });
 
@@ -2002,7 +2002,7 @@ export async function closeBet(betId: number, winnerId: number) {
                     categoryId: updatedBet.categoryId,
                     productId: updatedBet.productId,
                     productItemId: updatedBet.productItemId,
-                    turnirBetId: updatedBet.turnirBetId,
+                    turnirBetId: updatedBet.turnirBetId || null,
                     winnerId: updatedBet.winnerId,
                     margin: 0, // Инициализируем маржу
                     createdAt: updatedBet.createdAt,
@@ -2226,7 +2226,7 @@ export async function closeBetDraw(betId: number) {
                     categoryId: updatedBet.categoryId,
                     productId: updatedBet.productId,
                     productItemId: updatedBet.productItemId,
-                    turnirBetId: updatedBet.turnirBetId,
+                    turnirBetId: updatedBet.turnirBetId || null,
                     winnerId: null,
                     margin: 0,
                     createdAt: updatedBet.createdAt,
