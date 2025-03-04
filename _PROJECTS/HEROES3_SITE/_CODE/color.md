@@ -21,6 +21,29 @@ text-zinc
 text-neutral
 text-stone
 
+        <span
+            className={`absolute top-0 left-1 transform -translate-x-1 -translate-y-1 text-xs p-1 rounded shadow ${
+                bet?.description === 'online' ? 'text-green-500' : 'text-red-500'
+            }`}
+        >
+        № {bet.id}-4
+            {" "}{bet?.description}
+            <span className="text-amber-500">
+            {bet.category && (
+                <span> {bet.category.name}</span>
+            )}
+                {bet.product && (
+                    <span> {bet.product.name}</span>
+                )}
+                {bet.productItem && (
+                    <span> {bet.productItem.name}</span>
+                )}
+        </span>
+          </span>
+        <span className="text-green-600 absolute right-1 transform -translate-y-12 text-xs">
+            {new Date(bet.createdAt).toLocaleString()}
+        </span>
+
 
 Цветовые варианты:
 text-red-500
