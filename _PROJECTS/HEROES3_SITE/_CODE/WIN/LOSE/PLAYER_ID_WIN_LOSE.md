@@ -7,7 +7,7 @@
         "city": "Башня",
         "gold": -6000,
         "security": "Ангел",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -18,7 +18,7 @@
         "city": "Фабрика",
         "gold": 6000,
         "security": "Зелёный Дракон",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=c8SDfh3YZLM&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=2&pp=iAQB"
     },
     {
@@ -29,7 +29,7 @@
         "city": "Сопряжение",
         "gold": 500,
         "security": "Аспид",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=c8SDfh3YZLM&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=2&pp=iAQB"
     },
     {
@@ -40,7 +40,7 @@
         "city": "Крепость",
         "gold": -500,
         "security": "Багровый Коатль",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -51,7 +51,7 @@
         "city": "Оплот",
         "gold": -4900,
         "security": "Огненная Птица",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=ytKOARjiu-s&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=3&pp=iAQB"
     },
     {
@@ -62,7 +62,7 @@
         "city": "Сопряжение",
         "gold": 4900,
         "security": "Дредноут",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=ytKOARjiu-s&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=3&pp=iAQB"
     },
     {
@@ -73,7 +73,7 @@
         "city": "Замок",
         "gold": -2900,
         "security": "Гидра",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -84,7 +84,7 @@
         "city": "Фабрика",
         "gold": 2900,
         "security": "Призрачный Дракон",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -95,7 +95,7 @@
         "city": "Башня",
         "gold": -1100,
         "security": "Костяной Дракон",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=cNq6bKSqxLw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=4&pp=iAQB"
     },
     {
@@ -106,7 +106,7 @@
         "city": "Оплот",
         "gold": 1100,
         "security": "Морской Змей",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=cNq6bKSqxLw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=4&pp=iAQB"
     },
     {
@@ -117,7 +117,7 @@
         "city": "Сопряжение",
         "gold": 5800,
         "security": "Древнее Чудище",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -128,7 +128,7 @@
         "city": "Замок",
         "gold": -5800,
         "security": "-",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -139,7 +139,7 @@
         "city": "Фабрика",
         "gold": -200,
         "security": "Архидьявол",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=JzdCWFbRVos&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=5&pp=iAQB"
     },
     {
@@ -150,7 +150,7 @@
         "city": "Причал",
         "gold": 200,
         "security": "Титан",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=JzdCWFbRVos&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=5&pp=iAQB"
     },
     {
@@ -161,7 +161,7 @@
         "city": "Фабрика",
         "gold": 2300,
         "security": "Огненная Птица",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -172,7 +172,7 @@
         "city": "Причал",
         "gold": -2300,
         "security": "Багровый Коатль",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -183,7 +183,7 @@
         "city": "Башня",
         "gold": -5200,
         "security": "-",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
     },
     {
@@ -194,7 +194,7 @@
         "city": "Оплот",
         "gold": 5200,
         "security": "-",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
     },
     {
@@ -205,7 +205,7 @@
         "city": "Оплот",
         "gold": 4500,
         "security": "Зелёный Дракон",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -216,7 +216,7 @@
         "city": "Башня",
         "gold": -4500,
         "security": "Чудище",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -227,7 +227,7 @@
         "city": "Крепость",
         "gold": -6900,
         "security": "Дьявол",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
     },
     {
@@ -238,7 +238,7 @@
         "city": "Фабрика",
         "gold": 6900,
         "security": "Красный Дракон",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
     },
     {
@@ -249,7 +249,7 @@
         "city": "Темница",
         "gold": -1100,
         "security": "Архангел",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -260,7 +260,7 @@
         "city": "Башня",
         "gold": 1100,
         "security": "Титан",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -271,7 +271,7 @@
         "city": "Цитадель",
         "gold": 2100,
         "security": "Гидры Хаоса",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
     },
     {
@@ -282,7 +282,7 @@
         "city": "Крепость",
         "gold": -2100,
         "security": "-",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
     },
     {
@@ -293,7 +293,7 @@
         "city": "Инферно",
         "gold": 7000,
         "security": "Феникс",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -304,7 +304,7 @@
         "city": "Крепость",
         "gold": -7000,
         "security": "Огненная Птица",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -315,7 +315,7 @@
         "city": "Сопряжение",
         "gold": 200,
         "security": "​",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=fsoOdtX_Eu0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=9&pp=iAQB"
     },
     {
@@ -326,7 +326,7 @@
         "city": "Оплот",
         "gold": -200,
         "security": "​",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=fsoOdtX_Eu0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=9&pp=iAQB"
     },
     {
@@ -337,7 +337,7 @@
         "city": "Крепость",
         "gold": -3100,
         "security": "Гигант",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -348,7 +348,7 @@
         "city": "Инферно",
         "gold": 3100,
         "security": "Аспид",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -359,7 +359,7 @@
         "city": "Фабрика",
         "gold": -400,
         "security": "Ангел",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=LwyeXZSMSTA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=10"
     },
     {
@@ -370,7 +370,7 @@
         "city": "Замок",
         "gold": 400,
         "security": "Аспид",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=LwyeXZSMSTA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=10"
     },
     {
@@ -381,7 +381,7 @@
         "city": "Некрополис",
         "gold": 2800,
         "security": "Призрачный Дракон",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -392,7 +392,7 @@
         "city": "Цитадель",
         "gold": -2800,
         "security": "Зелёный Дракон",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -403,7 +403,7 @@
         "city": "Фабрика",
         "gold": 100,
         "security": "Зелёный Дракон",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=Gov1dWc765o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=11&pp=iAQB"
     },
     {
@@ -414,7 +414,7 @@
         "city": "Башня",
         "gold": -100,
         "security": "Древнее Чудище",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=Gov1dWc765o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=11&pp=iAQB"
     },
 
@@ -428,7 +428,7 @@
         "city": "Фабрика",
         "gold": 2200,
         "security": "Архангел",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -439,7 +439,7 @@
         "city": "Башня",
         "gold": -2200,
         "security": "Зелёный Дракон",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -450,7 +450,7 @@
         "city": "Замок",
         "gold": -6700,
         "security": "Аспид",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=lf7BTdOhveg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=12&pp=iAQB"
     },
     {
@@ -461,7 +461,7 @@
         "city": "Башня",
         "gold": 6700,
         "security": "Джаггернаут",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=lf7BTdOhveg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=12&pp=iAQB"
     },
     {
@@ -472,7 +472,7 @@
         "city": "Башня",
         "gold": 5100,
         "security": "Гидра",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -483,7 +483,7 @@
         "city": "Фабрика",
         "gold": -5100,
         "security": "Феникс",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -494,7 +494,7 @@
         "city": "Цитадель",
         "gold": -900,
         "security": "​",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=6NL0PTeZ620&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=13&pp=iAQB"
     },
     {
@@ -505,7 +505,7 @@
         "city": "Башня",
         "gold": 900,
         "security": "​",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=6NL0PTeZ620&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=13&pp=iAQB"
     },
     {
@@ -516,7 +516,7 @@
         "city": "Фабрика",
         "gold": -6000,
         "security": "Архангел",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -527,7 +527,7 @@
         "city": "Башня",
         "gold": 6000,
         "security": "Зелёный Дракон",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -538,7 +538,7 @@
         "city": "Причал",
         "gold": -6000,
         "security": "Морской Змей",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=7l00zf_fuN0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=14&pp=iAQB"
     },
     {
@@ -549,7 +549,7 @@
         "city": "Фабрика",
         "gold": 6000,
         "security": "Чёрный Дракон",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=7l00zf_fuN0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=14&pp=iAQB"
     },
     {
@@ -560,7 +560,7 @@
         "city": "Сопряжение",
         "gold": 1600,
         "security": "Архидьявол",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -571,7 +571,7 @@
         "city": "Оплот",
         "gold": -1600,
         "security": "Коатль",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -582,7 +582,7 @@
         "city": "Причал",
         "gold": -1600,
         "security": "Архангел",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=vKQOhgA4FoE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=15&pp=iAQB"
     },
     {
@@ -593,7 +593,7 @@
         "city": "Сопряжение",
         "gold": 1600,
         "security": "Архидьявол",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=vKQOhgA4FoE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=15&pp=iAQB"
     },
     {
@@ -604,7 +604,7 @@
         "city": "Некрополис",
         "gold": 4200,
         "security": "Гигант",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -615,7 +615,7 @@
         "city": "Причал",
         "gold": -4200,
         "security": "Костяной Дракон",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -626,7 +626,7 @@
         "city": "Оплот",
         "gold": 400,
         "security": "Гидры Хаоса",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=u-9-I_Kubqo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=16&pp=iAQB"
     },
     {
@@ -637,7 +637,7 @@
         "city": "Башня",
         "gold": -400,
         "security": "Багровый Коатль",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=u-9-I_Kubqo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=16&pp=iAQB"
     },
     {
@@ -648,7 +648,7 @@
         "city": "Крепость",
         "gold": 1100,
         "security": "Джаггернаут",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -659,7 +659,7 @@
         "city": "Оплот",
         "gold": -1100,
         "security": "Архидьявол",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -670,7 +670,7 @@
         "city": "Сопряжение",
         "gold": 2500,
         "security": "Морской Змей",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=7MUdm6r767M&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=17&pp=iAQB"
     },
     {
@@ -681,7 +681,7 @@
         "city": "Замок",
         "gold": -2500,
         "security": "Костяной Дракон",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=7MUdm6r767M&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=17&pp=iAQB"
     },
     {
@@ -692,7 +692,7 @@
         "city": "Замок",
         "gold": -2400,
         "security": "​",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -703,7 +703,7 @@
         "city": "Сопряжение",
         "gold": 2400,
         "security": "​",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -714,7 +714,7 @@
         "city": "Фабрика",
         "gold": 1600,
         "security": "​",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=Pb3G-2snw8k&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=18&pp=iAQB"
     },
     {
@@ -725,7 +725,7 @@
         "city": "Причал",
         "gold": -1600,
         "security": "​",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=Pb3G-2snw8k&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=18&pp=iAQB"
     },
     {
@@ -736,7 +736,7 @@
         "city": "​",
         "gold": 0,
         "security": "​",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -747,7 +747,7 @@
         "city": "​",
         "gold": 0,
         "security": "​",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -758,7 +758,7 @@
         "city": "Причал",
         "gold": -6900,
         "security": "Феникс",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=Yzv5cLqnLlA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=19&pp=iAQB"
     },
     {
@@ -769,7 +769,7 @@
         "city": "Фабрика",
         "gold": 6900,
         "security": "Огненная Птица",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=Yzv5cLqnLlA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=19&pp=iAQB"
     },
     {
@@ -780,7 +780,7 @@
         "city": "Фабрика",
         "gold": 100,
         "security": "Аспид",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -791,7 +791,7 @@
         "city": "Некрополис",
         "gold": -100,
         "security": "​",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -802,7 +802,7 @@
         "city": "Замок",
         "gold": 1500,
         "security": "Призрачный Дракон",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=MFNHZ1zq1iA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=20&pp=iAQB"
     },
     {
@@ -813,7 +813,7 @@
         "city": "Крепость",
         "gold": -1500,
         "security": "Зелёный Дракон",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=MFNHZ1zq1iA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=20&pp=iAQB"
     },
     {
@@ -824,7 +824,7 @@
         "city": "Замок",
         "gold": -5300,
         "security": "Чудище",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -835,7 +835,7 @@
         "city": "Причал",
         "gold": 5300,
         "security": "Багровый Коатль",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -846,7 +846,7 @@
         "city": "Замок",
         "gold": -6200,
         "security": "Чудище",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=SiPec07FDqA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=21&pp=iAQB"
     },
     {
@@ -857,7 +857,7 @@
         "city": "Цитадель",
         "gold": 6200,
         "security": "Призрачный Дракон",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=SiPec07FDqA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=21&pp=iAQB"
     },
 
@@ -871,7 +871,7 @@
         "city": "Сопряжение",
         "gold": 2100,
         "security": "Архангел",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -882,7 +882,7 @@
         "city": "Оплот",
         "gold": -2100,
         "security": "Чёрный Дракон",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -893,7 +893,7 @@
         "city": "Фабрика",
         "gold": 1300,
         "security": "Дьявол",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=sExYSRB23sY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=22&pp=iAQB"
     },
     {
@@ -904,7 +904,7 @@
         "city": "Цитадель",
         "gold": -1300,
         "security": "Титан",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=sExYSRB23sY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=22&pp=iAQB"
     },
     {
@@ -915,7 +915,7 @@
         "city": "Темница",
         "gold": 1100,
         "security": "​",
-        "win": false,
+        "win": 0,
         "link": ""
     },
     {
@@ -926,7 +926,7 @@
         "city": "Сопряжение",
         "gold": -1100,
         "security": "​",
-        "win": true,
+        "win": 1,
         "link": ""
     },
     {
@@ -937,7 +937,7 @@
         "city": "Сопряжение",
         "gold": -700,
         "security": "Древнее Чудище",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=wL4MXevJKzU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=23&pp=iAQB"
     },
     {
@@ -948,7 +948,7 @@
         "city": "Фабрика",
         "gold": 700,
         "security": "Чудище",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=wL4MXevJKzU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=23&pp=iAQB"
     },
     {
@@ -959,7 +959,7 @@
     "city": "Некрополис",
     "gold": 800,
     "security": "Дьявол",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -969,7 +969,7 @@
     "city": "Башня",
     "gold": -800,
     "security": "Волшебный Дракон",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -979,7 +979,7 @@
     "city": "Оплот",
     "gold": 1100,
     "security": "Гидра",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=uOagh98qSLQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=24&pp=iAQB"
     },
     {
@@ -990,7 +990,7 @@
     "city": "Башня",
     "gold": -1100,
     "security": "Кристальный Дракон",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=uOagh98qSLQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=24&pp=iAQB"
     },
     {
@@ -1001,7 +1001,7 @@
     "city": "Фабрика",
     "gold": -4400,
     "security": "Аспид",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1011,7 +1011,7 @@
     "city": "Причал",
     "gold": 4400,
     "security": "Джаггернаут",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1021,7 +1021,7 @@
     "city": "Фабрика",
     "gold": -5200,
     "security": "Кристальный Дракон",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=Ky5zcHmgE_I&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=25&pp=iAQB"
     },
     {
@@ -1032,7 +1032,7 @@
     "city": "Цитадель",
     "gold": 5200,
     "security": "Золотой Дракон",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=Ky5zcHmgE_I&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=25&pp=iAQB"
     },
     {
@@ -1043,7 +1043,7 @@
     "city": "Башня",
     "gold": -6000,
     "security": "",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1053,7 +1053,7 @@
     "city": "Некрополис",
     "gold": 6000,
     "security": "",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1063,7 +1063,7 @@
     "city": "Цитадель",
     "gold": 1500,
     "security": "Дьявол",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=ZLrhtJKIjOk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=26&pp=iAQB"
     },
     {
@@ -1074,7 +1074,7 @@
     "city": "Оплот",
     "gold": -1500,
     "security": "Коатль",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=ZLrhtJKIjOk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=26&pp=iAQB"
     },
     {
@@ -1085,7 +1085,7 @@
     "city": "Фабрика",
     "gold": 2600,
     "security": "",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1095,7 +1095,7 @@
     "city": "Башня",
     "gold": -2600,
     "security": "",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1105,7 +1105,7 @@
     "city": "Фабрика",
     "gold": 200,
     "security": "Багровый Коатль",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=b5ZC0xc7x8o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=27&pp=iAQB"
     },
     {
@@ -1116,7 +1116,7 @@
     "city": "Инферно",
     "gold": -200,
     "security": "Джаггернаут",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=b5ZC0xc7x8o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=27&pp=iAQB"
     },
     {
@@ -1127,7 +1127,7 @@
     "city": "Сопряжение",
     "gold": 100,
     "security": "Феникс",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1137,7 +1137,7 @@
     "city": "Башня",
     "gold": -100,
     "security": "Джаггернаут",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1147,7 +1147,7 @@
     "city": "Темница",
     "gold": 4700,
     "security": "Кристальный Дракон",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=bZ9Rj_u-3kE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=28&pp=iAQB"
     },
     {
@@ -1158,7 +1158,7 @@
     "city": "Некрополис",
     "gold": -4700,
     "security": "Кристальный Дракон",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=bZ9Rj_u-3kE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=28&pp=iAQB"
     },
     {
@@ -1169,7 +1169,7 @@
     "city": "Фабрика",
     "gold": 6200,
     "security": "Золотой Дракон",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1179,7 +1179,7 @@
     "city": "Некрополис",
     "gold": -6200,
     "security": "Ржавый Дракон",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1189,7 +1189,7 @@
     "city": "Инферно",
     "gold": 4900,
     "security": "Зелёный Дракон",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=CyCLJ9pltiI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=29&pp=iAQB"
     },
     {
@@ -1200,7 +1200,7 @@
     "city": "Оплот",
     "gold": -4900,
     "security": "",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=CyCLJ9pltiI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=29&pp=iAQB"
     },
     {
@@ -1211,7 +1211,7 @@
     "city": "Крепость",
     "gold": -1300,
     "security": "Титан",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1221,7 +1221,7 @@
     "city": "Некрополис",
     "gold": 1300,
     "security": "Огненная Птица",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1231,7 +1231,7 @@
     "city": "Крепость",
     "gold": -500,
     "security": "Зелёный Дракон",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=D4x0PjnsKKk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=30&pp=iAQB"
     },
     {
@@ -1242,7 +1242,7 @@
     "city": "Фабрика",
     "gold": 500,
     "security": "Гигант",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=D4x0PjnsKKk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=30&pp=iAQB"
     },
     {
@@ -1253,7 +1253,7 @@
     "city": "Сопряжение",
     "gold": 5900,
     "security": "Архидьявол",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1263,7 +1263,7 @@
     "city": "Фабрика",
     "gold": -5900,
     "security": "Ангел",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1273,7 +1273,7 @@
     "city": "Сопряжение",
     "gold": 1900,
     "security": "Дьявол",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=ZrVBO5mEQcU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=31&pp=iAQB"
     },
     {
@@ -1284,7 +1284,7 @@
     "city": "Некрополис",
     "gold": -1900,
     "security": "Морской Змей",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=ZrVBO5mEQcU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=31&pp=iAQB"
     },
     {
@@ -1295,7 +1295,7 @@
     "city": "",
     "gold": 0,
     "security": "",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1305,7 +1305,7 @@
     "city": "",
     "gold": 0,
     "security": "",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1315,7 +1315,7 @@
     "city": "Причал",
     "gold": 600,
     "security": "Призрачный Дракон",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=QgCAE4QKxWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=32&pp=iAQB"
     },
     {
@@ -1326,7 +1326,7 @@
     "city": "Оплот",
     "gold": -600,
     "security": "Королева Нага",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=QgCAE4QKxWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=32&pp=iAQB"
     },
     {
@@ -1337,7 +1337,7 @@
     "city": "Причал",
     "gold": -100,
     "security": "Золотой Дракон",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1347,7 +1347,7 @@
     "city": "Замок",
     "gold": 100,
     "security": "Ангел",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1357,7 +1357,7 @@
     "city": "Сопряжение",
     "gold": 1300,
     "security": "Архидьявол",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=aSGkbl3Y4C8&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=33&pp=iAQB"
     },
     {
@@ -1368,7 +1368,7 @@
     "city": "Фабрика",
     "gold": -1300,
     "security": "Морской Змей",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=aSGkbl3Y4C8&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=33&pp=iAQB"
     },
     {
@@ -1379,7 +1379,7 @@
     "city": "Оплот",
     "gold": -2400,
     "security": "Королева Нага",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1389,7 +1389,7 @@
     "city": "Некрополис",
     "gold": 2400,
     "security": "Гидры Хаоса",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1399,7 +1399,7 @@
     "city": "Причал",
     "gold": -1400,
     "security": "Золотой Дракон",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=5uQO9JpJjsg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=34&pp=iAQB"
     },
     {
@@ -1410,7 +1410,7 @@
     "city": "Сопряжение",
     "gold": 1400,
     "security": "Морской Змей",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=5uQO9JpJjsg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=34&pp=iAQB"
     },
     {
@@ -1421,7 +1421,7 @@
     "city": "Фабрика",
     "gold": 1900,
     "security": "Ангел",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1431,7 +1431,7 @@
     "city": "Цитадель",
     "gold": -1900,
     "security": "Кристальный Дракон",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1441,7 +1441,7 @@
     "city": "Причал",
     "gold": -1000,
     "security": "Кристальный Дракон",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=SohZu170FD4&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=35&pp=iAQB"
     },
     {
@@ -1452,7 +1452,7 @@
     "city": "Оплот",
     "gold": 1000,
     "security": "Королева Нага",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=SohZu170FD4&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=35&pp=iAQB"
     },
     {
@@ -1463,7 +1463,7 @@
     "city": "Крепость",
     "gold": 100,
     "security": "Дьявол",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1473,7 +1473,7 @@
     "city": "Замок",
     "gold": -100,
     "security": "Королева Нага",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1483,7 +1483,7 @@
     "city": "Замок",
     "gold": -6500,
     "security": "Волшебный Дракон",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=uUDgFAOL5uI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=36&pp=iAQB"
     },
     {
@@ -1494,7 +1494,7 @@
     "city": "Оплот",
     "gold": 6500,
     "security": "Огненная Птица",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=uUDgFAOL5uI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=36&pp=iAQB"
     },
     {
@@ -1505,7 +1505,7 @@
     "city": "Башня",
     "gold": -1400,
     "security": "Феникс",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "Heroes Cup",
@@ -1515,7 +1515,7 @@
     "city": "Крепость",
     "gold": 1400,
     "security": "Лазурный Дракон",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1525,7 +1525,7 @@
     "city": "Оплот",
     "gold": -900,
     "security": "Гидра",
-    "win": false,
+    "win": 0,
     "link": "https://www.youtube.com/watch?v=h_8WcWKossQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=37&pp=iAQB"
     },
     {
@@ -1536,7 +1536,7 @@
     "city": "Цитадель",
     "gold": 900,
     "security": "Ржавый Дракон",
-    "win": true,
+    "win": 1,
     "link": "https://www.youtube.com/watch?v=h_8WcWKossQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=37&pp=iAQB"
     },
     {
@@ -1547,7 +1547,7 @@
     "city": "Крепость",
     "gold": 300,
     "security": "Чёрный Дракон",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "Heroes Cup",
@@ -1557,7 +1557,7 @@
     "city": "Башня",
     "gold": -300,
     "security": "Чудище",
-    "win": true
+    "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1567,7 +1567,7 @@
         "city": "Фабрика",
         "gold": 500,
         "security": "Чёрный Дракон",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=q_g6vT2mL5w&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=38&pp=iAQB"
     },
     {
@@ -1578,7 +1578,7 @@
         "city": "Крепость",
         "gold": -500,
         "security": "Архангел",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=q_g6vT2mL5w&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=38&pp=iAQB"
     },
     {
@@ -1589,7 +1589,7 @@
         "city": "Крепость",
         "gold": -7000,
         "security": "",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1599,7 +1599,7 @@
         "city": "Фабрика",
         "gold": 7000,
         "security": "",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1609,7 +1609,7 @@
         "city": "Фабрика",
         "gold": -900,
         "security": "Коатль",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=an2jYYQn1BQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=39&pp=iAQB"
     },
     {
@@ -1620,7 +1620,7 @@
         "city": "Цитадель",
         "gold": 900,
         "security": "Древнее Чудище",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=an2jYYQn1BQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=39&pp=iAQB"
     },
     {
@@ -1631,7 +1631,7 @@
         "city": "Причал",
         "gold": -500,
         "security": "",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1641,7 +1641,7 @@
         "city": "Фабрика",
         "gold": 500,
         "security": "",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1651,7 +1651,7 @@
         "city": "Башня",
         "gold": 1000,
         "security": "Аспид",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=EIg4JFdQSKE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=40&pp=iAQB"
     },
     {
@@ -1662,7 +1662,7 @@
         "city": "Причал",
         "gold": -1000,
         "security": "Феникс",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=EIg4JFdQSKE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=40&pp=iAQB"
     },
     {
@@ -1673,7 +1673,7 @@
         "city": "Фабрика",
         "gold": 600,
         "security": "Багровый Коатль",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1683,7 +1683,7 @@
         "city": "Причал",
         "gold": -600,
         "security": "Красный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1693,7 +1693,7 @@
         "city": "Башня",
         "gold": 7000,
         "security": "Нага",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=1U_Q4OGWucg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=41&pp=iAQB"
     },
     {
@@ -1704,7 +1704,7 @@
         "city": "Некрополис",
         "gold": -7000,
         "security": "Песчаный Червь",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=1U_Q4OGWucg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=41&pp=iAQB"
     },
     {
@@ -1715,7 +1715,7 @@
         "city": "Оплот",
         "gold": 1400,
         "security": "Древнее Чудище",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1725,7 +1725,7 @@
         "city": "Цитадель",
         "gold": -1400,
         "security": "Кристальный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1735,7 +1735,7 @@
         "city": "Темница",
         "gold": -7200,
         "security": "Властитель Пропасти",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=jhkFMGVdo58&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=42&pp=iAQB"
     },
     {
@@ -1746,7 +1746,7 @@
         "city": "Крепость",
         "gold": 7200,
         "security": "Титан",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=jhkFMGVdo58&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=42&pp=iAQB"
     },
     {
@@ -1757,7 +1757,7 @@
         "city": "Инферно",
         "gold": 400,
         "security": "Чудище",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1767,7 +1767,7 @@
         "city": "Крепость",
         "gold": -400,
         "security": "Кристальный Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1777,7 +1777,7 @@
         "city": "Некрополис",
         "gold": -7900,
         "security": "Виверн",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=P8SnGYs4QVU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=43&pp=iAQB"
     },
     {
@@ -1788,7 +1788,7 @@
         "city": "Инферно",
         "gold": 7900,
         "security": "Олгой-Хорхой",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=P8SnGYs4QVU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=43&pp=iAQB"
     },
     {
@@ -1799,7 +1799,7 @@
         "city": "Сопряжение",
         "gold": -1000,
         "security": "Архидьявол",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1809,7 +1809,7 @@
         "city": "Фабрика",
         "gold": 1000,
         "security": "Огненная Птица",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1819,7 +1819,7 @@
         "city": "Фабрика",
         "gold": -4000,
         "security": "Психический Элементаль",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1829,7 +1829,7 @@
         "city": "Фабрика",
         "gold": 4000,
         "security": "Психический Элементаль",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1839,7 +1839,7 @@
         "city": "Сопряжение",
         "gold": -700,
         "security": "Королева Нага",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=bhNnxZdV8cg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=44&pp=iAQB"
     },
     {
@@ -1850,7 +1850,7 @@
         "city": "Оплот",
         "gold": 700,
         "security": "Властитель Пропасти",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=bhNnxZdV8cg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=44&pp=iAQB"
     },
     {
@@ -1861,7 +1861,7 @@
         "city": "Причал",
         "gold": -6600,
         "security": "Дьявол",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1871,7 +1871,7 @@
         "city": "Некрополис",
         "gold": 6600,
         "security": "Золотой Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1881,7 +1881,7 @@
         "city": "Фабрика",
         "gold": -4100,
         "security": "Воинственный Единорог",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1891,7 +1891,7 @@
         "city": "Фабрика",
         "gold": 4100,
         "security": "Воинственный Единорог",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1901,7 +1901,7 @@
         "city": "Фабрика",
         "gold": 4200,
         "security": "Чародей",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=lbpCedCMksE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=45&pp=iAQB"
     },
     {
@@ -1912,7 +1912,7 @@
         "city": "Инферно",
         "gold": -4200,
         "security": "Королева Нага",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=lbpCedCMksE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=45&pp=iAQB"
     },
     {
@@ -1923,7 +1923,7 @@
         "city": "Темница",
         "gold": 4400,
         "security": "Гидры Хаоса",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1933,7 +1933,7 @@
         "city": "Причал",
         "gold": -4400,
         "security": "Гидры Хаоса",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1943,7 +1943,7 @@
         "city": "Фабрика",
         "gold": 4300,
         "security": "Костяной Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -1953,7 +1953,7 @@
         "city": "Фабрика",
         "gold": -4300,
         "security": "Костяной Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1963,7 +1963,7 @@
         "city": "Оплот",
         "gold": 2200,
         "security": "Черный Рыцарь",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=mJPlYkNAXlU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=46&pp=iAQB"
     },
     {
@@ -1974,7 +1974,7 @@
         "city": "Некрополис",
         "gold": -2200,
         "security": "Золотой Дракон",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=mJPlYkNAXlU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=46&pp=iAQB"
     },
     {
@@ -1985,7 +1985,7 @@
         "city": "Сопряжение",
         "gold": -2800,
         "security": "Королева Нага",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -1995,7 +1995,7 @@
         "city": "Башня",
         "gold": 2800,
         "security": "Королева Нага",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2005,7 +2005,7 @@
         "city": "Оплот",
         "gold": -4900,
         "security": "Гигант",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=7CWDjAlxUeo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=47&pp=iAQB"
     },
     {
@@ -2016,7 +2016,7 @@
         "city": "Замок",
         "gold": 4900,
         "security": "Единорог",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=7CWDjAlxUeo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=47&pp=iAQB"
     },
     {
@@ -2027,7 +2027,7 @@
         "city": "Замок",
         "gold": 600,
         "security": "Морской Змей",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2037,7 +2037,7 @@
         "city": "Инферно",
         "gold": -600,
         "security": "Лазурный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2047,7 +2047,7 @@
         "city": "Некрополис",
         "gold": -8300,
         "security": "Чародей",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2057,7 +2057,7 @@
         "city": "Цитадель",
         "gold": 8300,
         "security": "Чародей",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2067,7 +2067,7 @@
         "city": "Крепость",
         "gold": -7800,
         "security": "Гидра",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=lfOFL-8b6Ok&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=48&pp=iAQB"
     },
     {
@@ -2078,7 +2078,7 @@
         "city": "Замок",
         "gold": 7800,
         "security": "Дредноут",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=lfOFL-8b6Ok&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=48&pp=iAQB"
     },
     {
@@ -2089,7 +2089,7 @@
         "city": "Фабрика",
         "gold": -3900,
         "security": "Ржавый Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2099,7 +2099,7 @@
         "city": "Фабрика",
         "gold": 3900,
         "security": "Ржавый Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2109,7 +2109,7 @@
         "city": "Сопряжение",
         "gold": -4500,
         "security": "Кристальный Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2119,7 +2119,7 @@
         "city": "Некрополис",
         "gold": 4500,
         "security": "Феникс",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2129,7 +2129,7 @@
         "city": "Фабрика",
         "gold": 6600,
         "security": "Древнее Чудище",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2139,7 +2139,7 @@
         "city": "Оплот",
         "gold": -6600,
         "security": "Феникс",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2149,7 +2149,7 @@
         "city": "Инферно",
         "gold": -1300,
         "security": "Виверн",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=BL056VcZsCo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=50&pp=iAQB"
     },
     {
@@ -2160,7 +2160,7 @@
         "city": "Причал",
         "gold": 1300,
         "security": "Феникс",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=BL056VcZsCo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=50&pp=iAQB"
     },
     {
@@ -2171,7 +2171,7 @@
         "city": "Темница",
         "gold": -2600,
         "security": "Зелёный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2181,7 +2181,7 @@
         "city": "Причал",
         "gold": 2600,
         "security": "Дредноут",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2191,7 +2191,7 @@
         "city": "Фабрика",
         "gold": -4500,
         "security": "Скорпикора",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2201,7 +2201,7 @@
         "city": "Фабрика",
         "gold": 4500,
         "security": "Скорпикора",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2211,7 +2211,7 @@
         "city": "Оплот",
         "gold": 5000,
         "security": "Гидры Хаоса",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=UUIEYytXg7Y&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=51&pp=iAQB"
     },
     {
@@ -2222,7 +2222,7 @@
         "city": "Некрополис",
         "gold": -5000,
         "security": "Психический Элементаль",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=UUIEYytXg7Y&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=51&pp=iAQB"
     },
     {
@@ -2233,7 +2233,7 @@
         "city": "Темница",
         "gold": -500,
         "security": "",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2243,7 +2243,7 @@
         "city": "Сопряжение",
         "gold": 500,
         "security": "Феникс",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2253,7 +2253,7 @@
         "city": "Фабрика",
         "gold": -4100,
         "security": "Султан Ифрит",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2263,7 +2263,7 @@
         "city": "Фабрика",
         "gold": 4100,
         "security": "Султан Ифрит",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2273,7 +2273,7 @@
         "city": "Башня",
         "gold": 100,
         "security": "Древнее Чудище",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=GgzHMM2agFU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=52&pp=iAQB"
     },
     {
@@ -2284,7 +2284,7 @@
         "city": "Некрополис",
         "gold": -100,
         "security": "",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=GgzHMM2agFU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=52&pp=iAQB"
     },
     {
@@ -2295,7 +2295,7 @@
         "city": "Башня",
         "gold": -2400,
         "security": "Гигант",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2305,7 +2305,7 @@
         "city": "Темница",
         "gold": 2400,
         "security": "Чёрный Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2315,7 +2315,7 @@
         "city": "Цитадель",
         "gold": 5100,
         "security": "Дьявол",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=EkHZmT_NnGY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=53&pp=iAQB"
     },
     {
@@ -2326,7 +2326,7 @@
         "city": "Некрополис",
         "gold": -5100,
         "security": "Циклоп",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=EkHZmT_NnGY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=53&pp=iAQB"
     },
     {
@@ -2337,7 +2337,7 @@
         "city": "Темница",
         "gold": 100,
         "security": "",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2347,7 +2347,7 @@
         "city": "Причал",
         "gold": -100,
         "security": "",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2357,7 +2357,7 @@
         "city": "Фабрика",
         "gold": -3900,
         "security": "Султан Ифрит",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2367,7 +2367,7 @@
         "city": "Фабрика",
         "gold": 3900,
         "security": "Султан Ифрит",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2377,7 +2377,7 @@
         "city": "Замок",
         "gold": -700,
         "security": "Джаггернаут",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=nOuOP70tSjg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=54&pp=iAQB"
     },
     {
@@ -2388,7 +2388,7 @@
         "city": "Крепость",
         "gold": 700,
         "security": "Коатль",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=nOuOP70tSjg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=54&pp=iAQB"
     },
     {
@@ -2399,7 +2399,7 @@
         "city": "Инферно",
         "gold": -900,
         "security": "Костяной Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2409,7 +2409,7 @@
         "city": "Темница",
         "gold": 900,
         "security": "Ржавый Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2419,7 +2419,7 @@
         "city": "Некрополис",
         "gold": -5000,
         "security": "Воинственный Единорог",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=9aSpm8eneWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=55&pp=iAQB"
     },
     {
@@ -2430,7 +2430,7 @@
         "city": "Фабрика",
         "gold": 5000,
         "security": "Королева Нага",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=9aSpm8eneWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=55&pp=iAQB"
     },
     {
@@ -2441,7 +2441,7 @@
         "city": "Некрополис",
         "gold": 100,
         "security": "Зелёный Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2451,7 +2451,7 @@
         "city": "Башня",
         "gold": -100,
         "security": "Призрачный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2461,7 +2461,7 @@
         "city": "Замок",
         "gold": 5700,
         "security": "Кристальный Дракон",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=rN3RXbOBnvA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=56&pp=iAQB"
     },
     {
@@ -2472,7 +2472,7 @@
         "city": "Башня",
         "gold": -5700,
         "security": "Султан Ифрит",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=rN3RXbOBnvA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=56&pp=iAQB"
     },
     {
@@ -2483,7 +2483,7 @@
         "city": "Инферно",
         "gold": 8100,
         "security": "Титан",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2493,7 +2493,7 @@
         "city": "Замок",
         "gold": -8100,
         "security": "Феникс",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2503,7 +2503,7 @@
         "city": "Фабрика",
         "gold": 4200,
         "security": "Воинственный Единорог",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2513,7 +2513,7 @@
         "city": "Фабрика",
         "gold": -4200,
         "security": "Воинственный Единорог",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2523,7 +2523,7 @@
         "city": "Сопряжение",
         "gold": 6000,
         "security": "Волшебный Дракон",
-        "win": true,
+        "win": 1,
         "link": "https://www.youtube.com/watch?v=XXV-rwZv5Tg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=57&pp=iAQB"
     },
     {
@@ -2534,7 +2534,7 @@
         "city": "Замок",
         "gold": -6000,
         "security": "Нага",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=XXV-rwZv5Tg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=57&pp=iAQB"
     },
     {
@@ -2545,7 +2545,7 @@
         "city": "Фабрика",
         "gold": 2500,
         "security": "Аспид",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup",
@@ -2555,7 +2555,7 @@
         "city": "Замок",
         "gold": -2500,
         "security": "Дредноут",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup",
@@ -2565,7 +2565,7 @@
         "city": "Фабрика",
         "gold": 100,
         "security": "Джаггернаут",
-        "win": false,
+        "win": 0,
         "link": "https://www.youtube.com/watch?v=x9MAaDkiEc0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=58&pp=iAQB"
     },
 {
@@ -2576,7 +2576,7 @@
 "city": "Замок",
 "gold": -100,
 "security": "Ржавый Дракон",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=x9MAaDkiEc0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=58&pp=iAQB"
 },
 {
@@ -2587,7 +2587,7 @@
 "city": "Цитадель",
 "gold": 1400,
 "security": "Архидьявол",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup",
@@ -2597,7 +2597,7 @@
 "city": "Замок",
 "gold": -1400,
 "security": "Древнее Чудище",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=ietkg-cLiB0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=59&pp=iAQB"
 },
 {
@@ -2608,7 +2608,7 @@
 "city": "Причал",
 "gold": 6000,
 "security": "Никс Воин",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=ietkg-cLiB0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=59&pp=iAQB"
 },
 {
@@ -2619,7 +2619,7 @@
 "city": "Оплот",
 "gold": -6000,
 "security": "Багровый Коатль",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup",
@@ -2629,7 +2629,7 @@
 "city": "Замок",
 "gold": -3400,
 "security": "Древнее Чудище",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup",
@@ -2639,7 +2639,7 @@
 "city": "Цитадель",
 "gold": 3400,
 "security": "Архангел",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup",
@@ -2649,7 +2649,7 @@
 "city": "Некрополис",
 "gold": -7700,
 "security": "Гигант",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=9qSTZsDAGHw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=61&pp=iAQB"
 },
 {
@@ -2660,7 +2660,7 @@
 "city": "Причал",
 "gold": 7700,
 "security": "Властитель Пропасти",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=9qSTZsDAGHw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=61&pp=iAQB"
 },
 {
@@ -2671,7 +2671,7 @@
 "city": "Некрополис",
 "gold": 5900,
 "security": "Древнее Чудище",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup",
@@ -2681,7 +2681,7 @@
 "city": "Причал",
 "gold": -5900,
 "security": "Архангел",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup",
@@ -2691,7 +2691,7 @@
 "city": "Фабрика",
 "gold": -4500,
 "security": "Мантикора",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup",
@@ -2701,7 +2701,7 @@
 "city": "Фабрика",
 "gold": 4500,
 "security": "Мантикора",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup",
@@ -2711,7 +2711,7 @@
 "city": "Некрополис",
 "gold": -6000,
 "security": "Властитель Пропасти",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=I6PyiKi7HTY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=60&pp=iAQB"
 },
 {
@@ -2722,7 +2722,7 @@
 "city": "Фабрика",
 "gold": 6000,
 "security": "Никс Воин",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=I6PyiKi7HTY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=60&pp=iAQB"
 },
 {
@@ -2733,7 +2733,7 @@
 "city": "Темница",
 "gold": 5300,
 "security": "Призрачный Дракон",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup",
@@ -2743,7 +2743,7 @@
 "city": "Замок",
 "gold": -5300,
 "security": "Джаггернаут",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup",
@@ -2753,7 +2753,7 @@
 "city": "",
 "gold": 0,
 "security": "",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup",
@@ -2763,7 +2763,7 @@
 "city": "",
 "gold": 0,
 "security": "",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup",
@@ -2773,7 +2773,7 @@
 "city": "",
 "gold": 0,
 "security": "",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup",
@@ -2783,7 +2783,7 @@
 "city": "",
 "gold": 0,
 "security": "",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup",
@@ -2793,7 +2793,7 @@
 "city": "",
 "gold": 0,
 "security": "",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup",
@@ -2803,7 +2803,7 @@
 "city": "",
 "gold": 0,
 "security": "",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2813,7 +2813,7 @@
 "city": "Крепость",
 "gold": 600,
 "security": "Морской Змей",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=QBe9bOlRn6E&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=1&pp=iAQB"
 },
 {
@@ -2824,7 +2824,7 @@
 "city": "Темница",
 "gold": -600,
 "security": "Морской Змей",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=QBe9bOlRn6E&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=1&pp=iAQB"
 },
 {
@@ -2835,7 +2835,7 @@
 "city": "Причал",
 "gold": -3900,
 "security": "Ифрит",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2845,7 +2845,7 @@
 "city": "Цитадель",
 "gold": 3900,
 "security": "Архангел",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2855,7 +2855,7 @@
 "city": "Фабрика",
 "gold": 5800,
 "security": "Джаггернаут",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=wK5S6aVzxTM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=2&pp=iAQB"
 },
 {
@@ -2866,7 +2866,7 @@
 "city": "Башня",
 "gold": -5800,
 "security": "Нага",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=wK5S6aVzxTM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=2&pp=iAQB"
 },
 {
@@ -2877,7 +2877,7 @@
 "city": "Башня",
 "gold": -4300,
 "security": "Чародей",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2887,7 +2887,7 @@
 "city": "Фабрика",
 "gold": 4300,
 "security": "Кавалерист",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2897,7 +2897,7 @@
 "city": "Инферно",
 "gold": 7000,
 "security": "Костяной Дракон",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2907,7 +2907,7 @@
 "city": "Крепость",
 "gold": -7000,
 "security": "Морской Змей",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2917,7 +2917,7 @@
 "city": "Башня",
 "gold": 0,
 "security": "Виверн",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=Si9iNibq4uE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=3&pp=iAQB"
 },
 {
@@ -2928,7 +2928,7 @@
 "city": "Темница",
 "gold": 0,
 "security": "Гидра",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=Si9iNibq4uE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=3&pp=iAQB"
 },
 {
@@ -2939,7 +2939,7 @@
 "city": "Замок",
 "gold": -4200,
 "security": "Дьявол",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2949,7 +2949,7 @@
 "city": "Инферно",
 "gold": 4200,
 "security": "Гидры Хаоса",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2959,7 +2959,7 @@
 "city": "Причал",
 "gold": 5500,
 "security": "Стрелок",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2969,7 +2969,7 @@
 "city": "Башня",
 "gold": -5500,
 "security": "Ржавый Дракон",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -2979,7 +2979,7 @@
 "city": "Фабрика",
 "gold": 4500,
 "security": "Архидьявол",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=vMGRhEXPbZE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=4&pp=iAQB"
 },
 {
@@ -2990,7 +2990,7 @@
 "city": "Темница",
 "gold": -4500,
 "security": "Воинственный Единорог",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=vMGRhEXPbZE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=4&pp=iAQB"
 },
 {
@@ -3001,7 +3001,7 @@
 "city": "Инферно",
 "gold": 4000,
 "security": "Единорог",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3011,7 +3011,7 @@
 "city": "Замок",
 "gold": -4000,
 "security": "Скорпикора",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3021,7 +3021,7 @@
 "city": "Фабрика",
 "gold": 6600,
 "security": "Чемпион",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=aSM1EwLe0Nc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=5&pp=iAQB"
 },
 {
@@ -3032,7 +3032,7 @@
 "city": "Некрополис",
 "gold": -6600,
 "security": "Циклоп",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=aSM1EwLe0Nc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=5&pp=iAQB"
 },
 {
@@ -3043,7 +3043,7 @@
 "city": "Крепость",
 "gold": 3600,
 "security": "Кавалерист",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3053,7 +3053,7 @@
 "city": "Цитадель",
 "gold": -3600,
 "security": "Виверн Монах",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3063,7 +3063,7 @@
 "city": "Замок",
 "gold": 5100,
 "security": "Кристальный Дракон",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=_4HaKR6xbVQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=6&pp=iAQB"
 },
 {
@@ -3074,7 +3074,7 @@
 "city": "Крепость",
 "gold": -5100,
 "security": "Циклоп",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=_4HaKR6xbVQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=6&pp=iAQB"
 },
 {
@@ -3085,7 +3085,7 @@
 "city": "Инферно",
 "gold": -3800,
 "security": "Минотавр",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3095,7 +3095,7 @@
 "city": "Цитадель",
 "gold": 3800,
 "security": "Зелёный Дракон",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3105,7 +3105,7 @@
 "city": "Темница",
 "gold": -200,
 "security": "Единорог",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3115,7 +3115,7 @@
 "city": "Замок",
 "gold": 200,
 "security": "Циклоп",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3125,7 +3125,7 @@
 "city": "Некрополис",
 "gold": -8200,
 "security": "Феникс",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=cK1mSP1VPmM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=7&pp=iAQB"
 },
 {
@@ -3136,7 +3136,7 @@
 "city": "Инферно",
 "gold": 8200,
 "security": "Птица Грома",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=cK1mSP1VPmM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=7&pp=iAQB"
 },
 {
@@ -3147,7 +3147,7 @@
 "city": "Замок",
 "gold": 4100,
 "security": "Джаггернаут",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3157,7 +3157,7 @@
 "city": "Сопряжение",
 "gold": -4100,
 "security": "Архангел",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3167,7 +3167,7 @@
 "city": "Оплот",
 "gold": 3400,
 "security": "Охотник за Головами",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=9qiS_XsTDtY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=8&pp=iAQB"
 },
 {
@@ -3178,7 +3178,7 @@
 "city": "Темница",
 "gold": -3400,
 "security": "Никс Воин",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=9qiS_XsTDtY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=8&pp=iAQB"
 },
 {
@@ -3189,7 +3189,7 @@
 "city": "Цитадель",
 "gold": -3900,
 "security": "Охотник за Головами",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3199,7 +3199,7 @@
 "city": "Крепость",
 "gold": 3900,
 "security": "Джаггернаут",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3209,7 +3209,7 @@
 "city": "Инферно",
 "gold": 0,
 "security": "Птица Грома",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=gyRWUZ1HsZ4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=9&pp=iAQB"
 },
 {
@@ -3220,7 +3220,7 @@
 "city": "Причал",
 "gold": 0,
 "security": "Воинственный Единорог",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=gyRWUZ1HsZ4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=9&pp=iAQB"
 },
 {
@@ -3231,7 +3231,7 @@
 "city": "Инферно",
 "gold": 4300,
 "security": "Коатль",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3241,7 +3241,7 @@
 "city": "Оплот",
 "gold": -4300,
 "security": "Властитель Пропасти",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3251,7 +3251,7 @@
 "city": "Крепость",
 "gold": 0,
 "security": "Птица Грома",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=qOiWXMKPyW0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=10"
 },
 {
@@ -3262,7 +3262,7 @@
 "city": "Фабрика",
 "gold": 0,
 "security": "Скорпикора",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=qOiWXMKPyW0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=10"
 },
 {
@@ -3273,7 +3273,7 @@
 "city": "Сопряжение",
 "gold": 4300,
 "security": "Никс Воин",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3283,7 +3283,7 @@
 "city": "Инферно",
 "gold": -4300,
 "security": "Виверн",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3293,7 +3293,7 @@
 "city": "Инферно",
 "gold": 4100,
 "security": "Циклоп",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=6lL4rN_v-eQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=11&pp=iAQB"
 },
 {
@@ -3304,7 +3304,7 @@
 "city": "Темница",
 "gold": -4100,
 "security": "Гидра",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=6lL4rN_v-eQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=11&pp=iAQB"
 },
 {
@@ -3315,7 +3315,7 @@
 "city": "Инферно",
 "gold": -4100,
 "security": "Призрачный Дракон",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3325,7 +3325,7 @@
 "city": "Сопряжение",
 "gold": 4100,
 "security": "Архангел",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3335,7 +3335,7 @@
 "city": "Темница",
 "gold": -6500,
 "security": "Циклоп",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=Rwyini2zOj0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=12&pp=iAQB"
 },
 {
@@ -3346,7 +3346,7 @@
 "city": "Крепость",
 "gold": 6500,
 "security": "Могущественный Лич",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=Rwyini2zOj0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=12&pp=iAQB"
 },
 {
@@ -3357,7 +3357,7 @@
 "city": "Причал",
 "gold": -4000,
 "security": "Циклоп",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3367,7 +3367,7 @@
 "city": "Сопряжение",
 "gold": 4000,
 "security": "Могущественный Лич",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3377,7 +3377,7 @@
 "city": "Замок",
 "gold": 4200,
 "security": "Никс Воин",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3387,7 +3387,7 @@
 "city": "Башня",
 "gold": -4200,
 "security": "Багровый Коатль",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3397,7 +3397,7 @@
 "city": "Крепость",
 "gold": 3600,
 "security": "Олгой-Хорхой",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=VQBP0OQlVAY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=13&pp=iAQB"
 },
 {
@@ -3408,7 +3408,7 @@
 "city": "Некрополис",
 "gold": -3600,
 "security": "Виверн",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=VQBP0OQlVAY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=13&pp=iAQB"
 },
 {
@@ -3419,7 +3419,7 @@
 "city": "Замок",
 "gold": 4100,
 "security": "Психический Элементаль",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3429,7 +3429,7 @@
 "city": "Фабрика",
 "gold": -4100,
 "security": "Мантикора",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3439,7 +3439,7 @@
 "city": "Причал",
 "gold": 6800,
 "security": "Ангел",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3449,7 +3449,7 @@
 "city": "Крепость",
 "gold": -6800,
 "security": "Призрачный Дракон",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3459,7 +3459,7 @@
 "city": "Цитадель",
 "gold": -4400,
 "security": "Древнее Чудище",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=1bYoyh_3iAQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=14&pp=iAQB"
 },
 {
@@ -3470,7 +3470,7 @@
 "city": "Сопряжение",
 "gold": 4400,
 "security": "Феникс",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=1bYoyh_3iAQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=14&pp=iAQB"
 },
 {
@@ -3481,7 +3481,7 @@
 "city": "Башня",
 "gold": -2800,
 "security": "Огненная Птица",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3491,7 +3491,7 @@
 "city": "Оплот",
 "gold": 2800,
 "security": "Ангел",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3501,7 +3501,7 @@
 "city": "Оплот",
 "gold": -5000,
 "security": "Древнее Чудище",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=Ca4-yWxXZGo&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=15&pp=iAQB"
 },
 {
@@ -3512,7 +3512,7 @@
 "city": "Замок",
 "gold": 5000,
 "security": "Архидьявол",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=Ca4-yWxXZGo&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=15&pp=iAQB"
 },
 {
@@ -3523,7 +3523,7 @@
 "city": "Темница",
 "gold": 3900,
 "security": "Охотник за Головами",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3533,7 +3533,7 @@
 "city": "Замок",
 "gold": -3900,
 "security": "Волшебный Дракон",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 2",
@@ -3543,7 +3543,7 @@
 "city": "Башня",
 "gold": -2300,
 "security": "Гидра",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=-F1xuEW-jH8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=16&pp=iAQB"
 },
 {
@@ -3554,7 +3554,7 @@
 "city": "Замок",
 "gold": 2300,
 "security": "Огненная Птица",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=-F1xuEW-jH8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=16&pp=iAQB"
 },
 {
@@ -3565,7 +3565,7 @@
 "city": "Инферно",
 "gold": 3900,
 "security": "Гигант",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3576,7 +3576,7 @@
 "city": "Сопряжение",
 "gold": -3900,
 "security": "Виверн Монах",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3587,7 +3587,7 @@
 "city": "Замок",
 "gold": -2800,
 "security": "Феникс",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3598,7 +3598,7 @@
 "city": "Инферно",
 "gold": 2800,
 "security": "Чемпион",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3609,7 +3609,7 @@
 "city": "Крепость",
 "gold": -6500,
 "security": "Джаггернаут",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=R8f9ca9TXa8"
 },
 {
@@ -3620,7 +3620,7 @@
 "city": "Инферно",
 "gold": 6500,
 "security": "Гигант",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=R8f9ca9TXa8"
 },
 {
@@ -3631,7 +3631,7 @@
 "city": "Крепость",
 "gold": -4300,
 "security": "Ифрит",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3642,7 +3642,7 @@
 "city": "Причал",
 "gold": 4300,
 "security": "Дредноут",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3653,7 +3653,7 @@
 "city": "Цитадель",
 "gold": 7500,
 "security": "Мантикора",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3664,7 +3664,7 @@
 "city": "Некрополис",
 "gold": -7500,
 "security": "Гидры Хаоса",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3675,7 +3675,7 @@
 "city": "Темница",
 "gold": 6000,
 "security": "Скорпикора",
-"win": true,
+"win": 1,
 "link": "https://youtu.be/Rdc2MdqhrlQ"
 },
 {
@@ -3686,7 +3686,7 @@
 "city": "Некрополис",
 "gold": -6000,
 "security": "Рыцарь Ужаса",
-"win": false,
+"win": 0,
 "link": "https://youtu.be/Rdc2MdqhrlQ"
 },
 {
@@ -3697,7 +3697,7 @@
 "city": "Фабрика",
 "gold": 4000,
 "security": "Волшебный Дракон",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3708,7 +3708,7 @@
 "city": "Инферно",
 "gold": -4000,
 "security": "Чемпион",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3719,7 +3719,7 @@
 "city": "Сопряжение",
 "gold": 3600,
 "security": "Виверн",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=ub5LCr21V88&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=18&pp=iAQB"
 },
 {
@@ -3730,7 +3730,7 @@
 "city": "Некрополис",
 "gold": -3600,
 "security": "Охотник за Головами",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=ub5LCr21V88&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=18&pp=iAQB"
 },
 {
@@ -3741,7 +3741,7 @@
 "city": "Сопряжение",
 "gold": -4000,
 "security": "Волшебный Дракон",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3752,7 +3752,7 @@
 "city": "Башня",
 "gold": 4000,
 "security": "Никс",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3763,7 +3763,7 @@
 "city": "Инферно",
 "gold": 6200,
 "security": "Единорог",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3774,7 +3774,7 @@
 "city": "Крепость",
 "gold": -6200,
 "security": "Никс Воин",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3785,7 +3785,7 @@
 "city": "Инферно",
 "gold": 4800,
 "security": "Птица Грома",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=AYnWGcpfqyM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=19&pp=iAQB"
 },
 {
@@ -3796,7 +3796,7 @@
 "city": "Башня",
 "gold": -4800,
 "security": "Психический Элементаль",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=AYnWGcpfqyM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=19&pp=iAQB"
 },
 {
@@ -3807,7 +3807,7 @@
 "city": "Башня",
 "gold": 3900,
 "security": "Рыцарь Ужаса",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3818,7 +3818,7 @@
 "city": "Причал",
 "gold": -3900,
 "security": "Ангел",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3829,7 +3829,7 @@
 "city": "Башня",
 "gold": -8000,
 "security": "Дредноут",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=FW5VnHuLsps&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=20&pp=iAQB"
 },
 {
@@ -3840,7 +3840,7 @@
 "city": "Инферно",
 "gold": 8000,
 "security": "Черный Рыцарь",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=FW5VnHuLsps&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=20&pp=iAQB"
 },
 {
@@ -3851,7 +3851,7 @@
 "city": "Причал",
 "gold": 8000,
 "security": "Багровый Коатль",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3862,7 +3862,7 @@
 "city": "Башня",
 "gold": -8000,
 "security": "Скорпикора",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3873,7 +3873,7 @@
 "city": "Инферно",
 "gold": 0,
 "security": "Дредноут",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=6MpBGKCC7cc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=21&pp=iAQB"
 },
 {
@@ -3884,7 +3884,7 @@
 "city": "Сопряжение",
 "gold": 0,
 "security": "Охотник за Головами",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=6MpBGKCC7cc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=21&pp=iAQB"
 },
 {
@@ -3895,7 +3895,7 @@
 "city": "Башня",
 "gold": 4300,
 "security": "Гидры Хаоса",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3906,7 +3906,7 @@
 "city": "Башня",
 "gold": -4300,
 "security": "Гидры Хаоса",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3917,7 +3917,7 @@
 "city": "Крепость",
 "gold": -3500,
 "security": "Титан",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=C_REFtNWkNE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=22&pp=iAQB"
 },
 {
@@ -3928,7 +3928,7 @@
 "city": "Инферно",
 "gold": 3500,
 "security": "Джаггернаут",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=C_REFtNWkNE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=22&pp=iAQB"
 },
 {
@@ -3939,7 +3939,7 @@
 "city": "Башня",
 "gold": 3600,
 "security": "",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3950,7 +3950,7 @@
 "city": "Инферно",
 "gold": -3600,
 "security": "Джаггернаут",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3961,7 +3961,7 @@
 "city": "Оплот",
 "gold": 4100,
 "security": "Джаггернаут",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -3972,7 +3972,7 @@
 "city": "Некрополис",
 "gold": -4100,
 "security": "Дьявол",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -3983,7 +3983,7 @@
 "city": "Башня",
 "gold": 4500,
 "security": "Гидры Хаоса",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=8IJZ98TQOVM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=23&pp=iAQB"
 },
 {
@@ -3994,7 +3994,7 @@
 "city": "Некрополис",
 "gold": -4500,
 "security": "Архангел",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=8IJZ98TQOVM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=23&pp=iAQB"
 },
 {
@@ -4005,7 +4005,7 @@
 "city": "Крепость",
 "gold": 2200,
 "security": "Чемпион",
-"win": true,
+"win": 1,
 "link": null
 },
 {
@@ -4016,7 +4016,7 @@
 "city": "Замок",
 "gold": -2200,
 "security": "Джаггернаут",
-"win": false,
+"win": 0,
 "link": null
 },
 {
@@ -4027,7 +4027,7 @@
 "city": "Башня",
 "gold": 100,
 "security": "Призрачный Дракон",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=0hByV9_Xses&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=24&pp=iAQB"
 },
 {
@@ -4038,7 +4038,7 @@
 "city": "Темница",
 "gold": -100,
 "security": "Мантикора",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=0hByV9_Xses&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=24&pp=iAQB"
 },
 {
@@ -4049,7 +4049,7 @@
 "city": "Темница",
 "gold": 9100,
 "security": "Древнее Чудище",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4059,7 +4059,7 @@
 "city": "Фабрика",
 "gold": -9100,
 "security": "Охотник за Головами",
-"win": true
+"win": 1
 },
 {
 "turnir": "HC 2 PO",
@@ -4069,7 +4069,7 @@
 "city": "Сопряжение",
 "gold": 1900,
 "security": "Чародей",
-"win": true
+"win": 1
 },
 {
 "turnir": "HC 2 PO",
@@ -4079,7 +4079,7 @@
 "city": "Темница",
 "gold": -1900,
 "security": "",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4089,7 +4089,7 @@
 "city": "Цитадель",
 "gold": 7400,
 "security": "Стрелок",
-"win": true
+"win": 1
 },
 {
 "turnir": "HC 2 PO",
@@ -4099,7 +4099,7 @@
 "city": "Темница",
 "gold": -7400,
 "security": "Титан",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4109,7 +4109,7 @@
 "city": "Оплот",
 "gold": -4300,
 "security": "Гидра",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=5w-UQJkP7bU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=26&pp=iAQB"
 },
 {
@@ -4120,7 +4120,7 @@
 "city": "Инферно",
 "gold": 4300,
 "security": "Чудище",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=5w-UQJkP7bU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=26&pp=iAQB"
 },
 {
@@ -4131,7 +4131,7 @@
 "city": "Крепость",
 "gold": -2700,
 "security": "Титан",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4141,7 +4141,7 @@
 "city": "Башня",
 "gold": 2700,
 "security": "Огненная Птица",
-"win": true
+"win": 1
 },
 {
 "turnir": "HC 2 PO",
@@ -4151,7 +4151,7 @@
 "city": "Темница",
 "gold": 9900,
 "security": "Красный Дракон",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4161,7 +4161,7 @@
 "city": "Замок",
 "gold": -9900,
 "security": "Охотник за Головами",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=sPQPMyPsbq8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=27&pp=iAQB"
 },
 {
@@ -4172,7 +4172,7 @@
 "city": "Цитадель",
 "gold": -4100,
 "security": "Олгой-Хорхой",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=sPQPMyPsbq8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=27&pp=iAQB"
 },
 {
@@ -4183,7 +4183,7 @@
 "city": "Цитадель",
 "gold": 4100,
 "security": "Олгой-Хорхой",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4193,7 +4193,7 @@
 "city": "Сопряжение",
 "gold": -600,
 "security": "Чемпион",
-"win": true
+"win": 1
 },
 {
 "turnir": "HC 2 PO",
@@ -4203,7 +4203,7 @@
 "city": "Цитадель",
 "gold": 600,
 "security": "Чудище",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4213,7 +4213,7 @@
 "city": "Оплот",
 "gold": 1,
 "security": "Гидра",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=nS-fQHgrMoU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=28&pp=iAQB"
 },
 {
@@ -4224,7 +4224,7 @@
 "city": "Крепость",
 "gold": -1,
 "security": "Чудище",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=nS-fQHgrMoU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=28&pp=iAQB"
 },
 {
@@ -4235,7 +4235,7 @@
 "city": "Темница",
 "gold": 200,
 "security": "Рыцарь Ужаса",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4245,7 +4245,7 @@
 "city": "Некрополис",
 "gold": -200,
 "security": "Огненная Птица",
-"win": true
+"win": 1
 },
 {
 "turnir": "HC 2 PO",
@@ -4255,7 +4255,7 @@
 "city": "Замок",
 "gold": -1300,
 "security": "Охотник за Головами",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=xj3zxZ4NZj4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=29&pp=iAQB"
 },
 {
@@ -4266,7 +4266,7 @@
 "city": "Фабрика",
 "gold": 1300,
 "security": "Ангел",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=xj3zxZ4NZj4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=29&pp=iAQB"
 },
 {
@@ -4277,7 +4277,7 @@
 "city": "Инферно",
 "gold": 3100,
 "security": "Психический Элементаль",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=bzj3FflOZZQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=32&pp=iAQB"
 },
 {
@@ -4288,7 +4288,7 @@
 "city": "Темница",
 "gold": -3100,
 "security": "Охотник за Головами",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=bzj3FflOZZQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=32&pp=iAQB"
 },
 {
@@ -4299,7 +4299,7 @@
 "city": "Оплот",
 "gold": -4300,
 "security": "Птица Грома",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4309,7 +4309,7 @@
 "city": "Причал",
 "gold": 4300,
 "security": "Чёрный Дракон",
-"win": true
+"win": 1
 },
 {
 "turnir": "HC 2 PO",
@@ -4319,7 +4319,7 @@
 "city": "Цитадель",
 "gold": -3900,
 "security": "Психический Элементаль",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4329,7 +4329,7 @@
 "city": "Оплот",
 "gold": 3900,
 "security": "Огненная Птица",
-"win": true
+"win": 1
 },
 {
 "turnir": "HC 2 PO",
@@ -4339,7 +4339,7 @@
 "city": "Инферно",
 "gold": 4300,
 "security": "Никс Воин",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=uFmjFF07Ti8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=33&pp=iAQB"
 },
 {
@@ -4350,7 +4350,7 @@
 "city": "Некрополис",
 "gold": -4300,
 "security": "Воинственный Единорог",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=uFmjFF07Ti8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=33&pp=iAQB"
 },
 {
@@ -4361,7 +4361,7 @@
 "city": "Крепость",
 "gold": 6600,
 "security": "Титан",
-"win": false
+"win": 0
 },
 {
 "turnir": "HC 2 PO",
@@ -4371,7 +4371,7 @@
 "city": "Крепость",
 "gold": -6600,
 "security": "Титан",
-"win": true
+"win": 1
 },
 {
 "turnir": "HC 2 PO",
@@ -4381,7 +4381,7 @@
 "city": "Фабрика",
 "gold": 5900,
 "security": "Психический Элементаль",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=-XAlWRNljxA&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=34&pp=iAQB"
 },
 {
@@ -4392,7 +4392,7 @@
 "city": "Некрополис",
 "gold": -5900,
 "security": "Циклоп",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=-XAlWRNljxA&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=34&pp=iAQB"
 },
 {
@@ -4403,7 +4403,7 @@
 "city": "Сопряжение",
 "gold": -100,
 "security": "Кристальный Дракон",
-"win": true
+"win": 1
 },
 {
 "turnir": "HC 2 PO",
@@ -4413,7 +4413,7 @@
 "city": "Некрополис",
 "gold": 100,
 "security": "Гигант",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4423,7 +4423,7 @@
 "city": "Крепость",
 "gold": 400,
 "security": "Дредноут",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=3U0LMqkqyt4&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=40&pp=iAQB"
 },
 {
@@ -4434,7 +4434,7 @@
 "city": "Оплот",
 "gold": -400,
 "security": "Феникс",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=3U0LMqkqyt4&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=40&pp=iAQB"
 },
 {
@@ -4445,7 +4445,7 @@
 "city": "Сопряжение",
 "gold": -3800,
 "security": "Джаггернаут",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4455,7 +4455,7 @@
 "city": "Фабрика",
 "gold": 3800,
 "security": "Зелёный Дракон",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4465,7 +4465,7 @@
 "city": "Инферно",
 "gold": 5500,
 "security": "Зелёный Дракон",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=Hd-4CZofS6M&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=39&pp=iAQB"
 },
 {
@@ -4476,7 +4476,7 @@
 "city": "Некрополис",
 "gold": -5500,
 "security": "Джаггернаут",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=Hd-4CZofS6M&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=39&pp=iAQB"
 },
 {
@@ -4487,7 +4487,7 @@
 "city": "Замок",
 "gold": 0,
 "security": "Могущественный Лич",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4497,7 +4497,7 @@
 "city": "Оплот",
 "gold": 0,
 "security": "Циклоп",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4507,7 +4507,7 @@
 "city": "Сопряжение",
 "gold": 5500,
 "security": "Магический Элементаль",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4517,7 +4517,7 @@
 "city": "Темница",
 "gold": -5500,
 "security": "Гидра",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4527,7 +4527,7 @@
 "city": "Башня",
 "gold": 1200,
 "security": "Архангел",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=qd5sYVTCJac&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=38&pp=iAQB"
 },
 {
@@ -4538,7 +4538,7 @@
 "city": "Крепость",
 "gold": -1200,
 "security": "Джаггернаут",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=qd5sYVTCJac&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=38&pp=iAQB"
 },
 {
@@ -4549,7 +4549,7 @@
 "city": "Сопряжение",
 "gold": -4000,
 "security": "Призрачный Дракон",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4559,7 +4559,7 @@
 "city": "Причал",
 "gold": 4000,
 "security": "Багровый Коатль",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4569,7 +4569,7 @@
 "city": "Крепость",
 "gold": -8200,
 "security": "Дредноут",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4579,7 +4579,7 @@
 "city": "Фабрика",
 "gold": 8200,
 "security": "",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4589,7 +4589,7 @@
 "city": "Крепость",
 "gold": -3900,
 "security": "Никс Воин",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=wvnbLwaciNM&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=37&pp=iAQB"
 },
 {
@@ -4600,7 +4600,7 @@
 "city": "Крепость",
 "gold": 3900,
 "security": "Никс Воин",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=wvnbLwaciNM&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=37&pp=iAQB"
 },
 {
@@ -4611,7 +4611,7 @@
 "city": "Башня",
 "gold": -7100,
 "security": "Никс",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4621,7 +4621,7 @@
 "city": "Сопряжение",
 "gold": 7100,
 "security": "Морской Змей",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4631,7 +4631,7 @@
 "city": "Крепость",
 "gold": 0,
 "security": "Циклоп",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=qzIGXOeXpKA&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=36&pp=iAQB"
 },
 {
@@ -4642,7 +4642,7 @@
 "city": "Башня",
 "gold": 0,
 "security": "Кристальный Дракон",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=qzIGXOeXpKA&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=36&pp=iAQB"
 },
 {
@@ -4653,7 +4653,7 @@
 "city": "Крепость",
 "gold": -6400,
 "security": "Огненная Птица",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4663,7 +4663,7 @@
 "city": "Цитадель",
 "gold": 6400,
 "security": "Ангел",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4673,7 +4673,7 @@
 "city": "Фабрика",
 "gold": -4100,
 "security": "Циклоп",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4683,7 +4683,7 @@
 "city": "Сопряжение",
 "gold": 4100,
 "security": "Стрелок",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4693,7 +4693,7 @@
 "city": "Оплот",
 "gold": -6900,
 "security": "Гигант",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=HawW_d66MN8&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=35&pp=iAQB"
 },
 {
@@ -4704,7 +4704,7 @@
 "city": "Инферно",
 "gold": 6900,
 "security": "Зелёный Дракон",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=HawW_d66MN8&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=35&pp=iAQB"
 },
 {
@@ -4715,7 +4715,7 @@
 "city": "Темница",
 "gold": 8000,
 "security": "Феникс",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4725,7 +4725,7 @@
 "city": "Башня",
 "gold": -8000,
 "security": "",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4735,7 +4735,7 @@
 "city": "Темница",
 "gold": -5100,
 "security": "Золотой Дракон",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4745,7 +4745,7 @@
 "city": "Цитадель",
 "gold": 5100,
 "security": "Никс Воин",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4755,7 +4755,7 @@
 "city": "Башня",
 "gold": 3900,
 "security": "Никс Воин",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=fKdxkGUaeGE&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=34&pp=iAQB"
 },
 {
@@ -4766,7 +4766,7 @@
 "city": "Башня",
 "gold": -3900,
 "security": "Никс Воин",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=fKdxkGUaeGE&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=34&pp=iAQB"
 },
 {
@@ -4777,7 +4777,7 @@
 "city": "Оплот",
 "gold": 5800,
 "security": "Архангел",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4787,7 +4787,7 @@
 "city": "Сопряжение",
 "gold": -5800,
 "security": "Кристальный Дракон",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4797,7 +4797,7 @@
 "city": "Цитадель",
 "gold": 4500,
 "security": "Черный Рыцарь",
-"win": true,
+"win": 1,
 "link": "https://www.youtube.com/watch?v=MkENEJhHp7E&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=33&pp=iAQB"
 },
 {
@@ -4808,7 +4808,7 @@
 "city": "Фабрика",
 "gold": 4500,
 "security": "Морской Змей",
-"win": false,
+"win": 0,
 "link": "https://www.youtube.com/watch?v=MkENEJhHp7E&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=33&pp=iAQB"
 },
 {
@@ -4819,7 +4819,7 @@
 "city": "Некрополис",
 "gold": -7100,
 "security": "Аспид",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4829,7 +4829,7 @@
 "city": "Башня",
 "gold": 7100,
 "security": "Ангел",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4839,7 +4839,7 @@
 "city": "Инферно",
 "gold": 4000,
 "security": "Кристальный Дракон",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4849,7 +4849,7 @@
 "city": "Сопряжение",
 "gold": -4000,
 "security": "Гидры Хаоса",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4859,7 +4859,7 @@
 "city": "Замок",
 "gold": -6000,
 "security": "Птица Грома",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4869,7 +4869,7 @@
 "city": "Инферно",
 "gold": 6000,
 "security": "Гидры Хаоса",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4879,7 +4879,7 @@
 "city": "Инферно",
 "gold": -4000,
 "security": "Король Минотавров",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4889,7 +4889,7 @@
 "city": "Башня",
 "gold": 4000,
 "security": "Никс Воин",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4899,7 +4899,7 @@
 "city": "Сопряжение",
 "gold": -7500,
 "security": "Гидры Хаоса",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4909,7 +4909,7 @@
 "city": "Замок",
 "gold": 7500,
 "security": "Мантикора",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4919,7 +4919,7 @@
 "city": "Сопряжение",
 "gold": -6700,
 "security": "",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4929,7 +4929,7 @@
 "city": "Инферно",
 "gold": 6700,
 "security": "Воинственный Единорог",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4939,7 +4939,7 @@
 "city": "Фабрика",
 "gold": 9000,
 "security": "Ржавый Дракон",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4949,7 +4949,7 @@
 "city": "Крепость",
 "gold": -9000,
 "security": "Волшебный Дракон",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4959,7 +4959,7 @@
 "city": "Инферно",
 "gold": -4700,
 "security": "Виверн",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4969,7 +4969,7 @@
 "city": "Инферно",
 "gold": 4700,
 "security": "Виверн",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4979,7 +4979,7 @@
 "city": "Сопряжение",
 "gold": -4600,
 "security": "Олгой-Хорхой",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4989,7 +4989,7 @@
 "city": "Сопряжение",
 "gold": 4600,
 "security": "Олгой-Хорхой",
-"win": false
+"win": 0
 },
 {
 "turnir": "Heroes Cup 3",
@@ -4999,7 +4999,7 @@
 "city": "Башня",
 "gold": -700,
 "security": "Циклоп",
-"win": true
+"win": 1
 },
 {
 "turnir": "Heroes Cup 3",
@@ -5009,7 +5009,7 @@
 "city": "Темница",
 "gold": 700,
 "security": "Феникс",
-"win": false
+"win": 0
 },
 
     {
@@ -5020,7 +5020,7 @@
         "city": "Темница",
         "gold": 4400,
         "security": "Могущественный Лич",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5030,7 +5030,7 @@
         "city": "Замок",
         "gold": -4400,
         "security": "Дредноут",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5040,7 +5040,7 @@
         "city": "Замок",
         "gold": -6500,
         "security": "Властитель Пропасти",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5050,7 +5050,7 @@
         "city": "Инферно",
         "gold": 6500,
         "security": "Олгой-Хорхой",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5060,7 +5060,7 @@
         "city": "Цитадель",
         "gold": -4200,
         "security": "Кристальный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5070,7 +5070,7 @@
         "city": "Причал",
         "gold": 4200,
         "security": "Королева Нага",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5080,7 +5080,7 @@
         "city": "Цитадель",
         "gold": 5600,
         "security": "Гидра",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5090,7 +5090,7 @@
         "city": "Башня",
         "gold": -5600,
         "security": "Черный Рыцарь",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5100,7 +5100,7 @@
         "city": "Цитадель",
         "gold": -4100,
         "security": "Огненная Птица",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5110,7 +5110,7 @@
         "city": "Цитадель",
         "gold": 4100,
         "security": "Огненная Птица",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5120,7 +5120,7 @@
         "city": "Фабрика",
         "gold": 3900,
         "security": "Волшебный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5130,7 +5130,7 @@
         "city": "Сопряжение",
         "gold": -3900,
         "security": "Багровый Коатль",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5140,7 +5140,7 @@
         "city": "Причал",
         "gold": -2300,
         "security": "Красный Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5150,7 +5150,7 @@
         "city": "Сопряжение",
         "gold": 2300,
         "security": "Дредноут",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5160,7 +5160,7 @@
         "city": "Цитадель",
         "gold": 4500,
         "security": "Стрелок",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5170,7 +5170,7 @@
         "city": "Оплот",
         "gold": -4500,
         "security": "Магический Элементаль",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5180,7 +5180,7 @@
         "city": "Инферно",
         "gold": -1600,
         "security": "Воинственный Единорог",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5190,7 +5190,7 @@
         "city": "Причал",
         "gold": 1600,
         "security": "Призрачный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5200,7 +5200,7 @@
         "city": "Замок",
         "gold": -8700,
         "security": "Красный Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5210,7 +5210,7 @@
         "city": "Фабрика",
         "gold": 8700,
         "security": "Чудище",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5220,7 +5220,7 @@
         "city": "Фабрика",
         "gold": 3200,
         "security": "Чёрный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5230,7 +5230,7 @@
         "city": "Крепость",
         "gold": -3200,
         "security": "Багровый Коатль",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5240,7 +5240,7 @@
         "city": "Сопряжение",
         "gold": 4000,
         "security": "Ангел",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5250,7 +5250,7 @@
         "city": "Сопряжение",
         "gold": -4000,
         "security": "Ангел",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5260,7 +5260,7 @@
         "city": "Цитадель",
         "gold": 4500,
         "security": "Архидьявол",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5270,7 +5270,7 @@
         "city": "Замок",
         "gold": -4500,
         "security": "Виверн",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5280,7 +5280,7 @@
         "city": "Башня",
         "gold": -2100,
         "security": "Королева Нага",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5290,7 +5290,7 @@
         "city": "Некрополис",
         "gold": 2100,
         "security": "Дьявол",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5300,7 +5300,7 @@
         "city": "Крепость",
         "gold": 1200,
         "security": "Рыцарь Ужаса",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "Heroes Cup 3",
@@ -5310,7 +5310,7 @@
         "city": "Башня",
         "gold": -1200,
         "security": "Морской Змей",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5320,7 +5320,7 @@
         "city": "Сопряжение",
         "gold": -6600,
         "security": "Аспид",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5330,7 +5330,7 @@
         "city": "Инферно",
         "gold": 6600,
         "security": "Психический Элементаль",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5340,7 +5340,7 @@
         "city": "Замок",
         "gold": -4400,
         "security": "Король Минотавров",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5350,7 +5350,7 @@
         "city": "Замок",
         "gold": 4400,
         "security": "Король Минотавров",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5360,7 +5360,7 @@
         "city": "Оплот",
         "gold": -1200,
         "security": "Титан",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5370,7 +5370,7 @@
         "city": "Крепость",
         "gold": 1200,
         "security": "Чародей",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5380,7 +5380,7 @@
         "city": "Башня",
         "gold": -6800,
         "security": "Гидра",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5390,7 +5390,7 @@
         "city": "Инферно",
         "gold": 6800,
         "security": "Лазурный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5400,7 +5400,7 @@
         "city": "Темница",
         "gold": -7300,
         "security": "Султан Ифрит",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5410,7 +5410,7 @@
         "city": "Фабрика",
         "gold": 7300,
         "security": "Чародей",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5420,7 +5420,7 @@
         "city": "Крепость",
         "gold": -200,
         "security": "Гигант",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5430,7 +5430,7 @@
         "city": "Башня",
         "gold": 200,
         "security": "Призрачный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5440,7 +5440,7 @@
         "city": "Некрополис",
         "gold": -3700,
         "security": "Чёрный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5450,7 +5450,7 @@
         "city": "Оплот",
         "gold": 3700,
         "security": "Властитель Пропасти",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5460,7 +5460,7 @@
         "city": "Некрополис",
         "gold": 1000,
         "security": "Чёрный Дракон",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5470,7 +5470,7 @@
         "city": "Башня",
         "gold": -1000,
         "security": "Охотник за Головами",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5480,7 +5480,7 @@
         "city": "Темница",
         "gold": -7600,
         "security": "Древнее Чудище",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5490,7 +5490,7 @@
         "city": "Инферно",
         "gold": 7600,
         "security": "Волшебный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5500,7 +5500,7 @@
         "city": "Крепость",
         "gold": 5000,
         "security": "Ржавый Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5510,7 +5510,7 @@
         "city": "Замок",
         "gold": -5000,
         "security": "",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5520,7 +5520,7 @@
         "city": "Темница",
         "gold": -8100,
         "security": "Огненная Птица",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5530,7 +5530,7 @@
         "city": "Причал",
         "gold": 8100,
         "security": "Виверн",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5540,7 +5540,7 @@
         "city": "Цитадель",
         "gold": -700,
         "security": "Чёрный Дракон",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5550,7 +5550,7 @@
         "city": "Некрополис",
         "gold": 700,
         "security": "Аспид",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5560,7 +5560,7 @@
         "city": "Цитадель",
         "gold": 6900,
         "security": "Нага",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5570,7 +5570,7 @@
         "city": "Крепость",
         "gold": -6900,
         "security": "Психический Элементаль",
-        "win": false
+        "win": 0
     },
     {
         "turnir": "HC 3 PO",
@@ -5580,7 +5580,7 @@
         "city": "Замок",
         "gold": 1500,
         "security": "Дьявол",
-        "win": true
+        "win": 1
     },
     {
         "turnir": "HC 3 PO",
@@ -5590,7 +5590,7 @@
         "city": "Темница",
         "gold": -1500,
         "security": "Феникс",
-        "win": false
+        "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5600,7 +5600,7 @@
     "city": "Инферно",
     "gold": 900,
     "security": "Гидры Хаоса",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5610,7 +5610,7 @@
     "city": "Оплот",
     "gold": -900,
     "security": "Дьявол",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5620,7 +5620,7 @@
     "city": "Оплот",
     "gold": -700,
     "security": "Гигант",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5630,7 +5630,7 @@
     "city": "Сопряжение",
     "gold": 700,
     "security": "Золотой Дракон",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5640,7 +5640,7 @@
     "city": "Фабрика",
     "gold": -4100,
     "security": "Циклоп",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5650,7 +5650,7 @@
     "city": "Башня",
     "gold": 4100,
     "security": "Охотник за Головами",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5660,7 +5660,7 @@
     "city": "Темница",
     "gold": 6500,
     "security": "Птица Грома",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5670,7 +5670,7 @@
     "city": "Крепость",
     "gold": -6500,
     "security": "Виверн",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5680,7 +5680,7 @@
     "city": "Крепость",
     "gold": 4400,
     "security": "Мантикора",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5690,7 +5690,7 @@
     "city": "Крепость",
     "gold": -4400,
     "security": "Мантикора",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5700,7 +5700,7 @@
     "city": "Башня",
     "gold": 400,
     "security": "Никс",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5710,7 +5710,7 @@
     "city": "Сопряжение",
     "gold": -400,
     "security": "Ифрит",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5720,7 +5720,7 @@
     "city": "Сопряжение",
     "gold": 6000,
     "security": "Древнее Чудище",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5730,7 +5730,7 @@
     "city": "Оплот",
     "gold": -6000,
     "security": "Циклоп",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5740,7 +5740,7 @@
     "city": "Сопряжение",
     "gold": 6000,
     "security": "Костяной Дракон",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5750,7 +5750,7 @@
     "city": "Оплот",
     "gold": -6000,
     "security": "Ржавый Дракон",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5760,7 +5760,7 @@
     "city": "Причал",
     "gold": -5000,
     "security": "Воинственный Единорог",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5770,7 +5770,7 @@
     "city": "Темница",
     "gold": 5000,
     "security": "Властитель Пропасти",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5780,7 +5780,7 @@
     "city": "Цитадель",
     "gold": 5100,
     "security": "Архангел",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5790,7 +5790,7 @@
     "city": "Некрополис",
     "gold": -5100,
     "security": "Никс Воин",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5800,7 +5800,7 @@
     "city": "Некрополис",
     "gold": -5000,
     "security": "Кристальный Дракон",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5810,7 +5810,7 @@
     "city": "Башня",
     "gold": 5000,
     "security": "Олгой-Хорхой",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5820,7 +5820,7 @@
     "city": "Оплот",
     "gold": 2400,
     "security": "Магический Элементаль",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5830,7 +5830,7 @@
     "city": "Темница",
     "gold": -2400,
     "security": "Циклоп",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5840,7 +5840,7 @@
     "city": "Оплот",
     "gold": 3700,
     "security": "Циклоп",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5850,7 +5850,7 @@
     "city": "Башня",
     "gold": -3700,
     "security": "",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5860,7 +5860,7 @@
     "city": "Фабрика",
     "gold": -2700,
     "security": "Коатль",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5870,7 +5870,7 @@
     "city": "Инферно",
     "gold": 2700,
     "security": "Гигант",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5880,7 +5880,7 @@
     "city": "Темница",
     "gold": -7300,
     "security": "Черный Рыцарь",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5890,7 +5890,7 @@
     "city": "Замок",
     "gold": 7300,
     "security": "Виверн Монах",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5900,7 +5900,7 @@
     "city": "Крепость",
     "gold": -7500,
     "security": "Воинственный Единорог",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5910,7 +5910,7 @@
     "city": "Цитадель",
     "gold": 7500,
     "security": "Красный Дракон",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5920,7 +5920,7 @@
     "city": "Фабрика",
     "gold": 3900,
     "security": "Архангел",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5930,7 +5930,7 @@
     "city": "Некрополис",
     "gold": 3900,
     "security": "Кристальный Дракон",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5940,7 +5940,7 @@
     "city": "Крепость",
     "gold": -4400,
     "security": "Гигант",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5950,7 +5950,7 @@
     "city": "Крепость",
     "gold": 4400,
     "security": "Гигант",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5960,7 +5960,7 @@
     "city": "Крепость",
     "gold": -5500,
     "security": "Архидьявол",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5970,7 +5970,7 @@
     "city": "Замок",
     "gold": 5500,
     "security": "Могущественный Лич",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -5980,7 +5980,7 @@
     "city": "Фабрика",
     "gold": -4300,
     "security": "Аспид",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -5990,7 +5990,7 @@
     "city": "Крепость",
     "gold": 4300,
     "security": "Гидры Хаоса",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -6000,7 +6000,7 @@
     "city": "Башня",
     "gold": 5900,
     "security": "Древнее Чудище",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -6010,7 +6010,7 @@
     "city": "Оплот",
     "gold": -5900,
     "security": "Ангел",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -6020,7 +6020,7 @@
     "city": "Инферно",
     "gold": -100,
     "security": "Никс Воин",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -6030,7 +6030,7 @@
     "city": "Фабрика",
     "gold": 100,
     "security": "Кристальный Дракон",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -6040,7 +6040,7 @@
     "city": "Башня",
     "gold": -100,
     "security": "Единорог",
-    "win": true
+    "win": 1
     },
     {
     "turnir": "HC 3 PO",
@@ -6050,7 +6050,7 @@
     "city": "Крепость",
     "gold": 100,
     "security": "Архидьявол",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -6060,7 +6060,7 @@
     "city": "Темница",
     "gold": 3900,
     "security": "Аспид",
-    "win": false
+    "win": 0
     },
     {
     "turnir": "HC 3 PO",
@@ -6070,6 +6070,6 @@
     "city": "Темница",
     "gold": -3900,
     "security": "Аспид",
-    "win": true
+    "win": 1
     }
 
