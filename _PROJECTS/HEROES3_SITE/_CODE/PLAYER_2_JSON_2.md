@@ -1,4 +1,3 @@
-  
     {
         "turnir": "Heroes Cup",
         "map": "JC Amazonki",
@@ -5922,5 +5921,3 @@
         "security": "Аспид",
         "win": 1
     },
-
-
