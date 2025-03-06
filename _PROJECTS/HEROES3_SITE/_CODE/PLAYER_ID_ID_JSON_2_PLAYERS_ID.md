@@ -1,2436 +1,3270 @@
 //6066
+
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 23, // Amieloo
-"color": "Красный",
-"city": "Башня",
-"gold": -6000,
-"security": "Ангел",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 4, // HILTYHA
-"color": "Синий",
-"city": "Фабрика",
-"gold": 6000,
-"security": "Зелёный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=c8SDfh3YZLM&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=2&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 23, // Amieloo
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 500,
-"security": "Аспид",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=c8SDfh3YZLM&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=2&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 4, // HILTYHA
-"color": "Синий",
-"city": "Крепость",
-"gold": -500,
-"security": "Багровый Коатль",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 31, // akaStinger
-"color": "Красный",
-"city": "Оплот",
-"gold": -4900,
-"security": "Огненная Птица",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=ytKOARjiu-s&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=3&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 44, // Yama_Darma
-"color": "Синий",
-"city": "Сопряжение",
-"gold": 4900,
-"security": "Дредноут",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=ytKOARjiu-s&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=3&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 31, // akaStinger
-"color": "Синий",
-"city": "Замок",
-"gold": -2900,
-"security": "Гидра",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 44, // Yama_Darma
-"color": "Красный",
-"city": "Фабрика",
-"gold": 2900,
-"security": "Призрачный Дракон",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 36, // HellLighT111
-"color": "Синий",
-"city": "Башня",
-"gold": -1100,
-"security": "Костяной Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=cNq6bKSqxLw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=4&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 59, // Skuns1978
-"color": "Красный",
-"city": "Оплот",
-"gold": 1100,
-"security": "Морской Змей",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=cNq6bKSqxLw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=4&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 36, // HellLighT111
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 5800,
-"security": "Древнее Чудище",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 59, // Skuns1978
-"color": "Синий",
-"city": "Замок",
-"gold": -5800,
-"security": "-",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 22, // Relig00s
-"color": "Красный",
-"city": "Фабрика",
-"gold": -200,
-"security": "Архидьявол",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=JzdCWFbRVos&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=5&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 33,
-"color": "Синий",
-"city": "Причал",
-"gold": 200,
-"security": "Титан",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=JzdCWFbRVos&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=5&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 22,
-"color": "Красный",
-"city": "Фабрика",
-"gold": 2300,
-"security": "Огненная Птица",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 33,
-"color": "Синий",
-"city": "Причал",
-"gold": -2300,
-"security": "Багровый Коатль",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 15,
-"color": "Красный",
-"city": "Башня",
-"gold": -5200,
-"security": "-",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 56,
-"color": "Синий",
-"city": "Оплот",
-"gold": 5200,
-"security": "-",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 15,
-"color": "Красный",
-"city": "Оплот",
-"gold": 4500,
-"security": "Зелёный Дракон",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 56,
-"color": "Синий",
-"city": "Башня",
-"gold": -4500,
-"security": "Чудище",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 41,
-"color": "Красный",
-"city": "Крепость",
-"gold": -6900,
-"security": "Дьявол",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 58,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 6900,
-"security": "Красный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 41,
-"color": "Синий",
-"city": "Темница",
-"gold": -1100,
-"security": "Архангел",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 58,
-"color": "Красный",
-"city": "Башня",
-"gold": 1100,
-"security": "Титан",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 55,
-"color": "Красный",
-"city": "Цитадель",
-"gold": 2100,
-"security": "Гидры Хаоса",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 5,
-"color": "Синий",
-"city": "Крепость",
-"gold": -2100,
-"security": "-",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 55,
-"color": "Синий",
-"city": "Инферно",
-"gold": 7000,
-"security": "Феникс",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 33, // Unutcon
-"color": "Синий",
-"city": "Причал",
-"gold": 200,
-"security": "Титан",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=JzdCWFbRVos&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=5&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 22, // Relig00s
-"color": "Красный",
-"city": "Фабрика",
-"gold": 2300,
-"security": "Огненная Птица",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 33, // Unutcon
-"color": "Синий",
-"city": "Причал",
-"gold": -2300,
-"security": "Багровый Коатль",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 15, // Newb1kk
-"color": "Красный",
-"city": "Башня",
-"gold": -5200,
-"security": "-",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 56, // Ahoy
-"color": "Синий",
-"city": "Оплот",
-"gold": 5200,
-"security": "-",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 15, // Newb1kk
-"color": "Красный",
-"city": "Оплот",
-"gold": 4500,
-"security": "Зелёный Дракон",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 56, // Ahoy
-"color": "Синий",
-"city": "Башня",
-"gold": -4500,
-"security": "Чудище",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 41, // pup_ok_
-"color": "Красный",
-"city": "Крепость",
-"gold": -6900,
-"security": "Дьявол",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 58, // Tretiy_Geroy
-"color": "Синий",
-"city": "Фабрика",
-"gold": 6900,
-"security": "Красный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 41, // pup_ok_
-"color": "Синий",
-"city": "Темница",
-"gold": -1100,
-"security": "Архангел",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 58, // Tretiy_Geroy
-"color": "Красный",
-"city": "Башня",
-"gold": 1100,
-"security": "Титан",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 55, // Admiral_sex
-"color": "Красный",
-"city": "Цитадель",
-"gold": 2100,
-"security": "Гидры Хаоса",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 5, // Master_of__mind
-"color": "Синий",
-"city": "Крепость",
-"gold": -2100,
-"security": "-",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 55, // Admiral_sex
-"color": "Синий",
-"city": "Инферно",
-"gold": 7000,
-"security": "Феникс",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 5, // Master_of__mind
-"color": "Красный",
-"city": "Крепость",
-"gold": -7000,
-"security": "Огненная Птица",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 49, // Green1hell
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 200,
-"security": "​",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=fsoOdtX_Eu0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=9&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 4, // HILTYHA
-"color": "Синий",
-"city": "Оплот",
-"gold": -200,
-"security": "​",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=fsoOdtX_Eu0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=9&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 49, // Green1hell
-"color": "Синий",
-"city": "Крепость",
-"gold": -3100,
-"security": "Гигант",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 4, // HILTYHA
-"color": "Красный",
-"city": "Инферно",
-"gold": 3100,
-"security": "Аспид",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 59, // Skuns1978
-"color": "Красный",
-"city": "Фабрика",
-"gold": -400,
-"security": "Ангел",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=LwyeXZSMSTA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=10"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 20, // papashkaiz4atika
-"color": "Синий",
-"city": "Замок",
-"gold": 400,
-"security": "Аспид",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=LwyeXZSMSTA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=10"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 59, // Skuns1978
-"color": "Синий",
-"city": "Некрополис",
-"gold": 2800,
-"security": "Призрачный Дракон",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 20, // papashkaiz4atika
-"color": "Красный",
-"city": "Цитадель",
-"gold": -2800,
-"security": "Зелёный Дракон",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 37, // Weronest
-"color": "Красный",
-"city": "Фабрика",
-"gold": 100,
-"security": "Зелёный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=Gov1dWc765o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=11&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 38, // VovastikMashina
-"color": "Синий",
-"city": "Башня",
-"gold": -100,
-"security": "Древнее Чудище",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=Gov1dWc765o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=11&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 37, // Weronest
-"color": "Красный",
-"city": "Фабрика",
-"gold": 2200,
-"security": "Архангел",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 38, // VovastikMashina
-"color": "Синий",
-"city": "Башня",
-"gold": -2200,
-"security": "Зелёный Дракон",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 37, // Weronest
-"color": "Красный",
-"city": "Замок",
-"gold": -6700,
-"security": "Аспид",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=lf7BTdOhveg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=12&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 36, // HellLighT111
-"color": "Синий",
-"city": "Башня",
-"gold": 6700,
-"security": "Джаггернаут",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=lf7BTdOhveg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=12&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 37, // Weronest
-"color": "Синий",
-"city": "Башня",
-"gold": 5100,
-"security": "Гидра",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 36, // HellLighT111
-"color": "Красный",
-"city": "Фабрика",
-"gold": -5100,
-"security": "Феникс",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 31, // akaStinger
-"color": "Синий",
-"city": "Цитадель",
-"gold": -900,
-"security": "​",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=6NL0PTeZ620&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=13&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 5, // Master_of__mind
-"color": "Красный",
-"city": "Башня",
-"gold": 900,
-"security": "​",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=6NL0PTeZ620&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=13&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 31, // akaStinger
-"color": "Красный",
-"city": "Фабрика",
-"gold": -6000,
-"security": "Архангел",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 5, // Master_of__mind
-"color": "Синий",
-"city": "Башня",
-"gold": 6000,
-"security": "Зелёный Дракон",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 23, // amieloo
-"color": "Красный",
-"city": "Причал",
-"gold": -6000,
-"security": "Морской Змей",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=7l00zf_fuN0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=14&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 41, // pup_ok_
-"color": "Синий",
-"city": "Фабрика",
-"gold": 6000,
-"security": "Чёрный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=7l00zf_fuN0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=14&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 23, // amieloo
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 1600,
-"security": "Архидьявол",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 41, // pup_ok_
-"color": "Синий",
-"city": "Оплот",
-"gold": -1600,
-"security": "Коатль",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 33, // Unutcon
-"color": "Синий",
-"city": "Причал",
-"gold": -1600,
-"security": "Архангел",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=vKQOhgA4FoE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=15&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 15, // Newb1kk
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 1600,
-"security": "Архидьявол",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=vKQOhgA4FoE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=15&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 33,
-"color": "Синий",
-"city": "Причал",
-"gold": 200,
-"security": "Титан",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=JzdCWFbRVos&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=5&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 22,
-"color": "Красный",
-"city": "Фабрика",
-"gold": 2300,
-"security": "Огненная Птица",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 33,
-"color": "Синий",
-"city": "Причал",
-"gold": -2300,
-"security": "Багровый Коатль",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 15,
-"color": "Красный",
-"city": "Башня",
-"gold": -5200,
-"security": "-",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 56,
-"color": "Синий",
-"city": "Оплот",
-"gold": 5200,
-"security": "-",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 15,
-"color": "Красный",
-"city": "Оплот",
-"gold": 4500,
-"security": "Зелёный Дракон",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 56,
-"color": "Синий",
-"city": "Башня",
-"gold": -4500,
-"security": "Чудище",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 41,
-"color": "Красный",
-"city": "Крепость",
-"gold": -6900,
-"security": "Дьявол",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 58,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 6900,
-"security": "Красный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 41,
-"color": "Синий",
-"city": "Темница",
-"gold": -1100,
-"security": "Архангел",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 58,
-"color": "Красный",
-"city": "Башня",
-"gold": 1100,
-"security": "Титан",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 55,
-"color": "Красный",
-"city": "Цитадель",
-"gold": 2100,
-"security": "Гидры Хаоса",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 5,
-"color": "Синий",
-"city": "Крепость",
-"gold": -2100,
-"security": "-",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 55,
-"color": "Синий",
-"city": "Инферно",
-"gold": 7000,
-"security": "Феникс",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 33,
-"color": "Красный",
-"city": "Некрополис",
-"gold": 4200,
-"security": "Гигант",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 15,
-"color": "Синий",
-"city": "Причал",
-"gold": -4200,
-"security": "Костяной Дракон",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 31,
-"color": "Синий",
-"city": "Оплот",
-"gold": 400,
-"security": "Гидры Хаоса",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=u-9-I_Kubqo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=16&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 54,
-"color": "Красный",
-"city": "Башня",
-"gold": -400,
-"security": "Багровый Коатль",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=u-9-I_Kubqo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=16&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 31,
-"color": "Синий",
-"city": "Крепость",
-"gold": 1100,
-"security": "Джаггернаут",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 54,
-"color": "Красный",
-"city": "Оплот",
-"gold": -1100,
-"security": "Архидьявол",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 20,
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 2500,
-"security": "Морской Змей",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=7MUdm6r767M&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=17&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 38,
-"color": "Синий",
-"city": "Замок",
-"gold": -2500,
-"security": "Костяной Дракон",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=7MUdm6r767M&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=17&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 20,
-"color": "Синий",
-"city": "Замок",
-"gold": -2400,
-"security": "​",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 38,
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 2400,
-"security": "​",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 15,
-"color": "Красный",
-"city": "Фабрика",
-"gold": 1600,
-"security": "​",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=Pb3G-2snw8k&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=18&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 57,
-"color": "Синий",
-"city": "Причал",
-"gold": -1600,
-"security": "​",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=Pb3G-2snw8k&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=18&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 15,
-"color": "Красный",
-"city": "​",
-"gold": 0,
-"security": "​",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 57,
-"color": "Синий",
-"city": "​",
-"gold": 0,
-"security": "​",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 44,
-"color": "Красный",
-"city": "Причал",
-"gold": -6900,
-"security": "Феникс",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=Yzv5cLqnLlA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=19&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 55,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 6900,
-"security": "Огненная Птица",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=Yzv5cLqnLlA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=19&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 44,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 100,
-"security": "Аспид",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 55,
-"color": "Красный",
-"city": "Некрополис",
-"gold": -100,
-"security": "​",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 57,
-"color": "Синий",
-"city": "Замок",
-"gold": 1500,
-"security": "Призрачный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=MFNHZ1zq1iA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=20&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 56,
-"color": "Красный",
-"city": "Крепость",
-"gold": -1500,
-"security": "Зелёный Дракон",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=MFNHZ1zq1iA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=20&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 57,
-"color": "Красный",
-"city": "Замок",
-"gold": -5300,
-"security": "Чудище",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 56,
-"color": "Синий",
-"city": "Причал",
-"gold": 5300,
-"security": "Багровый Коатль",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 44,
-"color": "Красный",
-"city": "Замок",
-"gold": -6200,
-"security": "Чудище",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=SiPec07FDqA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=21&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 54,
-"color": "Синий",
-"city": "Цитадель",
-"gold": 6200,
-"security": "Призрачный Дракон",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=SiPec07FDqA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=21&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 44,
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 2100,
-"security": "Архангел",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 54,
-"color": "Синий",
-"city": "Оплот",
-"gold": -2100,
-"security": "Чёрный Дракон",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 58,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 1300,
-"security": "Дьявол",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=sExYSRB23sY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=22&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 49,
-"color": "Красный",
-"city": "Цитадель",
-"gold": -1300,
-"security": "Титан",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=sExYSRB23sY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=22&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 58,
-"color": "Синий",
-"city": "Темница",
-"gold": 1100,
-"security": "​",
-"win": 0,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 49,
-"color": "Красный",
-"city": "Сопряжение",
-"gold": -1100,
-"security": "​",
-"win": 1,
-"link": ""
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 38,
-"color": "Красный",
-"city": "Сопряжение",
-"gold": -700,
-"security": "Древнее Чудище",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=wL4MXevJKzU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=23&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 59,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 700,
-"security": "Чудище",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=wL4MXevJKzU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=23&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 38,
-"color": "Красный",
-"city": "Некрополис",
-"gold": 800,
-"security": "Дьявол",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 59,
-"color": "Синий",
-"city": "Башня",
-"gold": -800,
-"security": "Волшебный Дракон",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 56,
-"color": "Красный",
-"city": "Оплот",
-"gold": 1100,
-"security": "Гидра",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=uOagh98qSLQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=24&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 22,
-"color": "Синий",
-"city": "Башня",
-"gold": -1100,
-"security": "Кристальный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=uOagh98qSLQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=24&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 56,
-"color": "Синий",
-"city": "Фабрика",
-"gold": -4400,
-"security": "Аспид",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 22,
-"color": "Красный",
-"city": "Причал",
-"gold": 4400,
-"security": "Джаггернаут",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 5,
-"color": "Красный",
-"city": "Фабрика",
-"gold": -5200,
-"security": "Кристальный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=Ky5zcHmgE_I&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=25&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 54,
-"color": "Синий",
-"city": "Цитадель",
-"gold": 5200,
-"security": "Золотой Дракон",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=Ky5zcHmgE_I&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=25&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 5,
-"color": "Красный",
-"city": "Башня",
-"gold": -6000,
-"security": "",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 54,
-"color": "Синий",
-"city": "Некрополис",
-"gold": 6000,
-"security": "",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 23,
-"color": "Красный",
-"city": "Цитадель",
-"gold": 1500,
-"security": "Дьявол",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=ZLrhtJKIjOk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=26&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 49,
-"color": "Синий",
-"city": "Оплот",
-"gold": -1500,
-"security": "Коатль",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=ZLrhtJKIjOk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=26&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 23,
-"color": "Красный",
-"city": "Фабрика",
-"gold": 2600,
-"security": "",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 49,
-"color": "Синий",
-"city": "Башня",
-"gold": -2600,
-"security": "",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 37, // Weronest
-"color": "Синий",
-"city": "Фабрика",
-"gold": 200,
-"security": "Багровый Коатль",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=b5ZC0xc7x8o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=27&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 20, // Papashkaiz4atika
-"color": "Красный",
-"city": "Инферно",
-"gold": -200,
-"security": "Джаггернаут",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=b5ZC0xc7x8o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=27&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 37, // Weronest
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 100,
-"security": "Феникс",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 20, // Papashkaiz4atika
-"color": "Синий",
-"city": "Башня",
-"gold": -100,
-"security": "Джаггернаут",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 4, // HILTYHA
-"color": "Красный",
-"city": "Темница",
-"gold": 4700,
-"security": "Кристальный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=bZ9Rj_u-3kE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=28&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 41, // pup_ok_
-"color": "Синий",
-"city": "Некрополис",
-"gold": -4700,
-"security": "Кристальный Дракон",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=bZ9Rj_u-3kE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=28&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 4, // HILTYHA
-"color": "Синий",
-"city": "Фабрика",
-"gold": 6200,
-"security": "Золотой Дракон",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 41, // pup_ok_
-"color": "Красный",
-"city": "Некрополис",
-"gold": -6200,
-"security": "Ржавый Дракон",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 33, // Unutcon
-"color": "Синий",
-"city": "Инферно",
-"gold": 4900,
-"security": "Зелёный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=CyCLJ9pltiI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=29&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 57, // Nitemoy
-"color": "Красный",
-"city": "Оплот",
-"gold": -4900,
-"security": "",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=CyCLJ9pltiI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=29&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 33, // Unutcon
-"color": "Синий",
-"city": "Крепость",
-"gold": -1300,
-"security": "Титан",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 57, // Nitemoy
-"color": "Красный",
-"city": "Некрополис",
-"gold": 1300,
-"security": "Огненная Птица",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 44, // Yama_Darma
-"color": "Красный",
-"city": "Крепость",
-"gold": -500,
-"security": "Зелёный Дракон",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=D4x0PjnsKKk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=30&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 5, // Master_of__mind
-"color": "Синий",
-"city": "Фабрика",
-"gold": 500,
-"security": "Гигант",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=D4x0PjnsKKk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=30&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 44, // Yama_Darma
-"color": "Синий",
-"city": "Сопряжение",
-"gold": 5900,
-"security": "Архидьявол",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 5, // Master_of__mind
-"color": "Красный",
-"city": "Фабрика",
-"gold": -5900,
-"security": "Ангел",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 15, // newb1kk
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 1900,
-"security": "Дьявол",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=ZrVBO5mEQcU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=31&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 22, // Relig00s
-"color": "Синий",
-"city": "Некрополис",
-"gold": -1900,
-"security": "Морской Змей",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=ZrVBO5mEQcU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=31&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 15, // newb1kk
-"color": "Красный",
-"city": "",
-"gold": 0,
-"security": "",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 22, // Relig00s
-"color": "Синий",
-"city": "",
-"gold": 0,
-"security": "",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 36, // HellLighT111
-"color": "Синий",
-"city": "Причал",
-"gold": 600,
-"security": "Призрачный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=QgCAE4QKxWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=32&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 20, // Papashkaiz4atika
-"color": "Красный",
-"city": "Оплот",
-"gold": -600,
-"security": "Королева Нага",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=QgCAE4QKxWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=32&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 36, // HellLighT111
-"color": "Синий",
-"city": "Причал",
-"gold": -100,
-"security": "Золотой Дракон",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 20, // Papashkaiz4atika
-"color": "Красный",
-"city": "Замок",
-"gold": 100,
-"security": "Ангел",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 31, // akaStinger
-"color": "Синий",
-"city": "Сопряжение",
-"gold": 1300,
-"security": "Архидьявол",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=aSGkbl3Y4C8&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=33&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 55, // Admiral_sex
-"color": "Красный",
-"city": "Фабрика",
-"gold": -1300,
-"security": "Морской Змей",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=aSGkbl3Y4C8&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=33&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 31, // akaStinger
-"color": "Красный",
-"city": "Оплот",
-"gold": -2400,
-"security": "Королева Нага",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 55, // Admiral_sex
-"color": "Синий",
-"city": "Некрополис",
-"gold": 2400,
-"security": "Гидры Хаоса",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 41, // pup_ok_
-"color": "Синий",
-"city": "Причал",
-"gold": -1400,
-"security": "Золотой Дракон",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=5uQO9JpJjsg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=34&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 49, // Green1hell
-"color": "Красный",
-"city": "Сопряжение",
-"gold": 1400,
-"security": "Морской Змей",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=5uQO9JpJjsg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=34&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 41, // pup_ok_
-"color": "Красный",
-"city": "Фабрика",
-"gold": 1900,
-"security": "Ангел",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 49, // Green1hell
-"color": "Синий",
-"city": "Цитадель",
-"gold": -1900,
-"security": "Кристальный Дракон",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 23, // amieloo
-"color": "Синий",
-"city": "Причал",
-"gold": -1000,
-"security": "Кристальный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=SohZu170FD4&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=35&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 58, // Tretiy_Geroy
-"color": "Красный",
-"city": "Оплот",
-"gold": 1000,
-"security": "Королева Нага",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=SohZu170FD4&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=35&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 23, // amieloo
-"color": "Красный",
-"city": "Крепость",
-"gold": 100,
-"security": "Дьявол",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 58, // Tretiy_Geroy
-"color": "Синий",
-"city": "Замок",
-"gold": -100,
-"security": "Королева Нага",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 22, // Relig00s
-"color": "Красный",
-"city": "Замок",
-"gold": -6500,
-"security": "Волшебный Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=uUDgFAOL5uI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=36&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 57, // Nitemoy
-"color": "Синий",
-"city": "Оплот",
-"gold": 6500,
-"security": "Огненная Птица",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=uUDgFAOL5uI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=36&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 22, // Relig00s
-"color": "Красный",
-"city": "Башня",
-"gold": -1400,
-"security": "Феникс",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 57, // Nitemoy
-"color": "Синий",
-"city": "Крепость",
-"gold": 1400,
-"security": "Лазурный Дракон",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 59, // Skuns1978
-"color": "Красный",
-"city": "Оплот",
-"gold": -900,
-"security": "Гидра",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=h_8WcWKossQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=37&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 37,
-"color": "Синий",
-"city": "Цитадель",
-"gold": 900,
-"security": "Ржавый Дракон",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=h_8WcWKossQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=37&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 59,
-"color": "Синий",
-"city": "Крепость",
-"gold": 300,
-"security": "Чёрный Дракон",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 37,
-"color": "Красный",
-"city": "Башня",
-"gold": -300,
-"security": "Чудище",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 56,
-"color": "Красный",
-"city": "Фабрика",
-"gold": 500,
-"security": "Чёрный Дракон",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=q_g6vT2mL5w&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=38&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 33,
-"color": "Синий",
-"city": "Крепость",
-"gold": -500,
-"security": "Архангел",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=q_g6vT2mL5w&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=38&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 56,
-"color": "Красный",
-"city": "Крепость",
-"gold": -7000,
-"security": "",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 33,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 7000,
-"security": "",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 54,
-"color": "Красный",
-"city": "Фабрика",
-"gold": -900,
-"security": "Коатль",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=an2jYYQn1BQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=39&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 55,
-"color": "Синий",
-"city": "Цитадель",
-"gold": 900,
-"security": "Древнее Чудище",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=an2jYYQn1BQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=39&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 54,
-"color": "Синий",
-"city": "Причал",
-"gold": -500,
-"security": "",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 55,
-"color": "Красный",
-"city": "Фабрика",
-"gold": 500,
-"security": "",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 4,
-"color": "Красный",
-"city": "Башня",
-"gold": 1000,
-"security": "Аспид",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=EIg4JFdQSKE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=40&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Native",
-"player": 58,
-"color": "Синий",
-"city": "Причал",
-"gold": -1000,
-"security": "Феникс",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=EIg4JFdQSKE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=40&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 4,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 600,
-"security": "Багровый Коатль",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 58,
-"color": "Красный",
-"city": "Причал",
-"gold": -600,
-"security": "Красный Дракон",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
+"turnir": "Heroes Cup 2",
 "map": "Jebus Cross",
-"player": 41,
+"player": 60,
+"color": "Красный",
+"city": "Крепость",
+"gold": 600,
+"security": "Морской Змей",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=QBe9bOlRn6E&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=1&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 31,
+"color": "Синий",
+"city": "Темница",
+"gold": -600,
+"security": "Морской Змей",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=QBe9bOlRn6E&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=1&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 60,
+"color": "Красный",
+"city": "Причал",
+"gold": -3900,
+"security": "Ифрит",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 31,
+"color": "Синий",
+"city": "Цитадель",
+"gold": 3900,
+"security": "Архангел",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 37,
+"color": "Красный",
+"city": "Фабрика",
+"gold": 5800,
+"security": "Джаггернаут",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=wK5S6aVzxTM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=2&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 61,
 "color": "Синий",
 "city": "Башня",
-"gold": 7000,
+"gold": -5800,
 "security": "Нага",
 "win": 1,
-"link": "https://www.youtube.com/watch?v=1U_Q4OGWucg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=41&pp=iAQB"
+"link": "https://www.youtube.com/watch?v=wK5S6aVzxTM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=2&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
-"player": 57,
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 37,
 "color": "Красный",
-"city": "Некрополис",
-"gold": -7000,
-"security": "Песчаный Червь",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=1U_Q4OGWucg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=41&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 41,
-"color": "Красный",
-"city": "Оплот",
-"gold": 1400,
-"security": "Древнее Чудище",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 57,
-"color": "Синий",
-"city": "Цитадель",
-"gold": -1400,
-"security": "Кристальный Дракон",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
-"player": 44,
-"color": "Красный",
-"city": "Темница",
-"gold": -7200,
-"security": "Властитель Пропасти",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=jhkFMGVdo58&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=42&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
-"player": 38,
-"color": "Синий",
-"city": "Крепость",
-"gold": 7200,
-"security": "Титан",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=jhkFMGVdo58&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=42&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 44,
-"color": "Красный",
-"city": "Инферно",
-"gold": 400,
-"security": "Чудище",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 38,
-"color": "Синий",
-"city": "Крепость",
-"gold": -400,
-"security": "Кристальный Дракон",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
-"player": 58,
-"color": "Красный",
-"city": "Некрополис",
-"gold": -7900,
-"security": "Виверн",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=P8SnGYs4QVU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=43&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
-"player": 15,
-"color": "Синий",
-"city": "Инферно",
-"gold": 7900,
-"security": "Олгой-Хорхой",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=P8SnGYs4QVU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=43&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 58,
-"color": "Синий",
-"city": "Сопряжение",
-"gold": -1000,
-"security": "Архидьявол",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 15,
-"color": "Красный",
-"city": "Фабрика",
-"gold": 1000,
-"security": "Огненная Птица",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
-"player": 58,
-"color": "Красный",
-"city": "Фабрика",
-"gold": -4000,
-"security": "Психический Элементаль",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
-"player": 15,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 4000,
-"security": "Психический Элементаль",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
-"player": 22,
-"color": "Красный",
-"city": "Сопряжение",
-"gold": -700,
-"security": "Королева Нага",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=bhNnxZdV8cg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=44&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
-"player": 4,
-"color": "Синий",
-"city": "Оплот",
-"gold": 700,
-"security": "Властитель Пропасти",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=bhNnxZdV8cg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=44&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 22,
-"color": "Красный",
-"city": "Причал",
-"gold": -6600,
-"security": "Дьявол",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 4,
-"color": "Синий",
-"city": "Некрополис",
-"gold": 6600,
-"security": "Золотой Дракон",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
-"player": 22,
-"color": "Красный",
-"city": "Фабрика",
-"gold": -4100,
-"security": "Воинственный Единорог",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
-"player": 4,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 4100,
-"security": "Воинственный Единорог",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
-"player": 55,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 4200,
+"city": "Башня",
+"gold": -4300,
 "security": "Чародей",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=lbpCedCMksE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=45&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
-"player": 36,
-"color": "Красный",
-"city": "Инферно",
-"gold": -4200,
-"security": "Королева Нага",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=lbpCedCMksE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=45&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 55,
-"color": "Красный",
-"city": "Темница",
-"gold": 4400,
-"security": "Гидры Хаоса",
 "win": 1
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 36,
-"color": "Синий",
-"city": "Причал",
-"gold": -4400,
-"security": "Гидры Хаоса",
-"win": 0
-},
-{
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
-"player": 55,
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 61,
 "color": "Синий",
 "city": "Фабрика",
 "gold": 4300,
-"security": "Костяной Дракон",
+"security": "Кавалерист",
 "win": 0
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 37,
+"color": "Синий",
+"city": "Инферно",
+"gold": 7000,
+"security": "Костяной Дракон",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 61,
+"color": "Красный",
+"city": "Крепость",
+"gold": -7000,
+"security": "Морской Змей",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 62,
+"color": "Красный",
+"city": "Башня",
+"gold": 0,
+"security": "Виверн",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=Si9iNibq4uE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=3&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 49,
+"color": "Синий",
+"city": "Темница",
+"gold": 0,
+"security": "Гидра",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=Si9iNibq4uE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=3&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 62,
+"color": "Красный",
+"city": "Замок",
+"gold": -4200,
+"security": "Дьявол",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 49,
+"color": "Синий",
+"city": "Инферно",
+"gold": 4200,
+"security": "Гидры Хаоса",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 62,
+"color": "Синий",
+"city": "Причал",
+"gold": 5500,
+"security": "Стрелок",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 49,
+"color": "Красный",
+"city": "Башня",
+"gold": -5500,
+"security": "Ржавый Дракон",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 5,
+"color": "Красный",
+"city": "Фабрика",
+"gold": 4500,
+"security": "Архидьявол",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=vMGRhEXPbZE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=4&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 63,
+"color": "Синий",
+"city": "Темница",
+"gold": -4500,
+"security": "Воинственный Единорог",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=vMGRhEXPbZE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=4&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 5,
+"color": "Синий",
+"city": "Инферно",
+"gold": 4000,
+"security": "Единорог",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 63,
+"color": "Красный",
+"city": "Замок",
+"gold": -4000,
+"security": "Скорпикора",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
 "player": 36,
 "color": "Красный",
 "city": "Фабрика",
-"gold": -4300,
-"security": "Костяной Дракон",
-"win": 1
-},
-{
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
-"player": 49,
-"color": "Красный",
-"city": "Оплот",
-"gold": 2200,
-"security": "Черный Рыцарь",
+"gold": 6600,
+"security": "Чемпион",
 "win": 1,
-"link": "https://www.youtube.com/watch?v=mJPlYkNAXlU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=46&pp=iAQB"
+"link": "https://www.youtube.com/watch?v=aSM1EwLe0Nc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=5&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
+"turnir": "Heroes Cup 2",
 "map": "Jebus Cross",
-"player": 33,
+"player": 64,
 "color": "Синий",
 "city": "Некрополис",
-"gold": -2200,
-"security": "Золотой Дракон",
+"gold": -6600,
+"security": "Циклоп",
 "win": 0,
-"link": "https://www.youtube.com/watch?v=mJPlYkNAXlU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=46&pp=iAQB"
+"link": "https://www.youtube.com/watch?v=aSM1EwLe0Nc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=5&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 49,
-"color": "Красный",
-"city": "Сопряжение",
-"gold": -2800,
-"security": "Королева Нага",
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 36,
+"color": "Синий",
+"city": "Крепость",
+"gold": 3600,
+"security": "Кавалерист",
 "win": 1
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 33,
-"color": "Синий",
-"city": "Башня",
-"gold": 2800,
-"security": "Королева Нага",
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 64,
+"color": "Красный",
+"city": "Цитадель",
+"gold": -3600,
+"security": "Виверн Монах",
 "win": 0
 },
 {
-"turnir": "Heroes Cup",
+"turnir": "Heroes Cup 2",
 "map": "Jebus Cross",
-"player": 37,
-"color": "Красный",
-"city": "Оплот",
-"gold": -4900,
-"security": "Гигант",
+"player": 60,
+"color": "Синий",
+"city": "Замок",
+"gold": 5100,
+"security": "Кристальный Дракон",
 "win": 1,
-"link": "https://www.youtube.com/watch?v=7CWDjAlxUeo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=47&pp=iAQB"
+"link": "https://www.youtube.com/watch?v=_4HaKR6xbVQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=6&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
+"turnir": "Heroes Cup 2",
 "map": "Jebus Cross",
-"player": 31,
-"color": "Синий",
-"city": "Замок",
-"gold": 4900,
-"security": "Единорог",
+"player": 61,
+"color": "Красный",
+"city": "Крепость",
+"gold": -5100,
+"security": "Циклоп",
 "win": 0,
-"link": "https://www.youtube.com/watch?v=7CWDjAlxUeo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=47&pp=iAQB"
+"link": "https://www.youtube.com/watch?v=_4HaKR6xbVQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=6&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 37,
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 60,
+"color": "Красный",
+"city": "Инферно",
+"gold": -3800,
+"security": "Минотавр",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 61,
 "color": "Синий",
-"city": "Замок",
-"gold": 600,
-"security": "Морской Змей",
+"city": "Цитадель",
+"gold": 3800,
+"security": "Зелёный Дракон",
 "win": 1
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 60,
+"color": "Синий",
+"city": "Темница",
+"gold": -200,
+"security": "Единорог",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 61,
+"color": "Красный",
+"city": "Замок",
+"gold": 200,
+"security": "Циклоп",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 62,
+"color": "Красный",
+"city": "Некрополис",
+"gold": -8200,
+"security": "Феникс",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=cK1mSP1VPmM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=7&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 64,
+"color": "Синий",
+"city": "Инферно",
+"gold": 8200,
+"security": "Птица Грома",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=cK1mSP1VPmM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=7&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 62,
+"color": "Синий",
+"city": "Замок",
+"gold": 4100,
+"security": "Джаггернаут",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 64,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -4100,
+"security": "Архангел",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 28,
+"color": "Красный",
+"city": "Оплот",
+"gold": 3400,
+"security": "Охотник за Головами",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=9qiS_XsTDtY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=8&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 4,
+"color": "Синий",
+"city": "Темница",
+"gold": -3400,
+"security": "Никс Воин",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=9qiS_XsTDtY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=8&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 28,
+"color": "Красный",
+"city": "Цитадель",
+"gold": -3900,
+"security": "Охотник за Головами",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 4,
+"color": "Синий",
+"city": "Крепость",
+"gold": 3900,
+"security": "Джаггернаут",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 22,
+"color": "Красный",
+"city": "Инферно",
+"gold": 0,
+"security": "Птица Грома",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=gyRWUZ1HsZ4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=9&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 58,
+"color": "Синий",
+"city": "Причал",
+"gold": 0,
+"security": "Воинственный Единорог",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=gyRWUZ1HsZ4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=9&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 22,
+"color": "Синий",
+"city": "Инферно",
+"gold": 4300,
+"security": "Коатль",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 58,
+"color": "Красный",
+"city": "Оплот",
+"gold": -4300,
+"security": "Властитель Пропасти",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 37,
+"color": "Синий",
+"city": "Крепость",
+"gold": 0,
+"security": "Птица Грома",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=qOiWXMKPyW0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=10"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 31,
+"color": "Красный",
+"city": "Фабрика",
+"gold": 0,
+"security": "Скорпикора",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=qOiWXMKPyW0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=10"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 37,
+"color": "Синий",
+"city": "Сопряжение",
+"gold": 4300,
+"security": "Никс Воин",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
 "player": 31,
 "color": "Красный",
 "city": "Инферно",
-"gold": -600,
-"security": "Лазурный Дракон",
+"gold": -4300,
+"security": "Виверн",
 "win": 0
 },
 {
-"turnir": "Heroes Cup",
+"turnir": "Heroes Cup 2",
 "map": "Jebus Cross",
-"player": 5,
+"player": 49,
 "color": "Красный",
-"city": "Некрополис",
-"gold": -8300,
-"security": "Чародей",
+"city": "Инферно",
+"gold": 4100,
+"security": "Циклоп",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=6lL4rN_v-eQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=11&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 36,
+"color": "Синий",
+"city": "Темница",
+"gold": -4100,
+"security": "Гидра",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=6lL4rN_v-eQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=11&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 49,
+"color": "Красный",
+"city": "Инферно",
+"gold": -4100,
+"security": "Призрачный Дракон",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 36,
+"color": "Синий",
+"city": "Сопряжение",
+"gold": 4100,
+"security": "Архангел",
 "win": 1
 },
 {
-"turnir": "Heroes Cup",
+"turnir": "Heroes Cup 2",
 "map": "Jebus Cross",
-"player": 20,
+"player": 31,
+"color": "Красный",
+"city": "Темница",
+"gold": -6500,
+"security": "Циклоп",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=Rwyini2zOj0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=12&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 60,
 "color": "Синий",
-"city": "Цитадель",
-"gold": 8300,
-"security": "Чародей",
+"city": "Крепость",
+"gold": 6500,
+"security": "Могущественный Лич",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=Rwyini2zOj0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=12&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 31,
+"color": "Красный",
+"city": "Причал",
+"gold": -4000,
+"security": "Циклоп",
 "win": 0
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 5,
-"color": "Красный",
-"city": "Крепость",
-"gold": -7800,
-"security": "Гидра",
-"win": 0,
-"link": "https://www.youtube.com/watch?v=lfOFL-8b6Ok&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=48&pp=iAQB"
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 60,
+"color": "Синий",
+"city": "Сопряжение",
+"gold": 4000,
+"security": "Могущественный Лич",
+"win": 1
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 20,
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 31,
 "color": "Синий",
 "city": "Замок",
-"gold": 7800,
-"security": "Дредноут",
-"win": 1,
-"link": "https://www.youtube.com/watch?v=lfOFL-8b6Ok&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=48&pp=iAQB"
-},
-{
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
-"player": 5,
-"color": "Красный",
-"city": "Фабрика",
-"gold": -3900,
-"security": "Ржавый Дракон",
+"gold": 4200,
+"security": "Никс Воин",
 "win": 1
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
-"player": 20,
-"color": "Синий",
-"city": "Фабрика",
-"gold": 3900,
-"security": "Ржавый Дракон",
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 60,
+"color": "Красный",
+"city": "Башня",
+"gold": -4200,
+"security": "Багровый Коатль",
 "win": 0
 },
 {
-"turnir": "Heroes Cup",
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 58,
+"color": "Красный",
+"city": "Крепость",
+"gold": 3600,
+"security": "Олгой-Хорхой",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=VQBP0OQlVAY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=13&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 28,
+"color": "Синий",
+"city": "Некрополис",
+"gold": -3600,
+"security": "Виверн",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=VQBP0OQlVAY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=13&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 58,
+"color": "Синий",
+"city": "Замок",
+"gold": 4100,
+"security": "Психический Элементаль",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 28,
+"color": "Красный",
+"city": "Фабрика",
+"gold": -4100,
+"security": "Мантикора",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 47,
+"color": "Синий",
+"city": "Причал",
+"gold": 6800,
+"security": "Ангел",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 63,
+"color": "Красный",
+"city": "Крепость",
+"gold": -6800,
+"security": "Призрачный Дракон",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 47,
+"color": "Красный",
+"city": "Цитадель",
+"gold": -4400,
+"security": "Древнее Чудище",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=1bYoyh_3iAQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=14&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 63,
+"color": "Синий",
+"city": "Сопряжение",
+"gold": 4400,
+"security": "Феникс",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=1bYoyh_3iAQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=14&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 47,
+"color": "Синий",
+"city": "Башня",
+"gold": -2800,
+"security": "Огненная Птица",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 63,
+"color": "Красный",
+"city": "Оплот",
+"gold": 2800,
+"security": "Ангел",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 4,
+"color": "Синий",
+"city": "Оплот",
+"gold": -5000,
+"security": "Древнее Чудище",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=Ca4-yWxXZGo&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=15&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 22,
+"color": "Красный",
+"city": "Замок",
+"gold": 5000,
+"security": "Архидьявол",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=Ca4-yWxXZGo&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=15&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 4,
+"color": "Синий",
+"city": "Темница",
+"gold": 3900,
+"security": "Охотник за Головами",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 22,
+"color": "Красный",
+"city": "Замок",
+"gold": -3900,
+"security": "Волшебный Дракон",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 5,
+"color": "Синий",
+"city": "Башня",
+"gold": -2300,
+"security": "Гидра",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=-F1xuEW-jH8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=16&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 33,
+"color": "Красный",
+"city": "Замок",
+"gold": 2300,
+"security": "Огненная Птица",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=-F1xuEW-jH8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=16&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 5,
+"color": "Синий",
+"city": "Инферно",
+"gold": 3900,
+"security": "Гигант",
+"win": 0,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 33,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -3900,
+"security": "Виверн Монах",
+"win": 1,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 5,
+"color": "Синий",
+"city": "Замок",
+"gold": -2800,
+"security": "Феникс",
+"win": 0,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 33,
+"color": "Красный",
+"city": "Инферно",
+"gold": 2800,
+"security": "Чемпион",
+"win": 1,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 47,
+"color": "Красный",
+"city": "Крепость",
+"gold": -6500,
+"security": "Джаггернаут",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=R8f9ca9TXa8"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 33,
+"color": "Синий",
+"city": "Инферно",
+"gold": 6500,
+"security": "Гигант",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=R8f9ca9TXa8"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 47,
+"color": "Красный",
+"city": "Крепость",
+"gold": -4300,
+"security": "Ифрит",
+"win": 1,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 33,
+"color": "Синий",
+"city": "Причал",
+"gold": 4300,
+"security": "Дредноут",
+"win": 0,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 47,
+"color": "Синий",
+"city": "Цитадель",
+"gold": 7500,
+"security": "Мантикора",
+"win": 1,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 33,
+"color": "Красный",
+"city": "Некрополис",
+"gold": -7500,
+"security": "Гидры Хаоса",
+"win": 0,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 49,
+"color": "Синий",
+"city": "Темница",
+"gold": 6000,
+"security": "Скорпикора",
+"win": 1,
+"link": "https://youtu.be/Rdc2MdqhrlQ"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 62,
+"color": "Красный",
+"city": "Некрополис",
+"gold": -6000,
+"security": "Рыцарь Ужаса",
+"win": 0,
+"link": "https://youtu.be/Rdc2MdqhrlQ"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 49,
+"color": "Синий",
+"city": "Фабрика",
+"gold": 4000,
+"security": "Волшебный Дракон",
+"win": 1,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 62,
+"color": "Красный",
+"city": "Инферно",
+"gold": -4000,
+"security": "Чемпион",
+"win": 0,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 58,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": 3600,
+"security": "Виверн",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=ub5LCr21V88&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=18&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 22,
+"color": "Синий",
+"city": "Некрополис",
+"gold": -3600,
+"security": "Охотник за Головами",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=ub5LCr21V88&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=18&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 58,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -4000,
+"security": "Волшебный Дракон",
+"win": 1,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 22,
+"color": "Синий",
+"city": "Башня",
+"gold": 4000,
+"security": "Никс",
+"win": 0,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 58,
+"color": "Красный",
+"city": "Инферно",
+"gold": 6200,
+"security": "Единорог",
+"win": 0,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Blitz",
+"player": 22,
+"color": "Синий",
+"city": "Крепость",
+"gold": -6200,
+"security": "Никс Воин",
+"win": 1,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 33,
+"color": "Красный",
+"city": "Инферно",
+"gold": 4800,
+"security": "Птица Грома",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=AYnWGcpfqyM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=19&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "Jebus Cross",
+"player": 63,
+"color": "Синий",
+"city": "Башня",
+"gold": -4800,
+"security": "Психический Элементаль",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=AYnWGcpfqyM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=19&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 33,
+"color": "Синий",
+"city": "Башня",
+"gold": 3900,
+"security": "Рыцарь Ужаса",
+"win": 1,
+"link": null
+},
+{
+"turnir": "Heroes Cup 2",
+"map": "JC Random",
+"player": 63,
+"color": "Красный",
+"city": "Причал",
+"gold": -3900,
+"security": "Ангел",
+"win": 0,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 37,
+"color": "Красный",
+"city": "Башня",
+"gold": -8000,
+"security": "Дредноут",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=FW5VnHuLsps&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=20&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 49,
+"color": "Синий",
+"city": "Инферно",
+"gold": 8000,
+"security": "Черный Рыцарь",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=FW5VnHuLsps&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=20&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC T7",
+"player": 37,
+"color": "Синий",
+"city": "Причал",
+"gold": 8000,
+"security": "Багровый Коатль",
+"win": 0,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC T7",
+"player": 49,
+"color": "Красный",
+"city": "Башня",
+"gold": -8000,
+"security": "Скорпикора",
+"win": 1,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 47,
+"color": "Красный",
+"city": "Инферно",
+"gold": 0,
+"security": "Дредноут",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=6MpBGKCC7cc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=21&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 22,
+"color": "Синий",
+"city": "Сопряжение",
+"gold": 0,
+"security": "Охотник за Головами",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=6MpBGKCC7cc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=21&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "MT_Jebus",
+"player": 47,
+"color": "Синий",
+"city": "Башня",
+"gold": 4300,
+"security": "Гидры Хаоса",
+"win": 0,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "MT_Jebus",
+"player": 22,
+"color": "Красный",
+"city": "Башня",
+"gold": -4300,
+"security": "Гидры Хаоса",
+"win": 1,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 33,
+"color": "Синий",
+"city": "Крепость",
+"gold": -3500,
+"security": "Титан",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=C_REFtNWkNE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=22&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 4,
+"color": "Красный",
+"city": "Инферно",
+"gold": 3500,
+"security": "Джаггернаут",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=C_REFtNWkNE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=22&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Random",
+"player": 33,
+"color": "Синий",
+"city": "Башня",
+"gold": 3600,
+"security": "",
+"win": 1,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Random",
+"player": 4,
+"color": "Красный",
+"city": "Инферно",
+"gold": -3600,
+"security": "Джаггернаут",
+"win": 0,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 33,
+"color": "Красный",
+"city": "Оплот",
+"gold": 4100,
+"security": "Джаггернаут",
+"win": 1,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 4,
+"color": "Синий",
+"city": "Некрополис",
+"gold": -4100,
+"security": "Дьявол",
+"win": 0,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Native",
+"player": 31,
+"color": "Красный",
+"city": "Башня",
+"gold": 4500,
+"security": "Гидры Хаоса",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=8IJZ98TQOVM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=23&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Native",
+"player": 36,
+"color": "Синий",
+"city": "Некрополис",
+"gold": -4500,
+"security": "Архангел",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=8IJZ98TQOVM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=23&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC T7",
+"player": 31,
+"color": "Красный",
+"city": "Крепость",
+"gold": 2200,
+"security": "Чемпион",
+"win": 1,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC T7",
+"player": 36,
+"color": "Синий",
+"city": "Замок",
+"gold": -2200,
+"security": "Джаггернаут",
+"win": 0,
+"link": null
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 22,
+"color": "Красный",
+"city": "Башня",
+"gold": 100,
+"security": "Призрачный Дракон",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=0hByV9_Xses&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=24&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 49,
+"color": "Синий",
+"city": "Темница",
+"gold": -100,
+"security": "Мантикора",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=0hByV9_Xses&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=24&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC T7",
+"player": 22,
+"color": "Синий",
+"city": "Темница",
+"gold": 9100,
+"security": "Древнее Чудище",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC T7",
+"player": 49,
+"color": "Красный",
+"city": "Фабрика",
+"gold": -9100,
+"security": "Охотник за Головами",
+"win": 1
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 22,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": 1900,
+"security": "Чародей",
+"win": 1
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 49,
+"color": "Синий",
+"city": "Темница",
+"gold": -1900,
+"security": "",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 37,
+"color": "Синий",
+"city": "Цитадель",
+"gold": 7400,
+"security": "Стрелок",
+"win": 1
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 47,
+"color": "Красный",
+"city": "Темница",
+"gold": -7400,
+"security": "Титан",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Amazonki",
+"player": 37,
+"color": "Синий",
+"city": "Оплот",
+"gold": -4300,
+"security": "Гидра",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=5w-UQJkP7bU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=26&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Amazonki",
+"player": 47,
+"color": "Красный",
+"city": "Инферно",
+"gold": 4300,
+"security": "Чудище",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=5w-UQJkP7bU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=26&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Native",
+"player": 37,
+"color": "Синий",
+"city": "Крепость",
+"gold": -2700,
+"security": "Титан",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Native",
+"player": 47,
+"color": "Красный",
+"city": "Башня",
+"gold": 2700,
+"security": "Огненная Птица",
+"win": 1
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC T7",
+"player": 4,
+"color": "Красный",
+"city": "Темница",
+"gold": 9900,
+"security": "Красный Дракон",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC T7",
+"player": 36,
+"color": "Синий",
+"city": "Замок",
+"gold": -9900,
+"security": "Охотник за Головами",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=sPQPMyPsbq8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=27&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "MT_Jebus",
+"player": 4,
+"color": "Красный",
+"city": "Цитадель",
+"gold": -4100,
+"security": "Олгой-Хорхой",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=sPQPMyPsbq8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=27&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "MT_Jebus",
+"player": 36,
+"color": "Синий",
+"city": "Цитадель",
+"gold": 4100,
+"security": "Олгой-Хорхой",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
 "map": "Jebus Cross",
 "player": 4,
 "color": "Синий",
 "city": "Сопряжение",
-"gold": -4500,
+"gold": -600,
+"security": "Чемпион",
+"win": 1
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 36,
+"color": "Красный",
+"city": "Цитадель",
+"gold": 600,
+"security": "Чудище",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 31,
+"color": "Красный",
+"city": "Оплот",
+"gold": 1,
+"security": "Гидра",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=nS-fQHgrMoU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=28&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 33,
+"color": "Синий",
+"city": "Крепость",
+"gold": -1,
+"security": "Чудище",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=nS-fQHgrMoU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=28&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 31,
+"color": "Красный",
+"city": "Темница",
+"gold": 200,
+"security": "Рыцарь Ужаса",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 33,
+"color": "Синий",
+"city": "Некрополис",
+"gold": -200,
+"security": "Огненная Птица",
+"win": 1
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 49,
+"color": "Синий",
+"city": "Замок",
+"gold": -1300,
+"security": "Охотник за Головами",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=xj3zxZ4NZj4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=29&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 4,
+"color": "Красный",
+"city": "Фабрика",
+"gold": 1300,
+"security": "Ангел",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=xj3zxZ4NZj4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=29&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 22,
+"color": "Красный",
+"city": "Инферно",
+"gold": 3100,
+"security": "Психический Элементаль",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=bzj3FflOZZQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=32&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Blitz",
+"player": 33,
+"color": "Синий",
+"city": "Темница",
+"gold": -3100,
+"security": "Охотник за Головами",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=bzj3FflOZZQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=32&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 22,
+"color": "Красный",
+"city": "Оплот",
+"gold": -4300,
+"security": "Птица Грома",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 33,
+"color": "Синий",
+"city": "Причал",
+"gold": 4300,
+"security": "Чёрный Дракон",
+"win": 1
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Random",
+"player": 22,
+"color": "Красный",
+"city": "Цитадель",
+"gold": -3900,
+"security": "Психический Элементаль",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Random",
+"player": 33,
+"color": "Синий",
+"city": "Оплот",
+"gold": 3900,
+"security": "Огненная Птица",
+"win": 1
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 47,
+"color": "Красный",
+"city": "Инферно",
+"gold": 4300,
+"security": "Никс Воин",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=uFmjFF07Ti8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=33&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 22,
+"color": "Синий",
+"city": "Некрополис",
+"gold": -4300,
+"security": "Воинственный Единорог",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=uFmjFF07Ti8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=33&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "MT_Jebus",
+"player": 47,
+"color": "Синий",
+"city": "Крепость",
+"gold": 6600,
+"security": "Титан",
+"win": 0
+},
+{
+"turnir": "HC 2 PO",
+"map": "MT_Jebus",
+"player": 22,
+"color": "Красный",
+"city": "Крепость",
+"gold": -6600,
+"security": "Титан",
+"win": 1
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 22,
+"color": "Красный",
+"city": "Фабрика",
+"gold": 5900,
+"security": "Психический Элементаль",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=-XAlWRNljxA&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=34&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "Jebus Cross",
+"player": 33,
+"color": "Синий",
+"city": "Некрополис",
+"gold": -5900,
+"security": "Циклоп",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=-XAlWRNljxA&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=34&pp=iAQB"
+},
+{
+"turnir": "HC 2 PO",
+"map": "JC Amazonki",
+"player": 22,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -100,
 "security": "Кристальный Дракон",
 "win": 1
 },
 {
-"turnir": "Heroes Cup",
+"turnir": "HC 2 PO",
+"map": "JC Amazonki",
+"player": 33,
+"color": "Синий",
+"city": "Некрополис",
+"gold": 100,
+"security": "Гигант",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Amazonki",
+"player": 31,
+"color": "Красный",
+"city": "Крепость",
+"gold": 400,
+"security": "Дредноут",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=3U0LMqkqyt4&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=40&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Amazonki",
+"player": 36,
+"color": "Синий",
+"city": "Оплот",
+"gold": -400,
+"security": "Феникс",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=3U0LMqkqyt4&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=40&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 31,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -3800,
+"security": "Джаггернаут",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 36,
+"color": "Синий",
+"city": "Фабрика",
+"gold": 3800,
+"security": "Зелёный Дракон",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Amazonki",
+"player": 62,
+"color": "Красный",
+"city": "Инферно",
+"gold": 5500,
+"security": "Зелёный Дракон",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=Hd-4CZofS6M&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=39&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Amazonki",
+"player": 65,
+"color": "Синий",
+"city": "Некрополис",
+"gold": -5500,
+"security": "Джаггернаут",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=Hd-4CZofS6M&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=39&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 62,
+"color": "Красный",
+"city": "Замок",
+"gold": 0,
+"security": "Могущественный Лич",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 65,
+"color": "Синий",
+"city": "Оплот",
+"gold": 0,
+"security": "Циклоп",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Blitz",
+"player": 62,
+"color": "Синий",
+"city": "Сопряжение",
+"gold": 5500,
+"security": "Магический Элементаль",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Blitz",
+"player": 65,
+"color": "Красный",
+"city": "Темница",
+"gold": -5500,
+"security": "Гидра",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Amazonki",
+"player": 49,
+"color": "Красный",
+"city": "Башня",
+"gold": 1200,
+"security": "Архангел",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=qd5sYVTCJac&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=38&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Amazonki",
+"player": 5,
+"color": "Синий",
+"city": "Крепость",
+"gold": -1200,
+"security": "Джаггернаут",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=qd5sYVTCJac&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=38&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 49,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -4000,
+"security": "Призрачный Дракон",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 5,
+"color": "Синий",
+"city": "Причал",
+"gold": 4000,
+"security": "Багровый Коатль",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Blitz",
+"player": 49,
+"color": "Красный",
+"city": "Крепость",
+"gold": -8200,
+"security": "Дредноут",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Blitz",
+"player": 5,
+"color": "Синий",
+"city": "Фабрика",
+"gold": 8200,
+"security": "",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "MT_Jebus",
+"player": 61,
+"color": "Красный",
+"city": "Крепость",
+"gold": -3900,
+"security": "Никс Воин",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=wvnbLwaciNM&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=37&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "MT_Jebus",
+"player": 33,
+"color": "Синий",
+"city": "Крепость",
+"gold": 3900,
+"security": "Никс Воин",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=wvnbLwaciNM&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=37&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 61,
+"color": "Красный",
+"city": "Башня",
+"gold": -7100,
+"security": "Никс",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 33,
+"color": "Синий",
+"city": "Сопряжение",
+"gold": 7100,
+"security": "Морской Змей",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 60,
+"color": "Красный",
+"city": "Крепость",
+"gold": 0,
+"security": "Циклоп",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=qzIGXOeXpKA&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=36&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 63,
+"color": "Синий",
+"city": "Башня",
+"gold": 0,
+"security": "Кристальный Дракон",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=qzIGXOeXpKA&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=36&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Blitz",
+"player": 60,
+"color": "Красный",
+"city": "Крепость",
+"gold": -6400,
+"security": "Огненная Птица",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Blitz",
+"player": 63,
+"color": "Синий",
+"city": "Цитадель",
+"gold": 6400,
+"security": "Ангел",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 60,
+"color": "Красный",
+"city": "Фабрика",
+"gold": -4100,
+"security": "Циклоп",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 63,
+"color": "Синий",
+"city": "Сопряжение",
+"gold": 4100,
+"security": "Стрелок",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Blitz",
+"player": 37,
+"color": "Красный",
+"city": "Оплот",
+"gold": -6900,
+"security": "Гигант",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=HawW_d66MN8&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=35&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Blitz",
+"player": 58,
+"color": "Синий",
+"city": "Инферно",
+"gold": 6900,
+"security": "Зелёный Дракон",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=HawW_d66MN8&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=35&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Amazonki",
+"player": 37,
+"color": "Синий",
+"city": "Темница",
+"gold": 8000,
+"security": "Феникс",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Amazonki",
+"player": 58,
+"color": "Красный",
+"city": "Башня",
+"gold": -8000,
+"security": "",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 37,
+"color": "Синий",
+"city": "Темница",
+"gold": -5100,
+"security": "Золотой Дракон",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 58,
+"color": "Красный",
+"city": "Цитадель",
+"gold": 5100,
+"security": "Никс Воин",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "MT_Jebus",
+"player": 50,
+"color": "Синий",
+"city": "Башня",
+"gold": 3900,
+"security": "Никс Воин",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=fKdxkGUaeGE&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=34&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "MT_Jebus",
+"player": 22,
+"color": "Красный",
+"city": "Башня",
+"gold": -3900,
+"security": "Никс Воин",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=fKdxkGUaeGE&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=34&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 50,
+"color": "Синий",
+"city": "Оплот",
+"gold": 5800,
+"security": "Архангел",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 22,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -5800,
+"security": "Кристальный Дракон",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 41,
+"color": "Синий",
+"city": "Цитадель",
+"gold": 4500,
+"security": "Черный Рыцарь",
+"win": 1,
+"link": "https://www.youtube.com/watch?v=MkENEJhHp7E&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=33&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 47,
+"color": "Красный",
+"city": "Фабрика",
+"gold": 4500,
+"security": "Морской Змей",
+"win": 0,
+"link": "https://www.youtube.com/watch?v=MkENEJhHp7E&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=33&pp=iAQB"
+},
+{
+"turnir": "Heroes Cup 3",
 "map": "Jebus Cross",
 "player": 41,
 "color": "Красный",
 "city": "Некрополис",
-"gold": 4500,
-"security": "Феникс",
+"gold": -7100,
+"security": "Аспид",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 47,
+"color": "Синий",
+"city": "Башня",
+"gold": 7100,
+"security": "Ангел",
 "win": 0
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
-"player": 4,
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 33,
 "color": "Синий",
-"city": "Фабрика",
-"gold": 6600,
-"security": "Древнее Чудище",
+"city": "Инферно",
+"gold": 4000,
+"security": "Кристальный Дракон",
 "win": 1
 },
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 58,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -4000,
+"security": "Гидры Хаоса",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 33,
+"color": "Красный",
+"city": "Замок",
+"gold": -6000,
+"security": "Птица Грома",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 58,
+"color": "Синий",
+"city": "Инферно",
+"gold": 6000,
+"security": "Гидры Хаоса",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 37,
+"color": "Красный",
+"city": "Инферно",
+"gold": -4000,
+"security": "Король Минотавров",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Random",
+"player": 61,
+"color": "Синий",
+"city": "Башня",
+"gold": 4000,
+"security": "Никс Воин",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 37,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -7500,
+"security": "Гидры Хаоса",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 61,
+"color": "Синий",
+"city": "Замок",
+"gold": 7500,
+"security": "Мантикора",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 5,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -6700,
+"security": "",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 47,
+"color": "Синий",
+"city": "Инферно",
+"gold": 6700,
+"security": "Воинственный Единорог",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Amazonki",
+"player": 5,
+"color": "Красный",
+"city": "Фабрика",
+"gold": 9000,
+"security": "Ржавый Дракон",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "JC Amazonki",
+"player": 47,
+"color": "Синий",
+"city": "Крепость",
+"gold": -9000,
+"security": "Волшебный Дракон",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "MT_Jebus",
+"player": 5,
+"color": "Красный",
+"city": "Инферно",
+"gold": -4700,
+"security": "Виверн",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "MT_Jebus",
+"player": 47,
+"color": "Синий",
+"city": "Инферно",
+"gold": 4700,
+"security": "Виверн",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "MT_Jebus",
+"player": 65,
+"color": "Красный",
+"city": "Сопряжение",
+"gold": -4600,
+"security": "Олгой-Хорхой",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "MT_Jebus",
+"player": 50,
+"color": "Синий",
+"city": "Сопряжение",
+"gold": 4600,
+"security": "Олгой-Хорхой",
+"win": 0
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 65,
+"color": "Красный",
+"city": "Башня",
+"gold": -700,
+"security": "Циклоп",
+"win": 1
+},
+{
+"turnir": "Heroes Cup 3",
+"map": "Jebus Cross",
+"player": 50,
+"color": "Синий",
+"city": "Темница",
+"gold": 700,
+"security": "Феникс",
+"win": 0
+},
+
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Random",
+        "player": 49,
+        "color": "Синий",
+        "city": "Темница",
+        "gold": 4400,
+        "security": "Могущественный Лич",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Random",
+        "player": 41,
+        "color": "Красный",
+        "city": "Замок",
+        "gold": -4400,
+        "security": "Дредноут",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Blitz",
+        "player": 49,
+        "color": "Красный",
+        "city": "Замок",
+        "gold": -6500,
+        "security": "Властитель Пропасти",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Blitz",
+        "player": 41,
+        "color": "Синий",
+        "city": "Инферно",
+        "gold": 6500,
+        "security": "Олгой-Хорхой",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Random",
+        "player": 31,
+        "color": "Красный",
+        "city": "Цитадель",
+        "gold": -4200,
+        "security": "Кристальный Дракон",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Random",
+        "player": 60,
+        "color": "Синий",
+        "city": "Причал",
+        "gold": 4200,
+        "security": "Королева Нага",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Blitz",
+        "player": 31,
+        "color": "Синий",
+        "city": "Цитадель",
+        "gold": 5600,
+        "security": "Гидра",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Blitz",
+        "player": 60,
+        "color": "Красный",
+        "city": "Башня",
+        "gold": -5600,
+        "security": "Черный Рыцарь",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "MT_Jebus",
+        "player": 31,
+        "color": "Красный",
+        "city": "Цитадель",
+        "gold": -4100,
+        "security": "Огненная Птица",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "MT_Jebus",
+        "player": 60,
+        "color": "Синий",
+        "city": "Цитадель",
+        "gold": 4100,
+        "security": "Огненная Птица",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "Jebus Cross",
+        "player": 5,
+        "color": "Красный",
+        "city": "Фабрика",
+        "gold": 3900,
+        "security": "Волшебный Дракон",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "Jebus Cross",
+        "player": 49,
+        "color": "Синий",
+        "city": "Сопряжение",
+        "gold": -3900,
+        "security": "Багровый Коатль",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Amazonki",
+        "player": 5,
+        "color": "Синий",
+        "city": "Причал",
+        "gold": -2300,
+        "security": "Красный Дракон",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Amazonki",
+        "player": 49,
+        "color": "Красный",
+        "city": "Сопряжение",
+        "gold": 2300,
+        "security": "Дредноут",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Random",
+        "player": 5,
+        "color": "Синий",
+        "city": "Цитадель",
+        "gold": 4500,
+        "security": "Стрелок",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Random",
+        "player": 49,
+        "color": "Красный",
+        "city": "Оплот",
+        "gold": -4500,
+        "security": "Магический Элементаль",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Blitz",
+        "player": 22,
+        "color": "Красный",
+        "city": "Инферно",
+        "gold": -1600,
+        "security": "Воинственный Единорог",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Blitz",
+        "player": 62,
+        "color": "Синий",
+        "city": "Причал",
+        "gold": 1600,
+        "security": "Призрачный Дракон",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Amazonki",
+        "player": 22,
+        "color": "Красный",
+        "city": "Замок",
+        "gold": -8700,
+        "security": "Красный Дракон",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Amazonki",
+        "player": 62,
+        "color": "Синий",
+        "city": "Фабрика",
+        "gold": 8700,
+        "security": "Чудище",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Amazonki",
+        "player": 31,
+        "color": "Красный",
+        "city": "Фабрика",
+        "gold": 3200,
+        "security": "Чёрный Дракон",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Amazonki",
+        "player": 36,
+        "color": "Синий",
+        "city": "Крепость",
+        "gold": -3200,
+        "security": "Багровый Коатль",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "MT_Jebus",
+        "player": 31,
+        "color": "Синий",
+        "city": "Сопряжение",
+        "gold": 4000,
+        "security": "Ангел",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "MT_Jebus",
+        "player": 36,
+        "color": "Красный",
+        "city": "Сопряжение",
+        "gold": -4000,
+        "security": "Ангел",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Blitz",
+        "player": 31,
+        "color": "Синий",
+        "city": "Цитадель",
+        "gold": 4500,
+        "security": "Архидьявол",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Blitz",
+        "player": 36,
+        "color": "Красный",
+        "city": "Замок",
+        "gold": -4500,
+        "security": "Виверн",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Amazonki",
+        "player": 33,
+        "color": "Синий",
+        "city": "Башня",
+        "gold": -2100,
+        "security": "Королева Нага",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "JC Amazonki",
+        "player": 61,
+        "color": "Красный",
+        "city": "Некрополис",
+        "gold": 2100,
+        "security": "Дьявол",
+        "win": 0
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "Jebus Cross",
+        "player": 33,
+        "color": "Красный",
+        "city": "Крепость",
+        "gold": 1200,
+        "security": "Рыцарь Ужаса",
+        "win": 1
+    },
+    {
+        "turnir": "Heroes Cup 3",
+        "map": "Jebus Cross",
+        "player": 61,
+        "color": "Синий",
+        "city": "Башня",
+        "gold": -1200,
+        "security": "Морской Змей",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Blitz",
+        "player": 5,
+        "color": "Красный",
+        "city": "Сопряжение",
+        "gold": -6600,
+        "security": "Аспид",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Blitz",
+        "player": 60,
+        "color": "Синий",
+        "city": "Инферно",
+        "gold": 6600,
+        "security": "Психический Элементаль",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "MT_Jebus",
+        "player": 5,
+        "color": "Красный",
+        "city": "Замок",
+        "gold": -4400,
+        "security": "Король Минотавров",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "MT_Jebus",
+        "player": 60,
+        "color": "Синий",
+        "city": "Замок",
+        "gold": 4400,
+        "security": "Король Минотавров",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "Jebus Cross",
+        "player": 22,
+        "color": "Красный",
+        "city": "Оплот",
+        "gold": -1200,
+        "security": "Титан",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "Jebus Cross",
+        "player": 33,
+        "color": "Синий",
+        "city": "Крепость",
+        "gold": 1200,
+        "security": "Чародей",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Amazonki",
+        "player": 22,
+        "color": "Красный",
+        "city": "Башня",
+        "gold": -6800,
+        "security": "Гидра",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Amazonki",
+        "player": 33,
+        "color": "Синий",
+        "city": "Инферно",
+        "gold": 6800,
+        "security": "Лазурный Дракон",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Blitz",
+        "player": 22,
+        "color": "Красный",
+        "city": "Темница",
+        "gold": -7300,
+        "security": "Султан Ифрит",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Blitz",
+        "player": 33,
+        "color": "Синий",
+        "city": "Фабрика",
+        "gold": 7300,
+        "security": "Чародей",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Amazonki",
+        "player": 36,
+        "color": "Синий",
+        "city": "Крепость",
+        "gold": -200,
+        "security": "Гигант",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Amazonki",
+        "player": 41,
+        "color": "Красный",
+        "city": "Башня",
+        "gold": 200,
+        "security": "Призрачный Дракон",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Blitz",
+        "player": 36,
+        "color": "Синий",
+        "city": "Некрополис",
+        "gold": -3700,
+        "security": "Чёрный Дракон",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Blitz",
+        "player": 41,
+        "color": "Красный",
+        "city": "Оплот",
+        "gold": 3700,
+        "security": "Властитель Пропасти",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "Jebus Cross",
+        "player": 36,
+        "color": "Синий",
+        "city": "Некрополис",
+        "gold": 1000,
+        "security": "Чёрный Дракон",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "Jebus Cross",
+        "player": 41,
+        "color": "Красный",
+        "city": "Башня",
+        "gold": -1000,
+        "security": "Охотник за Головами",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "Jebus Cross",
+        "player": 37,
+        "color": "Красный",
+        "city": "Темница",
+        "gold": -7600,
+        "security": "Древнее Чудище",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "Jebus Cross",
+        "player": 62,
+        "color": "Синий",
+        "city": "Инферно",
+        "gold": 7600,
+        "security": "Волшебный Дракон",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Random",
+        "player": 37,
+        "color": "Синий",
+        "city": "Крепость",
+        "gold": 5000,
+        "security": "Ржавый Дракон",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Random",
+        "player": 62,
+        "color": "Красный",
+        "city": "Замок",
+        "gold": -5000,
+        "security": "",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Blitz",
+        "player": 37,
+        "color": "Красный",
+        "city": "Темница",
+        "gold": -8100,
+        "security": "Огненная Птица",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Blitz",
+        "player": 62,
+        "color": "Синий",
+        "city": "Причал",
+        "gold": 8100,
+        "security": "Виверн",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Amazonki",
+        "player": 33,
+        "color": "Синий",
+        "city": "Цитадель",
+        "gold": -700,
+        "security": "Чёрный Дракон",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Amazonki",
+        "player": 41,
+        "color": "Красный",
+        "city": "Некрополис",
+        "gold": 700,
+        "security": "Аспид",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "Jebus Cross",
+        "player": 33,
+        "color": "Синий",
+        "city": "Цитадель",
+        "gold": 6900,
+        "security": "Нага",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "Jebus Cross",
+        "player": 41,
+        "color": "Красный",
+        "city": "Крепость",
+        "gold": -6900,
+        "security": "Психический Элементаль",
+        "win": 0
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Blitz",
+        "player": 33,
+        "color": "Красный",
+        "city": "Замок",
+        "gold": 1500,
+        "security": "Дьявол",
+        "win": 1
+    },
+    {
+        "turnir": "HC 3 PO",
+        "map": "JC Blitz",
+        "player": 41,
+        "color": "Синий",
+        "city": "Темница",
+        "gold": -1500,
+        "security": "Феникс",
+        "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 37,
+    "color": "Красный",
+    "city": "Инферно",
+    "gold": 900,
+    "security": "Гидры Хаоса",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 60,
+    "color": "Синий",
+    "city": "Оплот",
+    "gold": -900,
+    "security": "Дьявол",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 37,
+    "color": "Красный",
+    "city": "Оплот",
+    "gold": -700,
+    "security": "Гигант",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 60,
+    "color": "Синий",
+    "city": "Сопряжение",
+    "gold": 700,
+    "security": "Золотой Дракон",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Random",
+    "player": 37,
+    "color": "Красный",
+    "city": "Фабрика",
+    "gold": -4100,
+    "security": "Циклоп",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Random",
+    "player": 60,
+    "color": "Синий",
+    "city": "Башня",
+    "gold": 4100,
+    "security": "Охотник за Головами",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 22,
+    "color": "Красный",
+    "city": "Темница",
+    "gold": 6500,
+    "security": "Птица Грома",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 36,
+    "color": "Синий",
+    "city": "Крепость",
+    "gold": -6500,
+    "security": "Виверн",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "MT_Jebus",
+    "player": 22,
+    "color": "Синий",
+    "city": "Крепость",
+    "gold": 4400,
+    "security": "Мантикора",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "MT_Jebus",
+    "player": 36,
+    "color": "Красный",
+    "city": "Крепость",
+    "gold": -4400,
+    "security": "Мантикора",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 22,
+    "color": "Синий",
+    "city": "Башня",
+    "gold": 400,
+    "security": "Никс",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 36,
+    "color": "Красный",
+    "city": "Сопряжение",
+    "gold": -400,
+    "security": "Ифрит",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 62,
+    "color": "Красный",
+    "city": "Сопряжение",
+    "gold": 6000,
+    "security": "Древнее Чудище",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 5,
+    "color": "Синий",
+    "city": "Оплот",
+    "gold": -6000,
+    "security": "Циклоп",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 62,
+    "color": "Красный",
+    "city": "Сопряжение",
+    "gold": 6000,
+    "security": "Костяной Дракон",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 5,
+    "color": "Синий",
+    "city": "Оплот",
+    "gold": -6000,
+    "security": "Ржавый Дракон",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Random",
+    "player": 62,
+    "color": "Красный",
+    "city": "Причал",
+    "gold": -5000,
+    "security": "Воинственный Единорог",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Random",
+    "player": 5,
+    "color": "Синий",
+    "city": "Темница",
+    "gold": 5000,
+    "security": "Властитель Пропасти",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 62,
+    "color": "Красный",
+    "city": "Цитадель",
+    "gold": 5100,
+    "security": "Архангел",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 33,
+    "color": "Синий",
+    "city": "Некрополис",
+    "gold": -5100,
+    "security": "Никс Воин",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Random",
+    "player": 62,
+    "color": "Красный",
+    "city": "Некрополис",
+    "gold": -5000,
+    "security": "Кристальный Дракон",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Random",
+    "player": 33,
+    "color": "Синий",
+    "city": "Башня",
+    "gold": 5000,
+    "security": "Олгой-Хорхой",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 62,
+    "color": "Красный",
+    "city": "Оплот",
+    "gold": 2400,
+    "security": "Магический Элементаль",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 33,
+    "color": "Синий",
+    "city": "Темница",
+    "gold": -2400,
+    "security": "Циклоп",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 37,
+    "color": "Красный",
+    "city": "Оплот",
+    "gold": 3700,
+    "security": "Циклоп",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 33,
+    "color": "Синий",
+    "city": "Башня",
+    "gold": -3700,
+    "security": "",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Amazonki",
+    "player": 37,
+    "color": "Красный",
+    "city": "Фабрика",
+    "gold": -2700,
+    "security": "Коатль",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Amazonki",
+    "player": 33,
+    "color": "Синий",
+    "city": "Инферно",
+    "gold": 2700,
+    "security": "Гигант",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 37,
+    "color": "Красный",
+    "city": "Темница",
+    "gold": -7300,
+    "security": "Черный Рыцарь",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 33,
+    "color": "Синий",
+    "city": "Замок",
+    "gold": 7300,
+    "security": "Виверн Монах",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 5,
+    "color": "Красный",
+    "city": "Крепость",
+    "gold": -7500,
+    "security": "Воинственный Единорог",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 36,
+    "color": "Синий",
+    "city": "Цитадель",
+    "gold": 7500,
+    "security": "Красный Дракон",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Random",
+    "player": 5,
+    "color": "Красный",
+    "city": "Фабрика",
+    "gold": 3900,
+    "security": "Архангел",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Random",
+    "player": 36,
+    "color": "Синий",
+    "city": "Некрополис",
+    "gold": 3900,
+    "security": "Кристальный Дракон",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "MT_Jebus",
+    "player": 5,
+    "color": "Красный",
+    "city": "Крепость",
+    "gold": -4400,
+    "security": "Гигант",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "MT_Jebus",
+    "player": 36,
+    "color": "Синий",
+    "city": "Крепость",
+    "gold": 4400,
+    "security": "Гигант",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 5,
+    "color": "Красный",
+    "city": "Крепость",
+    "gold": -5500,
+    "security": "Архидьявол",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 33,
+    "color": "Синий",
+    "city": "Замок",
+    "gold": 5500,
+    "security": "Могущественный Лич",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Random",
+    "player": 5,
+    "color": "Красный",
+    "city": "Фабрика",
+    "gold": -4300,
+    "security": "Аспид",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Random",
+    "player": 33,
+    "color": "Синий",
+    "city": "Крепость",
+    "gold": 4300,
+    "security": "Гидры Хаоса",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Amazonki",
+    "player": 33,
+    "color": "Синий",
+    "city": "Башня",
+    "gold": 5900,
+    "security": "Древнее Чудище",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Amazonki",
+    "player": 36,
+    "color": "Красный",
+    "city": "Оплот",
+    "gold": -5900,
+    "security": "Ангел",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 33,
+    "color": "Синий",
+    "city": "Инферно",
+    "gold": -100,
+    "security": "Никс Воин",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "Jebus Cross",
+    "player": 36,
+    "color": "Красный",
+    "city": "Фабрика",
+    "gold": 100,
+    "security": "Кристальный Дракон",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 33,
+    "color": "Синий",
+    "city": "Башня",
+    "gold": -100,
+    "security": "Единорог",
+    "win": 1
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "JC Blitz",
+    "player": 36,
+    "color": "Красный",
+    "city": "Крепость",
+    "gold": 100,
+    "security": "Архидьявол",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "MT_Jebus",
+    "player": 33,
+    "color": "Синий",
+    "city": "Темница",
+    "gold": 3900,
+    "security": "Аспид",
+    "win": 0
+    },
+    {
+    "turnir": "HC 3 PO",
+    "map": "MT_Jebus",
+    "player": 36,
+    "color": "Красный",
+    "city": "Темница",
+    "gold": -3900,
+    "security": "Аспид",
+    "win": 1
+    }
 
