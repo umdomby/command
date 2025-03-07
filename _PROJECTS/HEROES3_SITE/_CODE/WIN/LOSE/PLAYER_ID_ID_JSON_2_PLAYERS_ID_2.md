@@ -3816,7 +3816,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 37,
 "color": 'RED',
@@ -3827,7 +3827,7 @@
 "link": "https://www.youtube.com/watch?v=FW5VnHuLsps&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=20&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 49,
 "color": 'BLUE',
@@ -3838,7 +3838,7 @@
 "link": "https://www.youtube.com/watch?v=FW5VnHuLsps&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=20&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 20,
 "player": 37,
 "color": 'BLUE',
@@ -3849,7 +3849,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 20,
 "player": 49,
 "color": 'RED',
@@ -3860,7 +3860,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 47,
 "color": 'RED',
@@ -3871,7 +3871,7 @@
 "link": "https://www.youtube.com/watch?v=6MpBGKCC7cc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=21&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 22,
 "color": 'BLUE',
@@ -3882,7 +3882,7 @@
 "link": "https://www.youtube.com/watch?v=6MpBGKCC7cc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=21&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 2,
 "player": 47,
 "color": 'BLUE',
@@ -3893,7 +3893,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 2,
 "player": 22,
 "color": 'RED',
@@ -3904,7 +3904,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 33,
 "color": 'BLUE',
@@ -3915,7 +3915,7 @@
 "link": "https://www.youtube.com/watch?v=C_REFtNWkNE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=22&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 4,
 "color": 'RED',
@@ -3926,7 +3926,7 @@
 "link": "https://www.youtube.com/watch?v=C_REFtNWkNE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=22&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 18,
 "player": 33,
 "color": 'BLUE',
@@ -3937,7 +3937,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 18,
 "player": 4,
 "color": 'RED',
@@ -3948,7 +3948,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 33,
 "color": 'RED',
@@ -3959,7 +3959,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 4,
 "color": 'BLUE',
@@ -3970,7 +3970,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 19,
 "player": 31,
 "color": 'RED',
@@ -3981,7 +3981,7 @@
 "link": "https://www.youtube.com/watch?v=8IJZ98TQOVM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=23&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 19,
 "player": 36,
 "color": 'BLUE',
@@ -3992,7 +3992,7 @@
 "link": "https://www.youtube.com/watch?v=8IJZ98TQOVM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=23&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 20,
 "player": 31,
 "color": 'RED',
@@ -4003,7 +4003,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 20,
 "player": 36,
 "color": 'BLUE',
@@ -4014,7 +4014,7 @@
 "link": null
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 22,
 "color": 'RED',
@@ -4025,7 +4025,7 @@
 "link": "https://www.youtube.com/watch?v=0hByV9_Xses&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=24&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 49,
 "color": 'BLUE',
@@ -4036,7 +4036,7 @@
 "link": "https://www.youtube.com/watch?v=0hByV9_Xses&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=24&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 20,
 "player": 22,
 "color": 'BLUE',
@@ -4046,7 +4046,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 20,
 "player": 49,
 "color": 'RED',
@@ -4056,7 +4056,7 @@
 "win": true
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 22,
 "color": 'RED',
@@ -4066,7 +4066,7 @@
 "win": true
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 49,
 "color": 'BLUE',
@@ -4076,7 +4076,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 37,
 "color": 'BLUE',
@@ -4086,7 +4086,7 @@
 "win": true
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 47,
 "color": 'RED',
@@ -4096,7 +4096,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 17,
 "player": 37,
 "color": 'BLUE',
@@ -4107,7 +4107,7 @@
 "link": "https://www.youtube.com/watch?v=5w-UQJkP7bU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=26&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 17,
 "player": 47,
 "color": 'RED',
@@ -4118,7 +4118,7 @@
 "link": "https://www.youtube.com/watch?v=5w-UQJkP7bU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=26&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 19,
 "player": 37,
 "color": 'BLUE',
@@ -4128,7 +4128,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 19,
 "player": 47,
 "color": 'RED',
@@ -4138,7 +4138,7 @@
 "win": true
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 20,
 "player": 4,
 "color": 'RED',
@@ -4148,7 +4148,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 20,
 "player": 36,
 "color": 'BLUE',
@@ -4159,7 +4159,7 @@
 "link": "https://www.youtube.com/watch?v=sPQPMyPsbq8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=27&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 2,
 "player": 4,
 "color": 'RED',
@@ -4170,7 +4170,7 @@
 "link": "https://www.youtube.com/watch?v=sPQPMyPsbq8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=27&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 2,
 "player": 36,
 "color": 'BLUE',
@@ -4180,7 +4180,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 4,
 "color": 'BLUE',
@@ -4190,7 +4190,7 @@
 "win": true
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 36,
 "color": 'RED',
@@ -4200,7 +4200,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 31,
 "color": 'RED',
@@ -4211,7 +4211,7 @@
 "link": "https://www.youtube.com/watch?v=nS-fQHgrMoU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=28&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 33,
 "color": 'BLUE',
@@ -4222,7 +4222,7 @@
 "link": "https://www.youtube.com/watch?v=nS-fQHgrMoU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=28&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 31,
 "color": 'RED',
@@ -4232,7 +4232,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 33,
 "color": 'BLUE',
@@ -4242,7 +4242,7 @@
 "win": true
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 49,
 "color": 'BLUE',
@@ -4253,7 +4253,7 @@
 "link": "https://www.youtube.com/watch?v=xj3zxZ4NZj4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=29&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 4,
 "color": 'RED',
@@ -4264,7 +4264,7 @@
 "link": "https://www.youtube.com/watch?v=xj3zxZ4NZj4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=29&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 22,
 "color": 'RED',
@@ -4275,7 +4275,7 @@
 "link": "https://www.youtube.com/watch?v=bzj3FflOZZQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=32&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 16,
 "player": 33,
 "color": 'BLUE',
@@ -4286,7 +4286,7 @@
 "link": "https://www.youtube.com/watch?v=bzj3FflOZZQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=32&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 22,
 "color": 'RED',
@@ -4296,7 +4296,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 33,
 "color": 'BLUE',
@@ -4306,7 +4306,7 @@
 "win": true
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 18,
 "player": 22,
 "color": 'RED',
@@ -4316,7 +4316,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 18,
 "player": 33,
 "color": 'BLUE',
@@ -4326,7 +4326,7 @@
 "win": true
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 47,
 "color": 'RED',
@@ -4337,7 +4337,7 @@
 "link": "https://www.youtube.com/watch?v=uFmjFF07Ti8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=33&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 22,
 "color": 'BLUE',
@@ -4348,7 +4348,7 @@
 "link": "https://www.youtube.com/watch?v=uFmjFF07Ti8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=33&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 2,
 "player": 47,
 "color": 'BLUE',
@@ -4358,7 +4358,7 @@
 "win": false
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 2,
 "player": 22,
 "color": 'RED',
@@ -4368,7 +4368,7 @@
 "win": true
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 22,
 "color": 'RED',
@@ -4379,7 +4379,7 @@
 "link": "https://www.youtube.com/watch?v=-XAlWRNljxA&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=34&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 1,
 "player": 33,
 "color": 'BLUE',
@@ -4390,7 +4390,7 @@
 "link": "https://www.youtube.com/watch?v=-XAlWRNljxA&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=34&pp=iAQB"
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 17,
 "player": 22,
 "color": 'RED',
@@ -4400,7 +4400,7 @@
 "win": true
 },
 {
-"turnir": 6,
+"turnir": "HC 2 PO",
 "map": 17,
 "player": 33,
 "color": 'BLUE',
