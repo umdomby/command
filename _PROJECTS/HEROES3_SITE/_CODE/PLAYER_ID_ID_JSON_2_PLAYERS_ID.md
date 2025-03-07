@@ -1,8 +1,8 @@
 //6066
 {
-"turnir": 2,
-"map": 17,
-"player": 23,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 23,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -6000,
@@ -11,9 +11,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 6000,
@@ -22,9 +22,9 @@
 "link": "https://www.youtube.com/watch?v=c8SDfh3YZLM&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=2&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 23,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 23,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 500,
@@ -33,9 +33,9 @@
 "link": "https://www.youtube.com/watch?v=c8SDfh3YZLM&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=2&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 4,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -500,
@@ -44,9 +44,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 31,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 31,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -4900,
@@ -55,9 +55,9 @@
 "link": "https://www.youtube.com/watch?v=ytKOARjiu-s&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=3&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 44,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 44,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 4900,
@@ -66,9 +66,9 @@
 "link": "https://www.youtube.com/watch?v=ytKOARjiu-s&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=3&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 31,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 31,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -2900,
@@ -77,9 +77,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 44,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 44,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 2900,
@@ -88,9 +88,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 36,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -1100,
@@ -99,9 +99,9 @@
 "link": "https://www.youtube.com/watch?v=cNq6bKSqxLw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=4&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 59,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 59,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 1100,
@@ -110,9 +110,9 @@
 "link": "https://www.youtube.com/watch?v=cNq6bKSqxLw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=4&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 36,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 36,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 5800,
@@ -121,9 +121,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 59,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 59,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -5800,
@@ -132,9 +132,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 22,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -200,
@@ -143,9 +143,9 @@
 "link": "https://www.youtube.com/watch?v=JzdCWFbRVos&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=5&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 33,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 200,
@@ -154,9 +154,9 @@
 "link": "https://www.youtube.com/watch?v=JzdCWFbRVos&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=5&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 22,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 2300,
@@ -165,9 +165,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 33,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -2300,
@@ -176,9 +176,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 15,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 15,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -5200,
@@ -187,9 +187,9 @@
 "link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 56,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 56,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": 5200,
@@ -198,9 +198,9 @@
 "link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 15,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 15,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 4500,
@@ -209,9 +209,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 56,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 56,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -4500,
@@ -220,9 +220,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 41,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 41,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -6900,
@@ -231,9 +231,9 @@
 "link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 58,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 58,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 6900,
@@ -242,9 +242,9 @@
 "link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 41,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 41,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -1100,
@@ -253,9 +253,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 58,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 58,
 "color": 'RED',
 "city": 'TOWER',
 "gold": 1100,
@@ -264,9 +264,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 55,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 55,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": 2100,
@@ -275,9 +275,9 @@
 "link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 5,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -2100,
@@ -286,9 +286,9 @@
 "link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 55,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 55,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 7000,
@@ -297,9 +297,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 5,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 5,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -7000,
@@ -308,9 +308,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 49,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 49,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 200,
@@ -319,9 +319,9 @@
 "link": "https://www.youtube.com/watch?v=fsoOdtX_Eu0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=9&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 4,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -200,
@@ -330,9 +330,9 @@
 "link": "https://www.youtube.com/watch?v=fsoOdtX_Eu0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=9&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 49,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -3100,
@@ -341,9 +341,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 3100,
@@ -352,9 +352,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 59,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 59,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -400,
@@ -363,9 +363,9 @@
 "link": "https://www.youtube.com/watch?v=LwyeXZSMSTA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=10"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 20,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 20,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 400,
@@ -374,9 +374,9 @@
 "link": "https://www.youtube.com/watch?v=LwyeXZSMSTA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=10"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 59,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 59,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": 2800,
@@ -385,9 +385,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 20,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 20,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": -2800,
@@ -396,9 +396,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 37,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 100,
@@ -407,9 +407,9 @@
 "link": "https://www.youtube.com/watch?v=Gov1dWc765o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=11&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 38,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 38,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -100,
@@ -418,9 +418,9 @@
 "link": "https://www.youtube.com/watch?v=Gov1dWc765o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=11&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 37,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 2200,
@@ -429,9 +429,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 38,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 38,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -2200,
@@ -440,9 +440,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 37,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 37,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -6700,
@@ -451,9 +451,9 @@
 "link": "https://www.youtube.com/watch?v=lf7BTdOhveg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=12&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 36,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 6700,
@@ -462,9 +462,9 @@
 "link": "https://www.youtube.com/watch?v=lf7BTdOhveg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=12&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 37,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 5100,
@@ -473,9 +473,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 36,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 36,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -5100,
@@ -484,9 +484,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 31,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 31,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": -900,
@@ -495,9 +495,9 @@
 "link": "https://www.youtube.com/watch?v=6NL0PTeZ620&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=13&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 5,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 5,
 "color": 'RED',
 "city": 'TOWER',
 "gold": 900,
@@ -506,9 +506,9 @@
 "link": "https://www.youtube.com/watch?v=6NL0PTeZ620&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=13&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 31,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 31,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -6000,
@@ -517,9 +517,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 5,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 6000,
@@ -528,9 +528,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 23,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 23,
 "color": 'RED',
 "city": 'COVE',
 "gold": -6000,
@@ -539,9 +539,9 @@
 "link": "https://www.youtube.com/watch?v=7l00zf_fuN0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=14&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 41,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 41,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 6000,
@@ -550,9 +550,9 @@
 "link": "https://www.youtube.com/watch?v=7l00zf_fuN0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=14&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 23,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 23,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 1600,
@@ -561,9 +561,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 41,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 41,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -1600,
@@ -572,9 +572,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 33,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -1600,
@@ -583,9 +583,9 @@
 "link": "https://www.youtube.com/watch?v=vKQOhgA4FoE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=15&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 15,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 15,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 1600,
@@ -594,9 +594,9 @@
 "link": "https://www.youtube.com/watch?v=vKQOhgA4FoE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=15&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 33,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 33,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": 4200,
@@ -605,9 +605,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 15,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 15,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -4200,
@@ -616,9 +616,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 31,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 31,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": 400,
@@ -627,9 +627,9 @@
 "link": "https://www.youtube.com/watch?v=u-9-I_Kubqo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=16&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 54,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 54,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -400,
@@ -638,9 +638,9 @@
 "link": "https://www.youtube.com/watch?v=u-9-I_Kubqo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=16&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 31,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 31,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 1100,
@@ -649,9 +649,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 54,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 54,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -1100,
@@ -660,9 +660,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 20,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 20,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 2500,
@@ -671,9 +671,9 @@
 "link": "https://www.youtube.com/watch?v=7MUdm6r767M&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=17&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 38,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 38,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -2500,
@@ -682,9 +682,9 @@
 "link": "https://www.youtube.com/watch?v=7MUdm6r767M&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=17&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 20,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 20,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -2400,
@@ -693,9 +693,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 38,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 38,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 2400,
@@ -704,9 +704,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 15,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 15,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 1600,
@@ -715,9 +715,9 @@
 "link": "https://www.youtube.com/watch?v=Pb3G-2snw8k&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=18&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 57,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 57,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -1600,
@@ -726,9 +726,9 @@
 "link": "https://www.youtube.com/watch?v=Pb3G-2snw8k&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=18&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 15,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 15,
 "color": 'RED',
 "city": "​",
 "gold": 0,
@@ -737,9 +737,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 57,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 57,
 "color": 'BLUE',
 "city": "​",
 "gold": 0,
@@ -748,9 +748,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 44,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 44,
 "color": 'RED',
 "city": 'COVE',
 "gold": -6900,
@@ -759,9 +759,9 @@
 "link": "https://www.youtube.com/watch?v=Yzv5cLqnLlA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=19&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 55,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 55,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 6900,
@@ -770,9 +770,9 @@
 "link": "https://www.youtube.com/watch?v=Yzv5cLqnLlA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=19&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 44,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 44,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 100,
@@ -781,9 +781,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 55,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 55,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -100,
@@ -792,9 +792,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 57,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 57,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 1500,
@@ -803,9 +803,9 @@
 "link": "https://www.youtube.com/watch?v=MFNHZ1zq1iA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=20&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 56,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 56,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -1500,
@@ -814,9 +814,9 @@
 "link": "https://www.youtube.com/watch?v=MFNHZ1zq1iA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=20&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 57,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 57,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -5300,
@@ -825,9 +825,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 56,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 56,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 5300,
@@ -836,9 +836,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 44,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 44,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -6200,
@@ -847,9 +847,9 @@
 "link": "https://www.youtube.com/watch?v=SiPec07FDqA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=21&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 54,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 54,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 6200,
@@ -858,9 +858,9 @@
 "link": "https://www.youtube.com/watch?v=SiPec07FDqA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=21&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 44,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 44,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 2100,
@@ -869,9 +869,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 54,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 54,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -2100,
@@ -880,9 +880,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 58,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 58,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 1300,
@@ -891,9 +891,9 @@
 "link": "https://www.youtube.com/watch?v=sExYSRB23sY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=22&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 49,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 49,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": -1300,
@@ -902,9 +902,9 @@
 "link": "https://www.youtube.com/watch?v=sExYSRB23sY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=22&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 58,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 58,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 1100,
@@ -913,9 +913,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 49,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 49,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -1100,
@@ -924,9 +924,9 @@
 "link": ""
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 38,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 38,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -700,
@@ -935,9 +935,9 @@
 "link": "https://www.youtube.com/watch?v=wL4MXevJKzU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=23&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 59,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 59,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 700,
@@ -946,9 +946,9 @@
 "link": "https://www.youtube.com/watch?v=wL4MXevJKzU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=23&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 38,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 38,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": 800,
@@ -956,9 +956,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 59,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 59,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -800,
@@ -966,9 +966,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 56,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 56,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 1100,
@@ -977,9 +977,9 @@
 "link": "https://www.youtube.com/watch?v=uOagh98qSLQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=24&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 22,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -1100,
@@ -988,9 +988,9 @@
 "link": "https://www.youtube.com/watch?v=uOagh98qSLQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=24&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 56,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 56,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": -4400,
@@ -998,9 +998,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 22,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 22,
 "color": 'RED',
 "city": 'COVE',
 "gold": 4400,
@@ -1008,9 +1008,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 5,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -5200,
@@ -1019,9 +1019,9 @@
 "link": "https://www.youtube.com/watch?v=Ky5zcHmgE_I&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=25&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 54,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 54,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 5200,
@@ -1030,9 +1030,9 @@
 "link": "https://www.youtube.com/watch?v=Ky5zcHmgE_I&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=25&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 5,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 5,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -6000,
@@ -1040,9 +1040,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 54,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 54,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": 6000,
@@ -1050,9 +1050,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 23,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 23,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": 1500,
@@ -1061,9 +1061,9 @@
 "link": "https://www.youtube.com/watch?v=ZLrhtJKIjOk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=26&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 49,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -1500,
@@ -1072,9 +1072,9 @@
 "link": "https://www.youtube.com/watch?v=ZLrhtJKIjOk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=26&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 23,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 23,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 2600,
@@ -1082,9 +1082,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 49,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -2600,
@@ -1092,9 +1092,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 37,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 200,
@@ -1103,9 +1103,9 @@
 "link": "https://www.youtube.com/watch?v=b5ZC0xc7x8o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=27&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 20,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 20,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -200,
@@ -1114,9 +1114,9 @@
 "link": "https://www.youtube.com/watch?v=b5ZC0xc7x8o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=27&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 37,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 37,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 100,
@@ -1124,9 +1124,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 20,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 20,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -100,
@@ -1134,9 +1134,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 4,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 4,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": 4700,
@@ -1145,9 +1145,9 @@
 "link": "https://www.youtube.com/watch?v=bZ9Rj_u-3kE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=28&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 41,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 41,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -4700,
@@ -1156,9 +1156,9 @@
 "link": "https://www.youtube.com/watch?v=bZ9Rj_u-3kE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=28&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 6200,
@@ -1166,9 +1166,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 41,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 41,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -6200,
@@ -1176,9 +1176,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 33,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 4900,
@@ -1187,9 +1187,9 @@
 "link": "https://www.youtube.com/watch?v=CyCLJ9pltiI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=29&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 57,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 57,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -4900,
@@ -1198,9 +1198,9 @@
 "link": "https://www.youtube.com/watch?v=CyCLJ9pltiI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=29&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 33,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -1300,
@@ -1208,9 +1208,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 57,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 57,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": 1300,
@@ -1218,9 +1218,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 44,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 44,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -500,
@@ -1229,9 +1229,9 @@
 "link": "https://www.youtube.com/watch?v=D4x0PjnsKKk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=30&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 5,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 500,
@@ -1240,9 +1240,9 @@
 "link": "https://www.youtube.com/watch?v=D4x0PjnsKKk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=30&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 44,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 44,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 5900,
@@ -1250,9 +1250,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 5,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -5900,
@@ -1260,9 +1260,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 15,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 15,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 1900,
@@ -1271,9 +1271,9 @@
 "link": "https://www.youtube.com/watch?v=ZrVBO5mEQcU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=31&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 22,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -1900,
@@ -1282,9 +1282,9 @@
 "link": "https://www.youtube.com/watch?v=ZrVBO5mEQcU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=31&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 15,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 15,
 "color": 'RED',
 "city": "",
 "gold": 0,
@@ -1292,9 +1292,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 22,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 22,
 "color": 'BLUE',
 "city": "",
 "gold": 0,
@@ -1302,9 +1302,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 36,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 600,
@@ -1313,9 +1313,9 @@
 "link": "https://www.youtube.com/watch?v=QgCAE4QKxWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=32&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 20,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 20,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -600,
@@ -1324,9 +1324,9 @@
 "link": "https://www.youtube.com/watch?v=QgCAE4QKxWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=32&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 36,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -100,
@@ -1334,9 +1334,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 20,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 20,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": 100,
@@ -1344,9 +1344,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 31,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 31,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 1300,
@@ -1355,9 +1355,9 @@
 "link": "https://www.youtube.com/watch?v=aSGkbl3Y4C8&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=33&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 55,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 55,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -1300,
@@ -1366,9 +1366,9 @@
 "link": "https://www.youtube.com/watch?v=aSGkbl3Y4C8&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=33&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 31,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 31,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -2400,
@@ -1376,9 +1376,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 55,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 55,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": 2400,
@@ -1386,9 +1386,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 41,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 41,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -1400,
@@ -1397,9 +1397,9 @@
 "link": "https://www.youtube.com/watch?v=5uQO9JpJjsg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=34&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 49,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 49,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 1400,
@@ -1408,9 +1408,9 @@
 "link": "https://www.youtube.com/watch?v=5uQO9JpJjsg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=34&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 41,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 41,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 1900,
@@ -1418,9 +1418,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 49,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": -1900,
@@ -1428,9 +1428,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 23,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 23,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -1000,
@@ -1439,9 +1439,9 @@
 "link": "https://www.youtube.com/watch?v=SohZu170FD4&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=35&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 58,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 58,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 1000,
@@ -1450,9 +1450,9 @@
 "link": "https://www.youtube.com/watch?v=SohZu170FD4&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=35&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 23,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 23,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": 100,
@@ -1460,9 +1460,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 58,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 58,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -100,
@@ -1470,9 +1470,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 22,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 22,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -6500,
@@ -1481,9 +1481,9 @@
 "link": "https://www.youtube.com/watch?v=uUDgFAOL5uI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=36&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 57,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 57,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": 6500,
@@ -1492,9 +1492,9 @@
 "link": "https://www.youtube.com/watch?v=uUDgFAOL5uI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=36&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 22,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 22,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -1400,
@@ -1502,9 +1502,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 57,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 57,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 1400,
@@ -1512,9 +1512,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 59,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 59,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -900,
@@ -1523,9 +1523,9 @@
 "link": "https://www.youtube.com/watch?v=h_8WcWKossQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=37&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 37,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 900,
@@ -1534,9 +1534,9 @@
 "link": "https://www.youtube.com/watch?v=h_8WcWKossQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=37&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 59,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 59,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 300,
@@ -1544,9 +1544,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 37,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 37,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -300,
@@ -1554,9 +1554,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 56,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 56,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 500,
@@ -1565,9 +1565,9 @@
 "link": "https://www.youtube.com/watch?v=q_g6vT2mL5w&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=38&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 33,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -500,
@@ -1576,9 +1576,9 @@
 "link": "https://www.youtube.com/watch?v=q_g6vT2mL5w&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=38&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 56,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 56,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -7000,
@@ -1586,9 +1586,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 33,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 7000,
@@ -1596,9 +1596,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 54,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 54,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -900,
@@ -1607,9 +1607,9 @@
 "link": "https://www.youtube.com/watch?v=an2jYYQn1BQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=39&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 55,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 55,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 900,
@@ -1618,9 +1618,9 @@
 "link": "https://www.youtube.com/watch?v=an2jYYQn1BQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=39&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 54,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 54,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -500,
@@ -1628,9 +1628,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 55,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 55,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 500,
@@ -1638,9 +1638,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 4,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 4,
 "color": 'RED',
 "city": 'TOWER',
 "gold": 1000,
@@ -1649,9 +1649,9 @@
 "link": "https://www.youtube.com/watch?v=EIg4JFdQSKE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=40&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 19,
-"player": 58,
+"turnirId": 2,
+"mapId": 19,
+"playerId": 58,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -1000,
@@ -1660,9 +1660,9 @@
 "link": "https://www.youtube.com/watch?v=EIg4JFdQSKE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=40&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 600,
@@ -1670,9 +1670,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 58,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 58,
 "color": 'RED',
 "city": 'COVE',
 "gold": -600,
@@ -1680,9 +1680,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 41,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 41,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 7000,
@@ -1691,9 +1691,9 @@
 "link": "https://www.youtube.com/watch?v=1U_Q4OGWucg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=41&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 57,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 57,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -7000,
@@ -1702,9 +1702,9 @@
 "link": "https://www.youtube.com/watch?v=1U_Q4OGWucg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=41&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 41,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 41,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 1400,
@@ -1712,9 +1712,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 57,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 57,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": -1400,
@@ -1722,9 +1722,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 44,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 44,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": -7200,
@@ -1733,9 +1733,9 @@
 "link": "https://www.youtube.com/watch?v=jhkFMGVdo58&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=42&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 38,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 38,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 7200,
@@ -1744,9 +1744,9 @@
 "link": "https://www.youtube.com/watch?v=jhkFMGVdo58&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=42&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 44,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 44,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 400,
@@ -1754,9 +1754,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 38,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 38,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -400,
@@ -1764,9 +1764,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 58,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 58,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -7900,
@@ -1775,9 +1775,9 @@
 "link": "https://www.youtube.com/watch?v=P8SnGYs4QVU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=43&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 15,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 15,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 7900,
@@ -1786,9 +1786,9 @@
 "link": "https://www.youtube.com/watch?v=P8SnGYs4QVU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=43&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 58,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 58,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": -1000,
@@ -1796,9 +1796,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 15,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 15,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 1000,
@@ -1806,9 +1806,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 58,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 58,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4000,
@@ -1816,9 +1816,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 15,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 15,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 4000,
@@ -1826,9 +1826,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 22,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 22,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -700,
@@ -1837,9 +1837,9 @@
 "link": "https://www.youtube.com/watch?v=bhNnxZdV8cg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=44&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 4,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": 700,
@@ -1848,9 +1848,9 @@
 "link": "https://www.youtube.com/watch?v=bhNnxZdV8cg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=44&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 22,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 22,
 "color": 'RED',
 "city": 'COVE',
 "gold": -6600,
@@ -1858,9 +1858,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": 6600,
@@ -1868,9 +1868,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 22,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4100,
@@ -1878,9 +1878,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 4,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 4100,
@@ -1888,9 +1888,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 55,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 55,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 4200,
@@ -1899,9 +1899,9 @@
 "link": "https://www.youtube.com/watch?v=lbpCedCMksE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=45&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 36,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 36,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -4200,
@@ -1910,9 +1910,9 @@
 "link": "https://www.youtube.com/watch?v=lbpCedCMksE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=45&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 55,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 55,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": 4400,
@@ -1920,9 +1920,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 36,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -4400,
@@ -1930,9 +1930,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 55,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 55,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 4300,
@@ -1940,9 +1940,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 36,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 36,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4300,
@@ -1950,9 +1950,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 49,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 49,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 2200,
@@ -1961,9 +1961,9 @@
 "link": "https://www.youtube.com/watch?v=mJPlYkNAXlU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=46&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 33,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -2200,
@@ -1972,9 +1972,9 @@
 "link": "https://www.youtube.com/watch?v=mJPlYkNAXlU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=46&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 49,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 49,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -2800,
@@ -1982,9 +1982,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 33,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 2800,
@@ -1992,9 +1992,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 37,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 37,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -4900,
@@ -2003,9 +2003,9 @@
 "link": "https://www.youtube.com/watch?v=7CWDjAlxUeo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=47&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 31,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 31,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 4900,
@@ -2014,9 +2014,9 @@
 "link": "https://www.youtube.com/watch?v=7CWDjAlxUeo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=47&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 37,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 600,
@@ -2024,9 +2024,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 31,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 31,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -600,
@@ -2034,9 +2034,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 5,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 5,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -8300,
@@ -2044,9 +2044,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 20,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 20,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 8300,
@@ -2054,9 +2054,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 5,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 5,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -7800,
@@ -2065,9 +2065,9 @@
 "link": "https://www.youtube.com/watch?v=lfOFL-8b6Ok&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=48&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 20,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 20,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 7800,
@@ -2076,9 +2076,9 @@
 "link": "https://www.youtube.com/watch?v=lfOFL-8b6Ok&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=48&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 5,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -3900,
@@ -2086,9 +2086,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 20,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 20,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 3900,
@@ -2096,9 +2096,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 4,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": -4500,
@@ -2106,9 +2106,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 41,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 41,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": 4500,
@@ -2116,9 +2116,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 6600,
@@ -2126,9 +2126,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 41,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 41,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -6600,
@@ -2136,9 +2136,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 31,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 31,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -1300,
@@ -2147,9 +2147,9 @@
 "link": "https://www.youtube.com/watch?v=BL056VcZsCo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=50&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 38,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 38,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 1300,
@@ -2158,9 +2158,9 @@
 "link": "https://www.youtube.com/watch?v=BL056VcZsCo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=50&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 31,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 31,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": -2600,
@@ -2168,9 +2168,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 38,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 38,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 2600,
@@ -2178,9 +2178,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 31,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 31,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4500,
@@ -2188,9 +2188,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 38,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 38,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 4500,
@@ -2198,9 +2198,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 36,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 36,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 5000,
@@ -2209,9 +2209,9 @@
 "link": "https://www.youtube.com/watch?v=UUIEYytXg7Y&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=51&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 20,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 20,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -5000,
@@ -2220,9 +2220,9 @@
 "link": "https://www.youtube.com/watch?v=UUIEYytXg7Y&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=51&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 36,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -500,
@@ -2230,9 +2230,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 20,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 20,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 500,
@@ -2240,9 +2240,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 36,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 36,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4100,
@@ -2250,9 +2250,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 20,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 20,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 4100,
@@ -2260,9 +2260,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 49,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 49,
 "color": 'RED',
 "city": 'TOWER',
 "gold": 100,
@@ -2271,9 +2271,9 @@
 "link": "https://www.youtube.com/watch?v=GgzHMM2agFU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=52&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 22,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -100,
@@ -2282,9 +2282,9 @@
 "link": "https://www.youtube.com/watch?v=GgzHMM2agFU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=52&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 49,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -2400,
@@ -2292,9 +2292,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 22,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 22,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": 2400,
@@ -2302,9 +2302,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 33,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 33,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": 5100,
@@ -2313,9 +2313,9 @@
 "link": "https://www.youtube.com/watch?v=EkHZmT_NnGY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=53&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 15,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 15,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -5100,
@@ -2324,9 +2324,9 @@
 "link": "https://www.youtube.com/watch?v=EkHZmT_NnGY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=53&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 33,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 33,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": 100,
@@ -2334,9 +2334,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 15,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 15,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -100,
@@ -2344,9 +2344,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 33,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 33,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -3900,
@@ -2354,9 +2354,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 15,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 15,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 3900,
@@ -2364,9 +2364,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 31,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 31,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -700,
@@ -2375,9 +2375,9 @@
 "link": "https://www.youtube.com/watch?v=nOuOP70tSjg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=54&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 36,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 700,
@@ -2386,9 +2386,9 @@
 "link": "https://www.youtube.com/watch?v=nOuOP70tSjg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=54&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 31,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 31,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -900,
@@ -2396,9 +2396,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 36,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 900,
@@ -2406,9 +2406,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 4,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -5000,
@@ -2417,9 +2417,9 @@
 "link": "https://www.youtube.com/watch?v=9aSpm8eneWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=55&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 33,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 33,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 5000,
@@ -2428,9 +2428,9 @@
 "link": "https://www.youtube.com/watch?v=9aSpm8eneWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=55&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": 100,
@@ -2438,9 +2438,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 33,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -100,
@@ -2448,9 +2448,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 5,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 5700,
@@ -2459,9 +2459,9 @@
 "link": "https://www.youtube.com/watch?v=rN3RXbOBnvA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=56&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 37,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 37,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -5700,
@@ -2470,9 +2470,9 @@
 "link": "https://www.youtube.com/watch?v=rN3RXbOBnvA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=56&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 5,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 8100,
@@ -2480,9 +2480,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 37,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 37,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -8100,
@@ -2490,9 +2490,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 5,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 4200,
@@ -2500,9 +2500,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 37,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4200,
@@ -2510,9 +2510,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 4,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 6000,
@@ -2521,9 +2521,9 @@
 "link": "https://www.youtube.com/watch?v=XXV-rwZv5Tg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=57&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 49,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 49,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -6000,
@@ -2532,9 +2532,9 @@
 "link": "https://www.youtube.com/watch?v=XXV-rwZv5Tg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=57&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 2500,
@@ -2542,9 +2542,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 49,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -2500,
@@ -2552,9 +2552,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 37,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 100,
@@ -2563,9 +2563,9 @@
 "link": "https://www.youtube.com/watch?v=x9MAaDkiEc0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=58&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 36,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -100,
@@ -2574,9 +2574,9 @@
 "link": "https://www.youtube.com/watch?v=x9MAaDkiEc0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=58&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 37,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 37,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": 1400,
@@ -2584,9 +2584,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 36,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -1400,
@@ -2595,9 +2595,9 @@
 "link": "https://www.youtube.com/watch?v=ietkg-cLiB0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=59&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 4,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 6000,
@@ -2606,9 +2606,9 @@
 "link": "https://www.youtube.com/watch?v=ietkg-cLiB0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=59&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 36,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 36,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -6000,
@@ -2616,9 +2616,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -3400,
@@ -2626,9 +2626,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 36,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 36,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": 3400,
@@ -2636,9 +2636,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 22,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 22,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -7700,
@@ -2647,9 +2647,9 @@
 "link": "https://www.youtube.com/watch?v=9qSTZsDAGHw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=61&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 5,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 7700,
@@ -2658,9 +2658,9 @@
 "link": "https://www.youtube.com/watch?v=9qSTZsDAGHw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=61&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 22,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": 5900,
@@ -2668,9 +2668,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 5,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 5,
 "color": 'RED',
 "city": 'COVE',
 "gold": -5900,
@@ -2678,9 +2678,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 22,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4500,
@@ -2688,9 +2688,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 5,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 4500,
@@ -2698,9 +2698,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 4,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -6000,
@@ -2709,9 +2709,9 @@
 "link": "https://www.youtube.com/watch?v=I6PyiKi7HTY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=60&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 22,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 6000,
@@ -2720,9 +2720,9 @@
 "link": "https://www.youtube.com/watch?v=I6PyiKi7HTY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=60&pp=iAQB"
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": 5300,
@@ -2730,9 +2730,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 22,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -5300,
@@ -2740,9 +2740,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 4,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 4,
 "color": 'RED',
 "city": "",
 "gold": 0,
@@ -2750,9 +2750,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 1,
-"player": 5,
+"turnirId": 2,
+"mapId": 1,
+"playerId": 5,
 "color": 'BLUE',
 "city": "",
 "gold": 0,
@@ -2760,9 +2760,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 4,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 4,
 "color": 'RED',
 "city": "",
 "gold": 0,
@@ -2770,9 +2770,9 @@
 "win": false
 },
 {
-"turnir": 2,
-"map": 17,
-"player": 5,
+"turnirId": 2,
+"mapId": 17,
+"playerId": 5,
 "color": 'BLUE',
 "city": "",
 "gold": 0,
@@ -2780,9 +2780,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 4,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 4,
 "color": 'RED',
 "city": "",
 "gold": 0,
@@ -2790,9 +2790,9 @@
 "win": true
 },
 {
-"turnir": 2,
-"map": 2,
-"player": 5,
+"turnirId": 2,
+"mapId": 2,
+"playerId": 5,
 "color": 'BLUE',
 "city": "",
 "gold": 0,
@@ -2800,9 +2800,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 60,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 60,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": 600,
@@ -2811,9 +2811,9 @@
 "link": "https://www.youtube.com/watch?v=QBe9bOlRn6E&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=1&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 31,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 31,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -600,
@@ -2822,9 +2822,9 @@
 "link": "https://www.youtube.com/watch?v=QBe9bOlRn6E&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=1&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 60,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 60,
 "color": 'RED',
 "city": 'COVE',
 "gold": -3900,
@@ -2832,9 +2832,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 31,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 31,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 3900,
@@ -2842,9 +2842,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 37,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 5800,
@@ -2853,9 +2853,9 @@
 "link": "https://www.youtube.com/watch?v=wK5S6aVzxTM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=2&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 61,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 61,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -5800,
@@ -2864,9 +2864,9 @@
 "link": "https://www.youtube.com/watch?v=wK5S6aVzxTM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=2&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 37,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 37,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -4300,
@@ -2874,9 +2874,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 61,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 61,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 4300,
@@ -2884,9 +2884,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 37,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 7000,
@@ -2894,9 +2894,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 61,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 61,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -7000,
@@ -2904,9 +2904,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 62,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 62,
 "color": 'RED',
 "city": 'TOWER',
 "gold": 0,
@@ -2915,9 +2915,9 @@
 "link": "https://www.youtube.com/watch?v=Si9iNibq4uE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=3&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 49,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 0,
@@ -2926,9 +2926,9 @@
 "link": "https://www.youtube.com/watch?v=Si9iNibq4uE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=3&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 62,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 62,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -4200,
@@ -2936,9 +2936,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 49,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 4200,
@@ -2946,9 +2946,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 62,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 62,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 5500,
@@ -2956,9 +2956,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 49,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 49,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -5500,
@@ -2966,9 +2966,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 5,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 4500,
@@ -2977,9 +2977,9 @@
 "link": "https://www.youtube.com/watch?v=vMGRhEXPbZE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=4&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 63,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 63,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -4500,
@@ -2988,9 +2988,9 @@
 "link": "https://www.youtube.com/watch?v=vMGRhEXPbZE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=4&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 5,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 4000,
@@ -2998,9 +2998,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 63,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 63,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -4000,
@@ -3008,9 +3008,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 36,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 36,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 6600,
@@ -3019,9 +3019,9 @@
 "link": "https://www.youtube.com/watch?v=aSM1EwLe0Nc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=5&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 64,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 64,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -6600,
@@ -3030,9 +3030,9 @@
 "link": "https://www.youtube.com/watch?v=aSM1EwLe0Nc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=5&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 36,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 3600,
@@ -3040,9 +3040,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 64,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 64,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": -3600,
@@ -3050,9 +3050,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 60,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 60,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 5100,
@@ -3061,9 +3061,9 @@
 "link": "https://www.youtube.com/watch?v=_4HaKR6xbVQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=6&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 61,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 61,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -5100,
@@ -3072,9 +3072,9 @@
 "link": "https://www.youtube.com/watch?v=_4HaKR6xbVQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=6&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 60,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 60,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -3800,
@@ -3082,9 +3082,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 61,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 61,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 3800,
@@ -3092,9 +3092,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 60,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 60,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -200,
@@ -3102,9 +3102,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 61,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 61,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": 200,
@@ -3112,9 +3112,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 62,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 62,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -8200,
@@ -3123,9 +3123,9 @@
 "link": "https://www.youtube.com/watch?v=cK1mSP1VPmM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=7&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 64,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 64,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 8200,
@@ -3134,9 +3134,9 @@
 "link": "https://www.youtube.com/watch?v=cK1mSP1VPmM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=7&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 62,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 62,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 4100,
@@ -3144,9 +3144,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 64,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 64,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -4100,
@@ -3154,9 +3154,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 28,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 28,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 3400,
@@ -3165,9 +3165,9 @@
 "link": "https://www.youtube.com/watch?v=9qiS_XsTDtY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=8&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 4,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -3400,
@@ -3176,9 +3176,9 @@
 "link": "https://www.youtube.com/watch?v=9qiS_XsTDtY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=8&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 28,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 28,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": -3900,
@@ -3186,9 +3186,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 4,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 3900,
@@ -3196,9 +3196,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 22,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 22,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 0,
@@ -3207,9 +3207,9 @@
 "link": "https://www.youtube.com/watch?v=gyRWUZ1HsZ4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=9&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 58,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 58,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 0,
@@ -3218,9 +3218,9 @@
 "link": "https://www.youtube.com/watch?v=gyRWUZ1HsZ4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=9&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 22,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 4300,
@@ -3228,9 +3228,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 58,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 58,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -4300,
@@ -3238,9 +3238,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 37,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 0,
@@ -3249,9 +3249,9 @@
 "link": "https://www.youtube.com/watch?v=qOiWXMKPyW0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=10"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 31,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 31,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 0,
@@ -3260,9 +3260,9 @@
 "link": "https://www.youtube.com/watch?v=qOiWXMKPyW0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=10"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 37,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 4300,
@@ -3270,9 +3270,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 31,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 31,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -4300,
@@ -3280,9 +3280,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 49,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 49,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 4100,
@@ -3291,9 +3291,9 @@
 "link": "https://www.youtube.com/watch?v=6lL4rN_v-eQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=11&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 36,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -4100,
@@ -3302,9 +3302,9 @@
 "link": "https://www.youtube.com/watch?v=6lL4rN_v-eQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=11&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 49,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 49,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -4100,
@@ -3312,9 +3312,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 36,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 4100,
@@ -3322,9 +3322,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 31,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 31,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": -6500,
@@ -3333,9 +3333,9 @@
 "link": "https://www.youtube.com/watch?v=Rwyini2zOj0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=12&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 60,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 60,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 6500,
@@ -3344,9 +3344,9 @@
 "link": "https://www.youtube.com/watch?v=Rwyini2zOj0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=12&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 31,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 31,
 "color": 'RED',
 "city": 'COVE',
 "gold": -4000,
@@ -3354,9 +3354,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 60,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 60,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 4000,
@@ -3364,9 +3364,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 31,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 31,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 4200,
@@ -3374,9 +3374,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 60,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 60,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -4200,
@@ -3384,9 +3384,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 58,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 58,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": 3600,
@@ -3395,9 +3395,9 @@
 "link": "https://www.youtube.com/watch?v=VQBP0OQlVAY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=13&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 28,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 28,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -3600,
@@ -3406,9 +3406,9 @@
 "link": "https://www.youtube.com/watch?v=VQBP0OQlVAY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=13&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 58,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 58,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 4100,
@@ -3416,9 +3416,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 28,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 28,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4100,
@@ -3426,9 +3426,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 47,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 47,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 6800,
@@ -3436,9 +3436,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 63,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 63,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -6800,
@@ -3446,9 +3446,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 47,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 47,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": -4400,
@@ -3457,9 +3457,9 @@
 "link": "https://www.youtube.com/watch?v=1bYoyh_3iAQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=14&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 63,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 63,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 4400,
@@ -3468,9 +3468,9 @@
 "link": "https://www.youtube.com/watch?v=1bYoyh_3iAQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=14&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 47,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 47,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -2800,
@@ -3478,9 +3478,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 63,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 63,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 2800,
@@ -3488,9 +3488,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 4,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -5000,
@@ -3499,9 +3499,9 @@
 "link": "https://www.youtube.com/watch?v=Ca4-yWxXZGo&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=15&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 22,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 22,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": 5000,
@@ -3510,9 +3510,9 @@
 "link": "https://www.youtube.com/watch?v=Ca4-yWxXZGo&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=15&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 4,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 3900,
@@ -3520,9 +3520,9 @@
 "win": true
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 22,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 22,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -3900,
@@ -3530,9 +3530,9 @@
 "win": false
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 5,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -2300,
@@ -3541,9 +3541,9 @@
 "link": "https://www.youtube.com/watch?v=-F1xuEW-jH8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=16&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 33,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 33,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": 2300,
@@ -3552,9 +3552,9 @@
 "link": "https://www.youtube.com/watch?v=-F1xuEW-jH8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=16&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 5,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 3900,
@@ -3563,9 +3563,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 33,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 33,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -3900,
@@ -3574,9 +3574,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 5,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -2800,
@@ -3585,9 +3585,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 33,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 33,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 2800,
@@ -3596,9 +3596,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 47,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 47,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -6500,
@@ -3607,9 +3607,9 @@
 "link": "https://www.youtube.com/watch?v=R8f9ca9TXa8"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 33,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 6500,
@@ -3618,9 +3618,9 @@
 "link": "https://www.youtube.com/watch?v=R8f9ca9TXa8"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 47,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 47,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -4300,
@@ -3629,9 +3629,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 33,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 4300,
@@ -3640,9 +3640,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 47,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 47,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 7500,
@@ -3651,9 +3651,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 33,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 33,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -7500,
@@ -3662,9 +3662,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 49,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 6000,
@@ -3673,9 +3673,9 @@
 "link": "https://youtu.be/Rdc2MdqhrlQ"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 62,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 62,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -6000,
@@ -3684,9 +3684,9 @@
 "link": "https://youtu.be/Rdc2MdqhrlQ"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 49,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 4000,
@@ -3695,9 +3695,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 62,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 62,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -4000,
@@ -3706,9 +3706,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 58,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 58,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 3600,
@@ -3717,9 +3717,9 @@
 "link": "https://www.youtube.com/watch?v=ub5LCr21V88&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=18&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 22,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -3600,
@@ -3728,9 +3728,9 @@
 "link": "https://www.youtube.com/watch?v=ub5LCr21V88&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=18&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 58,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 58,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -4000,
@@ -3739,9 +3739,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 22,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 4000,
@@ -3750,9 +3750,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 58,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 58,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 6200,
@@ -3761,9 +3761,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 16,
-"player": 22,
+"turnirId": 3,
+"mapId": 16,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -6200,
@@ -3772,9 +3772,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 33,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 33,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 4800,
@@ -3783,9 +3783,9 @@
 "link": "https://www.youtube.com/watch?v=AYnWGcpfqyM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=19&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 1,
-"player": 63,
+"turnirId": 3,
+"mapId": 1,
+"playerId": 63,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -4800,
@@ -3794,9 +3794,9 @@
 "link": "https://www.youtube.com/watch?v=AYnWGcpfqyM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=19&pp=iAQB"
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 33,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 3900,
@@ -3805,9 +3805,9 @@
 "link": null
 },
 {
-"turnir": 3,
-"map": 18,
-"player": 63,
+"turnirId": 3,
+"mapId": 18,
+"playerId": 63,
 "color": 'RED',
 "city": 'COVE',
 "gold": -3900,
@@ -3816,9 +3816,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 37,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 37,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -8000,
@@ -3827,9 +3827,9 @@
 "link": "https://www.youtube.com/watch?v=FW5VnHuLsps&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=20&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 49,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 8000,
@@ -3838,9 +3838,9 @@
 "link": "https://www.youtube.com/watch?v=FW5VnHuLsps&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=20&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 20,
-"player": 37,
+"turnirId": 6,
+"mapId": 20,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 8000,
@@ -3849,9 +3849,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 20,
-"player": 49,
+"turnirId": 6,
+"mapId": 20,
+"playerId": 49,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -8000,
@@ -3860,9 +3860,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 47,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 47,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 0,
@@ -3871,9 +3871,9 @@
 "link": "https://www.youtube.com/watch?v=6MpBGKCC7cc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=21&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 22,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 0,
@@ -3882,9 +3882,9 @@
 "link": "https://www.youtube.com/watch?v=6MpBGKCC7cc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=21&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 2,
-"player": 47,
+"turnirId": 6,
+"mapId": 2,
+"playerId": 47,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 4300,
@@ -3893,9 +3893,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 2,
-"player": 22,
+"turnirId": 6,
+"mapId": 2,
+"playerId": 22,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -4300,
@@ -3904,9 +3904,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 33,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -3500,
@@ -3915,9 +3915,9 @@
 "link": "https://www.youtube.com/watch?v=C_REFtNWkNE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=22&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 4,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 4,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 3500,
@@ -3926,9 +3926,9 @@
 "link": "https://www.youtube.com/watch?v=C_REFtNWkNE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=22&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 18,
-"player": 33,
+"turnirId": 6,
+"mapId": 18,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 3600,
@@ -3937,9 +3937,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 18,
-"player": 4,
+"turnirId": 6,
+"mapId": 18,
+"playerId": 4,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -3600,
@@ -3948,9 +3948,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 33,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 33,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 4100,
@@ -3959,9 +3959,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 4,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -4100,
@@ -3970,9 +3970,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 19,
-"player": 31,
+"turnirId": 6,
+"mapId": 19,
+"playerId": 31,
 "color": 'RED',
 "city": 'TOWER',
 "gold": 4500,
@@ -3981,9 +3981,9 @@
 "link": "https://www.youtube.com/watch?v=8IJZ98TQOVM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=23&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 19,
-"player": 36,
+"turnirId": 6,
+"mapId": 19,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -4500,
@@ -3992,9 +3992,9 @@
 "link": "https://www.youtube.com/watch?v=8IJZ98TQOVM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=23&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 20,
-"player": 31,
+"turnirId": 6,
+"mapId": 20,
+"playerId": 31,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": 2200,
@@ -4003,9 +4003,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 20,
-"player": 36,
+"turnirId": 6,
+"mapId": 20,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -2200,
@@ -4014,9 +4014,9 @@
 "link": null
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 22,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 22,
 "color": 'RED',
 "city": 'TOWER',
 "gold": 100,
@@ -4025,9 +4025,9 @@
 "link": "https://www.youtube.com/watch?v=0hByV9_Xses&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=24&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 49,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -100,
@@ -4036,9 +4036,9 @@
 "link": "https://www.youtube.com/watch?v=0hByV9_Xses&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=24&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 20,
-"player": 22,
+"turnirId": 6,
+"mapId": 20,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 9100,
@@ -4046,9 +4046,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 20,
-"player": 49,
+"turnirId": 6,
+"mapId": 20,
+"playerId": 49,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -9100,
@@ -4056,9 +4056,9 @@
 "win": true
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 22,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 22,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 1900,
@@ -4066,9 +4066,9 @@
 "win": true
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 49,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -1900,
@@ -4076,9 +4076,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 37,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 7400,
@@ -4086,9 +4086,9 @@
 "win": true
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 47,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 47,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": -7400,
@@ -4096,9 +4096,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 17,
-"player": 37,
+"turnirId": 6,
+"mapId": 17,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -4300,
@@ -4107,9 +4107,9 @@
 "link": "https://www.youtube.com/watch?v=5w-UQJkP7bU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=26&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 17,
-"player": 47,
+"turnirId": 6,
+"mapId": 17,
+"playerId": 47,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 4300,
@@ -4118,9 +4118,9 @@
 "link": "https://www.youtube.com/watch?v=5w-UQJkP7bU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=26&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 19,
-"player": 37,
+"turnirId": 6,
+"mapId": 19,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -2700,
@@ -4128,9 +4128,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 19,
-"player": 47,
+"turnirId": 6,
+"mapId": 19,
+"playerId": 47,
 "color": 'RED',
 "city": 'TOWER',
 "gold": 2700,
@@ -4138,9 +4138,9 @@
 "win": true
 },
 {
-"turnir": 6,
-"map": 20,
-"player": 4,
+"turnirId": 6,
+"mapId": 20,
+"playerId": 4,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": 9900,
@@ -4148,9 +4148,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 20,
-"player": 36,
+"turnirId": 6,
+"mapId": 20,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -9900,
@@ -4159,9 +4159,9 @@
 "link": "https://www.youtube.com/watch?v=sPQPMyPsbq8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=27&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 2,
-"player": 4,
+"turnirId": 6,
+"mapId": 2,
+"playerId": 4,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": -4100,
@@ -4170,9 +4170,9 @@
 "link": "https://www.youtube.com/watch?v=sPQPMyPsbq8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=27&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 2,
-"player": 36,
+"turnirId": 6,
+"mapId": 2,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 4100,
@@ -4180,9 +4180,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 4,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 4,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": -600,
@@ -4190,9 +4190,9 @@
 "win": true
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 36,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 36,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": 600,
@@ -4200,9 +4200,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 31,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 31,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 1,
@@ -4211,9 +4211,9 @@
 "link": "https://www.youtube.com/watch?v=nS-fQHgrMoU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=28&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 33,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -1,
@@ -4222,9 +4222,9 @@
 "link": "https://www.youtube.com/watch?v=nS-fQHgrMoU&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=28&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 31,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 31,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": 200,
@@ -4232,9 +4232,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 33,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -200,
@@ -4242,9 +4242,9 @@
 "win": true
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 49,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 49,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -1300,
@@ -4253,9 +4253,9 @@
 "link": "https://www.youtube.com/watch?v=xj3zxZ4NZj4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=29&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 4,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 4,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 1300,
@@ -4264,9 +4264,9 @@
 "link": "https://www.youtube.com/watch?v=xj3zxZ4NZj4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=29&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 22,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 22,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 3100,
@@ -4275,9 +4275,9 @@
 "link": "https://www.youtube.com/watch?v=bzj3FflOZZQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=32&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 16,
-"player": 33,
+"turnirId": 6,
+"mapId": 16,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -3100,
@@ -4286,9 +4286,9 @@
 "link": "https://www.youtube.com/watch?v=bzj3FflOZZQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=32&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 22,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 22,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -4300,
@@ -4296,9 +4296,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 33,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 4300,
@@ -4306,9 +4306,9 @@
 "win": true
 },
 {
-"turnir": 6,
-"map": 18,
-"player": 22,
+"turnirId": 6,
+"mapId": 18,
+"playerId": 22,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": -3900,
@@ -4316,9 +4316,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 18,
-"player": 33,
+"turnirId": 6,
+"mapId": 18,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": 3900,
@@ -4326,9 +4326,9 @@
 "win": true
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 47,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 47,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 4300,
@@ -4337,9 +4337,9 @@
 "link": "https://www.youtube.com/watch?v=uFmjFF07Ti8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=33&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 22,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -4300,
@@ -4348,9 +4348,9 @@
 "link": "https://www.youtube.com/watch?v=uFmjFF07Ti8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=33&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 2,
-"player": 47,
+"turnirId": 6,
+"mapId": 2,
+"playerId": 47,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 6600,
@@ -4358,9 +4358,9 @@
 "win": false
 },
 {
-"turnir": 6,
-"map": 2,
-"player": 22,
+"turnirId": 6,
+"mapId": 2,
+"playerId": 22,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -6600,
@@ -4368,9 +4368,9 @@
 "win": true
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 22,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 5900,
@@ -4379,9 +4379,9 @@
 "link": "https://www.youtube.com/watch?v=-XAlWRNljxA&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=34&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 1,
-"player": 33,
+"turnirId": 6,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -5900,
@@ -4390,9 +4390,9 @@
 "link": "https://www.youtube.com/watch?v=-XAlWRNljxA&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=34&pp=iAQB"
 },
 {
-"turnir": 6,
-"map": 17,
-"player": 22,
+"turnirId": 6,
+"mapId": 17,
+"playerId": 22,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -100,
@@ -4400,9 +4400,9 @@
 "win": true
 },
 {
-"turnir": 6,
-"map": 17,
-"player": 33,
+"turnirId": 6,
+"mapId": 17,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": 100,
@@ -4410,9 +4410,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 17,
-"player": 31,
+"turnirId": 4,
+"mapId": 17,
+"playerId": 31,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": 400,
@@ -4421,9 +4421,9 @@
 "link": "https://www.youtube.com/watch?v=3U0LMqkqyt4&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=40&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 17,
-"player": 36,
+"turnirId": 4,
+"mapId": 17,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -400,
@@ -4432,9 +4432,9 @@
 "link": "https://www.youtube.com/watch?v=3U0LMqkqyt4&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=40&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 31,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 31,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -3800,
@@ -4442,9 +4442,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 36,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 3800,
@@ -4452,9 +4452,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 17,
-"player": 62,
+"turnirId": 4,
+"mapId": 17,
+"playerId": 62,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 5500,
@@ -4463,9 +4463,9 @@
 "link": "https://www.youtube.com/watch?v=Hd-4CZofS6M&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=39&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 17,
-"player": 65,
+"turnirId": 4,
+"mapId": 17,
+"playerId": 65,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -5500,
@@ -4474,9 +4474,9 @@
 "link": "https://www.youtube.com/watch?v=Hd-4CZofS6M&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=39&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 62,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 62,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": 0,
@@ -4484,9 +4484,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 65,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 65,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": 0,
@@ -4494,9 +4494,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 16,
-"player": 62,
+"turnirId": 4,
+"mapId": 16,
+"playerId": 62,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 5500,
@@ -4504,9 +4504,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 16,
-"player": 65,
+"turnirId": 4,
+"mapId": 16,
+"playerId": 65,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": -5500,
@@ -4514,9 +4514,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 17,
-"player": 49,
+"turnirId": 4,
+"mapId": 17,
+"playerId": 49,
 "color": 'RED',
 "city": 'TOWER',
 "gold": 1200,
@@ -4525,9 +4525,9 @@
 "link": "https://www.youtube.com/watch?v=qd5sYVTCJac&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=38&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 17,
-"player": 5,
+"turnirId": 4,
+"mapId": 17,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -1200,
@@ -4536,9 +4536,9 @@
 "link": "https://www.youtube.com/watch?v=qd5sYVTCJac&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=38&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 49,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 49,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -4000,
@@ -4546,9 +4546,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 5,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'COVE',
 "gold": 4000,
@@ -4556,9 +4556,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 16,
-"player": 49,
+"turnirId": 4,
+"mapId": 16,
+"playerId": 49,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -8200,
@@ -4566,9 +4566,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 16,
-"player": 5,
+"turnirId": 4,
+"mapId": 16,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
 "gold": 8200,
@@ -4576,9 +4576,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 2,
-"player": 61,
+"turnirId": 4,
+"mapId": 2,
+"playerId": 61,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -3900,
@@ -4587,9 +4587,9 @@
 "link": "https://www.youtube.com/watch?v=wvnbLwaciNM&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=37&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 2,
-"player": 33,
+"turnirId": 4,
+"mapId": 2,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 3900,
@@ -4598,9 +4598,9 @@
 "link": "https://www.youtube.com/watch?v=wvnbLwaciNM&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=37&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 61,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 61,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -7100,
@@ -4608,9 +4608,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 33,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 7100,
@@ -4618,9 +4618,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 60,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 60,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": 0,
@@ -4629,9 +4629,9 @@
 "link": "https://www.youtube.com/watch?v=qzIGXOeXpKA&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=36&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 63,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 63,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 0,
@@ -4640,9 +4640,9 @@
 "link": "https://www.youtube.com/watch?v=qzIGXOeXpKA&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=36&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 16,
-"player": 60,
+"turnirId": 4,
+"mapId": 16,
+"playerId": 60,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -6400,
@@ -4650,9 +4650,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 16,
-"player": 63,
+"turnirId": 4,
+"mapId": 16,
+"playerId": 63,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 6400,
@@ -4660,9 +4660,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 60,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 60,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4100,
@@ -4670,9 +4670,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 63,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 63,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 4100,
@@ -4680,9 +4680,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 16,
-"player": 37,
+"turnirId": 4,
+"mapId": 16,
+"playerId": 37,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -6900,
@@ -4691,9 +4691,9 @@
 "link": "https://www.youtube.com/watch?v=HawW_d66MN8&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=35&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 16,
-"player": 58,
+"turnirId": 4,
+"mapId": 16,
+"playerId": 58,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 6900,
@@ -4702,9 +4702,9 @@
 "link": "https://www.youtube.com/watch?v=HawW_d66MN8&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=35&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 17,
-"player": 37,
+"turnirId": 4,
+"mapId": 17,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 8000,
@@ -4712,9 +4712,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 17,
-"player": 58,
+"turnirId": 4,
+"mapId": 17,
+"playerId": 58,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -8000,
@@ -4722,9 +4722,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 37,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 37,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -5100,
@@ -4732,9 +4732,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 58,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 58,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": 5100,
@@ -4742,9 +4742,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 2,
-"player": 50,
+"turnirId": 4,
+"mapId": 2,
+"playerId": 50,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 3900,
@@ -4753,9 +4753,9 @@
 "link": "https://www.youtube.com/watch?v=fKdxkGUaeGE&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=34&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 2,
-"player": 22,
+"turnirId": 4,
+"mapId": 2,
+"playerId": 22,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -3900,
@@ -4764,9 +4764,9 @@
 "link": "https://www.youtube.com/watch?v=fKdxkGUaeGE&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=34&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 50,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 50,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": 5800,
@@ -4774,9 +4774,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 22,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 22,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -5800,
@@ -4784,9 +4784,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 41,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 41,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 4500,
@@ -4795,9 +4795,9 @@
 "link": "https://www.youtube.com/watch?v=MkENEJhHp7E&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=33&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 47,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 47,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 4500,
@@ -4806,9 +4806,9 @@
 "link": "https://www.youtube.com/watch?v=MkENEJhHp7E&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=33&pp=iAQB"
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 41,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 41,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -7100,
@@ -4816,9 +4816,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 47,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 47,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 7100,
@@ -4826,9 +4826,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 33,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 4000,
@@ -4836,9 +4836,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 58,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 58,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -4000,
@@ -4846,9 +4846,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 33,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 33,
 "color": 'RED',
 "city": 'CASTLE',
 "gold": -6000,
@@ -4856,9 +4856,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 58,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 58,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 6000,
@@ -4866,9 +4866,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 37,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 37,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -4000,
@@ -4876,9 +4876,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 18,
-"player": 61,
+"turnirId": 4,
+"mapId": 18,
+"playerId": 61,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 4000,
@@ -4886,9 +4886,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 37,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 37,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -7500,
@@ -4896,9 +4896,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 61,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 61,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 7500,
@@ -4906,9 +4906,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 5,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 5,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -6700,
@@ -4916,9 +4916,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 47,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 47,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 6700,
@@ -4926,9 +4926,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 17,
-"player": 5,
+"turnirId": 4,
+"mapId": 17,
+"playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 9000,
@@ -4936,9 +4936,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 17,
-"player": 47,
+"turnirId": 4,
+"mapId": 17,
+"playerId": 47,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -9000,
@@ -4946,9 +4946,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 2,
-"player": 5,
+"turnirId": 4,
+"mapId": 2,
+"playerId": 5,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": -4700,
@@ -4956,9 +4956,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 2,
-"player": 47,
+"turnirId": 4,
+"mapId": 2,
+"playerId": 47,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 4700,
@@ -4966,9 +4966,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 2,
-"player": 65,
+"turnirId": 4,
+"mapId": 2,
+"playerId": 65,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -4600,
@@ -4976,9 +4976,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 2,
-"player": 50,
+"turnirId": 4,
+"mapId": 2,
+"playerId": 50,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 4600,
@@ -4986,9 +4986,9 @@
 "win": false
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 65,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 65,
 "color": 'RED',
 "city": 'TOWER',
 "gold": -700,
@@ -4996,9 +4996,9 @@
 "win": true
 },
 {
-"turnir": 4,
-"map": 1,
-"player": 50,
+"turnirId": 4,
+"mapId": 1,
+"playerId": 50,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 700,
@@ -5006,9 +5006,9 @@
 "win": false
 },
 {
-    "turnir": 4,
-    "map": 18,
-    "player": 49,
+    "turnirId": 4,
+    "mapId": 18,
+    "playerId": 49,
     "color": 'BLUE',
     "city": 'DUNGEON',
     "gold": 4400,
@@ -5016,9 +5016,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 18,
-    "player": 41,
+    "turnirId": 4,
+    "mapId": 18,
+    "playerId": 41,
     "color": 'RED',
     "city": 'CASTLE',
     "gold": -4400,
@@ -5026,9 +5026,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 16,
-    "player": 49,
+    "turnirId": 4,
+    "mapId": 16,
+    "playerId": 49,
     "color": 'RED',
     "city": 'CASTLE',
     "gold": -6500,
@@ -5036,9 +5036,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 16,
-    "player": 41,
+    "turnirId": 4,
+    "mapId": 16,
+    "playerId": 41,
     "color": 'BLUE',
     "city": 'INFERNO',
     "gold": 6500,
@@ -5046,9 +5046,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 18,
-    "player": 31,
+    "turnirId": 4,
+    "mapId": 18,
+    "playerId": 31,
     "color": 'RED',
     "city": 'STRONGHOLD',
     "gold": -4200,
@@ -5056,9 +5056,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 18,
-    "player": 60,
+    "turnirId": 4,
+    "mapId": 18,
+    "playerId": 60,
     "color": 'BLUE',
     "city": 'COVE',
     "gold": 4200,
@@ -5066,9 +5066,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 16,
-    "player": 31,
+    "turnirId": 4,
+    "mapId": 16,
+    "playerId": 31,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
     "gold": 5600,
@@ -5076,9 +5076,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 16,
-    "player": 60,
+    "turnirId": 4,
+    "mapId": 16,
+    "playerId": 60,
     "color": 'RED',
     "city": 'TOWER',
     "gold": -5600,
@@ -5086,9 +5086,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 2,
-    "player": 31,
+    "turnirId": 4,
+    "mapId": 2,
+    "playerId": 31,
     "color": 'RED',
     "city": 'STRONGHOLD',
     "gold": -4100,
@@ -5096,9 +5096,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 2,
-    "player": 60,
+    "turnirId": 4,
+    "mapId": 2,
+    "playerId": 60,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
     "gold": 4100,
@@ -5106,9 +5106,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 1,
-    "player": 5,
+    "turnirId": 4,
+    "mapId": 1,
+    "playerId": 5,
     "color": 'RED',
     "city": 'FACTORY',
     "gold": 3900,
@@ -5116,9 +5116,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 1,
-    "player": 49,
+    "turnirId": 4,
+    "mapId": 1,
+    "playerId": 49,
     "color": 'BLUE',
     "city": 'CONFLUX',
     "gold": -3900,
@@ -5126,9 +5126,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 17,
-    "player": 5,
+    "turnirId": 4,
+    "mapId": 17,
+    "playerId": 5,
     "color": 'BLUE',
     "city": 'COVE',
     "gold": -2300,
@@ -5136,9 +5136,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 17,
-    "player": 49,
+    "turnirId": 4,
+    "mapId": 17,
+    "playerId": 49,
     "color": 'RED',
     "city": 'CONFLUX',
     "gold": 2300,
@@ -5146,9 +5146,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 18,
-    "player": 5,
+    "turnirId": 4,
+    "mapId": 18,
+    "playerId": 5,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
     "gold": 4500,
@@ -5156,9 +5156,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 18,
-    "player": 49,
+    "turnirId": 4,
+    "mapId": 18,
+    "playerId": 49,
     "color": 'RED',
     "city": 'RAMPART',
     "gold": -4500,
@@ -5166,9 +5166,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 16,
-    "player": 22,
+    "turnirId": 4,
+    "mapId": 16,
+    "playerId": 22,
     "color": 'RED',
     "city": 'INFERNO',
     "gold": -1600,
@@ -5176,9 +5176,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 16,
-    "player": 62,
+    "turnirId": 4,
+    "mapId": 16,
+    "playerId": 62,
     "color": 'BLUE',
     "city": 'COVE',
     "gold": 1600,
@@ -5186,9 +5186,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 17,
-    "player": 22,
+    "turnirId": 4,
+    "mapId": 17,
+    "playerId": 22,
     "color": 'RED',
     "city": 'CASTLE',
     "gold": -8700,
@@ -5196,9 +5196,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 17,
-    "player": 62,
+    "turnirId": 4,
+    "mapId": 17,
+    "playerId": 62,
     "color": 'BLUE',
     "city": 'FACTORY',
     "gold": 8700,
@@ -5206,9 +5206,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 17,
-    "player": 31,
+    "turnirId": 4,
+    "mapId": 17,
+    "playerId": 31,
     "color": 'RED',
     "city": 'FACTORY',
     "gold": 3200,
@@ -5216,9 +5216,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 17,
-    "player": 36,
+    "turnirId": 4,
+    "mapId": 17,
+    "playerId": 36,
     "color": 'BLUE',
     "city": 'FORTRESS',
     "gold": -3200,
@@ -5226,9 +5226,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 2,
-    "player": 31,
+    "turnirId": 4,
+    "mapId": 2,
+    "playerId": 31,
     "color": 'BLUE',
     "city": 'CONFLUX',
     "gold": 4000,
@@ -5236,9 +5236,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 2,
-    "player": 36,
+    "turnirId": 4,
+    "mapId": 2,
+    "playerId": 36,
     "color": 'RED',
     "city": 'CONFLUX',
     "gold": -4000,
@@ -5246,9 +5246,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 16,
-    "player": 31,
+    "turnirId": 4,
+    "mapId": 16,
+    "playerId": 31,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
     "gold": 4500,
@@ -5256,9 +5256,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 16,
-    "player": 36,
+    "turnirId": 4,
+    "mapId": 16,
+    "playerId": 36,
     "color": 'RED',
     "city": 'CASTLE',
     "gold": -4500,
@@ -5266,9 +5266,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 17,
-    "player": 33,
+    "turnirId": 4,
+    "mapId": 17,
+    "playerId": 33,
     "color": 'BLUE',
     "city": 'TOWER',
     "gold": -2100,
@@ -5276,9 +5276,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 17,
-    "player": 61,
+    "turnirId": 4,
+    "mapId": 17,
+    "playerId": 61,
     "color": 'RED',
     "city": 'NECROPOLIS',
     "gold": 2100,
@@ -5286,9 +5286,9 @@
     "win": false
 },
 {
-    "turnir": 4,
-    "map": 1,
-    "player": 33,
+    "turnirId": 4,
+    "mapId": 1,
+    "playerId": 33,
     "color": 'RED',
     "city": 'FORTRESS',
     "gold": 1200,
@@ -5296,9 +5296,9 @@
     "win": true
 },
 {
-    "turnir": 4,
-    "map": 1,
-    "player": 61,
+    "turnirId": 4,
+    "mapId": 1,
+    "playerId": 61,
     "color": 'BLUE',
     "city": 'TOWER',
     "gold": -1200,
@@ -5306,9 +5306,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 16,
-    "player": 5,
+    "turnirId": 5,
+    "mapId": 16,
+    "playerId": 5,
     "color": 'RED',
     "city": 'CONFLUX',
     "gold": -6600,
@@ -5316,9 +5316,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 16,
-    "player": 60,
+    "turnirId": 5,
+    "mapId": 16,
+    "playerId": 60,
     "color": 'BLUE',
     "city": 'INFERNO',
     "gold": 6600,
@@ -5326,9 +5326,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 2,
-    "player": 5,
+    "turnirId": 5,
+    "mapId": 2,
+    "playerId": 5,
     "color": 'RED',
     "city": 'CASTLE',
     "gold": -4400,
@@ -5336,9 +5336,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 2,
-    "player": 60,
+    "turnirId": 5,
+    "mapId": 2,
+    "playerId": 60,
     "color": 'BLUE',
     "city": 'CASTLE',
     "gold": 4400,
@@ -5346,9 +5346,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 1,
-    "player": 22,
+    "turnirId": 5,
+    "mapId": 1,
+    "playerId": 22,
     "color": 'RED',
     "city": 'RAMPART',
     "gold": -1200,
@@ -5356,9 +5356,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 1,
-    "player": 33,
+    "turnirId": 5,
+    "mapId": 1,
+    "playerId": 33,
     "color": 'BLUE',
     "city": 'FORTRESS',
     "gold": 1200,
@@ -5366,9 +5366,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 17,
-    "player": 22,
+    "turnirId": 5,
+    "mapId": 17,
+    "playerId": 22,
     "color": 'RED',
     "city": 'TOWER',
     "gold": -6800,
@@ -5376,9 +5376,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 17,
-    "player": 33,
+    "turnirId": 5,
+    "mapId": 17,
+    "playerId": 33,
     "color": 'BLUE',
     "city": 'INFERNO',
     "gold": 6800,
@@ -5386,9 +5386,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 16,
-    "player": 22,
+    "turnirId": 5,
+    "mapId": 16,
+    "playerId": 22,
     "color": 'RED',
     "city": 'DUNGEON',
     "gold": -7300,
@@ -5396,9 +5396,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 16,
-    "player": 33,
+    "turnirId": 5,
+    "mapId": 16,
+    "playerId": 33,
     "color": 'BLUE',
     "city": 'FACTORY',
     "gold": 7300,
@@ -5406,9 +5406,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 17,
-    "player": 36,
+    "turnirId": 5,
+    "mapId": 17,
+    "playerId": 36,
     "color": 'BLUE',
     "city": 'FORTRESS',
     "gold": -200,
@@ -5416,9 +5416,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 17,
-    "player": 41,
+    "turnirId": 5,
+    "mapId": 17,
+    "playerId": 41,
     "color": 'RED',
     "city": 'TOWER',
     "gold": 200,
@@ -5426,9 +5426,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 16,
-    "player": 36,
+    "turnirId": 5,
+    "mapId": 16,
+    "playerId": 36,
     "color": 'BLUE',
     "city": 'NECROPOLIS',
     "gold": -3700,
@@ -5436,9 +5436,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 16,
-    "player": 41,
+    "turnirId": 5,
+    "mapId": 16,
+    "playerId": 41,
     "color": 'RED',
     "city": 'RAMPART',
     "gold": 3700,
@@ -5446,9 +5446,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 1,
-    "player": 36,
+    "turnirId": 5,
+    "mapId": 1,
+    "playerId": 36,
     "color": 'BLUE',
     "city": 'NECROPOLIS',
     "gold": 1000,
@@ -5456,9 +5456,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 1,
-    "player": 41,
+    "turnirId": 5,
+    "mapId": 1,
+    "playerId": 41,
     "color": 'RED',
     "city": 'TOWER',
     "gold": -1000,
@@ -5466,9 +5466,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 1,
-    "player": 37,
+    "turnirId": 5,
+    "mapId": 1,
+    "playerId": 37,
     "color": 'RED',
     "city": 'DUNGEON',
     "gold": -7600,
@@ -5476,9 +5476,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 1,
-    "player": 62,
+    "turnirId": 5,
+    "mapId": 1,
+    "playerId": 62,
     "color": 'BLUE',
     "city": 'INFERNO',
     "gold": 7600,
@@ -5486,9 +5486,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 18,
-    "player": 37,
+    "turnirId": 5,
+    "mapId": 18,
+    "playerId": 37,
     "color": 'BLUE',
     "city": 'FORTRESS',
     "gold": 5000,
@@ -5496,9 +5496,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 18,
-    "player": 62,
+    "turnirId": 5,
+    "mapId": 18,
+    "playerId": 62,
     "color": 'RED',
     "city": 'CASTLE',
     "gold": -5000,
@@ -5506,9 +5506,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 16,
-    "player": 37,
+    "turnirId": 5,
+    "mapId": 16,
+    "playerId": 37,
     "color": 'RED',
     "city": 'DUNGEON',
     "gold": -8100,
@@ -5516,9 +5516,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 16,
-    "player": 62,
+    "turnirId": 5,
+    "mapId": 16,
+    "playerId": 62,
     "color": 'BLUE',
     "city": 'COVE',
     "gold": 8100,
@@ -5526,9 +5526,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 17,
-    "player": 33,
+    "turnirId": 5,
+    "mapId": 17,
+    "playerId": 33,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
     "gold": -700,
@@ -5536,9 +5536,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 17,
-    "player": 41,
+    "turnirId": 5,
+    "mapId": 17,
+    "playerId": 41,
     "color": 'RED',
     "city": 'NECROPOLIS',
     "gold": 700,
@@ -5546,9 +5546,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 1,
-    "player": 33,
+    "turnirId": 5,
+    "mapId": 1,
+    "playerId": 33,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
     "gold": 6900,
@@ -5556,9 +5556,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 1,
-    "player": 41,
+    "turnirId": 5,
+    "mapId": 1,
+    "playerId": 41,
     "color": 'RED',
     "city": 'FORTRESS',
     "gold": -6900,
@@ -5566,9 +5566,9 @@
     "win": false
 },
 {
-    "turnir": 5,
-    "map": 16,
-    "player": 33,
+    "turnirId": 5,
+    "mapId": 16,
+    "playerId": 33,
     "color": 'RED',
     "city": 'CASTLE',
     "gold": 1500,
@@ -5576,9 +5576,9 @@
     "win": true
 },
 {
-    "turnir": 5,
-    "map": 16,
-    "player": 41,
+    "turnirId": 5,
+    "mapId": 16,
+    "playerId": 41,
     "color": 'BLUE',
     "city": 'DUNGEON',
     "gold": -1500,
@@ -5586,9 +5586,9 @@
     "win": false
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 37,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 37,
 "color": 'RED',
 "city": 'INFERNO',
 "gold": 900,
@@ -5596,9 +5596,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 60,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 60,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -900,
@@ -5606,9 +5606,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 37,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 37,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -700,
@@ -5616,9 +5616,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 60,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 60,
 "color": 'BLUE',
 "city": 'CONFLUX',
 "gold": 700,
@@ -5626,9 +5626,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 18,
-"player": 37,
+"turnirId": 5,
+"mapId": 18,
+"playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4100,
@@ -5636,9 +5636,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 18,
-"player": 60,
+"turnirId": 5,
+"mapId": 18,
+"playerId": 60,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 4100,
@@ -5646,9 +5646,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 22,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 22,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": 6500,
@@ -5656,9 +5656,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 36,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": -6500,
@@ -5666,9 +5666,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 2,
-"player": 22,
+"turnirId": 5,
+"mapId": 2,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 4400,
@@ -5676,9 +5676,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 2,
-"player": 36,
+"turnirId": 5,
+"mapId": 2,
+"playerId": 36,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -4400,
@@ -5686,9 +5686,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 22,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 22,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 400,
@@ -5696,9 +5696,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 36,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 36,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -400,
@@ -5706,9 +5706,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 62,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 62,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 6000,
@@ -5716,9 +5716,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 5,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -6000,
@@ -5726,9 +5726,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 62,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 62,
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 6000,
@@ -5736,9 +5736,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 5,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -6000,
@@ -5746,9 +5746,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 18,
-"player": 62,
+"turnirId": 5,
+"mapId": 18,
+"playerId": 62,
 "color": 'RED',
 "city": 'COVE',
 "gold": -5000,
@@ -5756,9 +5756,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 18,
-"player": 5,
+"turnirId": 5,
+"mapId": 18,
+"playerId": 5,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 5000,
@@ -5766,9 +5766,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 62,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 62,
 "color": 'RED',
 "city": 'STRONGHOLD',
 "gold": 5100,
@@ -5776,9 +5776,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 33,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": -5100,
@@ -5786,9 +5786,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 18,
-"player": 62,
+"turnirId": 5,
+"mapId": 18,
+"playerId": 62,
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -5000,
@@ -5796,9 +5796,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 18,
-"player": 33,
+"turnirId": 5,
+"mapId": 18,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 5000,
@@ -5806,9 +5806,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 62,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 62,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 2400,
@@ -5816,9 +5816,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 33,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": -2400,
@@ -5826,9 +5826,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 37,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 37,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": 3700,
@@ -5836,9 +5836,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 33,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -3700,
@@ -5846,9 +5846,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 17,
-"player": 37,
+"turnirId": 5,
+"mapId": 17,
+"playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -2700,
@@ -5856,9 +5856,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 17,
-"player": 33,
+"turnirId": 5,
+"mapId": 17,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": 2700,
@@ -5866,9 +5866,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 37,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 37,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": -7300,
@@ -5876,9 +5876,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 33,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 7300,
@@ -5886,9 +5886,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 5,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 5,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -7500,
@@ -5896,9 +5896,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 36,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": 7500,
@@ -5906,9 +5906,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 18,
-"player": 5,
+"turnirId": 5,
+"mapId": 18,
+"playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 3900,
@@ -5916,9 +5916,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 18,
-"player": 36,
+"turnirId": 5,
+"mapId": 18,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
 "gold": 3900,
@@ -5926,9 +5926,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 2,
-"player": 5,
+"turnirId": 5,
+"mapId": 2,
+"playerId": 5,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -4400,
@@ -5936,9 +5936,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 2,
-"player": 36,
+"turnirId": 5,
+"mapId": 2,
+"playerId": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 4400,
@@ -5946,9 +5946,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 5,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 5,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": -5500,
@@ -5956,9 +5956,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 33,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": 5500,
@@ -5966,9 +5966,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 18,
-"player": 5,
+"turnirId": 5,
+"mapId": 18,
+"playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": -4300,
@@ -5976,9 +5976,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 18,
-"player": 33,
+"turnirId": 5,
+"mapId": 18,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
 "gold": 4300,
@@ -5986,9 +5986,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 17,
-"player": 33,
+"turnirId": 5,
+"mapId": 17,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": 5900,
@@ -5996,9 +5996,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 17,
-"player": 36,
+"turnirId": 5,
+"mapId": 17,
+"playerId": 36,
 "color": 'RED',
 "city": 'RAMPART',
 "gold": -5900,
@@ -6006,9 +6006,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 33,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
 "gold": -100,
@@ -6016,9 +6016,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 1,
-"player": 36,
+"turnirId": 5,
+"mapId": 1,
+"playerId": 36,
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 100,
@@ -6026,9 +6026,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 33,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
 "gold": -100,
@@ -6036,9 +6036,9 @@
 "win": true
 },
 {
-"turnir": 5,
-"map": 16,
-"player": 36,
+"turnirId": 5,
+"mapId": 16,
+"playerId": 36,
 "color": 'RED',
 "city": 'FORTRESS',
 "gold": 100,
@@ -6046,9 +6046,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 2,
-"player": 33,
+"turnirId": 5,
+"mapId": 2,
+"playerId": 33,
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 3900,
@@ -6056,9 +6056,9 @@
 "win": false
 },
 {
-"turnir": 5,
-"map": 2,
-"player": 36,
+"turnirId": 5,
+"mapId": 2,
+"playerId": 36,
 "color": 'RED',
 "city": 'DUNGEON',
 "gold": -3900,
