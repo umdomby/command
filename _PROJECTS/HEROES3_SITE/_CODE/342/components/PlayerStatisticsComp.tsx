@@ -88,14 +88,14 @@ export function PlayerStatisticsComp({ playerStatistics, currentPage, totalPages
                             <TableCell className={`text-${stat.color?.toLowerCase() || 'gray'}-500`}>
                                 <span className="text-center">{stat.player?.name || 'N/A'}</span>
                             </TableCell>
-                            <TableCell className="text-yellow-500 text-right">{stat.gold}</TableCell>
-                            <TableCell className="text-red-500 text-center">{stat.security || 'N/A'}</TableCell>
+                            <TableCell className={`text-${stat.color?.toLowerCase() || 'gray'}-500`}>{stat.gold}</TableCell>
+                            <TableCell className="text-amber-500 text-center">{stat.security || '-'}</TableCell>
                             <TableCell className="text-gray-500">
                                 {stat.link ? (
-                                    <Link href={stat.link} target="_blank" rel="noopener noreferrer">
+                                    <Link href={stat.link} target="_blank" rel="noopener noreferrer" className="text-blue-500">
                                         Link
                                     </Link>
-                                ) : 'N/A'}
+                                ) : ''}
                             </TableCell>
                         </TableRow>
                     ))}
