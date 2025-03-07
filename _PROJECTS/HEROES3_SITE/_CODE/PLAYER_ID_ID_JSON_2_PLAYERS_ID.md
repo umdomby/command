@@ -314,7 +314,7 @@
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 200,
-"security": "​",
+"security": "",
 "win": false,
 "link": "https://www.youtube.com/watch?v=fsoOdtX_Eu0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=9&pp=iAQB"
 },
@@ -325,7 +325,7 @@
 "color": 'BLUE',
 "city": 'RAMPART',
 "gold": -200,
-"security": "​",
+"security": "",
 "win": true,
 "link": "https://www.youtube.com/watch?v=fsoOdtX_Eu0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=9&pp=iAQB"
 },
@@ -490,7 +490,7 @@
 "color": 'BLUE',
 "city": 'STRONGHOLD',
 "gold": -900,
-"security": "​",
+"security": "",
 "win": false,
 "link": "https://www.youtube.com/watch?v=6NL0PTeZ620&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=13&pp=iAQB"
 },
@@ -501,7 +501,7 @@
 "color": 'RED',
 "city": 'TOWER',
 "gold": 900,
-"security": "​",
+"security": "",
 "win": true,
 "link": "https://www.youtube.com/watch?v=6NL0PTeZ620&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=13&pp=iAQB"
 },
@@ -688,7 +688,7 @@
 "color": 'BLUE',
 "city": 'CASTLE',
 "gold": -2400,
-"security": "​",
+"security": "",
 "win": true,
 "link": ""
 },
@@ -699,7 +699,7 @@
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": 2400,
-"security": "​",
+"security": "",
 "win": false,
 "link": ""
 },
@@ -710,7 +710,7 @@
 "color": 'RED',
 "city": 'FACTORY',
 "gold": 1600,
-"security": "​",
+"security": "",
 "win": true,
 "link": "https://www.youtube.com/watch?v=Pb3G-2snw8k&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=18&pp=iAQB"
 },
@@ -721,7 +721,7 @@
 "color": 'BLUE',
 "city": 'COVE',
 "gold": -1600,
-"security": "​",
+"security": "",
 "win": false,
 "link": "https://www.youtube.com/watch?v=Pb3G-2snw8k&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=18&pp=iAQB"
 },
@@ -730,9 +730,9 @@
 "categoryId": 17,
 "playerId": 15,
 "color": 'RED',
-"city": "​",
+"city": "",
 "gold": 0,
-"security": "​",
+"security": "",
 "win": true,
 "link": ""
 },
@@ -741,9 +741,9 @@
 "categoryId": 17,
 "playerId": 57,
 "color": 'BLUE',
-"city": "​",
+"city": "",
 "gold": 0,
-"security": "​",
+"security": "",
 "win": false,
 "link": ""
 },
@@ -787,7 +787,7 @@
 "color": 'RED',
 "city": 'NECROPOLIS',
 "gold": -100,
-"security": "​",
+"security": "",
 "win": true,
 "link": ""
 },
@@ -908,7 +908,7 @@
 "color": 'BLUE',
 "city": 'DUNGEON',
 "gold": 1100,
-"security": "​",
+"security": "",
 "win": false,
 "link": ""
 },
@@ -919,7 +919,7 @@
 "color": 'RED',
 "city": 'CONFLUX',
 "gold": -1100,
-"security": "​",
+"security": "",
 "win": true,
 "link": ""
 },
