@@ -1,322 +1,212 @@
-export const players = [
-    { "userId" : 1,
-        "id": 1,
-        "name": "Pi33",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 2,
-        "name": "HotaGirl",
-        "twitch": 'https://www.twitch.tv/HotaGirl',
-    },
-    { "userId" : 1,
-        "id": 3,
-        "name": "2BISHOP",
-        "twitch": 'https://www.twitch.tv/2BISHOP',
-    },
-    { "userId" : 1,
-        "id": 4,
-        "name": "HILTYHA",
-        "twitch": 'https://www.twitch.tv/HILTYHA',
-    },
-    { "userId" : 1,
-        "id": 5,
-        "name": "Master_of__mind",
-        "twitch": 'https://www.twitch.tv/Master_of__mind',
-    },
-    { "userId" : 1,
-        "id": 6,
-        "name": "yarostnayaKoshka",
-        "twitch": 'https://www.twitch.tv/yarostnayaKoshka',
-    },
-    { "userId" : 1,
-        "id": 7,
-        "name": "kesZu_h3",
-        "twitch": 'https://www.twitch.tv/kesZu_h3',
-    },
-    { "userId" : 1,
-        "id": 8,
-        "name": "KnyazeMakarSumski",
-        "twitch": 'https://www.twitch.tv/KnyazeMakarSumski',
-    },
-    { "userId" : 1,
-        "id": 9,
-        "name": "KICK_FREAK",
-        "twitch": 'https://www.twitch.tv/KICK_FREAK',
-    },
-    { "userId" : 1,
-        "id": 10,
-        "name": "Redwhait",
-        "twitch": 'https://www.twitch.tv/Redwhait',
-    },
-    { "userId" : 1,
-        "id": 11,
-        "name": "ViSoVi",
-        "twitch": 'https://www.twitch.tv/ViSoVi',
-    },
-    { "userId" : 1,
-        "id": 12,
-        "name": "sstrattegy",
-        "twitch": 'https://www.twitch.tv/sstrattegy',
-    },
-    { "userId" : 1,
-        "id": 13,
-        "name": "ARTI_da_KING",
-        "twitch": 'https://www.twitch.tv/ARTI_da_KING',
-    },
-    { "userId" : 1,
-        "id": 14,
-        "name": "YAR_",
-        "twitch": 'https://www.twitch.tv/YAR_',
-    },
-    { "userId" : 1,
-        "id": 15,
-        "name": "newb1kk",
-        "twitch": 'https://www.twitch.tv/newb1kk',
-    },
-    { "userId" : 1,
-        "id": 16,
-        "name": "tyranuxus11",
-        "twitch": 'https://www.twitch.tv/tyranuxus11',
-    },
-    { "userId" : 1,
-        "id": 17,
-        "name": "Evlampich",
-        "twitch": 'https://www.twitch.tv/Evlampich',
-    },
-    { "userId" : 1,
-        "id": 18,
-        "name": "Pavllovich",
-        "twitch": 'https://www.twitch.tv/Pavllovich',
-    },
-    { "userId" : 1,
-        "id": 19,
-        "name": "Sav1tarrr",
-        "twitch": 'https://www.twitch.tv/Sav1tarrr',
-    },
-    { "userId" : 1,
-        "id": 20,
-        "name": "papashkaiz4atika",
-        "twitch": 'https://www.twitch.tv/papashkaiz4atika',
-    },
-    { "userId" : 1,
-        "id": 21,
-        "name": "Tender_cat",
-        "twitch": 'https://www.twitch.tv/Tender_cat',
-    },
-    { "userId" : 1,
-        "id": 22,
-        "name": "Relig00s",
-        "twitch": 'https://www.twitch.tv/Relig00s',
-    },
-    { "userId" : 1,
-        "id": 23,
-        "name": "amieloo",
-        "twitch": 'https://www.twitch.tv/amieloo',
-    },
-    { "userId" : 1,
-        "id": 24,
-        "name": "M_on_t",
-        "twitch": 'https://www.twitch.tv/M_on_t',
-    },
-    { "userId" : 1,
-        "id": 25,
-        "name": "RitoSux",
-        "twitch": 'https://www.twitch.tv/RitoSux',
-    },
-    { "userId" : 1,
-        "id": 26,
-        "name": "beZZdar_",
-        "twitch": 'https://www.twitch.tv/beZZdar_',
-    },
-    { "userId" : 1,
-        "id": 27,
-        "name": "AnzhPri",
-        "twitch": 'https://www.twitch.tv/AnzhPri',
-    },
-    { "userId" : 1,
-        "id": 28,
-        "name": "MeatWagonGG",
-        "twitch": 'https://www.twitch.tv/MeatWagonGG',
-    },
-    { "userId" : 1,
-        "id": 29,
-        "name": "mrplane_",
-        "twitch": 'https://www.twitch.tv/mrplane_',
-    },
-    { "userId" : 1,
-        "id": 30,
-        "name": "ChambiQ",
-        "twitch": 'https://www.twitch.tv/ChambiQ',
-    },
-    { "userId" : 1,
-        "id": 31,
-        "name": "akaStinger",
-        "twitch": 'https://www.twitch.tv/akaStinger',
-    },
-    { "userId" : 1,
-        "id": 32,
-        "name": "Tihiy__",
-        "twitch": 'https://www.twitch.tv/Tihiy__',
-    },
-    { "userId" : 1,
-        "id": 33,
-        "name": "unutcon",
-        "twitch": 'https://www.twitch.tv/unutcon',
-    },
-    { "userId" : 1,
-        "id": 34,
-        "name": "Daddy_Boka",
-        "twitch": 'https://www.twitch.tv/Daddy_Boka',
-    },
-    { "userId" : 1,
-        "id": 35,
-        "name": "Gomunguls",
-        "twitch": 'https://www.twitch.tv/GomungulsTV',
-    },
-    { "userId" : 1,
-        "id": 36,
-        "name": "HellLighT111",
-        "twitch": 'https://www.twitch.tv/HellLighT111',
-    },
-    { "userId" : 1,
-        "id": 37,
-        "name": "Weronest",
-        "twitch": 'https://www.twitch.tv/Weronest',
-    },
-    { "userId" : 1,
-        "id": 38,
-        "name": "VovastikMashina",
-        "twitch": 'https://www.twitch.tv/VovastikMashina',
-    },
-    { "userId" : 1,
-        "id": 39,
-        "name": "zherarrr",
-        "twitch": 'https://www.twitch.tv/zherarrr',
-    },
-    { "userId" : 1,
-        "id": 40,
-        "name": "Wukosha",
-        "twitch": 'https://www.twitch.tv/Wukosha',
-    },
-    { "userId" : 1,
-        "id": 41,
-        "name": "pup_ok_",
-        "twitch": 'https://www.twitch.tv/pup_ok_',
-    },
-    { "userId" : 1,
-        "id": 42,
-        "name": "Serj PapiKu",
-        "twitch": 'https://twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 43,
-        "name": "ALAMAR",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 44,
-        "name": "YAMA_DARMA",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 45,
-        "name": "Pi33",
-        "twitch": 'https://twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 47,
-        "name": "ROS",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 48,
-        "name": ")I(yK-HaBo3HuK",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 49,
-        "name": "Green1hell",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 50,
-        "name": "Dad_of_Dragons",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 51,
-        "name": "=Freedom=",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 52,
-        "name": "PurpelDragon",
-        "twitch": 'https://www.twitch.tv/heroes_hub',
-    },
-    { "userId" : 1,
-        "id": 53,
-        "name": "Kexiqbq2134",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 54,
-        "name": "Cuc9ctblu",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 55,
-        "name": "Admiral_sex",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 56,
-        "name": "Ahoy",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 57,
-        "name": "Nitemoy",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 58,
-        "name": "Tretiy_Geroy",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 59,
-        "name": "Skuns1978",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 60,
-        "name": "Grand",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 61,
-        "name": "Dale",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 62,
-        "name": "Dark_Pepega",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 63,
-        "name": "Christian_Wolf",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 64,
-        "name": "Duma_pvp",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-    { "userId" : 1,
-        "id": 65,
-        "name": "Wobiges",
-        "twitch": 'https://www.twitch.tv/heroes3_site',
-    },
-];
+// server page
+"use server";
+import { redirect } from 'next/navigation';
+import { getUserSession } from "@/components/lib/get-user-session";
+import { prisma } from "@/prisma/prisma-client";
+import React from "react";
+import { Container } from "@/components/container";
+import { PlayerStatisticsComp } from "@/components/PlayerStatisticsComp";
+
+export default async function PlayerStatisticsPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+    const session = await getUserSession();
+
+    if (!session) {
+        return redirect('/');
+    }
+
+    const user = await prisma.user.findFirst({ where: { id: Number(session?.id) } });
+
+    if (user?.role !== 'ADMIN') {
+        return redirect('/');
+    }
+
+    const resolvedSearchParams = await searchParams;
+    const page = parseInt(resolvedSearchParams.page || '1', 10);
+    const pageSize = 100;
+    const skip = (page - 1) * pageSize;
+
+    const playerStatistics = await prisma.playerStatistic.findMany({
+        skip,
+        take: pageSize,
+        include: {
+            turnirBet: true,
+            category: true,
+            player: true,
+        },
+    });
+
+    // Debugging: Log the data to ensure it's an array
+    console.log("Loaded playerStatistics:", playerStatistics);
+
+    if (!Array.isArray(playerStatistics)) {
+        console.error("playerStatistics is not an array:", playerStatistics);
+        return null; // или обработайте ошибку соответствующим образом
+    }
+
+    return (
+        <Container className="w-[96%]">
+            <PlayerStatisticsComp playerStatistics={playerStatistics} />
+        </Container>
+    );
+}
+'use client';
+import React from "react";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { PlayerStatistic } from "@prisma/client";
+import { Crown } from 'lucide-preact';
+
+interface PlayerStatisticsProps {
+    playerStatistics: PlayerStatistic[];
+}
+
+export function PlayerStatisticsComp({ playerStatistics }: PlayerStatisticsProps) {
+    const getColor = (color: string) => {
+        switch (color) {
+            case 'RED': return 'text-red-500';
+            case 'BLUE': return 'text-blue-500';
+            case 'GREEN': return 'text-green-500';
+            case 'YELLOW': return 'text-yellow-500';
+            case 'PURPLE': return 'text-purple-500';
+            case 'ORANGE': return 'text-orange-500';
+            case 'TEAL': return 'text-teal-500';
+            case 'PINK': return 'text-pink-500';
+            default: return '';
+        }
+    };
+
+    const getCityName = (city: string) => {
+        switch (city) {
+            case 'CASTLE': return 'ЗАМОК';
+            case 'RAMPART': return 'ОПЛОТ';
+            case 'TOWER': return 'БАШНЯ';
+            case 'INFERNO': return 'ИНФЕРНО';
+            case 'NECROPOLIS': return 'НЕКРОПОЛИС';
+            case 'DUNGEON': return 'ТЕМНИЦА';
+            case 'STRONGHOLD': return 'ЦИТАДЕЛЬ';
+            case 'FORTRESS': return 'КРЕПОСТЬ';
+            case 'CONFLUX': return 'СОПРЯЖЕНИЕ';
+            case 'COVE': return 'ПРИЧАЛ';
+            case 'FACTORY': return 'ФАБРИКА';
+            default: return '';
+        }
+    };
+
+    return (
+        <Table>
+            <TableBody>
+                {playerStatistics.map((stat) => (
+                    <TableRow key={stat.id}>
+                        <TableCell>{stat.turnirBet?.name || 'N/A'}</TableCell>
+                        <TableCell>{stat.category?.name || 'N/A'}</TableCell>
+                        <TableCell className={getColor(stat.color)}>
+                            {stat.player?.name || 'N/A'} {stat.win && <Crown />}
+                        </TableCell>
+                        <TableCell>{getCityName(stat.city)}</TableCell>
+                        <TableCell>{stat.gold}</TableCell>
+                        <TableCell>{stat.security}</TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
+    );
+}
+получаем данные
+Loaded playerStatistics: [
+
+    {
+        id: 9,
+        turnirId: 2,
+        categoryId: 17,
+        playerId: 36,
+        color: 'BLUE',
+        city: 'TOWER',
+        gold: -1100,
+        security: 'Костяной Дракон',
+        win: true,
+        link: 'https://www.youtube.com/watch?v=cNq6bKSqxLw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=4&pp=iAQB',
+        turnirBet: { id: 2, name: 'Heroes Cup' },
+        category: { id: 17, name: 'JC Amazonki' },
+        player: {
+            id: 36,
+            name: 'HellLighT111',
+            twitch: 'https://www.twitch.tv/HellLighT111',
+            userId: 1
+        }
+    },
+    {
+        id: 10,
+        turnirId: 2,
+        categoryId: 17,
+        playerId: 59,
+        color: 'RED',
+        city: 'RAMPART',
+        gold: 1100,
+        security: 'Морской Змей',
+        win: false,
+        link: 'https://www.youtube.com/watch?v=cNq6bKSqxLw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=4&pp=iAQB',
+        turnirBet: { id: 2, name: 'Heroes Cup' },
+        category: { id: 17, name: 'JC Amazonki' },
+        player: {
+            id: 59,
+            name: 'Skuns1978',
+            twitch: 'https://www.twitch.tv/heroes3_site',
+            userId: 1
+        }
+    },
+    {
+        id: 11,
+        turnirId: 2,
+        categoryId: 19,
+        playerId: 36,
+        color: 'RED',
+        city: 'CONFLUX',
+        gold: 5800,
+        security: 'Древнее Чудище',
+        win: true,
+        link: '',
+        turnirBet: { id: 2, name: 'Heroes Cup' },
+        category: { id: 19, name: 'JC Native' },
+        player: {
+            id: 36,
+            name: 'HellLighT111',
+            twitch: 'https://www.twitch.tv/HellLighT111',
+            userId: 1
+        }
+    },
+    {
+        id: 12,
+        turnirId: 2,
+        categoryId: 19,
+        playerId: 59,
+        color: 'BLUE',
+        city: 'CASTLE',
+        gold: -5800,
+        security: '-',
+        win: false,
+        link: '',
+        turnirBet: { id: 2, name: 'Heroes Cup' },
+        category: { id: 19, name: 'JC Native' },
+        player: {
+            id: 59,
+            name: 'Skuns1978',
+            twitch: 'https://www.twitch.tv/heroes3_site',
+            userId: 1
+        }
+    },]
+
+ошибка
+Unhandled Runtime Error
+
+
+Error: Objects are not valid as a React child (found: object with keys {type, props, key, ref, __k, __, __b, __e, __c, constructor, __v, __i, __u}). If you meant to render a collection of children, use an array instead.
+
+    app/(root)/player-statistic/page.tsx (48:13) @ PlayerStatisticsPage
+
+
+46 |     return (
+    47 |         <Container className="w-[96%]">
+        > 48 |             <PlayerStatisticsComp playerStatistics={playerStatistics} />
+        |             ^
+        49 |         </Container>
+50 |     );
+51 | }
