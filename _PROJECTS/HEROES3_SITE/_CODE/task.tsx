@@ -1,3 +1,0 @@
-
-
-взнос: {turnir.startPointsTurnir}
