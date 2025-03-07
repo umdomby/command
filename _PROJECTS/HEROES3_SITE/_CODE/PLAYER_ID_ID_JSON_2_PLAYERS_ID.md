@@ -1,7 +1,7 @@
 //6066
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 23,
 "color": 'RED',
 "city": 'TOWER',
@@ -11,8 +11,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -22,8 +22,8 @@
 "link": "https://www.youtube.com/watch?v=c8SDfh3YZLM&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=2&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 23,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -33,8 +33,8 @@
 "link": "https://www.youtube.com/watch?v=c8SDfh3YZLM&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=2&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 4,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -44,8 +44,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 31,
 "color": 'RED',
 "city": 'RAMPART',
@@ -55,8 +55,8 @@
 "link": "https://www.youtube.com/watch?v=ytKOARjiu-s&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=3&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 44,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -66,8 +66,8 @@
 "link": "https://www.youtube.com/watch?v=ytKOARjiu-s&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=3&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 31,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -77,8 +77,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 44,
 "color": 'RED',
 "city": 'FACTORY',
@@ -88,8 +88,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 36,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -99,8 +99,8 @@
 "link": "https://www.youtube.com/watch?v=cNq6bKSqxLw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=4&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 59,
 "color": 'RED',
 "city": 'RAMPART',
@@ -110,8 +110,8 @@
 "link": "https://www.youtube.com/watch?v=cNq6bKSqxLw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=4&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 36,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -121,8 +121,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 59,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -132,8 +132,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -143,8 +143,8 @@
 "link": "https://www.youtube.com/watch?v=JzdCWFbRVos&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=5&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 33,
 "color": 'BLUE',
 "city": 'COVE',
@@ -154,8 +154,8 @@
 "link": "https://www.youtube.com/watch?v=JzdCWFbRVos&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=5&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -165,8 +165,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 33,
 "color": 'BLUE',
 "city": 'COVE',
@@ -176,8 +176,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 15,
 "color": 'RED',
 "city": 'TOWER',
@@ -187,8 +187,8 @@
 "link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 56,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -198,8 +198,8 @@
 "link": "https://www.youtube.com/watch?v=zlLmxLFgKcE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=6&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 15,
 "color": 'RED',
 "city": 'RAMPART',
@@ -209,8 +209,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 56,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -220,8 +220,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 41,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -231,8 +231,8 @@
 "link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 58,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -242,8 +242,8 @@
 "link": "https://www.youtube.com/watch?v=QDVFm93NsGs&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=7&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 41,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -253,8 +253,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 58,
 "color": 'RED',
 "city": 'TOWER',
@@ -264,8 +264,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 55,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -275,8 +275,8 @@
 "link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 5,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -286,8 +286,8 @@
 "link": "https://www.youtube.com/watch?v=K36EdozPFSo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=8"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 55,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -297,8 +297,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 5,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -308,8 +308,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 49,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -319,8 +319,8 @@
 "link": "https://www.youtube.com/watch?v=fsoOdtX_Eu0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=9&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 4,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -330,8 +330,8 @@
 "link": "https://www.youtube.com/watch?v=fsoOdtX_Eu0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=9&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 49,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -341,8 +341,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'RED',
 "city": 'INFERNO',
@@ -352,8 +352,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 59,
 "color": 'RED',
 "city": 'FACTORY',
@@ -363,8 +363,8 @@
 "link": "https://www.youtube.com/watch?v=LwyeXZSMSTA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=10"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 20,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -374,8 +374,8 @@
 "link": "https://www.youtube.com/watch?v=LwyeXZSMSTA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=10"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 59,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -385,8 +385,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 20,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -396,8 +396,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -407,8 +407,8 @@
 "link": "https://www.youtube.com/watch?v=Gov1dWc765o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=11&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 38,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -418,8 +418,8 @@
 "link": "https://www.youtube.com/watch?v=Gov1dWc765o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=11&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -429,8 +429,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 38,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -440,8 +440,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 37,
 "color": 'RED',
 "city": 'CASTLE',
@@ -451,8 +451,8 @@
 "link": "https://www.youtube.com/watch?v=lf7BTdOhveg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=12&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 36,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -462,8 +462,8 @@
 "link": "https://www.youtube.com/watch?v=lf7BTdOhveg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=12&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 37,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -473,8 +473,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 36,
 "color": 'RED',
 "city": 'FACTORY',
@@ -484,8 +484,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 31,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -495,8 +495,8 @@
 "link": "https://www.youtube.com/watch?v=6NL0PTeZ620&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=13&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 5,
 "color": 'RED',
 "city": 'TOWER',
@@ -506,8 +506,8 @@
 "link": "https://www.youtube.com/watch?v=6NL0PTeZ620&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=13&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 31,
 "color": 'RED',
 "city": 'FACTORY',
@@ -517,8 +517,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 5,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -528,8 +528,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 23,
 "color": 'RED',
 "city": 'COVE',
@@ -539,8 +539,8 @@
 "link": "https://www.youtube.com/watch?v=7l00zf_fuN0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=14&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 41,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -550,8 +550,8 @@
 "link": "https://www.youtube.com/watch?v=7l00zf_fuN0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=14&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 23,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -561,8 +561,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 41,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -572,8 +572,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 33,
 "color": 'BLUE',
 "city": 'COVE',
@@ -583,8 +583,8 @@
 "link": "https://www.youtube.com/watch?v=vKQOhgA4FoE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=15&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 15,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -594,8 +594,8 @@
 "link": "https://www.youtube.com/watch?v=vKQOhgA4FoE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=15&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 33,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -605,8 +605,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 15,
 "color": 'BLUE',
 "city": 'COVE',
@@ -616,8 +616,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 31,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -627,8 +627,8 @@
 "link": "https://www.youtube.com/watch?v=u-9-I_Kubqo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=16&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 54,
 "color": 'RED',
 "city": 'TOWER',
@@ -638,8 +638,8 @@
 "link": "https://www.youtube.com/watch?v=u-9-I_Kubqo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=16&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 31,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -649,8 +649,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 54,
 "color": 'RED',
 "city": 'RAMPART',
@@ -660,8 +660,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 20,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -671,8 +671,8 @@
 "link": "https://www.youtube.com/watch?v=7MUdm6r767M&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=17&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 38,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -682,8 +682,8 @@
 "link": "https://www.youtube.com/watch?v=7MUdm6r767M&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=17&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 20,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -693,8 +693,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 38,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -704,8 +704,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 15,
 "color": 'RED',
 "city": 'FACTORY',
@@ -715,8 +715,8 @@
 "link": "https://www.youtube.com/watch?v=Pb3G-2snw8k&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=18&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 57,
 "color": 'BLUE',
 "city": 'COVE',
@@ -726,8 +726,8 @@
 "link": "https://www.youtube.com/watch?v=Pb3G-2snw8k&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=18&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 15,
 "color": 'RED',
 "city": "​",
@@ -737,8 +737,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 57,
 "color": 'BLUE',
 "city": "​",
@@ -748,8 +748,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 44,
 "color": 'RED',
 "city": 'COVE',
@@ -759,8 +759,8 @@
 "link": "https://www.youtube.com/watch?v=Yzv5cLqnLlA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=19&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 55,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -770,8 +770,8 @@
 "link": "https://www.youtube.com/watch?v=Yzv5cLqnLlA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=19&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 44,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -781,8 +781,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 55,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -792,8 +792,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 57,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -803,8 +803,8 @@
 "link": "https://www.youtube.com/watch?v=MFNHZ1zq1iA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=20&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 56,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -814,8 +814,8 @@
 "link": "https://www.youtube.com/watch?v=MFNHZ1zq1iA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=20&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 57,
 "color": 'RED',
 "city": 'CASTLE',
@@ -825,8 +825,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 56,
 "color": 'BLUE',
 "city": 'COVE',
@@ -836,8 +836,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 44,
 "color": 'RED',
 "city": 'CASTLE',
@@ -847,8 +847,8 @@
 "link": "https://www.youtube.com/watch?v=SiPec07FDqA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=21&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 54,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -858,8 +858,8 @@
 "link": "https://www.youtube.com/watch?v=SiPec07FDqA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=21&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 44,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -869,8 +869,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 54,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -880,8 +880,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 58,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -891,8 +891,8 @@
 "link": "https://www.youtube.com/watch?v=sExYSRB23sY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=22&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 49,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -902,8 +902,8 @@
 "link": "https://www.youtube.com/watch?v=sExYSRB23sY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=22&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 58,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -913,8 +913,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 49,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -924,8 +924,8 @@
 "link": ""
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 38,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -935,8 +935,8 @@
 "link": "https://www.youtube.com/watch?v=wL4MXevJKzU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=23&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 59,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -946,8 +946,8 @@
 "link": "https://www.youtube.com/watch?v=wL4MXevJKzU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=23&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 38,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -956,8 +956,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 59,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -966,8 +966,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 56,
 "color": 'RED',
 "city": 'RAMPART',
@@ -977,8 +977,8 @@
 "link": "https://www.youtube.com/watch?v=uOagh98qSLQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=24&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 22,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -988,8 +988,8 @@
 "link": "https://www.youtube.com/watch?v=uOagh98qSLQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=24&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 56,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -998,8 +998,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 22,
 "color": 'RED',
 "city": 'COVE',
@@ -1008,8 +1008,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1019,8 +1019,8 @@
 "link": "https://www.youtube.com/watch?v=Ky5zcHmgE_I&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=25&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 54,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -1030,8 +1030,8 @@
 "link": "https://www.youtube.com/watch?v=Ky5zcHmgE_I&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=25&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 5,
 "color": 'RED',
 "city": 'TOWER',
@@ -1040,8 +1040,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 54,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1050,8 +1050,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 23,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -1061,8 +1061,8 @@
 "link": "https://www.youtube.com/watch?v=ZLrhtJKIjOk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=26&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 49,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -1072,8 +1072,8 @@
 "link": "https://www.youtube.com/watch?v=ZLrhtJKIjOk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=26&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 23,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1082,8 +1082,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 49,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -1092,8 +1092,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 37,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1103,8 +1103,8 @@
 "link": "https://www.youtube.com/watch?v=b5ZC0xc7x8o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=27&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 20,
 "color": 'RED',
 "city": 'INFERNO',
@@ -1114,8 +1114,8 @@
 "link": "https://www.youtube.com/watch?v=b5ZC0xc7x8o&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=27&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 37,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -1124,8 +1124,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 20,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -1134,8 +1134,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 4,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -1145,8 +1145,8 @@
 "link": "https://www.youtube.com/watch?v=bZ9Rj_u-3kE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=28&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 41,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1156,8 +1156,8 @@
 "link": "https://www.youtube.com/watch?v=bZ9Rj_u-3kE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=28&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1166,8 +1166,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 41,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -1176,8 +1176,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -1187,8 +1187,8 @@
 "link": "https://www.youtube.com/watch?v=CyCLJ9pltiI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=29&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 57,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1198,8 +1198,8 @@
 "link": "https://www.youtube.com/watch?v=CyCLJ9pltiI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=29&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1208,8 +1208,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 57,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -1218,8 +1218,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 44,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -1229,8 +1229,8 @@
 "link": "https://www.youtube.com/watch?v=D4x0PjnsKKk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=30&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1240,8 +1240,8 @@
 "link": "https://www.youtube.com/watch?v=D4x0PjnsKKk&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=30&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 44,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -1250,8 +1250,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1260,8 +1260,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 15,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -1271,8 +1271,8 @@
 "link": "https://www.youtube.com/watch?v=ZrVBO5mEQcU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=31&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1282,8 +1282,8 @@
 "link": "https://www.youtube.com/watch?v=ZrVBO5mEQcU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=31&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 15,
 "color": 'RED',
 "city": "",
@@ -1292,8 +1292,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 22,
 "color": 'BLUE',
 "city": "",
@@ -1302,8 +1302,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 36,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1313,8 +1313,8 @@
 "link": "https://www.youtube.com/watch?v=QgCAE4QKxWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=32&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 20,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1324,8 +1324,8 @@
 "link": "https://www.youtube.com/watch?v=QgCAE4QKxWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=32&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 36,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1334,8 +1334,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 20,
 "color": 'RED',
 "city": 'CASTLE',
@@ -1344,8 +1344,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 31,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -1355,8 +1355,8 @@
 "link": "https://www.youtube.com/watch?v=aSGkbl3Y4C8&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=33&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 55,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1366,8 +1366,8 @@
 "link": "https://www.youtube.com/watch?v=aSGkbl3Y4C8&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=33&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 31,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1376,8 +1376,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 55,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1386,8 +1386,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 41,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1397,8 +1397,8 @@
 "link": "https://www.youtube.com/watch?v=5uQO9JpJjsg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=34&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 49,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -1408,8 +1408,8 @@
 "link": "https://www.youtube.com/watch?v=5uQO9JpJjsg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=34&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 41,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1418,8 +1418,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 49,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -1428,8 +1428,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 23,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1439,8 +1439,8 @@
 "link": "https://www.youtube.com/watch?v=SohZu170FD4&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=35&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 58,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1450,8 +1450,8 @@
 "link": "https://www.youtube.com/watch?v=SohZu170FD4&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=35&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 23,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -1460,8 +1460,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 58,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -1470,8 +1470,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 22,
 "color": 'RED',
 "city": 'CASTLE',
@@ -1481,8 +1481,8 @@
 "link": "https://www.youtube.com/watch?v=uUDgFAOL5uI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=36&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 57,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -1492,8 +1492,8 @@
 "link": "https://www.youtube.com/watch?v=uUDgFAOL5uI&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=36&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 22,
 "color": 'RED',
 "city": 'TOWER',
@@ -1502,8 +1502,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 57,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1512,8 +1512,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 59,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1523,8 +1523,8 @@
 "link": "https://www.youtube.com/watch?v=h_8WcWKossQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=37&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 37,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -1534,8 +1534,8 @@
 "link": "https://www.youtube.com/watch?v=h_8WcWKossQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=37&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 59,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1544,8 +1544,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 37,
 "color": 'RED',
 "city": 'TOWER',
@@ -1554,8 +1554,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 56,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1565,8 +1565,8 @@
 "link": "https://www.youtube.com/watch?v=q_g6vT2mL5w&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=38&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1576,8 +1576,8 @@
 "link": "https://www.youtube.com/watch?v=q_g6vT2mL5w&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=38&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 56,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -1586,8 +1586,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 33,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1596,8 +1596,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 54,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1607,8 +1607,8 @@
 "link": "https://www.youtube.com/watch?v=an2jYYQn1BQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=39&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 55,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -1618,8 +1618,8 @@
 "link": "https://www.youtube.com/watch?v=an2jYYQn1BQ&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=39&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 54,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1628,8 +1628,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 55,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1638,8 +1638,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 4,
 "color": 'RED',
 "city": 'TOWER',
@@ -1649,8 +1649,8 @@
 "link": "https://www.youtube.com/watch?v=EIg4JFdQSKE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=40&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Native",
+"turnir": 2,
+"map": 19,
 "player": 58,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1660,8 +1660,8 @@
 "link": "https://www.youtube.com/watch?v=EIg4JFdQSKE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=40&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1670,8 +1670,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 58,
 "color": 'RED',
 "city": 'COVE',
@@ -1680,8 +1680,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 41,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -1691,8 +1691,8 @@
 "link": "https://www.youtube.com/watch?v=1U_Q4OGWucg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=41&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 57,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -1702,8 +1702,8 @@
 "link": "https://www.youtube.com/watch?v=1U_Q4OGWucg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=41&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 41,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1712,8 +1712,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 57,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -1722,8 +1722,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 44,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -1733,8 +1733,8 @@
 "link": "https://www.youtube.com/watch?v=jhkFMGVdo58&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=42&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 38,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1744,8 +1744,8 @@
 "link": "https://www.youtube.com/watch?v=jhkFMGVdo58&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=42&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 44,
 "color": 'RED',
 "city": 'INFERNO',
@@ -1754,8 +1754,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 38,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1764,8 +1764,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 58,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -1775,8 +1775,8 @@
 "link": "https://www.youtube.com/watch?v=P8SnGYs4QVU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=43&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 15,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -1786,8 +1786,8 @@
 "link": "https://www.youtube.com/watch?v=P8SnGYs4QVU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=43&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 58,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -1796,8 +1796,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 15,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1806,8 +1806,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 58,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1816,8 +1816,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 15,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1826,8 +1826,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 22,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -1837,8 +1837,8 @@
 "link": "https://www.youtube.com/watch?v=bhNnxZdV8cg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=44&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 4,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -1848,8 +1848,8 @@
 "link": "https://www.youtube.com/watch?v=bhNnxZdV8cg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=44&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 22,
 "color": 'RED',
 "city": 'COVE',
@@ -1858,8 +1858,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1868,8 +1868,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1878,8 +1878,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1888,8 +1888,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 55,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1899,8 +1899,8 @@
 "link": "https://www.youtube.com/watch?v=lbpCedCMksE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=45&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 36,
 "color": 'RED',
 "city": 'INFERNO',
@@ -1910,8 +1910,8 @@
 "link": "https://www.youtube.com/watch?v=lbpCedCMksE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=45&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 55,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -1920,8 +1920,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 36,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1930,8 +1930,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 55,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1940,8 +1940,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 36,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1950,8 +1950,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 49,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1961,8 +1961,8 @@
 "link": "https://www.youtube.com/watch?v=mJPlYkNAXlU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=46&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1972,8 +1972,8 @@
 "link": "https://www.youtube.com/watch?v=mJPlYkNAXlU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=46&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 49,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -1982,8 +1982,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -1992,8 +1992,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 37,
 "color": 'RED',
 "city": 'RAMPART',
@@ -2003,8 +2003,8 @@
 "link": "https://www.youtube.com/watch?v=7CWDjAlxUeo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=47&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 31,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2014,8 +2014,8 @@
 "link": "https://www.youtube.com/watch?v=7CWDjAlxUeo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=47&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 37,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2024,8 +2024,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 31,
 "color": 'RED',
 "city": 'INFERNO',
@@ -2034,8 +2034,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 5,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -2044,8 +2044,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 20,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -2054,8 +2054,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 5,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -2065,8 +2065,8 @@
 "link": "https://www.youtube.com/watch?v=lfOFL-8b6Ok&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=48&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 20,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2076,8 +2076,8 @@
 "link": "https://www.youtube.com/watch?v=lfOFL-8b6Ok&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=48&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2086,8 +2086,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 20,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2096,8 +2096,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 4,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -2106,8 +2106,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 41,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -2116,8 +2116,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2126,8 +2126,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 41,
 "color": 'RED',
 "city": 'RAMPART',
@@ -2136,8 +2136,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 31,
 "color": 'RED',
 "city": 'INFERNO',
@@ -2147,8 +2147,8 @@
 "link": "https://www.youtube.com/watch?v=BL056VcZsCo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=50&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 38,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2158,8 +2158,8 @@
 "link": "https://www.youtube.com/watch?v=BL056VcZsCo&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=50&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 31,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -2168,8 +2168,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 38,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2178,8 +2178,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 31,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2188,8 +2188,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 38,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2198,8 +2198,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 36,
 "color": 'RED',
 "city": 'RAMPART',
@@ -2209,8 +2209,8 @@
 "link": "https://www.youtube.com/watch?v=UUIEYytXg7Y&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=51&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 20,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2220,8 +2220,8 @@
 "link": "https://www.youtube.com/watch?v=UUIEYytXg7Y&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=51&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 36,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -2230,8 +2230,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 20,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -2240,8 +2240,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 36,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2250,8 +2250,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 20,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2260,8 +2260,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 49,
 "color": 'RED',
 "city": 'TOWER',
@@ -2271,8 +2271,8 @@
 "link": "https://www.youtube.com/watch?v=GgzHMM2agFU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=52&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2282,8 +2282,8 @@
 "link": "https://www.youtube.com/watch?v=GgzHMM2agFU&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=52&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 49,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -2292,8 +2292,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 22,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -2302,8 +2302,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 33,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -2313,8 +2313,8 @@
 "link": "https://www.youtube.com/watch?v=EkHZmT_NnGY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=53&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 15,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2324,8 +2324,8 @@
 "link": "https://www.youtube.com/watch?v=EkHZmT_NnGY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=53&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 33,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -2334,8 +2334,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 15,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2344,8 +2344,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 33,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2354,8 +2354,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 15,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2364,8 +2364,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 31,
 "color": 'RED',
 "city": 'CASTLE',
@@ -2375,8 +2375,8 @@
 "link": "https://www.youtube.com/watch?v=nOuOP70tSjg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=54&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -2386,8 +2386,8 @@
 "link": "https://www.youtube.com/watch?v=nOuOP70tSjg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=54&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 31,
 "color": 'RED',
 "city": 'INFERNO',
@@ -2396,8 +2396,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 36,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -2406,8 +2406,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2417,8 +2417,8 @@
 "link": "https://www.youtube.com/watch?v=9aSpm8eneWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=55&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 33,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2428,8 +2428,8 @@
 "link": "https://www.youtube.com/watch?v=9aSpm8eneWE&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=55&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -2438,8 +2438,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -2448,8 +2448,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 5,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2459,8 +2459,8 @@
 "link": "https://www.youtube.com/watch?v=rN3RXbOBnvA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=56&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 37,
 "color": 'RED',
 "city": 'TOWER',
@@ -2470,8 +2470,8 @@
 "link": "https://www.youtube.com/watch?v=rN3RXbOBnvA&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=56&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 5,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -2480,8 +2480,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 37,
 "color": 'RED',
 "city": 'CASTLE',
@@ -2490,8 +2490,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2500,8 +2500,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2510,8 +2510,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 4,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -2521,8 +2521,8 @@
 "link": "https://www.youtube.com/watch?v=XXV-rwZv5Tg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=57&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 49,
 "color": 'RED',
 "city": 'CASTLE',
@@ -2532,8 +2532,8 @@
 "link": "https://www.youtube.com/watch?v=XXV-rwZv5Tg&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=57&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2542,8 +2542,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 49,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2552,8 +2552,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2563,8 +2563,8 @@
 "link": "https://www.youtube.com/watch?v=x9MAaDkiEc0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=58&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2574,8 +2574,8 @@
 "link": "https://www.youtube.com/watch?v=x9MAaDkiEc0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=58&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 37,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -2584,8 +2584,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2595,8 +2595,8 @@
 "link": "https://www.youtube.com/watch?v=ietkg-cLiB0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=59&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 4,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2606,8 +2606,8 @@
 "link": "https://www.youtube.com/watch?v=ietkg-cLiB0&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=59&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 36,
 "color": 'RED',
 "city": 'RAMPART',
@@ -2616,8 +2616,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2626,8 +2626,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 36,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -2636,8 +2636,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 22,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -2647,8 +2647,8 @@
 "link": "https://www.youtube.com/watch?v=9qSTZsDAGHw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=61&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 5,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2658,8 +2658,8 @@
 "link": "https://www.youtube.com/watch?v=9qSTZsDAGHw&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=61&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2668,8 +2668,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 5,
 "color": 'RED',
 "city": 'COVE',
@@ -2678,8 +2678,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2688,8 +2688,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2698,8 +2698,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2709,8 +2709,8 @@
 "link": "https://www.youtube.com/watch?v=I6PyiKi7HTY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=60&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2720,8 +2720,8 @@
 "link": "https://www.youtube.com/watch?v=I6PyiKi7HTY&list=PLGvjKRILtSt_pvwRLx3iA8ec_lv6KF7YO&index=60&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -2730,8 +2730,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 22,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2740,8 +2740,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 4,
 "color": 'RED',
 "city": "",
@@ -2750,8 +2750,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "Jebus Cross",
+"turnir": 2,
+"map": 1,
 "player": 5,
 "color": 'BLUE',
 "city": "",
@@ -2760,8 +2760,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 4,
 "color": 'RED',
 "city": "",
@@ -2770,8 +2770,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup",
-"map": "JC Amazonki",
+"turnir": 2,
+"map": 17,
 "player": 5,
 "color": 'BLUE',
 "city": "",
@@ -2780,8 +2780,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 4,
 "color": 'RED',
 "city": "",
@@ -2790,8 +2790,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup",
-"map": "MT_Jebus",
+"turnir": 2,
+"map": 2,
 "player": 5,
 "color": 'BLUE',
 "city": "",
@@ -2800,8 +2800,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 60,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -2811,8 +2811,8 @@
 "link": "https://www.youtube.com/watch?v=QBe9bOlRn6E&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=1&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 31,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -2822,8 +2822,8 @@
 "link": "https://www.youtube.com/watch?v=QBe9bOlRn6E&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=1&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 60,
 "color": 'RED',
 "city": 'COVE',
@@ -2832,8 +2832,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 31,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -2842,8 +2842,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2853,8 +2853,8 @@
 "link": "https://www.youtube.com/watch?v=wK5S6aVzxTM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=2&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 61,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -2864,8 +2864,8 @@
 "link": "https://www.youtube.com/watch?v=wK5S6aVzxTM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=2&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 37,
 "color": 'RED',
 "city": 'TOWER',
@@ -2874,8 +2874,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 61,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2884,8 +2884,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 37,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -2894,8 +2894,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 61,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -2904,8 +2904,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 62,
 "color": 'RED',
 "city": 'TOWER',
@@ -2915,8 +2915,8 @@
 "link": "https://www.youtube.com/watch?v=Si9iNibq4uE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=3&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -2926,8 +2926,8 @@
 "link": "https://www.youtube.com/watch?v=Si9iNibq4uE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=3&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 62,
 "color": 'RED',
 "city": 'CASTLE',
@@ -2936,8 +2936,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 49,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -2946,8 +2946,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 62,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2956,8 +2956,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 49,
 "color": 'RED',
 "city": 'TOWER',
@@ -2966,8 +2966,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2977,8 +2977,8 @@
 "link": "https://www.youtube.com/watch?v=vMGRhEXPbZE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=4&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 63,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -2988,8 +2988,8 @@
 "link": "https://www.youtube.com/watch?v=vMGRhEXPbZE&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=4&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 5,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -2998,8 +2998,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 63,
 "color": 'RED',
 "city": 'CASTLE',
@@ -3008,8 +3008,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 36,
 "color": 'RED',
 "city": 'FACTORY',
@@ -3019,8 +3019,8 @@
 "link": "https://www.youtube.com/watch?v=aSM1EwLe0Nc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=5&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 64,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -3030,8 +3030,8 @@
 "link": "https://www.youtube.com/watch?v=aSM1EwLe0Nc&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=5&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3040,8 +3040,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 64,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -3050,8 +3050,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 60,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -3061,8 +3061,8 @@
 "link": "https://www.youtube.com/watch?v=_4HaKR6xbVQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=6&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 61,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -3072,8 +3072,8 @@
 "link": "https://www.youtube.com/watch?v=_4HaKR6xbVQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=6&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 60,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3082,8 +3082,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 61,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -3092,8 +3092,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 60,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -3102,8 +3102,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 61,
 "color": 'RED',
 "city": 'CASTLE',
@@ -3112,8 +3112,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 62,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -3123,8 +3123,8 @@
 "link": "https://www.youtube.com/watch?v=cK1mSP1VPmM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=7&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 64,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -3134,8 +3134,8 @@
 "link": "https://www.youtube.com/watch?v=cK1mSP1VPmM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=7&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 62,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -3144,8 +3144,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 64,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -3154,8 +3154,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 28,
 "color": 'RED',
 "city": 'RAMPART',
@@ -3165,8 +3165,8 @@
 "link": "https://www.youtube.com/watch?v=9qiS_XsTDtY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=8&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 4,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -3176,8 +3176,8 @@
 "link": "https://www.youtube.com/watch?v=9qiS_XsTDtY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=8&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 28,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -3186,8 +3186,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 4,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3196,8 +3196,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 22,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3207,8 +3207,8 @@
 "link": "https://www.youtube.com/watch?v=gyRWUZ1HsZ4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=9&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 58,
 "color": 'BLUE',
 "city": 'COVE',
@@ -3218,8 +3218,8 @@
 "link": "https://www.youtube.com/watch?v=gyRWUZ1HsZ4&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=9&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 22,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -3228,8 +3228,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 58,
 "color": 'RED',
 "city": 'RAMPART',
@@ -3238,8 +3238,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 37,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3249,8 +3249,8 @@
 "link": "https://www.youtube.com/watch?v=qOiWXMKPyW0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=10"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 31,
 "color": 'RED',
 "city": 'FACTORY',
@@ -3260,8 +3260,8 @@
 "link": "https://www.youtube.com/watch?v=qOiWXMKPyW0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=10"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 37,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -3270,8 +3270,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 31,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3280,8 +3280,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 49,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3291,8 +3291,8 @@
 "link": "https://www.youtube.com/watch?v=6lL4rN_v-eQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=11&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 36,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -3302,8 +3302,8 @@
 "link": "https://www.youtube.com/watch?v=6lL4rN_v-eQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=11&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 49,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3312,8 +3312,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 36,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -3322,8 +3322,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 31,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -3333,8 +3333,8 @@
 "link": "https://www.youtube.com/watch?v=Rwyini2zOj0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=12&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 60,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3344,8 +3344,8 @@
 "link": "https://www.youtube.com/watch?v=Rwyini2zOj0&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=12&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 31,
 "color": 'RED',
 "city": 'COVE',
@@ -3354,8 +3354,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 60,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -3364,8 +3364,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 31,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -3374,8 +3374,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 60,
 "color": 'RED',
 "city": 'TOWER',
@@ -3384,8 +3384,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 58,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -3395,8 +3395,8 @@
 "link": "https://www.youtube.com/watch?v=VQBP0OQlVAY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=13&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 28,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -3406,8 +3406,8 @@
 "link": "https://www.youtube.com/watch?v=VQBP0OQlVAY&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=13&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 58,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -3416,8 +3416,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 28,
 "color": 'RED',
 "city": 'FACTORY',
@@ -3426,8 +3426,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 47,
 "color": 'BLUE',
 "city": 'COVE',
@@ -3436,8 +3436,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 63,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -3446,8 +3446,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 47,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -3457,8 +3457,8 @@
 "link": "https://www.youtube.com/watch?v=1bYoyh_3iAQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=14&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 63,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -3468,8 +3468,8 @@
 "link": "https://www.youtube.com/watch?v=1bYoyh_3iAQ&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=14&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 47,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3478,8 +3478,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 63,
 "color": 'RED',
 "city": 'RAMPART',
@@ -3488,8 +3488,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 4,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -3499,8 +3499,8 @@
 "link": "https://www.youtube.com/watch?v=Ca4-yWxXZGo&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=15&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 22,
 "color": 'RED',
 "city": 'CASTLE',
@@ -3510,8 +3510,8 @@
 "link": "https://www.youtube.com/watch?v=Ca4-yWxXZGo&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=15&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 4,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -3520,8 +3520,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 22,
 "color": 'RED',
 "city": 'CASTLE',
@@ -3530,8 +3530,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 5,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3541,8 +3541,8 @@
 "link": "https://www.youtube.com/watch?v=-F1xuEW-jH8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=16&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 33,
 "color": 'RED',
 "city": 'CASTLE',
@@ -3552,8 +3552,8 @@
 "link": "https://www.youtube.com/watch?v=-F1xuEW-jH8&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=16&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 5,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -3563,8 +3563,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 33,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -3574,8 +3574,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 5,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -3585,8 +3585,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 33,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3596,8 +3596,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 47,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -3607,8 +3607,8 @@
 "link": "https://www.youtube.com/watch?v=R8f9ca9TXa8"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -3618,8 +3618,8 @@
 "link": "https://www.youtube.com/watch?v=R8f9ca9TXa8"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 47,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -3629,8 +3629,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 33,
 "color": 'BLUE',
 "city": 'COVE',
@@ -3640,8 +3640,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 47,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -3651,8 +3651,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 33,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -3662,8 +3662,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -3673,8 +3673,8 @@
 "link": "https://youtu.be/Rdc2MdqhrlQ"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 62,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -3684,8 +3684,8 @@
 "link": "https://youtu.be/Rdc2MdqhrlQ"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 49,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -3695,8 +3695,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 62,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3706,8 +3706,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 58,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -3717,8 +3717,8 @@
 "link": "https://www.youtube.com/watch?v=ub5LCr21V88&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=18&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -3728,8 +3728,8 @@
 "link": "https://www.youtube.com/watch?v=ub5LCr21V88&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=18&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 58,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -3739,8 +3739,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 22,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3750,8 +3750,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 58,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3761,8 +3761,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Blitz",
+"turnir": 3,
+"map": 16,
 "player": 22,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3772,8 +3772,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 33,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3783,8 +3783,8 @@
 "link": "https://www.youtube.com/watch?v=AYnWGcpfqyM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=19&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "Jebus Cross",
+"turnir": 3,
+"map": 1,
 "player": 63,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3794,8 +3794,8 @@
 "link": "https://www.youtube.com/watch?v=AYnWGcpfqyM&list=PLGvjKRILtSt98v90j1bQDAzDA6oB0bXQb&index=19&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3805,8 +3805,8 @@
 "link": null
 },
 {
-"turnir": "Heroes Cup 2",
-"map": "JC Random",
+"turnir": 3,
+"map": 18,
 "player": 63,
 "color": 'RED',
 "city": 'COVE',
@@ -3817,7 +3817,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 37,
 "color": 'RED',
 "city": 'TOWER',
@@ -3828,7 +3828,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 49,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -3839,7 +3839,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC T7",
+"map": 20,
 "player": 37,
 "color": 'BLUE',
 "city": 'COVE',
@@ -3850,7 +3850,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC T7",
+"map": 20,
 "player": 49,
 "color": 'RED',
 "city": 'TOWER',
@@ -3861,7 +3861,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 47,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3872,7 +3872,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 22,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -3883,7 +3883,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "MT_Jebus",
+"map": 2,
 "player": 47,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3894,7 +3894,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "MT_Jebus",
+"map": 2,
 "player": 22,
 "color": 'RED',
 "city": 'TOWER',
@@ -3905,7 +3905,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3916,7 +3916,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 4,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3927,7 +3927,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Random",
+"map": 18,
 "player": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3938,7 +3938,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Random",
+"map": 18,
 "player": 4,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3949,7 +3949,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 33,
 "color": 'RED',
 "city": 'RAMPART',
@@ -3960,7 +3960,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -3971,7 +3971,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Native",
+"map": 19,
 "player": 31,
 "color": 'RED',
 "city": 'TOWER',
@@ -3982,7 +3982,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Native",
+"map": 19,
 "player": 36,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -3993,7 +3993,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC T7",
+"map": 20,
 "player": 31,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4004,7 +4004,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC T7",
+"map": 20,
 "player": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -4015,7 +4015,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 22,
 "color": 'RED',
 "city": 'TOWER',
@@ -4026,7 +4026,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4037,7 +4037,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC T7",
+"map": 20,
 "player": 22,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4047,7 +4047,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC T7",
+"map": 20,
 "player": 49,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4057,7 +4057,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 22,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4067,7 +4067,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4077,7 +4077,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 37,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -4087,7 +4087,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 47,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -4097,7 +4097,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Amazonki",
+"map": 17,
 "player": 37,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -4108,7 +4108,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Amazonki",
+"map": 17,
 "player": 47,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4119,7 +4119,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Native",
+"map": 19,
 "player": 37,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4129,7 +4129,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Native",
+"map": 19,
 "player": 47,
 "color": 'RED',
 "city": 'TOWER',
@@ -4139,7 +4139,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC T7",
+"map": 20,
 "player": 4,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -4149,7 +4149,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC T7",
+"map": 20,
 "player": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -4160,7 +4160,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "MT_Jebus",
+"map": 2,
 "player": 4,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -4171,7 +4171,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "MT_Jebus",
+"map": 2,
 "player": 36,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -4181,7 +4181,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 4,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -4191,7 +4191,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 36,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -4201,7 +4201,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 31,
 "color": 'RED',
 "city": 'RAMPART',
@@ -4212,7 +4212,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4223,7 +4223,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 31,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -4233,7 +4233,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -4243,7 +4243,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 49,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -4254,7 +4254,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 4,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4265,7 +4265,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 22,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4276,7 +4276,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Blitz",
+"map": 16,
 "player": 33,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4287,7 +4287,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 22,
 "color": 'RED',
 "city": 'RAMPART',
@@ -4297,7 +4297,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'COVE',
@@ -4307,7 +4307,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Random",
+"map": 18,
 "player": 22,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -4317,7 +4317,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Random",
+"map": 18,
 "player": 33,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -4327,7 +4327,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 47,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4338,7 +4338,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -4349,7 +4349,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "MT_Jebus",
+"map": 2,
 "player": 47,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4359,7 +4359,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "MT_Jebus",
+"map": 2,
 "player": 22,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4369,7 +4369,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4380,7 +4380,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "Jebus Cross",
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -4391,7 +4391,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Amazonki",
+"map": 17,
 "player": 22,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4401,7 +4401,7 @@
 },
 {
 "turnir": "HC 2 PO",
-"map": "JC Amazonki",
+"map": 17,
 "player": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -4410,8 +4410,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Amazonki",
+"turnir": 4,
+"map": 17,
 "player": 31,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4421,8 +4421,8 @@
 "link": "https://www.youtube.com/watch?v=3U0LMqkqyt4&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=40&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Amazonki",
+"turnir": 4,
+"map": 17,
 "player": 36,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -4432,8 +4432,8 @@
 "link": "https://www.youtube.com/watch?v=3U0LMqkqyt4&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=40&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 31,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4442,8 +4442,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 36,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -4452,8 +4452,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Amazonki",
+"turnir": 4,
+"map": 17,
 "player": 62,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4463,8 +4463,8 @@
 "link": "https://www.youtube.com/watch?v=Hd-4CZofS6M&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=39&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Amazonki",
+"turnir": 4,
+"map": 17,
 "player": 65,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -4474,8 +4474,8 @@
 "link": "https://www.youtube.com/watch?v=Hd-4CZofS6M&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=39&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 62,
 "color": 'RED',
 "city": 'CASTLE',
@@ -4484,8 +4484,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 65,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -4494,8 +4494,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Blitz",
+"turnir": 4,
+"map": 16,
 "player": 62,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -4504,8 +4504,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Blitz",
+"turnir": 4,
+"map": 16,
 "player": 65,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -4514,8 +4514,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Amazonki",
+"turnir": 4,
+"map": 17,
 "player": 49,
 "color": 'RED',
 "city": 'TOWER',
@@ -4525,8 +4525,8 @@
 "link": "https://www.youtube.com/watch?v=qd5sYVTCJac&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=38&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Amazonki",
+"turnir": 4,
+"map": 17,
 "player": 5,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4536,8 +4536,8 @@
 "link": "https://www.youtube.com/watch?v=qd5sYVTCJac&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=38&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 49,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4546,8 +4546,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 5,
 "color": 'BLUE',
 "city": 'COVE',
@@ -4556,8 +4556,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Blitz",
+"turnir": 4,
+"map": 16,
 "player": 49,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4566,8 +4566,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Blitz",
+"turnir": 4,
+"map": 16,
 "player": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -4576,8 +4576,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "MT_Jebus",
+"turnir": 4,
+"map": 2,
 "player": 61,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4587,8 +4587,8 @@
 "link": "https://www.youtube.com/watch?v=wvnbLwaciNM&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=37&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "MT_Jebus",
+"turnir": 4,
+"map": 2,
 "player": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4598,8 +4598,8 @@
 "link": "https://www.youtube.com/watch?v=wvnbLwaciNM&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=37&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 61,
 "color": 'RED',
 "city": 'TOWER',
@@ -4608,8 +4608,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -4618,8 +4618,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 60,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4629,8 +4629,8 @@
 "link": "https://www.youtube.com/watch?v=qzIGXOeXpKA&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=36&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 63,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -4640,8 +4640,8 @@
 "link": "https://www.youtube.com/watch?v=qzIGXOeXpKA&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=36&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Blitz",
+"turnir": 4,
+"map": 16,
 "player": 60,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4650,8 +4650,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Blitz",
+"turnir": 4,
+"map": 16,
 "player": 63,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -4660,8 +4660,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 60,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4670,8 +4670,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 63,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -4680,8 +4680,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Blitz",
+"turnir": 4,
+"map": 16,
 "player": 37,
 "color": 'RED',
 "city": 'RAMPART',
@@ -4691,8 +4691,8 @@
 "link": "https://www.youtube.com/watch?v=HawW_d66MN8&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=35&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Blitz",
+"turnir": 4,
+"map": 16,
 "player": 58,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -4702,8 +4702,8 @@
 "link": "https://www.youtube.com/watch?v=HawW_d66MN8&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=35&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Amazonki",
+"turnir": 4,
+"map": 17,
 "player": 37,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4712,8 +4712,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Amazonki",
+"turnir": 4,
+"map": 17,
 "player": 58,
 "color": 'RED',
 "city": 'TOWER',
@@ -4722,8 +4722,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 37,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4732,8 +4732,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 58,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -4742,8 +4742,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "MT_Jebus",
+"turnir": 4,
+"map": 2,
 "player": 50,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -4753,8 +4753,8 @@
 "link": "https://www.youtube.com/watch?v=fKdxkGUaeGE&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=34&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "MT_Jebus",
+"turnir": 4,
+"map": 2,
 "player": 22,
 "color": 'RED',
 "city": 'TOWER',
@@ -4764,8 +4764,8 @@
 "link": "https://www.youtube.com/watch?v=fKdxkGUaeGE&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=34&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 50,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -4774,8 +4774,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 22,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4784,8 +4784,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 41,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -4795,8 +4795,8 @@
 "link": "https://www.youtube.com/watch?v=MkENEJhHp7E&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=33&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 47,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4806,8 +4806,8 @@
 "link": "https://www.youtube.com/watch?v=MkENEJhHp7E&list=PLGvjKRILtSt_-IC5SHpqbkj3YjzxuTcha&index=33&pp=iAQB"
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 41,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -4816,8 +4816,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 47,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -4826,8 +4826,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -4836,8 +4836,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 58,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4846,8 +4846,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 33,
 "color": 'RED',
 "city": 'CASTLE',
@@ -4856,8 +4856,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 58,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -4866,8 +4866,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 37,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4876,8 +4876,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Random",
+"turnir": 4,
+"map": 18,
 "player": 61,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -4886,8 +4886,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 37,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4896,8 +4896,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 61,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -4906,8 +4906,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 5,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4916,8 +4916,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 47,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -4926,8 +4926,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Amazonki",
+"turnir": 4,
+"map": 17,
 "player": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4936,8 +4936,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "JC Amazonki",
+"turnir": 4,
+"map": 17,
 "player": 47,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4946,8 +4946,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "MT_Jebus",
+"turnir": 4,
+"map": 2,
 "player": 5,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4956,8 +4956,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "MT_Jebus",
+"turnir": 4,
+"map": 2,
 "player": 47,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -4966,8 +4966,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "MT_Jebus",
+"turnir": 4,
+"map": 2,
 "player": 65,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4976,8 +4976,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "MT_Jebus",
+"turnir": 4,
+"map": 2,
 "player": 50,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -4986,8 +4986,8 @@
 "win": false
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 65,
 "color": 'RED',
 "city": 'TOWER',
@@ -4996,8 +4996,8 @@
 "win": true
 },
 {
-"turnir": "Heroes Cup 3",
-"map": "Jebus Cross",
+"turnir": 4,
+"map": 1,
 "player": 50,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -5006,8 +5006,8 @@
 "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Random",
+    "turnir": 4,
+    "map": 18,
     "player": 49,
     "color": 'BLUE',
     "city": 'DUNGEON',
@@ -5016,8 +5016,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Random",
+    "turnir": 4,
+    "map": 18,
     "player": 41,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5026,8 +5026,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Blitz",
+    "turnir": 4,
+    "map": 16,
     "player": 49,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5036,8 +5036,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Blitz",
+    "turnir": 4,
+    "map": 16,
     "player": 41,
     "color": 'BLUE',
     "city": 'INFERNO',
@@ -5046,8 +5046,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Random",
+    "turnir": 4,
+    "map": 18,
     "player": 31,
     "color": 'RED',
     "city": 'STRONGHOLD',
@@ -5056,8 +5056,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Random",
+    "turnir": 4,
+    "map": 18,
     "player": 60,
     "color": 'BLUE',
     "city": 'COVE',
@@ -5066,8 +5066,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Blitz",
+    "turnir": 4,
+    "map": 16,
     "player": 31,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5076,8 +5076,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Blitz",
+    "turnir": 4,
+    "map": 16,
     "player": 60,
     "color": 'RED',
     "city": 'TOWER',
@@ -5086,8 +5086,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "MT_Jebus",
+    "turnir": 4,
+    "map": 2,
     "player": 31,
     "color": 'RED',
     "city": 'STRONGHOLD',
@@ -5096,8 +5096,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "MT_Jebus",
+    "turnir": 4,
+    "map": 2,
     "player": 60,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5106,8 +5106,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "Jebus Cross",
+    "turnir": 4,
+    "map": 1,
     "player": 5,
     "color": 'RED',
     "city": 'FACTORY',
@@ -5116,8 +5116,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "Jebus Cross",
+    "turnir": 4,
+    "map": 1,
     "player": 49,
     "color": 'BLUE',
     "city": 'CONFLUX',
@@ -5126,8 +5126,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Amazonki",
+    "turnir": 4,
+    "map": 17,
     "player": 5,
     "color": 'BLUE',
     "city": 'COVE',
@@ -5136,8 +5136,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Amazonki",
+    "turnir": 4,
+    "map": 17,
     "player": 49,
     "color": 'RED',
     "city": 'CONFLUX',
@@ -5146,8 +5146,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Random",
+    "turnir": 4,
+    "map": 18,
     "player": 5,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5156,8 +5156,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Random",
+    "turnir": 4,
+    "map": 18,
     "player": 49,
     "color": 'RED',
     "city": 'RAMPART',
@@ -5166,8 +5166,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Blitz",
+    "turnir": 4,
+    "map": 16,
     "player": 22,
     "color": 'RED',
     "city": 'INFERNO',
@@ -5176,8 +5176,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Blitz",
+    "turnir": 4,
+    "map": 16,
     "player": 62,
     "color": 'BLUE',
     "city": 'COVE',
@@ -5186,8 +5186,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Amazonki",
+    "turnir": 4,
+    "map": 17,
     "player": 22,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5196,8 +5196,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Amazonki",
+    "turnir": 4,
+    "map": 17,
     "player": 62,
     "color": 'BLUE',
     "city": 'FACTORY',
@@ -5206,8 +5206,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Amazonki",
+    "turnir": 4,
+    "map": 17,
     "player": 31,
     "color": 'RED',
     "city": 'FACTORY',
@@ -5216,8 +5216,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Amazonki",
+    "turnir": 4,
+    "map": 17,
     "player": 36,
     "color": 'BLUE',
     "city": 'FORTRESS',
@@ -5226,8 +5226,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "MT_Jebus",
+    "turnir": 4,
+    "map": 2,
     "player": 31,
     "color": 'BLUE',
     "city": 'CONFLUX',
@@ -5236,8 +5236,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "MT_Jebus",
+    "turnir": 4,
+    "map": 2,
     "player": 36,
     "color": 'RED',
     "city": 'CONFLUX',
@@ -5246,8 +5246,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Blitz",
+    "turnir": 4,
+    "map": 16,
     "player": 31,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5256,8 +5256,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Blitz",
+    "turnir": 4,
+    "map": 16,
     "player": 36,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5266,8 +5266,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Amazonki",
+    "turnir": 4,
+    "map": 17,
     "player": 33,
     "color": 'BLUE',
     "city": 'TOWER',
@@ -5276,8 +5276,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "JC Amazonki",
+    "turnir": 4,
+    "map": 17,
     "player": 61,
     "color": 'RED',
     "city": 'NECROPOLIS',
@@ -5286,8 +5286,8 @@
     "win": false
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "Jebus Cross",
+    "turnir": 4,
+    "map": 1,
     "player": 33,
     "color": 'RED',
     "city": 'FORTRESS',
@@ -5296,8 +5296,8 @@
     "win": true
 },
 {
-    "turnir": "Heroes Cup 3",
-    "map": "Jebus Cross",
+    "turnir": 4,
+    "map": 1,
     "player": 61,
     "color": 'BLUE',
     "city": 'TOWER',
@@ -5306,8 +5306,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Blitz",
+    "turnir": 5,
+    "map": 16,
     "player": 5,
     "color": 'RED',
     "city": 'CONFLUX',
@@ -5316,8 +5316,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Blitz",
+    "turnir": 5,
+    "map": 16,
     "player": 60,
     "color": 'BLUE',
     "city": 'INFERNO',
@@ -5326,8 +5326,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "MT_Jebus",
+    "turnir": 5,
+    "map": 2,
     "player": 5,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5336,8 +5336,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "MT_Jebus",
+    "turnir": 5,
+    "map": 2,
     "player": 60,
     "color": 'BLUE',
     "city": 'CASTLE',
@@ -5346,8 +5346,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "Jebus Cross",
+    "turnir": 5,
+    "map": 1,
     "player": 22,
     "color": 'RED',
     "city": 'RAMPART',
@@ -5356,8 +5356,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "Jebus Cross",
+    "turnir": 5,
+    "map": 1,
     "player": 33,
     "color": 'BLUE',
     "city": 'FORTRESS',
@@ -5366,8 +5366,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Amazonki",
+    "turnir": 5,
+    "map": 17,
     "player": 22,
     "color": 'RED',
     "city": 'TOWER',
@@ -5376,8 +5376,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Amazonki",
+    "turnir": 5,
+    "map": 17,
     "player": 33,
     "color": 'BLUE',
     "city": 'INFERNO',
@@ -5386,8 +5386,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Blitz",
+    "turnir": 5,
+    "map": 16,
     "player": 22,
     "color": 'RED',
     "city": 'DUNGEON',
@@ -5396,8 +5396,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Blitz",
+    "turnir": 5,
+    "map": 16,
     "player": 33,
     "color": 'BLUE',
     "city": 'FACTORY',
@@ -5406,8 +5406,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Amazonki",
+    "turnir": 5,
+    "map": 17,
     "player": 36,
     "color": 'BLUE',
     "city": 'FORTRESS',
@@ -5416,8 +5416,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Amazonki",
+    "turnir": 5,
+    "map": 17,
     "player": 41,
     "color": 'RED',
     "city": 'TOWER',
@@ -5426,8 +5426,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Blitz",
+    "turnir": 5,
+    "map": 16,
     "player": 36,
     "color": 'BLUE',
     "city": 'NECROPOLIS',
@@ -5436,8 +5436,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Blitz",
+    "turnir": 5,
+    "map": 16,
     "player": 41,
     "color": 'RED',
     "city": 'RAMPART',
@@ -5446,8 +5446,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "Jebus Cross",
+    "turnir": 5,
+    "map": 1,
     "player": 36,
     "color": 'BLUE',
     "city": 'NECROPOLIS',
@@ -5456,8 +5456,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "Jebus Cross",
+    "turnir": 5,
+    "map": 1,
     "player": 41,
     "color": 'RED',
     "city": 'TOWER',
@@ -5466,8 +5466,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "Jebus Cross",
+    "turnir": 5,
+    "map": 1,
     "player": 37,
     "color": 'RED',
     "city": 'DUNGEON',
@@ -5476,8 +5476,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "Jebus Cross",
+    "turnir": 5,
+    "map": 1,
     "player": 62,
     "color": 'BLUE',
     "city": 'INFERNO',
@@ -5486,8 +5486,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Random",
+    "turnir": 5,
+    "map": 18,
     "player": 37,
     "color": 'BLUE',
     "city": 'FORTRESS',
@@ -5496,8 +5496,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Random",
+    "turnir": 5,
+    "map": 18,
     "player": 62,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5506,8 +5506,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Blitz",
+    "turnir": 5,
+    "map": 16,
     "player": 37,
     "color": 'RED',
     "city": 'DUNGEON',
@@ -5516,8 +5516,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Blitz",
+    "turnir": 5,
+    "map": 16,
     "player": 62,
     "color": 'BLUE',
     "city": 'COVE',
@@ -5526,8 +5526,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Amazonki",
+    "turnir": 5,
+    "map": 17,
     "player": 33,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5536,8 +5536,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Amazonki",
+    "turnir": 5,
+    "map": 17,
     "player": 41,
     "color": 'RED',
     "city": 'NECROPOLIS',
@@ -5546,8 +5546,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "Jebus Cross",
+    "turnir": 5,
+    "map": 1,
     "player": 33,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5556,8 +5556,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "Jebus Cross",
+    "turnir": 5,
+    "map": 1,
     "player": 41,
     "color": 'RED',
     "city": 'FORTRESS',
@@ -5566,8 +5566,8 @@
     "win": false
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Blitz",
+    "turnir": 5,
+    "map": 16,
     "player": 33,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5576,8 +5576,8 @@
     "win": true
 },
 {
-    "turnir": "HC 3 PO",
-    "map": "JC Blitz",
+    "turnir": 5,
+    "map": 16,
     "player": 41,
     "color": 'BLUE',
     "city": 'DUNGEON',
@@ -5586,8 +5586,8 @@
     "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 37,
 "color": 'RED',
 "city": 'INFERNO',
@@ -5596,8 +5596,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 60,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -5606,8 +5606,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 37,
 "color": 'RED',
 "city": 'RAMPART',
@@ -5616,8 +5616,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 60,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -5626,8 +5626,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Random",
+"turnir": 5,
+"map": 18,
 "player": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -5636,8 +5636,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Random",
+"turnir": 5,
+"map": 18,
 "player": 60,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -5646,8 +5646,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 22,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -5656,8 +5656,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -5666,8 +5666,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "MT_Jebus",
+"turnir": 5,
+"map": 2,
 "player": 22,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -5676,8 +5676,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "MT_Jebus",
+"turnir": 5,
+"map": 2,
 "player": 36,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -5686,8 +5686,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 22,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -5696,8 +5696,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 36,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -5706,8 +5706,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 62,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -5716,8 +5716,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 5,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -5726,8 +5726,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 62,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -5736,8 +5736,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 5,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -5746,8 +5746,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Random",
+"turnir": 5,
+"map": 18,
 "player": 62,
 "color": 'RED',
 "city": 'COVE',
@@ -5756,8 +5756,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Random",
+"turnir": 5,
+"map": 18,
 "player": 5,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -5766,8 +5766,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 62,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -5776,8 +5776,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -5786,8 +5786,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Random",
+"turnir": 5,
+"map": 18,
 "player": 62,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -5796,8 +5796,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Random",
+"turnir": 5,
+"map": 18,
 "player": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -5806,8 +5806,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 62,
 "color": 'RED',
 "city": 'RAMPART',
@@ -5816,8 +5816,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 33,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -5826,8 +5826,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 37,
 "color": 'RED',
 "city": 'RAMPART',
@@ -5836,8 +5836,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -5846,8 +5846,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Amazonki",
+"turnir": 5,
+"map": 17,
 "player": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -5856,8 +5856,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Amazonki",
+"turnir": 5,
+"map": 17,
 "player": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -5866,8 +5866,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 37,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -5876,8 +5876,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 33,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -5886,8 +5886,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 5,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -5896,8 +5896,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 36,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -5906,8 +5906,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Random",
+"turnir": 5,
+"map": 18,
 "player": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -5916,8 +5916,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Random",
+"turnir": 5,
+"map": 18,
 "player": 36,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -5926,8 +5926,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "MT_Jebus",
+"turnir": 5,
+"map": 2,
 "player": 5,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -5936,8 +5936,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "MT_Jebus",
+"turnir": 5,
+"map": 2,
 "player": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -5946,8 +5946,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 5,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -5956,8 +5956,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -5966,8 +5966,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Random",
+"turnir": 5,
+"map": 18,
 "player": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -5976,8 +5976,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Random",
+"turnir": 5,
+"map": 18,
 "player": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -5986,8 +5986,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Amazonki",
+"turnir": 5,
+"map": 17,
 "player": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -5996,8 +5996,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Amazonki",
+"turnir": 5,
+"map": 17,
 "player": 36,
 "color": 'RED',
 "city": 'RAMPART',
@@ -6006,8 +6006,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -6016,8 +6016,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "Jebus Cross",
+"turnir": 5,
+"map": 1,
 "player": 36,
 "color": 'RED',
 "city": 'FACTORY',
@@ -6026,8 +6026,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -6036,8 +6036,8 @@
 "win": true
 },
 {
-"turnir": "HC 3 PO",
-"map": "JC Blitz",
+"turnir": 5,
+"map": 16,
 "player": 36,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -6046,8 +6046,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "MT_Jebus",
+"turnir": 5,
+"map": 2,
 "player": 33,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -6056,8 +6056,8 @@
 "win": false
 },
 {
-"turnir": "HC 3 PO",
-"map": "MT_Jebus",
+"turnir": 5,
+"map": 2,
 "player": 36,
 "color": 'RED',
 "city": 'DUNGEON',
