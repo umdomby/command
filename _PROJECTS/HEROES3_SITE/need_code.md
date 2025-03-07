@@ -13,13 +13,16 @@ import {placeBet} from "@/app/actions";
 ```
 
 
-отвечай на русском, не удаляй и не изменяй комментарии, 
+отвечай на русском, не удаляй и не изменяй комментарии,
+SELECT setval(pg_get_serial_sequence('"User"', 'id'), coalesce(max(id)+1, 1), false) FROM "User";
+SELECT setval(pg_get_serial_sequence('"ProductItem"', 'id'), coalesce(max(id)+1, 1), false) FROM "ProductItem";
+SELECT setval(pg_get_serial_sequence('"Player"', 'id'), coalesce(max(id)+1, 1), false) FROM "Player";
+
+
 
 SELECT setval(pg_get_serial_sequence('"Bet3"', 'id'), coalesce(max(id)+1, 1), false) FROM "Bet3";
 SELECT setval(pg_get_serial_sequence('"BetParticipant3"', 'id'), coalesce(max(id)+1, 1), false) FROM "BetParticipant3";
-SELECT setval(pg_get_serial_sequence('"Player"', 'id'), coalesce(max(id)+1, 1), false) FROM "Player";
 
-SELECT setval(pg_get_serial_sequence('"User"', 'id'), coalesce(max(id)+1, 1), false) FROM "User";
 
 npx prisma generate
 npx prisma migrate dev --name init
