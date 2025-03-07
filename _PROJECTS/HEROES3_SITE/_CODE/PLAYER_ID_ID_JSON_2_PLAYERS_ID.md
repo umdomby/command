@@ -1,7 +1,7 @@
 //6066
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 23,
 "color": 'RED',
 "city": 'TOWER',
@@ -12,7 +12,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -23,7 +23,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 23,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -34,7 +34,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -45,7 +45,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 31,
 "color": 'RED',
 "city": 'RAMPART',
@@ -56,7 +56,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 44,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -67,7 +67,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 31,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -78,7 +78,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 44,
 "color": 'RED',
 "city": 'FACTORY',
@@ -89,7 +89,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -100,7 +100,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 59,
 "color": 'RED',
 "city": 'RAMPART',
@@ -111,7 +111,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 36,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -122,7 +122,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 59,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -133,7 +133,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -144,7 +144,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'COVE',
@@ -155,7 +155,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -166,7 +166,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'COVE',
@@ -177,7 +177,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 15,
 "color": 'RED',
 "city": 'TOWER',
@@ -188,7 +188,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 56,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -199,7 +199,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 15,
 "color": 'RED',
 "city": 'RAMPART',
@@ -210,7 +210,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 56,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -221,7 +221,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 41,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -232,7 +232,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 58,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -243,7 +243,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 41,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -254,7 +254,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 58,
 "color": 'RED',
 "city": 'TOWER',
@@ -265,7 +265,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 55,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -276,7 +276,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -287,7 +287,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 55,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -298,7 +298,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 5,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -309,7 +309,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 49,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -320,7 +320,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -331,7 +331,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -342,7 +342,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'RED',
 "city": 'INFERNO',
@@ -353,7 +353,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 59,
 "color": 'RED',
 "city": 'FACTORY',
@@ -364,7 +364,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 20,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -375,7 +375,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 59,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -386,7 +386,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 20,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -397,7 +397,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -408,7 +408,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 38,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -419,7 +419,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -430,7 +430,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 38,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -441,7 +441,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 37,
 "color": 'RED',
 "city": 'CASTLE',
@@ -452,7 +452,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -463,7 +463,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -474,7 +474,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 36,
 "color": 'RED',
 "city": 'FACTORY',
@@ -485,7 +485,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 31,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -496,7 +496,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 5,
 "color": 'RED',
 "city": 'TOWER',
@@ -507,7 +507,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 31,
 "color": 'RED',
 "city": 'FACTORY',
@@ -518,7 +518,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -529,7 +529,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 23,
 "color": 'RED',
 "city": 'COVE',
@@ -540,7 +540,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 41,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -551,7 +551,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 23,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -562,7 +562,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 41,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -573,7 +573,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'COVE',
@@ -584,7 +584,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 15,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -595,7 +595,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 33,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -606,7 +606,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 15,
 "color": 'BLUE',
 "city": 'COVE',
@@ -617,7 +617,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 31,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -628,7 +628,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 54,
 "color": 'RED',
 "city": 'TOWER',
@@ -639,7 +639,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 31,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -650,7 +650,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 54,
 "color": 'RED',
 "city": 'RAMPART',
@@ -661,7 +661,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 20,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -672,7 +672,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 38,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -683,7 +683,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 20,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -694,7 +694,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 38,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -705,7 +705,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 15,
 "color": 'RED',
 "city": 'FACTORY',
@@ -716,7 +716,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 57,
 "color": 'BLUE',
 "city": 'COVE',
@@ -727,7 +727,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 15,
 "color": 'RED',
 "city": "​",
@@ -738,7 +738,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 57,
 "color": 'BLUE',
 "city": "​",
@@ -749,7 +749,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 44,
 "color": 'RED',
 "city": 'COVE',
@@ -760,7 +760,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 55,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -771,7 +771,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 44,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -782,7 +782,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 55,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -793,7 +793,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 57,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -804,7 +804,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 56,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -815,7 +815,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 57,
 "color": 'RED',
 "city": 'CASTLE',
@@ -826,7 +826,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 56,
 "color": 'BLUE',
 "city": 'COVE',
@@ -837,7 +837,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 44,
 "color": 'RED',
 "city": 'CASTLE',
@@ -848,7 +848,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 54,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -859,7 +859,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 44,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -870,7 +870,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 54,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -881,7 +881,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 58,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -892,7 +892,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 49,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -903,7 +903,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 58,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -914,7 +914,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 49,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -925,7 +925,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 38,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -936,7 +936,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 59,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -947,7 +947,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 38,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -957,7 +957,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 59,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -967,7 +967,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 56,
 "color": 'RED',
 "city": 'RAMPART',
@@ -978,7 +978,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -989,7 +989,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 56,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -999,7 +999,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 22,
 "color": 'RED',
 "city": 'COVE',
@@ -1009,7 +1009,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1020,7 +1020,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 54,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -1031,7 +1031,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 5,
 "color": 'RED',
 "city": 'TOWER',
@@ -1041,7 +1041,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 54,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1051,7 +1051,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 23,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -1062,7 +1062,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -1073,7 +1073,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 23,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1083,7 +1083,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -1093,7 +1093,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1104,7 +1104,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 20,
 "color": 'RED',
 "city": 'INFERNO',
@@ -1115,7 +1115,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 37,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -1125,7 +1125,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 20,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -1135,7 +1135,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 4,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -1146,7 +1146,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 41,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1157,7 +1157,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1167,7 +1167,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 41,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -1177,7 +1177,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -1188,7 +1188,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 57,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1199,7 +1199,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1209,7 +1209,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 57,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -1219,7 +1219,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 44,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -1230,7 +1230,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1241,7 +1241,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 44,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -1251,7 +1251,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1261,7 +1261,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 15,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -1272,7 +1272,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1283,7 +1283,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 15,
 "color": 'RED',
 "city": "",
@@ -1293,7 +1293,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 22,
 "color": 'BLUE',
 "city": "",
@@ -1303,7 +1303,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1314,7 +1314,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 20,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1325,7 +1325,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1335,7 +1335,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 20,
 "color": 'RED',
 "city": 'CASTLE',
@@ -1345,7 +1345,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 31,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -1356,7 +1356,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 55,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1367,7 +1367,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 31,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1377,7 +1377,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 55,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1387,7 +1387,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 41,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1398,7 +1398,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 49,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -1409,7 +1409,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 41,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1419,7 +1419,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -1429,7 +1429,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 23,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1440,7 +1440,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 58,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1451,7 +1451,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 23,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -1461,7 +1461,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 58,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -1471,7 +1471,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 22,
 "color": 'RED',
 "city": 'CASTLE',
@@ -1482,7 +1482,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 57,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -1493,7 +1493,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 22,
 "color": 'RED',
 "city": 'TOWER',
@@ -1503,7 +1503,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 57,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1513,7 +1513,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 59,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1524,7 +1524,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -1535,7 +1535,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 59,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1545,7 +1545,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 37,
 "color": 'RED',
 "city": 'TOWER',
@@ -1555,7 +1555,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 56,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1566,7 +1566,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1577,7 +1577,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 56,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -1587,7 +1587,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1597,7 +1597,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 54,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1608,7 +1608,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 55,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -1619,7 +1619,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 54,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1629,7 +1629,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 55,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1639,7 +1639,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 4,
 "color": 'RED',
 "city": 'TOWER',
@@ -1650,7 +1650,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 58,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1661,7 +1661,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1671,7 +1671,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 58,
 "color": 'RED',
 "city": 'COVE',
@@ -1681,7 +1681,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 41,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -1692,7 +1692,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 57,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -1703,7 +1703,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 41,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1713,7 +1713,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 57,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -1723,7 +1723,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 44,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -1734,7 +1734,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 38,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1745,7 +1745,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 44,
 "color": 'RED',
 "city": 'INFERNO',
@@ -1755,7 +1755,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 38,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -1765,7 +1765,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 58,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -1776,7 +1776,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 15,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -1787,7 +1787,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 58,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -1797,7 +1797,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 15,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1807,7 +1807,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 58,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1817,7 +1817,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 15,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1827,7 +1827,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -1838,7 +1838,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -1849,7 +1849,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 22,
 "color": 'RED',
 "city": 'COVE',
@@ -1859,7 +1859,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1869,7 +1869,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1879,7 +1879,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1889,7 +1889,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 55,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1900,7 +1900,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 36,
 "color": 'RED',
 "city": 'INFERNO',
@@ -1911,7 +1911,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 55,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -1921,7 +1921,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'COVE',
@@ -1931,7 +1931,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 55,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -1941,7 +1941,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 36,
 "color": 'RED',
 "city": 'FACTORY',
@@ -1951,7 +1951,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 49,
 "color": 'RED',
 "city": 'RAMPART',
@@ -1962,7 +1962,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -1973,7 +1973,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 49,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -1983,7 +1983,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -1993,7 +1993,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 37,
 "color": 'RED',
 "city": 'RAMPART',
@@ -2004,7 +2004,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 31,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2015,7 +2015,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2025,7 +2025,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 31,
 "color": 'RED',
 "city": 'INFERNO',
@@ -2035,7 +2035,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 5,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -2045,7 +2045,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 20,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -2055,7 +2055,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 5,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -2066,7 +2066,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 20,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2077,7 +2077,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2087,7 +2087,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 20,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2097,7 +2097,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -2107,7 +2107,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 41,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -2117,7 +2117,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2127,7 +2127,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 41,
 "color": 'RED',
 "city": 'RAMPART',
@@ -2137,7 +2137,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 31,
 "color": 'RED',
 "city": 'INFERNO',
@@ -2148,7 +2148,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 38,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2159,7 +2159,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 31,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -2169,7 +2169,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 38,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2179,7 +2179,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 31,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2189,7 +2189,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 38,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2199,7 +2199,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 36,
 "color": 'RED',
 "city": 'RAMPART',
@@ -2210,7 +2210,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 20,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2221,7 +2221,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -2231,7 +2231,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 20,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -2241,7 +2241,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 36,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2251,7 +2251,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 20,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2261,7 +2261,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 49,
 "color": 'RED',
 "city": 'TOWER',
@@ -2272,7 +2272,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2283,7 +2283,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -2293,7 +2293,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 22,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -2303,7 +2303,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -2314,7 +2314,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 15,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2325,7 +2325,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 33,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -2335,7 +2335,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 15,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2345,7 +2345,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 33,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2355,7 +2355,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 15,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2365,7 +2365,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 31,
 "color": 'RED',
 "city": 'CASTLE',
@@ -2376,7 +2376,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -2387,7 +2387,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 31,
 "color": 'RED',
 "city": 'INFERNO',
@@ -2397,7 +2397,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -2407,7 +2407,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2418,7 +2418,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2429,7 +2429,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -2439,7 +2439,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -2449,7 +2449,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2460,7 +2460,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 37,
 "color": 'RED',
 "city": 'TOWER',
@@ -2471,7 +2471,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -2481,7 +2481,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 37,
 "color": 'RED',
 "city": 'CASTLE',
@@ -2491,7 +2491,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2501,7 +2501,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2511,7 +2511,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -2522,7 +2522,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 49,
 "color": 'RED',
 "city": 'CASTLE',
@@ -2533,7 +2533,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2543,7 +2543,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2553,7 +2553,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2564,7 +2564,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2575,7 +2575,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 37,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -2585,7 +2585,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2596,7 +2596,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2607,7 +2607,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 36,
 "color": 'RED',
 "city": 'RAMPART',
@@ -2617,7 +2617,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2627,7 +2627,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 36,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -2637,7 +2637,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -2648,7 +2648,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2659,7 +2659,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2669,7 +2669,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 5,
 "color": 'RED',
 "city": 'COVE',
@@ -2679,7 +2679,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2689,7 +2689,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2699,7 +2699,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -2710,7 +2710,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2721,7 +2721,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -2731,7 +2731,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -2741,7 +2741,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'RED',
 "city": "",
@@ -2751,7 +2751,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 5,
 "color": 'BLUE',
 "city": "",
@@ -2761,7 +2761,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 4,
 "color": 'RED',
 "city": "",
@@ -2771,7 +2771,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 5,
 "color": 'BLUE',
 "city": "",
@@ -2781,7 +2781,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 4,
 "color": 'RED',
 "city": "",
@@ -2791,7 +2791,7 @@
 },
 {
 "turnirId": 2,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 5,
 "color": 'BLUE',
 "city": "",
@@ -2801,7 +2801,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 60,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -2812,7 +2812,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 31,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -2823,7 +2823,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 60,
 "color": 'RED',
 "city": 'COVE',
@@ -2833,7 +2833,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 31,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -2843,7 +2843,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2854,7 +2854,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 61,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -2865,7 +2865,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 37,
 "color": 'RED',
 "city": 'TOWER',
@@ -2875,7 +2875,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 61,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -2885,7 +2885,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -2895,7 +2895,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 61,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -2905,7 +2905,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 62,
 "color": 'RED',
 "city": 'TOWER',
@@ -2916,7 +2916,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -2927,7 +2927,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 62,
 "color": 'RED',
 "city": 'CASTLE',
@@ -2937,7 +2937,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -2947,7 +2947,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 62,
 "color": 'BLUE',
 "city": 'COVE',
@@ -2957,7 +2957,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 49,
 "color": 'RED',
 "city": 'TOWER',
@@ -2967,7 +2967,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -2978,7 +2978,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 63,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -2989,7 +2989,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -2999,7 +2999,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 63,
 "color": 'RED',
 "city": 'CASTLE',
@@ -3009,7 +3009,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 36,
 "color": 'RED',
 "city": 'FACTORY',
@@ -3020,7 +3020,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 64,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -3031,7 +3031,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3041,7 +3041,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 64,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -3051,7 +3051,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 60,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -3062,7 +3062,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 61,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -3073,7 +3073,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 60,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3083,7 +3083,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 61,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -3093,7 +3093,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 60,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -3103,7 +3103,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 61,
 "color": 'RED',
 "city": 'CASTLE',
@@ -3113,7 +3113,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 62,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -3124,7 +3124,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 64,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -3135,7 +3135,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 62,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -3145,7 +3145,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 64,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -3155,7 +3155,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 28,
 "color": 'RED',
 "city": 'RAMPART',
@@ -3166,7 +3166,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -3177,7 +3177,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 28,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -3187,7 +3187,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3197,7 +3197,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3208,7 +3208,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 58,
 "color": 'BLUE',
 "city": 'COVE',
@@ -3219,7 +3219,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -3229,7 +3229,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 58,
 "color": 'RED',
 "city": 'RAMPART',
@@ -3239,7 +3239,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3250,7 +3250,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 31,
 "color": 'RED',
 "city": 'FACTORY',
@@ -3261,7 +3261,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -3271,7 +3271,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 31,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3281,7 +3281,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 49,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3292,7 +3292,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -3303,7 +3303,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 49,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3313,7 +3313,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -3323,7 +3323,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 31,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -3334,7 +3334,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 60,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3345,7 +3345,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 31,
 "color": 'RED',
 "city": 'COVE',
@@ -3355,7 +3355,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 60,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -3365,7 +3365,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 31,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -3375,7 +3375,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 60,
 "color": 'RED',
 "city": 'TOWER',
@@ -3385,7 +3385,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 58,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -3396,7 +3396,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 28,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -3407,7 +3407,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 58,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -3417,7 +3417,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 28,
 "color": 'RED',
 "city": 'FACTORY',
@@ -3427,7 +3427,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 47,
 "color": 'BLUE',
 "city": 'COVE',
@@ -3437,7 +3437,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 63,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -3447,7 +3447,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 47,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -3458,7 +3458,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 63,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -3469,7 +3469,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 47,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3479,7 +3479,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 63,
 "color": 'RED',
 "city": 'RAMPART',
@@ -3489,7 +3489,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -3500,7 +3500,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'RED',
 "city": 'CASTLE',
@@ -3511,7 +3511,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -3521,7 +3521,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 22,
 "color": 'RED',
 "city": 'CASTLE',
@@ -3531,7 +3531,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3542,7 +3542,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'RED',
 "city": 'CASTLE',
@@ -3553,7 +3553,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -3564,7 +3564,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 33,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -3575,7 +3575,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -3586,7 +3586,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 33,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3597,7 +3597,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 47,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -3608,7 +3608,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -3619,7 +3619,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 47,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -3630,7 +3630,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'COVE',
@@ -3641,7 +3641,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 47,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -3652,7 +3652,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 33,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -3663,7 +3663,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -3674,7 +3674,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 62,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -3685,7 +3685,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -3696,7 +3696,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 62,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3707,7 +3707,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 58,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -3718,7 +3718,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -3729,7 +3729,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 58,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -3740,7 +3740,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3751,7 +3751,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 58,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3762,7 +3762,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3773,7 +3773,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3784,7 +3784,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 63,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3795,7 +3795,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3806,7 +3806,7 @@
 },
 {
 "turnirId": 3,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 63,
 "color": 'RED',
 "city": 'COVE',
@@ -3817,7 +3817,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 37,
 "color": 'RED',
 "city": 'TOWER',
@@ -3828,7 +3828,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -3839,7 +3839,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 20,
+"categoryId": 20,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'COVE',
@@ -3850,7 +3850,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 20,
+"categoryId": 20,
 "playerId": 49,
 "color": 'RED',
 "city": 'TOWER',
@@ -3861,7 +3861,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 47,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3872,7 +3872,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -3883,7 +3883,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 47,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3894,7 +3894,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 22,
 "color": 'RED',
 "city": 'TOWER',
@@ -3905,7 +3905,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -3916,7 +3916,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3927,7 +3927,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -3938,7 +3938,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 4,
 "color": 'RED',
 "city": 'INFERNO',
@@ -3949,7 +3949,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 33,
 "color": 'RED',
 "city": 'RAMPART',
@@ -3960,7 +3960,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -3971,7 +3971,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 31,
 "color": 'RED',
 "city": 'TOWER',
@@ -3982,7 +3982,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -3993,7 +3993,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 20,
+"categoryId": 20,
 "playerId": 31,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4004,7 +4004,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 20,
+"categoryId": 20,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -4015,7 +4015,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 22,
 "color": 'RED',
 "city": 'TOWER',
@@ -4026,7 +4026,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4037,7 +4037,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 20,
+"categoryId": 20,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4047,7 +4047,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 20,
+"categoryId": 20,
 "playerId": 49,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4057,7 +4057,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4067,7 +4067,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4077,7 +4077,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -4087,7 +4087,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 47,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -4097,7 +4097,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -4108,7 +4108,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 47,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4119,7 +4119,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4129,7 +4129,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 19,
+"categoryId": 19,
 "playerId": 47,
 "color": 'RED',
 "city": 'TOWER',
@@ -4139,7 +4139,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 20,
+"categoryId": 20,
 "playerId": 4,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -4149,7 +4149,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 20,
+"categoryId": 20,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -4160,7 +4160,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 4,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -4171,7 +4171,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -4181,7 +4181,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -4191,7 +4191,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 36,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -4201,7 +4201,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 31,
 "color": 'RED',
 "city": 'RAMPART',
@@ -4212,7 +4212,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4223,7 +4223,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 31,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -4233,7 +4233,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -4243,7 +4243,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 49,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -4254,7 +4254,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 4,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4265,7 +4265,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 22,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4276,7 +4276,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4287,7 +4287,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'RED',
 "city": 'RAMPART',
@@ -4297,7 +4297,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'COVE',
@@ -4307,7 +4307,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 22,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -4317,7 +4317,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -4327,7 +4327,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 47,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4338,7 +4338,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -4349,7 +4349,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 47,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4359,7 +4359,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 22,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4369,7 +4369,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4380,7 +4380,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -4391,7 +4391,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 22,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4401,7 +4401,7 @@
 },
 {
 "turnirId": 6,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -4411,7 +4411,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 31,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4422,7 +4422,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -4433,7 +4433,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 31,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4443,7 +4443,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -4453,7 +4453,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 62,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4464,7 +4464,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 65,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -4475,7 +4475,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 62,
 "color": 'RED',
 "city": 'CASTLE',
@@ -4485,7 +4485,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 65,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -4495,7 +4495,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 62,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -4505,7 +4505,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 65,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -4515,7 +4515,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 49,
 "color": 'RED',
 "city": 'TOWER',
@@ -4526,7 +4526,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4537,7 +4537,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 49,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4547,7 +4547,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'COVE',
@@ -4557,7 +4557,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 49,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4567,7 +4567,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'FACTORY',
@@ -4577,7 +4577,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 61,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4588,7 +4588,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4599,7 +4599,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 61,
 "color": 'RED',
 "city": 'TOWER',
@@ -4609,7 +4609,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -4619,7 +4619,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 60,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4630,7 +4630,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 63,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -4641,7 +4641,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 60,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -4651,7 +4651,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 63,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -4661,7 +4661,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 60,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4671,7 +4671,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 63,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -4681,7 +4681,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 37,
 "color": 'RED',
 "city": 'RAMPART',
@@ -4692,7 +4692,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 58,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -4703,7 +4703,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4713,7 +4713,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 58,
 "color": 'RED',
 "city": 'TOWER',
@@ -4723,7 +4723,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 37,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -4733,7 +4733,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 58,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -4743,7 +4743,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 50,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -4754,7 +4754,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 22,
 "color": 'RED',
 "city": 'TOWER',
@@ -4765,7 +4765,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 50,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -4775,7 +4775,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4785,7 +4785,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 41,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -4796,7 +4796,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 47,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4807,7 +4807,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 41,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -4817,7 +4817,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 47,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -4827,7 +4827,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -4837,7 +4837,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 58,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4847,7 +4847,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'RED',
 "city": 'CASTLE',
@@ -4857,7 +4857,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 58,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -4867,7 +4867,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 37,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4877,7 +4877,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 61,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -4887,7 +4887,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 37,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4897,7 +4897,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 61,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -4907,7 +4907,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 5,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4917,7 +4917,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 47,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -4927,7 +4927,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -4937,7 +4937,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 47,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -4947,7 +4947,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 5,
 "color": 'RED',
 "city": 'INFERNO',
@@ -4957,7 +4957,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 47,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -4967,7 +4967,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 65,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -4977,7 +4977,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 50,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -4987,7 +4987,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 65,
 "color": 'RED',
 "city": 'TOWER',
@@ -4997,7 +4997,7 @@
 },
 {
 "turnirId": 4,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 50,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -5007,7 +5007,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 18,
+    "categoryId": 18,
     "playerId": 49,
     "color": 'BLUE',
     "city": 'DUNGEON',
@@ -5017,7 +5017,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 18,
+    "categoryId": 18,
     "playerId": 41,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5027,7 +5027,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 49,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5037,7 +5037,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 41,
     "color": 'BLUE',
     "city": 'INFERNO',
@@ -5047,7 +5047,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 18,
+    "categoryId": 18,
     "playerId": 31,
     "color": 'RED',
     "city": 'STRONGHOLD',
@@ -5057,7 +5057,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 18,
+    "categoryId": 18,
     "playerId": 60,
     "color": 'BLUE',
     "city": 'COVE',
@@ -5067,7 +5067,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 31,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5077,7 +5077,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 60,
     "color": 'RED',
     "city": 'TOWER',
@@ -5087,7 +5087,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 2,
+    "categoryId": 2,
     "playerId": 31,
     "color": 'RED',
     "city": 'STRONGHOLD',
@@ -5097,7 +5097,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 2,
+    "categoryId": 2,
     "playerId": 60,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5107,7 +5107,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 5,
     "color": 'RED',
     "city": 'FACTORY',
@@ -5117,7 +5117,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 49,
     "color": 'BLUE',
     "city": 'CONFLUX',
@@ -5127,7 +5127,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 5,
     "color": 'BLUE',
     "city": 'COVE',
@@ -5137,7 +5137,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 49,
     "color": 'RED',
     "city": 'CONFLUX',
@@ -5147,7 +5147,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 18,
+    "categoryId": 18,
     "playerId": 5,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5157,7 +5157,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 18,
+    "categoryId": 18,
     "playerId": 49,
     "color": 'RED',
     "city": 'RAMPART',
@@ -5167,7 +5167,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 22,
     "color": 'RED',
     "city": 'INFERNO',
@@ -5177,7 +5177,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 62,
     "color": 'BLUE',
     "city": 'COVE',
@@ -5187,7 +5187,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 22,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5197,7 +5197,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 62,
     "color": 'BLUE',
     "city": 'FACTORY',
@@ -5207,7 +5207,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 31,
     "color": 'RED',
     "city": 'FACTORY',
@@ -5217,7 +5217,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 36,
     "color": 'BLUE',
     "city": 'FORTRESS',
@@ -5227,7 +5227,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 2,
+    "categoryId": 2,
     "playerId": 31,
     "color": 'BLUE',
     "city": 'CONFLUX',
@@ -5237,7 +5237,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 2,
+    "categoryId": 2,
     "playerId": 36,
     "color": 'RED',
     "city": 'CONFLUX',
@@ -5247,7 +5247,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 31,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5257,7 +5257,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 36,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5267,7 +5267,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 33,
     "color": 'BLUE',
     "city": 'TOWER',
@@ -5277,7 +5277,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 61,
     "color": 'RED',
     "city": 'NECROPOLIS',
@@ -5287,7 +5287,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 33,
     "color": 'RED',
     "city": 'FORTRESS',
@@ -5297,7 +5297,7 @@
 },
 {
     "turnirId": 4,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 61,
     "color": 'BLUE',
     "city": 'TOWER',
@@ -5307,7 +5307,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 5,
     "color": 'RED',
     "city": 'CONFLUX',
@@ -5317,7 +5317,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 60,
     "color": 'BLUE',
     "city": 'INFERNO',
@@ -5327,7 +5327,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 2,
+    "categoryId": 2,
     "playerId": 5,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5337,7 +5337,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 2,
+    "categoryId": 2,
     "playerId": 60,
     "color": 'BLUE',
     "city": 'CASTLE',
@@ -5347,7 +5347,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 22,
     "color": 'RED',
     "city": 'RAMPART',
@@ -5357,7 +5357,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 33,
     "color": 'BLUE',
     "city": 'FORTRESS',
@@ -5367,7 +5367,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 22,
     "color": 'RED',
     "city": 'TOWER',
@@ -5377,7 +5377,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 33,
     "color": 'BLUE',
     "city": 'INFERNO',
@@ -5387,7 +5387,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 22,
     "color": 'RED',
     "city": 'DUNGEON',
@@ -5397,7 +5397,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 33,
     "color": 'BLUE',
     "city": 'FACTORY',
@@ -5407,7 +5407,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 36,
     "color": 'BLUE',
     "city": 'FORTRESS',
@@ -5417,7 +5417,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 41,
     "color": 'RED',
     "city": 'TOWER',
@@ -5427,7 +5427,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 36,
     "color": 'BLUE',
     "city": 'NECROPOLIS',
@@ -5437,7 +5437,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 41,
     "color": 'RED',
     "city": 'RAMPART',
@@ -5447,7 +5447,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 36,
     "color": 'BLUE',
     "city": 'NECROPOLIS',
@@ -5457,7 +5457,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 41,
     "color": 'RED',
     "city": 'TOWER',
@@ -5467,7 +5467,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 37,
     "color": 'RED',
     "city": 'DUNGEON',
@@ -5477,7 +5477,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 62,
     "color": 'BLUE',
     "city": 'INFERNO',
@@ -5487,7 +5487,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 18,
+    "categoryId": 18,
     "playerId": 37,
     "color": 'BLUE',
     "city": 'FORTRESS',
@@ -5497,7 +5497,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 18,
+    "categoryId": 18,
     "playerId": 62,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5507,7 +5507,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 37,
     "color": 'RED',
     "city": 'DUNGEON',
@@ -5517,7 +5517,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 62,
     "color": 'BLUE',
     "city": 'COVE',
@@ -5527,7 +5527,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 33,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5537,7 +5537,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 17,
+    "categoryId": 17,
     "playerId": 41,
     "color": 'RED',
     "city": 'NECROPOLIS',
@@ -5547,7 +5547,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 33,
     "color": 'BLUE',
     "city": 'STRONGHOLD',
@@ -5557,7 +5557,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 1,
+    "categoryId": 1,
     "playerId": 41,
     "color": 'RED',
     "city": 'FORTRESS',
@@ -5567,7 +5567,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 33,
     "color": 'RED',
     "city": 'CASTLE',
@@ -5577,7 +5577,7 @@
 },
 {
     "turnirId": 5,
-    "mapId": 16,
+    "categoryId": 16,
     "playerId": 41,
     "color": 'BLUE',
     "city": 'DUNGEON',
@@ -5587,7 +5587,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 37,
 "color": 'RED',
 "city": 'INFERNO',
@@ -5597,7 +5597,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 60,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -5607,7 +5607,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 37,
 "color": 'RED',
 "city": 'RAMPART',
@@ -5617,7 +5617,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 60,
 "color": 'BLUE',
 "city": 'CONFLUX',
@@ -5627,7 +5627,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -5637,7 +5637,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 60,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -5647,7 +5647,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 22,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -5657,7 +5657,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -5667,7 +5667,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -5677,7 +5677,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 36,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -5687,7 +5687,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 22,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -5697,7 +5697,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 36,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -5707,7 +5707,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 62,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -5717,7 +5717,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -5727,7 +5727,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 62,
 "color": 'RED',
 "city": 'CONFLUX',
@@ -5737,7 +5737,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'RAMPART',
@@ -5747,7 +5747,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 62,
 "color": 'RED',
 "city": 'COVE',
@@ -5757,7 +5757,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 5,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -5767,7 +5767,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 62,
 "color": 'RED',
 "city": 'STRONGHOLD',
@@ -5777,7 +5777,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -5787,7 +5787,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 62,
 "color": 'RED',
 "city": 'NECROPOLIS',
@@ -5797,7 +5797,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -5807,7 +5807,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 62,
 "color": 'RED',
 "city": 'RAMPART',
@@ -5817,7 +5817,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -5827,7 +5827,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 37,
 "color": 'RED',
 "city": 'RAMPART',
@@ -5837,7 +5837,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -5847,7 +5847,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 37,
 "color": 'RED',
 "city": 'FACTORY',
@@ -5857,7 +5857,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -5867,7 +5867,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 37,
 "color": 'RED',
 "city": 'DUNGEON',
@@ -5877,7 +5877,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -5887,7 +5887,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 5,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -5897,7 +5897,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'STRONGHOLD',
@@ -5907,7 +5907,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -5917,7 +5917,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'NECROPOLIS',
@@ -5927,7 +5927,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 5,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -5937,7 +5937,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 36,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -5947,7 +5947,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 5,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -5957,7 +5957,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'CASTLE',
@@ -5967,7 +5967,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 5,
 "color": 'RED',
 "city": 'FACTORY',
@@ -5977,7 +5977,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 18,
+"categoryId": 18,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'FORTRESS',
@@ -5987,7 +5987,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -5997,7 +5997,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 17,
+"categoryId": 17,
 "playerId": 36,
 "color": 'RED',
 "city": 'RAMPART',
@@ -6007,7 +6007,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'INFERNO',
@@ -6017,7 +6017,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 1,
+"categoryId": 1,
 "playerId": 36,
 "color": 'RED',
 "city": 'FACTORY',
@@ -6027,7 +6027,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'TOWER',
@@ -6037,7 +6037,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 16,
+"categoryId": 16,
 "playerId": 36,
 "color": 'RED',
 "city": 'FORTRESS',
@@ -6047,7 +6047,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 33,
 "color": 'BLUE',
 "city": 'DUNGEON',
@@ -6057,7 +6057,7 @@
 },
 {
 "turnirId": 5,
-"mapId": 2,
+"categoryId": 2,
 "playerId": 36,
 "color": 'RED',
 "city": 'DUNGEON',
