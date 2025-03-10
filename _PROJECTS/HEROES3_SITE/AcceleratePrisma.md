@@ -1,1 +1,0 @@
-https://www.prisma.io/accelerate?utm_medium=promo-generate-v5-17&utm_source=cli&utm_campaign=tip-2-accelerate
