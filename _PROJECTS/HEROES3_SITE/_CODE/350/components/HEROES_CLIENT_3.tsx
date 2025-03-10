@@ -536,10 +536,7 @@ export const HEROES_CLIENT_3: React.FC<Props> = ({className, user}) => {
                                                     <div
                                                         className={`${playerColors[PlayerChoice.PLAYER1]} text-ellipsis overflow-hidden whitespace-nowrap`}
                                                     >
-                                                        {Math.floor(bet.oddsBetPlayer1 * 100) / 100}
-                                                    </div>
-                                                    <div className="text-xs">
-                                                        {bet.player1.name}
+                                                        {Math.floor(bet.oddsBetPlayer1 * 100) / 100}{" "}
                                                         {user.role === "ADMIN" && (
                                                             <input
                                                                 type="checkbox"
@@ -547,6 +544,9 @@ export const HEROES_CLIENT_3: React.FC<Props> = ({className, user}) => {
                                                                 onChange={() => updateBet3PField(bet.id, 'betP1', !bet.betP1)}
                                                             />
                                                         )}
+                                                    </div>
+                                                    <div className="text-xs">
+                                                        {bet.player1.name}
                                                     </div>
                                                     <div>  <span
                                                         className={
@@ -569,10 +569,7 @@ export const HEROES_CLIENT_3: React.FC<Props> = ({className, user}) => {
                                                     <div
                                                         className={`${playerColors[PlayerChoice.PLAYER2]} text-ellipsis overflow-hidden whitespace-nowrap`}
                                                     >
-                                                        {Math.floor(bet.oddsBetPlayer2 * 100) / 100}
-                                                    </div>
-                                                    <div className="text-xs">
-                                                        {bet.player2.name}
+                                                        {Math.floor(bet.oddsBetPlayer2 * 100) / 100}{" "}
                                                         {user.role === "ADMIN" && (
                                                             <input
                                                                 type="checkbox"
@@ -580,6 +577,9 @@ export const HEROES_CLIENT_3: React.FC<Props> = ({className, user}) => {
                                                                 onChange={() => updateBet3PField(bet.id, 'betP2', !bet.betP2)}
                                                             />
                                                         )}
+                                                    </div>
+                                                    <div className="text-xs">
+                                                        {bet.player2.name}
                                                     </div>
                                                     <div> <span
                                                         className={
@@ -602,10 +602,7 @@ export const HEROES_CLIENT_3: React.FC<Props> = ({className, user}) => {
                                                     <div
                                                         className={`${playerColors[PlayerChoice.PLAYER3]} text-ellipsis overflow-hidden whitespace-nowrap`}
                                                     >
-                                                        {Math.floor(bet.oddsBetPlayer3 * 100) / 100}
-                                                    </div>
-                                                    <div className="text-xs">
-                                                        {bet.player3.name}
+                                                        {Math.floor(bet.oddsBetPlayer3 * 100) / 100}{" "}
                                                         {user.role === "ADMIN" && (
                                                             <input
                                                                 type="checkbox"
@@ -613,6 +610,9 @@ export const HEROES_CLIENT_3: React.FC<Props> = ({className, user}) => {
                                                                 onChange={() => updateBet3PField(bet.id, 'betP3', !bet.betP3)}
                                                             />
                                                         )}
+                                                    </div>
+                                                    <div className="text-xs">
+                                                        {bet.player3.name}
                                                     </div>
                                                     <div> <span
                                                         className={
