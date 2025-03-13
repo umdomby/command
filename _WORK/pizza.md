@@ -1,0 +1,2 @@
+https://gamecoin.store/
+
