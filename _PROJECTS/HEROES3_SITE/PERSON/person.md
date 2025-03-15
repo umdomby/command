@@ -25,6 +25,8 @@ https://www.twitch.tv/heroes3_site
 Сотрудничество Heroes3.site - сайт имеет много функциональностей и настроек. Можно прикрутить дополнительный функционал.
 Может вам нужен такой сайт?
 
+https://myfin.by/bukmekerskie-kontory
+
 Помогает в организации:
 Турниров: img_12.png - страница пользователя img_13.png - страница админа https://heroes3.site/turnir
 Ставок (Биржа) 2,3 и 4 игрока: img.png https://heroes3.site/
