@@ -45,5 +45,6 @@ sudo ufw allow from 111.111.111.111
 sudo ufw allow from 111.111.111.111 to any port 22
 sudo ufw delete allow 443
 sudo ufw delete allow 5000
+sudo ufw allow 8080/tcp
 
 sudo nano /var/log/nginx/error.log

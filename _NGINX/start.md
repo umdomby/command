@@ -8,6 +8,13 @@ sudo ufw app list
 sudo ufw status
 sudo ufw allow 'Nginx Full'
 
+# wsl2
+sudo systemctl disable nginx
+sudo systemctl status nginx
+
+# WSL2 DELL
+sudo systemctl stop nginx 2>/dev/null || sudo service nginx stop 2>/dev/null || sudo killall -9 nginx
+
 # systemctl status nginx
 systemctl status nginx
 sudo service nginx stop
@@ -27,6 +34,7 @@ Status: inactive
 sudo ufw enable
 sudo ufw status
 sudo ufw restart
+
 
 sudo ufw app list
 sudo ufw allow 5000/tcp

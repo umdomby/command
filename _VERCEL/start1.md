@@ -7,10 +7,15 @@ umdom33 -->
 
 heroes
 
-namecheap.com 
+namecheap.com
+Papirapi85 ASAS..
+
+213.184.249.66
 # gamerecord.online Nov 27, 2025
 # heroes3.site Nov 27, 2026
-
+# anybet.site
+# anycoin.site
+# ardu.site
 ```
 umdomby git
 umdomby@yandex.ru
