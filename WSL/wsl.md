@@ -23,6 +23,7 @@ ip a
 hostname -I
 
 # узнать прт wsl
+ip addr show eth0
 ip -4 addr show eth0 | grep "inet"
 
 172.30.46.88/20 brd 172.30.47.255 scope global eth0
@@ -34,13 +35,13 @@ New-NetFirewallRule -DisplayName "WSL Access" -Direction Inbound -Protocol TCP -
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=80 connectaddress=172.30.46.88 connectport=80
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=443 connectaddress=172.30.46.88 connectport=443
 
-netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=80 connectaddress=172.30.46.88 connectport=80
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=5432 connectaddress=172.30.46.88 connectport=5432
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=443 connectaddress=172.30.46.88 connectport=443
 
 
-netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=8081 connectaddress=172.30.46.88 connectport=8081
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=3001 connectaddress=172.30.46.88 connectport=3001
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=8080 connectaddress=172.30.46.88 connectport=8080
-New-NetFirewallRule -DisplayName "Allow Port 8081" -Direction Inbound -Protocol TCP -LocalPort 8081 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 5432" -Direction Inbound -Protocol TCP -LocalPort 5432 -Action Allow
 
 #Powershell
 ipconfig /all
