@@ -26,8 +26,10 @@ sudo ufw status verbose
 Status: inactive
 sudo ufw enable
 sudo ufw status
-sudo ufw restart
-sudo ufw allow 3000/tcp
+sudo ufw reload
+sudo ufw allow 3001/tcp
+sudo ufw allow 3002/tcp
+sudo ufw allow 3003/tcp
 sudo ufw allow 5432/tcp
 sudo ufw app list
 sudo ufw allow 82/tcp
