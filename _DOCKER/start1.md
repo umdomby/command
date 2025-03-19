@@ -1,6 +1,8 @@
 213.184.249.66
+docker stop $(docker ps -q)
+docker start $(docker ps -a -q)
 
-# docker-compose down
+# docker-compose down -v
 # docker-compose up --build
 
 - Запущенные контейнеры: 

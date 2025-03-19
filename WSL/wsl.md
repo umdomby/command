@@ -39,12 +39,12 @@ netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=5432
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=443 connectaddress=172.30.46.88 connectport=443
 
 
-netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=3001 connectaddress=172.30.46.88 connectport=3001
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=6379 connectaddress=172.30.46.88 connectport=6379
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=3002 connectaddress=172.30.46.88 connectport=3002
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=3003 connectaddress=172.30.46.88 connectport=3003
 New-NetFirewallRule -DisplayName "Allow Port 5432" -Direction Inbound -Protocol TCP -LocalPort 5432 -Action Allow
 
-New-NetFirewallRule -DisplayName "Allow Port 3003" -Direction Inbound -Protocol TCP -LocalPort 3003 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 6379" -Direction Inbound -Protocol TCP -LocalPort 6379 -Action Allow
 
 #Powershell
 ipconfig /all

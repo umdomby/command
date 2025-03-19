@@ -27,7 +27,7 @@ Status: inactive
 sudo ufw enable
 sudo ufw status
 sudo ufw reload
-sudo ufw allow 3001/tcp
+sudo ufw allow 6379/tcp
 sudo ufw allow 3002/tcp
 sudo ufw allow 3003/tcp
 sudo ufw allow 5432/tcp

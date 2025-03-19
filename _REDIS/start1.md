@@ -1,3 +1,88 @@
+docker run --name my-redis -p 6379:6379 -d redis
+
+```
+services:
+  redis:
+    image: redis:latest
+    container_name: my-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - redis-net
+
+volumes:
+  redis-data:
+
+networks:
+  redis-net:
+```
+
+
+```
+  services:
+  redis:
+  image: redis:latest
+  container_name: my-redis
+  ports:
+  - "6379:6379"
+  command: ["redis-server", "--port", "6379", "--requirepass", "yourpassword", "--appendonly", "yes"]
+  volumes:
+    - redis-data:/data
+    networks:
+    - redis-net
+  
+  volumes:
+  redis-data:
+  
+  networks:
+  redis-net:
+```
+docker ps
+docker logs my-redis
+-test
+docker run -it --rm --network sharednetwork redis:latest redis-cli -h my-redis
+docker inspect my-redis
+
+- отдельно
+docker run --name my-redis -d redis:latest
+
+settings Dockerfile
+```
+FROM redis:latest
+
+# Запускаем Redis с параметрами конфигурации
+CMD ["redis-server", "--port", "6379", "--requirepass", "yourpassword", "--appendonly", "yes"]
+```
+
+
+settings Dockerfile  redis.conf
+```
+FROM redis:latest
+COPY redis.conf /usr/local/etc/redis/redis.conf
+CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]
+```
+redis.conf — это файл конфигурации для Redis, который позволяет вам настраивать различные параметры работы Redis-сервера. Этот файл используется для изменения стандартных настроек Redis и может быть полезен для оптимизации производительности, безопасности и других аспектов работы сервера.
+Основные параметры в redis.conf
+Вот некоторые из наиболее часто используемых параметров, которые вы можете настроить в redis.conf:
+Порт и адрес:
+port 6379: Устанавливает порт, на котором Redis будет слушать входящие соединения.
+bind 127.0.0.1: Указывает IP-адреса, на которых Redis будет принимать соединения. По умолчанию это 127.0.0.1 (localhost).
+Безопасность:
+requirepass yourpassword: Устанавливает пароль для доступа к Redis. Это важно для защиты вашего сервера от несанкционированного доступа.
+Управление памятью:
+maxmemory <bytes>: Устанавливает максимальный объем памяти, который Redis может использовать.
+maxmemory-policy <policy>: Определяет политику управления памятью, например, noeviction, allkeys-lru, и т.д.
+Персистентность:
+save <seconds> <changes>: Определяет, как часто Redis будет сохранять данные на диск. Например, save 900 1 означает, что Redis сохранит данные, если за последние 900 секунд было сделано хотя бы одно изменение.
+appendonly yes: Включает режим append-only file (AOF) для персистентности данных.
+Логирование:
+logfile /var/log/redis/redis-server.log: Указывает файл, в который будут записываться логи Redis.
+Кластеризация:
+cluster-enabled yes: Включает режим кластера для Redis.
+Использование redis.conf
+Если вы хотите использовать кастомный redis.conf с Docker, вы можете скопировать его в контейнер и указать Redis использовать этот файл при запуске. Например, в Dockerfile:
 
 
   Redis — это высокопроизводительная система управления базами данных в памяти, которая используется для хранения данных в формате ключ-значение. Вот краткое описание его основных применений и преимуществ:

@@ -2,7 +2,8 @@ https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubunt
 --- Вариант 3 — Установка Node с помощью Node Version Manager
 
 
-
+     yarn cache clean
+     yarn install
 
 
 Вариант 2 — Установка Node.js с помощью Apt через архив NodeSource PPA

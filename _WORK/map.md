@@ -1,0 +1,1 @@
+https://rabota.by/search/vacancy/map?bottom_left_lat=53.9363958191926&bottom_left_lng=27.621326931488138&geocode_type=QUADKEY&items_on_page=100&label=with_address&ored_clusters=true&top_right_lat=53.960584092284535&top_right_lng=27.73495236529958&vacancy_id=118463625&width=1912&height=690
