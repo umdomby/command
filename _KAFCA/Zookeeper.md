@@ -1,0 +1,1 @@
+docker logs ed213db5d3c4f50daf8ec74f6b7e8fabec4fff1972307a5f4340c8a26eba7077

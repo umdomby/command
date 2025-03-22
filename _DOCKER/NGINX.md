@@ -1,5 +1,9 @@
 https://chatgpt.com/c/67d5fdb6-bce8-800b-af99-a1893ecd9b46
 
+# Если сертификат истёк, обновляем вручную:
+docker-compose run --rm certbot certonly --webroot --webroot-path=/var/www/certbot -d anybet.site
+docker-compose restart nginx
+
 # Чтобы установить NGINX в Docker, нужно создать Docker контейнер с NGINX либо использовать уже готовый образ. Вот два способа:
 
 ##  Способ 1: Использование готового образа (рекомендуется)
