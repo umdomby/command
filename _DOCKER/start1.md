@@ -18,6 +18,21 @@ docker start $(docker ps -a -q)
 # docker exec -it docker-start-nginx-1 bash
 # nginx -t
 
+пересборка
+# docker-compose build
+# docker-compose up -d
+# docker-compose exec ardu1 yarn install
+# docker-compose exec ardu1 yarn build
+- docker-compose exec ardu1 yarn next clear
+- 
+# docker-compose restart ardu1
+
+# #################
+# docker-compose exec ardu1 sh
+# rm -rf .next/cache
+# #################
+
+
 
 # docker exec -it docker-start-nginx-1 nginx -t
 -nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
