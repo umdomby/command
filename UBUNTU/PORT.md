@@ -12,7 +12,7 @@ sudo lsof -i TCP:3003
 
 sudo kill -9 `sudo lsof -t -i:3000`  or  sudo kill -9 $(sudo lsof -t -i:9001)
 sudo kill -9 `sudo lsof -t -i:8081`
-sudo kill -9 `sudo lsof -t -i:8000`
+sudo kill -9 `sudo lsof -t -i:8080`
 sudo kill -9 `sudo lsof -t -i:80`
 sudo kill -9 `sudo lsof -t -i:443`
 sudo kill -9 `sudo lsof -t -i:81`

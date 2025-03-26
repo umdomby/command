@@ -1,0 +1,1 @@
+C:\Users\PC1\.platformio\penv\Scripts
