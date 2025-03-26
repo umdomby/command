@@ -1,0 +1,24 @@
+services:
+  ardu1:
+    build: .
+    working_dir: /app2
+    ports:
+      - "3003:3000"
+      - "8085:8080"
+    environment:
+      NODE_ENV: production
+#    command: ["sh", "-c", "concurrently \"next start --port 3000 --hostname 0.0.0.0\" \"node server.js\""]
+#    Уберите volumes, чтобы не перезаписывать файлы сборки
+#    volumes:
+#    volumes:
+#      - .:/app2
+#      - /app2/node_modules
+    env_file:
+      - .env
+    networks:
+      - sharednetwork
+    restart: always
+
+networks:
+  sharednetwork:
+    external: true

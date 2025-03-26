@@ -18,6 +18,8 @@ docker start $(docker ps -a -q)
 # docker exec -it docker-start-nginx-1 bash
 # nginx -t
 
+yarn cache clean
+
 пересборка
 # docker-compose build
 # docker-compose up -d
@@ -32,7 +34,7 @@ docker start $(docker ps -a -q)
 # rm -rf .next/cache
 # #################
 
-
+const PORT = process.env.WS_PORT || 8085; // Добавлена возможность переопределения порта
 
 # docker exec -it docker-start-nginx-1 nginx -t
 -nginx: the configuration file /etc/nginx/nginx.conf syntax is ok

@@ -1,0 +1,53 @@
+# Этап 1: Сборка приложения
+FROM node:22 AS builder
+
+WORKDIR /app2
+
+COPY package.json yarn.lock ./
+COPY prisma ./prisma
+
+RUN yarn install --frozen-lockfile --production=false
+
+COPY . .
+RUN yarn build
+
+# Этап 2: Финальный образ
+FROM node:22
+
+WORKDIR /app2
+
+COPY --from=builder /app2 /app2
+
+RUN yarn global add pm2 ts-node concurrently
+
+RUN yarn prisma generate
+
+# Правильное создание конфига PM2
+RUN echo 'module.exports = {' > ecosystem.config.js && \
+    echo '  apps: [' >> ecosystem.config.js && \
+    echo '    {' >> ecosystem.config.js && \
+    echo '      name: "next-app",' >> ecosystem.config.js && \
+    echo '      script: "yarn",' >> ecosystem.config.js && \
+    echo '      args: "start",' >> ecosystem.config.js && \
+    echo '      cwd: "/app2",' >> ecosystem.config.js && \
+    echo '      watch: false,' >> ecosystem.config.js && \
+    echo '      env: {' >> ecosystem.config.js && \
+    echo '        NODE_ENV: "production"' >> ecosystem.config.js && \
+    echo '      }' >> ecosystem.config.js && \
+    echo '    },' >> ecosystem.config.js && \
+    echo '    {' >> ecosystem.config.js && \
+    echo '      name: "server",' >> ecosystem.config.js && \
+    echo '      script: "ts-node",' >> ecosystem.config.js && \
+    echo '      args: "server.ts",' >> ecosystem.config.js && \
+    echo '      cwd: "/app2",' >> ecosystem.config.js && \
+    echo '      watch: false,' >> ecosystem.config.js && \
+    echo '      env: {' >> ecosystem.config.js && \
+    echo '        NODE_ENV: "production"' >> ecosystem.config.js && \
+    echo '      }' >> ecosystem.config.js && \
+    echo '    }' >> ecosystem.config.js && \
+    echo '  ]' >> ecosystem.config.js && \
+    echo '};' >> ecosystem.config.js
+
+ENV NODE_ENV=production
+
+CMD ["pm2-runtime", "start", "ecosystem.config.js"]

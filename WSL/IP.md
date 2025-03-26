@@ -69,6 +69,9 @@ netsh interface portproxy delete v4tov4 listenport=5000 listenaddress=192.168.0.
 netsh interface portproxy delete v4tov4 listenport=1337 listenaddress=192.168.0.151
 netsh interface portproxy dump
 
+
+netsh interface portproxy delete v4tov4 listenport=3000 listenaddress=213.184.249.66
+
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 \ listenport=3000 connectaddress=172.26.38.5 connectport=3000
 
 sudo ip addr add 192.168.0.151/24 dev eth0

@@ -39,14 +39,15 @@ netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=5432
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=443 connectaddress=172.30.46.88 connectport=443
 
 
-netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=9093 connectaddress=172.30.46.88 connectport=9093
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=444 connectaddress=172.30.46.88 connectport=444
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=3002 connectaddress=172.30.46.88 connectport=3002
-netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=2181 connectaddress=172.30.46.88 connectport=2181
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=444 connectaddress=172.30.46.88 connectport=444
 New-NetFirewallRule -DisplayName "Allow Port 5432" -Direction Inbound -Protocol TCP -LocalPort 5432 -Action Allow
 
-New-NetFirewallRule -DisplayName "Allow Port 9093" -Direction Inbound -Protocol TCP -LocalPort 9093 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 444" -Direction Inbound -Protocol TCP -LocalPort 444 -Action Allow
 
-New-NetFirewallRule -DisplayName "Allow Port 2181" -Direction Inbound -Protocol TCP -LocalPort 2181 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 8085" -Direction Inbound -Protocol TCP -LocalPort 8085 -Action Allow
+
 
 #Powershell
 ipconfig /all
@@ -80,3 +81,4 @@ netsh interface portproxy show all
 # Для сброса всех существующих правил используйте:
 netsh interface portproxy reset
 
+netsh interface portproxy delete v4tov4 listenport=444 listenaddress=192.168.0.151

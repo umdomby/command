@@ -32,11 +32,11 @@ sudo ufw allow 9092/tcp
 sudo ufw allow 3003/tcp
 sudo ufw allow 5432/tcp
 sudo ufw app list
-sudo ufw allow 82/tcp
+sudo ufw allow 444/tcp
 sudo ufw allow 5000/tcp
 sudo ufw allow 8080/tcp
 sudo ufw allow 8081/tcp
-sudo ufw allow 8082/tcp
+sudo ufw allow 8085/tcp
 sudo ufw allow 2181/tcp
 sudo ufw allow 5006/tcp
 sudo ufw allow 80/tcp
