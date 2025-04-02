@@ -1,3 +1,5 @@
+npx create-react-app@latest .
+
 npx create-react-app my-app
 npx create-react-app .
 yarn add mobx-react-lite

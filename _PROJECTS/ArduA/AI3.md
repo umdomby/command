@@ -1,746 +1,719 @@
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\server.ts
-import { WebSocketServer, WebSocket } from 'ws';
-import { IncomingMessage } from 'http';
-import { getAllowedDeviceIds } from './app/actions';
+server go
+package main
 
-const PORT = 8085;
+import (
+"encoding/json"
+"log"
+"net/http"
+"sync"
+"time"
 
-interface ClientInfo {
-ws: WebSocket;
-deviceId?: string;
-ip: string;
-isIdentified: boolean;
-clientType?: 'browser' | 'esp';
-lastActivity: number;
-isAlive: boolean;
+	"github.com/gorilla/websocket"
+	"github.com/pion/webrtc/v3"
+)
+
+var upgrader = websocket.Upgrader{
+CheckOrigin: func(r *http.Request) bool { return true },
 }
 
-const clients = new Map<number, ClientInfo>();
-
-const wss = new WebSocketServer({ port: PORT });
-
-// Ping clients every 30 seconds
-setInterval(() => {
-clients.forEach((client, clientId) => {
-if (!client.isAlive) {
-client.ws.terminate();
-clients.delete(clientId);
-console.log(`Client ${clientId} terminated (no ping response)`);
-return;
+type Client struct {
+conn         *websocket.Conn
+pc           *webrtc.PeerConnection
+lastActivity time.Time
 }
-client.isAlive = false;
-client.ws.ping(null, false);
-});
-}, 30000);
 
-wss.on('connection', async (ws: WebSocket, req: IncomingMessage) => {
-const clientId = Date.now();
-const ip = req.socket.remoteAddress || 'unknown';
-const client: ClientInfo = {
-ws,
-ip,
-isIdentified: false,
-lastActivity: Date.now(),
-isAlive: true
-};
-clients.set(clientId, client);
+var (
+clients = make(map[*Client]bool)
+mutex   = &sync.Mutex{}
+)
 
-    console.log(`New connection: ${clientId} from ${ip}`);
+func handleWebSocket(w http.ResponseWriter, r *http.Request) {
+conn, err := upgrader.Upgrade(w, r, nil)
+if err != nil {
+log.Println("WebSocket upgrade error:", err)
+return
+}
 
-    ws.on('pong', () => {
-        client.isAlive = true;
-        client.lastActivity = Date.now();
-    });
+	client := &Client{
+		conn:         conn,
+		lastActivity: time.Now(),
+	}
 
-    ws.send(JSON.stringify({
-        type: 'system',
-        message: 'Connection established',
-        clientId,
-        status: 'awaiting_identification'
-    }));
+	// Добавляем клиента
+	mutex.Lock()
+	clients[client] = true
+	mutex.Unlock()
 
-    ws.on('message', async (data: Buffer) => {
-        try {
-            client.lastActivity = Date.now();
-            const message = data.toString();
-            console.log(`[${clientId}] Received: ${message}`);
-            const parsed = JSON.parse(message);
+	// Запускаем пинг-понг для проверки соединения
+	go pingPongHandler(client)
 
-            if (parsed.type === 'client_type') {
-                client.clientType = parsed.clientType;
-                return;
-            }
+	defer func() {
+		cleanupClient(client)
+	}()
 
-            if (parsed.type === 'identify') {
-                const allowedIds = new Set(await getAllowedDeviceIds());
-                if (parsed.deviceId && allowedIds.has(parsed.deviceId)) {
-                    client.deviceId = parsed.deviceId;
-                    client.isIdentified = true;
+	for {
+		_, msg, err := conn.ReadMessage()
+		if err != nil {
+			log.Println("Read error:", err)
+			return
+		}
 
-                    ws.send(JSON.stringify({
-                        type: 'system',
-                        message: 'Identification successful',
-                        clientId,
-                        deviceId: parsed.deviceId,
-                        status: 'connected'
-                    }));
+		client.lastActivity = time.Now()
 
-                    // Notify browser clients about ESP connection
-                    if (client.clientType === 'esp') {
-                        clients.forEach(targetClient => {
-                            if (targetClient.clientType === 'browser' &&
-                                targetClient.deviceId === parsed.deviceId) {
-                                console.log(`Notifying browser client ${targetClient.deviceId} about ESP connection`);
-                                targetClient.ws.send(JSON.stringify({
-                                    type: 'esp_status',
-                                    status: 'connected',
-                                    deviceId: parsed.deviceId,
-                                    timestamp: new Date().toISOString()
-                                }));
-                            }
-                        });
-                    }
-                } else {
-                    ws.send(JSON.stringify({
-                        type: 'error',
-                        message: 'Invalid device ID',
-                        clientId,
-                        status: 'rejected'
-                    }));
-                    ws.close();
-                }
-                return;
-            }
+		var data map[string]interface{}
+		if err := json.Unmarshal(msg, &data); err != nil {
+			log.Println("JSON unmarshal error:", err)
+			continue
+		}
 
-            if (!client.isIdentified) {
-                ws.send(JSON.stringify({
-                    type: 'error',
-                    message: 'Not identified',
-                    clientId
-                }));
-                return;
-            }
+		switch data["type"] {
+		case "offer":
+			handleOffer(client, data["sdp"].(string))
+		case "ice":
+			handleICE(client, data["candidate"].(map[string]interface{}))
+		case "pong":
+			// Обработка pong-сообщения
+			continue
+		}
+	}
+}
 
-            // Process logs from ESP
-            if (parsed.type === 'log' && client.clientType === 'esp') {
-                clients.forEach(targetClient => {
-                    if (targetClient.clientType === 'browser' &&
-                        targetClient.deviceId === client.deviceId) {
-                        targetClient.ws.send(JSON.stringify({
-                            type: 'log',
-                            message: parsed.message,
-                            deviceId: client.deviceId,
-                            timestamp: new Date().toISOString(),
-                            origin: 'esp'
-                        }));
-                    }
-                });
-                return;
-            }
+func pingPongHandler(client *Client) {
+ticker := time.NewTicker(30 * time.Second)
+defer ticker.Stop()
 
-            // Process command acknowledgements
-            if (parsed.type === 'command_ack' && client.clientType === 'esp') {
-                clients.forEach(targetClient => {
-                    if (targetClient.clientType === 'browser' &&
-                        targetClient.deviceId === client.deviceId) {
-                        targetClient.ws.send(JSON.stringify({
-                            type: 'command_ack',
-                            command: parsed.command,
-                            deviceId: client.deviceId,
-                            timestamp: new Date().toISOString()
-                        }));
-                    }
-                });
-                return;
-            }
+	for {
+		select {
+		case <-ticker.C:
+			if time.Since(client.lastActivity) > 45*time.Second {
+				log.Println("Connection timeout, closing...")
+				cleanupClient(client)
+				return
+			}
 
-            // Route commands to ESP
-            if (parsed.command && parsed.deviceId) {
-                let delivered = false;
-                clients.forEach(targetClient => {
-                    if (targetClient.deviceId === parsed.deviceId &&
-                        targetClient.clientType === 'esp' &&
-                        targetClient.isIdentified) {
-                        targetClient.ws.send(message);
-                        delivered = true;
-                    }
-                });
+			if err := client.conn.WriteMessage(websocket.PingMessage, nil); err != nil {
+				log.Println("Ping error:", err)
+				cleanupClient(client)
+				return
+			}
+		}
+	}
+}
 
-                ws.send(JSON.stringify({
-                    type: delivered ? 'command_status' : 'error',
-                    status: delivered ? 'delivered' : 'esp_not_found',
-                    command: parsed.command,
-                    deviceId: parsed.deviceId,
-                    timestamp: new Date().toISOString()
-                }));
-            }
+func cleanupClient(client *Client) {
+mutex.Lock()
+defer mutex.Unlock()
 
-        } catch (err) {
-            console.error(`[${clientId}] Message error:`, err);
-            ws.send(JSON.stringify({
-                type: 'error',
-                message: 'Invalid message format',
-                error: (err as Error).message,
-                clientId
-            }));
-        }
-    });
+	if _, ok := clients[client]; ok {
+		if client.pc != nil {
+			client.pc.Close()
+		}
+		if client.conn != nil {
+			client.conn.Close()
+		}
+		delete(clients, client)
+		log.Println("Client cleaned up")
+	}
+}
 
-    ws.on('close', () => {
-        console.log(`Client ${clientId} disconnected`);
-        if (client.clientType === 'esp' && client.deviceId) {
-            clients.forEach(targetClient => {
-                if (targetClient.clientType === 'browser' &&
-                    targetClient.deviceId === client.deviceId) {
-                    targetClient.ws.send(JSON.stringify({
-                        type: 'esp_status',
-                        status: 'disconnected',
-                        deviceId: client.deviceId,
-                        timestamp: new Date().toISOString(),
-                        reason: 'connection closed'
-                    }));
-                }
-            });
-        }
-        clients.delete(clientId);
-    });
-
-    ws.on('error', (err: Error) => {
-        console.error(`[${clientId}] WebSocket error:`, err);
-    });
-});
-
-console.log(`WebSocket server running on ws://0.0.0.0:${PORT}`);
-
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\next.config.mjs
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-reactStrictMode: false,
-images: {
-remotePatterns: [
-{
-protocol: 'https',
-hostname: '**',
-port: '',
+func handleOffer(client *Client, sdp string) {
+config := webrtc.Configuration{
+ICEServers: []webrtc.ICEServer{
+{URLs: []string{"stun:stun.l.google.com:19302"}},
 },
-]
-},
-// Конфигурация для standalone-режима
-output: 'standalone',
-experimental: {
-serverActions: {
-bodySizeLimit: '5mb',
-serverActions: true,
-allowedOrigins: ['localhost:3000/', 'localhost:3001/','https://ardu.site/'],
-},
-},
-eslint: {
-ignoreDuringBuilds: true, // Добавьте эту строку
-},
-};
+}
 
-export default nextConfig;
+	pc, err := webrtc.NewPeerConnection(config)
+	if err != nil {
+		log.Println("PeerConnection error:", err)
+		return
+	}
 
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\SocketClient.tsx
-"use client"
-import { useState, useEffect, useRef, useCallback } from 'react';
+	client.pc = pc
 
-type MessageType = {
-type?: string;
-command?: string;
-deviceId?: string;
-message?: string;
-params?: any;
-clientId?: number;
-status?: string;
-timestamp?: string;
-origin?: 'client' | 'esp' | 'server' | 'error';
-reason?: string;
-};
+	pc.OnICECandidate(func(c *webrtc.ICECandidate) {
+		if c == nil {
+			return
+		}
+		if err := client.conn.WriteJSON(map[string]interface{}{
+			"type":      "ice",
+			"candidate": c.ToJSON(),
+		}); err != nil {
+			log.Println("Write ICE candidate error:", err)
+		}
+	})
 
-type LogEntry = {
-message: string;
-type: 'client' | 'esp' | 'server' | 'error';
-};
+	pc.OnConnectionStateChange(func(s webrtc.PeerConnectionState) {
+		log.Printf("Connection state changed: %s\n", s.String())
+		if s == webrtc.PeerConnectionStateFailed || s == webrtc.PeerConnectionStateClosed {
+			cleanupClient(client)
+		}
+	})
 
-export default function WebsocketController() {
-const [log, setLog] = useState<LogEntry[]>([]);
+	dataChannel, err := pc.CreateDataChannel("chat", nil)
+	if err != nil {
+		log.Println("DataChannel error:", err)
+		return
+	}
+
+	dataChannel.OnOpen(func() {
+		log.Println("DataChannel opened!")
+		if err := dataChannel.Send([]byte("Hello from Go server!")); err != nil {
+			log.Println("Send welcome message error:", err)
+		}
+	})
+
+	dataChannel.OnMessage(func(msg webrtc.DataChannelMessage) {
+		log.Printf("Received message: %s\n", string(msg.Data))
+		if err := dataChannel.Send([]byte("Echo: " + string(msg.Data))); err != nil {
+			log.Println("Send echo error:", err)
+		}
+	})
+
+	if err := pc.SetRemoteDescription(webrtc.SessionDescription{
+		Type: webrtc.SDPTypeOffer,
+		SDP:  sdp,
+	}); err != nil {
+		log.Println("SetRemoteDescription error:", err)
+		return
+	}
+
+	answer, err := pc.CreateAnswer(nil)
+	if err != nil {
+		log.Println("CreateAnswer error:", err)
+		return
+	}
+
+	if err := pc.SetLocalDescription(answer); err != nil {
+		log.Println("SetLocalDescription error:", err)
+		return
+	}
+
+	if err := client.conn.WriteJSON(map[string]interface{}{
+		"type": "answer",
+		"sdp":  answer.SDP,
+	}); err != nil {
+		log.Println("Send answer error:", err)
+	}
+}
+
+func handleICE(client *Client, candidate map[string]interface{}) {
+if client.pc == nil {
+return
+}
+
+	candidateMap, ok := candidate["candidate"].(map[string]interface{})
+	if !ok {
+		log.Println("Invalid candidate format")
+		return
+	}
+
+	iceCandidate := webrtc.ICECandidateInit{
+		Candidate: candidateMap["candidate"].(string),
+	}
+
+	if sdpMid, ok := candidateMap["sdpMid"].(string); ok {
+		iceCandidate.SDPMid = &sdpMid
+	}
+
+	if sdpMLineIndex, ok := candidateMap["sdpMLineIndex"].(float64); ok {
+		idx := uint16(sdpMLineIndex)
+		iceCandidate.SDPMLineIndex = &idx
+	}
+
+	if err := client.pc.AddICECandidate(iceCandidate); err != nil {
+		log.Println("AddICECandidate error:", err)
+	}
+}
+
+func main() {
+http.HandleFunc("/ws", handleWebSocket)
+http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+w.WriteHeader(http.StatusOK)
+w.Write([]byte("Server is healthy"))
+})
+
+	log.Println("Server starting on :8080")
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal("Server failed:", err)
+	}
+}
+
+client react
+
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\webrtc\react-webrtc\src\App.css
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\webrtc\react-webrtc\src\App.js
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\webrtc\react-webrtc\src\index.css
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\webrtc\react-webrtc\src\index.js
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\webrtc\react-webrtc\src\MediaDevices.js
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\webrtc\react-webrtc\config-overrides.js
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\webrtc\react-webrtc\webpack.config.js
+
+
+// file: src/App.css
+.App {
+text-align: center;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background-color: #282c34;
+color: white;
+padding: 20px;
+}
+
+.App-header {
+width: 100%;
+max-width: 1200px;
+}
+
+.media-container {
+margin: 20px 0;
+}
+
+.video-container {
+display: flex;
+justify-content: center;
+gap: 20px;
+margin-bottom: 20px;
+}
+
+video {
+background-color: #000;
+border-radius: 8px;
+max-width: 45%;
+max-height: 400px;
+}
+
+.local-video {
+border: 2px solid #61dafb;
+}
+
+.remote-video {
+border: 2px solid #4caf50;
+}
+
+.controls {
+display: flex;
+flex-direction: column;
+gap: 15px;
+align-items: center;
+}
+
+.chat {
+display: flex;
+gap: 10px;
+margin-top: 15px;
+}
+
+input {
+padding: 10px;
+font-size: 16px;
+width: 300px;
+border-radius: 5px;
+border: 1px solid #61dafb;
+}
+
+button {
+padding: 10px 20px;
+font-size: 16px;
+cursor: pointer;
+background-color: #61dafb;
+border: none;
+border-radius: 5px;
+transition: background-color 0.3s;
+}
+
+button:hover {
+background-color: #4fa8d3;
+}
+
+button:disabled {
+background-color: #ccc;
+cursor: not-allowed;
+}
+
+.status {
+margin-top: 20px;
+padding: 15px;
+background-color: #3a3f4b;
+border-radius: 8px;
+}
+
+.error {
+color: #ff6b6b;
+margin-top: 10px;
+}
+
+.device-controls {
+margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+.video-container {
+flex-direction: column;
+align-items: center;
+}
+
+video {
+max-width: 100%;
+max-height: 300px;
+}
+}
+
+// file: src/App.js
+import React, { useState, useEffect, useRef } from 'react';
+import SimplePeer from 'simple-peer';
+import MediaDevices from './MediaDevices';
+import './App.css';
+
+function App() {
+const [message, setMessage] = useState('');
+const [received, setReceived] = useState('');
 const [isConnected, setIsConnected] = useState(false);
-const [isIdentified, setIsIdentified] = useState(false);
-const [angle, setAngle] = useState(90);
-const [deviceId, setDeviceId] = useState('123');
-const [inputDeviceId, setInputDeviceId] = useState('123');
-const [espConnected, setEspConnected] = useState(false);
-const socketRef = useRef<WebSocket | null>(null);
-const commandTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-const espWatchdogRef = useRef<NodeJS.Timeout | null>(null);
-const reconnectAttemptRef = useRef(0);
+const [connectionError, setConnectionError] = useState('');
+const peerRef = useRef(null);
+const wsRef = useRef(null);
+const [mediaStream, setMediaStream] = useState(null);
 
-    const addLog = useCallback((msg: string, type: LogEntry['type']) => {
-        setLog(prev => [...prev.slice(-100), {message: `${new Date().toLocaleTimeString()}: ${msg}`, type}]);
-    }, []);
+useEffect(() => {
+const initWebSocket = () => {
+wsRef.current = new WebSocket('ws://192.168.0.151:8080/ws');
 
+      wsRef.current.onopen = () => {
+        console.log('WebSocket connected');
+        setConnectionError('');
+      };
 
-    const heartbeatTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+      wsRef.current.onclose = () => {
+        console.log('WebSocket disconnected');
+        cleanupConnection();
+      };
 
-    const resetHeartbeatTimeout = useCallback(() => {
-        if (heartbeatTimeoutRef.current) clearTimeout(heartbeatTimeoutRef.current);
-        heartbeatTimeoutRef.current = setTimeout(() => {
-            setEspConnected(false);
-            addLog(`ESP[${deviceId}] connection lost (no heartbeat)`, 'error');
-        }, 3000); // 5 секунд без Heartbeat = потеря связи
-    }, [deviceId, addLog]);
+      wsRef.current.onerror = (error) => {
+        console.error('WebSocket error:', error);
+        setConnectionError('WebSocket connection failed');
+      };
 
+      wsRef.current.onmessage = handleWebSocketMessage;
+    };
 
+    initWebSocket();
 
-    const resetEspWatchdog = useCallback(() => {
-        if (espWatchdogRef.current) clearTimeout(espWatchdogRef.current);
-        espWatchdogRef.current = setTimeout(() => {
-            if (espConnected) {
-                setEspConnected(false);
-                addLog(`ESP[${deviceId}] connection lost (timeout)`, 'error');
-            }
-        }, 15000); // 15 секунд без ответа = потеря связи
-    }, [deviceId, addLog, espConnected]);
+    return () => {
+      cleanupConnection();
+      if (wsRef.current) wsRef.current.close();
+    };
+}, []);
 
-    const connectWebSocket = useCallback(() => {
-        if (socketRef.current) {
-            socketRef.current.close();
+const handleWebSocketMessage = (e) => {
+try {
+const data = JSON.parse(e.data);
+console.log('Received WebSocket message:', data);
+
+      if (!peerRef.current) {
+        console.warn('Peer is not initialized');
+        return;
+      }
+
+      if (data.type === 'answer') {
+        peerRef.current.signal(data.sdp);
+      } else if (data.type === 'ice' && data.candidate) {
+        peerRef.current.signal(data.candidate);
+      }
+    } catch (err) {
+      console.error('Error processing WebSocket message:', err);
+    }
+};
+
+const cleanupConnection = () => {
+if (peerRef.current) {
+peerRef.current.destroy();
+peerRef.current = null;
+}
+setIsConnected(false);
+
+    if (mediaStream) {
+      mediaStream.getTracks().forEach(track => track.stop());
+      setMediaStream(null);
+    }
+};
+
+const startConnection = async () => {
+try {
+cleanupConnection();
+
+      // Получаем медиапоток (если нужно)
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
+      });
+      setMediaStream(stream);
+
+      const peer = new SimplePeer({
+        initiator: true,
+        trickle: true,
+        stream: stream,
+        config: {
+          iceServers: [
+            { urls: 'stun:stun.l.google.com:19302' }
+          ]
         }
+      });
 
-        reconnectAttemptRef.current = 0; // Сброс попыток переподключения
-        const ws = new WebSocket('ws://192.168.0.151:8085');
-
-        ws.onopen = () => {
-            setIsConnected(true);
-            reconnectAttemptRef.current = 0;
-            addLog("Connected to WebSocket server", 'server');
-
-            // Отправляем тип клиента
-            ws.send(JSON.stringify({
-                type: 'client_type',
-                clientType: 'browser'
-            }));
-
-            // Идентификация
-            ws.send(JSON.stringify({
-                type: 'identify',
-                deviceId: inputDeviceId
-            }));
-        };
-        ws.onmessage = (event) => {
-            try {
-                const data: MessageType = JSON.parse(event.data);
-                console.log("Received message:", data);
-
-                if (data.type === "system") {
-                    if (data.status === "connected") {
-                        setIsIdentified(true);
-                        setDeviceId(inputDeviceId);
-                        resetEspWatchdog();
-                    }
-                    addLog(`System: ${data.message}`, 'server');
-                }
-                else if (data.type === "error") {
-                    addLog(`Error: ${data.message}`, 'error');
-                    setIsIdentified(false);
-                }
-                else if (data.type === "log") {
-                    addLog(`ESP: ${data.message}`, 'esp');
-                    resetEspWatchdog();
-                    if (data.message && data.message.includes("Heartbeat")) {
-                        setEspConnected(true);
-                        resetHeartbeatTimeout();
-                    }
-                }
-                else if (data.type === "esp_status") {
-                    console.log(`Received ESP status: ${data.status}`);
-                    setEspConnected(data.status === "connected");
-                    addLog(`ESP ${data.status === "connected" ? "✅ Connected" : "❌ Disconnected"}${data.reason ? ` (${data.reason})` : ''}`,
-                        data.status === "connected" ? 'esp' : 'error');
-                    if (data.status === "connected") resetEspWatchdog();
-                }
-                else if (data.type === "command_ack") {
-                    if (commandTimeoutRef.current) clearTimeout(commandTimeoutRef.current);
-                    addLog(`ESP executed command: ${data.command}`, 'esp');
-                }
-                else if (data.type === "command_status") {
-                    addLog(`Command ${data.command} delivered to ESP`, 'server');
-                }
-            } catch (error) {
-                console.error("Error processing message:", error);
-                addLog(`Received invalid message: ${event.data}`, 'error');
-            }
-        };
-
-        ws.onclose = (event) => {
-            setIsConnected(false);
-            setIsIdentified(false);
-            setEspConnected(false);
-            addLog(`Disconnected from server${event.reason ? `: ${event.reason}` : ''}`, 'server');
-            if (espWatchdogRef.current) clearTimeout(espWatchdogRef.current);
-
-            // Удаляем логику автоматического переподключения
-            // if (reconnectAttemptRef.current < 5) {
-            //     reconnectAttemptRef.current += 1;
-            //     const delay = Math.min(1000 * reconnectAttemptRef.current, 5000);
-            //     addLog(`Attempting to reconnect in ${delay/1000} seconds...`, 'server');
-            //     setTimeout(connectWebSocket, delay);
-            // }
-        };
-
-        ws.onerror = (error) => {
-            addLog(`WebSocket error: ${error.type}`, 'error');
-        };
-
-        socketRef.current = ws;
-    }, [addLog, inputDeviceId, resetEspWatchdog]);
-
-
-    const disconnectWebSocket = useCallback(() => {
-        if (socketRef.current) {
-            socketRef.current.close();
-            socketRef.current = null;
-            setIsConnected(false);
-            setIsIdentified(false);
-            setEspConnected(false);
-            addLog("Disconnected manually", 'server');
-            if (espWatchdogRef.current) clearTimeout(espWatchdogRef.current);
-            if (heartbeatTimeoutRef.current) clearTimeout(heartbeatTimeoutRef.current);
-            reconnectAttemptRef.current = 5; // Отключаем автореконнект
+      peer.on('signal', (data) => {
+        console.log('Peer signal:', data);
+        if (wsRef.current?.readyState === WebSocket.OPEN) {
+          wsRef.current.send(JSON.stringify(data));
         }
-    }, [addLog]);
+      });
+
+      peer.on('connect', () => {
+        setIsConnected(true);
+        setConnectionError('');
+        console.log('P2P connected!');
+      });
+
+      peer.on('data', (data) => {
+        setReceived(data.toString());
+      });
+
+      peer.on('stream', (stream) => {
+        console.log('Received remote stream');
+        // Здесь можно обработать удаленный поток
+      });
+
+      peer.on('error', (err) => {
+        console.error('P2P error:', err);
+        setConnectionError(`Connection error: ${err.message}`);
+        cleanupConnection();
+      });
+
+      peer.on('close', () => {
+        console.log('P2P connection closed');
+        cleanupConnection();
+      });
+
+      peerRef.current = peer;
+    } catch (err) {
+      console.error('Connection error:', err);
+      setConnectionError(`Failed to start connection: ${err.message}`);
+      cleanupConnection();
+    }
+};
+
+const sendMessage = () => {
+if (peerRef.current && isConnected) {
+peerRef.current.send(message);
+setMessage('');
+}
+};
+
+return (
+<div className="App">
+<header className="App-header">
+<h1>WebRTC Video Chat</h1>
+
+          <div className="media-container">
+            <MediaDevices
+                mediaStream={mediaStream}
+                isConnected={isConnected}
+            />
+          </div>
+
+          <div className="controls">
+            <button
+                onClick={startConnection}
+                disabled={isConnected}
+            >
+              {isConnected ? 'Connected' : 'Start Connection'}
+            </button>
+
+            <div className="chat">
+              <input
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  disabled={!isConnected}
+                  placeholder="Type your message"
+              />
+              <button
+                  onClick={sendMessage}
+                  disabled={!isConnected}
+              >
+                Send
+              </button>
+            </div>
+          </div>
+
+          <div className="status">
+            <p>Status: {isConnected ? 'Connected' : 'Disconnected'}</p>
+            <p>Received: {received || 'No messages yet'}</p>
+            {connectionError && <p className="error">{connectionError}</p>}
+          </div>
+        </header>
+      </div>
+);
+}
+
+export default App;
+
+// file: src/index.css
+body {
+margin: 0;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+monospace;
+}
+
+
+// file: src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+<React.StrictMode>
+<App />
+</React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
+
+
+// file: src/MediaDevices.js
+import React, { useEffect, useRef } from 'react';
+
+const MediaDevices = ({ mediaStream, isConnected }) => {
+const localVideoRef = useRef(null);
+const remoteVideoRef = useRef(null);
 
     useEffect(() => {
-        // Удаляем автоподключение
+        if (mediaStream && localVideoRef.current) {
+            localVideoRef.current.srcObject = mediaStream;
+        }
+
         return () => {
-            if (socketRef.current) {
-                socketRef.current.close();
+            if (localVideoRef.current) {
+                localVideoRef.current.srcObject = null;
             }
-            if (espWatchdogRef.current) clearTimeout(espWatchdogRef.current);
-            if (commandTimeoutRef.current) clearTimeout(commandTimeoutRef.current);
+            if (remoteVideoRef.current) {
+                remoteVideoRef.current.srcObject = null;
+            }
         };
-    }, []);
-    // useEffect(() => {
-    //     // Автоподключение при монтировании
-    //     connectWebSocket();
-    //
-    //     return () => {
-    //         if (socketRef.current) {
-    //             socketRef.current.close();
-    //         }
-    //         if (espWatchdogRef.current) clearTimeout(espWatchdogRef.current);
-    //         if (commandTimeoutRef.current) clearTimeout(commandTimeoutRef.current);
-    //     };
-    // }, [connectWebSocket]);
-
-    const sendCommand = useCallback((command: string, params?: any) => {
-        if (!isIdentified) {
-            addLog("Cannot send command: not identified", 'error');
-            return;
-        }
-
-        if (socketRef.current?.readyState === WebSocket.OPEN) {
-            const msg = JSON.stringify({
-                command,
-                params,
-                deviceId,
-                timestamp: Date.now(),
-                expectAck: true
-            });
-
-            socketRef.current.send(msg);
-            addLog(`Sent command to ${deviceId}: ${command}`, 'client');
-
-            // Таймаут на подтверждение команды
-            if (commandTimeoutRef.current) clearTimeout(commandTimeoutRef.current);
-            commandTimeoutRef.current = setTimeout(() => {
-                if (espConnected) {
-                    addLog(`Command ${command} not acknowledged by ESP`, 'error');
-                    setEspConnected(false);
-                }
-            }, 5000);
-        } else {
-            addLog("WebSocket not ready!", 'error');
-        }
-    }, [addLog, deviceId, isIdentified, espConnected]);
+    }, [mediaStream]);
 
     return (
-        <div className="container">
-            <h1>ESP8266 WebSocket Control</h1>
-
-            <div className="status">
-                Status: {isConnected ?
-                (isIdentified ? `✅ Connected & Identified (ESP: ${espConnected ? '✅' : '❌'})` : "🟡 Connected (Pending)") :
-                "❌ Disconnected"}
-                {reconnectAttemptRef.current > 0 && reconnectAttemptRef.current < 5 &&
-                    ` (Reconnecting ${reconnectAttemptRef.current}/5)`}
+        <div className="media-devices">
+            <div className="video-container">
+                <video
+                    ref={localVideoRef}
+                    autoPlay
+                    playsInline
+                    muted
+                    className="local-video"
+                />
+                <video
+                    ref={remoteVideoRef}
+                    autoPlay
+                    playsInline
+                    className="remote-video"
+                />
             </div>
 
-            <div className="connection-control">
-                <div className="device-id-input">
-                    <input
-                        type="text"
-                        placeholder="Enter Device ID"
-                        value={inputDeviceId}
-                        onChange={(e) => setInputDeviceId(e.target.value)}
-                        disabled={isConnected}
-                    />
-                </div>
-                <div className="connection-buttons">
+            <div className="device-controls">
+                {!isConnected && (
                     <button
-                        onClick={connectWebSocket}
-                        disabled={isConnected}
+                        onClick={async () => {
+                            try {
+                                const stream = await navigator.mediaDevices.getUserMedia({
+                                    video: true,
+                                    audio: true
+                                });
+                                localVideoRef.current.srcObject = stream;
+                            } catch (err) {
+                                console.error('Error accessing media devices:', err);
+                            }
+                        }}
                     >
-                        Connect
+                        Test Camera/Mic
                     </button>
-                    <button
-                        onClick={disconnectWebSocket}
-                        disabled={!isConnected}
-                        className="disconnect-btn"
-                    >
-                        Disconnect
-                    </button>
-                </div>
+                )}
             </div>
-
-            <div className="control-panel">
-                <div className="device-info">
-                    <p>Current Device ID: <strong>{deviceId}</strong></p>
-                    <p>ESP Status: <strong>{espConnected ? 'Connected' : 'Disconnected'}</strong></p>
-                </div>
-
-                <button onClick={() => sendCommand("forward")} disabled={!isIdentified || !espConnected}>
-                    Forward
-                </button>
-                <button onClick={() => sendCommand("backward")} disabled={!isIdentified || !espConnected}>
-                    Backward
-                </button>
-
-                <div className="servo-control">
-                    <input
-                        type="range"
-                        min="0"
-                        max="180"
-                        value={angle}
-                        onChange={(e) => setAngle(parseInt(e.target.value))}
-                        disabled={!isIdentified || !espConnected}
-                    />
-                    <span>{angle}°</span>
-                    <button
-                        onClick={() => sendCommand("servo", {angle})}
-                        disabled={!isIdentified || !espConnected}
-                    >
-                        Set Angle
-                    </button>
-                </div>
-            </div>
-
-            <div className="log-container">
-                <h3>Event Log</h3>
-                <div className="log-content">
-                    {log.slice().reverse().map((entry, index) => (
-                        <div key={index} className={`log-entry ${entry.type}`}>
-                            {entry.message}
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <style jsx>{`
-                .container {
-                    max-width: 800px;
-                    margin: 0 auto;
-                    padding: 20px;
-                    font-family: Arial;
-                }
-
-                .status {
-                    margin: 10px 0;
-                    padding: 10px;
-                    background: ${isConnected ?
-                            (isIdentified ?
-                                    (espConnected ? '#e6f7e6' : '#fff3e0') :
-                                    '#fff3e0') :
-                            '#ffebee'};
-                    border: 1px solid ${isConnected ?
-                            (isIdentified ?
-                                    (espConnected ? '#4caf50' : '#ffa000') :
-                                    '#ffa000') :
-                            '#f44336'};
-                    border-radius: 4px;
-                }
-
-                .connection-control {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
-                    margin: 15px 0;
-                    padding: 15px;
-                    background: #f5f5f5;
-                    border-radius: 8px;
-                }
-
-                .device-id-input input {
-                    flex-grow: 1;
-                    padding: 8px;
-                    border: 1px solid #ddd;
-                    border-radius: 4px;
-                }
-
-                .connection-buttons {
-                    display: flex;
-                    gap: 10px;
-                }
-
-                button {
-                    padding: 10px 15px;
-                    background: #2196f3;
-                    color: white;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                }
-
-                button:disabled {
-                    background: #b0bec5;
-                    cursor: not-allowed;
-                }
-
-                .disconnect-btn {
-                    background: #f44336;
-                }
-
-                .control-panel {
-                    margin: 20px 0;
-                    padding: 15px;
-                    background: #f5f5f5;
-                    border-radius: 8px;
-                }
-
-                .device-info {
-                    padding: 10px;
-                    background: white;
-                    border-radius: 4px;
-                    margin-bottom: 10px;
-                }
-
-                .servo-control {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    margin-top: 10px;
-                }
-
-                .log-container {
-                    border: 1px solid #ddd;
-                    border-radius: 8px;
-                    overflow: hidden;
-                }
-
-                .log-content {
-                    height: 300px;
-                    overflow-y: auto;
-                    padding: 10px;
-                    background: #fafafa;
-                }
-
-                .log-entry {
-                    margin: 5px 0;
-                    padding: 5px;
-                    border-bottom: 1px solid #eee;
-                    font-family: monospace;
-                    font-size: 14px;
-                }
-
-                .log-entry.client {
-                    color: #2196F3;
-                }
-
-                .log-entry.esp {
-                    color: #4CAF50;
-                }
-
-                .log-entry.server {
-                    color: #9C27B0;
-                }
-
-                .log-entry.error {
-                    color: #F44336;
-                    font-weight: bold;
-                }
-            `}</style>
         </div>
     );
-}
+};
 
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\docker-compose.yml
-services:
-ardua:
-build: .
-working_dir: /app2
-ports:
-- "3003:3000"
-- "8085:8085"
-  environment:
-  NODE_ENV: production
-  env_file:
-- .env
-  networks:
-- sharednetwork
-  restart: always
+export default MediaDevices;
 
-networks:
-sharednetwork:
-external: true
+// file: config-overrides.js
+const webpack = require('webpack');
+const path = require('path');
 
+module.exports = function override(config) {
+// Добавляем полифиллы для Node.js модулей
+config.resolve.fallback = {
+...config.resolve.fallback,
+"crypto": require.resolve("crypto-browserify"),
+"stream": require.resolve("stream-browserify"),
+"buffer": require.resolve("buffer"),
+"http": require.resolve("stream-http"),
+"https": require.resolve("https-browserify"),
+"url": require.resolve("url"),
+"os": require.resolve("os-browserify/browser"),
+"assert": require.resolve("assert")
+};
 
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\Dockerfile
-# Этап 1: Сборка приложения
-FROM node:22 AS builder
+    // Добавляем плагины для глобальных переменных
+    config.plugins = [
+        ...(config.plugins || []),
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+            Buffer: ['buffer', 'Buffer']
+        })
+    ];
 
-# Установите рабочую директорию
-WORKDIR /app2
+    return config;
+};
 
-# Скопируйте package.json и yarn.lock в контейнер
-COPY package.json yarn.lock ./
+// file: webpack.config.js
+const webpack = require('webpack');
 
-# Скопируйте директорию prisma в контейнер
-COPY prisma ./prisma
+module.exports = function override(config) {
+const fallback = config.resolve.fallback || {};
+Object.assign(fallback, {
+"crypto": require.resolve("crypto-browserify"),
+"stream": require.resolve("stream-browserify"),
+"buffer": require.resolve("buffer"),
+"http": require.resolve("stream-http"),
+"https": require.resolve("https-browserify"),
+"url": require.resolve("url"),
+"os": require.resolve("os-browserify/browser"),
+"assert": require.resolve("assert/")
+});
+config.resolve.fallback = fallback;
 
-# Установите зависимости
-RUN yarn install --frozen-lockfile
+    config.plugins = (config.plugins || []).concat([
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+            Buffer: ['buffer', 'Buffer']
+        })
+    ]);
 
-# Скопируйте остальной код вашего приложения
-COPY . .
-
-# Выполните сборку приложения
-RUN yarn build
-
-# Этап 2: Финальный образ
-FROM node:22
-
-# Установите рабочую директорию
-WORKDIR /app2
-
-COPY --from=builder /app2 /app2
-
-RUN yarn install --production --frozen-lockfile
-RUN yarn global add ts-node typescript @types/node @types/ws concurrently
-RUN yarn prisma generate
-
-# Установите переменные окружения
-ENV NODE_ENV=production
-
-# Порты
-EXPOSE 3000
-EXPOSE 8085
-
-# Запустите приложение
-#CMD ["yarn", "start"]
-CMD ["sh", "-c", "concurrently \"yarn next start\" \"ts-node server.ts\""]
+    return config;
+};
 
 
-Я использую Next app , мне нужно      output: 'standalone',  и API к WebSocket
-расскажи почему standalone лучше чем просто server.ts
-отвечай на русском комментарии на русском

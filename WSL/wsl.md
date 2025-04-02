@@ -32,21 +32,21 @@ PowerShell
 New-NetFirewallRule -DisplayName "WSL Access" -Direction Inbound -Protocol TCP -LocalPort 80 -Action Allow
 New-NetFirewallRule -DisplayName "WSL Access" -Direction Inbound -Protocol TCP -LocalPort 443 -Action Allow
 
-netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=80 connectaddress=172.30.46.88 connectport=80
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=8080 connectaddress=172.30.46.88 connectport=8080
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=443 connectaddress=172.30.46.88 connectport=443
 
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=5432 connectaddress=172.30.46.88 connectport=5432
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=443 connectaddress=172.30.46.88 connectport=443
 
 
-netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=1444 connectaddress=172.30.46.88 connectport=1444
-netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=3002 connectaddress=172.30.46.88 connectport=3002
-netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=444 connectaddress=172.30.46.88 connectport=444
+netsh interface portproxy add v4tov4 listenaddress=localhost listenport=3000 connectaddress=172.30.46.88 connectport=3000
+netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=3000 connectaddress=172.30.46.88 connectport=3000
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=5173 connectaddress=172.30.46.88 connectport=5173
 New-NetFirewallRule -DisplayName "Allow Port 5432" -Direction Inbound -Protocol TCP -LocalPort 5432 -Action Allow
 
-New-NetFirewallRule -DisplayName "Allow Port 1444" -Direction Inbound -Protocol TCP -LocalPort 1444 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 3000" -Direction Inbound -Protocol TCP -LocalPort 3000 -Action Allow
 
-New-NetFirewallRule -DisplayName "Allow Port 8085" -Direction Inbound -Protocol TCP -LocalPort 8085 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 5173" -Direction Inbound -Protocol TCP -LocalPort 5173 -Action Allow
 
 
 #Powershell
@@ -82,3 +82,5 @@ netsh interface portproxy show all
 netsh interface portproxy reset
 
 netsh interface portproxy delete v4tov4 listenport=444 listenaddress=192.168.0.151
+
+

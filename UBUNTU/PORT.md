@@ -1,3 +1,6 @@
+sudo ss -tulnp | grep 1444
+sudo kill -9 50366
+
 sudo netstat -ltpn
 
 netstat -ntlp | grep LISTEN  
@@ -18,7 +21,7 @@ sudo kill -9 `sudo lsof -t -i:443`
 sudo kill -9 `sudo lsof -t -i:81`
 sudo kill -9 `sudo lsof -t -i:5000`
 sudo kill -9 `sudo lsof -t -i:3000`
-sudo kill -9 `sudo lsof -t -i:3001`
+sudo kill -9 `sudo lsof -t -i:3005`
 sudo kill -9 `sudo lsof -t -i:5001`
 sudo kill -9 `sudo lsof -t -i:1337`
 sudo kill -9 -ID-  
