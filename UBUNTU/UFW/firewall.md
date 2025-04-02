@@ -4,9 +4,9 @@ Get-NetFirewallRule | Where-Object {$_.DisplayName -like "Allow Port*"} | Format
 # Удалить все старые правила
 Remove-NetFirewallRule -DisplayName "Allow Port 3000" -ErrorAction SilentlyContinue
 Remove-NetFirewallRule -DisplayName "Allow Port 3005" -ErrorAction SilentlyContinue
-# Создать новые 1
+# Создать новые
 New-NetFirewallRule -DisplayName "Allow Port 3000-3005" -Direction Inbound -Protocol TCP -LocalPort 3000-3005 -Action Allow
-# Для каждого порта в диапазоне 3000-3005 2
+# Для каждого порта в диапазоне 3000-3005
 3000..3005 | ForEach-Object {
 netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=$_ connectaddress=172.30.46.88 connectport=$_
 Write-Host "Перенаправлен порт $_"
