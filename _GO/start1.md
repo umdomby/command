@@ -29,3 +29,29 @@ go mod tidy
 
 # Запустите сервер
 go run .
+
+
+
+cd server
+go mod init server
+go mod tidy
+go run main.go
+
+go clean -modcache
+go mod download
+go run main.go
+
+
+Сначала удалите текущие файлы зависимостей:
+rm -rf go.mod go.sum
+
+go mod init server
+
+go mod tidy
+go mod vendor
+
+###
+go clean -modcache
+rm -rf go.sum
+go mod download
+go run main.go
