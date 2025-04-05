@@ -1,4 +1,28 @@
 Сделай мне:
+# Установите Expo CLI если еще не установлен
+npm install -g expo-cli
+
+npm i -g expo-cli
+
+# Создайте новый проект
+expo init MyWebRTCApp
+# Выберите template: "blank (TypeScript)"
+
+# Перейдите в папку проекта
+cd MyWebRTCApp
+
+# Установите необходимые зависимости
+# old - expo install react-native-webrtc @types/react-native-webrtc
+# new
+npx expo install react-native-webrtc @types/react-native-webrtc
+npx expo upgrade
+
+
+
+exp://192.168.1.151:8081
+
+
+
 
 Pion WebRTC сервер Go 
 React Native iphone13 expo go  EAS Build? 
