@@ -43,10 +43,14 @@ netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=443 
 netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=1444 connectaddress=172.30.46.88 connectport=1444
 netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=8081 connectaddress=172.30.46.88 connectport=8081
 netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=3000 connectaddress=172.30.46.88 connectport=3000
-netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=19002 connectaddress=172.30.46.88 connectport=19002
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=19000 connectaddress=172.30.46.88 connectport=19000
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=19001 connectaddress=172.30.46.88 connectport=19001
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=5555 connectaddress=172.30.46.88 connectport=5555
 New-NetFirewallRule -DisplayName "Allow Port 5432" -Direction Inbound -Protocol TCP -LocalPort 5432 -Action Allow
 
-New-NetFirewallRule -DisplayName "Allow Port 8081" -Direction Inbound -Protocol TCP -LocalPort 8081 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 5555" -Direction Inbound -Protocol TCP -LocalPort 5555 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 19000" -Direction Inbound -Protocol TCP -LocalPort 19000 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 19001" -Direction Inbound -Protocol TCP -LocalPort 19001 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 19002" -Direction Inbound -Protocol TCP -LocalPort 19002 -Action Allow
 
 New-NetFirewallRule -DisplayName "Allow Port 5349" -Direction Inbound -Protocol TCP -LocalPort 5349 -Action Allow

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/app/src/androidTest/java/com/example/mytest/ExampleInstrumentedTest.kt;D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/ui/theme/Color.kt;D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/ui/theme/Theme.kt;D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/ui/theme/Type.kt;D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/MainActivity.kt;D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/WebRTCClient.kt;D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/WebSocketClient.kt;D:/AndroidStudio/MyTest/app/src/test/java/com/example/mytest/ExampleUnitTest.kt;D:/AndroidStudio/MyTest/app/build.gradle.kts;D:/AndroidStudio/MyTest/build.gradle.kts;D:/AndroidStudio/MyTest/settings.gradle.kts" />
+  </component>
+</project>
