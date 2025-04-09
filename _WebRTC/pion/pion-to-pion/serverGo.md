@@ -1,54 +1,54 @@
 package main
 
 import (
-	"encoding/json"
-	"log"
-	"math/rand"
-	"net/http"
-	"sync"
-	"time"
+"encoding/json"
+"log"
+"math/rand"
+"net/http"
+"sync"
+"time"
 
 	"github.com/gorilla/websocket"
 	"github.com/pion/webrtc/v3"
 )
 
 var upgrader = websocket.Upgrader{
-	CheckOrigin: func(r *http.Request) bool { return true },
+CheckOrigin: func(r *http.Request) bool { return true },
 }
 
 type Peer struct {
-	conn     *websocket.Conn
-	pc       *webrtc.PeerConnection
-	username string
-	room     string
+conn     *websocket.Conn
+pc       *webrtc.PeerConnection
+username string
+room     string
 }
 
 type RoomInfo struct {
-	Users []string `json:"users"`
+Users []string `json:"users"`
 }
 
 var (
-	peers   = make(map[string]*Peer) // key: conn.RemoteAddr().String()
-	rooms   = make(map[string]map[string]*Peer) // key: room name
-	mu      sync.Mutex
-	letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+peers   = make(map[string]*Peer) // key: conn.RemoteAddr().String()
+rooms   = make(map[string]map[string]*Peer) // key: room name
+mu      sync.Mutex
+letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 )
 
 func init() {
-	rand.Seed(time.Now().UnixNano())
+rand.Seed(time.Now().UnixNano())
 }
 
 func randSeq(n int) string {
-	b := make([]rune, n)
-	for i := range b {
-		b[i] = letters[rand.Intn(len(letters))]
-	}
-	return string(b)
+b := make([]rune, n)
+for i := range b {
+b[i] = letters[rand.Intn(len(letters))]
+}
+return string(b)
 }
 
 func logStatus() {
-	mu.Lock()
-	defer mu.Unlock()
+mu.Lock()
+defer mu.Unlock()
 
 	log.Printf("Current status - Total connections: %d, Total rooms: %d", len(peers), len(rooms))
 	for room, roomPeers := range rooms {
@@ -57,16 +57,16 @@ func logStatus() {
 }
 
 func getUsernames(peers map[string]*Peer) []string {
-	usernames := make([]string, 0, len(peers))
-	for username := range peers {
-		usernames = append(usernames, username)
-	}
-	return usernames
+usernames := make([]string, 0, len(peers))
+for username := range peers {
+usernames = append(usernames, username)
+}
+return usernames
 }
 
 func sendRoomInfo(room string) {
-	mu.Lock()
-	defer mu.Unlock()
+mu.Lock()
+defer mu.Unlock()
 
 	if roomPeers, exists := rooms[room]; exists {
 		users := make([]string, 0, len(roomPeers))
@@ -89,11 +89,11 @@ func sendRoomInfo(room string) {
 }
 
 func main() {
-	http.HandleFunc("/ws", handleWebSocket)
-	http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
-		logStatus()
-		w.Write([]byte("Status logged to console"))
-	})
+http.HandleFunc("/ws", handleWebSocket)
+http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
+logStatus()
+w.Write([]byte("Status logged to console"))
+})
 
 	log.Println("Сервер запущен на :8080")
 	logStatus()
@@ -101,42 +101,12 @@ func main() {
 }
 
 func handleWebSocket(w http.ResponseWriter, r *http.Request) {
-	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Println("WebSocket upgrade error:", err)
-		return
-	}
-	defer conn.Close()
-
-    conn.SetPingHandler(func(appData string) error {
-        log.Printf("Получен ping от %s", remoteAddr)
-        err := conn.WriteMessage(websocket.PongMessage, []byte("pong"))
-        if err != nil {
-            log.Printf("Ошибка отправки pong: %v", err)
-        }
-        return nil
-    })
-
-    conn.SetPongHandler(func(appData string) error {
-        log.Printf("Получен pong от %s", remoteAddr)
-        return nil
-    })
-
-    // Регулярные ping-запросы клиенту
-    go func() {
-        ticker := time.NewTicker(30 * time.Second)
-        defer ticker.Stop()
-
-        for {
-            select {
-            case <-ticker.C:
-                if err := conn.WriteMessage(websocket.PingMessage, nil); err != nil {
-                    log.Printf("Ошибка отправки ping: %v", err)
-                    return
-                }
-            }
-        }
-    }()
+conn, err := upgrader.Upgrade(w, r, nil)
+if err != nil {
+log.Println("WebSocket upgrade error:", err)
+return
+}
+defer conn.Close()
 
 	remoteAddr := conn.RemoteAddr().String()
 	log.Printf("New connection from: %s", remoteAddr)

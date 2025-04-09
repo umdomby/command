@@ -1,5 +1,0 @@
-2025-04-06 22:34:21.898  3562-3583  org.webrtc.Logging      com.example.mytest                   I  EglRenderer: Duration: 4004 ms. Frames received: 0. Dropped: 0. Rendered: 0. Render fps: .0. Average render time: NA. Average swapBuffer time: NA.
-2025-04-06 22:34:22.233  3562-3590  org.webrtc.Logging      com.example.mytest                   I  CameraStatistics: Camera fps: 12.
-2025-04-06 22:34:22.388   684-1251  NotificationService     system_server                        E  Package has already queued 5 toasts. Not showing more. Package=com.example.mytest
-2025-04-06 22:34:22.389   684-1251  NotificationService     system_server                        E  Package has already queued 5 toasts. Not showing more. Package=com.example.mytest
-2025-04-06 22:34:22.389   684-1251  NotificationService     system_server                        E  Package has already queued 5 toasts. Not showing more. Package=com.example.mytest
