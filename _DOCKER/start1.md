@@ -27,7 +27,7 @@ yarn cache clean
 # docker-compose exec ardu1 yarn build
 - docker-compose exec ardu1 yarn next clear
 - 
-# docker-compose restart ardu1
+# docker-compose restart ardu
 
 # #################
 # docker-compose exec ardu1 sh

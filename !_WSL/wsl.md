@@ -41,16 +41,18 @@ netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=443 
 
 netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=443 connectaddress=172.30.46.88 connectport=443
 netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=1444 connectaddress=172.30.46.88 connectport=1444
-netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=8081 connectaddress=172.30.46.88 connectport=8081
-netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=3000 connectaddress=172.30.46.88 connectport=3000
-netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=19000 connectaddress=172.30.46.88 connectport=19000
+netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=80 connectaddress=172.30.46.88 connectport=80
+netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=3001 connectaddress=172.30.46.88 connectport=3001
+netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=444 connectaddress=172.30.46.88 connectport=444
 netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=9093 connectaddress=172.30.46.88 connectport=9093
 netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=6379 connectaddress=172.30.46.88 connectport=6379
 New-NetFirewallRule -DisplayName "Allow Port 5432" -Direction Inbound -Protocol TCP -LocalPort 5432 -Action Allow
 
+
+New-NetFirewallRule -DisplayName "Allow Port 80" -Direction Inbound -Protocol TCP -LocalPort 80 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 6379" -Direction Inbound -Protocol TCP -LocalPort 6379 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 9093" -Direction Inbound -Protocol TCP -LocalPort 9093 -Action Allow
-New-NetFirewallRule -DisplayName "Allow Port 19001" -Direction Inbound -Protocol TCP -LocalPort 19001 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 1444" -Direction Inbound -Protocol TCP -LocalPort 1444 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 19002" -Direction Inbound -Protocol TCP -LocalPort 19002 -Action Allow
 
 New-NetFirewallRule -DisplayName "Allow Port 5349" -Direction Inbound -Protocol TCP -LocalPort 5349 -Action Allow
