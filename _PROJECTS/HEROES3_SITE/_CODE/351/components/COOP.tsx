@@ -88,7 +88,7 @@ export default function COOP() {
                                             alt="Ставок (Биржа)"
                                             width={100}
                                             height={100}
-                                            onClick={() => openDialog("/coop/img.png")}
+                                            onClick={() => openDialog("/coop/STRADA_ALPINA_FORD.png")}
                                         />
                                     </DialogTrigger>
                                     <DialogContent className="dialog-content">
