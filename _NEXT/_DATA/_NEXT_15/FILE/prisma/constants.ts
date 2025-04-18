@@ -106,8 +106,8 @@ export const products = [
     "id": 15,
     "name": "NFS Most Wanted 2012",
     "categoryId": 1,
-    "createdAt": "2024-09-06T23:19:41.412Z",
-    "updatedAt": "2024-09-06T23:19:41.412Z"
+    "createdAt": "2024-09-06T23:19-:41.412Z",
+    "updatedAt": "2024-09-06T23:19-:41.412Z"
   },
   {
     "id": 7,
@@ -207,7 +207,7 @@ export const productsItem =[
     "id": 9,
     "productId": 1,
     "name": "Little Italy",
-    "createdAt": "2024-08-09T15:44:19.891Z",
+    "createdAt": "2024-08-09T15:44:19-.891Z",
     "updatedAt": "2024-08-29T10:55:02.169Z"
   },
   {
@@ -460,7 +460,7 @@ export const gameRecords = [
     "linkvideo": "",
     "img": "cfe1e45d-7a7f-4762-b996-f0b9c8be5269.jpg",
     "userId": 1,
-    "createdAt": "2024-08-06T23:53:19.911Z",
+    "createdAt": "2024-08-06T23:53:19-.911Z",
     "updatedAt": "2024-09-05T00:25:53.590Z"
   },
   {

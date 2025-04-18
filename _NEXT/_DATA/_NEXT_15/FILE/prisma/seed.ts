@@ -134,7 +134,7 @@ async function up() {
       // generateProductItem({ productId: 4 }),
       // generateProductItem({ productId: 5 }),
       // generateProductItem({ productId: 6 }),
-      // generateProductItem({ productId: 7 }),
+      // generateProductItem({ productId: 7- }),
       // generateProductItem({ productId: 8 }),
       // generateProductItem({ productId: 9 }),
       // generateProductItem({ productId: 10 }),

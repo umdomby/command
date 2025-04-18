@@ -40,7 +40,7 @@
     "id": 7,
     "title": "Кроссовки Orange Boomb Edition",
     "price": 7499,
-    "imageUrl": "/sneakers/sneakers-7.jpg"
+    "imageUrl": "/sneakers/sneakers-7-.jpg"
   },
   {
     "id": 8,
@@ -139,7 +139,7 @@
       "id": 7,
       "title": "Кроссовки Orange Boomb Edition",
       "price": 7499,
-      "imageUrl": "/sneakers/sneakers-7.jpg",
+      "imageUrl": "/sneakers/sneakers-7-.jpg",
       "isFavorite": false,
       "favoriteId": null,
       "isAdded": false
@@ -264,7 +264,7 @@
       "id": 7,
       "title": "Кроссовки Orange Boomb Edition",
       "price": 7499,
-      "imageUrl": "/sneakers/sneakers-7.jpg",
+      "imageUrl": "/sneakers/sneakers-7-.jpg",
       "isFavorite": false,
       "favoriteId": null,
       "isAdded": false
@@ -375,7 +375,7 @@
       "id": 7,
       "title": "Кроссовки Orange Boomb Edition",
       "price": 7499,
-      "imageUrl": "/sneakers/sneakers-7.jpg",
+      "imageUrl": "/sneakers/sneakers-7-.jpg",
       "isFavorite": false,
       "favoriteId": null,
       "isAdded": false
@@ -486,7 +486,7 @@
       "id": 7,
       "title": "Кроссовки Orange Boomb Edition",
       "price": 7499,
-      "imageUrl": "/sneakers/sneakers-7.jpg",
+      "imageUrl": "/sneakers/sneakers-7-.jpg",
       "isFavorite": false,
       "favoriteId": null,
       "isAdded": false

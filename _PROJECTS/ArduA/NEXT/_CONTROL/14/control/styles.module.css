@@ -1,0 +1,75 @@
+/* Основные стили панели управления */
+.controlPanel {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+/* Стили для заголовка */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.header:hover {
+    background-color: #ebebeb;
+}
+
+/* Стили для скрытого контента */
+.hiddenContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    opacity: 0;
+}
+
+.hiddenContent.visible {
+    max-height: 500px;
+    opacity: 1;
+    padding-top: 12px;
+}
+
+/* Стили для элементов управления */
+.controlsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+
+/* Стили для логов */
+.logContainer {
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 12px;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+/* Стили для статуса соединения */
+.statusIndicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/* Анимация для кнопки раскрытия */
+.chevron {
+    transition: transform 0.2s ease;
+}
+
+.chevron.rotated {
+    transform: rotate(180deg);
+}
