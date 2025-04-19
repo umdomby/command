@@ -1,257 +1,12 @@
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\control\Joystick.tsx
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\control\SocketClient.tsx
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\control\styles.module.css
-
-// file: docker-ardua/components/control/Joystick.tsx
-// file: docker-ardua/components/control/Joystick.tsx
-"use client"
-import { useCallback, useRef, useEffect, useState } from 'react'
-
-type JoystickProps = {
-motor: 'A' | 'B'
-onChange: (value: number) => void
-direction: 'forward' | 'backward' | 'stop'
-speed: number
-}
-
-/**
-* Компонент джойстика для управления моторами
-  */
-  const Joystick = ({ motor, onChange, direction, speed }: JoystickProps) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const isDragging = useRef(false)
-  const touchId = useRef<number | null>(null)
-  const [windowHeight, setWindowHeight] = useState(0)
-
-  // Обновляем высоту окна при изменении размера
-  useEffect(() => {
-  const handleResize = () => {
-  setWindowHeight(window.innerHeight)
-  }
-
-       // Устанавливаем начальное значение
-       handleResize()
-
-       window.addEventListener('resize', handleResize)
-       return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  // Стили для разных моторов
-  const motorStyles = {
-  A: { border: '1px solid #ffffff' },
-  B: { border: '1px solid #ffffff' }
-  }
-
-  // Позиционирование в зависимости от мотора
-  const positionStyles = {
-  A: {
-  left: '0',
-  right: 'auto',
-  marginLeft: '10px'
-  },
-  B: {
-  right: '0',
-  left: 'auto',
-  marginRight: '10px'
-  }
-  }
-
-  // Обновление значения джойстика
-  const updateValue = useCallback((clientY: number) => {
-  const container = containerRef.current
-  if (!container) return
-
-       const rect = container.getBoundingClientRect()
-       const y = clientY - rect.top
-       const height = rect.height
-       let value = ((height - y) / height) * 510 - 255
-       value = Math.max(-255, Math.min(255, value))
-
-       // Изменение цвета в зависимости от положения
-       const intensity = Math.abs(value) / 255 * 0.3 + 0.2
-       container.style.backgroundColor = `rgba(${
-           motor === 'A' ? '255, 87, 34' : '76, 175, 80'
-       }, ${intensity})`
-
-       onChange(value)
-  }, [motor, onChange])
-
-  // Обработчики событий
-  const handleStart = useCallback((clientY: number) => {
-  isDragging.current = true
-  const container = containerRef.current
-  if (container) {
-  container.style.transition = 'none'
-  }
-  updateValue(clientY)
-  }, [updateValue])
-
-  const handleMove = useCallback((clientY: number) => {
-  if (isDragging.current) {
-  updateValue(clientY)
-  }
-  }, [updateValue])
-
-  const handleEnd = useCallback(() => {
-  if (!isDragging.current) return
-  isDragging.current = false
-  touchId.current = null
-
-       const container = containerRef.current
-       if (container) {
-           container.style.transition = 'background-color 0.3s'
-           container.style.backgroundColor = 'transparent'
-       }
-
-       onChange(0)
-  }, [onChange])
-
-  // Подписка на события
-  useEffect(() => {
-  const container = containerRef.current
-  if (!container) return
-
-       const onTouchStart = (e: TouchEvent) => {
-           if (touchId.current === null) {
-               const touch = e.changedTouches[0]
-               touchId.current = touch.identifier
-               handleStart(touch.clientY)
-           }
-       }
-
-       const onTouchMove = (e: TouchEvent) => {
-           if (touchId.current !== null) {
-               const touch = Array.from(e.changedTouches).find(
-                   t => t.identifier === touchId.current
-               )
-               if (touch) {
-                   handleMove(touch.clientY)
-               }
-           }
-       }
-
-       const onTouchEnd = (e: TouchEvent) => {
-           if (touchId.current !== null) {
-               const touch = Array.from(e.changedTouches).find(
-                   t => t.identifier === touchId.current
-               )
-               if (touch) {
-                   handleEnd()
-               }
-           }
-       }
-
-       const onMouseDown = (e: MouseEvent) => {
-           e.preventDefault()
-           handleStart(e.clientY)
-       }
-
-       const onMouseMove = (e: MouseEvent) => {
-           e.preventDefault()
-           handleMove(e.clientY)
-       }
-
-       const onMouseUp = () => {
-           handleEnd()
-       }
-
-       // Добавление обработчиков
-       container.addEventListener('touchstart', onTouchStart, { passive: false })
-       container.addEventListener('touchmove', onTouchMove, { passive: false })
-       container.addEventListener('touchend', onTouchEnd, { passive: false })
-       container.addEventListener('touchcancel', onTouchEnd, { passive: false })
-
-       container.addEventListener('mousedown', onMouseDown)
-       document.addEventListener('mousemove', onMouseMove)
-       document.addEventListener('mouseup', onMouseUp)
-       container.addEventListener('mouseleave', handleEnd)
-
-       // Глобальные обработчики
-       const handleGlobalMouseUp = () => {
-           if (isDragging.current) {
-               handleEnd()
-           }
-       }
-
-       const handleGlobalTouchEnd = (e: TouchEvent) => {
-           if (isDragging.current && touchId.current !== null) {
-               const touch = Array.from(e.changedTouches).find(
-                   t => t.identifier === touchId.current
-               )
-               if (touch) {
-                   handleEnd()
-               }
-           }
-       }
-
-       document.addEventListener('mouseup', handleGlobalMouseUp)
-       document.addEventListener('touchend', handleGlobalTouchEnd)
-
-       // Очистка
-       return () => {
-           container.removeEventListener('touchstart', onTouchStart)
-           container.removeEventListener('touchmove', onTouchMove)
-           container.removeEventListener('touchend', onTouchEnd)
-           container.removeEventListener('touchcancel', onTouchEnd)
-
-           container.removeEventListener('mousedown', onMouseDown)
-           document.removeEventListener('mousemove', onMouseMove)
-           document.removeEventListener('mouseup', onMouseUp)
-           container.removeEventListener('mouseleave', handleEnd)
-
-           document.removeEventListener('mouseup', handleGlobalMouseUp)
-           document.removeEventListener('touchend', handleGlobalTouchEnd)
-       }
-  }, [handleEnd, handleMove, handleStart])
-
-  return (
-  <div
-  ref={containerRef}
-  style={{
-  position: 'absolute',
-  width: '80px',
-  height: `${windowHeight * 0.5}px`, // 50% высоты окна
-  top: '50%',
-  transform: 'translateY(-50%)',
-  borderRadius: '8px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  touchAction: 'none',
-  userSelect: 'none',
-  backgroundColor: 'transparent',
-  ...motorStyles[motor],
-  ...positionStyles[motor]
-  }}
-  >
-  <div style={{
-  position: 'absolute',
-  bottom: '10px',
-  left: '0',
-  right: '0',
-  textAlign: 'center',
-  fontSize: '14px',
-  fontWeight: 'bold',
-  color: '#333',
-  zIndex: '1'
-  }}>
-  </div>
-  </div>
-  )
-  }
-
-export default Joystick
-
-// file: docker-ardua/components/control/SocketClient.tsx
 "use client"
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
 import {
-Dialog, DialogClose,
-DialogContent, DialogDescription,
-DialogHeader,
-DialogTitle,
-DialogTrigger,
+    Dialog, DialogClose,
+    DialogContent, DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog"
 import {VisuallyHidden} from "@radix-ui/react-visually-hidden";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -262,41 +17,41 @@ import { Label } from "@/components/ui/label"
 import Joystick from '@/components/control/Joystick'
 
 type MessageType = {
-type?: string
-command?: string
-deviceId?: string
-message?: string
-params?: any
-clientId?: number
-status?: string
-timestamp?: string
-origin?: 'client' | 'esp' | 'server' | 'error'
-reason?: string
+    type?: string
+    command?: string
+    deviceId?: string
+    message?: string
+    params?: any
+    clientId?: number
+    status?: string
+    timestamp?: string
+    origin?: 'client' | 'esp' | 'server' | 'error'
+    reason?: string
 }
 
 type LogEntry = {
-message: string
-type: 'client' | 'esp' | 'server' | 'error'
+    message: string
+    type: 'client' | 'esp' | 'server' | 'error'
 }
 
 export default function SocketClient() {
-const [log, setLog] = useState<LogEntry[]>([])
-const [isConnected, setIsConnected] = useState(false)
-const [isIdentified, setIsIdentified] = useState(false)
-const [deviceId, setDeviceId] = useState('123')
-const [inputDeviceId, setInputDeviceId] = useState('123')
-const [newDeviceId, setNewDeviceId] = useState('')
-const [deviceList, setDeviceList] = useState<string[]>(['123'])
-const [espConnected, setEspConnected] = useState(false)
-const [controlVisible, setControlVisible] = useState(false)
-const [logVisible, setLogVisible] = useState(false)
-const [motorASpeed, setMotorASpeed] = useState(0)
-const [motorBSpeed, setMotorBSpeed] = useState(0)
-const [motorADirection, setMotorADirection] = useState<'forward' | 'backward' | 'stop'>('stop')
-const [motorBDirection, setMotorBDirection] = useState<'forward' | 'backward' | 'stop'>('stop')
-const [autoReconnect, setAutoReconnect] = useState(false)
-const [autoConnect, setAutoConnect] = useState(false)
-const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>('esp') // Состояние активной вкладки
+    const [log, setLog] = useState<LogEntry[]>([])
+    const [isConnected, setIsConnected] = useState(false)
+    const [isIdentified, setIsIdentified] = useState(false)
+    const [deviceId, setDeviceId] = useState('123')
+    const [inputDeviceId, setInputDeviceId] = useState('123')
+    const [newDeviceId, setNewDeviceId] = useState('')
+    const [deviceList, setDeviceList] = useState<string[]>(['123'])
+    const [espConnected, setEspConnected] = useState(false)
+    const [controlVisible, setControlVisible] = useState(false)
+    const [logVisible, setLogVisible] = useState(false)
+    const [motorASpeed, setMotorASpeed] = useState(0)
+    const [motorBSpeed, setMotorBSpeed] = useState(0)
+    const [motorADirection, setMotorADirection] = useState<'forward' | 'backward' | 'stop'>('stop')
+    const [motorBDirection, setMotorBDirection] = useState<'forward' | 'backward' | 'stop'>('stop')
+    const [autoReconnect, setAutoReconnect] = useState(false)
+    const [autoConnect, setAutoConnect] = useState(false)
+    const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>('esp') // Состояние активной вкладки
 
     const reconnectAttemptRef = useRef(0)
     const reconnectTimerRef = useRef<NodeJS.Timeout | null>(null)
@@ -628,19 +383,19 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
         <div className="flex flex-col items-center min-h-screen p-4 bg-transparent">
             {/* Основной контейнер с управлением */}
             {activeTab === 'esp' && (
-                <div className="w-full max-w-md space-y-4 bg-transparent rounded-lg p-4 sm:p-6 border border-gray-200 backdrop-blur-sm"
-                     style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+                <div className="w-full max-w-md space-y-4 bg-transparent rounded-lg p-6 border border-gray-200 backdrop-blur-sm">
                     {/* Заголовок и статус */}
                     <div className="flex flex-col items-center space-y-2">
+                        <h1 className="text-2xl font-bold text-gray-800">ESP8266 Control Panel</h1>
                         <div className="flex items-center space-x-2">
-                            <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${
+                            <div className={`w-4 h-4 rounded-full ${
                                 isConnected
                                     ? (isIdentified
                                         ? (espConnected ? 'bg-green-500' : 'bg-yellow-500')
                                         : 'bg-yellow-500')
                                     : 'bg-red-500'
                             }`}></div>
-                            <span className="text-xs sm:text-sm font-medium text-gray-600">
+                            <span className="text-sm font-medium text-gray-600">
                 {isConnected
                     ? (isIdentified
                         ? (espConnected ? 'Connected' : 'Waiting for ESP')
@@ -651,20 +406,20 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
                     </div>
 
                     {/* Выбор устройства */}
-                    <div className="space-y-1 sm:space-y-2">
-                        <Label className="block text-xs sm:text-sm font-medium text-gray-700">Device ID</Label>
+                    <div className="space-y-2">
+                        <Label className="block text-sm font-medium text-gray-700">Device ID</Label>
                         <div className="flex space-x-2">
                             <Select
                                 value={inputDeviceId}
                                 onValueChange={handleDeviceChange}
                                 disabled={isConnected && !autoReconnect}
                             >
-                                <SelectTrigger className="flex-1 bg-transparent h-8 sm:h-10">
+                                <SelectTrigger className="flex-1 bg-transparent">
                                     <SelectValue placeholder="Select device"/>
                                 </SelectTrigger>
                                 <SelectContent className="bg-transparent backdrop-blur-sm border border-gray-200">
                                     {deviceList.map(id => (
-                                        <SelectItem key={id} value={id} className="hover:bg-gray-100/50 text-xs sm:text-sm">{id}</SelectItem>
+                                        <SelectItem key={id} value={id} className="hover:bg-gray-100/50">{id}</SelectItem>
                                     ))}
                                 </SelectContent>
                             </Select>
@@ -672,19 +427,19 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
                     </div>
 
                     {/* Добавление нового устройства */}
-                    <div className="space-y-1 sm:space-y-2">
-                        <Label className="block text-xs sm:text-sm font-medium text-gray-700">Add New Device</Label>
+                    <div className="space-y-2">
+                        <Label className="block text-sm font-medium text-gray-700">Add New Device</Label>
                         <div className="flex space-x-2">
                             <Input
                                 value={newDeviceId}
                                 onChange={(e) => setNewDeviceId(e.target.value)}
                                 placeholder="Enter new device ID"
-                                className="flex-1 bg-transparent h-8 sm:h-10 text-xs sm:text-sm"
+                                className="flex-1 bg-transparent"
                             />
                             <Button
                                 onClick={saveNewDeviceId}
                                 disabled={!newDeviceId}
-                                className="bg-blue-600 hover:bg-blue-700 h-8 sm:h-10 px-2 sm:px-4 text-xs sm:text-sm"
+                                className="bg-blue-600 hover:bg-blue-700"
                             >
                                 Add
                             </Button>
@@ -696,29 +451,29 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
                         <Button
                             onClick={() => connectWebSocket(currentDeviceIdRef.current)}
                             disabled={isConnected}
-                            className="flex-1 bg-green-600 hover:bg-green-700 h-8 sm:h-10 text-xs sm:text-sm"
+                            className="flex-1 bg-green-600 hover:bg-green-700"
                         >
                             Connect
                         </Button>
                         <Button
                             onClick={disconnectWebSocket}
                             disabled={!isConnected || autoConnect}
-                            className="flex-1 bg-red-600 hover:bg-red-700 h-8 sm:h-10 text-xs sm:text-sm"
+                            className="flex-1 bg-red-600 hover:bg-red-700"
                         >
                             Disconnect
                         </Button>
                     </div>
 
                     {/* Настройки */}
-                    <div className="space-y-2 sm:space-y-3">
+                    <div className="space-y-3">
                         <div className="flex items-center space-x-2">
                             <Checkbox
                                 id="auto-reconnect"
                                 checked={autoReconnect}
                                 onCheckedChange={toggleAutoReconnect}
-                                className="border-gray-300 bg-transparent w-4 h-4 sm:w-5 sm:h-5"
+                                className="border-gray-300 bg-transparent"
                             />
-                            <Label htmlFor="auto-reconnect" className="text-xs sm:text-sm font-medium text-gray-700">
+                            <Label htmlFor="auto-reconnect" className="text-sm font-medium text-gray-700">
                                 Auto reconnect when changing device
                             </Label>
                         </div>
@@ -727,9 +482,9 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
                                 id="auto-connect"
                                 checked={autoConnect}
                                 onCheckedChange={handleAutoConnectChange}
-                                className="border-gray-300 bg-transparent w-4 h-4 sm:w-5 sm:h-5"
+                                className="border-gray-300 bg-transparent"
                             />
-                            <Label htmlFor="auto-connect" className="text-xs sm:text-sm font-medium text-gray-700">
+                            <Label htmlFor="auto-connect" className="text-sm font-medium text-gray-700">
                                 Auto connect on page load
                             </Label>
                         </div>
@@ -738,21 +493,21 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
                     {/* Кнопка открытия контролов */}
                     <Button
                         onClick={handleOpenControls}
-                        className="w-full bg-indigo-600 hover:bg-indigo-700 h-8 sm:h-10 text-xs sm:text-sm"
+                        className="w-full bg-indigo-600 hover:bg-indigo-700"
                     >
-                        Controls
+                        Show Motor Controls
                     </Button>
 
                     {/* Логи */}
                     <Button
                         onClick={() => setLogVisible(!logVisible)}
                         variant="outline"
-                        className="w-full border-gray-300 bg-transparent hover:bg-gray-100/50 h-8 sm:h-10 text-xs sm:text-sm"
+                        className="w-full border-gray-300 bg-transparent hover:bg-gray-100/50"
                     >
                         {logVisible ? (
-                            <ChevronUp className="h-3 w-3 sm:h-4 sm:w-4 mr-2"/>
+                            <ChevronUp className="h-4 w-4 mr-2"/>
                         ) : (
-                            <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 mr-2"/>
+                            <ChevronDown className="h-4 w-4 mr-2"/>
                         )}
                         {logVisible ? "Hide Logs" : "Show Logs"}
                     </Button>
@@ -760,7 +515,7 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
                     {/* Отображение логов */}
                     {logVisible && (
                         <div className="border border-gray-200 rounded-md overflow-hidden bg-transparent backdrop-blur-sm">
-                            <div className="h-32 sm:h-48 overflow-y-auto p-2 bg-transparent text-xs font-mono">
+                            <div className="h-48 overflow-y-auto p-2 bg-transparent text-xs font-mono">
                                 {log.length === 0 ? (
                                     <div className="text-gray-500 italic">No logs yet</div>
                                 ) : (
@@ -786,13 +541,13 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
 
             {/* Диалог моторных контролов */}
             {controlVisible && (
-                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50">
-                    <div className="w-full h-full sm:w-[90vw] sm:h-[90vh] max-w-2xl max-h-[90vh] bg-transparent rounded-lg p-2 sm:p-4">
-                        <div className="flex flex-col items-center justify-center h-full">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full h-full">
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="w-full max-w-md bg-transparent rounded-lg p-6">
+                        <div className="flex flex-col items-center space-y-4">
+                            <div className="grid grid-cols-2 gap-8 w-full">
                                 {/* Мотор A */}
-                                <div className="flex flex-col items-center justify-center h-full">
-                                    <div className="w-full h-48 sm:h-64">
+                                <div className="flex flex-col items-center">
+                                    <div className="w-full h-64">
                                         <Joystick
                                             motor="A"
                                             onChange={handleMotorAControl}
@@ -800,11 +555,15 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
                                             speed={motorASpeed}
                                         />
                                     </div>
+                                    {/*<div className="mt-2 text-sm">*/}
+                                    {/*    {motorADirection === 'stop' ? 'Stopped' :*/}
+                                    {/*        `${motorADirection} at ${motorASpeed}%`}*/}
+                                    {/*</div>*/}
                                 </div>
 
                                 {/* Мотор B */}
-                                <div className="flex flex-col items-center justify-center h-full">
-                                    <div className="w-full h-48 sm:h-64">
+                                <div className="flex flex-col items-center">
+                                    <div className="w-full h-64">
                                         <Joystick
                                             motor="B"
                                             onChange={handleMotorBControl}
@@ -812,16 +571,27 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
                                             speed={motorBSpeed}
                                         />
                                     </div>
+                                    {/*<div className="mt-2 text-sm">*/}
+                                    {/*    {motorBDirection === 'stop' ? 'Stopped' :*/}
+                                    {/*        `${motorBDirection} at ${motorBSpeed}%`}*/}
+                                    {/*</div>*/}
                                 </div>
                             </div>
+
+                            {/* Кнопка аварийной остановки */}
+                            {/*<Button*/}
+                            {/*    onClick={emergencyStop}*/}
+                            {/*    disabled={!isConnected || !isIdentified}*/}
+                            {/*    variant="destructive"*/}
+                            {/*    className="w-32 mt-4"*/}
+                            {/*>*/}
+                            {/*    Emergency Stop*/}
+                            {/*</Button>*/}
 
                             {/* Кнопка закрытия */}
                             <Button
                                 onClick={handleCloseControls}
-                                className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-transparent hover:bg-gray-700/30 backdrop-blur-sm border border-gray-600 text-gray-600 px-4 py-1 sm:px-6 sm:py-2 rounded-full transition-all text-xs sm:text-sm"
-                                style={{
-                                    minWidth: '6rem',
-                                }}
+                                className="w-32 mt-2 bg-gray-600 hover:bg-gray-700"
                             >
                                 Close
                             </Button>
@@ -832,288 +602,3 @@ const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>
         </div>
     )
 }
-
-// file: docker-ardua/components/control/styles.module.css
-/* file: docker-ardua/components/control/styles.module.css */
-.container {
-position: fixed;
-top: 20px;
-left: 20px;
-z-index: 1000;
-}
-
-.sheetTrigger {
-padding: 8px 16px;
-}
-
-.sheetContent {
-width: 350px;
-display: flex;
-flex-direction: column;
-padding: 20px;
-}
-
-.controlsContainer {
-display: flex;
-flex-direction: column;
-gap: 16px;
-margin-top: 20px;
-flex: 1;
-}
-
-.statusIndicator {
-display: flex;
-align-items: center;
-gap: 8px;
-margin-bottom: 10px;
-}
-
-.statusDot {
-width: 12px;
-height: 12px;
-border-radius: 50%;
-}
-
-.connected {
-background-color: #10B981;
-}
-
-.pending {
-background-color: #F59E0B;
-}
-
-.disconnected {
-background-color: #EF4444;
-}
-
-.deviceControl {
-display: flex;
-flex-direction: column;
-gap: 8px;
-}
-
-.selectTrigger {
-width: 100%;
-}
-
-.newDevice {
-display: flex;
-gap: 8px;
-}
-
-.newDeviceInput {
-flex: 1;
-}
-
-.addButton {
-min-width: 60px;
-}
-
-.connectionButtons {
-display: flex;
-gap: 8px;
-}
-
-.connectButton {
-flex: 1;
-background-color: #10B981;
-}
-
-.connectButton:hover {
-background-color: #059669;
-}
-
-.disconnectButton {
-flex: 1;
-}
-
-.checkboxGroup {
-display: flex;
-flex-direction: column;
-gap: 8px;
-}
-
-.checkboxItem {
-display: flex;
-align-items: center;
-gap: 8px;
-}
-
-.checkbox {
-width: 16px;
-height: 16px;
-}
-
-.showControlsButton {
-width: 100%;
-margin-top: 10px;
-}
-
-.logsButton {
-width: 100%;
-justify-content: center;
-margin-top: 10px;
-}
-
-.logContainer {
-border: 1px solid rgba(229, 231, 235, 0.5);
-border-radius: 6px;
-overflow: hidden;
-margin-top: 10px;
-}
-
-.logContent {
-height: 150px;
-overflow-y: auto;
-padding: 8px;
-line-height: 1.5;
-}
-
-.logEntry {
-padding: 4px 0;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-}
-
-.clientLog {
-color: #3b82f6;
-}
-
-.espLog {
-color: #10b981;
-}
-
-.serverLog {
-color: #8b5cf6;
-}
-
-.errorLog {
-color: #ef4444;
-font-weight: bold;
-}
-
-.closeButton {
-margin-top: 20px;
-width: 100%;
-}
-
-.joystickDialog {
-width: 90vw;
-max-width: 500px;
-height: 70vh;
-padding: 0;
-}
-
-.joystickContainer {
-display: flex;
-width: 100%;
-height: calc(100% - 120px);
-justify-content: space-between;
-gap: 20px;
-padding: 20px;
-}
-
-.joystickWrapper {
-width: calc(50% - 10px);
-height: 70%;
-}
-
-.emergencyStop {
-display: flex;
-justify-content: center;
-padding: 10px;
-}
-
-.estopButton {
-width: 120px;
-height: 40px;
-font-weight: bold;
-}
-
-@keyframes pulse {
-0%, 100% {
-opacity: 1;
-}
-50% {
-opacity: 0.5;
-}
-}
-
-.connecting {
-animation: pulse 1.5s infinite;
-}
-
-.statusBadge {
-display: inline-flex;
-align-items: center;
-padding: 0.25rem 0.5rem;
-border-radius: 9999px;
-font-size: 0.75rem;
-font-weight: 500;
-}
-
-.statusBadgeConnected {
-background-color: rgba(220, 252, 231, 0.5);
-color: #166534;
-}
-
-.statusBadgeDisconnected {
-background-color: rgba(254, 226, 226, 0.5);
-color: #991b1b;
-}
-
-.statusBadgePending {
-background-color: rgba(254, 249, 195, 0.5);
-color: #854d0e;
-}
-
-.joystickBase {
-position: relative;
-width: 100%;
-height: 100%;
-border-radius: 50%;
-touch-action: none;
-}
-
-.joystickHandle {
-position: absolute;
-width: 40px;
-height: 40px;
-border-radius: 50%;
-background-color: #4f46e5;
-transform: translate(-50%, -50%);
-cursor: move;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.motorLabel {
-position: absolute;
-top: -1.5rem;
-left: 50%;
-transform: translateX(-50%);
-font-weight: 600;
-color: #374151;
-}
-
-.speedIndicator {
-position: absolute;
-bottom: -1.5rem;
-left: 50%;
-transform: translateX(-50%);
-font-size: 0.75rem;
-color: #6b7280;
-}
-
-.logEntryLine {
-padding: 0.25rem 0;
-border-bottom: 1px solid rgba(229, 231, 235, 0.5);
-}
-
-.logEntryLine:last-child {
-border-bottom: none;
-}
-
-
-export default Joystick
-когда я в мобильном браузере нажимаю на джойстики левый и правый, мобильные браузеры пытаются что то выделить постоянно, можешь сделать так чтобы когда был открыт компонент джойстик в браузере ничего не выделялось, для копирования или еще чего
