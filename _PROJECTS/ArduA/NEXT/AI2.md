@@ -1,1974 +1,2106 @@
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\app
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\stores
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\stores\motorControlStore.ts
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\components
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\components\DeviceSelector.tsx
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\components\VideoPlayer.tsx
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\hooks
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\hooks\useWebRTC.ts
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\lib
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\lib\signaling.ts
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\lib\webrtc.ts
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\index.tsx
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\styles.module.css
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\types.ts
+\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\VideoCallApp.tsx
 
+// file: docker-ardua/components/webrtc/lib/webrtc.ts
+//app\webrtc\lib\webrtc.ts
+export function checkWebRTCSupport(): boolean {
+if (typeof window === 'undefined') return false;
 
+    const requiredAPIs = [
+        'RTCPeerConnection',
+        'RTCSessionDescription',
+        'RTCIceCandidate',
+        'MediaStream',
+        'navigator.mediaDevices.getUserMedia'
+    ];
 
-// file: docker-ardua/app/api/auth/[...nextauth]/route.ts
-import NextAuth from 'next-auth';
-import { authOptions } from '@/components/constants/auth-options';
-
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
-
-
-// file: docker-ardua/app/api/users/route.ts
-import { prisma } from '@/prisma/prisma-client';
-import { NextRequest, NextResponse } from 'next/server';
-
-export async function GET() {
-const users = await prisma.user.findMany();
-return NextResponse.json(users);
-}
-
-export async function POST(req: NextRequest) {
-const data = await req.json();
-const user = await prisma.user.create({
-data,
-});
-
-return NextResponse.json(user);
-}
-
-
-// file: docker-ardua/app/(root)/profile/page.tsx
-// app/(root)/profile/index.tsx
-import { prisma } from '@/prisma/prisma-client';
-import { ProfileForm } from '@/components/profile-form';
-import { getUserSession } from '@/components/lib/get-user-session';
-import { redirect } from 'next/navigation';
-
-export const dynamic = 'force-dynamic'; // <-- Добавьте эту строку
-
-export default async function ProfilePage() {
-const session = await getUserSession();
-
-if (!session) {
-return redirect('/');
-}
-
-const user = await prisma.user.findFirst({ where: { id: Number(session?.id) } });
-
-if (!user) {
-return redirect('/');
-}
-
-return <ProfileForm data={user} />;
-}
-
-// file: docker-ardua/app/(root)/page.tsx
-"use server"
-import { Container } from '@/components/container';
-import { HEROES_CLIENT } from '@/components/HEROES_CLIENT';
-import { getUserSession } from '@/components/lib/get-user-session';
-import { redirect } from 'next/navigation';
-import React, { Suspense } from 'react';
-import Loading from "@/app/(root)/loading";
-import {prisma} from "@/prisma/prisma-client";
-import SocketClient from "@/components/control/SocketClient";
-import WebRTC from  "@/components/webrtc";
-
-export default async function Home() {
-const session = await getUserSession();
-
-    if (!session?.id) {
-        return (
-            <Container className="flex flex-col my-10">
-                <Suspense fallback={<Loading />}>
-                    123
-                </Suspense>
-            </Container>
-        );
-    }
-
-    const user = await prisma.user.findFirst({
-        where: {
-            id: Number(session.id)
+    return requiredAPIs.every(api => {
+        try {
+            if (api.includes('.')) {
+                const [obj, prop] = api.split('.');
+                return (window as any)[obj]?.[prop] !== undefined;
+            }
+            return (window as any)[api] !== undefined;
+        } catch {
+            return false;
         }
     });
+}
 
-    if (!user) {
+
+
+
+
+
+
+// file: docker-ardua/components/webrtc/lib/signaling.ts
+// file: client/app/webrtc/lib/signaling.ts
+import { RoomInfo, SignalingMessage, SignalingClientOptions } from '../types';
+
+export class SignalingClient {
+private ws: WebSocket | null = null;
+private reconnectAttempts = 0;
+private connectionTimeout: NodeJS.Timeout | null = null;
+private connectionPromise: Promise<void> | null = null;
+private resolveConnection: (() => void) | null = null;
+
+    public onRoomInfo: (data: RoomInfo) => void = () => {};
+    public onOffer: (data: RTCSessionDescriptionInit) => void = () => {};
+    public onAnswer: (data: RTCSessionDescriptionInit) => void = () => {};
+    public onCandidate: (data: RTCIceCandidateInit) => void = () => {};
+    public onError: (error: string) => void = () => {};
+    public onLeave: (username?: string) => void = () => {};
+    public onJoin: (username: string) => void = () => {};
+
+    constructor(
+        private url: string,
+        private options: SignalingClientOptions = {}
+    ) {
+        this.options = {
+            maxReconnectAttempts: 5,
+            reconnectDelay: 1000,
+            connectionTimeout: 5000,
+            ...options
+        };
+    }
+
+    public get isConnected(): boolean {
+        return this.ws?.readyState === WebSocket.OPEN;
+    }
+
+    public connect(roomId: string, username: string): Promise<void> {
+        if (this.ws) {
+            this.ws.close();
+        }
+
+        this.ws = new WebSocket(this.url);
+        this.setupEventListeners();
+
+        this.connectionPromise = new Promise((resolve, reject) => {
+            this.resolveConnection = resolve;
+
+            this.connectionTimeout = setTimeout(() => {
+                if (!this.isConnected) {
+                    this.handleError('Connection timeout');
+                    reject(new Error('Connection timeout'));
+                }
+            }, this.options.connectionTimeout);
+
+            this.ws!.onopen = () => {
+                this.ws!.send(JSON.stringify({
+                    type: 'join',
+                    room: roomId,
+                    username: username
+                }));
+            };
+        });
+
+        return this.connectionPromise;
+    }
+
+    private setupEventListeners(): void {
+        if (!this.ws) return;
+
+        this.ws.onmessage = (event) => {
+            try {
+                const message: SignalingMessage = JSON.parse(event.data);
+
+                if (!('type' in message)) {
+                    console.warn('Received message without type:', message);
+                    return;
+                }
+
+                switch (message.type) {
+                    case 'room_info':
+                        this.onRoomInfo(message.data);
+                        break;
+                    case 'error':
+                        this.onError(message.data);
+                        break;
+                    case 'offer':
+                        this.onOffer(message.sdp);
+                        break;
+                    case 'answer':
+                        this.onAnswer(message.sdp);
+                        break;
+                    case 'candidate':
+                        this.onCandidate(message.candidate);
+                        break;
+                    case 'leave':
+                        this.onLeave(message.data);
+                        break;
+                    case 'join':
+                        this.onJoin(message.data);
+                        break;
+                    default:
+                        console.warn('Unknown message type:', message);
+                }
+            } catch (error) {
+                this.handleError('Invalid message format');
+            }
+        };
+
+        this.ws.onclose = () => {
+            console.log('Signaling connection closed');
+            this.cleanup();
+            this.attemptReconnect();
+        };
+
+        this.ws.onerror = (error) => {
+            this.handleError(`Connection error: ${error}`);
+        };
+    }
+
+    public sendOffer(offer: RTCSessionDescriptionInit): Promise<void> {
+        return this.send({ type: 'offer', sdp: offer });
+    }
+
+    public sendAnswer(answer: RTCSessionDescriptionInit): Promise<void> {
+        return this.send({ type: 'answer', sdp: answer });
+    }
+
+    public sendCandidate(candidate: RTCIceCandidateInit): Promise<void> {
+        return this.send({ type: 'candidate', candidate });
+    }
+
+    public sendLeave(username: string): Promise<void> {
+        return this.send({ type: 'leave', data: username });
+    }
+
+    private send(data: SignalingMessage): Promise<void> {
+        if (!this.isConnected) {
+            return Promise.reject(new Error('WebSocket not connected'));
+        }
+
+        try {
+            this.ws!.send(JSON.stringify(data));
+            return Promise.resolve();
+        } catch (error) {
+            console.error('Send error:', error);
+            return Promise.reject(error);
+        }
+    }
+
+    private attemptReconnect(): void {
+        if (this.reconnectAttempts >= (this.options.maxReconnectAttempts || 5)) {
+            return this.handleError('Max reconnection attempts reached');
+        }
+
+        this.reconnectAttempts++;
+        console.log(`Reconnecting (attempt ${this.reconnectAttempts})`);
+
+        setTimeout(() => this.connect('', ''), this.options.reconnectDelay);
+    }
+
+    private handleError(error: string): void {
+        console.error('Signaling error:', error);
+        this.onError(error);
+        this.cleanup();
+    }
+
+    private cleanup(): void {
+        this.clearTimeout(this.connectionTimeout);
+        if (this.resolveConnection) {
+            this.resolveConnection();
+            this.resolveConnection = null;
+        }
+        this.connectionPromise = null;
+    }
+
+    private clearTimeout(timer: NodeJS.Timeout | null): void {
+        if (timer) clearTimeout(timer);
+    }
+
+    public close(): void {
+        this.cleanup();
+        this.ws?.close();
+    }
+}
+
+// file: docker-ardua/components/webrtc/hooks/useWebRTC.ts
+import { useEffect, useRef, useState } from 'react';
+
+interface WebSocketMessage {
+type: string;
+data?: any;
+sdp?: {
+type: RTCSdpType;
+sdp: string;
+};
+ice?: RTCIceCandidateInit;
+room?: string;
+username?: string;
+}
+
+export const useWebRTC = (
+deviceIds: { video: string; audio: string },
+username: string,
+roomId: string
+) => {
+const [localStream, setLocalStream] = useState<MediaStream | null>(null);
+const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
+const [users, setUsers] = useState<string[]>([]);
+const [isCallActive, setIsCallActive] = useState(false);
+const [isConnected, setIsConnected] = useState(false);
+const [isInRoom, setIsInRoom] = useState(false);
+const [error, setError] = useState<string | null>(null);
+const [retryCount, setRetryCount] = useState(0);
+
+    const ws = useRef<WebSocket | null>(null);
+    const pc = useRef<RTCPeerConnection | null>(null);
+    const pendingIceCandidates = useRef<RTCIceCandidate[]>([]);
+    const isNegotiating = useRef(false);
+    const shouldCreateOffer = useRef(false);
+    const connectionTimeout = useRef<NodeJS.Timeout | null>(null);
+    const statsInterval = useRef<NodeJS.Timeout | null>(null);
+
+    // Максимальное количество попыток переподключения
+    const MAX_RETRIES = 3;
+
+    const normalizeSdp = (sdp: string | undefined): string => {
+        if (!sdp) return '';
+
+        let normalized = sdp.trim();
+        if (!normalized.startsWith('v=')) {
+            normalized = 'v=0\r\n' + normalized;
+        }
+        if (!normalized.includes('\r\no=')) {
+            normalized = normalized.replace('\r\n', '\r\no=- 0 0 IN IP4 0.0.0.0\r\n');
+        }
+        if (!normalized.includes('\r\ns=')) {
+            normalized = normalized.replace('\r\n', '\r\ns=-\r\n');
+        }
+        if (!normalized.includes('\r\nt=')) {
+            normalized = normalized.replace('\r\n', '\r\nt=0 0\r\n');
+        }
+
+        return normalized + '\r\n';
+    };
+
+    const cleanup = () => {
+        // Очистка таймеров
+        if (connectionTimeout.current) {
+            clearTimeout(connectionTimeout.current);
+            connectionTimeout.current = null;
+        }
+
+        if (statsInterval.current) {
+            clearInterval(statsInterval.current);
+            statsInterval.current = null;
+        }
+
+        // Очистка WebRTC соединения
+        if (pc.current) {
+            pc.current.onicecandidate = null;
+            pc.current.ontrack = null;
+            pc.current.onnegotiationneeded = null;
+            pc.current.oniceconnectionstatechange = null;
+            pc.current.close();
+            pc.current = null;
+        }
+
+        // Остановка медиапотоков
+        if (localStream) {
+            localStream.getTracks().forEach(track => track.stop());
+            setLocalStream(null);
+        }
+
+        if (remoteStream) {
+            remoteStream.getTracks().forEach(track => track.stop());
+            setRemoteStream(null);
+        }
+
+        setIsCallActive(false);
+        pendingIceCandidates.current = [];
+        isNegotiating.current = false;
+        shouldCreateOffer.current = false;
+    };
+
+    const leaveRoom = () => {
+        if (ws.current?.readyState === WebSocket.OPEN) {
+            ws.current.send(JSON.stringify({
+                type: 'leave',
+                room: roomId,
+                username
+            }));
+        }
+        cleanup();
+        setUsers([]);
+        setIsInRoom(false);
+        ws.current?.close();
+        ws.current = null;
+        setRetryCount(0);
+    };
+
+    const connectWebSocket = async (): Promise<boolean> => {
+        return new Promise((resolve) => {
+            if (ws.current?.readyState === WebSocket.OPEN) {
+                resolve(true);
+                return;
+            }
+
+            try {
+                ws.current = new WebSocket('wss://anybet.site/ws');
+
+                const onOpen = () => {
+                    cleanupEvents();
+                    setIsConnected(true);
+                    setError(null);
+                    console.log('WebSocket подключен');
+                    resolve(true);
+                };
+
+                const onError = (event: Event) => {
+                    cleanupEvents();
+                    console.error('Ошибка WebSocket:', event);
+                    setError('Ошибка подключения');
+                    setIsConnected(false);
+                    resolve(false);
+                };
+
+                const onClose = (event: CloseEvent) => {
+                    cleanupEvents();
+                    console.log('WebSocket отключен:', event.code, event.reason);
+                    setIsConnected(false);
+                    setIsInRoom(false);
+                    setError(event.code !== 1000 ? `Соединение закрыто: ${event.reason || 'код ' + event.code}` : null);
+                    resolve(false);
+                };
+
+                const cleanupEvents = () => {
+                    ws.current?.removeEventListener('open', onOpen);
+                    ws.current?.removeEventListener('error', onError);
+                    ws.current?.removeEventListener('close', onClose);
+                    if (connectionTimeout.current) {
+                        clearTimeout(connectionTimeout.current);
+                    }
+                };
+
+                connectionTimeout.current = setTimeout(() => {
+                    cleanupEvents();
+                    setError('Таймаут подключения WebSocket');
+                    resolve(false);
+                }, 5000);
+
+                ws.current.addEventListener('open', onOpen);
+                ws.current.addEventListener('error', onError);
+                ws.current.addEventListener('close', onClose);
+
+            } catch (err) {
+                console.error('Ошибка создания WebSocket:', err);
+                setError('Не удалось создать WebSocket соединение');
+                resolve(false);
+            }
+        });
+    };
+
+    const setupWebSocketListeners = () => {
+        if (!ws.current) return;
+
+        const handleMessage = async (event: MessageEvent) => {
+            try {
+                const data: WebSocketMessage = JSON.parse(event.data);
+                console.log('Получено сообщение:', data);
+
+                if (data.type === 'room_info') {
+                    setUsers(data.data.users || []);
+                }
+                else if (data.type === 'error') {
+                    setError(data.data);
+                }
+                else if (data.type === 'offer') {
+                    if (pc.current && ws.current?.readyState === WebSocket.OPEN && data.sdp) {
+                        try {
+                            if (isNegotiating.current) {
+                                console.log('Уже в процессе переговоров, игнорируем оффер');
+                                return;
+                            }
+
+                            isNegotiating.current = true;
+                            await pc.current.setRemoteDescription(
+                                new RTCSessionDescription(data.sdp)
+                            );
+
+                            const answer = await pc.current.createAnswer({
+                                offerToReceiveAudio: true,
+                                offerToReceiveVideo: true
+                            });
+
+                            const normalizedAnswer = {
+                                ...answer,
+                                sdp: normalizeSdp(answer.sdp)
+                            };
+
+                            await pc.current.setLocalDescription(normalizedAnswer);
+
+                            ws.current.send(JSON.stringify({
+                                type: 'answer',
+                                sdp: normalizedAnswer,
+                                room: roomId,
+                                username
+                            }));
+
+                            setIsCallActive(true);
+                            isNegotiating.current = false;
+                        } catch (err) {
+                            console.error('Ошибка обработки оффера:', err);
+                            setError('Ошибка обработки предложения соединения');
+                            isNegotiating.current = false;
+                        }
+                    }
+                }
+                else if (data.type === 'answer') {
+                    if (pc.current && data.sdp) {
+                        try {
+                            if (pc.current.signalingState !== 'have-local-offer') {
+                                console.log('Не в состоянии have-local-offer, игнорируем ответ');
+                                return;
+                            }
+
+                            const answerDescription: RTCSessionDescriptionInit = {
+                                type: 'answer',
+                                sdp: normalizeSdp(data.sdp.sdp)
+                            };
+
+                            console.log('Устанавливаем удаленное описание с ответом');
+                            await pc.current.setRemoteDescription(
+                                new RTCSessionDescription(answerDescription)
+                            );
+
+                            setIsCallActive(true);
+
+                            // Обрабатываем ожидающие кандидаты
+                            while (pendingIceCandidates.current.length > 0) {
+                                const candidate = pendingIceCandidates.current.shift();
+                                if (candidate) {
+                                    try {
+                                        await pc.current.addIceCandidate(candidate);
+                                    } catch (err) {
+                                        console.error('Ошибка добавления отложенного ICE кандидата:', err);
+                                    }
+                                }
+                            }
+                        } catch (err) {
+                            console.error('Ошибка установки ответа:', err);
+                            setError(`Ошибка установки ответа: ${err instanceof Error ? err.message : String(err)}`);
+                        }
+                    }
+                }
+                else if (data.type === 'ice_candidate') {
+                    if (data.ice) {
+                        try {
+                            const candidate = new RTCIceCandidate(data.ice);
+
+                            if (pc.current && pc.current.remoteDescription) {
+                                await pc.current.addIceCandidate(candidate);
+                            } else {
+                                pendingIceCandidates.current.push(candidate);
+                            }
+                        } catch (err) {
+                            console.error('Ошибка добавления ICE-кандидата:', err);
+                            setError('Ошибка добавления ICE-кандидата');
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error('Ошибка обработки сообщения:', err);
+                setError('Ошибка обработки сообщения сервера');
+            }
+        };
+
+        ws.current.onmessage = handleMessage;
+    };
+
+    const createAndSendOffer = async () => {
+        if (!pc.current || !ws.current || ws.current.readyState !== WebSocket.OPEN) {
+            return;
+        }
+
+        try {
+            const offer = await pc.current.createOffer({
+                offerToReceiveAudio: true,
+                offerToReceiveVideo: true
+            });
+
+            const standardizedOffer = {
+                ...offer,
+                sdp: normalizeSdp(offer.sdp)
+            };
+
+            console.log('Устанавливаем локальное описание с оффером');
+            await pc.current.setLocalDescription(standardizedOffer);
+
+            ws.current.send(JSON.stringify({
+                type: "offer",
+                sdp: standardizedOffer,
+                room: roomId,
+                username
+            }));
+
+            setIsCallActive(true);
+        } catch (err) {
+            console.error('Ошибка создания оффера:', err);
+            setError('Ошибка создания предложения соединения');
+        }
+    };
+
+    const initializeWebRTC = async () => {
+        try {
+            cleanup();
+
+            const config: RTCConfiguration = {
+                iceServers: [
+                    {
+                        urls: [
+                            'stun:stun.l.google.com:19302',
+                            'stun:stun1.l.google.com:19302',
+                            'stun:stun2.l.google.com:19302',
+                            'stun:stun3.l.google.com:19302',
+                            'stun:stun4.l.google.com:19302'
+                        ]
+                    }
+                ],
+                iceTransportPolicy: 'all',
+                bundlePolicy: 'max-bundle',
+                rtcpMuxPolicy: 'require'
+            };
+
+            pc.current = new RTCPeerConnection(config);
+
+            // Обработчики событий WebRTC
+            pc.current.onnegotiationneeded = () => {
+                console.log('Требуется переговорный процесс');
+            };
+
+            pc.current.onsignalingstatechange = () => {
+                console.log('Состояние сигнализации изменилось:', pc.current?.signalingState);
+            };
+
+            pc.current.onicegatheringstatechange = () => {
+                console.log('Состояние сбора ICE изменилось:', pc.current?.iceGatheringState);
+            };
+
+            pc.current.onicecandidateerror = (event) => {
+                const ignorableErrors = [701, 702, 703]; // Игнорируем стандартные ошибки STUN
+                if (!ignorableErrors.includes(event.errorCode)) {
+                    console.error('Критическая ошибка ICE кандидата:', event);
+                    setError(`Ошибка ICE соединения: ${event.errorText}`);
+                }
+            };
+
+            // Получаем медиапоток с устройства
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: deviceIds.video ? {
+                    deviceId: { exact: deviceIds.video },
+                    width: { ideal: 640 },
+                    height: { ideal: 480 },
+                    frameRate: { ideal: 30 }
+                } : {
+                    width: { ideal: 640 },
+                    height: { ideal: 480 },
+                    frameRate: { ideal: 30 }
+                },
+                audio: deviceIds.audio ? {
+                    deviceId: { exact: deviceIds.audio },
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                    autoGainControl: true
+                } : true
+            });
+
+            // Проверяем наличие видеотрека
+            const videoTracks = stream.getVideoTracks();
+            if (videoTracks.length === 0) {
+                throw new Error('Не удалось получить видеопоток с устройства');
+            }
+
+            setLocalStream(stream);
+            stream.getTracks().forEach(track => {
+                pc.current?.addTrack(track, stream);
+            });
+
+            // Обработка ICE кандидатов
+            pc.current.onicecandidate = (event) => {
+                if (event.candidate && ws.current?.readyState === WebSocket.OPEN) {
+                    try {
+                        // Фильтруем нежелательные кандидаты
+                        if (event.candidate.candidate &&
+                            event.candidate.candidate.length > 0 &&
+                            !event.candidate.candidate.includes('0.0.0.0')) {
+
+                            ws.current.send(JSON.stringify({
+                                type: 'ice_candidate',
+                                ice: {
+                                    candidate: event.candidate.candidate,
+                                    sdpMid: event.candidate.sdpMid || '0',
+                                    sdpMLineIndex: event.candidate.sdpMLineIndex || 0
+                                },
+                                room: roomId,
+                                username
+                            }));
+                        }
+                    } catch (err) {
+                        console.error('Ошибка отправки ICE кандидата:', err);
+                    }
+                }
+            };
+
+            // Обработка входящих медиапотоков
+            pc.current.ontrack = (event) => {
+                if (event.streams && event.streams[0]) {
+                    // Проверяем, что видеопоток содержит данные
+                    const videoTrack = event.streams[0].getVideoTracks()[0];
+                    if (videoTrack) {
+                        const videoElement = document.createElement('video');
+                        videoElement.srcObject = new MediaStream([videoTrack]);
+                        videoElement.onloadedmetadata = () => {
+                            if (videoElement.videoWidth > 0 && videoElement.videoHeight > 0) {
+                                setRemoteStream(event.streams[0]);
+                                setIsCallActive(true);
+                            } else {
+                                console.warn('Получен пустой видеопоток');
+                            }
+                        };
+                    } else {
+                        console.warn('Входящий поток не содержит видео');
+                    }
+                }
+            };
+
+            // Обработка состояния ICE соединения
+            pc.current.oniceconnectionstatechange = () => {
+                if (!pc.current) return;
+
+                console.log('Состояние ICE соединения:', pc.current.iceConnectionState);
+
+                switch (pc.current.iceConnectionState) {
+                    case 'failed':
+                        console.log('Перезапуск ICE...');
+                        setTimeout(() => {
+                            if (pc.current && pc.current.iceConnectionState === 'failed') {
+                                pc.current.restartIce();
+                                if (isInRoom && !isCallActive) {
+                                    createAndSendOffer().catch(console.error);
+                                }
+                            }
+                        }, 1000);
+                        break;
+
+                    case 'disconnected':
+                        console.log('Соединение прервано...');
+                        setIsCallActive(false);
+                        setTimeout(() => {
+                            if (pc.current && pc.current.iceConnectionState === 'disconnected') {
+                                createAndSendOffer().catch(console.error);
+                            }
+                        }, 2000);
+                        break;
+
+                    case 'connected':
+                        console.log('Соединение установлено!');
+                        setIsCallActive(true);
+                        break;
+
+                    case 'closed':
+                        console.log('Соединение закрыто');
+                        setIsCallActive(false);
+                        break;
+                }
+            };
+
+            // Запускаем мониторинг статистики соединения
+            startConnectionMonitoring();
+
+            return true;
+        } catch (err) {
+            console.error('Ошибка инициализации WebRTC:', err);
+            setError(`Не удалось инициализировать WebRTC: ${err instanceof Error ? err.message : String(err)}`);
+            cleanup();
+            return false;
+        }
+    };
+
+    const startConnectionMonitoring = () => {
+        if (statsInterval.current) {
+            clearInterval(statsInterval.current);
+        }
+
+        statsInterval.current = setInterval(async () => {
+            if (!pc.current || !isCallActive) return;
+
+            try {
+                const stats = await pc.current.getStats();
+                let hasActiveVideo = false;
+
+                stats.forEach(report => {
+                    if (report.type === 'inbound-rtp' && report.kind === 'video') {
+                        if (report.bytesReceived > 0) {
+                            hasActiveVideo = true;
+                        }
+                    }
+                });
+
+                if (!hasActiveVideo && isCallActive) {
+                    console.warn('Нет активного видеопотока, пытаемся восстановить...');
+                    resetConnection();
+                }
+            } catch (err) {
+                console.error('Ошибка получения статистики:', err);
+            }
+        }, 5000);
+    };
+
+    const resetConnection = async () => {
+        if (retryCount >= MAX_RETRIES) {
+            setError('Не удалось восстановить соединение после нескольких попыток');
+            leaveRoom();
+            return;
+        }
+
+        setRetryCount(prev => prev + 1);
+        console.log(`Попытка восстановления #${retryCount + 1}`);
+
+        try {
+            await leaveRoom();
+            await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+            await joinRoom(username);
+        } catch (err) {
+            console.error('Ошибка при восстановлении соединения:', err);
+        }
+    };
+
+    const restartMediaDevices = async () => {
+        try {
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+            }
+
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: deviceIds.video ? {
+                    deviceId: { exact: deviceIds.video },
+                    width: { ideal: 640 },
+                    height: { ideal: 480 },
+                    frameRate: { ideal: 30 }
+                } : {
+                    width: { ideal: 640 },
+                    height: { ideal: 480 },
+                    frameRate: { ideal: 30 }
+                },
+                audio: deviceIds.audio ? {
+                    deviceId: { exact: deviceIds.audio },
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                    autoGainControl: true
+                } : true
+            });
+
+            setLocalStream(stream);
+
+            if (pc.current) {
+                const senders = pc.current.getSenders();
+                stream.getTracks().forEach(track => {
+                    const sender = senders.find(s => s.track?.kind === track.kind);
+                    if (sender) {
+                        sender.replaceTrack(track);
+                    } else {
+                        pc.current?.addTrack(track, stream);
+                    }
+                });
+            }
+
+            return true;
+        } catch (err) {
+            console.error('Ошибка перезагрузки медиаустройств:', err);
+            setError('Ошибка доступа к медиаустройствам');
+            return false;
+        }
+    };
+
+    const joinRoom = async (uniqueUsername: string) => {
+        setError(null);
+        setIsInRoom(false);
+        setIsConnected(false);
+
+        try {
+            // 1. Подключаем WebSocket
+            if (!(await connectWebSocket())) {
+                throw new Error('Не удалось подключиться к WebSocket');
+            }
+
+            setupWebSocketListeners();
+
+            // 2. Инициализируем WebRTC
+            if (!(await initializeWebRTC())) {
+                throw new Error('Не удалось инициализировать WebRTC');
+            }
+
+            // 3. Отправляем запрос на присоединение к комнате
+            await new Promise<void>((resolve, reject) => {
+                if (!ws.current || ws.current.readyState !== WebSocket.OPEN) {
+                    reject(new Error('WebSocket не подключен'));
+                    return;
+                }
+
+                const onMessage = (event: MessageEvent) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        if (data.type === 'room_info') {
+                            cleanupEvents();
+                            resolve();
+                        } else if (data.type === 'error') {
+                            cleanupEvents();
+                            reject(new Error(data.data || 'Ошибка входа в комнату'));
+                        }
+                    } catch (err) {
+                        cleanupEvents();
+                        reject(err);
+                    }
+                };
+
+                const cleanupEvents = () => {
+                    ws.current?.removeEventListener('message', onMessage);
+                    if (connectionTimeout.current) {
+                        clearTimeout(connectionTimeout.current);
+                    }
+                };
+
+                connectionTimeout.current = setTimeout(() => {
+                    cleanupEvents();
+                    console.log('Таймаут ожидания ответа от сервера');
+                }, 10000);
+
+                ws.current.addEventListener('message', onMessage);
+                ws.current.send(JSON.stringify({
+                    action: "join",
+                    room: roomId,
+                    username: uniqueUsername
+                }));
+            });
+
+            // 4. Успешное подключение
+            setIsInRoom(true);
+            shouldCreateOffer.current = true;
+
+            // 5. Создаем оффер, если мы первые в комнате
+            if (users.length === 0) {
+                await createAndSendOffer();
+            }
+
+        } catch (err) {
+            console.error('Ошибка входа в комнату:', err);
+            setError(`Ошибка входа в комнату: ${err instanceof Error ? err.message : String(err)}`);
+
+            // Полная очистка при ошибке
+            cleanup();
+            if (ws.current) {
+                ws.current.close();
+                ws.current = null;
+            }
+
+            // Автоматическая повторная попытка
+            if (retryCount < MAX_RETRIES) {
+                setTimeout(() => {
+                    joinRoom(uniqueUsername).catch(console.error);
+                }, 2000 * (retryCount + 1));
+            }
+        }
+    };
+
+    useEffect(() => {
+        return () => {
+            leaveRoom();
+        };
+    }, []);
+
+    return {
+        localStream,
+        remoteStream,
+        users,
+        joinRoom,
+        leaveRoom,
+        isCallActive,
+        isConnected,
+        isInRoom,
+        error,
+        retryCount,
+        resetConnection,
+        restartMediaDevices
+    };
+};
+
+// file: docker-ardua/components/webrtc/types.ts
+// file: client/app/webrtc/types.ts
+export interface RoomInfo {
+users: string[];
+}
+
+export type SignalingMessage =
+| { type: 'room_info'; data: RoomInfo }
+| { type: 'error'; data: string }
+| { type: 'offer'; sdp: RTCSessionDescriptionInit }
+| { type: 'answer'; sdp: RTCSessionDescriptionInit }
+| { type: 'candidate'; candidate: RTCIceCandidateInit }
+| { type: 'join'; data: string }
+| { type: 'leave'; data: string };
+
+export interface User {
+username: string;
+stream?: MediaStream;
+peerConnection?: RTCPeerConnection;
+}
+
+export interface SignalingClientOptions {
+maxReconnectAttempts?: number;
+reconnectDelay?: number;
+connectionTimeout?: number;
+}
+
+// file: docker-ardua/components/webrtc/index.tsx
+// file: client/app/webrtc/index.tsx
+'use client'
+
+import { VideoCallApp } from './VideoCallApp';
+import { useEffect, useState } from 'react';
+import { checkWebRTCSupport } from './lib/webrtc';
+import styles from './styles.module.css';
+
+export default function WebRTCPage() {
+const [isSupported, setIsSupported] = useState<boolean | null>(null);
+const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
+
+    useEffect(() => {
+        const initialize = async () => {
+            setIsSupported(checkWebRTCSupport());
+
+            try {
+                const mediaDevices = await navigator.mediaDevices.enumerateDevices();
+                setDevices(mediaDevices);
+            } catch (err) {
+                console.error('Error getting devices:', err);
+            }
+        };
+
+        initialize();
+    }, []);
+
+    if (isSupported === false) {
         return (
-            <Container className="flex flex-col my-10">
-                <Suspense fallback={<Loading />}>
-                    123
-                </Suspense>
-            </Container>
+            <div>
+                <h1>WebRTC is not supported in your browser</h1>
+                <p>Please use a modern browser like Chrome, Firefox or Edge.</p>
+            </div>
         );
     }
 
     return (
-        // <Container className="flex flex-col my-10">
-            <Suspense fallback={<Loading />}>
-                {/*<SocketClient/>*/}
-                <WebRTC/>
-            </Suspense>
-        // </Container>
+        <div>
+            {isSupported === null ? (
+                <div>Loading...</div>
+            ) : (
+                <VideoCallApp />
+            )}
+        </div>
     );
 }
 
-// file: docker-ardua/app/(root)/layout.tsx
-import { Header } from '@/components/header';
-import type { Metadata } from 'next';
-import React, { Suspense } from 'react';
+// file: docker-ardua/components/webrtc/components/VideoPlayer.tsx
+import { useEffect, useRef, useState } from 'react'
 
-export const metadata: Metadata = {
-title: 'HEROES 3',
+interface VideoPlayerProps {
+stream: MediaStream | null;
+muted?: boolean;
+className?: string;
+transform?: string;
+}
+
+type VideoSettings = {
+rotation: number;
+flipH: boolean;
+flipV: boolean;
 };
 
-export const dynamic = 'force-dynamic'; // Отключаем SSG
+export const VideoPlayer = ({ stream, muted = false, className, transform }: VideoPlayerProps) => {
+const videoRef = useRef<HTMLVideoElement>(null)
+const [computedTransform, setComputedTransform] = useState<string>('')
 
+    useEffect(() => {
+        // Применяем трансформации при каждом обновлении transform
+        if (typeof transform === 'string') {
+            setComputedTransform(transform)
+        } else {
+            try {
+                const saved = localStorage.getItem('videoSettings')
+                if (saved) {
+                    const { rotation, flipH, flipV } = JSON.parse(saved) as VideoSettings
+                    let fallbackTransform = ''
+                    if (rotation !== 0) fallbackTransform += `rotate(${rotation}deg) `
+                    fallbackTransform += `scaleX(${flipH ? -1 : 1}) scaleY(${flipV ? -1 : 1})`
+                    setComputedTransform(fallbackTransform)
+                } else {
+                    setComputedTransform('')
+                }
+            } catch (e) {
+                console.error('Error parsing saved video settings:', e)
+                setComputedTransform('')
+            }
+        }
+    }, [transform])
 
-export default function HomeLayout({ children }: { children: React.ReactNode }) {
-return (
-<main className="min-h-screen">
-<Suspense>
-<Header />
-</Suspense>
-{children}
-</main>
-);
-}
+    useEffect(() => {
+        const video = videoRef.current
+        if (!video) return
 
-// file: docker-ardua/app/(root)/loading.tsx
-export default function Loading(){
-return <div style={{width: "50%", margin: "0 auto"}}> Loading...</div>
-}
+        const handleCanPlay = () => {
+            video.play().catch(e => {
+                console.error('Playback failed:', e)
+                video.muted = true
+                video.play().catch(e => console.error('Muted playback also failed:', e))
+            })
+        }
 
-// file: docker-ardua/app/actions.ts
-'use server';
-import {prisma} from '@/prisma/prisma-client';
-import {getUserSession} from '@/components/lib/get-user-session';
-import {Prisma} from '@prisma/client';
-import {hashSync} from 'bcrypt';
-import * as z from 'zod'
-import { revalidatePath } from 'next/cache';
-import { BetParticipant, PlayerChoice } from '@prisma/client'
+        video.addEventListener('canplay', handleCanPlay)
 
+        if (stream) {
+            video.srcObject = stream
+        } else {
+            video.srcObject = null
+        }
 
-export async function updateUserInfo(body: Prisma.UserUpdateInput) {
-try {
-const currentUser = await getUserSession();
-
-    if (!currentUser) {
-      throw new Error('Пользователь не найден');
-    }
-
-    const findUser = await prisma.user.findFirst({
-      where: {
-        id: Number(currentUser.id),
-      },
-    });
-
-    await prisma.user.update({
-      where: {
-        id: Number(currentUser.id),
-      },
-      data: {
-        fullName: body.fullName,
-        email: body.email,
-        password: body.password ? hashSync(body.password as string, 10) : findUser?.password,
-      },
-    });
-} catch (err) {
-throw err;
-}
-}
-export async function registerUser(body: Prisma.UserCreateInput) {
-try {
-const user = await prisma.user.findFirst({
-where: {
-email: body.email,
-},
-});
-if (user) {
-throw new Error('Пользователь уже существует');
-}
-await prisma.user.create({
-data: {
-fullName: body.fullName,
-email: body.email,
-password: hashSync(body.password, 10),
-},
-});
-} catch (err) {
-console.log('Error [CREATE_USER]', err);
-throw err;
-}
-}
-
-
-// file: docker-ardua/app/layout.tsx
-'use server'
-import { Nunito } from 'next/font/google';
-import './globals.css';
-import {Providers} from "@/components/providers";
-
-
-const nunito = Nunito({
-subsets: ['cyrillic'],
-variable: '--font-nunito',
-weight: ['400', '500', '600', '700', '800', '900'],
-});
-
-export default async function RootLayout({
-children,
-}: Readonly<{
-children: React.ReactNode;
-}>) {
+        return () => {
+            video.removeEventListener('canplay', handleCanPlay)
+            video.srcObject = null
+        }
+    }, [stream])
 
     return (
-        <html lang="en">
-        <head>
-            {/*<link data-rh="true" rel="icon" href="/logo.webp" />*/}
-        </head>
-        <body className={nunito.className} suppressHydrationWarning={true}>
-        <Providers>
-            <main>{children}</main>
-        </Providers>
-        </body>
-        </html>
-    );
-}
-
-// file: docker-ardua/app/globals.css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html {
-scroll-behavior: smooth;
-}
-
-@media screen and (prefers-reduced-motion: reduce) {
-html {
-scroll-behavior: auto;
-}
-}
-
-@layer base {
-:root {
---foreground: 20 14.3% 4.1%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
-
-    --primary: 22 100% 50%;
-    --primary-foreground: 60 9.1% 97.8%;
-
-    --secondary: 32 100% 98%;
-    --secondary-foreground: 24 9.8% 10%;
-
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.3% 44.7%;
-
-    --accent: 60 4.8% 95.9%;
-    --accent-foreground: 24 9.8% 10%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
-
-    --border: 20 5.9% 90%;
-    --input: 0 0% 90%;
-    --ring: 24.6 95% 53.1%;
-    --radius: 18px;
-}
-}
-.dark {
---background: 222.2 84% 4.9%;
---foreground: 210 40% 98%;
-
---card: 222.2 84% 4.9%;
---card-foreground: 210 40% 98%;
-
---popover: 222.2 84% 4.9%;
---popover-foreground: 210 40% 98%;
-
---primary: 210 40% 98%;
---primary-foreground: 222.2 47.4% 11.2%;
-
---secondary: 217.2 32.6% 17.5%;
---secondary-foreground: 210 40% 98%;
-
---muted: 217.2 32.6% 17.5%;
---muted-foreground: 215 20.2% 65.1%;
-
---accent: 217.2 32.6% 17.5%;
---accent-foreground: 210 40% 98%;
-
---destructive: 0 62.8% 30.6%;
---destructive-foreground: 210 40% 98%;
-
---border: 217.2 32.6% 17.5%;
---input: 217.2 32.6% 17.5%;
---ring: 212.7 26.8% 83.9%;
-}
-
-* {
-  font-family: var(--font-nunito), sans-serif;
-  }
-
-.scrollbar::-webkit-scrollbar {
-width: 4px;
-}
-
-.scrollbar::-webkit-scrollbar-track {
-border-radius: 6px;
-background: #fff;
-}
-
-.scrollbar::-webkit-scrollbar-thumb {
-background: #dbdadd;
-border-radius: 6px;
-}
-
-.scrollbar::-webkit-scrollbar-thumb:hover {
-background: #dbdadd;
-}
-
-@layer utilities {
-.text-balance {
-text-wrap: balance;
-}
-}
-
-@layer base {
-* {
-  @apply border-border;
-  }
-  body {
-  @apply bg-background text-foreground;
-  }
-  }
-
-#nprogress .bar {
-@apply bg-primary !important;
-}
-
-#nprogress .peg {
-@apply shadow-md shadow-primary !important;
-}
-
-#nprogress .spinner-icon {
-@apply border-t-primary border-l-primary !important;
-}
-.p-4 {
-padding: 0.3rem;
-}
-
-.table-cell-text {
-white-space: nowrap; /* Запрет на перенос текста */
-overflow: hidden; /* Обрезать текст за пределами блока */
-text-overflow: ellipsis; /* Добавлять троеточие вместо обрезанного текста */
-width: 100%; /* Фиксированная ширина */
-}
-
-.font-medium {
-font-weight: 0;
-}
-.p-4 {
-padding: .2rem;
-}
-
-/*.dialog-content {*/
-/*  width: 95vw; !* Полная ширина экрана *!*/
-/*  height: 90vh; !* Полная высота экрана *!*/
-/*  padding: 0; !* Убираем отступы *!*/
-/*  background: rgba(0, 0, 0, 0.8); !* Полупрозрачный фон для затемнения *!*/
-/*}*/
-
-.image-container {
-position: relative; /* Для использования layout="fill" */
-width: 100%;
-height: 100%;
-}
-
-.image-container img {
-object-fit: contain; /* Или cover, в зависимости от ваших предпочтений */
-}
-
-.image-container { /*  Класс для контейнера изображения */
-width: 50%; /* Или любое другое значение */
-height: auto; /*  Сохраняем соотношение сторон */
-}
-
-// file: docker-ardua/components/ui/form.tsx
-"use client"
-
-import * as React from "react"
-import * as LabelPrimitive from "@radix-ui/react-label"
-import { Slot } from "@radix-ui/react-slot"
-import {
-Controller,
-ControllerProps,
-FieldPath,
-FieldValues,
-FormProvider,
-useFormContext,
-} from "react-hook-form"
-
-import { cn } from "@/components/lib/utils"
-import { Label } from "@/components/ui/label"
-
-const Form = FormProvider
-
-type FormFieldContextValue<
-TFieldValues extends FieldValues = FieldValues,
-TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = {
-name: TName
-}
-
-const FormFieldContext = React.createContext<FormFieldContextValue>(
-{} as FormFieldContextValue
-)
-
-const FormField = <
-TFieldValues extends FieldValues = FieldValues,
-TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
->({
-...props
-}: ControllerProps<TFieldValues, TName>) => {
-return (
-<FormFieldContext.Provider value={{ name: props.name }}>
-<Controller {...props} />
-</FormFieldContext.Provider>
-)
-}
-
-const useFormField = () => {
-const fieldContext = React.useContext(FormFieldContext)
-const itemContext = React.useContext(FormItemContext)
-const { getFieldState, formState } = useFormContext()
-
-const fieldState = getFieldState(fieldContext.name, formState)
-
-if (!fieldContext) {
-throw new Error("useFormField should be used within <FormField>")
-}
-
-const { id } = itemContext
-
-return {
-id,
-name: fieldContext.name,
-formItemId: `${id}-form-item`,
-formDescriptionId: `${id}-form-item-description`,
-formMessageId: `${id}-form-item-message`,
-...fieldState,
-}
-}
-
-type FormItemContextValue = {
-id: string
-}
-
-const FormItemContext = React.createContext<FormItemContextValue>(
-{} as FormItemContextValue
-)
-
-const FormItem = React.forwardRef<
-HTMLDivElement,
-React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-const id = React.useId()
-
-return (
-<FormItemContext.Provider value={{ id }}>
-<div ref={ref} className={cn("space-y-2", className)} {...props} />
-</FormItemContext.Provider>
-)
-})
-FormItem.displayName = "FormItem"
-
-const FormLabel = React.forwardRef<
-React.ElementRef<typeof LabelPrimitive.Root>,
-React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
->(({ className, ...props }, ref) => {
-const { error, formItemId } = useFormField()
-
-return (
-<Label
-ref={ref}
-className={cn(error && "text-destructive", className)}
-htmlFor={formItemId}
-{...props}
-/>
-)
-})
-FormLabel.displayName = "FormLabel"
-
-const FormControl = React.forwardRef<
-React.ElementRef<typeof Slot>,
-React.ComponentPropsWithoutRef<typeof Slot>
->(({ ...props }, ref) => {
-const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
-
-return (
-<Slot
-ref={ref}
-id={formItemId}
-aria-describedby={
-!error
-? `${formDescriptionId}`
-: `${formDescriptionId} ${formMessageId}`
-}
-aria-invalid={!!error}
-{...props}
-/>
-)
-})
-FormControl.displayName = "FormControl"
-
-const FormDescription = React.forwardRef<
-HTMLParagraphElement,
-React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => {
-const { formDescriptionId } = useFormField()
-
-return (
-<p
-ref={ref}
-id={formDescriptionId}
-className={cn("text-sm text-muted-foreground", className)}
-{...props}
-/>
-)
-})
-FormDescription.displayName = "FormDescription"
-
-const FormMessage = React.forwardRef<
-HTMLParagraphElement,
-React.HTMLAttributes<HTMLParagraphElement>
->(({ className, children, ...props }, ref) => {
-const { error, formMessageId } = useFormField()
-const body = error ? String(error?.message) : children
-
-if (!body) {
-return null
-}
-
-return (
-<p
-ref={ref}
-id={formMessageId}
-className={cn("text-sm font-medium text-destructive", className)}
-{...props}
->
-{body}
-</p>
-)
-})
-FormMessage.displayName = "FormMessage"
-
-export {
-useFormField,
-Form,
-FormItem,
-FormLabel,
-FormControl,
-FormDescription,
-FormMessage,
-FormField,
+        <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            muted={muted}
+            className={className}
+            style={{ transform: computedTransform, transformOrigin: 'center center' }}
+        />
+    )
 }
 
 
-// file: docker-ardua/components/ui/index.ts
-export { Button } from './button';
-export { Checkbox } from './checkbox';
-export { Dialog } from './dialog';
-export { Drawer } from './drawer';
-export { Input } from './input';
-export { Popover } from './popover';
-export { Select } from './select';
-export { Skeleton } from './skeleton';
-export { Slider } from './slider';
-export { Textarea } from './textarea';
-export { Label } from './label';
-export { Form } from './form';
-
-
-// file: docker-ardua/components/ui/tabs.tsx
-// components/ui/tabs.tsx
-"use client"
-
-import * as React from "react"
-import * as TabsPrimitive from "@radix-ui/react-tabs"
-
-import { cn } from "@/components/lib/utils"
-
-const Tabs = TabsPrimitive.Root
-
-const TabsList = React.forwardRef<
-React.ElementRef<typeof TabsPrimitive.List>,
-React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
->(({ className, ...props }, ref) => (
-<TabsPrimitive.List
-ref={ref}
-className={cn(
-"inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
-className
-)}
-{...props}
-/>
-))
-TabsList.displayName = TabsPrimitive.List.displayName
-
-const TabsTrigger = React.forwardRef<
-React.ElementRef<typeof TabsPrimitive.Trigger>,
-React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
->(({ className, ...props }, ref) => (
-<TabsPrimitive.Trigger
-ref={ref}
-className={cn(
-"inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
-className
-)}
-{...props}
-/>
-))
-TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
-
-const TabsContent = React.forwardRef<
-React.ElementRef<typeof TabsPrimitive.Content>,
-React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
->(({ className, ...props }, ref) => (
-<TabsPrimitive.Content
-ref={ref}
-className={cn(
-"mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-className
-)}
-{...props}
-/>
-))
-TabsContent.displayName = TabsPrimitive.Content.displayName
-
-export { Tabs, TabsList, TabsTrigger, TabsContent }
-
-// file: docker-ardua/components/ui/input.tsx
-import * as React from 'react';
-
-import { cn } from '@/components/lib/utils';
-
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
-
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-({ className, type, ...props }, ref) => {
-return (
-<input
-type={type}
-className={cn(
-'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-className,
-)}
-ref={ref}
-{...props}
-/>
-);
-},
-);
-Input.displayName = 'Input';
-
-export { Input };
-
-
-// file: docker-ardua/components/ui/label.tsx
-"use client"
-
-import * as React from "react"
-import * as LabelPrimitive from "@radix-ui/react-label"
-import { cva, type VariantProps } from "class-variance-authority"
-
-import { cn } from "@/components/lib/utils"
-
-const labelVariants = cva(
-"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-)
-
-const Label = React.forwardRef<
-React.ElementRef<typeof LabelPrimitive.Root>,
-React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
-VariantProps<typeof labelVariants>
->(({ className, ...props }, ref) => (
-<LabelPrimitive.Root
-ref={ref}
-className={cn(labelVariants(), className)}
-{...props}
-/>
-))
-Label.displayName = LabelPrimitive.Root.displayName
-
-export { Label }
-
-
-// file: docker-ardua/components/ui/sheet.tsx
-"use client"
-
-import * as React from "react"
-import * as SheetPrimitive from "@radix-ui/react-dialog"
-import { cva, type VariantProps } from "class-variance-authority"
-import { X } from "lucide-react"
-
-import { cn } from "@/components/lib/utils"
-
-const Sheet = SheetPrimitive.Root
-
-const SheetTrigger = SheetPrimitive.Trigger
-
-const SheetClose = SheetPrimitive.Close
-
-const SheetPortal = SheetPrimitive.Portal
-
-const SheetOverlay = React.forwardRef<
-React.ElementRef<typeof SheetPrimitive.Overlay>,
-React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-<SheetPrimitive.Overlay
-className={cn(
-"fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-className
-)}
-{...props}
-ref={ref}
-/>
-))
-SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
-
-const sheetVariants = cva(
-"fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
-{
-variants: {
-side: {
-top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
-bottom:
-"inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
-right:
-"inset-y-0 right-0 h-full w-3/4  border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
-},
-},
-defaultVariants: {
-side: "right",
-},
-}
-)
-
-interface SheetContentProps
-extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
-VariantProps<typeof sheetVariants> {}
-
-const SheetContent = React.forwardRef<
-React.ElementRef<typeof SheetPrimitive.Content>,
-SheetContentProps
->(({ side = "right", className, children, ...props }, ref) => (
-<SheetPortal>
-<SheetOverlay />
-<SheetPrimitive.Content
-ref={ref}
-className={cn(sheetVariants({ side }), className)}
-{...props}
->
-{children}
-<SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-<X className="h-4 w-4" />
-<span className="sr-only">Close</span>
-</SheetPrimitive.Close>
-</SheetPrimitive.Content>
-</SheetPortal>
-))
-SheetContent.displayName = SheetPrimitive.Content.displayName
-
-const SheetHeader = ({
-className,
-...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "flex flex-col space-y-2 text-center sm:text-left",
-      className
-    )}
-    {...props}
-  />
-)
-SheetHeader.displayName = "SheetHeader"
-
-const SheetFooter = ({
-className,
-...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
-      className
-    )}
-    {...props}
-  />
-)
-SheetFooter.displayName = "SheetFooter"
-
-const SheetTitle = React.forwardRef<
-React.ElementRef<typeof SheetPrimitive.Title>,
-React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
->(({ className, ...props }, ref) => (
-<SheetPrimitive.Title
-ref={ref}
-className={cn("text-lg font-semibold text-foreground", className)}
-{...props}
-/>
-))
-SheetTitle.displayName = SheetPrimitive.Title.displayName
-
-const SheetDescription = React.forwardRef<
-React.ElementRef<typeof SheetPrimitive.Description>,
-React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
->(({ className, ...props }, ref) => (
-<SheetPrimitive.Description
-ref={ref}
-className={cn("text-sm text-muted-foreground", className)}
-{...props}
-/>
-))
-SheetDescription.displayName = SheetPrimitive.Description.displayName
-
-export {
-Sheet,
-SheetPortal,
-SheetOverlay,
-SheetTrigger,
-SheetClose,
-SheetContent,
-SheetHeader,
-SheetFooter,
-SheetTitle,
-SheetDescription,
-}
-
-
-// file: docker-ardua/components/ui/table.tsx
-import * as React from "react"
-
-import { cn } from "@/components/lib/utils"
-
-const Table = React.forwardRef<
-HTMLTableElement,
-React.HTMLAttributes<HTMLTableElement>
->(({ className, ...props }, ref) => (
-  <div className="relative w-full overflow-auto">
-    <table
-      ref={ref}
-      className={cn("w-full caption-bottom text-sm", className)}
-      {...props}
-    />
-  </div>
-))
-Table.displayName = "Table"
-
-const TableHeader = React.forwardRef<
-HTMLTableSectionElement,
-React.HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => (
-  <thead ref={ref} className={cn("[&_tr]:border-b", className)} {...props} />
-))
-TableHeader.displayName = "TableHeader"
-
-const TableBody = React.forwardRef<
-HTMLTableSectionElement,
-React.HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => (
-  <tbody
-    ref={ref}
-    className={cn("[&_tr:last-child]:border-0", className)}
-    {...props}
-  />
-))
-TableBody.displayName = "TableBody"
-
-const TableFooter = React.forwardRef<
-HTMLTableSectionElement,
-React.HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => (
-  <tfoot
-    ref={ref}
-    className={cn(
-      "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
-      className
-    )}
-    {...props}
-  />
-))
-TableFooter.displayName = "TableFooter"
-
-const TableRow = React.forwardRef<
-HTMLTableRowElement,
-React.HTMLAttributes<HTMLTableRowElement>
->(({ className, ...props }, ref) => (
-  <tr
-    ref={ref}
-    className={cn(
-      "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
-      className
-    )}
-    {...props}
-  />
-))
-TableRow.displayName = "TableRow"
-
-const TableHead = React.forwardRef<
-HTMLTableCellElement,
-React.ThHTMLAttributes<HTMLTableCellElement>
->(({ className, ...props }, ref) => (
-  <th
-    ref={ref}
-    className={cn(
-      "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
-      className
-    )}
-    {...props}
-  />
-))
-TableHead.displayName = "TableHead"
-
-const TableCell = React.forwardRef<
-HTMLTableCellElement,
-React.TdHTMLAttributes<HTMLTableCellElement>
->(({ className, ...props }, ref) => (
-  <td
-    ref={ref}
-    className={cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
-    {...props}
-  />
-))
-TableCell.displayName = "TableCell"
-
-const TableCaption = React.forwardRef<
-HTMLTableCaptionElement,
-React.HTMLAttributes<HTMLTableCaptionElement>
->(({ className, ...props }, ref) => (
-  <caption
-    ref={ref}
-    className={cn("mt-4 text-sm text-muted-foreground", className)}
-    {...props}
-  />
-))
-TableCaption.displayName = "TableCaption"
-
-export {
-Table,
-TableHeader,
-TableBody,
-TableFooter,
-TableHead,
-TableRow,
-TableCell,
-TableCaption,
-}
-
-
-// file: docker-ardua/components/ui/button.tsx
-'use client';
-
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cva, type VariantProps } from 'class-variance-authority';
-
-import { cn } from '@/components/lib/utils';
-import { Loader } from 'lucide-react';
-
-const buttonVariants = cva(
-'inline-flex items-center justify-center whitespace-nowrap rounded-md active:translate-y-[1px] text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:bg-gray-500',
-{
-variants: {
-variant: {
-default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-outline: 'border border-primary text-primary bg-transparent hover:bg-secondary',
-secondary: 'bg-secondary text-primary hover:bg-secondary/50',
-ghost: 'hover:bg-secondary hover:text-secondary-foreground',
-link: 'text-primary underline-offset-4 hover:underline',
-},
-size: {
-default: 'h-10 px-4 py-2',
-sm: 'h-9 rounded-md px-3',
-lg: 'h-11 rounded-md px-8',
-icon: 'h-10 w-10',
-},
-},
-defaultVariants: {
-variant: 'default',
-size: 'default',
-},
-},
-);
-
-export interface ButtonProps
-extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-VariantProps<typeof buttonVariants> {
-asChild?: boolean;
-loading?: boolean;
-}
-
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-({ className, variant, size, asChild = false, children, disabled, loading, ...props }, ref) => {
-const Comp = asChild ? Slot : 'button';
-return (
-<Comp
-disabled={disabled || loading}
-className={cn(buttonVariants({ variant, size, className }))}
-ref={ref}
-{...props}>
-{!loading ? children : <Loader className="w-5 h-5 animate-spin" />}
-</Comp>
-);
-},
-);
-Button.displayName = 'Button';
-
-export { Button, buttonVariants };
-
-
-// file: docker-ardua/components/ui/dialog.tsx
-'use client';
-
-import * as React from 'react';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { X } from 'lucide-react';
-
-import { cn } from '@/components/lib/utils';
-
-const Dialog = DialogPrimitive.Root;
-
-const DialogTrigger = DialogPrimitive.Trigger;
-
-const DialogPortal = DialogPrimitive.Portal;
-
-const DialogClose = DialogPrimitive.Close;
-
-const DialogOverlay = React.forwardRef<
-React.ElementRef<typeof DialogPrimitive.Overlay>,
-React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-<DialogPrimitive.Overlay
-ref={ref}
-className={cn(
-'fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-className,
-)}
-{...props}
-/>
-));
-DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
-
-const DialogContent = React.forwardRef<
-React.ElementRef<typeof DialogPrimitive.Content>,
-React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-<DialogPortal>
-<DialogOverlay />
-<DialogPrimitive.Content
-ref={ref}
-className={cn(
-'fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg',
-className,
-)}
-{...props}>
-{children}
-<DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-<X className="h-4 w-4" />
-<span className="sr-only">Close</span>
-</DialogPrimitive.Close>
-</DialogPrimitive.Content>
-</DialogPortal>
-));
-DialogContent.displayName = DialogPrimitive.Content.displayName;
-
-const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('flex flex-col space-y-1.5 text-center sm:text-left', className)} {...props} />
-);
-DialogHeader.displayName = 'DialogHeader';
-
-const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)}
-    {...props}
-  />
-);
-DialogFooter.displayName = 'DialogFooter';
-
-const DialogTitle = React.forwardRef<
-React.ElementRef<typeof DialogPrimitive.Title>,
-React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ className, ...props }, ref) => (
-<DialogPrimitive.Title
-ref={ref}
-className={cn('text-lg font-semibold leading-none tracking-tight', className)}
-{...props}
-/>
-));
-DialogTitle.displayName = DialogPrimitive.Title.displayName;
-
-const DialogDescription = React.forwardRef<
-React.ElementRef<typeof DialogPrimitive.Description>,
-React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
->(({ className, ...props }, ref) => (
-<DialogPrimitive.Description
-ref={ref}
-className={cn('text-sm text-muted-foreground', className)}
-{...props}
-/>
-));
-DialogDescription.displayName = DialogPrimitive.Description.displayName;
-
-export {
-Dialog,
-DialogPortal,
-DialogOverlay,
-DialogClose,
-DialogTrigger,
-DialogContent,
-DialogHeader,
-DialogFooter,
-DialogTitle,
-DialogDescription,
+// file: docker-ardua/components/webrtc/components/DeviceSelector.tsx
+//app\webrtc\components\DeviceSelector.tsx
+import { useState, useEffect } from 'react';
+import styles from '../styles.module.css';
+
+interface DeviceSelectorProps {
+devices?: MediaDeviceInfo[];
+selectedDevices: {
+video: string;
+audio: string;
 };
-
-
-// file: docker-ardua/components/ui/drawer.tsx
-'use client';
-
-import * as React from 'react';
-import { Drawer as DrawerPrimitive } from 'vaul';
-
-import { cn } from '@/components/lib/utils';
-
-const Drawer = ({
-shouldScaleBackground = true,
-...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-<DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />
-);
-Drawer.displayName = 'Drawer';
-
-const DrawerTrigger = DrawerPrimitive.Trigger;
-
-const DrawerPortal = DrawerPrimitive.Portal;
-
-const DrawerClose = DrawerPrimitive.Close;
-
-const DrawerOverlay = React.forwardRef<
-React.ElementRef<typeof DrawerPrimitive.Overlay>,
-React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-<DrawerPrimitive.Overlay
-ref={ref}
-className={cn('fixed inset-0 z-50 bg-black/80', className)}
-{...props}
-/>
-));
-DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
-
-const DrawerContent = React.forwardRef<
-React.ElementRef<typeof DrawerPrimitive.Content>,
-React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-<DrawerPortal>
-<DrawerOverlay />
-<DrawerPrimitive.Content
-ref={ref}
-className={cn(
-'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background',
-className,
-)}
-{...props}>
-<div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
-{children}
-</DrawerPrimitive.Content>
-</DrawerPortal>
-));
-DrawerContent.displayName = 'DrawerContent';
-
-const DrawerHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('grid gap-1.5 p-4 text-center sm:text-left', className)} {...props} />
-);
-DrawerHeader.displayName = 'DrawerHeader';
-
-const DrawerFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('mt-auto flex flex-col gap-2 p-4', className)} {...props} />
-);
-DrawerFooter.displayName = 'DrawerFooter';
-
-const DrawerTitle = React.forwardRef<
-React.ElementRef<typeof DrawerPrimitive.Title>,
-React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
->(({ className, ...props }, ref) => (
-<DrawerPrimitive.Title
-ref={ref}
-className={cn('text-lg font-semibold leading-none tracking-tight', className)}
-{...props}
-/>
-));
-DrawerTitle.displayName = DrawerPrimitive.Title.displayName;
-
-const DrawerDescription = React.forwardRef<
-React.ElementRef<typeof DrawerPrimitive.Description>,
-React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
->(({ className, ...props }, ref) => (
-<DrawerPrimitive.Description
-ref={ref}
-className={cn('text-sm text-muted-foreground', className)}
-{...props}
-/>
-));
-DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
-
-export {
-Drawer,
-DrawerPortal,
-DrawerOverlay,
-DrawerTrigger,
-DrawerClose,
-DrawerContent,
-DrawerHeader,
-DrawerFooter,
-DrawerTitle,
-DrawerDescription,
-};
-
-
-// file: docker-ardua/components/ui/select.tsx
-'use client';
-
-import * as React from 'react';
-import * as SelectPrimitive from '@radix-ui/react-select';
-import { Check, ChevronDown, ChevronUp } from 'lucide-react';
-
-import { cn } from '@/components/lib/utils';
-
-const Select = SelectPrimitive.Root;
-
-const SelectGroup = SelectPrimitive.Group;
-
-const SelectValue = SelectPrimitive.Value;
-
-const SelectTrigger = React.forwardRef<
-React.ElementRef<typeof SelectPrimitive.Trigger>,
-React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-<SelectPrimitive.Trigger
-ref={ref}
-className={cn(
-'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
-className,
-)}
-{...props}>
-{children}
-<SelectPrimitive.Icon asChild>
-<ChevronDown className="h-4 w-4 opacity-50" />
-</SelectPrimitive.Icon>
-</SelectPrimitive.Trigger>
-));
-SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
-
-const SelectScrollUpButton = React.forwardRef<
-React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
-React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
->(({ className, ...props }, ref) => (
-<SelectPrimitive.ScrollUpButton
-ref={ref}
-className={cn('flex cursor-default items-center justify-center py-1', className)}
-{...props}>
-<ChevronUp className="h-4 w-4" />
-</SelectPrimitive.ScrollUpButton>
-));
-SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
-
-const SelectScrollDownButton = React.forwardRef<
-React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
-React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
->(({ className, ...props }, ref) => (
-<SelectPrimitive.ScrollDownButton
-ref={ref}
-className={cn('flex cursor-default items-center justify-center py-1', className)}
-{...props}>
-<ChevronDown className="h-4 w-4" />
-</SelectPrimitive.ScrollDownButton>
-));
-SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
-
-const SelectContent = React.forwardRef<
-React.ElementRef<typeof SelectPrimitive.Content>,
-React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = 'popper', ...props }, ref) => (
-<SelectPrimitive.Portal>
-<SelectPrimitive.Content
-ref={ref}
-className={cn(
-'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-position === 'popper' &&
-'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
-className,
-)}
-position={position}
-{...props}>
-<SelectScrollUpButton />
-<SelectPrimitive.Viewport
-className={cn(
-'p-1',
-position === 'popper' &&
-'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]',
-)}>
-{children}
-</SelectPrimitive.Viewport>
-<SelectScrollDownButton />
-</SelectPrimitive.Content>
-</SelectPrimitive.Portal>
-));
-SelectContent.displayName = SelectPrimitive.Content.displayName;
-
-const SelectLabel = React.forwardRef<
-React.ElementRef<typeof SelectPrimitive.Label>,
-React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
->(({ className, ...props }, ref) => (
-<SelectPrimitive.Label
-ref={ref}
-className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)}
-{...props}
-/>
-));
-SelectLabel.displayName = SelectPrimitive.Label.displayName;
-
-const SelectItem = React.forwardRef<
-React.ElementRef<typeof SelectPrimitive.Item>,
-React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({ className, children, ...props }, ref) => (
-<SelectPrimitive.Item
-ref={ref}
-className={cn(
-'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-className,
-)}
-{...props}>
-<span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-<SelectPrimitive.ItemIndicator>
-<Check className="h-4 w-4" />
-</SelectPrimitive.ItemIndicator>
-</span>
-
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-</SelectPrimitive.Item>
-));
-SelectItem.displayName = SelectPrimitive.Item.displayName;
-
-const SelectSeparator = React.forwardRef<
-React.ElementRef<typeof SelectPrimitive.Separator>,
-React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
->(({ className, ...props }, ref) => (
-<SelectPrimitive.Separator
-ref={ref}
-className={cn('-mx-1 my-1 h-px bg-muted', className)}
-{...props}
-/>
-));
-SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
-
-export {
-Select,
-SelectGroup,
-SelectValue,
-SelectTrigger,
-SelectContent,
-SelectLabel,
-SelectItem,
-SelectSeparator,
-SelectScrollUpButton,
-SelectScrollDownButton,
-};
-
-
-// file: docker-ardua/components/ui/slider.tsx
-'use client';
-
-import * as React from 'react';
-import * as SliderPrimitive from '@radix-ui/react-slider';
-
-import { cn } from '@/components/lib/utils';
-
-const Slider = React.forwardRef<
-React.ElementRef<typeof SliderPrimitive.Root>,
-React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
->(({ className, ...props }, ref) => (
-<SliderPrimitive.Root
-ref={ref}
-className={cn('relative flex w-full touch-none select-none items-center', className)}
-{...props}>
-<SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
-<SliderPrimitive.Range className="absolute h-full bg-primary" />
-</SliderPrimitive.Track>
-<SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" />
-</SliderPrimitive.Root>
-));
-Slider.displayName = SliderPrimitive.Root.displayName;
-
-export { Slider };
-
-
-// file: docker-ardua/components/ui/popover.tsx
-'use client';
-
-import * as React from 'react';
-import * as PopoverPrimitive from '@radix-ui/react-popover';
-
-import { cn } from '@/components/lib/utils';
-
-const Popover = PopoverPrimitive.Root;
-
-const PopoverTrigger = PopoverPrimitive.Trigger;
-
-const PopoverContent = React.forwardRef<
-React.ElementRef<typeof PopoverPrimitive.Content>,
-React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->(({ className, align = 'center', sideOffset = 4, ...props }, ref) => (
-<PopoverPrimitive.Portal>
-<PopoverPrimitive.Content
-ref={ref}
-align={align}
-sideOffset={sideOffset}
-className={cn(
-'z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-className,
-)}
-{...props}
-/>
-</PopoverPrimitive.Portal>
-));
-PopoverContent.displayName = PopoverPrimitive.Content.displayName;
-
-export { Popover, PopoverTrigger, PopoverContent };
-
-
-// file: docker-ardua/components/ui/checkbox.tsx
-'use client';
-
-import * as React from 'react';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { Check } from 'lucide-react';
-
-import { cn } from '@/components/lib/utils';
-
-const Checkbox = React.forwardRef<
-React.ElementRef<typeof CheckboxPrimitive.Root>,
-React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
-<CheckboxPrimitive.Root
-ref={ref}
-className={cn(
-'peer h-4 w-4 shrink-0 bg-gray-100 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
-className,
-)}
-{...props}>
-<CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
-<Check className="h-4 w-4" strokeWidth={3} />
-</CheckboxPrimitive.Indicator>
-</CheckboxPrimitive.Root>
-));
-Checkbox.displayName = CheckboxPrimitive.Root.displayName;
-
-export { Checkbox };
-
-
-// file: docker-ardua/components/ui/skeleton.tsx
-import { cn } from '@/components/lib/utils';
-
-function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-return <div className={cn('animate-pulse rounded-md bg-muted', className)} {...props} />;
+onChange: (type: 'video' | 'audio', deviceId: string) => void;
+onRefresh?: () => Promise<void>;
 }
 
-export { Skeleton };
+export const DeviceSelector = ({
+devices,
+selectedDevices,
+onChange,
+onRefresh
+}: DeviceSelectorProps) => {
+const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
+const [audioDevices, setAudioDevices] = useState<MediaDeviceInfo[]>([]);
+const [isRefreshing, setIsRefreshing] = useState(false);
 
+    useEffect(() => {
+        if (devices) {
+            updateDeviceLists(devices);
+        }
+    }, [devices]);
 
-// file: docker-ardua/components/ui/textarea.tsx
-import * as React from "react"
+    const updateDeviceLists = (deviceList: MediaDeviceInfo[]) => {
+        setVideoDevices(deviceList.filter(d => d.kind === 'videoinput'));
+        setAudioDevices(deviceList.filter(d => d.kind === 'audioinput'));
+    };
 
-import { cn } from "@/components/lib/utils"
+    const handleRefresh = async () => {
+        if (!onRefresh) return;
 
-export interface TextareaProps
-extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+        setIsRefreshing(true);
+        try {
+            await onRefresh();
+        } catch (error) {
+            console.error('Error refreshing devices:', error);
+        } finally {
+            setIsRefreshing(false);
+        }
+    };
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-({ className, ...props }, ref) => {
-return (
-<textarea
-className={cn(
-"flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-className
-)}
-ref={ref}
-{...props}
-/>
-)
-}
-)
-Textarea.displayName = "Textarea"
-
-export { Textarea }
-
-
-// file: docker-ardua/components/ui/dropdown-menu.tsx
-"use client"
-
-import * as React from "react"
-import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
-import { Check, ChevronRight, Circle } from "lucide-react"
-
-import { cn } from "@/components/lib/utils"
-
-const DropdownMenu = DropdownMenuPrimitive.Root
-
-const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger
-
-const DropdownMenuGroup = DropdownMenuPrimitive.Group
-
-const DropdownMenuPortal = DropdownMenuPrimitive.Portal
-
-const DropdownMenuSub = DropdownMenuPrimitive.Sub
-
-const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup
-
-const DropdownMenuSubTrigger = React.forwardRef<
-React.ElementRef<typeof DropdownMenuPrimitive.SubTrigger>,
-React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger> & {
-inset?: boolean
-}
->(({ className, inset, children, ...props }, ref) => (
-<DropdownMenuPrimitive.SubTrigger
-ref={ref}
-className={cn(
-"flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-inset && "pl-8",
-className
-)}
-{...props}
->
-    {children}
-    <ChevronRight className="ml-auto" />
-</DropdownMenuPrimitive.SubTrigger>
-))
-DropdownMenuSubTrigger.displayName =
-DropdownMenuPrimitive.SubTrigger.displayName
-
-const DropdownMenuSubContent = React.forwardRef<
-React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,
-React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>
->(({ className, ...props }, ref) => (
-<DropdownMenuPrimitive.SubContent
-ref={ref}
-className={cn(
-"z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-className
-)}
-{...props}
-/>
-))
-DropdownMenuSubContent.displayName =
-DropdownMenuPrimitive.SubContent.displayName
-
-const DropdownMenuContent = React.forwardRef<
-React.ElementRef<typeof DropdownMenuPrimitive.Content>,
-React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
->(({ className, sideOffset = 4, ...props }, ref) => (
-<DropdownMenuPrimitive.Portal>
-<DropdownMenuPrimitive.Content
-ref={ref}
-sideOffset={sideOffset}
-className={cn(
-"z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-className
-)}
-{...props}
-/>
-</DropdownMenuPrimitive.Portal>
-))
-DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName
-
-const DropdownMenuItem = React.forwardRef<
-React.ElementRef<typeof DropdownMenuPrimitive.Item>,
-React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
-inset?: boolean
-}
->(({ className, inset, ...props }, ref) => (
-<DropdownMenuPrimitive.Item
-ref={ref}
-className={cn(
-"relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-inset && "pl-8",
-className
-)}
-{...props}
-/>
-))
-DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName
-
-const DropdownMenuCheckboxItem = React.forwardRef<
-React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
-React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
->(({ className, children, checked, ...props }, ref) => (
-<DropdownMenuPrimitive.CheckboxItem
-ref={ref}
-className={cn(
-"relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-className
-)}
-checked={checked}
-{...props}
->
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-      <DropdownMenuPrimitive.ItemIndicator>
-        <Check className="h-4 w-4" />
-      </DropdownMenuPrimitive.ItemIndicator>
-    </span>
-    {children}
-</DropdownMenuPrimitive.CheckboxItem>
-))
-DropdownMenuCheckboxItem.displayName =
-DropdownMenuPrimitive.CheckboxItem.displayName
-
-const DropdownMenuRadioItem = React.forwardRef<
-React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
-React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>
->(({ className, children, ...props }, ref) => (
-<DropdownMenuPrimitive.RadioItem
-ref={ref}
-className={cn(
-"relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-className
-)}
-{...props}
->
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-      <DropdownMenuPrimitive.ItemIndicator>
-        <Circle className="h-2 w-2 fill-current" />
-      </DropdownMenuPrimitive.ItemIndicator>
-    </span>
-    {children}
-</DropdownMenuPrimitive.RadioItem>
-))
-DropdownMenuRadioItem.displayName = DropdownMenuPrimitive.RadioItem.displayName
-
-const DropdownMenuLabel = React.forwardRef<
-React.ElementRef<typeof DropdownMenuPrimitive.Label>,
-React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label> & {
-inset?: boolean
-}
->(({ className, inset, ...props }, ref) => (
-<DropdownMenuPrimitive.Label
-ref={ref}
-className={cn(
-"px-2 py-1.5 text-sm font-semibold",
-inset && "pl-8",
-className
-)}
-{...props}
-/>
-))
-DropdownMenuLabel.displayName = DropdownMenuPrimitive.Label.displayName
-
-const DropdownMenuSeparator = React.forwardRef<
-React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
-React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
->(({ className, ...props }, ref) => (
-<DropdownMenuPrimitive.Separator
-ref={ref}
-className={cn("-mx-1 my-1 h-px bg-muted", className)}
-{...props}
-/>
-))
-DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName
-
-const DropdownMenuShortcut = ({
-className,
-...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
-return (
-<span
-className={cn("ml-auto text-xs tracking-widest opacity-60", className)}
-{...props}
-/>
-)
-}
-DropdownMenuShortcut.displayName = "DropdownMenuShortcut"
-
-export {
-DropdownMenu,
-DropdownMenuTrigger,
-DropdownMenuContent,
-DropdownMenuItem,
-DropdownMenuCheckboxItem,
-DropdownMenuRadioItem,
-DropdownMenuLabel,
-DropdownMenuSeparator,
-DropdownMenuShortcut,
-DropdownMenuGroup,
-DropdownMenuPortal,
-DropdownMenuSub,
-DropdownMenuSubContent,
-DropdownMenuSubTrigger,
-DropdownMenuRadioGroup,
-}
-
-
-// file: docker-ardua/components/lib/utils.ts
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
-
-export function cn(...inputs: ClassValue[]) {
-return twMerge(clsx(inputs))
-}
-
-
-// file: docker-ardua/components/lib/get-user-session.ts
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/components/constants/auth-options';
-
-export const getUserSession = async () => {
-const session = await getServerSession(authOptions);
-
-return session?.user ?? null;
-};
-
-
-// file: docker-ardua/components/form/index.ts
-export { FormInput } from './form-input';
-export { FormTextarea } from './form-textarea';
-
-
-// file: docker-ardua/components/form/form-input.tsx
-'use client';
-
-import { useFormContext } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
-import { ClearButton } from '@/components/clear-button';
-import { ErrorText } from '@/components/error-text';
-import { RequiredSymbol } from '@/components/required-symbol';
-
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-name: string;
-label?: string;
-required?: boolean;
-className?: string;
-}
-
-export const FormInput: React.FC<Props> = ({ className, name, label, required, ...props }) => {
-const {
-register,
-formState: { errors },
-watch,
-setValue,
-} = useFormContext();
-
-const value = watch(name);
-const errorText = errors[name]?.message as string;
-
-const onClickClear = () => {
-setValue(name, '', { shouldValidate: true });
-};
-
-return (
-<div className={className}>
-{label && (
-<p className="font-medium mb-2">
-{label} {required && <RequiredSymbol />}
-</p>
-)}
-
-        <div className="relative">
-          <Input className="h-12 text-md" {...register(name)} {...props} />
-
-          {value && <ClearButton onClick={onClickClear} />}
-        </div>
-
-        {errorText && <ErrorText text={errorText} className="mt-2" />}
-      </div>
-);
-};
-
-
-
-
-
-
-ESP8266 Control Panel - Connect (если стоит галочка "Auto connect on page load") - то при первой загрузке страницы,
-   должно происходить подключение к socket (SocketClient) - хук useAutoConnectSocket подключения - который будет проверять "Auto connect on page load = true" (данные в localStorage)
-   то хук дает подключается к сокету как в SocketClient
-
-статус подключение socket отображаться в ESP Connected в (VideoCallApp) .
-
-так же нужно оставить ручное подключение, если "Auto connect on page load" = false
-<div className="w-full max-w-md space-y-4 bg-transparent rounded-lg p-6 border border-gray-200 backdrop-blur-sm">
-{/* Header and Status */}
-<div className="flex flex-col items-center space-y-2">
-<h1 className="text-2xl font-bold text-gray-800">ESP8266 Control Panel</h1>
-<div className="flex items-center space-x-2">
-<div className={`w-4 h-4 rounded-full ${
-                            isConnected
-                                ? (isIdentified
-                                    ? (espConnected ? 'bg-green-500' : 'bg-yellow-500')
-                                    : 'bg-yellow-500')
-                                : 'bg-red-500'
-                        }`}></div>
-<span className="text-sm font-medium text-gray-600">
-{isConnected
-? (isIdentified
-? (espConnected ? 'Connected' : 'Waiting for ESP')
-: 'Connecting...')
-: 'Disconnected'}
-</span>
-</div>
-</div>
-
-                {/* Device Selection */}
-                <div className="space-y-2">
-                    <Label className="block text-sm font-medium text-gray-700">Device ID</Label>
-                    <div className="flex space-x-2">
-                        <Select
-                            value={inputDeviceId}
-                            onValueChange={handleDeviceChange}
-                            disabled={isConnected && !autoReconnect}
-                        >
-                            <SelectTrigger className="flex-1 bg-transparent">
-                                <SelectValue placeholder="Select device"/>
-                            </SelectTrigger>
-                            <SelectContent className="bg-transparent backdrop-blur-sm border border-gray-200">
-                                {deviceList.map(id => (
-                                    <SelectItem key={id} value={id} className="hover:bg-gray-100/50">{id}</SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
-                </div>
-
-                {/* New Device Input */}
-                <div className="space-y-2">
-                    <Label className="block text-sm font-medium text-gray-700">Add New Device</Label>
-                    <div className="flex space-x-2">
-                        <Input
-                            value={newDeviceId}
-                            onChange={(e) => setNewDeviceId(e.target.value)}
-                            placeholder="Enter new device ID"
-                            className="flex-1 bg-transparent"
-                        />
-                        <Button
-                            onClick={saveNewDeviceId}
-                            disabled={!newDeviceId}
-                            className="bg-blue-600 hover:bg-blue-700"
-                        >
-                            Add
-                        </Button>
-                    </div>
-                </div>
-
-                {/* Connection Controls */}
-                <div className="flex space-x-2">
-                    <Button
-                        onClick={() => connectWebSocket(currentDeviceIdRef.current)}
-                        disabled={isConnected}
-                        className="flex-1 bg-green-600 hover:bg-green-700"
-                    >
-                        Connect
-                    </Button>
-                    <Button
-                        onClick={disconnectWebSocket}
-                        disabled={!isConnected || autoConnect}
-                        className="flex-1 bg-red-600 hover:bg-red-700"
-                    >
-                        Disconnect
-                    </Button>
-                </div>
-
-                {/* Options */}
-                <div className="space-y-3">
-                    <div className="flex items-center space-x-2">
-                        <Checkbox
-                            id="auto-reconnect"
-                            checked={autoReconnect}
-                            onCheckedChange={toggleAutoReconnect}
-                            className="border-gray-300 bg-transparent"
-                        />
-                        <Label htmlFor="auto-reconnect" className="text-sm font-medium text-gray-700">
-                            Auto reconnect when changing device
-                        </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <Checkbox
-                            id="auto-connect"
-                            checked={autoConnect}
-                            onCheckedChange={handleAutoConnectChange}
-                            className="border-gray-300 bg-transparent"
-                        />
-                        <Label htmlFor="auto-connect" className="text-sm font-medium text-gray-700">
-                            Auto connect on page load
-                        </Label>
-                    </div>
-                </div>
-
-                {/* Controls Button */}
-                <Button
-                    onClick={() => setControlVisible(!controlVisible)}
-                    className="w-full bg-indigo-600 hover:bg-indigo-700"
+    return (
+        <div className={styles.deviceSelector}>
+            <div className={styles.deviceGroup}>
+                <label>Камера:</label>
+                <select
+                    value={selectedDevices.video}
+                    onChange={(e) => onChange('video', e.target.value)}
+                    disabled={videoDevices.length === 0}
                 >
-                    {controlVisible ? "Hide Motor Controls" : "Show Motor Controls"}
-                </Button>
-
-                {/* Logs Toggle */}
-                <Button
-                    onClick={() => setLogVisible(!logVisible)}
-                    variant="outline"
-                    className="w-full border-gray-300 bg-transparent hover:bg-gray-100/50"
-                >
-                    {logVisible ? (
-                        <ChevronUp className="h-4 w-4 mr-2"/>
+                    {videoDevices.length === 0 ? (
+                        <option value="">Камеры не найдены</option>
                     ) : (
-                        <ChevronDown className="h-4 w-4 mr-2"/>
+                        <>
+                            <option value="">-- Выберите камеру --</option>
+                            {videoDevices.map(device => (
+                                <option key={device.deviceId} value={device.deviceId}>
+                                    {device.label || `Камера ${videoDevices.indexOf(device) + 1}`}
+                                </option>
+                            ))}
+                        </>
                     )}
-                    {logVisible ? "Hide Logs" : "Show Logs"}
-                </Button>
+                </select>
+            </div>
 
-                {/* Logs Display */}
-                {logVisible && (
-                    <div className="border border-gray-200 rounded-md overflow-hidden bg-transparent backdrop-blur-sm">
-                        <div className="h-48 overflow-y-auto p-2 bg-transparent text-xs font-mono">
-                            {log.length === 0 ? (
-                                <div className="text-gray-500 italic">No logs yet</div>
+            <div className={styles.deviceGroup}>
+                <label>Микрофон:</label>
+                <select
+                    value={selectedDevices.audio}
+                    onChange={(e) => onChange('audio', e.target.value)}
+                    disabled={audioDevices.length === 0}
+                >
+                    {audioDevices.length === 0 ? (
+                        <option value="">Микрофоны не найдены</option>
+                    ) : (
+                        <>
+                            <option value="">-- Выберите микрофон --</option>
+                            {audioDevices.map(device => (
+                                <option key={device.deviceId} value={device.deviceId}>
+                                    {device.label || `Микрофон ${audioDevices.indexOf(device) + 1}`}
+                                </option>
+                            ))}
+                        </>
+                    )}
+                </select>
+            </div>
+
+            <button
+                onClick={handleRefresh}
+                className={styles.refreshButton}
+                disabled={isRefreshing}
+            >
+                {isRefreshing ? 'Обновление...' : 'Обновить устройства'}
+            </button>
+        </div>
+    );
+};
+
+// file: docker-ardua/components/webrtc/VideoCallApp.tsx
+// file: docker-ardua/components/webrtc/VideoCallApp.tsx
+'use client'
+
+import { useWebRTC } from './hooks/useWebRTC'
+import styles from './styles.module.css'
+import { VideoPlayer } from './components/VideoPlayer'
+import { DeviceSelector } from './components/DeviceSelector'
+import {useEffect, useState, useRef, useCallback} from 'react'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
+import { ChevronDown, ChevronUp } from "lucide-react"
+import SocketClient from '../control/SocketClient'
+
+
+type VideoSettings = {
+rotation: number
+flipH: boolean
+flipV: boolean
+}
+
+export const VideoCallApp = () => {
+const [devices, setDevices] = useState<MediaDeviceInfo[]>([])
+const [selectedDevices, setSelectedDevices] = useState({
+video: '',
+audio: ''
+})
+const [showLocalVideo, setShowLocalVideo] = useState(true);
+const [videoTransform, setVideoTransform] = useState('')
+const [roomId, setRoomId] = useState('room1')
+const [username, setUsername] = useState('user_' + Math.floor(Math.random() * 1000))
+const [hasPermission, setHasPermission] = useState(false)
+const [devicesLoaded, setDevicesLoaded] = useState(false)
+const [isJoining, setIsJoining] = useState(false)
+const [autoJoin, setAutoJoin] = useState(false)
+const [activeTab, setActiveTab] = useState<'webrtc' | 'esp' | 'controls' | null>('esp') // По умолчанию открыта вкладка ESP
+const [logVisible, setLogVisible] = useState(false)
+const [videoSettings, setVideoSettings] = useState<VideoSettings>({
+rotation: 0,
+flipH: false,
+flipV: false
+})
+const videoContainerRef = useRef<HTMLDivElement>(null)
+const [isFullscreen, setIsFullscreen] = useState(false)
+const remoteVideoRef = useRef<HTMLVideoElement>(null)
+
+    const {
+        localStream,
+        remoteStream,
+        users,
+        joinRoom,
+        leaveRoom,
+        isCallActive,
+        isConnected,
+        isInRoom,
+        error
+    } = useWebRTC(selectedDevices, username, roomId)
+
+    const loadSettings = () => {
+        try {
+            const saved = localStorage.getItem('videoSettings')
+            if (saved) {
+                const parsed = JSON.parse(saved) as VideoSettings
+                setVideoSettings(parsed)
+                applyVideoTransform(parsed)
+            }
+        } catch (e) {
+            console.error('Failed to load video settings', e)
+        }
+    }
+
+    const saveSettings = (settings: VideoSettings) => {
+        localStorage.setItem('videoSettings', JSON.stringify(settings))
+    }
+
+    const applyVideoTransform = (settings: VideoSettings) => {
+        const { rotation, flipH, flipV } = settings
+        let transform = ''
+        if (rotation !== 0) transform += `rotate(${rotation}deg) `
+        transform += `scaleX(${flipH ? -1 : 1}) scaleY(${flipV ? -1 : 1})`
+        setVideoTransform(transform)
+
+        if (remoteVideoRef.current) {
+            remoteVideoRef.current.style.transform = transform
+            remoteVideoRef.current.style.transformOrigin = 'center center'
+            remoteVideoRef.current.style.width = '100%'
+            remoteVideoRef.current.style.height = '100%'
+            remoteVideoRef.current.style.objectFit = 'contain'
+        }
+    }
+
+    const loadDevices = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true
+            })
+
+            stream.getTracks().forEach(track => track.stop())
+
+            const devices = await navigator.mediaDevices.enumerateDevices()
+            setDevices(devices)
+            setHasPermission(true)
+            setDevicesLoaded(true)
+
+            const savedVideoDevice = localStorage.getItem('videoDevice')
+            const savedAudioDevice = localStorage.getItem('audioDevice')
+
+            const videoDevice = devices.find(d =>
+                d.kind === 'videoinput' &&
+                (savedVideoDevice ? d.deviceId === savedVideoDevice : true)
+            )
+            const audioDevice = devices.find(d =>
+                d.kind === 'audioinput' &&
+                (savedAudioDevice ? d.deviceId === savedAudioDevice : true)
+            )
+
+            setSelectedDevices({
+                video: videoDevice?.deviceId || '',
+                audio: audioDevice?.deviceId || ''
+            })
+        } catch (error) {
+            console.error('Device access error:', error)
+            setHasPermission(false)
+            setDevicesLoaded(true)
+        }
+    }
+
+    useEffect(() => {
+        const savedShowLocalVideo = localStorage.getItem('showLocalVideo');
+        if (savedShowLocalVideo !== null) {
+            setShowLocalVideo(savedShowLocalVideo === 'true');
+        }
+    }, []);
+
+    const toggleLocalVideo = () => {
+        const newState = !showLocalVideo;
+        setShowLocalVideo(newState);
+        localStorage.setItem('showLocalVideo', String(newState));
+    };
+
+    useEffect(() => {
+        const savedAutoJoin = localStorage.getItem('autoJoin') === 'true'
+        setAutoJoin(savedAutoJoin)
+        loadSettings()
+        loadDevices()
+
+        const handleFullscreenChange = () => {
+            const isNowFullscreen = !!document.fullscreenElement
+            setIsFullscreen(isNowFullscreen)
+
+            if (remoteVideoRef.current) {
+                setTimeout(() => {
+                    applyVideoTransform(videoSettings)
+                }, 50)
+            }
+        }
+
+        document.addEventListener('fullscreenchange', handleFullscreenChange)
+        return () => {
+            document.removeEventListener('fullscreenchange', handleFullscreenChange)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (autoJoin && hasPermission && devicesLoaded && selectedDevices.video && selectedDevices.audio) {
+            joinRoom(username)
+        }
+    }, [autoJoin, hasPermission, devicesLoaded, selectedDevices])
+
+    useEffect(() => {
+        if (selectedDevices.video) localStorage.setItem('videoDevice', selectedDevices.video)
+        if (selectedDevices.audio) localStorage.setItem('audioDevice', selectedDevices.audio)
+    }, [selectedDevices])
+
+    const updateVideoSettings = (newSettings: Partial<VideoSettings>) => {
+        const updated = { ...videoSettings, ...newSettings }
+        setVideoSettings(updated)
+        applyVideoTransform(updated)
+        saveSettings(updated)
+    }
+
+    const handleDeviceChange = (type: 'video' | 'audio', deviceId: string) => {
+        setSelectedDevices(prev => ({
+            ...prev,
+            [type]: deviceId
+        }))
+    }
+
+    const handleJoinRoom = async () => {
+        setIsJoining(true)
+        try {
+            await joinRoom(username)
+        } catch (error) {
+            console.error('Error joining room:', error)
+        } finally {
+            setIsJoining(false)
+        }
+    }
+
+    const toggleFullscreen = async () => {
+        if (!videoContainerRef.current) return
+
+        try {
+            if (!document.fullscreenElement) {
+                await videoContainerRef.current.requestFullscreen()
+                setTimeout(() => {
+                    applyVideoTransform(videoSettings)
+                }, 50)
+            } else {
+                await document.exitFullscreen()
+            }
+        } catch (err) {
+            console.error('Fullscreen error:', err)
+        }
+    }
+
+    const rotateVideo = (degrees: number) => {
+        updateVideoSettings({ rotation: degrees })
+    }
+
+    const flipVideoHorizontal = () => {
+        updateVideoSettings({ flipH: !videoSettings.flipH })
+    }
+
+    const flipVideoVertical = () => {
+        updateVideoSettings({ flipV: !videoSettings.flipV })
+    }
+
+    const resetVideo = () => {
+        updateVideoSettings({ rotation: 0, flipH: false, flipV: false })
+    }
+
+    const toggleTab = (tab: 'webrtc' | 'esp' | 'controls') => {
+        setActiveTab(activeTab === tab ? null : tab)
+    }
+
+    return (
+        <div className={styles.container}>
+            {/* Основное видео (удаленный участник) */}
+            <div
+                ref={videoContainerRef}
+                className={styles.remoteVideoContainer}
+            >
+                <VideoPlayer
+                    stream={remoteStream}
+                    className={styles.remoteVideo}
+                    transform={videoTransform}
+                />
+                {/*<div className={styles.remoteVideoLabel}>Удаленный участник</div>*/}
+            </div>
+
+            {/* Локальное видео (маленькое в углу) */}
+            {showLocalVideo && (
+                <div className={styles.localVideoContainer}>
+                    <VideoPlayer
+                        stream={localStream}
+                        muted
+                        className={styles.localVideo}
+                    />
+                    <div className={styles.localVideoLabel}>Вы ({username})</div>
+                </div>
+            )}
+
+            {/* Панель управления сверху */}
+            <div className={styles.topControls}>
+                <div className={styles.tabsContainer}>
+                    <button
+                        onClick={() => toggleTab('webrtc')}
+                        className={`${styles.tabButton} ${activeTab === 'webrtc' ? styles.activeTab : ''}`}
+                    >
+                        {activeTab === 'webrtc' ? '▲' : '▼'} <img src="/cam.svg" alt="Camera" />
+                    </button>
+
+                    <button
+                        onClick={() => toggleTab('esp')}
+                        className={`${styles.tabButton} ${activeTab === 'esp' ? styles.activeTab : ''}`}
+                    >
+                        {activeTab === 'esp' ? '▲' : '▼'} <img src="/joy.svg" alt="Joystick" />
+                    </button>
+
+                    <button
+                        onClick={() => toggleTab('controls')}
+                        className={`${styles.tabButton} ${activeTab === 'controls' ? styles.activeTab : ''}`}
+                    >
+                        {activeTab === 'controls' ? '▲' : '▼'} <img src="/img.svg" alt="Image" />
+                    </button>
+
+                </div>
+            </div>
+
+            {/* Контент вкладок */}
+            {activeTab === 'webrtc' && (
+                <div className={styles.tabContent}>
+                    {error && <div className={styles.error}>{error}</div>}
+                    <div className={styles.controls}>
+                        <div className={styles.connectionStatus}>
+                            Статус: {isConnected ? (isInRoom ? `В комнате ${roomId}` : 'Подключено') : 'Отключено'}
+                            {isCallActive && ' (Звонок активен)'}
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <div className="flex items-center space-x-2">
+                                <Checkbox
+                                    id="autoJoin"
+                                    checked={autoJoin}
+                                    onCheckedChange={(checked) => {
+                                        setAutoJoin(!!checked)
+                                        localStorage.setItem('autoJoin', checked ? 'true' : 'false')
+                                    }}
+                                />
+                                <Label htmlFor="autoJoin">
+                                    Автоматическое подключение
+                                </Label>
+                            </div>
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <Input
+                                id="room"
+                                value={roomId}
+                                onChange={(e) => setRoomId(e.target.value)}
+                                disabled={isInRoom}
+                                placeholder="ID комнаты"
+                            />
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <Input
+                                id="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                disabled={isInRoom}
+                                placeholder="Ваше имя"
+                            />
+                        </div>
+
+                        {!isInRoom ? (
+                            <Button
+                                onClick={handleJoinRoom}
+                                disabled={!hasPermission || isJoining || (autoJoin && isInRoom)}
+                                className={styles.button}
+                            >
+                                {isJoining ? 'Подключение...' : 'Войти в комнату'}
+                            </Button>
+                        ) : (
+                            <Button
+                                onClick={leaveRoom}
+                                className={styles.button}
+                            >
+                                Покинуть комнату
+                            </Button>
+                        )}
+
+                        <div className={styles.userList}>
+                            <h3>Участники ({users.length}):</h3>
+                            <ul>
+                                {users.map((user, index) => (
+                                    <li key={index}>{user}</li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className={styles.deviceSelection}>
+                            <h3>Выбор устройств:</h3>
+                            {devicesLoaded ? (
+                                <DeviceSelector
+                                    devices={devices}
+                                    selectedDevices={selectedDevices}
+                                    onChange={handleDeviceChange}
+                                    onRefresh={loadDevices}
+                                />
                             ) : (
-                                log.slice().reverse().map((entry, index) => (
-                                    <div
-                                        key={index}
-                                        className={`truncate py-1 ${
-                                            entry.type === 'client' ? 'text-blue-600' :
-                                                entry.type === 'esp' ? 'text-green-600' :
-                                                    entry.type === 'server' ? 'text-purple-600' :
-                                                        'text-red-600 font-semibold'
-                                        }`}
-                                    >
-                                        {entry.message}
-                                    </div>
-                                ))
+                                <div>Загрузка устройств...</div>
                             )}
                         </div>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
+
+            {activeTab === 'esp' && (
+                <div className={styles.tabContent}>
+                    <SocketClient/>
+                </div>
+            )}
+            {activeTab === 'controls' && (
+                <div className={styles.tabContent}>
+                    <div className={styles.videoControlsTab}>
+                        <div className={styles.controlButtons}>
+                            <button
+                                onClick={() => rotateVideo(0)}
+                                className={`${styles.controlButton} ${videoSettings.rotation === 0 ? styles.active : ''}`}
+                                title="Обычная ориентация"
+                            >
+                                ↻0°
+                            </button>
+                            <button
+                                onClick={() => rotateVideo(90)}
+                                className={`${styles.controlButton} ${videoSettings.rotation === 90 ? styles.active : ''}`}
+                                title="Повернуть на 90°"
+                            >
+                                ↻90°
+                            </button>
+                            <button
+                                onClick={() => rotateVideo(180)}
+                                className={`${styles.controlButton} ${videoSettings.rotation === 180 ? styles.active : ''}`}
+                                title="Повернуть на 180°"
+                            >
+                                ↻180°
+                            </button>
+                            <button
+                                onClick={() => rotateVideo(270)}
+                                className={`${styles.controlButton} ${videoSettings.rotation === 270 ? styles.active : ''}`}
+                                title="Повернуть на 270°"
+                            >
+                                ↻270°
+                            </button>
+                            <button
+                                onClick={flipVideoHorizontal}
+                                className={`${styles.controlButton} ${videoSettings.flipH ? styles.active : ''}`}
+                                title="Отразить по горизонтали"
+                            >
+                                ⇄
+                            </button>
+                            <button
+                                onClick={flipVideoVertical}
+                                className={`${styles.controlButton} ${videoSettings.flipV ? styles.active : ''}`}
+                                title="Отразить по вертикали"
+                            >
+                                ⇅
+                            </button>
+                            <button
+                                onClick={resetVideo}
+                                className={styles.controlButton}
+                                title="Сбросить настройки"
+                            >
+                                ⟲
+                            </button>
+                            <button
+                                onClick={toggleFullscreen}
+                                className={styles.controlButton}
+                                title={isFullscreen ? 'Выйти из полноэкранного режима' : 'Полноэкранный режим'}
+                            >
+                                {isFullscreen ? '✕' : '⛶'}
+                            </button>
+                            <button
+                                onClick={toggleLocalVideo}
+                                className={`${styles.controlButton} ${!showLocalVideo ? styles.active : ''}`}
+                                title={showLocalVideo ? 'Скрыть локальное видео' : 'Показать локальное видео'}
+                            >
+                                {showLocalVideo ? '👁' : '👁‍🗨'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {logVisible && (
+                <div className={styles.logsPanel}>
+                    <div className={styles.logsContent}>
+                        {[...Array(50)].map((_, i) => (
+                            <div key={i} className={styles.logEntry}>
+                                Sample log entry {i + 1}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    )
+}
+
+// file: docker-ardua/components/webrtc/styles.module.css
+.container {
+position: relative;
+width: 99vw;
+height: 100vh;
+overflow: hidden;
+background-color: #000;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.remoteVideoContainer {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #000;
+transition: transform 0.3s ease;
+}
+
+:fullscreen .remoteVideoContainer {
+width: 100vw;
+height: 100vh;
+background-color: #000;
+}
+
+.remoteVideo {
+width: 100%;
+height: 133%;
+object-fit: contain;
+transition: transform 0.3s ease;
+}
+
+.localVideoContainer {
+position: absolute;
+bottom: 20px;
+right: 20px;
+width: 20vw;
+max-width: 300px;
+min-width: 150px;
+height: 15vh;
+max-height: 200px;
+min-height: 100px;
+z-index: 10;
+border: 2px solid #fff;
+border-radius: 8px;
+overflow: hidden;
+background-color: #000;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.localVideo {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transform: scaleX(-1);
+}
+
+.remoteVideoLabel,
+.localVideoLabel {
+position: absolute;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0, 0, 0, 0.7);
+color: white;
+padding: 8px 12px;
+font-size: 14px;
+text-align: center;
+backdrop-filter: blur(5px);
+}
+
+.topControls {
+position: absolute;
+top: 15px;
+left: 15px;
+
+    display: flex;
+    justify-content: space-between;
+
+    z-index: 20;
 
 
-Добавить кнопку в \\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\header.tsx для отображения и управления моторами с отправкой данных на сервер через
-import { create } from 'zustand'
-import { immer } from 'zustand/middleware/immer'
+}
+
+.toggleControlsButton {
+background-color: rgba(255, 255, 255, 0.15);
+color: white;
+border: none;
+border-radius: 20px;
+padding: 8px 16px;
+font-size: 14px;
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 8px;
+transition: all 0.2s ease;
+}
+
+.toggleControlsButton:hover {
+background-color: rgba(255, 255, 255, 0.25);
+}
+
+.videoControls {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+justify-content: flex-end;
+}
+
+.controlButton {
+background-color: rgba(255, 255, 255, 0.15);
+color: #a6a6a6;
+border: none;
+border-radius: 20px;
+min-width: 40px;
+height: 40px;
+font-size: 14px;
+cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: all 0.2s ease;
+padding: 0 12px;
+}
+
+.controlButton:hover {
+background-color: rgba(255, 255, 255, 0.25);
+}
+
+.controlButton.active {
+background-color: rgba(0, 150, 255, 0.7);
+color: white;
+}
+
+.controlsOverlay {
+position: absolute;
+top: 70px;
+left: 0;
+right: 0;
+background-color: rgba(0, 0, 0, 0);
+color: white;
+padding: 25px;
+z-index: 15;
+max-height: calc(100vh - 100px);
+overflow-y: auto;
+backdrop-filter: none;
+border-radius: 0 0 12px 12px;
+animation: fadeIn 0.3s ease-out;
+}
+
+.controls {
+display: flex;
+flex-direction: column;
+gap: 20px;
+max-width: 600px;
+margin: 0 auto;
+}
+
+.inputGroup {
+color: #6a6a6a;
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+.button {
+width: 100%;
+padding: 12px;
+font-weight: 500;
+transition: all 0.2s ease;
+}
+
+.userList {
+color: #6a6a6a;
+margin-top: 20px;
+background-color: rgba(255, 255, 255, 0.1);
+padding: 15px;
+border-radius: 8px;
+}
+
+.userList h3 {
+margin-top: 0;
+margin-bottom: 10px;
+font-size: 16px;
+}
+
+.userList ul {
+list-style: none;
+padding: 0;
+margin: 0;
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+.userList li {
+padding: 8px 12px;
+background-color: rgba(255, 255, 255, 0.1);
+border-radius: 6px;
+}
+
+.error {
+color: #ff6b6b;
+background-color: rgba(255, 107, 107, 0.1);
+padding: 12px;
+border-radius: 6px;
+border-left: 4px solid #ff6b6b;
+margin-bottom: 20px;
+}
+
+.connectionStatus {
+padding: 12px;
+/*background-color: rgba(255, 255, 255, 0.1);*/
+border-radius: 6px;
+margin-bottom: 15px;
+font-weight: 500;
+}
+
+.deviceSelection {
+color: #6a6a6a;
+margin-top: 20px;
+/*background-color: rgba(255, 255, 255, 0.1);*/
+padding: 15px;
+border-radius: 8px;
+}
+
+.deviceSelection h3 {
+margin-top: 0;
+margin-bottom: 15px;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(-10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+.localVideoContainer {
+width: 25vw;
+height: 20vh;
+}
+
+    .controlsOverlay {
+        padding: 15px;
+    }
+
+    .controlButton {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .videoControls {
+        gap: 6px;
+    }
+}
+
+/* Новые стили для вкладок */
+.tabsContainer {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+}
+
+.tabButton {
+background-color: rgba(255, 255, 255, 0.15);
+color: white;
+border: none;
+border-radius: 20px;
+padding: 8px 16px;
+font-size: 14px;
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 8px;
+transition: all 0.2s ease;
+}
+
+.tabButton:hover {
+background-color: rgba(255, 255, 255, 0.25);
+}
+
+.activeTab {
+background-color: rgba(0, 150, 255, 0.7);
+}
+
+.tabContent {
+position: absolute;
+top: 70px;
+left: 0;
+right: 0;
+/*background-color: rgba(0, 0, 0, 0);*/
+color: #c3c3c3;
+z-index: 15;
+max-height: calc(100vh - 0px);
+overflow-y: auto;
+backdrop-filter: none;
+border-radius: 0 0 12px 12px;
+animation: fadeIn 0.3s ease-out;
+}
+
+.videoControlsTab {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.controlButtons {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+justify-content: center;
+}
+
+/* Стили для панели логов */
+.logsPanel {
+position: fixed;
+top: 0;
+right: 0;
+bottom: 0;
+width: 300px;
+background-color: rgba(0, 0, 0, 0.9);
+z-index: 1000;
+padding: 15px;
+overflow-y: auto;
+backdrop-filter: blur(5px);
+user-select: none;
+pointer-events: none;
+}
+
+.logsContent {
+font-family: monospace;
+font-size: 12px;
+color: #ccc;
+line-height: 1.5;
+}
+
+.logEntry {
+margin-bottom: 4px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+.tabsContainer {
+gap: 6px;
+}
+
+    .tabButton {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .tabContent {
+        padding: 15px;
+    }
+
+    .logsPanel {
+        width: 200px;
+    }
+}
 
 
-так же сделай кнопку которая даст возможность управления const Joystick = ({ motor, onChange, direction, speed }: JoystickProps) => { через  useMotorControlStore - у
+.statusIndicator {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-left: 15px;
+padding: 6px 12px;
+border-radius: 20px;
+background-color: rgba(0, 0, 0, 0.5);
+backdrop-filter: blur(5px);
+}
 
-дай абсолютно полные кода, полные код каждого файла, комментарии на русском.
+.statusDot {
+width: 10px;
+height: 10px;
+border-radius: 50%;
+}
+
+.statusText {
+font-size: 14px;
+color: white;
+}
+
+.connected {
+background-color: #10B981;
+}
+
+.pending {
+background-color: #F59E0B;
+animation: pulse 1.5s infinite;
+}
+
+.disconnected {
+background-color: #EF4444;
+}
+
+@keyframes pulse {
+0%, 100% {
+opacity: 1;
+}
+50% {
+opacity: 0.5;
+}
+}
+
+.statusIndicator {
+/* существующие стили */
+will-change: contents; /* Оптимизация для браузера */
+}
+
+.statusDot, .statusText {
+transition: all 0.3s ease;
+}
+
+
+В {activeTab === 'controls' &&  нужно добавить две кнопки
+1. не отправлять локальный звук
+2. не получать удаленный звук
+   состояние кнопок сохранить в localStore
+   комментарии на русском

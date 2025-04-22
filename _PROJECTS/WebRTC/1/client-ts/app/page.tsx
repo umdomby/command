@@ -166,8 +166,8 @@ export default function Home() {
 
       return true;
     } catch (err) {
-      console.error('WebRTC_Android_Server initialization failed:', err);
-      setError('Failed to initialize WebRTC_Android_Server');
+      console.error('ANDROID_WEBRTC initialization failed:', err);
+      setError('Failed to initialize ANDROID_WEBRTC');
       cleanup();
       return false;
     }

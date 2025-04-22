@@ -15,7 +15,7 @@ function App() {
   const pc = useRef();
 
   const cleanup = () => {
-    // Закрываем WebRTC_Android_Server соединение
+    // Закрываем ANDROID_WEBRTC соединение
     if (pc.current) {
       pc.current.onicecandidate = null;
       pc.current.ontrack = null;
@@ -149,8 +149,8 @@ function App() {
 
       return true;
     } catch (err) {
-      console.error('WebRTC_Android_Server initialization failed:', err);
-      setError('Failed to initialize WebRTC_Android_Server');
+      console.error('ANDROID_WEBRTC initialization failed:', err);
+      setError('Failed to initialize ANDROID_WEBRTC');
       cleanup();
       return false;
     }

@@ -1,4 +1,4 @@
-sudo ss -tulnp | grep 1444
+sudo ss -tulnp | grep 8080
 sudo kill -9 58195
 
 sudo netstat -ltpn
@@ -13,7 +13,7 @@ sudo lsof -i TCP:80
 sudo lsof -i TCP:3003
 ```
 
-sudo kill -9 `sudo lsof -t -i:3002`  or  sudo kill -9 $(sudo lsof -t -i:9001)
+sudo kill -9 `sudo lsof -t -i:3001`  or  sudo kill -9 $(sudo lsof -t -i:9001)
 sudo kill -9 `sudo lsof -t -i:8081`
 sudo kill -9 `sudo lsof -t -i:8080`
 sudo kill -9 `sudo lsof -t -i:80`

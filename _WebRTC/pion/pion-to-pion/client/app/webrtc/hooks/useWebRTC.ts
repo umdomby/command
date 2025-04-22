@@ -184,8 +184,8 @@ export const useWebRTC = (
 
             return true;
         } catch (err) {
-            console.error('WebRTC_Android_Server initialization error:', err);
-            setError('Failed to initialize WebRTC_Android_Server');
+            console.error('ANDROID_WEBRTC initialization error:', err);
+            setError('Failed to initialize ANDROID_WEBRTC');
             cleanup();
             return false;
         }
