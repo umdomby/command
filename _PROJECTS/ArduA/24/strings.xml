@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyTest</string>
+    <string name="save_room">Save room</string>
+    <string name="delete_room">Delete</string>
+    <string name="cannot_delete_last">Cannot delete the last room</string>
+    <string name="room_not_found">Room not found in list</string>
+</resources>
