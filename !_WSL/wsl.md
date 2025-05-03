@@ -49,7 +49,7 @@ netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=6379
 New-NetFirewallRule -DisplayName "Allow Port 5432" -Direction Inbound -Protocol TCP -LocalPort 5432 -Action Allow
 
 
-New-NetFirewallRule -DisplayName "Allow Port 3001" -Direction Inbound -Protocol TCP -LocalPort 3001 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 5349" -Direction Inbound -Protocol TCP -LocalPort 5349 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 6379" -Direction Inbound -Protocol TCP -LocalPort 6379 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 9093" -Direction Inbound -Protocol TCP -LocalPort 9093 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 1444" -Direction Inbound -Protocol TCP -LocalPort 1444 -Action Allow

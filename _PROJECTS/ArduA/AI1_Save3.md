@@ -1,215 +1,8 @@
-Ведомый браузер
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\components\DeviceSelector.tsx
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\components\VideoPlayer.tsx
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\hooks
+ведомый
 \\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\hooks\useWebRTC.ts
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\lib
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\lib\signaling.ts
 \\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\lib\webrtc.ts
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\index.tsx
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\styles.module.css
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\types.ts
 \\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\VideoCallApp.tsx
 
-
-// file: docker-ardua/components/webrtc/components/DeviceSelector.tsx
-//app\webrtc\components\DeviceSelector.tsx
-import { useState, useEffect } from 'react';
-import styles from '../styles.module.css';
-
-interface DeviceSelectorProps {
-devices?: MediaDeviceInfo[];
-selectedDevices: {
-video: string;
-audio: string;
-};
-onChange: (type: 'video' | 'audio', deviceId: string) => void;
-onRefresh?: () => Promise<void>;
-}
-
-export const DeviceSelector = ({
-devices,
-selectedDevices,
-onChange,
-onRefresh
-}: DeviceSelectorProps) => {
-const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
-const [audioDevices, setAudioDevices] = useState<MediaDeviceInfo[]>([]);
-const [isRefreshing, setIsRefreshing] = useState(false);
-
-    useEffect(() => {
-        if (devices) {
-            updateDeviceLists(devices);
-        }
-    }, [devices]);
-
-    const updateDeviceLists = (deviceList: MediaDeviceInfo[]) => {
-        setVideoDevices(deviceList.filter(d => d.kind === 'videoinput'));
-        setAudioDevices(deviceList.filter(d => d.kind === 'audioinput'));
-    };
-
-    const handleRefresh = async () => {
-        if (!onRefresh) return;
-
-        setIsRefreshing(true);
-        try {
-            await onRefresh();
-        } catch (error) {
-            console.error('Error refreshing devices:', error);
-        } finally {
-            setIsRefreshing(false);
-        }
-    };
-
-    return (
-        <div>
-            <div>
-                <label>Камера:</label>
-                <select
-                    value={selectedDevices.video}
-                    onChange={(e) => onChange('video', e.target.value)}
-                    disabled={videoDevices.length === 0}
-                >
-                    {videoDevices.length === 0 ? (
-                        <option value="">Камеры не найдены</option>
-                    ) : (
-                        <>
-                            <option value="">-- Выберите камеру --</option>
-                            {videoDevices.map(device => (
-                                <option key={device.deviceId} value={device.deviceId}>
-                                    {device.label || `Камера ${videoDevices.indexOf(device) + 1}`}
-                                </option>
-                            ))}
-                        </>
-                    )}
-                </select>
-            </div>
-
-            <div>
-                <label>Микрофон:</label>
-                <select
-                    value={selectedDevices.audio}
-                    onChange={(e) => onChange('audio', e.target.value)}
-                    disabled={audioDevices.length === 0}
-                >
-                    {audioDevices.length === 0 ? (
-                        <option value="">Микрофоны не найдены</option>
-                    ) : (
-                        <>
-                            <option value="">-- Выберите микрофон --</option>
-                            {audioDevices.map(device => (
-                                <option key={device.deviceId} value={device.deviceId}>
-                                    {device.label || `Микрофон ${audioDevices.indexOf(device) + 1}`}
-                                </option>
-                            ))}
-                        </>
-                    )}
-                </select>
-            </div>
-
-            <button
-                onClick={handleRefresh}
-                disabled={isRefreshing}
-            >
-                {isRefreshing ? 'Обновление...' : 'Обновить устройства'}
-            </button>
-        </div>
-    );
-};
-
-// file: docker-ardua/components/webrtc/components/VideoPlayer.tsx
-import { useEffect, useRef, useState } from 'react'
-
-interface VideoPlayerProps {
-stream: MediaStream | null;
-muted?: boolean;
-className?: string;
-transform?: string;
-videoRef?: React.RefObject<HTMLVideoElement | null>;
-}
-
-type VideoSettings = {
-rotation: number;
-flipH: boolean;
-flipV: boolean;
-};
-
-export const VideoPlayer = ({ stream, muted = false, className, transform, videoRef }: VideoPlayerProps) => {
-const internalVideoRef = useRef<HTMLVideoElement>(null)
-const [computedTransform, setComputedTransform] = useState<string>('')
-const [isRotated, setIsRotated] = useState(false)
-
-    // Use the provided ref or the internal one
-    const actualVideoRef = videoRef || internalVideoRef
-
-    useEffect(() => {
-        // Apply transformations and detect rotation
-        if (typeof transform === 'string') {
-            setComputedTransform(transform)
-            // Check if transform includes 90 or 270 degree rotation
-            setIsRotated(transform.includes('rotate(90deg') || transform.includes('rotate(270deg)'))
-        } else {
-            try {
-                const saved = localStorage.getItem('videoSettings')
-                if (saved) {
-                    const { rotation, flipH, flipV } = JSON.parse(saved) as VideoSettings
-                    let fallbackTransform = ''
-                    if (rotation !== 0) fallbackTransform += `rotate(${rotation}deg) `
-                    fallbackTransform += `scaleX(${flipH ? -1 : 1}) scaleY(${flipV ? -1 : 1})`
-                    setComputedTransform(fallbackTransform)
-                    setIsRotated(rotation === 90 || rotation === 270)
-                } else {
-                    setComputedTransform('')
-                    setIsRotated(false)
-                }
-            } catch (e) {
-                console.error('Error parsing saved video settings:', e)
-                setComputedTransform('')
-                setIsRotated(false)
-            }
-        }
-    }, [transform])
-
-    useEffect(() => {
-        const video = actualVideoRef.current
-        if (!video) return
-
-        const handleCanPlay = () => {
-            video.play().catch(e => {
-                console.error('Playback failed:', e)
-                video.muted = true
-                video.play().catch(e => console.error('Muted playback also failed:', e))
-            })
-        }
-
-        video.addEventListener('canplay', handleCanPlay)
-
-        if (stream) {
-            video.srcObject = stream
-        } else {
-            video.srcObject = null
-        }
-
-        return () => {
-            video.removeEventListener('canplay', handleCanPlay)
-            video.srcObject = null
-        }
-    }, [stream, actualVideoRef])
-
-    return (
-        <video
-            ref={actualVideoRef}
-            autoPlay
-            playsInline
-            muted={muted}
-            className={`${className} ${isRotated ? 'rotated' : ''}`}
-            style={{
-                transform: computedTransform,
-                transformOrigin: 'center center',
-            }}
-        />
-    )
-}
 
 // file: docker-ardua/components/webrtc/hooks/useWebRTC.ts
 import { useEffect, useRef, useState } from 'react';
@@ -281,24 +74,20 @@ const [retryCount, setRetryCount] = useState(0);
     };
 
     const cleanup = () => {
+        console.log('Выполняется полная очистка ресурсов');
+
         // Очистка таймеров
-        if (connectionTimeout.current) {
-            clearTimeout(connectionTimeout.current);
-            connectionTimeout.current = null;
-        }
+        [connectionTimeout, statsInterval, videoCheckTimeout].forEach(timer => {
+            if (timer.current) {
+                clearTimeout(timer.current);
+                timer.current = null;
+            }
+        });
 
-        if (statsInterval.current) {
-            clearInterval(statsInterval.current);
-            statsInterval.current = null;
-        }
-
-        if (videoCheckTimeout.current) {
-            clearTimeout(videoCheckTimeout.current);
-            videoCheckTimeout.current = null;
-        }
-
-        // Очистка WebRTC соединения
+        // Полная очистка PeerConnection
         if (pc.current) {
+            console.log('Закрытие PeerConnection');
+            // Отключаем все обработчики событий
             pc.current.onicecandidate = null;
             pc.current.ontrack = null;
             pc.current.onnegotiationneeded = null;
@@ -306,32 +95,49 @@ const [retryCount, setRetryCount] = useState(0);
             pc.current.onicegatheringstatechange = null;
             pc.current.onsignalingstatechange = null;
             pc.current.onconnectionstatechange = null;
-            pc.current.close();
+
+            // Закрываем все трансцепторы
+            pc.current.getTransceivers().forEach(transceiver => {
+                try {
+                    transceiver.stop();
+                } catch (err) {
+                    console.warn('Ошибка при остановке трансцептора:', err);
+                }
+            });
+
+            // Закрываем соединение
+            try {
+                pc.current.close();
+            } catch (err) {
+                console.warn('Ошибка при закрытии PeerConnection:', err);
+            }
             pc.current = null;
         }
 
-        // Остановка медиапотоков
-        if (localStream) {
-            localStream.getTracks().forEach(track => {
-                track.stop();
-                track.dispatchEvent(new Event('ended'));
-            });
-            setLocalStream(null);
-        }
+        // Остановка и очистка медиапотоков
+        [localStream, remoteStream].forEach(stream => {
+            if (stream) {
+                console.log(`Остановка ${stream === localStream ? 'локального' : 'удаленного'} потока`);
+                stream.getTracks().forEach(track => {
+                    try {
+                        track.stop();
+                        track.dispatchEvent(new Event('ended'));
+                    } catch (err) {
+                        console.warn('Ошибка при остановке трека:', err);
+                    }
+                });
+            }
+        });
 
-        if (remoteStream) {
-            remoteStream.getTracks().forEach(track => {
-                track.stop();
-                track.dispatchEvent(new Event('ended'));
-            });
-            setRemoteStream(null);
-        }
-
-        setIsCallActive(false);
+        // Сброс состояний
+        setLocalStream(null);
+        setRemoteStream(null);
         pendingIceCandidates.current = [];
         isNegotiating.current = false;
         shouldCreateOffer.current = false;
-        retryAttempts.current = 0;
+        setIsCallActive(false);
+
+        console.log('Очистка завершена');
     };
 
 
@@ -489,7 +295,7 @@ const [retryCount, setRetryCount] = useState(0);
                 else if (data.type === 'error') {
                     setError(data.data);
                 }
-                else if (data.type === 'offer') {
+                if (data.type === 'offer') {
                     if (pc.current && ws.current?.readyState === WebSocket.OPEN && data.sdp) {
                         try {
                             if (isNegotiating.current) {
@@ -523,9 +329,6 @@ const [retryCount, setRetryCount] = useState(0);
 
                             setIsCallActive(true);
                             isNegotiating.current = false;
-
-                            // Запускаем проверку получения видео
-                            startVideoCheckTimer();
                         } catch (err) {
                             console.error('Ошибка обработки оффера:', err);
                             setError('Ошибка обработки предложения соединения');
@@ -729,17 +532,10 @@ const [retryCount, setRetryCount] = useState(0);
                 if (event.candidate && ws.current?.readyState === WebSocket.OPEN) {
                     try {
                         // Фильтруем нежелательные кандидаты
-                        if (event.candidate.candidate &&
-                            event.candidate.candidate.length > 0 &&
-                            !event.candidate.candidate.includes('0.0.0.0')) {
-
+                        if (shouldSendIceCandidate(event.candidate)) {
                             ws.current.send(JSON.stringify({
                                 type: 'ice_candidate',
-                                ice: {
-                                    candidate: event.candidate.candidate,
-                                    sdpMid: event.candidate.sdpMid || '0',
-                                    sdpMLineIndex: event.candidate.sdpMLineIndex || 0
-                                },
+                                ice: event.candidate.toJSON(),
                                 room: roomId,
                                 username
                             }));
@@ -748,6 +544,21 @@ const [retryCount, setRetryCount] = useState(0);
                         console.error('Ошибка отправки ICE кандидата:', err);
                     }
                 }
+            };
+
+            const shouldSendIceCandidate = (candidate: RTCIceCandidate) => {
+                // Не отправляем пустые кандидаты
+                if (!candidate.candidate || candidate.candidate.length === 0) return false;
+
+                // Приоритет для relay-кандидатов
+                if (candidate.candidate.includes('typ relay')) return true;
+
+                // Игнорируем host-кандидаты после первого подключения
+                if (retryAttempts.current > 0 && candidate.candidate.includes('typ host')) {
+                    return false;
+                }
+
+                return true;
             };
 
             // Обработка входящих медиапотоков
@@ -782,35 +593,18 @@ const [retryCount, setRetryCount] = useState(0);
             pc.current.oniceconnectionstatechange = () => {
                 if (!pc.current) return;
 
-                if (pc.current?.iceConnectionState === 'disconnected' ||
-                    pc.current?.iceConnectionState === 'failed') {
-                    console.log('ICE соединение разорвано, возможно нас заменили');
-                    leaveRoom();
-                }
-
                 console.log('Состояние ICE соединения:', pc.current.iceConnectionState);
 
                 switch (pc.current.iceConnectionState) {
                     case 'failed':
-                        console.log('Перезапуск ICE...');
-                        setTimeout(() => {
-                            if (pc.current && pc.current.iceConnectionState === 'failed') {
-                                pc.current.restartIce();
-                                if (isInRoom && !isCallActive) {
-                                    createAndSendOffer().catch(console.error);
-                                }
-                            }
-                        }, 1000);
+                        console.log('Ошибка ICE, перезапуск...');
+                        resetConnection();
                         break;
 
                     case 'disconnected':
                         console.log('Соединение прервано...');
                         setIsCallActive(false);
-                        setTimeout(() => {
-                            if (pc.current && pc.current.iceConnectionState === 'disconnected') {
-                                createAndSendOffer().catch(console.error);
-                            }
-                        }, 2000);
+                        resetConnection();
                         break;
 
                     case 'connected':
@@ -874,16 +668,16 @@ const [retryCount, setRetryCount] = useState(0);
             return;
         }
 
-        retryAttempts.current += 1;
-        setRetryCount(retryAttempts.current);
-        console.log(`Попытка восстановления #${retryAttempts.current}`);
+        // Полная очистка перед повторным подключением
+        cleanup();
 
         try {
-            await leaveRoom();
-            await new Promise(resolve => setTimeout(resolve, 1000 * retryAttempts.current));
+            // При переподключении явно указываем, что мы ведомый
             await joinRoom(username);
+            retryAttempts.current = 0;
         } catch (err) {
-            console.error('Ошибка при восстановлении соединения:', err);
+            retryAttempts.current += 1;
+            setRetryCount(retryAttempts.current);
         }
     };
 
@@ -998,7 +792,7 @@ const [retryCount, setRetryCount] = useState(0);
 
             // 4. Успешное подключение
             setIsInRoom(true);
-            shouldCreateOffer.current = true;
+            shouldCreateOffer.current = false; // Ведомый никогда не должен создавать оффер
 
             // 5. Создаем оффер, если мы первые в комнате
             if (users.length === 0) {
@@ -1082,795 +876,6 @@ if (typeof window === 'undefined') return false;
 
 
 
-
-// file: docker-ardua/components/webrtc/lib/signaling.ts
-// file: client/app/webrtc/lib/signaling.ts
-import { RoomInfo, SignalingMessage, SignalingClientOptions } from '../types';
-
-export class SignalingClient {
-private ws: WebSocket | null = null;
-private reconnectAttempts = 0;
-private connectionTimeout: NodeJS.Timeout | null = null;
-private connectionPromise: Promise<void> | null = null;
-private resolveConnection: (() => void) | null = null;
-
-    public onRoomInfo: (data: RoomInfo) => void = () => {};
-    public onOffer: (data: RTCSessionDescriptionInit) => void = () => {};
-    public onAnswer: (data: RTCSessionDescriptionInit) => void = () => {};
-    public onCandidate: (data: RTCIceCandidateInit) => void = () => {};
-    public onError: (error: string) => void = () => {};
-    public onLeave: (username?: string) => void = () => {};
-    public onJoin: (username: string) => void = () => {};
-
-    constructor(
-        private url: string,
-        private options: SignalingClientOptions = {}
-    ) {
-        this.options = {
-            maxReconnectAttempts: 5,
-            reconnectDelay: 1000,
-            connectionTimeout: 5000,
-            ...options
-        };
-    }
-
-    public get isConnected(): boolean {
-        return this.ws?.readyState === WebSocket.OPEN;
-    }
-
-    public connect(roomId: string, username: string): Promise<void> {
-        if (this.ws) {
-            this.ws.close();
-        }
-
-        this.ws = new WebSocket(this.url);
-        this.setupEventListeners();
-
-        this.connectionPromise = new Promise((resolve, reject) => {
-            this.resolveConnection = resolve;
-
-            this.connectionTimeout = setTimeout(() => {
-                if (!this.isConnected) {
-                    this.handleError('Connection timeout');
-                    reject(new Error('Connection timeout'));
-                }
-            }, this.options.connectionTimeout);
-
-            this.ws!.onopen = () => {
-                this.ws!.send(JSON.stringify({
-                    type: 'join',
-                    room: roomId,
-                    username: username
-                }));
-            };
-        });
-
-        return this.connectionPromise;
-    }
-
-    private setupEventListeners(): void {
-        if (!this.ws) return;
-
-        this.ws.onmessage = (event) => {
-            try {
-                const message: SignalingMessage = JSON.parse(event.data);
-
-                if (!('type' in message)) {
-                    console.warn('Received message without type:', message);
-                    return;
-                }
-
-                switch (message.type) {
-                    case 'room_info':
-                        this.onRoomInfo(message.data);
-                        break;
-                    case 'error':
-                        this.onError(message.data);
-                        break;
-                    case 'offer':
-                        this.onOffer(message.sdp);
-                        break;
-                    case 'answer':
-                        this.onAnswer(message.sdp);
-                        break;
-                    case 'candidate':
-                        this.onCandidate(message.candidate);
-                        break;
-                    case 'leave':
-                        this.onLeave(message.data);
-                        break;
-                    case 'join':
-                        this.onJoin(message.data);
-                        break;
-                    default:
-                        console.warn('Unknown message type:', message);
-                }
-            } catch (error) {
-                this.handleError('Invalid message format');
-            }
-        };
-
-        this.ws.onclose = () => {
-            console.log('Signaling connection closed');
-            this.cleanup();
-            this.attemptReconnect();
-        };
-
-        this.ws.onerror = (error) => {
-            this.handleError(`Connection error: ${error}`);
-        };
-    }
-
-    public sendOffer(offer: RTCSessionDescriptionInit): Promise<void> {
-        return this.send({ type: 'offer', sdp: offer });
-    }
-
-    public sendAnswer(answer: RTCSessionDescriptionInit): Promise<void> {
-        return this.send({ type: 'answer', sdp: answer });
-    }
-
-    public sendCandidate(candidate: RTCIceCandidateInit): Promise<void> {
-        return this.send({ type: 'candidate', candidate });
-    }
-
-    public sendLeave(username: string): Promise<void> {
-        return this.send({ type: 'leave', data: username });
-    }
-
-    private send(data: SignalingMessage): Promise<void> {
-        if (!this.isConnected) {
-            return Promise.reject(new Error('WebSocket not connected'));
-        }
-
-        try {
-            this.ws!.send(JSON.stringify(data));
-            return Promise.resolve();
-        } catch (error) {
-            console.error('Send error:', error);
-            return Promise.reject(error);
-        }
-    }
-
-    private attemptReconnect(): void {
-        if (this.reconnectAttempts >= (this.options.maxReconnectAttempts || 5)) {
-            return this.handleError('Max reconnection attempts reached');
-        }
-
-        this.reconnectAttempts++;
-        console.log(`Reconnecting (attempt ${this.reconnectAttempts})`);
-
-        setTimeout(() => this.connect('', ''), this.options.reconnectDelay);
-    }
-
-    private handleError(error: string): void {
-        console.error('Signaling error:', error);
-        this.onError(error);
-        this.cleanup();
-    }
-
-    private cleanup(): void {
-        this.clearTimeout(this.connectionTimeout);
-        if (this.resolveConnection) {
-            this.resolveConnection();
-            this.resolveConnection = null;
-        }
-        this.connectionPromise = null;
-    }
-
-    private clearTimeout(timer: NodeJS.Timeout | null): void {
-        if (timer) clearTimeout(timer);
-    }
-
-    public close(): void {
-        this.cleanup();
-        this.ws?.close();
-    }
-}
-
-// file: docker-ardua/components/webrtc/index.tsx
-// file: client/app/webrtc/index.tsx
-'use client'
-
-import { VideoCallApp } from './VideoCallApp';
-import { useEffect, useState } from 'react';
-import { checkWebRTCSupport } from './lib/webrtc';
-import styles from './styles.module.css';
-
-export default function WebRTCPage() {
-const [isSupported, setIsSupported] = useState<boolean | null>(null);
-const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
-
-    useEffect(() => {
-        const initialize = async () => {
-            setIsSupported(checkWebRTCSupport());
-
-            try {
-                const mediaDevices = await navigator.mediaDevices.enumerateDevices();
-                setDevices(mediaDevices);
-            } catch (err) {
-                console.error('Error getting devices:', err);
-            }
-        };
-
-        initialize();
-    }, []);
-
-    if (isSupported === false) {
-        return (
-            <div>
-                <h1>WebRTC is not supported in your browser</h1>
-                <p>Please use a modern browser like Chrome, Firefox or Edge.</p>
-            </div>
-        );
-    }
-
-    return (
-        <div>
-            {isSupported === null ? (
-                <div>Loading...</div>
-            ) : (
-                <VideoCallApp />
-            )}
-        </div>
-    );
-}
-
-// file: docker-ardua/components/webrtc/styles.module.css
-.container {
-position: relative;
-width: 99vw;
-height: 100vh;
-overflow: hidden;
-background-color: #000;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.remoteVideoContainer {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-background-color: #000;
-transition: transform 0.3s ease;
-}
-
-:fullscreen .remoteVideoContainer {
-width: 100vw;
-height: 100vh;
-background-color: #000;
-}
-
-.remoteVideo {
-width: 100%;
-height: 100%;
-object-fit: contain;
-transition: all 0.3s ease;
-}
-
-/* When rotated 90 or 270 degrees */
-.remoteVideo[style*="rotate(90deg)"],
-.remoteVideo[style*="rotate(270deg)"] {
-height: 133%;
-}
-
-.remoteVideo.rotated {
-height: 133%;
-width: auto;
-max-width: 100%;
-}
-
-.localVideoContainer {
-position: absolute;
-bottom: 20px;
-right: 20px;
-width: 20vw;
-max-width: 300px;
-min-width: 150px;
-height: 15vh;
-max-height: 200px;
-min-height: 100px;
-z-index: 10;
-border: 2px solid #fff;
-border-radius: 8px;
-overflow: hidden;
-background-color: #000;
-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.localVideo {
-width: 100%;
-height: 100%;
-object-fit: cover;
-transform: scaleX(-1);
-}
-
-.remoteVideoLabel{
-position: absolute;
-left: 0;
-right: 0;
-bottom: 0;
-background-color: rgba(0, 0, 0, 0.7);
-color: white;
-padding: 8px 12px;
-font-size: 14px;
-text-align: center;
-backdrop-filter: blur(5px);
-}
-
-.topControls {
-position: absolute;
-top: 15px;
-left: 50%;
-transform: translateX(-50%);
-display: flex;
-justify-content: space-between;
-z-index: 20;
-}
-
-.toggleControlsButton {
-background-color: rgba(255, 255, 255, 0.15);
-color: white;
-border: none;
-border-radius: 20px;
-padding: 8px 16px;
-font-size: 14px;
-cursor: pointer;
-display: flex;
-align-items: center;
-gap: 8px;
-transition: all 0.2s ease;
-}
-
-.toggleControlsButton:hover {
-background-color: rgba(255, 255, 255, 0.25);
-}
-
-.videoControls {
-display: flex;
-gap: 8px;
-flex-wrap: wrap;
-justify-content: flex-end;
-}
-
-.controlButton {
-background-color: rgba(255, 255, 255, 0.15);
-color: #a6a6a6;
-border: none;
-border-radius: 20px;
-min-width: 40px;
-height: 40px;
-font-size: 14px;
-cursor: pointer;
-display: flex;
-justify-content: center;
-align-items: center;
-transition: all 0.2s ease;
-padding: 0 12px;
-}
-
-.controlButton:hover {
-background-color: rgba(255, 255, 255, 0.25);
-}
-
-.controlButton.active {
-background-color: rgba(0, 150, 255, 0.7);
-color: white;
-}
-
-.controlsOverlay {
-position: absolute;
-top: 70px;
-left: 0;
-right: 0;
-background-color: rgba(0, 0, 0, 0);
-color: white;
-padding: 25px;
-z-index: 15;
-max-height: calc(100vh - 100px);
-overflow-y: auto;
-backdrop-filter: none;
-border-radius: 0 0 12px 12px;
-animation: fadeIn 0.3s ease-out;
-}
-
-.controls {
-display: flex;
-flex-direction: column;
-gap: 20px;
-max-width: 600px;
-margin: 0 auto;
-}
-
-.inputGroup {
-color: #6a6a6a;
-display: flex;
-flex-direction: column;
-gap: 8px;
-}
-
-.button {
-width: 100%;
-padding: 12px;
-font-weight: 500;
-transition: all 0.2s ease;
-}
-
-.userList {
-color: #6a6a6a;
-margin-top: 20px;
-background-color: rgba(255, 255, 255, 0.1);
-padding: 15px;
-border-radius: 8px;
-}
-
-.userList h3 {
-margin-top: 0;
-margin-bottom: 10px;
-font-size: 16px;
-}
-
-.userList ul {
-list-style: none;
-padding: 0;
-margin: 0;
-display: flex;
-flex-direction: column;
-gap: 8px;
-}
-
-.userList li {
-padding: 8px 12px;
-background-color: rgba(255, 255, 255, 0.1);
-border-radius: 6px;
-}
-
-.error {
-color: #ff6b6b;
-background-color: rgba(255, 107, 107, 0.1);
-padding: 12px;
-border-radius: 6px;
-border-left: 4px solid #ff6b6b;
-margin-bottom: 20px;
-}
-
-.connectionStatus {
-padding: 12px;
-/*background-color: rgba(255, 255, 255, 0.1);*/
-border-radius: 6px;
-margin-bottom: 15px;
-font-weight: 500;
-}
-
-.deviceSelection {
-color: #6a6a6a;
-margin-top: 20px;
-/*background-color: rgba(255, 255, 255, 0.1);*/
-padding: 15px;
-border-radius: 8px;
-}
-
-.deviceSelection h3 {
-margin-top: 0;
-margin-bottom: 15px;
-}
-
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(-10px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 768px) {
-.localVideoContainer {
-width: 25vw;
-height: 20vh;
-}
-
-    .controlsOverlay {
-        padding: 15px;
-    }
-
-    .controlButton {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
-    }
-
-    .videoControls {
-        gap: 6px;
-    }
-}
-
-/* Новые стили для вкладок */
-.tabsContainer {
-display: flex;
-gap: 8px;
-flex-wrap: wrap;
-}
-
-.tabButton {
-background-color: rgba(255, 255, 255, 0.15);
-color: white;
-border: none;
-border-radius: 20px;
-padding: 8px 16px;
-font-size: 14px;
-cursor: pointer;
-display: flex;
-align-items: center;
-gap: 8px;
-transition: all 0.2s ease;
-}
-
-.tabButton:hover {
-background-color: rgba(255, 255, 255, 0.25);
-}
-
-.activeTab {
-background-color: rgba(0, 150, 255, 0.7);
-}
-
-.tabContent {
-position: absolute;
-top: 70px;
-left: 0;
-right: 0;
-/*background-color: rgba(0, 0, 0, 0);*/
-color: #c3c3c3;
-z-index: 15;
-max-height: calc(100vh - 0px);
-overflow-y: auto;
-backdrop-filter: none;
-border-radius: 0 0 12px 12px;
-animation: fadeIn 0.3s ease-out;
-}
-
-.videoControlsTab {
-display: flex;
-flex-direction: column;
-gap: 20px;
-}
-
-.controlButtons {
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
-justify-content: center;
-}
-
-/* Стили для панели логов */
-.logsPanel {
-position: fixed;
-top: 0;
-right: 0;
-bottom: 0;
-width: 300px;
-background-color: rgba(0, 0, 0, 0.9);
-z-index: 1000;
-padding: 15px;
-overflow-y: auto;
-backdrop-filter: blur(5px);
-user-select: none;
-pointer-events: none;
-}
-
-.logsContent {
-font-family: monospace;
-font-size: 12px;
-color: #ccc;
-line-height: 1.5;
-}
-
-.logEntry {
-margin-bottom: 4px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-}
-
-/* Адаптивные стили */
-@media (max-width: 768px) {
-.tabsContainer {
-gap: 5px;
-}
-
-    .tabButton {
-        padding: 1px 3px;
-        font-size: 8px;
-    }
-
-    .tabContent {
-        padding: 15px;
-    }
-
-    .logsPanel {
-        width: 200px;
-    }
-}
-
-
-.statusIndicator {
-display: flex;
-align-items: center;
-gap: 8px;
-margin-left: 15px;
-padding: 6px 12px;
-border-radius: 20px;
-background-color: rgba(0, 0, 0, 0.5);
-backdrop-filter: blur(5px);
-}
-
-.statusDot {
-width: 10px;
-height: 10px;
-border-radius: 50%;
-}
-
-.statusText {
-font-size: 14px;
-color: white;
-}
-
-.connected {
-background-color: #10B981;
-}
-
-.pending {
-background-color: #F59E0B;
-animation: pulse 1.5s infinite;
-}
-
-.disconnected {
-background-color: #EF4444;
-}
-
-@keyframes pulse {
-0%, 100% {
-opacity: 1;
-}
-50% {
-opacity: 0.5;
-}
-}
-
-.statusIndicator {
-/* существующие стили */
-will-change: contents; /* Оптимизация для браузера */
-}
-
-.statusDot, .statusText {
-transition: all 0.3s ease;
-}
-
-.unsupportedContainer {
-max-width: 600px;
-margin: 2rem auto;
-padding: 2rem;
-background: #fff;
-border-radius: 8px;
-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-text-align: center;
-}
-
-.unsupportedContainer h2 {
-color: #e74c3c;
-margin-bottom: 1rem;
-}
-
-.unsupportedContainer p {
-margin-bottom: 1rem;
-line-height: 1.6;
-}
-
-.browserList {
-text-align: left;
-background: #f8f9fa;
-padding: 1rem;
-border-radius: 6px;
-margin: 1.5rem 0;
-}
-
-.browserList ul {
-padding-left: 1.5rem;
-margin: 0.5rem 0;
-}
-
-.note {
-font-size: 0.9rem;
-color: #666;
-font-style: italic;
-}
-
-/* Стили для списка сохраненных комнат */
-.savedRooms {
-margin-top: 20px;
-background-color: rgba(255, 255, 255, 0.1);
-padding: 15px;
-border-radius: 8px;
-}
-
-.savedRooms h3 {
-margin-top: 0;
-margin-bottom: 15px;
-font-size: 16px;
-}
-
-.savedRooms ul {
-list-style: none;
-padding: 0;
-margin: 0;
-display: flex;
-flex-direction: column;
-gap: 8px;
-}
-
-.savedRoomItem {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 8px 12px;
-background-color: rgba(255, 255, 255, 0.1);
-border-radius: 6px;
-}
-
-.savedRoomItem span {
-cursor: pointer;
-flex-grow: 1;
-}
-
-.savedRoomItem span:hover {
-text-decoration: underline;
-}
-
-.defaultRoom {
-font-weight: bold;
-color: #4CAF50;
-}
-
-.deleteRoomButton {
-background-color: rgba(255, 99, 71, 0.2);
-color: #FF6347;
-border: none;
-border-radius: 4px;
-padding: 4px 8px;
-cursor: pointer;
-font-size: 12px;
-margin-left: 10px;
-}
-
-.deleteRoomButton:hover {
-background-color: rgba(255, 99, 71, 0.3);
-}
-
-// file: docker-ardua/components/webrtc/types.ts
-// file: client/app/webrtc/types.ts
-export interface RoomInfo {
-users: string[];
-}
-
-export type SignalingMessage =
-| { type: 'room_info'; data: RoomInfo }
-| { type: 'error'; data: string }
-| { type: 'offer'; sdp: RTCSessionDescriptionInit }
-| { type: 'answer'; sdp: RTCSessionDescriptionInit }
-| { type: 'candidate'; candidate: RTCIceCandidateInit }
-| { type: 'join'; data: string }
-| { type: 'leave'; data: string };
-
-export interface User {
-username: string;
-stream?: MediaStream;
-peerConnection?: RTCPeerConnection;
-}
-
-export interface SignalingClientOptions {
-maxReconnectAttempts?: number;
-reconnectDelay?: number;
-connectionTimeout?: number;
-}
 
 // file: docker-ardua/components/webrtc/VideoCallApp.tsx
 // file: docker-ardua/components/webrtc/VideoCallApp.tsx
@@ -2619,7 +1624,7 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
     )
 }
 
-Server Go
+сервер
 package main
 
 import (
@@ -2627,7 +1632,7 @@ import (
 "log"
 "math/rand"
 "net/http"
-// "strings" // Удален неиспользуемый импорт
+"strings" // Удален неиспользуемый импорт
 "sync"
 "time"
 
@@ -2647,6 +1652,7 @@ username string                  // Имя пользователя
 room     string                  // Комната, к которой подключен пользователь
 isLeader bool                    // true для Android (ведущий), false для браузера (ведомый)
 mu       sync.Mutex              // Мьютекс для защиты доступа к pc и conn из разных горутин
+lastActivity time.Time // Добавляем поле для отслеживания активности
 }
 
 // RoomInfo содержит информацию о комнате для отправки клиентам
@@ -2792,28 +1798,36 @@ return
 peer.mu.Lock() // Блокируем мьютекс пира
 defer peer.mu.Unlock()
 
-	// 1. Закрываем WebRTC соединение
-	if peer.pc != nil {
-		log.Printf("Closing PeerConnection for %s (Reason: %s)", peer.username, reason)
-		// Небольшая задержка перед закрытием, чтобы дать время на отправку последних сообщений
-		time.Sleep(100 * time.Millisecond)
-		if err := peer.pc.Close(); err != nil {
-			log.Printf("Error closing peer connection for %s: %v", peer.username, err)
-		}
-		peer.pc = nil // Убираем ссылку
-	}
+    // 1. Закрываем WebRTC соединение
+    if peer.pc != nil {
+        log.Printf("Closing PeerConnection for %s (Reason: %s)", peer.username, reason)
 
-	// 2. Закрываем WebSocket соединение
-	if peer.conn != nil {
-		log.Printf("Closing WebSocket connection for %s (Reason: %s)", peer.username, reason)
-		// Отправляем сообщение о закрытии клиенту
-		peer.conn.WriteControl(websocket.CloseMessage,
-			websocket.FormatCloseMessage(websocket.CloseNormalClosure, reason),
-			time.Now().Add(time.Second)) // Даем секунду на отправку
-		// Закрываем соединение со стороны сервера
-		peer.conn.Close()
-		peer.conn = nil // Убираем ссылку
-	}
+        // Останавливаем все отправители
+        for _, sender := range peer.pc.GetSenders() {
+            if sender.Track() != nil {
+                sender.ReplaceTrack(nil)
+            }
+        }
+
+        // Небольшая задержка перед закрытием
+        time.Sleep(100 * time.Millisecond)
+        if err := peer.pc.Close(); err != nil {
+            log.Printf("Error closing peer connection for %s: %v", peer.username, err)
+        }
+        peer.pc = nil // Убираем ссылку
+    }
+
+    // 2. Закрываем WebSocket соединение
+    if peer.conn != nil {
+        log.Printf("Closing WebSocket connection for %s (Reason: %s)", peer.username, reason)
+        // Отправляем сообщение о закрытии клиенту
+        peer.conn.WriteControl(websocket.CloseMessage,
+            websocket.FormatCloseMessage(websocket.CloseNormalClosure, reason),
+            time.Now().Add(time.Second)) // Даем секунду на отправку
+        // Закрываем соединение со стороны сервера
+        peer.conn.Close()
+        peer.conn = nil // Убираем ссылку
+    }
 }
 
 // handlePeerJoin обрабатывает присоединение нового пользователя к комнате
@@ -2936,22 +1950,30 @@ defer mu.Unlock()
 		return nil, err // Возвращаем ошибку, если PeerConnection не создан
 	}
 
-	peer := &Peer{
-		conn:     conn,
-		pc:       peerConnection,
-		username: username,
-		room:     room,
-		isLeader: isLeader,
-	}
+peer := &Peer{
+conn:         conn,
+pc:           peerConnection,
+username:     username,
+room:         room,
+isLeader:     isLeader,
+lastActivity: time.Now(), // Инициализация времени создания
+}
 
 	// --- Настройка Обработчиков PeerConnection ---
 
 	// Обработчик для ICE кандидатов: отправляем кандидата другому пиру через WebSocket
 	peerConnection.OnICECandidate(func(c *webrtc.ICECandidate) {
-		if c == nil {
-			log.Printf("ICE candidate gathering complete for %s", peer.username)
-			return
-		}
+        if c == nil {
+            // При завершении сбора кандидатов
+            peer.mu.Lock()
+            defer peer.mu.Unlock()
+            if peer.conn != nil {
+                peer.conn.WriteJSON(map[string]interface{}{
+                    "type": "ice_complete",
+                })
+            }
+            return
+        }
 
 		candidateJSON := c.ToJSON()
 		log.Printf("Generated ICE candidate for %s: %s", peer.username, candidateJSON.Candidate)
@@ -3115,22 +2137,58 @@ logStatus() // Вывод статуса в лог по запросу /status
 w.Write([]byte("Status logged to console"))
 })
 
+    // Запускаем очистку каждые 5 минут
+    go func() {
+        ticker := time.NewTicker(5 * time.Minute)
+        for range ticker.C {
+            cleanupInactivePeers()
+            logStatus()
+        }
+    }()
+
 	log.Println("Server starting on :8080")
 	logStatus() // Начальный статус
 	// Запуск HTTP сервера
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
+func cleanupInactivePeers() {
+mu.Lock()
+defer mu.Unlock()
+
+    now := time.Now()
+    for room, roomPeers := range rooms {
+        for username, peer := range roomPeers {
+            peer.mu.Lock()
+            isAlive := peer.conn != nil && now.Sub(peer.lastActivity) < 2*time.Minute
+            peer.mu.Unlock()
+
+            if !isAlive {
+                delete(roomPeers, username)
+                log.Printf("Removed inactive peer %s from room %s", username, room)
+                go closePeerConnection(peer, "Inactive peer cleanup")
+            }
+        }
+
+        if len(roomPeers) == 0 {
+            delete(rooms, room)
+            log.Printf("Removed empty room %s", room)
+        }
+    }
+}
+
 // handleWebSocket обрабатывает входящие WebSocket соединения
 func handleWebSocket(w http.ResponseWriter, r *http.Request) {
-// Обновляем HTTP соединение до WebSocket
-conn, err := upgrader.Upgrade(w, r, nil)
-if err != nil {
-log.Println("WebSocket upgrade error:", err)
-return
-}
-// Важно: закрываем соединение при выходе из функции (при ошибке или штатном завершении)
-// defer conn.Close() // Перенесли закрытие в логику очистки
+
+
+	// Обновляем HTTP соединение до WebSocket
+	conn, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Println("WebSocket upgrade error:", err)
+		return
+	}
+	// Важно: закрываем соединение при выходе из функции (при ошибке или штатном завершении)
+	// defer conn.Close() // Перенесли закрытие в логику очистки
 
 	remoteAddr := conn.RemoteAddr().String()
 	log.Printf("New WebSocket connection attempt from: %s", remoteAddr)
@@ -3143,7 +2201,7 @@ return
 	}
 
 	// Устанавливаем таймаут на чтение первого сообщения
-	conn.SetReadDeadline(time.Now().Add(10 * time.Second)) // 10 секунд на отправку initData
+	conn.SetReadDeadline(time.Now().Add(2 * time.Second)) // 2 секунд на отправку initData
 	err = conn.ReadJSON(&initData)
 	conn.SetReadDeadline(time.Time{}) // Сбрасываем таймаут после успешного чтения
 
@@ -3200,6 +2258,11 @@ return
 			}
 			break // Выходим из цикла чтения
 		}
+
+        // Обновляем время последней активности
+        peer.mu.Lock()
+        peer.lastActivity = time.Now()
+        peer.mu.Unlock()
 
 		// Парсим полученное сообщение как JSON
 		var data map[string]interface{}
@@ -3294,18 +2357,21 @@ return
 		case "ice_candidate":
 			// ICE кандидаты пересылаются другому пиру в комнате
 			if targetPeer != nil {
-				if ice, iceOk := data["ice"].(map[string]interface{}); iceOk { // Проверяем тип перед доступом
-					if candidate, candOk := ice["candidate"].(string); candOk {
-						candSnippet := candidate
-						if len(candSnippet) > 40 { // Обрезаем для лога
-							candSnippet = candSnippet[:40]
-						}
-						log.Printf("... Forwarding ICE candidate from %s to %s (Candidate: %s...)", peer.username, targetPeer.username, candSnippet)
-					} else {
-						log.Printf("WARN: Received 'ice_candidate' from %s with invalid 'candidate' field.", peer.username)
-						break // Не пересылаем некорректный кандидат
-					}
-				} else {
+
+
+
+			        if ice, iceOk := data["ice"].(map[string]interface{}); iceOk {
+                        if candidate, candOk := ice["candidate"].(string); candOk {
+                            // Пропускаем локальные (host) кандидаты если уже есть релейные
+                            if strings.Contains(candidate, "typ relay") ||
+                               !strings.Contains(candidate, "typ host") {
+                                // Пересылаем только важные кандидаты
+                                targetPeer.mu.Lock()
+                                targetPeer.conn.WriteMessage(websocket.TextMessage, msg)
+                                targetPeer.mu.Unlock()
+                            }
+                        }
+                    } else {
 					log.Printf("WARN: Received 'ice_candidate' from %s with invalid 'ice' field structure.", peer.username)
 					break // Не пересылаем некорректный кандидат
 				}
@@ -3391,476 +2457,10 @@ return
 	log.Printf("Cleanup complete for connection %s.", remoteAddr) // Лог по адресу, т.к. peer может быть nil
 } // Конец handleWebSocket
 
-Android ведущий
-
-D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\MainActivity.kt
+ведущий
 D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebRTCClient.kt
 D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebRTCService.kt
 D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebSocketClient.kt
-D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\Worker.kt
-
-
-// file: D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/MainActivity.kt
-package com.example.mytest
-
-import android.Manifest
-import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.BroadcastReceiver
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.media.projection.MediaProjectionManager
-import android.net.Uri
-import android.os.Build
-import android.os.Bundle
-import android.os.PowerManager
-import android.provider.Settings
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
-import android.view.View
-import android.view.WindowManager
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.result.registerForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
-import com.example.mytest.databinding.ActivityMainBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.json.JSONArray
-import java.util.*
-import kotlin.random.Random
-
-class MainActivity : ComponentActivity() {
-private lateinit var binding: ActivityMainBinding
-private lateinit var sharedPreferences: SharedPreferences
-private var currentRoomName: String = ""
-private var isServiceRunning: Boolean = false
-private val roomList = mutableListOf<String>()
-private lateinit var roomListAdapter: ArrayAdapter<String>
-
-    private val requiredPermissions = arrayOf(
-        Manifest.permission.CAMERA,
-        Manifest.permission.RECORD_AUDIO,
-        Manifest.permission.POST_NOTIFICATIONS
-    )
-
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissions ->
-        if (permissions.all { it.value }) {
-            if (isCameraPermissionGranted()) {
-                val mediaManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-                mediaProjectionLauncher.launch(mediaManager.createScreenCaptureIntent())
-                checkBatteryOptimization()
-            } else {
-                showToast("Camera permission required")
-                finish()
-            }
-        } else {
-            showToast("Not all permissions granted")
-            finish()
-        }
-    }
-
-    private val mediaProjectionLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK && result.data != null) {
-            // Сохраняем текущее имя комнаты при успешном запуске сервиса
-            saveCurrentRoom()
-            startWebRTCService(result.data!!)
-        } else {
-            showToast("Screen recording access denied")
-            finish()
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        loadRoomList()
-        setupUI()
-        setupRoomListAdapter()
-
-        // Проверяем состояние сервиса при создании активности
-        isServiceRunning = WebRTCService.isRunning
-        updateButtonStates()
-    }
-
-    private fun loadRoomList() {
-        // Загружаем список комнат
-        val jsonString = sharedPreferences.getString(ROOM_LIST_KEY, null)
-        jsonString?.let {
-            val jsonArray = JSONArray(it)
-            for (i in 0 until jsonArray.length()) {
-                roomList.add(jsonArray.getString(i))
-            }
-        }
-
-        // Загружаем последнее использованное имя комнаты
-        currentRoomName = sharedPreferences.getString(LAST_USED_ROOM_KEY, "") ?: ""
-
-        // Если нет сохраненных комнат или последнее имя пустое, генерируем новое
-        if (roomList.isEmpty()) {
-            currentRoomName = generateRandomRoomName()
-            roomList.add(currentRoomName)
-            saveRoomList()
-            saveCurrentRoom()
-        } else if (currentRoomName.isEmpty()) {
-            currentRoomName = roomList.first()
-            saveCurrentRoom()
-        }
-
-        // Устанавливаем последнее использованное имя в поле ввода
-        binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
-    }
-
-    private fun saveCurrentRoom() {
-        sharedPreferences.edit()
-            .putString(LAST_USED_ROOM_KEY, currentRoomName)
-            .apply()
-    }
-
-    private fun saveRoomList() {
-        val jsonArray = JSONArray()
-        roomList.forEach { jsonArray.put(it) }
-        sharedPreferences.edit()
-            .putString(ROOM_LIST_KEY, jsonArray.toString())
-            .apply()
-    }
-
-    private fun setupRoomListAdapter() {
-        roomListAdapter = ArrayAdapter(
-            this,
-            com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
-            roomList
-        )
-        binding.roomListView.adapter = roomListAdapter
-        binding.roomListView.setOnItemClickListener { _, _, position, _ ->
-            currentRoomName = roomList[position]
-            binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
-            updateButtonStates()
-        }
-    }
-
-    private fun setupUI() {
-        binding.roomCodeEditText.addTextChangedListener(object : TextWatcher {
-            private var isFormatting = false
-            private var deletingHyphen = false
-            private var hyphenPositions = listOf(4, 9, 14)
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if (isFormatting) return
-
-                if (count == 1 && after == 0 && hyphenPositions.contains(start)) {
-                    deletingHyphen = true
-                } else {
-                    deletingHyphen = false
-                }
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (isFormatting || isServiceRunning) return
-
-                isFormatting = true
-
-                val text = s.toString().replace("-", "")
-                if (text.length > 16) {
-                    s?.replace(0, s.length, formatRoomName(currentRoomName))
-                } else {
-                    val formatted = StringBuilder()
-                    for (i in text.indices) {
-                        if (i > 0 && i % 4 == 0) {
-                            formatted.append('-')
-                        }
-                        formatted.append(text[i])
-                    }
-
-                    val cursorPos = binding.roomCodeEditText.selectionStart
-                    if (deletingHyphen && cursorPos > 0 && cursorPos < formatted.length &&
-                        formatted[cursorPos] == '-') {
-                        formatted.deleteCharAt(cursorPos)
-                    }
-
-                    s?.replace(0, s.length, formatted.toString())
-                }
-
-                isFormatting = false
-
-                val cleanName = binding.roomCodeEditText.text.toString().replace("-", "")
-                binding.saveCodeButton.isEnabled = cleanName.length == 16 &&
-                        !roomList.contains(cleanName)
-            }
-        })
-
-        binding.generateCodeButton.setOnClickListener {
-            currentRoomName = generateRandomRoomName()
-            binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
-            showToast("Generated: $currentRoomName")
-        }
-
-        binding.deleteRoomButton.setOnClickListener {
-            val selectedRoom = binding.roomCodeEditText.text.toString().replace("-", "")
-            if (roomList.contains(selectedRoom)) {
-                showDeleteConfirmationDialog(selectedRoom)
-            } else {
-                showToast(getString(R.string.room_not_found))
-            }
-        }
-
-        binding.saveCodeButton.setOnClickListener {
-            val newRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
-            if (newRoomName.length == 16) {
-                if (!roomList.contains(newRoomName)) {
-                    roomList.add(0, newRoomName)
-                    currentRoomName = newRoomName
-                    saveRoomList()
-                    saveCurrentRoom()
-                    roomListAdapter.notifyDataSetChanged()
-                    showToast("Room saved: ${formatRoomName(newRoomName)}")
-                } else {
-                    showToast("Room already exists")
-                }
-            }
-        }
-
-        binding.copyCodeButton.setOnClickListener {
-            val roomName = binding.roomCodeEditText.text.toString()
-            val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText("Room name", roomName)
-            clipboard.setPrimaryClip(clip)
-            showToast("Copied: $roomName")
-        }
-
-        binding.shareCodeButton.setOnClickListener {
-            val roomName = binding.roomCodeEditText.text.toString()
-            val shareIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "Join my room: $roomName")
-                type = "text/plain"
-            }
-            startActivity(Intent.createChooser(shareIntent, "Share Room"))
-        }
-
-        binding.startButton.setOnClickListener {
-            if (isServiceRunning) {
-                showToast("Service already running")
-                return@setOnClickListener
-            }
-
-            currentRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
-            if (currentRoomName.isEmpty()) {
-                showToast("Enter room name")
-                return@setOnClickListener
-            }
-
-            if (checkAllPermissionsGranted() && isCameraPermissionGranted()) {
-                val mediaManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-                mediaProjectionLauncher.launch(mediaManager.createScreenCaptureIntent())
-                checkBatteryOptimization()
-            } else {
-                requestPermissionLauncher.launch(requiredPermissions)
-            }
-        }
-
-        binding.stopButton.setOnClickListener {
-            if (!isServiceRunning) {
-                showToast("Service not running")
-                return@setOnClickListener
-            }
-            stopWebRTCService()
-        }
-    }
-
-    private fun formatRoomName(name: String): String {
-        if (name.length != 16) return name
-
-        return buildString {
-            for (i in 0 until 16) {
-                if (i > 0 && i % 4 == 0) append('-')
-                append(name[i])
-            }
-        }
-    }
-
-    private fun showDeleteConfirmationDialog(roomName: String) {
-        if (roomList.size <= 1) {
-            showToast(getString(R.string.cannot_delete_last))
-            return
-        }
-
-        MaterialAlertDialogBuilder(this)
-            .setTitle(getString(R.string.delete_confirm_title))
-            .setMessage(getString(R.string.delete_confirm_message, formatRoomName(roomName)))
-            .setPositiveButton(getString(R.string.delete_button)) { _, _ ->
-                roomList.remove(roomName)
-                saveRoomList()
-                roomListAdapter.notifyDataSetChanged()
-
-                if (currentRoomName == roomName) {
-                    currentRoomName = roomList.first()
-                    binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
-                    saveCurrentRoom()
-                }
-
-                showToast("Room deleted")
-                updateButtonStates()
-            }
-            .setNegativeButton(getString(R.string.cancel_button), null)
-            .show()
-    }
-
-    private fun generateRandomRoomName(): String {
-        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        val random = Random.Default
-        val code = StringBuilder()
-
-        repeat(16) {
-            code.append(chars[random.nextInt(chars.length)])
-        }
-
-        return code.toString()
-    }
-
-    private fun startWebRTCService(resultData: Intent) {
-        try {
-            // Сохраняем текущее имя комнаты перед запуском сервиса
-            currentRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
-            saveCurrentRoom()
-
-            WebRTCService.currentRoomName = currentRoomName
-            val serviceIntent = Intent(this, WebRTCService::class.java).apply {
-                putExtra("resultCode", RESULT_OK)
-                putExtra("resultData", resultData)
-                putExtra("roomName", currentRoomName)
-            }
-            ContextCompat.startForegroundService(this, serviceIntent)
-            isServiceRunning = true
-            updateButtonStates()
-            showToast("Service started: ${formatRoomName(currentRoomName)}")
-        } catch (e: Exception) {
-            showToast("Start error: ${e.message}")
-            Log.e("MainActivity", "Service start error", e)
-        }
-    }
-
-    private fun stopWebRTCService() {
-        try {
-            val stopIntent = Intent(this, WebRTCService::class.java).apply {
-                action = "STOP"
-            }
-            startService(stopIntent)
-            isServiceRunning = false
-            updateButtonStates()
-            showToast("Service stopped")
-        } catch (e: Exception) {
-            showToast("Stop error: ${e.message}")
-            Log.e("MainActivity", "Service stop error", e)
-        }
-    }
-
-    private fun updateButtonStates() {
-        binding.apply {
-            // START активен только если сервис не работает
-            startButton.isEnabled = !isServiceRunning
-
-            // STOP активен только если сервис работает
-            stopButton.isEnabled = isServiceRunning
-
-            roomCodeEditText.isEnabled = !isServiceRunning
-            saveCodeButton.isEnabled = !isServiceRunning &&
-                    binding.roomCodeEditText.text.toString().replace("-", "").length == 16 &&
-                    !roomList.contains(binding.roomCodeEditText.text.toString().replace("-", ""))
-            generateCodeButton.isEnabled = !isServiceRunning
-            deleteRoomButton.isEnabled = !isServiceRunning &&
-                    roomList.contains(binding.roomCodeEditText.text.toString().replace("-", "")) &&
-                    roomList.size > 1
-
-            startButton.setBackgroundColor(
-                ContextCompat.getColor(
-                    this@MainActivity,
-                    if (isServiceRunning) android.R.color.darker_gray else R.color.green
-                )
-            )
-            stopButton.setBackgroundColor(
-                ContextCompat.getColor(
-                    this@MainActivity,
-                    if (isServiceRunning) R.color.red else android.R.color.darker_gray
-                )
-            )
-        }
-    }
-
-    private val serviceStateReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action == WebRTCService.ACTION_SERVICE_STATE) {
-                isServiceRunning = intent.getBooleanExtra(WebRTCService.EXTRA_IS_RUNNING, false)
-                updateButtonStates()
-            }
-        }
-    }
-
-    private fun checkAllPermissionsGranted() = requiredPermissions.all {
-        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun isCameraPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun checkBatteryOptimization() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val powerManager = getSystemService(PowerManager::class.java)
-            if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
-                val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
-                    data = Uri.parse("package:$packageName")
-                }
-                startActivity(intent)
-            }
-        }
-    }
-
-    private fun showToast(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
-    }
-
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
-    override fun onResume() {
-        super.onResume()
-        registerReceiver(serviceStateReceiver, IntentFilter(WebRTCService.ACTION_SERVICE_STATE))
-        // Обновляем состояние при возвращении в активность
-        isServiceRunning = WebRTCService.isRunning
-        updateButtonStates()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        unregisterReceiver(serviceStateReceiver)
-    }
-
-    companion object {
-        private const val PREFS_NAME = "WebRTCPrefs"
-        private const val ROOM_LIST_KEY = "room_list"
-        private const val LAST_USED_ROOM_KEY = "last_used_room"
-    }
-}
 
 // file: D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/WebRTCClient.kt
 package com.example.mytest
@@ -4249,6 +2849,60 @@ class WebRTCService : Service() {
         }
     }
 
+    // Добавляем в класс WebRTCService
+    private val bandwidthEstimationRunnable = object : Runnable {
+        override fun run() {
+            if (isConnected) {
+                adjustVideoQualityBasedOnStats()
+            }
+            handler.postDelayed(this, 10000) // Каждые 10 секунд
+        }
+    }
+
+    private fun adjustVideoQualityBasedOnStats() {
+        webRTCClient.peerConnection.getStats { statsReport ->
+            try {
+                var videoPacketsLost = 0L
+                var videoPacketsSent = 0L
+
+                // Получаем статистику для исходящего видео
+                statsReport.statsMap.values.forEach { stats ->
+                    if (stats.type == "outbound-rtp" && stats.id.contains("video")) {
+                        // Получаем значения как Long
+                        videoPacketsLost += stats.members["packetsLost"] as? Long ?: 0L
+                        videoPacketsSent += stats.members["packetsSent"] as? Long ?: 1L
+                    }
+                }
+
+                if (videoPacketsSent > 0) {
+                    val lossRate = videoPacketsLost.toDouble() / videoPacketsSent.toDouble()
+                    handler.post {
+                        when {
+                            lossRate > 0.1 -> reduceVideoQuality() // >10% потерь
+                            lossRate < 0.05 -> increaseVideoQuality() // <5% потерь
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("WebRTCService", "Error processing stats", e)
+            }
+        }
+    }
+
+    private fun reduceVideoQuality() {
+        webRTCClient.videoCapturer?.let { capturer ->
+            capturer.changeCaptureFormat(640, 480, 15) // Уменьшаем разрешение и FPS
+            Log.d("WebRTCService", "Reduced video quality to 640x480@15fps")
+        }
+    }
+
+    private fun increaseVideoQuality() {
+        webRTCClient.videoCapturer?.let { capturer ->
+            capturer.changeCaptureFormat(1280, 720, 30) // Увеличиваем разрешение и FPS
+            Log.d("WebRTCService", "Increased video quality to 1280x720@30fps")
+        }
+    }
+
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onCreate() {
         super.onCreate()
@@ -4276,6 +2930,7 @@ class WebRTCService : Service() {
 
         Log.d("WebRTCService", "Service created with room: $roomName")
         sendServiceStateUpdate()
+        handler.post(bandwidthEstimationRunnable)
         try {
             registerReceiver(connectivityReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
             isConnectivityReceiverRegistered = true
@@ -4540,6 +3195,12 @@ class WebRTCService : Service() {
 
         try {
             when (message.optString("type")) {
+                "create_offer_for_new_follower" -> {
+                    Log.d("WebRTCService", "Received request to create offer for new follower")
+                    handler.post {
+                        createOffer() // Создаем оффер по запросу сервера
+                    }
+                }
                 "bandwidth_estimation" -> {
                     val estimation = message.optLong("estimation", 1000000)
                     handleBandwidthEstimation(estimation)
@@ -4562,6 +3223,38 @@ class WebRTCService : Service() {
             }
         } catch (e: Exception) {
             Log.e("WebRTCService", "Error handling message", e)
+        }
+    }
+
+    private fun createOffer() {
+        try {
+            val constraints = MediaConstraints().apply {
+                mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"))
+                mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"))
+            }
+
+            webRTCClient.peerConnection.createOffer(object : SdpObserver {
+                override fun onCreateSuccess(desc: SessionDescription) {
+                    Log.d("WebRTCService", "Created offer: ${desc.description}")
+                    webRTCClient.peerConnection.setLocalDescription(object : SdpObserver {
+                        override fun onSetSuccess() {
+                            sendSessionDescription(desc) // Отправляем оффер через WebSocket
+                        }
+                        override fun onSetFailure(error: String) {
+                            Log.e("WebRTCService", "Error setting local description: $error")
+                        }
+                        override fun onCreateSuccess(p0: SessionDescription?) {}
+                        override fun onCreateFailure(error: String) {}
+                    }, desc)
+                }
+                override fun onCreateFailure(error: String) {
+                    Log.e("WebRTCService", "Error creating offer: $error")
+                }
+                override fun onSetSuccess() {}
+                override fun onSetFailure(error: String) {}
+            }, constraints)
+        } catch (e: Exception) {
+            Log.e("WebRTCService", "Error creating offer", e)
         }
     }
 
@@ -4665,10 +3358,12 @@ class WebRTCService : Service() {
 
             webRTCClient.peerConnection.setRemoteDescription(object : SdpObserver {
                 override fun onSetSuccess() {
-                    Log.d("WebRTCService", "Answer accepted")
+                    Log.d("WebRTCService", "Answer accepted, connection should be established")
                 }
                 override fun onSetFailure(error: String) {
                     Log.e("WebRTCService", "Error setting answer: $error")
+                    // При ошибке запрашиваем новый оффер
+                    handler.postDelayed({ createOffer() }, 2000)
                 }
                 override fun onCreateSuccess(p0: SessionDescription?) {}
                 override fun onCreateFailure(error: String) {}
@@ -4924,75 +3619,25 @@ private val client = OkHttpClient.Builder()
     }
 }
 
-// file: D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/Worker.kt
-package com.example.mytest
-
-import android.content.Context
-import android.content.Intent
-import android.os.Build
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.Worker
-import androidx.work.WorkerParameters
-import java.util.concurrent.TimeUnit
-
-class WebRTCWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
-override fun doWork(): Result {
-val intent = Intent(applicationContext, WebRTCService::class.java)
-if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-applicationContext.startForegroundService(intent)
-} else {
-applicationContext.startService(intent)
-}
-return Result.success()
-}
-}
-
-Проблема. Клиент-ведомый-браузер соединяется с ервером получает от ведущего оффер - видео работает идеально, этот же клиент отсоединяется-присоединяется
-видео очень сильно тормозит-идет с задержками. Перезагружаю сервер - клиент присоединяется - получает оффер - видео идет идеально.
-помоги разобраться в чем дело. Может что то не полностью чистится.
 
 
 
+Когда ведомый подсоединяется к комнате где уже есть ведомый, по реализации сервер должен исключать старого ведомого и присоединять нового ведомого.
+в мобильных браузерах - может это не совсем критерий - но почему то мобильные браузеры ведомые исключают ведомого в комнате , но сами присоединиться не могут, а стационарный компьютер подключатеся.
+в чем может быть причина?
 
+2025/05/01 11:10:57 WARN: Received 'offer' from non-leader user_6. Ignoring.
+2025/05/01 11:10:57 <<< Forwarding ANSWER from Follower user_6 to Leader PRA-LA1
+2025/05/01 11:11:01 Received message without 'type' field from user_6: map[action:join isLeader:false room:NTKKKM96JMTPRP90 username:user_6]
 
+2025/05/01 10:50:57 WARN: Received 'offer' from non-leader user_126. Ignoring.
+2025/05/01 10:50:57 <<< Forwarding ANSWER from Follower user_126 to Leader PRA-LA1
+2025/05/01 10:51:01 Received message without 'type' field from user_126: map[action:join isLeader:false room:NTKKKM96JMTPRP90 username:user_126]
+2025/05/01 10:51:08 Received message without 'type' field from user_126: map[action:join isLeader:false room:NTKKKM96JMTPRP90 username:user_126]
+2025/05/01 10:51:13 Received message without 'type' field from user_126: map[action:join isLeader:false room:NTKKKM96JMTPRP90 username:user_126]
+2025/05/01 10:51:18 Received message without 'type' field from user_126: map[action:join isLeader:false room:NTKKKM96JMTPRP90 username:user_126]
+2025/05/01 10:51:24 Received message without 'type' field from user_126: map[action:join isLeader:false room:NTKKKM96JMTPRP90 username:user_126]
+2025/05/01 10:51:29 Received message without 'type' field from user_126: map[action:join isLeader:false room:NTKKKM96JMTPRP90 username:user_126]
 
-Реализовано:
-1. В комнате должны быть только два участника ведущий и ведомый
-2. только ведущий создает комнату, готовит и отправляет оффер
-3. замена ведомого на ведомого если второй ведомый хочет попасть в комнату
+комментарии на русском. главное не сломай рабочую реализацию! посторайся с минимальными исправлениями устранить эту небольшую проблему. - почему мобильные браузеры ...
 
-Нужно чтобы работало: Когда Ведомый подключается к комнате, сервер сигнализации сообщает Ведущему, что нужно создать и отправить оффер Ведомому (через сервер). Ведомый ждет этот оффер, принимает его, создает answer (ответ) и отправляет обратно Ведущему (через сервер).
-Плюсы:
-✅ Стандартный и Рекомендуемый Подход: Это классическая модель WebRTC, где инициатор звонка (или потока, в вашем случае - Ведущий) отправляет предложение (offer), а принимающая сторона (Ведомый) отвечает (answer).
-✅ Логично: Ведущий "предлагает" свой видеопоток, Ведомый "соглашается" его принять.
-✅ Простота для Ведомого: Логика ведомого клиента очень проста – ждать оффер и отправлять ответ.
-✅ Меньше путаницы: Четкое разделение ролей снижает вероятность ошибок и состояний гонки (race conditions) на сервере и клиентах.
-✅ Совместимость: Большинство библиотек и примеров WebRTC построены на этой модели.
-✅ Ваша текущая реализация: Мы как раз исправили код клиента и сервера для работы по этой схеме (сервер просит лидера -> лидер шлет оффер -> ведомый шлет ответ).
-Минусы:
-Требуется явный сигнал от сервера к Ведущему для инициации оффера (что у вас уже сделано через сообщение create_offer_for_new_follower).
-Только Ведомый (Браузер) отправляет Оффер:
-
-###
-Android код (WebRTCService.kt) он всегда действовал как Ведущий (Leader) и только отправлял Офферы, но никогда их не получал и не создавал ответы (Answers). Он будет только получать и обрабатывать ответы от Ведомого (браузера).
-Это соответствует модели, которую мы реализовали на сервере и в веб-клиенте: сервер при подключении ведомого отправляет лидеру (Android) команду create_offer_for_new_follower, и Android должен на это среагировать, создав и отправив оффер.
-###
-Ведущий создает оффер только по запросу сервера
-Ведомый всегда ожидает оффер и отвечает на него
-
-Доработай и справь код Ведущего и ведомого, сервер Go желательно не изменяй.
-Андройд работает на библиотеках
-// WebRTC
-implementation("io.github.webrtc-sdk:android:125.6422.07")
-// WebSocket
-implementation("com.squareup.okhttp3:okhttp:4.11.0")
-из менять не нужно
-
-
-
-Сделай эту логику чтобы Ведущий и ведомый всегда обменивались видео, сделай изменения без лишних улучшений - чтобы не ухудшить остальную логику.
-1. Кода давай целыми функциями.
-2. Комментарии на русском.
-
-на мобильных устройствах при длительной работе происходит задержка видео, на дестктопных компьютерах все работает хорошо.

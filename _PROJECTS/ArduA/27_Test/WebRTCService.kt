@@ -1,247 +1,3 @@
-
-
-
-D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebRTCClient.kt
-D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebRTCService.kt
-D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebSocketClient.kt
-
-// file: D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/WebRTCClient.kt
-package com.example.mytest
-
-import android.content.Context
-import android.os.Build
-import android.util.Log
-import org.webrtc.*
-
-class WebRTCClient(
-private val context: Context,
-private val eglBase: EglBase,
-private val localView: SurfaceViewRenderer,
-private val remoteView: SurfaceViewRenderer,
-private val observer: PeerConnection.Observer
-) {
-lateinit var peerConnectionFactory: PeerConnectionFactory
-var peerConnection: PeerConnection
-private var localVideoTrack: VideoTrack? = null
-private var localAudioTrack: AudioTrack? = null
-internal var videoCapturer: VideoCapturer? = null
-private var surfaceTextureHelper: SurfaceTextureHelper? = null
-
-    init {
-        initializePeerConnectionFactory()
-        peerConnection = createPeerConnection()
-        createLocalTracks()
-    }
-
-    private fun initializePeerConnectionFactory() {
-        val initializationOptions = PeerConnectionFactory.InitializationOptions.builder(context)
-            .setEnableInternalTracer(true)
-            .setFieldTrials("WebRTC-VP8-Forced-Fallback-Encoder/Enabled/")
-            .createInitializationOptions()
-        PeerConnectionFactory.initialize(initializationOptions)
-
-        val videoEncoderFactory = DefaultVideoEncoderFactory(
-            eglBase.eglBaseContext,
-            true,
-            true
-        )
-
-        val videoDecoderFactory = DefaultVideoDecoderFactory(eglBase.eglBaseContext)
-
-        peerConnectionFactory = PeerConnectionFactory.builder()
-            .setVideoEncoderFactory(videoEncoderFactory)
-            .setVideoDecoderFactory(videoDecoderFactory)
-            .setOptions(PeerConnectionFactory.Options().apply {
-                disableEncryption = false
-                disableNetworkMonitor = false
-            })
-            .createPeerConnectionFactory()
-    }
-
-    private fun createPeerConnection(): PeerConnection {
-        val rtcConfig = PeerConnection.RTCConfiguration(listOf(
-
-            PeerConnection.IceServer.builder("turn:ardua.site:3478")
-                .setUsername("user1")
-                .setPassword("pass1")
-                .createIceServer(),
-
-            PeerConnection.IceServer.builder("stun:ardua.site:3478").createIceServer(),
-
-//            PeerConnection.IceServer.builder("turns:ardua.site:5349")
-//                .setUsername("user1")
-//                .setPassword("pass1")
-//                .createIceServer(),
-
-//            PeerConnection.IceServer.builder("stun:stun.l.google.com:19301").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun.l.google.com:19302").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun.l.google.com:19303").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun.l.google.com:19304").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun.l.google.com:19305").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun1.l.google.com:19301").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun1.l.google.com:19302").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun1.l.google.com:19303").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun1.l.google.com:19304").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun1.l.google.com:19305").createIceServer()
-)).apply {
-sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN
-continualGatheringPolicy = PeerConnection.ContinualGatheringPolicy.GATHER_CONTINUALLY
-iceTransportsType = PeerConnection.IceTransportsType.ALL
-bundlePolicy = PeerConnection.BundlePolicy.MAXBUNDLE
-rtcpMuxPolicy = PeerConnection.RtcpMuxPolicy.REQUIRE
-tcpCandidatePolicy = PeerConnection.TcpCandidatePolicy.ENABLED
-candidateNetworkPolicy = PeerConnection.CandidateNetworkPolicy.ALL
-keyType = PeerConnection.KeyType.ECDSA
-
-            // Оптимизация для мобильных
-            if (Build.MODEL.contains("iPhone")) {
-                audioJitterBufferMaxPackets = 50
-                audioJitterBufferFastAccelerate = true
-            } else {
-                // Настройки для Android
-                audioJitterBufferMaxPackets = 200
-                iceConnectionReceivingTimeout = 5000
-            }
-        }
-
-        return peerConnectionFactory.createPeerConnection(rtcConfig, observer)!!
-    }
-
-    // В WebRTCClient.kt добавляем обработку переключения камеры
-    internal fun switchCamera(useBackCamera: Boolean) {
-        try {
-            videoCapturer?.let { capturer ->
-                if (capturer is CameraVideoCapturer) {
-                    if (useBackCamera) {
-                        // Switch to back camera
-                        val cameraEnumerator = Camera2Enumerator(context)
-                        val deviceNames = cameraEnumerator.deviceNames
-                        deviceNames.find { !cameraEnumerator.isFrontFacing(it) }?.let { backCameraId ->
-                            capturer.switchCamera(object : CameraVideoCapturer.CameraSwitchHandler {
-                                override fun onCameraSwitchDone(isFrontCamera: Boolean) {
-                                    Log.d("WebRTCClient", "Switched to back camera")
-                                }
-
-                                override fun onCameraSwitchError(error: String) {
-                                    Log.e("WebRTCClient", "Error switching to back camera: $error")
-                                }
-                            })
-                        }
-                    } else {
-                        // Switch to front camera
-                        val cameraEnumerator = Camera2Enumerator(context)
-                        val deviceNames = cameraEnumerator.deviceNames
-                        deviceNames.find { cameraEnumerator.isFrontFacing(it) }?.let { frontCameraId ->
-                            capturer.switchCamera(object : CameraVideoCapturer.CameraSwitchHandler {
-                                override fun onCameraSwitchDone(isFrontCamera: Boolean) {
-                                    Log.d("WebRTCClient", "Switched to front camera")
-                                }
-
-                                override fun onCameraSwitchError(error: String) {
-                                    Log.e("WebRTCClient", "Error switching to front camera: $error")
-                                }
-                            })
-                        }
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            Log.e("WebRTCClient", "Error switching camera", e)
-        }
-    }
-
-    private fun createLocalTracks() {
-        createAudioTrack()
-        createVideoTrack()
-
-        val streamId = "ARDAMS"
-        val stream = peerConnectionFactory.createLocalMediaStream(streamId)
-
-        localAudioTrack?.let {
-            stream.addTrack(it)
-            peerConnection.addTrack(it, listOf(streamId))
-        }
-
-        localVideoTrack?.let {
-            stream.addTrack(it)
-            peerConnection.addTrack(it, listOf(streamId))
-        }
-    }
-
-    private fun createAudioTrack() {
-        val audioConstraints = MediaConstraints().apply {
-            mandatory.add(MediaConstraints.KeyValuePair("googEchoCancellation", "true"))
-            mandatory.add(MediaConstraints.KeyValuePair("googAutoGainControl", "true"))
-            mandatory.add(MediaConstraints.KeyValuePair("googHighpassFilter", "true"))
-            mandatory.add(MediaConstraints.KeyValuePair("googNoiseSuppression", "true"))
-        }
-
-        val audioSource = peerConnectionFactory.createAudioSource(audioConstraints)
-        localAudioTrack = peerConnectionFactory.createAudioTrack("ARDAMSa0", audioSource)
-    }
-
-    private fun createVideoTrack() {
-        try {
-            videoCapturer = createCameraCapturer()
-            videoCapturer?.let { capturer ->
-                surfaceTextureHelper = SurfaceTextureHelper.create(
-                    "CaptureThread",
-                    eglBase.eglBaseContext
-                )
-
-                val videoSource = peerConnectionFactory.createVideoSource(false)
-                capturer.initialize(
-                    surfaceTextureHelper,
-                    context,
-                    videoSource.capturerObserver
-                )
-                capturer.startCapture(640, 480, 30)
-
-                localVideoTrack = peerConnectionFactory.createVideoTrack("ARDAMSv0", videoSource).apply {
-                    addSink(localView)
-                }
-            } ?: run {
-                Log.e("WebRTCClient", "Failed to create video capturer")
-            }
-        } catch (e: Exception) {
-            Log.e("WebRTCClient", "Error creating video track", e)
-        }
-    }
-
-    private fun createCameraCapturer(): VideoCapturer? {
-        return Camera2Enumerator(context).run {
-            deviceNames.find { isFrontFacing(it) }?.let {
-                Log.d("WebRTC", "Using front camera: $it")
-                createCapturer(it, null)
-            } ?: deviceNames.firstOrNull()?.let {
-                Log.d("WebRTC", "Using first available camera: $it")
-                createCapturer(it, null)
-            }
-        }
-    }
-
-    fun close() {
-        try {
-            videoCapturer?.let {
-                it.stopCapture()
-                it.dispose()
-            }
-            localVideoTrack?.let {
-                it.removeSink(localView)
-                it.dispose()
-            }
-            localAudioTrack?.dispose()
-            surfaceTextureHelper?.dispose()
-            peerConnection.close()
-            peerConnection.dispose()
-        } catch (e: Exception) {
-            Log.e("WebRTCClient", "Error closing resources", e)
-        }
-    }
-}
-
-// file: D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/WebRTCService.kt
-// file: src/main/java/com/example/mytest/WebRTCService.kt
 package com.example.mytest
 
 import android.annotation.SuppressLint
@@ -267,6 +23,9 @@ import androidx.work.Constraints
 import androidx.work.ExistingWorkPolicy
 import androidx.work.NetworkType
 
+/**
+ * Фоновый сервис для управления WebRTC соединением и WebSocket.
+ */
 class WebRTCService : Service() {
 
     companion object {
@@ -281,7 +40,7 @@ class WebRTCService : Service() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == ACTION_SERVICE_STATE) {
                 val isRunning = intent.getBooleanExtra(EXTRA_IS_RUNNING, false)
-                // Можно обновить UI активности, если она видима
+                // Обновление UI активности при изменении состояния
             }
         }
     }
@@ -293,11 +52,12 @@ class WebRTCService : Service() {
         sendBroadcast(intent)
     }
 
-    private var isConnected = false // Флаг подключения
-    private var isConnecting = false // Флаг процесса подключения
-
+    // Состояние соединения
+    private var isConnected = false
+    private var isConnecting = false
     private var shouldStop = false
     private var isUserStopped = false
+    private var currentFollowerUsername: String? = null // Текущий ведомый
 
     private val binder = LocalBinder()
     private lateinit var webSocketClient: WebSocketClient
@@ -349,7 +109,7 @@ class WebRTCService : Service() {
             Log.d("WebRTCService", "WebSocket connected for room: $roomName")
             isConnected = true
             isConnecting = false
-            reconnectAttempts = 0 // Сбрасываем счетчик попыток
+            reconnectAttempts = 0
             updateNotification("Connected to server")
             joinRoom()
         }
@@ -392,7 +152,6 @@ class WebRTCService : Service() {
         }
     }
 
-    // Добавляем в класс WebRTCService
     private val bandwidthEstimationRunnable = object : Runnable {
         override fun run() {
             if (isConnected) {
@@ -402,56 +161,10 @@ class WebRTCService : Service() {
         }
     }
 
-    private fun adjustVideoQualityBasedOnStats() {
-        webRTCClient.peerConnection.getStats { statsReport ->
-            try {
-                var videoPacketsLost = 0L
-                var videoPacketsSent = 0L
-
-                // Получаем статистику для исходящего видео
-                statsReport.statsMap.values.forEach { stats ->
-                    if (stats.type == "outbound-rtp" && stats.id.contains("video")) {
-                        // Получаем значения как Long
-                        videoPacketsLost += stats.members["packetsLost"] as? Long ?: 0L
-                        videoPacketsSent += stats.members["packetsSent"] as? Long ?: 1L
-                    }
-                }
-
-                if (videoPacketsSent > 0) {
-                    val lossRate = videoPacketsLost.toDouble() / videoPacketsSent.toDouble()
-                    handler.post {
-                        when {
-                            lossRate > 0.1 -> reduceVideoQuality() // >10% потерь
-                            lossRate < 0.05 -> increaseVideoQuality() // <5% потерь
-                        }
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("WebRTCService", "Error processing stats", e)
-            }
-        }
-    }
-
-    private fun reduceVideoQuality() {
-        webRTCClient.videoCapturer?.let { capturer ->
-            capturer.changeCaptureFormat(640, 480, 15) // Уменьшаем разрешение и FPS
-            Log.d("WebRTCService", "Reduced video quality to 640x480@15fps")
-        }
-    }
-
-    private fun increaseVideoQuality() {
-        webRTCClient.videoCapturer?.let { capturer ->
-            capturer.changeCaptureFormat(1280, 720, 30) // Увеличиваем разрешение и FPS
-            Log.d("WebRTCService", "Increased video quality to 1280x720@30fps")
-        }
-    }
-
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onCreate() {
         super.onCreate()
         isRunning = true
-
-        // Инициализация имени комнаты из статического поля
         roomName = currentRoomName
 
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -463,6 +176,7 @@ class WebRTCService : Service() {
         )
 
         handler.post(healthCheckRunnable)
+        handler.post(bandwidthEstimationRunnable)
 
         alarmManager.setInexactRepeating(
             AlarmManager.ELAPSED_REALTIME_WAKEUP,
@@ -473,7 +187,7 @@ class WebRTCService : Service() {
 
         Log.d("WebRTCService", "Service created with room: $roomName")
         sendServiceStateUpdate()
-        handler.post(bandwidthEstimationRunnable)
+
         try {
             registerReceiver(connectivityReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
             isConnectivityReceiverRegistered = true
@@ -483,7 +197,7 @@ class WebRTCService : Service() {
             startForegroundService()
             initializeWebRTC()
             connectWebSocket()
-            registerNetworkCallback() // Добавлен вызов регистрации коллбэка сети
+            registerNetworkCallback()
         } catch (e: Exception) {
             Log.e("WebRTCService", "Initialization failed", e)
             stopSelf()
@@ -503,7 +217,6 @@ class WebRTCService : Service() {
     private fun isServiceActive(): Boolean {
         return ::webSocketClient.isInitialized && webSocketClient.isConnected()
     }
-
 
     private fun startForegroundService() {
         val notification = createNotification()
@@ -555,7 +268,7 @@ class WebRTCService : Service() {
         override fun onIceCandidate(candidate: IceCandidate?) {
             candidate?.let {
                 Log.d("WebRTCService", "Local ICE candidate: ${it.sdpMid}:${it.sdpMLineIndex} ${it.sdp}")
-                sendIceCandidate(it)
+                sendIceCandidate(it, currentFollowerUsername)
             }
         }
 
@@ -564,8 +277,17 @@ class WebRTCService : Service() {
             when (state) {
                 PeerConnection.IceConnectionState.CONNECTED ->
                     updateNotification("Connection established")
-                PeerConnection.IceConnectionState.DISCONNECTED ->
+                PeerConnection.IceConnectionState.DISCONNECTED -> {
                     updateNotification("Connection lost")
+                    currentFollowerUsername = null
+                }
+                PeerConnection.IceConnectionState.FAILED -> {
+                    updateNotification("Connection failed")
+                    currentFollowerUsername = null
+                }
+                PeerConnection.IceConnectionState.CLOSED -> {
+                    currentFollowerUsername = null
+                }
                 else -> {}
             }
         }
@@ -662,28 +384,22 @@ class WebRTCService : Service() {
         handler.post {
             try {
                 Log.d("WebRTCService", "Starting reconnect process")
-
-                // Получаем последнее сохраненное имя комнаты
                 val sharedPrefs = getSharedPreferences("WebRTCPrefs", Context.MODE_PRIVATE)
                 val lastRoomName = sharedPrefs.getString("last_used_room", "")
 
-                // Если имя комнаты пустое, используем дефолтное значение
                 roomName = if (lastRoomName.isNullOrEmpty()) {
                     "default_room_${System.currentTimeMillis()}"
                 } else {
                     lastRoomName
                 }
 
-                // Обновляем текущее имя комнаты
                 currentRoomName = roomName
                 Log.d("WebRTCService", "Reconnecting to room: $roomName")
 
-                // Очищаем предыдущие соединения
                 if (::webSocketClient.isInitialized) {
                     webSocketClient.disconnect()
                 }
 
-                // Инициализируем заново
                 initializeWebRTC()
                 connectWebSocket()
 
@@ -710,26 +426,57 @@ class WebRTCService : Service() {
         }
     }
 
-    private fun handleBandwidthEstimation(estimation: Long) {
-        handler.post {
+    private fun adjustVideoQualityBasedOnStats() {
+        webRTCClient.peerConnection.getStats { statsReport ->
             try {
-                // Адаптируем качество видео в зависимости от доступной полосы
-                val width = when {
-                    estimation > 1500000 -> 1280 // 1.5 Mbps+
-                    estimation > 500000 -> 854  // 0.5-1.5 Mbps
-                    else -> 640                // <0.5 Mbps
+                var videoPacketsLost = 0L
+                var videoPacketsSent = 0L
+                var availableSendBandwidth = 0L
+
+                statsReport.statsMap.values.forEach { stats ->
+                    when {
+                        stats.type == "outbound-rtp" && stats.id.contains("video") -> {
+                            videoPacketsLost += stats.members["packetsLost"] as? Long ?: 0L
+                            videoPacketsSent += stats.members["packetsSent"] as? Long ?: 1L
+                        }
+                        stats.type == "candidate-pair" && stats.members["state"] == "succeeded" -> {
+                            availableSendBandwidth = stats.members["availableOutgoingBitrate"] as? Long ?: 0L
+                        }
+                    }
                 }
 
-                val height = (width * 9 / 16)
-
-                webRTCClient.videoCapturer?.let { capturer ->
-                    capturer.stopCapture()
-                    capturer.startCapture(width, height, 24)
-                    Log.d("WebRTCService", "Adjusted video to ${width}x${height} @24fps")
+                if (videoPacketsSent > 0) {
+                    val lossRate = videoPacketsLost.toDouble() / videoPacketsSent.toDouble()
+                    handler.post {
+                        when {
+                            lossRate > 0.1 -> reduceVideoQuality() // >10% потерь
+                            lossRate < 0.05 && availableSendBandwidth > 700000 -> increaseVideoQuality() // <5% потерь и хорошая пропускная способность
+                        }
+                    }
                 }
             } catch (e: Exception) {
-                Log.e("WebRTCService", "Error adjusting video quality", e)
+                Log.e("WebRTCService", "Error processing stats", e)
             }
+        }
+    }
+
+    private fun reduceVideoQuality() {
+        try {
+            webRTCClient.changeCaptureFormat(480, 360, 15)
+            webRTCClient.setVideoEncoderBitrate(150000, 200000, 300000)
+            Log.d("WebRTCService", "Reduced video quality to 480x360@15fps, 200kbps")
+        } catch (e: Exception) {
+            Log.e("WebRTCService", "Error reducing video quality", e)
+        }
+    }
+
+    private fun increaseVideoQuality() {
+        try {
+            webRTCClient.changeCaptureFormat(640, 480, 20)
+            webRTCClient.setVideoEncoderBitrate(300000, 400000, 500000)
+            Log.d("WebRTCService", "Increased video quality to 640x480@20fps, 400kbps")
+        } catch (e: Exception) {
+            Log.e("WebRTCService", "Error increasing video quality", e)
         }
     }
 
@@ -738,27 +485,35 @@ class WebRTCService : Service() {
 
         try {
             when (message.optString("type")) {
-                "create_offer_for_new_follower" -> {
-                    Log.d("WebRTCService", "Received request to create offer for new follower")
+                "rejoin_and_offer" -> {
+                    // Сервер запрашивает переподключение и создание нового оффера
+                    val followerUsername = message.optString("follower", "")
+                    Log.d("WebRTCService", "Received rejoin_and_offer for follower: $followerUsername")
                     handler.post {
-                        createOffer() // Создаем оффер по запросу сервера
+                        resetAndInitiateOffer(followerUsername)
                     }
                 }
-                "bandwidth_estimation" -> {
-                    val estimation = message.optLong("estimation", 1000000)
-                    handleBandwidthEstimation(estimation)
+                "answer" -> {
+                    val caller = message.optString("username", "")
+                    if (caller == currentFollowerUsername) {
+                        handleAnswer(message)
+                    } else {
+                        Log.w("WebRTCService", "Received answer from unexpected user: $caller")
+                    }
                 }
-                "offer" -> handleOffer(message)
-                "answer" -> handleAnswer(message)
-                "ice_candidate" -> handleIceCandidate(message)
-                "room_info" -> {}
+                "ice_candidate" -> {
+                    val caller = message.optString("username", "")
+                    if (caller == currentFollowerUsername) {
+                        handleIceCandidate(message)
+                    } else {
+                        Log.w("WebRTCService", "Received ICE candidate from unexpected user: $caller")
+                    }
+                }
                 "switch_camera" -> {
-                    // Обрабатываем команду переключения камеры
                     val useBackCamera = message.optBoolean("useBackCamera", false)
                     Log.d("WebRTCService", "Received switch camera command: useBackCamera=$useBackCamera")
                     handler.post {
                         webRTCClient.switchCamera(useBackCamera)
-                        // Отправляем подтверждение
                         sendCameraSwitchAck(useBackCamera)
                     }
                 }
@@ -769,7 +524,26 @@ class WebRTCService : Service() {
         }
     }
 
-    private fun createOffer() {
+    private fun resetAndInitiateOffer(targetUsername: String?) {
+        if (targetUsername.isNullOrEmpty()) {
+            Log.e("WebRTCService", "Cannot initiate offer - target username is empty")
+            return
+        }
+
+        Log.d("WebRTCService", "Resetting connection and initiating offer for $targetUsername")
+        currentFollowerUsername = targetUsername
+
+        // Полный сброс WebRTC соединения
+        cleanupWebRTCResources()
+        initializeWebRTC()
+
+        // Небольшая задержка перед созданием оффера
+        handler.postDelayed({
+            createOffer(targetUsername)
+        }, 500)
+    }
+
+    private fun createOffer(targetUsername: String) {
         try {
             val constraints = MediaConstraints().apply {
                 mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"))
@@ -779,101 +553,37 @@ class WebRTCService : Service() {
             webRTCClient.peerConnection.createOffer(object : SdpObserver {
                 override fun onCreateSuccess(desc: SessionDescription) {
                     Log.d("WebRTCService", "Created offer: ${desc.description}")
-                    webRTCClient.peerConnection.setLocalDescription(object : SdpObserver {
-                        override fun onSetSuccess() {
-                            sendSessionDescription(desc) // Отправляем оффер через WebSocket
-                        }
-                        override fun onSetFailure(error: String) {
-                            Log.e("WebRTCService", "Error setting local description: $error")
-                        }
-                        override fun onCreateSuccess(p0: SessionDescription?) {}
-                        override fun onCreateFailure(error: String) {}
-                    }, desc)
+                    setLocalDescription(desc, targetUsername)
                 }
                 override fun onCreateFailure(error: String) {
                     Log.e("WebRTCService", "Error creating offer: $error")
+                    currentFollowerUsername = null
                 }
                 override fun onSetSuccess() {}
                 override fun onSetFailure(error: String) {}
             }, constraints)
         } catch (e: Exception) {
             Log.e("WebRTCService", "Error creating offer", e)
+            currentFollowerUsername = null
         }
     }
 
-    // Метод для отправки подтверждения переключения камеры
-    private fun sendCameraSwitchAck(useBackCamera: Boolean) {
-        try {
-            val message = JSONObject().apply {
-                put("type", "switch_camera_ack")
-                put("useBackCamera", useBackCamera)
-                put("success", true)
-                put("room", roomName)
-                put("username", userName)
+    private fun setLocalDescription(desc: SessionDescription, targetUsername: String) {
+        webRTCClient.peerConnection.setLocalDescription(object : SdpObserver {
+            override fun onSetSuccess() {
+                Log.d("WebRTCService", "Local description set successfully")
+                sendSdpOffer(desc, targetUsername)
             }
-            webSocketClient.send(message.toString())
-            Log.d("WebRTCService", "Sent camera switch ack")
-        } catch (e: Exception) {
-            Log.e("WebRTCService", "Error sending camera switch ack", e)
-        }
+            override fun onSetFailure(error: String) {
+                Log.e("WebRTCService", "Error setting local description: $error")
+                currentFollowerUsername = null
+            }
+            override fun onCreateSuccess(p0: SessionDescription?) {}
+            override fun onCreateFailure(error: String) {}
+        }, desc)
     }
 
-    private fun handleOffer(offer: JSONObject) {
-        try {
-            val sdp = offer.getJSONObject("sdp")
-            val sessionDescription = SessionDescription(
-                SessionDescription.Type.OFFER,
-                sdp.getString("sdp")
-            )
-
-            webRTCClient.peerConnection.setRemoteDescription(object : SdpObserver {
-                override fun onSetSuccess() {
-                    val constraints = MediaConstraints().apply {
-                        mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"))
-                        mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"))
-                    }
-                    createAnswer(constraints)
-                }
-                override fun onSetFailure(error: String) {
-                    Log.e("WebRTCService", "Error setting remote description: $error")
-                }
-                override fun onCreateSuccess(p0: SessionDescription?) {}
-                override fun onCreateFailure(error: String) {}
-            }, sessionDescription)
-        } catch (e: Exception) {
-            Log.e("WebRTCService", "Error handling offer", e)
-        }
-    }
-
-    private fun createAnswer(constraints: MediaConstraints) {
-        try {
-            webRTCClient.peerConnection.createAnswer(object : SdpObserver {
-                override fun onCreateSuccess(desc: SessionDescription) {
-                    Log.d("WebRTCService", "Created answer: ${desc.description}")
-                    webRTCClient.peerConnection.setLocalDescription(object : SdpObserver {
-                        override fun onSetSuccess() {
-                            sendSessionDescription(desc)
-                        }
-                        override fun onSetFailure(error: String) {
-                            Log.e("WebRTCService", "Error setting local description: $error")
-                        }
-                        override fun onCreateSuccess(p0: SessionDescription?) {}
-                        override fun onCreateFailure(error: String) {}
-                    }, desc)
-                }
-                override fun onCreateFailure(error: String) {
-                    Log.e("WebRTCService", "Error creating answer: $error")
-                }
-                override fun onSetSuccess() {}
-                override fun onSetFailure(error: String) {}
-            }, constraints)
-        } catch (e: Exception) {
-            Log.e("WebRTCService", "Error creating answer", e)
-        }
-    }
-
-    private fun sendSessionDescription(desc: SessionDescription) {
-        Log.d("WebRTCService", "Sending SDP: ${desc.type} \n${desc.description}")
+    private fun sendSdpOffer(desc: SessionDescription, targetUsername: String) {
         try {
             val message = JSONObject().apply {
                 put("type", desc.type.canonicalForm())
@@ -883,11 +593,12 @@ class WebRTCService : Service() {
                 })
                 put("room", roomName)
                 put("username", userName)
-                put("target", "browser")
+                put("target", targetUsername)
             }
             webSocketClient.send(message.toString())
+            Log.d("WebRTCService", "Sent SDP offer to $targetUsername")
         } catch (e: Exception) {
-            Log.e("WebRTCService", "Error sending SDP", e)
+            Log.e("WebRTCService", "Error sending SDP offer", e)
         }
     }
 
@@ -901,18 +612,18 @@ class WebRTCService : Service() {
 
             webRTCClient.peerConnection.setRemoteDescription(object : SdpObserver {
                 override fun onSetSuccess() {
-                    Log.d("WebRTCService", "Answer accepted, connection should be established")
+                    Log.d("WebRTCService", "Answer accepted, connection established")
                 }
                 override fun onSetFailure(error: String) {
                     Log.e("WebRTCService", "Error setting answer: $error")
-                    // При ошибке запрашиваем новый оффер
-                    handler.postDelayed({ createOffer() }, 2000)
+                    currentFollowerUsername = null
                 }
                 override fun onCreateSuccess(p0: SessionDescription?) {}
                 override fun onCreateFailure(error: String) {}
             }, sessionDescription)
         } catch (e: Exception) {
             Log.e("WebRTCService", "Error handling answer", e)
+            currentFollowerUsername = null
         }
     }
 
@@ -930,7 +641,9 @@ class WebRTCService : Service() {
         }
     }
 
-    private fun sendIceCandidate(candidate: IceCandidate) {
+    private fun sendIceCandidate(candidate: IceCandidate, targetUsername: String?) {
+        if (targetUsername == null) return
+
         try {
             val message = JSONObject().apply {
                 put("type", "ice_candidate")
@@ -941,10 +654,27 @@ class WebRTCService : Service() {
                 })
                 put("room", roomName)
                 put("username", userName)
+                put("target", targetUsername)
             }
             webSocketClient.send(message.toString())
         } catch (e: Exception) {
             Log.e("WebRTCService", "Error sending ICE candidate", e)
+        }
+    }
+
+    private fun sendCameraSwitchAck(useBackCamera: Boolean) {
+        try {
+            val message = JSONObject().apply {
+                put("type", "switch_camera_ack")
+                put("useBackCamera", useBackCamera)
+                put("success", true)
+                put("room", roomName)
+                put("username", userName)
+            }
+            webSocketClient.send(message.toString())
+            Log.d("WebRTCService", "Sent camera switch ack")
+        } catch (e: Exception) {
+            Log.e("WebRTCService", "Error sending camera switch ack", e)
         }
     }
 
@@ -967,7 +697,7 @@ class WebRTCService : Service() {
             .setContentTitle("WebRTC Service")
             .setContentText("Active in room: $roomName")
             .setSmallIcon(R.drawable.ic_notification)
-            .setPriority(NotificationCompat.PRIORITY_HIGH) // Измените на HIGH
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setOngoing(true)
             .build()
     }
@@ -993,7 +723,6 @@ class WebRTCService : Service() {
             if (isStateReceiverRegistered) {
                 unregisterReceiver(stateReceiver)
             }
-            // Автоматический перезапуск только если не было явной остановки
             scheduleRestartWithWorkManager()
         }
         super.onDestroy()
@@ -1019,7 +748,6 @@ class WebRTCService : Service() {
             else -> {
                 isUserStopped = false
 
-                // Получаем последнее сохраненное имя комнаты
                 val sharedPrefs = getSharedPreferences("WebRTCPrefs", Context.MODE_PRIVATE)
                 val lastRoomName = sharedPrefs.getString("last_used_room", "")
 
@@ -1067,12 +795,11 @@ class WebRTCService : Service() {
     }
 
     private fun scheduleRestartWithWorkManager() {
-        // Убедитесь, что используете ApplicationContext
         val workRequest = OneTimeWorkRequestBuilder<WebRTCWorker>()
             .setInitialDelay(1, TimeUnit.MINUTES)
             .setConstraints(
                 Constraints.Builder()
-                    .setRequiredNetworkType(NetworkType.CONNECTED) // Только при наличии сети
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
                     .build()
             )
             .build()
@@ -1090,75 +817,3 @@ class WebRTCService : Service() {
                 ::eglBase.isInitialized
     }
 }
-
-// file: D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/WebSocketClient.kt
-package com.example.mytest
-
-import android.annotation.SuppressLint
-import android.util.Log
-import okhttp3.*
-import org.json.JSONObject
-import java.security.cert.X509Certificate
-import java.util.concurrent.TimeUnit
-import javax.net.ssl.*
-
-class WebSocketClient(private val listener: okhttp3.WebSocketListener) {
-private var webSocket: WebSocket? = null
-private var currentUrl: String = ""
-private val client = OkHttpClient.Builder()
-.pingInterval(20, TimeUnit.SECONDS)
-.pingInterval(20, TimeUnit.SECONDS)
-.hostnameVerifier { _, _ -> true }
-.sslSocketFactory(getUnsafeSSLSocketFactory(), getTrustAllCerts()[0] as X509TrustManager)
-.build()
-
-    private fun getUnsafeSSLSocketFactory(): SSLSocketFactory {
-        val trustAllCerts = getTrustAllCerts()
-        val sslContext = SSLContext.getInstance("SSL")
-        sslContext.init(null, trustAllCerts, java.security.SecureRandom())
-        return sslContext.socketFactory
-    }
-
-    private fun getTrustAllCerts(): Array<TrustManager> {
-        return arrayOf(
-            @SuppressLint("CustomX509TrustManager")
-            object : X509TrustManager {
-                @SuppressLint("TrustAllX509TrustManager")
-                override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
-                }
-
-                @SuppressLint("TrustAllX509TrustManager")
-                override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
-                }
-
-                override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
-            })
-    }
-    fun isConnected(): Boolean {
-        return webSocket != null
-    }
-
-    fun connect(url: String) {
-        currentUrl = url
-        val request = Request.Builder()
-            .url(url)
-            .build()
-
-        webSocket = client.newWebSocket(request, listener)
-    }
-
-    fun reconnect() {
-        disconnect()
-        connect(currentUrl)
-    }
-
-    fun send(message: String) {
-        webSocket?.send(message)
-    }
-
-    fun disconnect() {
-        webSocket?.close(1000, "Normal closure")
-        client.dispatcher.executorService.shutdown()
-    }
-}
-

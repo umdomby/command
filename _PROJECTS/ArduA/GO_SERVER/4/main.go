@@ -167,154 +167,99 @@ func cleanupPeer(peer *Peer) {
 }
 
 // Создание нового предложения (offer) для ведомого
-func createNewOffer(peer *Peer) error {
-	offer, err := peer.pc.CreateOffer(nil)
-	if err != nil {
-		return err
-	}
+func createNewOffer(leader *Peer) error {
+    // Проверяем текущее состояние
+    if leader.pc.SignalingState() == webrtc.SignalingStateHaveLocalOffer {
+        // Сбрасываем соединение перед созданием нового offer
+        leader.pc.Close()
 
-	// Устанавливаем локальное описание
-	err = peer.pc.SetLocalDescription(offer)
-	if err != nil {
-		return err
-	}
+        // Создаем новое PeerConnection
+        newPC, err := webrtc.NewPeerConnection(getWebRTCConfig())
+        if err != nil {
+            return err
+        }
 
-	// Отправляем offer другому участнику комнаты
-	mu.Lock()
-	defer mu.Unlock()
+        // Заменяем PeerConnection
+        leader.pc = newPC
+        setupPeerConnectionHandlers(leader)
+    }
 
-	for _, p := range rooms[peer.room] {
-		if p.username != peer.username {
-			err = p.conn.WriteJSON(map[string]interface{}{
-				"type": "offer",
-				"sdp":  offer,
-			})
-			if err != nil {
-				return err
-			}
-		}
-	}
+    offer, err := leader.pc.CreateOffer(nil)
+    if err != nil {
+        return err
+    }
 
-	return nil
+    err = leader.pc.SetLocalDescription(offer)
+    if err != nil {
+        return err
+    }
+
+    return nil
+}
+
+
+// Новая функция для настройки обработчиков PeerConnection
+func setupPeerConnectionHandlers(peer *Peer) {
+    peer.pc.OnICECandidate(func(c *webrtc.ICECandidate) {
+        if c == nil {
+            return
+        }
+        peer.conn.WriteJSON(map[string]interface{}{
+            "type": "ice_candidate",
+            "ice":  c.ToJSON(),
+        })
+    })
+
+    peer.pc.OnTrack(func(track *webrtc.TrackRemote, receiver *webrtc.RTPReceiver) {
+        log.Printf("Получен трек: %s от %s", track.Kind().String(), peer.username)
+    })
+
+    peer.pc.OnConnectionStateChange(func(s webrtc.PeerConnectionState) {
+        log.Printf("Состояние PeerConnection изменилось для %s: %s", peer.username, s.String())
+        if s == webrtc.PeerConnectionStateFailed || s == webrtc.PeerConnectionStateClosed {
+            cleanupPeer(peer)
+            sendRoomInfo(peer.room)
+        }
+    })
 }
 
 // Обработка подключения нового пира
 func handlePeerJoin(room string, username string, isLeader bool, conn *websocket.Conn) (*Peer, error) {
-	mu.Lock()
-	defer mu.Unlock()
+    mu.Lock()
+    defer mu.Unlock()
 
-	// Создаем комнату, если ее нет
-	if _, exists := rooms[room]; !exists {
-		if !isLeader {
-			// Ведомый не может создать комнату
-			return nil, nil
-		}
-		rooms[room] = make(map[string]*Peer)
-	}
+    if _, exists := rooms[room]; !exists {
+        if !isLeader {
+            return nil, nil
+        }
+        rooms[room] = make(map[string]*Peer)
+    }
 
-	roomPeers := rooms[room]
+    roomPeers := rooms[room]
 
-	// Проверяем, не подключен ли уже пользователь с таким именем
-	if _, exists := roomPeers[username]; exists {
-		return nil, nil
-	}
+    // Если это повторное подключение того же пользователя
+    if existingPeer, exists := roomPeers[username]; exists {
+        cleanupPeer(existingPeer) // Полностью очищаем предыдущее соединение
+    }
 
-	// Если это ведущий, удаляем предыдущего ведущего
-	if isLeader {
-		for _, p := range roomPeers {
-			if p.isLeader {
-				log.Printf("Заменяем ведущего %s на нового ведущего %s", p.username, username)
-				p.conn.WriteJSON(map[string]interface{}{
-					"type": "force_disconnect",
-					"data": "Заменен новым ведущим",
-				})
-				cleanupPeer(p)
-				break
-			}
-		}
-	} else {
-		// Если это ведомый, удаляем предыдущего ведомого
-		for _, p := range roomPeers {
-			if !p.isLeader {
-				log.Printf("Заменяем ведомого %s на нового ведомого %s", p.username, username)
-				p.conn.WriteJSON(map[string]interface{}{
-					"type": "force_disconnect",
-					"data": "Заменен новым зрителем",
-				})
-				cleanupPeer(p)
-				break
-			}
-		}
-	}
+    peerConnection, err := webrtc.NewPeerConnection(getWebRTCConfig())
+    if err != nil {
+        return nil, err
+    }
 
-	// Проверяем лимит участников (2 - ведущий и ведомый)
-	if len(roomPeers) >= 2 {
-		return nil, nil
-	}
+    peer := &Peer{
+        conn:     conn,
+        pc:       peerConnection,
+        username: username,
+        room:     room,
+        isLeader: isLeader,
+    }
 
-	// Создаем новое PeerConnection
-	peerConnection, err := webrtc.NewPeerConnection(getWebRTCConfig())
-	if err != nil {
-		log.Printf("Ошибка создания PeerConnection: %v", err)
-		return nil, err
-	}
+    setupPeerConnectionHandlers(peer)
+    rooms[room][username] = peer
+    peers[conn.RemoteAddr().String()] = peer
 
-	peer := &Peer{
-		conn:     conn,
-		pc:       peerConnection,
-		username: username,
-		room:     room,
-		isLeader: isLeader,
-	}
-
-	// Обработчики событий WebRTC
-	peerConnection.OnICECandidate(func(c *webrtc.ICECandidate) {
-		if c == nil {
-			return
-		}
-
-		// Отправляем ICE кандидата другому участнику
-		candidate := c.ToJSON()
-		conn.WriteJSON(map[string]interface{}{
-			"type": "ice_candidate",
-			"ice":  candidate,
-		})
-	})
-
-	peerConnection.OnTrack(func(track *webrtc.TrackRemote, receiver *webrtc.RTPReceiver) {
-		log.Printf("Получен трек: %s от %s", track.Kind().String(), peer.username)
-	})
-
-	peerConnection.OnConnectionStateChange(func(s webrtc.PeerConnectionState) {
-		log.Printf("Состояние PeerConnection изменилось для %s: %s", peer.username, s.String())
-		if s == webrtc.PeerConnectionStateFailed || s == webrtc.PeerConnectionStateClosed {
-			log.Printf("Очищаем пир %s из-за состояния %s", peer.username, s.String())
-			cleanupPeer(peer)
-			sendRoomInfo(room)
-		}
-	})
-
-	// Если это ведомый и в комнате уже есть ведущий - создаем новое предложение
-	if !isLeader && len(roomPeers) > 0 {
-		for _, p := range roomPeers {
-			if p.isLeader {
-				go func() {
-					time.Sleep(500 * time.Millisecond) // Даем время на инициализацию
-					err := createNewOffer(p)
-					if err != nil {
-						log.Printf("Ошибка создания нового предложения: %v", err)
-					}
-				}()
-				break
-			}
-		}
-	}
-
-	// Добавляем пира в комнату
-	rooms[room][username] = peer
-	peers[conn.RemoteAddr().String()] = peer
-
-	return peer, nil
+    return peer, nil
 }
 
 func main() {
