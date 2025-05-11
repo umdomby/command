@@ -12,3 +12,15 @@ certbot/certbot certonly --standalone -d ardua.site --email umdom2@email.com --a
 
 sudo cp -r /etc/letsencrypt/archive/ardua.site /home/pi/Projects/docker/docker-nginx/letsencrypt/archive
 sudo cp -r /etc/letsencrypt/live/ardua.site /home/pi/Projects/docker/docker-nginx/letsencrypt/live
+
+
+
+
+Сначала перейдите в целевую директорию:
+cd /home/pi/projects/docker/docker-nginx/letsencrypt/live/ardua.site
+
+Затем создайте символические ссылки для каждого файла:
+ln -s ../../archive/ardua.site/cert.pem cert.pem
+ln -s ../../archive/ardua.site/chain.pem chain.pem
+ln -s ../../archive/ardua.site/fullchain.pem fullchain.pem
+ln -s ../../archive/ardua.site/privkey.pem privkey.pem

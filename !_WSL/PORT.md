@@ -1,13 +1,39 @@
-add v4tov4 listenport=5432 connectaddress=172.24.152.235 connectport=5432
-add v4tov4 listenport=80 connectaddress=172.24.152.235 connectport=80
-add v4tov4 listenport=5001 connectaddress=172.24.152.235 connectport=5001
-add v4tov4 listenport=5002 connectaddress=172.24.152.235 connectport=5002
-add v4tov4 listenport=444 connectaddress=172.24.152.235 connectport=444
-add v4tov4 listenport=5005 connectaddress=172.24.152.235 connectport=5005
-add v4tov4 listenport=445 connectaddress=172.24.152.235 connectport=445
-add v4tov4 listenport=5006 connectaddress=172.24.152.235 connectport=5006
-add v4tov4 listenport=8080 connectaddress=172.24.152.235 connectport=8080
-add v4tov4 listenport=443 connectaddress=172.24.152.235 connectport=443
-add v4tov4 listenport=5000 connectaddress=172.24.152.235 connectport=5000
-add v4tov4 listenport=8082 connectaddress=172.24.152.235 connectport=8082
-add v4tov4 listenport=81 connectaddress=172.24.152.235 connectport=81
+# проверка устройства в сети
+ping 192.168.1.151
+
+# ! PING 192.168.1.151 (192.168.1.151) 56(84) bytes of data.
+# ! 64 bytes from 192.168.1.151: icmp_seq=1 ttl=64 time=0.033 ms
+
+# powershell
+Test-NetConnection 192.168.1.151 -Port 3001
+Get-NetFirewallRule -DisplayName "Allow Port 3001" | Select-Object Enabled, Direction, Action
+# False?
+Enable-NetFirewallRule -DisplayName "Allow Port 3001"
+
+# WSL выполните:
+curl -v http://localhost:3001  # Должен работать
+curl -v http://192.168.1.151:3001  # Проверка внешнего доступа
+
+
+# Проверьте, слушает ли сервер порт 3001: В WSL:
+ss -tulnp | grep 3001
+
+# WSL не пробрасывает порты
+# В WSL 2 порты по умолчанию не пробрасываются на хост.
+# Решение: powershell
+netsh interface portproxy add v4tov4 listenport=3001 listenaddress=0.0.0.0 connectport=3001 connectaddress=$(wsl hostname -I).Trim()
+
+
+
+
+# Отключите брандмауэр Windows полностью: powershell
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+Test-NetConnection
+
+# Запустите сервер с подробным логом:
+next dev -H 0.0.0.0 -p 3001 2>&1 | tee server.log
+
+
+
+# Узнаем IP WSL
+$wsl_ip = (wsl hostname -I).Trim()

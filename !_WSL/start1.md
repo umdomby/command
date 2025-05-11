@@ -1,5 +1,21 @@
+wsl --install -d Ubuntu-24.04
+# запуск
+wsl -d Ubuntu-24.04
+# Обновите пакеты:
+sudo apt update && sudo apt upgrade -y
 # Ярлык
 wsl.exe ~
+wsl.exe -d Ubuntu-24.04 --cd ~/projects bash -i -l
+! wsl.exe ~ -d Ubuntu-24.04 -e bash --rcfile <(echo "cd ~/projects; exec bash -i")
+
+
+# импорт
+wsl --import Ubuntu-24.04 C:\WSL\Ubuntu-24.04 "C:\wsl-ubuntu-24-04-backup.tar"
+wsl --import Ubuntu-24.04 C:\WSL\Ubuntu-24.04-Old "C:\wsl-ubuntu-24.04-backup.tar"
+
+# экспорт
+wsl --export Ubuntu-24.04 C:\wsl-ubuntu-new-backup.tar
+
 
 https://blog.programs74.ru/how-to-install-nginx-on-ubuntu-2204/
 tp-link 1.3.3 build 20230808 Archer c6 v2.0
@@ -7,10 +23,9 @@ tp-link 1.3.3 build 20230808 Archer c6 v2.0
 openwrt-23.05.3-ath79-generic-tplink_archer-c6-v2
 ipconfig (Windows) / ip a (Linux) / curl ifconfig.me (Linux)
 
-
+wsl --shutdown
 wsl -l -v
 wsl hostname -I
-
 
 
 # Убедиться, что WSL работает powershell

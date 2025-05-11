@@ -1,33 +1,75 @@
-PS C:\Users\PC1> wsl -d Ubuntu-24.04 -e ip a
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-inet 127.0.0.1/8 scope host lo
-valid_lft forever preferred_lft forever
-inet 10.255.255.254/32 brd 10.255.255.254 scope global lo
-valid_lft forever preferred_lft forever
-inet6 ::1/128 scope host
-valid_lft forever preferred_lft forever
-2: loopback0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
-link/ether 00:15:5d:ff:2b:21 brd ff:ff:ff:ff:ff:ff
-3: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
-link/ether e8:9c:25:de:cd:80 brd ff:ff:ff:ff:ff:ff
-inet 192.168.1.151/24 brd 192.168.1.255 scope global noprefixroute eth0
-valid_lft forever preferred_lft forever
-inet6 2a00:1760:8115:28:4c86:f934:cde6:2840/64 scope global nodad deprecated noprefixroute
-valid_lft forever preferred_lft 0sec
-inet6 2a00:1760:8115:28::50b/128 scope global nodad noprefixroute
-valid_lft forever preferred_lft forever
-inet6 2a00:1760:8115:28:c5d4:e110:9bd8:bb7/128 scope global nodad noprefixroute
-valid_lft forever preferred_lft forever
-inet6 fd63:116b:ae5f::50b/128 scope global nodad noprefixroute
-valid_lft forever preferred_lft forever
-inet6 fd63:116b:ae5f:0:ebdc:aa74:d86e:79bf/64 scope global nodad deprecated noprefixroute
-valid_lft forever preferred_lft 0sec
-inet6 fd63:116b:ae5f:0:c5d4:e110:9bd8:bb7/128 scope global nodad noprefixroute
-valid_lft forever preferred_lft forever
-inet6 fe80::5034:7309:de27:ac61/64 scope link nodad noprefixroute
-valid_lft forever preferred_lft forever
+ping 192.168.1.151
+PING 192.168.1.151 (192.168.1.151) 56(84) bytes of data.
+64 bytes from 192.168.1.151: icmp_seq=1 ttl=64 time=0.033 ms
 
+Test-NetConnection 192.168.1.151 -Port 3001                                                            ПРЕДУПРЕЖДЕНИЕ: TCP connect to (192.168.1.151 : 3001) failed                                                                                                                                                                                    
+ComputerName           : 192.168.1.151
+RemoteAddress          : 192.168.1.151
+RemotePort             : 3001
+InterfaceAlias         : Ethernet
+SourceAddress          : 192.168.1.151
+PingSucceeded          : True
+PingReplyDetails (RTT) : 0 ms
+TcpTestSucceeded       : False
+
+фаерволы отключены
+
+.wslconfig
+[wsl2]
+networkingMode=mirrored
+ipv6=false
+firewall=false  # Временно отключает встроенный брандмауэр WSL
+
+
+    "dev1": "next dev -H 0.0.0.0 -p 3001",   Next15
+
+почему виндовс не разрешает порт, брандмауэр и фаерволы отключены
+
+
+#  WSL2:
+curl http://localhost:3001  # Проверьте, отвечает ли сервер локально
+curl http://192.168.1.151:3001  # Проверьте доступ по IP
+
+netstat -tulnp | grep 3001
+
+# powershell
+Test-NetConnection -ComputerName 127.0.0.1 -Port 3001
+
+
+Проблема:
+WSL2 в режиме mirrored не пробрасывает порты автоматически, несмотря на то, что сервер слушает 0.0.0.0.
+Windows видит WSL2 как отдельный хост (192.168.1.151), но трафик на этот IP не проходит.
+
+
+# Проверьте привязку к IP в WSL Иногда приложения в WSL2 могут некорректно привязываться к IP. Попробуйте явно указать IP:
+next dev -H 192.168.1.151 -p 3001
+
+# Даже если брандмауэр отключён, проверьте: powershell
+Get-NetFirewallRule | Where-Object { $_.Enabled -eq 'True' }
+
+# Если есть активные правила, удалите их или отключите полностью: powershell
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+
+# WSL2 использует NAT, и порты по умолчанию не пробрасываются. Для проброса выполните в PowerShell (от админа): powershell
+netsh interface portproxy add v4tov4 listenport=3001 listenaddress=0.0.0.0 connectport=3001 connectaddress=192.168.1.151
+
+# Проверка маршрутизации
+route print
+
+# Если после всех шагов проблема сохраняется, попробуйте запустить простой HTTP-сервер (например,
+python -m http.server 3001
+
+Trying 192.168.1.151...
+Connected to 192.168.1.151.
+Escape character is '^]'.
+
+
+Next 15
+"dev": "next dev -p 3001",
+
+
+# Для доступа из локальной сети настройте проброс портов в WSL:
+netsh interface portproxy add v4tov4 listenport=3001 listenaddress=0.0.0.0 connectport=3001 connectaddress=192.168.1.151
 
 
 Анализ вывода ip a в WSL

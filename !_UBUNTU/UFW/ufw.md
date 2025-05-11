@@ -66,6 +66,7 @@ sudo ufw allow 80/tcp
 sudo ufw allow 444/tcp
 sudo ufw allow 445/tcp
 sudo ufw allow 1234/tcp
+sudo ufw allow 3001/tcp
 
 sudo ufw allow 3478/udp  
 sudo ufw allow 5349/udp  

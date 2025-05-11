@@ -2,6 +2,8 @@
 docker stop $(docker ps -q)
 docker start $(docker ps -a -q)
 
+# docker network create sharednetwork
+# docker network ls
 # docker-compose down -v
 # docker-compose up --build
 

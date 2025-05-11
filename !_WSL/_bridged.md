@@ -1,3 +1,7 @@
+Смотри  \\wsl.localhost\Ubuntu-24.04\home\pi\projects\command\!_WSL\_bridged2.md
+
+
+
 Создайте виртуальный коммутатор в Hyper-V:
 Откройте PowerShell от имени администратора и выполните:
 powershell
