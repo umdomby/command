@@ -1,218 +1,11 @@
-Ведомый браузер
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\components\DeviceSelector.tsx
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\components\VideoPlayer.tsx
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\hooks
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\hooks\useWebRTC.ts
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\lib
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\lib\signaling.ts
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\lib\webrtc.ts
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\index.tsx
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\styles.module.css
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\types.ts
-\\wsl.localhost\Ubuntu-24.04\home\pi\Projects\docker\docker-ardua\components\webrtc\VideoCallApp.tsx
-
-
-// file: docker-ardua/components/webrtc/components/DeviceSelector.tsx
-//app\webrtc\components\DeviceSelector.tsx
-import { useState, useEffect } from 'react';
-import styles from '../styles.module.css';
-
-interface DeviceSelectorProps {
-devices?: MediaDeviceInfo[];
-selectedDevices: {
-video: string;
-audio: string;
-};
-onChange: (type: 'video' | 'audio', deviceId: string) => void;
-onRefresh?: () => Promise<void>;
-}
-
-export const DeviceSelector = ({
-devices,
-selectedDevices,
-onChange,
-onRefresh
-}: DeviceSelectorProps) => {
-const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
-const [audioDevices, setAudioDevices] = useState<MediaDeviceInfo[]>([]);
-const [isRefreshing, setIsRefreshing] = useState(false);
-
-    useEffect(() => {
-        if (devices) {
-            updateDeviceLists(devices);
-        }
-    }, [devices]);
-
-    const updateDeviceLists = (deviceList: MediaDeviceInfo[]) => {
-        setVideoDevices(deviceList.filter(d => d.kind === 'videoinput'));
-        setAudioDevices(deviceList.filter(d => d.kind === 'audioinput'));
-    };
-
-    const handleRefresh = async () => {
-        if (!onRefresh) return;
-
-        setIsRefreshing(true);
-        try {
-            await onRefresh();
-        } catch (error) {
-            console.error('Error refreshing devices:', error);
-        } finally {
-            setIsRefreshing(false);
-        }
-    };
-
-    return (
-        <div>
-            <div>
-                <label>Камера:</label>
-                <select
-                    value={selectedDevices.video}
-                    onChange={(e) => onChange('video', e.target.value)}
-                    disabled={videoDevices.length === 0}
-                >
-                    {videoDevices.length === 0 ? (
-                        <option value="">Камеры не найдены</option>
-                    ) : (
-                        <>
-                            <option value="">-- Выберите камеру --</option>
-                            {videoDevices.map(device => (
-                                <option key={device.deviceId} value={device.deviceId}>
-                                    {device.label || `Камера ${videoDevices.indexOf(device) + 1}`}
-                                </option>
-                            ))}
-                        </>
-                    )}
-                </select>
-            </div>
-
-            <div>
-                <label>Микрофон:</label>
-                <select
-                    value={selectedDevices.audio}
-                    onChange={(e) => onChange('audio', e.target.value)}
-                    disabled={audioDevices.length === 0}
-                >
-                    {audioDevices.length === 0 ? (
-                        <option value="">Микрофоны не найдены</option>
-                    ) : (
-                        <>
-                            <option value="">-- Выберите микрофон --</option>
-                            {audioDevices.map(device => (
-                                <option key={device.deviceId} value={device.deviceId}>
-                                    {device.label || `Микрофон ${audioDevices.indexOf(device) + 1}`}
-                                </option>
-                            ))}
-                        </>
-                    )}
-                </select>
-            </div>
-
-            <button
-                onClick={handleRefresh}
-                disabled={isRefreshing}
-            >
-                {isRefreshing ? 'Обновление...' : 'Обновить устройства'}
-            </button>
-        </div>
-    );
-};
-
-// file: docker-ardua/components/webrtc/components/VideoPlayer.tsx
-import { useEffect, useRef, useState } from 'react'
-
-interface VideoPlayerProps {
-stream: MediaStream | null;
-muted?: boolean;
-className?: string;
-transform?: string;
-videoRef?: React.RefObject<HTMLVideoElement | null>;
-}
-
-type VideoSettings = {
-rotation: number;
-flipH: boolean;
-flipV: boolean;
-};
-
-export const VideoPlayer = ({ stream, muted = false, className, transform, videoRef }: VideoPlayerProps) => {
-const internalVideoRef = useRef<HTMLVideoElement>(null)
-const [computedTransform, setComputedTransform] = useState<string>('')
-const [isRotated, setIsRotated] = useState(false)
-
-    // Use the provided ref or the internal one
-    const actualVideoRef = videoRef || internalVideoRef
-
-    useEffect(() => {
-        // Apply transformations and detect rotation
-        if (typeof transform === 'string') {
-            setComputedTransform(transform)
-            // Check if transform includes 90 or 270 degree rotation
-            setIsRotated(transform.includes('rotate(90deg') || transform.includes('rotate(270deg)'))
-        } else {
-            try {
-                const saved = localStorage.getItem('videoSettings')
-                if (saved) {
-                    const { rotation, flipH, flipV } = JSON.parse(saved) as VideoSettings
-                    let fallbackTransform = ''
-                    if (rotation !== 0) fallbackTransform += `rotate(${rotation}deg) `
-                    fallbackTransform += `scaleX(${flipH ? -1 : 1}) scaleY(${flipV ? -1 : 1})`
-                    setComputedTransform(fallbackTransform)
-                    setIsRotated(rotation === 90 || rotation === 270)
-                } else {
-                    setComputedTransform('')
-                    setIsRotated(false)
-                }
-            } catch (e) {
-                console.error('Error parsing saved video settings:', e)
-                setComputedTransform('')
-                setIsRotated(false)
-            }
-        }
-    }, [transform])
-
-    useEffect(() => {
-        const video = actualVideoRef.current
-        if (!video) return
-
-        const handleCanPlay = () => {
-            video.play().catch(e => {
-                console.error('Playback failed:', e)
-                video.muted = true
-                video.play().catch(e => console.error('Muted playback also failed:', e))
-            })
-        }
-
-        video.addEventListener('canplay', handleCanPlay)
-
-        if (stream) {
-            video.srcObject = stream
-        } else {
-            video.srcObject = null
-        }
-
-        return () => {
-            video.removeEventListener('canplay', handleCanPlay)
-            video.srcObject = null
-        }
-    }, [stream, actualVideoRef])
-
-    return (
-        <video
-            ref={actualVideoRef}
-            autoPlay
-            playsInline
-            muted={muted}
-            className={`${className} ${isRotated ? 'rotated' : ''}`}
-            style={{
-                transform: computedTransform,
-                transformOrigin: 'center center',
-            }}
-        />
-    )
-}
+браузер-ведомый
+\\wsl.localhost\Ubuntu-24.04\home\pi\projects\docker\docker-ardua\components\webrtc\hooks\useWebRTC.ts
+\\wsl.localhost\Ubuntu-24.04\home\pi\projects\docker\docker-ardua\components\webrtc\VideoCallApp.tsx
 
 // file: docker-ardua/components/webrtc/hooks/useWebRTC.ts
+// file: docker-ardua/components/webrtc/hooks/useWebRTC.ts
 import { useEffect, useRef, useState } from 'react';
+import {RoomInfo} from "@/components/webrtc/types";
 
 interface WebSocketMessage {
 type: string;
@@ -224,14 +17,29 @@ sdp: string;
 ice?: RTCIceCandidateInit;
 room?: string;
 username?: string;
-// Добавляем новый тип сообщения
+isLeader?: boolean;
 force_disconnect?: boolean;
+}
+
+interface RoomInfoMessage extends WebSocketMessage {
+type: 'room_info';
+data: RoomInfo;
+}
+
+interface CustomRTCRtpCodecParameters extends RTCRtpCodecParameters {
+parameters?: {
+'level-asymmetry-allowed'?: number;
+'packetization-mode'?: number;
+'profile-level-id'?: string;
+[key: string]: any;
+};
 }
 
 export const useWebRTC = (
 deviceIds: { video: string; audio: string },
 username: string,
-roomId: string
+roomId: string,
+preferredCodec: 'VP8' | 'H264' // Новый параметр
 ) => {
 const [localStream, setLocalStream] = useState<MediaStream | null>(null);
 const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
@@ -241,64 +49,336 @@ const [isConnected, setIsConnected] = useState(false);
 const [isInRoom, setIsInRoom] = useState(false);
 const [error, setError] = useState<string | null>(null);
 const [retryCount, setRetryCount] = useState(0);
+const [isLeader, setIsLeader] = useState(false);
+const ws = useRef<WebSocket | null>(null);
+const pc = useRef<RTCPeerConnection | null>(null);
+const pendingIceCandidates = useRef<RTCIceCandidate[]>([]);
+const isNegotiating = useRef(false);
+const shouldCreateOffer = useRef(false);
+const connectionTimeout = useRef<NodeJS.Timeout | null>(null);
+const statsInterval = useRef<NodeJS.Timeout | null>(null);
+const videoCheckTimeout = useRef<NodeJS.Timeout | null>(null);
+const retryAttempts = useRef(0);
 
-    const ws = useRef<WebSocket | null>(null);
-    const pc = useRef<RTCPeerConnection | null>(null);
-    const pendingIceCandidates = useRef<RTCIceCandidate[]>([]);
-    const isNegotiating = useRef(false);
-    const shouldCreateOffer = useRef(false);
-    const connectionTimeout = useRef<NodeJS.Timeout | null>(null);
-    const statsInterval = useRef<NodeJS.Timeout | null>(null);
-    const videoCheckTimeout = useRef<NodeJS.Timeout | null>(null);
-    const retryAttempts = useRef(0);
+    // Добавляем функцию для определения платформы
+    const detectPlatform = () => {
+        const ua = navigator.userAgent;
+        const isIOS = /iPad|iPhone|iPod/.test(ua);
+        const isSafari = /^((?!chrome|android).)*safari/i.test(ua) || isIOS;
+        return {
+            isIOS,
+            isSafari,
+            isChrome: /chrome/i.test(ua),
+            isHuawei: /huawei/i.test(ua),
+            isAndroid: /Android/i.test(ua),
+            isMobile: isIOS || /Android/i.test(ua)
+        };
+    };
 
     // Максимальное количество попыток переподключения
     const MAX_RETRIES = 10;
-    const VIDEO_CHECK_TIMEOUT = 4000; // 4 секунд для проверки видео
+    const VIDEO_CHECK_TIMEOUT = 7000; // 4 секунд для проверки видео
+
+
+
+    // 1. Улучшенная функция для получения параметров видео для Huawei
+    const getVideoConstraints = () => {
+        const { isHuawei, isSafari, isIOS, isMobile } = detectPlatform();
+        // Специальные параметры для Huawei
+        if (isHuawei) {
+            return {
+                width: { ideal: 480, max: 640 },
+                height: { ideal: 360, max: 480 },
+                frameRate: { ideal: 20, max: 24 },
+                // Huawei лучше работает с этими параметрами
+                facingMode: 'environment',
+                resizeMode: 'crop-and-scale'
+            };
+        }
+
+        // Базовые параметры для всех устройств
+        const baseConstraints = {
+            width: { ideal: isMobile ? 640 : 1280 },
+            height: { ideal: isMobile ? 480 : 720 },
+            frameRate: { ideal: isMobile ? 24 : 30 }
+        };
+
+        // Специфичные настройки для Huawei
+        if (isHuawei) {
+            return {
+                ...baseConstraints,
+                width: { ideal: 480 },
+                height: { ideal: 360 },
+                frameRate: { ideal: 24 },
+                advanced: [{ width: { max: 480 } }]
+            };
+        }
+        if (isIOS) {
+            return {
+                ...baseConstraints,
+                facingMode: 'user', // Фронтальная камера по умолчанию
+                deviceId: deviceIds.video ? { exact: deviceIds.video } : undefined,
+                advanced: [
+                    { facingMode: 'user' }, // Приоритет фронтальной камеры
+                    { width: { max: 640 } },
+                    { height: { max: 480 } },
+                    { frameRate: { max: 24 } }
+                ]
+            };
+        }
+
+        // Специфичные настройки для Safari
+        if (isSafari || isIOS) {
+            return {
+                ...baseConstraints,
+                frameRate: { ideal: 24 }, // Чуть меньше FPS для стабильности
+                advanced: [
+                    { frameRate: { max: 24 } },
+                    { width: { max: 640 }, height: { max: 480 } }
+                ]
+            };
+        }
+
+        return baseConstraints;
+    };
+
+// 2. Конфигурация видео-трансмиттера для Huawei
+const configureVideoSender = (sender: RTCRtpSender) => {
+const { isHuawei } = detectPlatform();
+
+        if (isHuawei && sender.track?.kind === 'video') {
+            const parameters = sender.getParameters();
+
+            if (!parameters.encodings) {
+                parameters.encodings = [{}];
+            }
+
+            // Используем только стандартные параметры
+            parameters.encodings[0] = {
+                ...parameters.encodings[0],
+                maxBitrate: 300000,    // 300 kbps
+                scaleResolutionDownBy: 1,
+                maxFramerate: 15,
+                priority: 'high',
+                networkPriority: 'high'
+            };
+
+            try {
+                sender.setParameters(parameters);
+            } catch (err) {
+                console.error('Ошибка настройки параметров видео:', err);
+            }
+        }
+    };
+
+
+
+    // 4. Мониторинг производительности для Huawei
+    const startHuaweiPerformanceMonitor = () => {
+        const { isHuawei } = detectPlatform();
+        if (!isHuawei) return () => {};
+
+
+        const monitorInterval = setInterval(async () => {
+            if (!pc.current || !isCallActive) return;
+
+            try {
+                const stats = await pc.current.getStats();
+                let videoStats: any = null;
+                let connectionStats: any = null;
+
+                stats.forEach(report => {
+                    if (report.type === 'outbound-rtp' && report.kind === 'video') {
+                        videoStats = report;
+                    }
+                    if (report.type === 'candidate-pair' && report.selected) {
+                        connectionStats = report;
+                    }
+                });
+
+                if (videoStats && connectionStats) {
+                    // Адаптация при высокой потере пакетов или задержке
+                    if (videoStats.packetsLost > 5 ||
+                        (connectionStats.currentRoundTripTime && connectionStats.currentRoundTripTime > 0.5)) {
+                        console.log('Высокие потери или задержка, уменьшаем качество');
+                        adjustVideoQuality('lower');
+                    }
+                }
+            } catch (err) {
+                console.error('Ошибка мониторинга:', err);
+            }
+        }, 3000); // Более частый мониторинг для Huawei
+
+        return () => clearInterval(monitorInterval);
+    };
+
+// 5. Функция адаптации качества видео
+const adjustVideoQuality = (direction: 'higher' | 'lower') => {
+const { isMobile } = detectPlatform();
+const senders = pc.current?.getSenders() || [];
+
+        senders.forEach(sender => {
+            if (sender.track?.kind === 'video') {
+                const parameters = sender.getParameters();
+
+                if (!parameters.encodings || parameters.encodings.length === 0) {
+                    parameters.encodings = [{}];
+                }
+
+                // Базовые параметры для всех устройств
+                const baseEncoding: RTCRtpEncodingParameters = {
+                    ...parameters.encodings[0],
+                    active: true,
+                };
+
+                // Для мобильных сетей используем более низкие битрейты
+                if (isMobile) {
+                    parameters.encodings[0] = {
+                        ...baseEncoding,
+                        maxBitrate: direction === 'higher' ? 300000 : 150000,
+                        scaleResolutionDownBy: direction === 'higher' ? 1.0 : 1.5,
+                        maxFramerate: direction === 'higher' ? 15 : 10,
+                        priority: 'high',
+                        networkPriority: 'high'
+                    };
+                } else {
+                    // Для WiFi оставляем текущие настройки
+                    parameters.encodings[0] = {
+                        ...baseEncoding,
+                        maxBitrate: direction === 'higher' ? 300000 : 150000,
+                        scaleResolutionDownBy: direction === 'higher' ? 1.0 : 1.5,
+                        maxFramerate: direction === 'higher' ? 15 : 10,
+                        priority: 'high',
+                        networkPriority: 'high'
+                    };
+                }
+
+                try {
+                    sender.setParameters(parameters);
+                } catch (err) {
+                    console.error('Ошибка изменения параметров:', err);
+                }
+            }
+        });
+    };
+
+    const normalizeSdpForIOS = (sdp: string): string => {
+        return sdp
+            // Удаляем лишние RTX кодеки
+            .replace(/a=rtpmap:\d+ rtx\/\d+\r\n/g, '')
+            .replace(/a=fmtp:\d+ apt=\d+\r\n/g, '')
+            // Упрощаем параметры
+            .replace(/a=extmap:\d+ .*\r\n/g, '')
+            // Форсируем низкую задержку
+            .replace(/a=mid:video\r\n/g, 'a=mid:video\r\na=x-google-flag:conference\r\n')
+            // Упрощаем SDP для лучшей совместимости с iOS
+            .replace(/a=setup:actpass\r\n/g, 'a=setup:active\r\n')
+            // Удаляем ICE options, которые могут мешать
+            .replace(/a=ice-options:trickle\r\n/g, '')
+            // Устанавливаем низкий битрейт для iOS
+            .replace(/a=mid:video\r\n/g, 'a=mid:video\r\nb=AS:300\r\n')
+            // Форсируем H.264
+            .replace(/a=rtpmap:\d+ H264\/\d+/g, 'a=rtpmap:$& profile-level-id=42e01f;packetization-mode=1')
+            // Удаляем несовместимые параметры
+            .replace(/a=rtcp-fb:\d+ goog-remb\r\n/g, '')
+            .replace(/a=rtcp-fb:\d+ transport-cc\r\n/g, '');
+
+    };
+
+
+    // 3. Специальная нормализация SDP для Huawei
+    const normalizeSdpForHuawei = (sdp: string): string => {
+        const { isHuawei } = detectPlatform();
+
+        if (!isHuawei) return sdp;
+
+        return sdp
+            // Приоритет H.264 baseline profile
+            .replace(/a=rtpmap:(\d+) H264\/\d+/g,
+                'a=rtpmap:$1 H264/90000\r\n' +
+                'a=fmtp:$1 profile-level-id=42e01f;packetization-mode=1;level-asymmetry-allowed=1\r\n')
+            // Уменьшаем размер GOP
+            .replace(/a=fmtp:\d+/, '$&;sprop-parameter-sets=J0LgC5Q9QEQ=,KM4=;')
+            // Оптимизации буферизации и битрейта
+            .replace(/a=mid:video\r\n/g,
+                'a=mid:video\r\n' +
+                'b=AS:250\r\n' +  // Уменьшенный битрейт для Huawei
+                'b=TIAS:250000\r\n' +
+                'a=rtcp-fb:* ccm fir\r\n' +
+                'a=rtcp-fb:* nack\r\n' +
+                'a=rtcp-fb:* nack pli\r\n');
+
+    };
 
     const normalizeSdp = (sdp: string | undefined): string => {
         if (!sdp) return '';
 
-        // Сначала очищаем от network-cost
-        let normalized = sdp.replace(/a=network-cost:.+\r\n/g, '');
+        const { isHuawei, isSafari, isIOS } = detectPlatform();
 
-        normalized = normalized.trim();
+        let optimized = sdp;
 
-        if (!normalized.startsWith('v=')) {
-            normalized = 'v=0\r\n' + normalized;
-        }
-        if (!normalized.includes('\r\no=')) {
-            normalized = normalized.replace('\r\n', '\r\no=- 0 0 IN IP4 0.0.0.0\r\n');
-        }
-        if (!normalized.includes('\r\ns=')) {
-            normalized = normalized.replace('\r\n', '\r\ns=-\r\n');
-        }
-        if (!normalized.includes('\r\nt=')) {
-            normalized = normalized.replace('\r\n', '\r\nt=0 0\r\n');
+        optimized = optimized.replace(/a=rtpmap:(\d+) rtx\/\d+\r\n/gm, (match, pt) => {
+            // Проверяем, есть ли соответствующий H264 кодек
+            if (optimized.includes(`a=fmtp:${pt} apt=`)) {
+                return match; // Оставляем RTX для H264
+            }
+            return ''; // Удаляем RTX для других кодеков
+        });
+
+        // 2. Форсируем H.264 параметры
+        // optimized = optimized.replace(
+        //     /a=rtpmap:(\d+) H264\/\d+\r\n/g,
+        //     'a=rtpmap:$1 H264/90000\r\na=fmtp:$1 profile-level-id=42e01f;level-asymmetry-allowed=1;packetization-mode=1\r\n'
+        // );
+
+        // Оптимизации только для Huawei
+        if (isHuawei) {
+            optimized = normalizeSdpForHuawei(optimized);
         }
 
-        return normalized + '\r\n';
+        // Специальные оптимизации для iOS/Safari
+        if (isIOS || isSafari) {
+            optimized = normalizeSdpForIOS(optimized);
+        }
+
+
+        // Общие оптимизации для всех устройств
+        optimized = optimized
+            .replace(/a=mid:video\r\n/g, 'a=mid:video\r\nb=AS:150\r\nb=TIAS:500000\r\n')
+            .replace(/a=rtpmap:(\d+) H264\/\d+/g, 'a=rtpmap:$1 H264/90000\r\na=fmtp:$1 profile-level-id=42e01f;level-asymmetry-allowed=1;packetization-mode=1')
+            .replace(/a=rtpmap:\d+ rtx\/\d+\r\n/g, '')
+            .replace(/a=fmtp:\d+ apt=\d+\r\n/g, '')
+            .replace(/(a=fmtp:\d+ .*profile-level-id=.*\r\n)/g, 'a=fmtp:126 profile-level-id=42e01f\r\n')
+            .replace(/a=rtcp-fb:\d+ goog-remb\r\n/g, '') // Отключаем REMB
+            .replace(/a=rtcp-fb:\d+ transport-cc\r\n/g, '') // Отключаем transport-cc
+            .replace(/^(m=video.*?)((?:\s+\d+)+)/gm, (match, prefix, payloads) => {
+                // Оставляем только payload types, которые есть в оставшемся SDP
+                const allowedPayloads = Array.from(new Set(sdp.match(/a=rtpmap:(\d+)/g) || []))
+                    .map(m => m.replace('a=rtpmap:', ''));
+                const filtered = payloads.split(' ').filter((pt: string) => allowedPayloads.includes(pt));
+                return prefix + ' ' + filtered.join(' ');
+            })
+            .replace(/a=fmtp:\d+ .*\r\n/g, '');
+
+
+        return optimized;
     };
 
-    const cleanup = () => {
+    let cleanup = () => {
+        console.log('Выполняется полная очистка ресурсов');
+
         // Очистка таймеров
-        if (connectionTimeout.current) {
-            clearTimeout(connectionTimeout.current);
-            connectionTimeout.current = null;
-        }
+        [connectionTimeout, statsInterval, videoCheckTimeout].forEach(timer => {
+            if (timer.current) {
+                clearTimeout(timer.current);
+                timer.current = null;
+            }
+        });
 
-        if (statsInterval.current) {
-            clearInterval(statsInterval.current);
-            statsInterval.current = null;
-        }
-
-        if (videoCheckTimeout.current) {
-            clearTimeout(videoCheckTimeout.current);
-            videoCheckTimeout.current = null;
-        }
-
-        // Очистка WebRTC соединения
+        // Полная очистка PeerConnection
         if (pc.current) {
+            console.log('Закрытие PeerConnection');
+            // Отключаем все обработчики событий
             pc.current.onicecandidate = null;
             pc.current.ontrack = null;
             pc.current.onnegotiationneeded = null;
@@ -306,36 +386,54 @@ const [retryCount, setRetryCount] = useState(0);
             pc.current.onicegatheringstatechange = null;
             pc.current.onsignalingstatechange = null;
             pc.current.onconnectionstatechange = null;
-            pc.current.close();
+
+            // Закрываем все трансцепторы
+            pc.current.getTransceivers().forEach(transceiver => {
+                try {
+                    transceiver.stop();
+                } catch (err) {
+                    console.warn('Ошибка при остановке трансцептора:', err);
+                }
+            });
+
+            // Закрываем соединение
+            try {
+                pc.current.close();
+            } catch (err) {
+                console.warn('Ошибка при закрытии PeerConnection:', err);
+            }
             pc.current = null;
         }
 
-        // Остановка медиапотоков
-        if (localStream) {
-            localStream.getTracks().forEach(track => {
-                track.stop();
-                track.dispatchEvent(new Event('ended'));
-            });
-            setLocalStream(null);
-        }
+        // Остановка и очистка медиапотоков
+        [localStream, remoteStream].forEach(stream => {
+            if (stream) {
+                console.log(`Остановка ${stream === localStream ? 'локального' : 'удаленного'} потока`);
+                stream.getTracks().forEach(track => {
+                    try {
+                        track.stop();
+                        track.dispatchEvent(new Event('ended'));
+                    } catch (err) {
+                        console.warn('Ошибка при остановке трека:', err);
+                    }
+                });
+            }
+        });
 
-        if (remoteStream) {
-            remoteStream.getTracks().forEach(track => {
-                track.stop();
-                track.dispatchEvent(new Event('ended'));
-            });
-            setRemoteStream(null);
-        }
-
-        setIsCallActive(false);
+        // Сброс состояний
+        setLocalStream(null);
+        setRemoteStream(null);
         pendingIceCandidates.current = [];
         isNegotiating.current = false;
         shouldCreateOffer.current = false;
-        retryAttempts.current = 0;
+        setIsCallActive(false);
+        setIsInRoom(false); // Сбрасываем isInRoom
+        console.log('Очистка завершена');
     };
 
 
     const leaveRoom = () => {
+        console.log('Выполняется leaveRoom');
         if (ws.current?.readyState === WebSocket.OPEN) {
             try {
                 ws.current.send(JSON.stringify({
@@ -343,16 +441,30 @@ const [retryCount, setRetryCount] = useState(0);
                     room: roomId,
                     username
                 }));
+                console.log('Отправлено сообщение leave:', { type: 'leave', room: roomId, username });
             } catch (e) {
-                console.error('Error sending leave message:', e);
+                console.error('Ошибка отправки сообщения leave:', e);
             }
         }
+
+        // Очищаем ресурсы
         cleanup();
+
+        // Закрываем WebSocket
+        if (ws.current) {
+            ws.current.close();
+            ws.current = null;
+        }
+
+        // Сбрасываем состояния
         setUsers([]);
         setIsInRoom(false);
-        ws.current?.close();
-        ws.current = null;
+        setIsConnected(false);
+        setIsCallActive(false);
+        setIsLeader(false);
         setRetryCount(0);
+        setError(null);
+        console.log('Состояния сброшены после leaveRoom');
     };
 
     const startVideoCheckTimer = () => {
@@ -379,7 +491,7 @@ const [retryCount, setRetryCount] = useState(0);
             }
 
             try {
-                ws.current = new WebSocket('wss://ardua.site/ws');
+                ws.current = new WebSocket('wss://ardua.site/wsgo');
 
                 const onOpen = () => {
                     cleanupEvents();
@@ -392,7 +504,7 @@ const [retryCount, setRetryCount] = useState(0);
                 const onError = (event: Event) => {
                     cleanupEvents();
                     console.error('Ошибка WebSocket:', event);
-                    setError('Ошибка подключения');
+                    setError('Ошибка подключения к WebSocket');
                     setIsConnected(false);
                     resolve(false);
                 };
@@ -433,6 +545,28 @@ const [retryCount, setRetryCount] = useState(0);
         });
     };
 
+    // Функция для извлечения видеокодека из SDP
+    const getVideoCodecFromSdp = (sdp: string): string | null => {
+        const lines = sdp.split('\n');
+        let videoSection = false;
+
+        for (const line of lines) {
+            if (line.startsWith('m=video')) {
+                videoSection = true;
+                continue;
+            }
+            if (videoSection && line.startsWith('a=rtpmap')) {
+                const match = line.match(/a=rtpmap:\d+ ([A-Za-z0-9]+)/);
+                if (match) {
+                    return match[1]; // Например, VP8 или H264
+                }
+            }
+            if (line.startsWith('m=') && !line.startsWith('m=video')) {
+                videoSection = false;
+            }
+        }
+        return null;
+    };
 
 
     const setupWebSocketListeners = () => {
@@ -443,15 +577,25 @@ const [retryCount, setRetryCount] = useState(0);
                 const data: WebSocketMessage = JSON.parse(event.data);
                 console.log('Получено сообщение:', data);
 
-                // Добавляем обработку switch_camera
-                if (data.type === 'switch_camera_ack') {
-                    console.log('Камера на Android успешно переключена');
-                    // Можно показать уведомление пользователю
+                // Устанавливаем isLeader и users при получении room_info
+                if (data.type === 'room_info') {
+                    const roomInfo = (data as RoomInfoMessage).data;
+                    console.log('Обработка room_info:', roomInfo);
+                    if (roomInfo) {
+                        setIsLeader(roomInfo.leader === username);
+                        setUsers(roomInfo.users || []);
+                        setIsInRoom(true);
+                    }
                 }
 
-                // Добавляем обработку reconnect_request
+                // Обработка switch_camera
+                if (data.type === 'switch_camera_ack') {
+                    console.log('Камера на Android успешно переключена');
+                }
+
+                // Обработка reconnect_request
                 if (data.type === 'reconnect_request') {
-                    console.log('Server requested reconnect');
+                    console.log('Сервер запросил переподключение');
                     setTimeout(() => {
                         resetConnection();
                     }, 1000);
@@ -459,37 +603,18 @@ const [retryCount, setRetryCount] = useState(0);
                 }
 
                 if (data.type === 'force_disconnect') {
-                    // Обработка принудительного отключения
                     console.log('Получена команда принудительного отключения');
                     setError('Вы были отключены, так как подключился другой зритель');
-
-                    // Останавливаем все медиапотоки
-                    if (remoteStream) {
-                        remoteStream.getTracks().forEach(track => track.stop());
-                    }
-
-                    // Закрываем PeerConnection
-                    if (pc.current) {
-                        pc.current.close();
-                        pc.current = null;
-                    }
                     leaveRoom();
-                    // Очищаем состояние
-                    setRemoteStream(null);
-                    setIsCallActive(false);
-                    setIsInRoom(false);
-
                     return;
                 }
 
+                if (data.type === 'error') {
+                    setError(data.data || 'Ошибка от сервера');
+                    console.error('Ошибка от сервера:', data.data);
+                }
 
-                if (data.type === 'room_info') {
-                    setUsers(data.data.users || []);
-                }
-                else if (data.type === 'error') {
-                    setError(data.data);
-                }
-                else if (data.type === 'offer') {
+                if (data.type === 'offer') {
                     if (pc.current && ws.current?.readyState === WebSocket.OPEN && data.sdp) {
                         try {
                             if (isNegotiating.current) {
@@ -514,26 +639,31 @@ const [retryCount, setRetryCount] = useState(0);
 
                             await pc.current.setLocalDescription(normalizedAnswer);
 
+                            // Логируем кодек из SDP ответа
+                            const codec = getVideoCodecFromSdp(normalizedAnswer.sdp);
+                            if (codec) {
+                                console.log(`Кодек трансляции: ${codec}`);
+                            } else {
+                                console.warn('Кодек не найден в SDP ответа');
+                            }
+
                             ws.current.send(JSON.stringify({
                                 type: 'answer',
                                 sdp: normalizedAnswer,
                                 room: roomId,
                                 username
                             }));
+                            console.log('Отправлен answer:', normalizedAnswer);
 
                             setIsCallActive(true);
                             isNegotiating.current = false;
-
-                            // Запускаем проверку получения видео
-                            startVideoCheckTimer();
                         } catch (err) {
                             console.error('Ошибка обработки оффера:', err);
                             setError('Ошибка обработки предложения соединения');
                             isNegotiating.current = false;
                         }
                     }
-                }
-                else if (data.type === 'answer') {
+                } else if (data.type === 'answer') {
                     if (pc.current && data.sdp) {
                         try {
                             if (pc.current.signalingState !== 'have-local-offer') {
@@ -572,16 +702,17 @@ const [retryCount, setRetryCount] = useState(0);
                             setError(`Ошибка установки ответа: ${err instanceof Error ? err.message : String(err)}`);
                         }
                     }
-                }
-                else if (data.type === 'ice_candidate') {
+                } else if (data.type === 'ice_candidate') {
                     if (data.ice) {
                         try {
                             const candidate = new RTCIceCandidate(data.ice);
 
                             if (pc.current && pc.current.remoteDescription) {
                                 await pc.current.addIceCandidate(candidate);
+                                console.log('Добавлен ICE кандидат:', candidate);
                             } else {
                                 pendingIceCandidates.current.push(candidate);
+                                console.log('ICE кандидат добавлен в очередь:', candidate);
                             }
                         } catch (err) {
                             console.error('Ошибка добавления ICE-кандидата:', err);
@@ -598,79 +729,75 @@ const [retryCount, setRetryCount] = useState(0);
         ws.current.onmessage = handleMessage;
     };
 
-    const createAndSendOffer = async () => {
-        if (!pc.current || !ws.current || ws.current.readyState !== WebSocket.OPEN) {
-            return;
-        }
-
-        try {
-            const offer = await pc.current.createOffer({
-                offerToReceiveAudio: true,
-                offerToReceiveVideo: true,
-                iceRestart: false,
-            });
-
-            const standardizedOffer = {
-                ...offer,
-                sdp: normalizeSdp(offer.sdp)
-            };
-
-            console.log('Устанавливаем локальное описание с оффером');
-            await pc.current.setLocalDescription(standardizedOffer);
-
-            ws.current.send(JSON.stringify({
-                type: "offer",
-                sdp: standardizedOffer,
-                room: roomId,
-                username
-            }));
-
-            setIsCallActive(true);
-
-            // Запускаем проверку получения видео
-            startVideoCheckTimer();
-        } catch (err) {
-            console.error('Ошибка создания оффера:', err);
-            setError('Ошибка создания предложения соединения');
-        }
-    };
-
     const initializeWebRTC = async () => {
         try {
             cleanup();
 
+            const { isIOS, isSafari, isHuawei } = detectPlatform();
+
             const config: RTCConfiguration = {
                 iceServers: [
+                    { urls: 'stun:ardua.site:3478' },
                     {
-                        urls: [
-                            'turn:ardua.site:3478',  // UDP/TCP
-                            // 'turns:ardua.site:5349'   // TLS (если настроен)
-                        ],
-                        username: 'user1',     // Исправлено: username
-                        credential: 'pass1'    // Исправлено: credential
-                    },
-                    {
-                        urls: [
-                            'stun:ardua.site:3478',
-                            // 'stun:stun.l.google.com:19301',
-                            // 'stun:stun.l.google.com:19302',
-                            // 'stun:stun.l.google.com:19303',
-                            // 'stun:stun.l.google.com:19304',
-                            // 'stun:stun.l.google.com:19305',
-                            // 'stun:stun1.l.google.com:19301',
-                            // 'stun:stun1.l.google.com:19302',
-                            // 'stun:stun1.l.google.com:19303',
-                            // 'stun:stun1.l.google.com:19304',
-                            // 'stun:stun1.l.google.com:19305'
-                        ]
+                        urls: 'turn:ardua.site:3478',
+                        username: 'user1',
+                        credential: 'pass1'
                     }
                 ],
-                iceTransportPolicy: 'all',
                 bundlePolicy: 'max-bundle',
-                rtcpMuxPolicy: 'require'
+                rtcpMuxPolicy: 'require',
+                iceTransportPolicy: 'all',
+                iceCandidatePoolSize: 0,
+                // @ts-ignore - sdpSemantics is supported but not in TypeScript's types
+                sdpSemantics: 'unified-plan' as any,
             };
 
             pc.current = new RTCPeerConnection(config);
+
+
+            if (isIOS || isSafari) {
+                // iOS требует более агрессивного управления ICE
+                pc.current.oniceconnectionstatechange = () => {
+                    if (!pc.current) return;
+
+                    console.log('iOS ICE state:', pc.current.iceConnectionState);
+
+                    if (pc.current.iceConnectionState === 'disconnected' ||
+                        pc.current.iceConnectionState === 'failed') {
+                        console.log('iOS: ICE failed, restarting connection');
+                        setTimeout(resetConnection, 1000);
+                    }
+                };
+
+                // iOS требует быстрой переотправки кандидатов
+                pc.current.onicegatheringstatechange = () => {
+                    if (pc.current?.iceGatheringState === 'complete') {
+                        console.log('iOS: ICE gathering complete');
+                    }
+                };
+            }
+
+            pc.current.addEventListener('icecandidate', event => {
+                if (event.candidate) {
+                    console.log('Using candidate type:',
+                        event.candidate.candidate.split(' ')[7]);
+                }
+            });
+
+            if (isHuawei) {
+                pc.current.oniceconnectionstatechange = () => {
+                    if (!pc.current) return;
+
+                    console.log('Huawei ICE состояние:', pc.current.iceConnectionState);
+
+                    // Более агрессивное восстановление для Huawei
+                    if (pc.current.iceConnectionState === 'disconnected' ||
+                        pc.current.iceConnectionState === 'failed') {
+                        console.log('Huawei: соединение прервано, переподключение...');
+                        setTimeout(resetConnection, 1000);
+                    }
+                };
+            }
 
             // Обработчики событий WebRTC
             pc.current.onnegotiationneeded = () => {
@@ -697,14 +824,10 @@ const [retryCount, setRetryCount] = useState(0);
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: deviceIds.video ? {
                     deviceId: { exact: deviceIds.video },
-                    width: { ideal: 640 },
-                    height: { ideal: 480 },
-                    frameRate: { ideal: 30 }
-                } : {
-                    width: { ideal: 640 },
-                    height: { ideal: 480 },
-                    frameRate: { ideal: 30 }
-                },
+                    ...getVideoConstraints(),
+                    ...(isIOS && !deviceIds.video ? { facingMode: 'user' } : {})
+                } : getVideoConstraints(),
+                ...(isIOS && !deviceIds.video ? { facingMode: 'user' } : {}),
                 audio: deviceIds.audio ? {
                     deviceId: { exact: deviceIds.audio },
                     echoCancellation: true,
@@ -712,6 +835,9 @@ const [retryCount, setRetryCount] = useState(0);
                     autoGainControl: true
                 } : true
             });
+
+            // Применяем настройки для Huawei
+            pc.current.getSenders().forEach(configureVideoSender);
 
             // Проверяем наличие видеотрека
             const videoTracks = stream.getVideoTracks();
@@ -729,17 +855,10 @@ const [retryCount, setRetryCount] = useState(0);
                 if (event.candidate && ws.current?.readyState === WebSocket.OPEN) {
                     try {
                         // Фильтруем нежелательные кандидаты
-                        if (event.candidate.candidate &&
-                            event.candidate.candidate.length > 0 &&
-                            !event.candidate.candidate.includes('0.0.0.0')) {
-
+                        if (shouldSendIceCandidate(event.candidate)) {
                             ws.current.send(JSON.stringify({
                                 type: 'ice_candidate',
-                                ice: {
-                                    candidate: event.candidate.candidate,
-                                    sdpMid: event.candidate.sdpMid || '0',
-                                    sdpMLineIndex: event.candidate.sdpMLineIndex || 0
-                                },
+                                ice: event.candidate.toJSON(),
                                 room: roomId,
                                 username
                             }));
@@ -750,30 +869,52 @@ const [retryCount, setRetryCount] = useState(0);
                 }
             };
 
+            const shouldSendIceCandidate = (candidate: RTCIceCandidate) => {
+
+                const { isIOS, isSafari, isHuawei } = detectPlatform();
+
+                // Для Huawei отправляем только relay-кандидаты
+                if (isHuawei) {
+                    return candidate.candidate.includes('typ relay');
+                }
+
+                // Для iOS/Safari отправляем только relay-кандидаты и srflx
+                if (isIOS || isSafari) {
+                    return candidate.candidate.includes('typ relay') ||
+                        candidate.candidate.includes('typ srflx');
+                }
+
+                return true;
+            };
+
             // Обработка входящих медиапотоков
             pc.current.ontrack = (event) => {
                 if (event.streams && event.streams[0]) {
-                    // Проверяем, что видеопоток содержит данные
-                    const videoTrack = event.streams[0].getVideoTracks()[0];
-                    if (videoTrack) {
-                        const videoElement = document.createElement('video');
-                        videoElement.srcObject = new MediaStream([videoTrack]);
-                        videoElement.onloadedmetadata = () => {
-                            if (videoElement.videoWidth > 0 && videoElement.videoHeight > 0) {
-                                setRemoteStream(event.streams[0]);
-                                setIsCallActive(true);
+                    const stream = event.streams[0];
 
-                                // Видео получено, очищаем таймер проверки
-                                if (videoCheckTimeout.current) {
-                                    clearTimeout(videoCheckTimeout.current);
-                                    videoCheckTimeout.current = null;
-                                }
-                            } else {
-                                console.warn('Получен пустой видеопоток');
-                            }
-                        };
+                    // Проверяем наличие видео трека
+                    const videoTrack = stream.getVideoTracks()[0];
+                    if (videoTrack) {
+                        console.log('Получен видеотрек:', videoTrack.id);
+
+                        // Создаем новый MediaStream только с нужными треками
+                        const newRemoteStream = new MediaStream();
+                        stream.getTracks().forEach(track => {
+                            newRemoteStream.addTrack(track);
+                            console.log(`Добавлен ${track.kind} трек в remoteStream`);
+                        });
+
+                        setRemoteStream(newRemoteStream);
+                        setIsCallActive(true);
+
+                        // Очищаем таймер проверки видео
+                        if (videoCheckTimeout.current) {
+                            clearTimeout(videoCheckTimeout.current);
+                            videoCheckTimeout.current = null;
+                        }
                     } else {
                         console.warn('Входящий поток не содержит видео');
+                        startVideoCheckTimer();
                     }
                 }
             };
@@ -782,35 +923,44 @@ const [retryCount, setRetryCount] = useState(0);
             pc.current.oniceconnectionstatechange = () => {
                 if (!pc.current) return;
 
-                if (pc.current?.iceConnectionState === 'disconnected' ||
-                    pc.current?.iceConnectionState === 'failed') {
-                    console.log('ICE соединение разорвано, возможно нас заменили');
-                    leaveRoom();
+                const { isHuawei } = detectPlatform();
+
+                if (pc.current.iceConnectionState === 'connected' && isHuawei) {
+                    // Сохраняем функцию остановки для cleanup
+                    const stopHuaweiMonitor = startHuaweiPerformanceMonitor();
+
+                    // Автоматическая остановка при разрыве
+                    pc.current.onconnectionstatechange = () => {
+                        if (pc.current?.connectionState === 'disconnected') {
+                            stopHuaweiMonitor();
+                        }
+                    };
+
+                    // Также останавливаем при ручной очистке
+                    const originalCleanup = cleanup;
+                    cleanup = () => {
+                        stopHuaweiMonitor();
+                        originalCleanup();
+                    };
+                }
+
+                if (isHuawei && pc.current.iceConnectionState === 'disconnected') {
+                    // Более агрессивный перезапуск для Huawei
+                    setTimeout(resetConnection, 1000);
                 }
 
                 console.log('Состояние ICE соединения:', pc.current.iceConnectionState);
 
                 switch (pc.current.iceConnectionState) {
                     case 'failed':
-                        console.log('Перезапуск ICE...');
-                        setTimeout(() => {
-                            if (pc.current && pc.current.iceConnectionState === 'failed') {
-                                pc.current.restartIce();
-                                if (isInRoom && !isCallActive) {
-                                    createAndSendOffer().catch(console.error);
-                                }
-                            }
-                        }, 1000);
+                        console.log('Ошибка ICE, перезапуск...');
+                        resetConnection();
                         break;
 
                     case 'disconnected':
                         console.log('Соединение прервано...');
                         setIsCallActive(false);
-                        setTimeout(() => {
-                            if (pc.current && pc.current.iceConnectionState === 'disconnected') {
-                                createAndSendOffer().catch(console.error);
-                            }
-                        }, 2000);
+                        resetConnection();
                         break;
 
                     case 'connected':
@@ -837,10 +987,39 @@ const [retryCount, setRetryCount] = useState(0);
         }
     };
 
+    const adjustVideoQualityForSafari = (direction: 'higher' | 'lower') => {
+        const senders = pc.current?.getSenders() || [];
+
+        senders.forEach(sender => {
+            if (sender.track?.kind === 'video') {
+                const parameters = sender.getParameters();
+
+                if (!parameters.encodings) return;
+
+                parameters.encodings[0] = {
+                    ...parameters.encodings[0],
+                    maxBitrate: direction === 'higher' ? 300000 : 150000,
+                    scaleResolutionDownBy: direction === 'higher' ? 1.0 : 1.5,
+                    maxFramerate: direction === 'higher' ? 25 : 15,
+                    priority: 'high',
+                    networkPriority: 'high'
+                };
+
+                try {
+                    sender.setParameters(parameters);
+                } catch (err) {
+                    console.error('Ошибка изменения параметров:', err);
+                }
+            }
+        });
+    };
+
     const startConnectionMonitoring = () => {
         if (statsInterval.current) {
             clearInterval(statsInterval.current);
         }
+
+        const { isSafari } = detectPlatform();
 
         statsInterval.current = setInterval(async () => {
             if (!pc.current || !isCallActive) return;
@@ -848,43 +1027,82 @@ const [retryCount, setRetryCount] = useState(0);
             try {
                 const stats = await pc.current.getStats();
                 let hasActiveVideo = false;
+                let packetsLost = 0;
+                let totalPackets = 0;
+                let videoJitter = 0;
 
                 stats.forEach(report => {
                     if (report.type === 'inbound-rtp' && report.kind === 'video') {
-                        if (report.bytesReceived > 0) {
-                            hasActiveVideo = true;
-                        }
+                        if (report.bytesReceived > 0) hasActiveVideo = true;
+                        if (report.packetsLost !== undefined) packetsLost += report.packetsLost;
+                        if (report.packetsReceived !== undefined) totalPackets += report.packetsReceived;
+                        if (report.jitter !== undefined) videoJitter = report.jitter;
                     }
                 });
 
+                // Общая проверка для всех устройств
                 if (!hasActiveVideo && isCallActive) {
                     console.warn('Нет активного видеопотока, пытаемся восстановить...');
                     resetConnection();
+                    return;
+                }
+
+                // Специфичные проверки для Safari
+                if (isSafari) {
+                    // Проверка на высокую задержку
+                    if (videoJitter > 0.3) { // Jitter в секундах
+                        console.log('Высокий jitter на Safari, уменьшаем битрейт');
+                        adjustVideoQualityForSafari('lower');
+                    }
+                    // Проверка потери пакетов
+                    else if (totalPackets > 0 && packetsLost / totalPackets > 0.05) { // >5% потерь
+                        console.warn('Высокий уровень потерь пакетов на Safari, переподключение...');
+                        resetConnection();
+                        return;
+                    }
                 }
             } catch (err) {
                 console.error('Ошибка получения статистики:', err);
             }
         }, 5000);
+
+        return () => {
+            if (statsInterval.current) {
+                clearInterval(statsInterval.current);
+            }
+        };
     };
 
-    const resetConnection = async () => {
-        if (retryAttempts.current >= MAX_RETRIES) {
-            setError('Не удалось восстановить соединение после нескольких попыток');
-            leaveRoom();
-            return;
-        }
+// Модифицируем функцию resetConnection
+const resetConnection = async () => {
+if (retryAttempts.current >= MAX_RETRIES) {
+setError('Не удалось восстановить соединение после нескольких попыток');
+leaveRoom();
+return;
+}
 
+        // Увеличиваем таймаут с каждой попыткой, особенно для мобильных
+        const { isIOS, isSafari } = detectPlatform();
+        const baseDelay = isIOS || isSafari ? 5000 : 2000; // Больше времени для iOS
+        const retryDelay = Math.min(baseDelay * (retryAttempts.current + 1), 15000);
+
+        console.log(`Попытка переподключения #${retryAttempts.current + 1}, задержка: ${retryDelay}ms`);
+
+        cleanup();
         retryAttempts.current += 1;
         setRetryCount(retryAttempts.current);
-        console.log(`Попытка восстановления #${retryAttempts.current}`);
 
-        try {
-            await leaveRoom();
-            await new Promise(resolve => setTimeout(resolve, 1000 * retryAttempts.current));
-            await joinRoom(username);
-        } catch (err) {
-            console.error('Ошибка при восстановлении соединения:', err);
-        }
+        setTimeout(async () => {
+            try {
+                await joinRoom(username);
+                retryAttempts.current = 0;
+            } catch (err) {
+                console.error('Ошибка переподключения:', err);
+                if (retryAttempts.current < MAX_RETRIES) {
+                    resetConnection();
+                }
+            }
+        }, retryDelay);
     };
 
     const restartMediaDevices = async () => {
@@ -935,104 +1153,106 @@ const [retryCount, setRetryCount] = useState(0);
     };
 
     const joinRoom = async (uniqueUsername: string) => {
-        setError(null);
-        setIsInRoom(false);
-        setIsConnected(false);
+        setError(null)
+        setIsInRoom(false)
+        setIsConnected(false)
+        setIsLeader(false)
 
         try {
-            // 1. Подключаем WebSocket
             if (!(await connectWebSocket())) {
-                throw new Error('Не удалось подключиться к WebSocket');
+                throw new Error('Не удалось подключиться к WebSocket')
             }
 
-            setupWebSocketListeners();
+            setupWebSocketListeners()
 
-            // 2. Инициализируем WebRTC
             if (!(await initializeWebRTC())) {
-                throw new Error('Не удалось инициализировать WebRTC');
+                throw new Error('Не удалось инициализировать WebRTC')
             }
 
-            // 3. Отправляем запрос на присоединение к комнате
+            // Используем переданный preferredCodec вместо определения по платформе
+            // const { isChrome } = detectPlatform()
+            // const preferredCodec = isChrome ? 'VP8' : 'H264'
+
             await new Promise<void>((resolve, reject) => {
                 if (!ws.current || ws.current.readyState !== WebSocket.OPEN) {
-                    reject(new Error('WebSocket не подключен'));
-                    return;
+                    reject(new Error('WebSocket не подключен'))
+                    return
                 }
 
                 const onMessage = (event: MessageEvent) => {
                     try {
-                        const data = JSON.parse(event.data);
+                        const data = JSON.parse(event.data)
+                        console.log('Получено сообщение в joinRoom:', data)
                         if (data.type === 'room_info') {
-                            cleanupEvents();
-                            resolve();
+                            console.log('Получено room_info, очищаем таймер')
+                            cleanupEvents()
+                            setIsInRoom(true)
+                            setUsers(data.data?.users || [])
+                            resolve()
                         } else if (data.type === 'error') {
-                            cleanupEvents();
-                            reject(new Error(data.data || 'Ошибка входа в комнату'));
+                            console.error('Ошибка от сервера:', data.data)
+                            cleanupEvents()
+                            reject(new Error(data.data || 'Ошибка входа в комнату'))
                         }
                     } catch (err) {
-                        cleanupEvents();
-                        reject(err);
+                        console.error('Ошибка обработки сообщения:', err)
+                        cleanupEvents()
+                        reject(err)
                     }
-                };
+                }
 
                 const cleanupEvents = () => {
-                    ws.current?.removeEventListener('message', onMessage);
+                    ws.current?.removeEventListener('message', onMessage)
                     if (connectionTimeout.current) {
-                        clearTimeout(connectionTimeout.current);
+                        clearTimeout(connectionTimeout.current)
+                        connectionTimeout.current = null
                     }
-                };
+                }
 
                 connectionTimeout.current = setTimeout(() => {
-                    cleanupEvents();
-                    console.log('Таймаут ожидания ответа от сервера');
-                }, 10000);
+                    cleanupEvents()
+                    console.error('Таймаут ожидания ответа от сервера')
+                    setError('Таймаут ожидания ответа от сервера')
+                    reject(new Error('Таймаут ожидания ответа от сервера'))
+                }, 15000)
 
-                ws.current.addEventListener('message', onMessage);
+                ws.current.addEventListener('message', onMessage)
+
                 ws.current.send(JSON.stringify({
                     action: "join",
                     room: roomId,
                     username: uniqueUsername,
-                    isLeader: false // Браузер всегда ведомый
-                }));
-            });
+                    isLeader: false,
+                    preferredCodec // Используем переданный кодек
+                }))
+                console.log('Отправлен запрос на подключение:', { action: "join", room: roomId, username: uniqueUsername, isLeader: false, preferredCodec })
+            })
 
-            // 4. Успешное подключение
-            setIsInRoom(true);
-            shouldCreateOffer.current = true;
-
-            // 5. Создаем оффер, если мы первые в комнате
-            if (users.length === 0) {
-                await createAndSendOffer();
-            }
-
-            // 6. Запускаем таймер проверки видео
-            startVideoCheckTimer();
-
+            shouldCreateOffer.current = false
+            startVideoCheckTimer()
         } catch (err) {
-            console.error('Ошибка входа в комнату:', err);
-            setError(`Ошибка входа в комнату: ${err instanceof Error ? err.message : String(err)}`);
+            console.error('Ошибка входа в комнату:', err)
+            setError(`Ошибка входа в комнату: ${err instanceof Error ? err.message : String(err)}`)
 
-            // Полная очистка при ошибке
-            cleanup();
+            cleanup()
             if (ws.current) {
-                ws.current.close();
-                ws.current = null;
+                ws.current.close()
+                ws.current = null
             }
 
-            // Автоматическая повторная попытка
             if (retryAttempts.current < MAX_RETRIES) {
                 setTimeout(() => {
-                    joinRoom(uniqueUsername).catch(console.error);
-                }, 2000 * (retryAttempts.current + 1));
+                    joinRoom(uniqueUsername).catch(console.error)
+                }, 2000 * (retryAttempts.current + 1))
             }
         }
-    };
+    }
 
     useEffect(() => {
         return () => {
-            leaveRoom();
-        };
-    }, []);
+            leaveRoom()
+        }
+    }, [])
 
     return {
         localStream,
@@ -1043,834 +1263,15 @@ const [retryCount, setRetryCount] = useState(0);
         isCallActive,
         isConnected,
         isInRoom,
+        isLeader,
         error,
         retryCount,
         resetConnection,
         restartMediaDevices,
+        setError,
         ws: ws.current, // Возвращаем текущее соединение
     };
 };
-
-// file: docker-ardua/components/webrtc/lib/webrtc.ts
-//app\webrtc\lib\webrtc.ts
-export function checkWebRTCSupport(): boolean {
-if (typeof window === 'undefined') return false;
-
-    const requiredAPIs = [
-        'RTCPeerConnection',
-        'RTCSessionDescription',
-        'RTCIceCandidate',
-        'MediaStream',
-        'navigator.mediaDevices.getUserMedia'
-    ];
-
-    return requiredAPIs.every(api => {
-        try {
-            if (api.includes('.')) {
-                const [obj, prop] = api.split('.');
-                return (window as any)[obj]?.[prop] !== undefined;
-            }
-            return (window as any)[api] !== undefined;
-        } catch {
-            return false;
-        }
-    });
-}
-
-
-
-
-
-
-
-// file: docker-ardua/components/webrtc/lib/signaling.ts
-// file: client/app/webrtc/lib/signaling.ts
-import { RoomInfo, SignalingMessage, SignalingClientOptions } from '../types';
-
-export class SignalingClient {
-private ws: WebSocket | null = null;
-private reconnectAttempts = 0;
-private connectionTimeout: NodeJS.Timeout | null = null;
-private connectionPromise: Promise<void> | null = null;
-private resolveConnection: (() => void) | null = null;
-
-    public onRoomInfo: (data: RoomInfo) => void = () => {};
-    public onOffer: (data: RTCSessionDescriptionInit) => void = () => {};
-    public onAnswer: (data: RTCSessionDescriptionInit) => void = () => {};
-    public onCandidate: (data: RTCIceCandidateInit) => void = () => {};
-    public onError: (error: string) => void = () => {};
-    public onLeave: (username?: string) => void = () => {};
-    public onJoin: (username: string) => void = () => {};
-
-    constructor(
-        private url: string,
-        private options: SignalingClientOptions = {}
-    ) {
-        this.options = {
-            maxReconnectAttempts: 5,
-            reconnectDelay: 1000,
-            connectionTimeout: 5000,
-            ...options
-        };
-    }
-
-    public get isConnected(): boolean {
-        return this.ws?.readyState === WebSocket.OPEN;
-    }
-
-    public connect(roomId: string, username: string): Promise<void> {
-        if (this.ws) {
-            this.ws.close();
-        }
-
-        this.ws = new WebSocket(this.url);
-        this.setupEventListeners();
-
-        this.connectionPromise = new Promise((resolve, reject) => {
-            this.resolveConnection = resolve;
-
-            this.connectionTimeout = setTimeout(() => {
-                if (!this.isConnected) {
-                    this.handleError('Connection timeout');
-                    reject(new Error('Connection timeout'));
-                }
-            }, this.options.connectionTimeout);
-
-            this.ws!.onopen = () => {
-                this.ws!.send(JSON.stringify({
-                    type: 'join',
-                    room: roomId,
-                    username: username
-                }));
-            };
-        });
-
-        return this.connectionPromise;
-    }
-
-    private setupEventListeners(): void {
-        if (!this.ws) return;
-
-        this.ws.onmessage = (event) => {
-            try {
-                const message: SignalingMessage = JSON.parse(event.data);
-
-                if (!('type' in message)) {
-                    console.warn('Received message without type:', message);
-                    return;
-                }
-
-                switch (message.type) {
-                    case 'room_info':
-                        this.onRoomInfo(message.data);
-                        break;
-                    case 'error':
-                        this.onError(message.data);
-                        break;
-                    case 'offer':
-                        this.onOffer(message.sdp);
-                        break;
-                    case 'answer':
-                        this.onAnswer(message.sdp);
-                        break;
-                    case 'candidate':
-                        this.onCandidate(message.candidate);
-                        break;
-                    case 'leave':
-                        this.onLeave(message.data);
-                        break;
-                    case 'join':
-                        this.onJoin(message.data);
-                        break;
-                    default:
-                        console.warn('Unknown message type:', message);
-                }
-            } catch (error) {
-                this.handleError('Invalid message format');
-            }
-        };
-
-        this.ws.onclose = () => {
-            console.log('Signaling connection closed');
-            this.cleanup();
-            this.attemptReconnect();
-        };
-
-        this.ws.onerror = (error) => {
-            this.handleError(`Connection error: ${error}`);
-        };
-    }
-
-    public sendOffer(offer: RTCSessionDescriptionInit): Promise<void> {
-        return this.send({ type: 'offer', sdp: offer });
-    }
-
-    public sendAnswer(answer: RTCSessionDescriptionInit): Promise<void> {
-        return this.send({ type: 'answer', sdp: answer });
-    }
-
-    public sendCandidate(candidate: RTCIceCandidateInit): Promise<void> {
-        return this.send({ type: 'candidate', candidate });
-    }
-
-    public sendLeave(username: string): Promise<void> {
-        return this.send({ type: 'leave', data: username });
-    }
-
-    private send(data: SignalingMessage): Promise<void> {
-        if (!this.isConnected) {
-            return Promise.reject(new Error('WebSocket not connected'));
-        }
-
-        try {
-            this.ws!.send(JSON.stringify(data));
-            return Promise.resolve();
-        } catch (error) {
-            console.error('Send error:', error);
-            return Promise.reject(error);
-        }
-    }
-
-    private attemptReconnect(): void {
-        if (this.reconnectAttempts >= (this.options.maxReconnectAttempts || 5)) {
-            return this.handleError('Max reconnection attempts reached');
-        }
-
-        this.reconnectAttempts++;
-        console.log(`Reconnecting (attempt ${this.reconnectAttempts})`);
-
-        setTimeout(() => this.connect('', ''), this.options.reconnectDelay);
-    }
-
-    private handleError(error: string): void {
-        console.error('Signaling error:', error);
-        this.onError(error);
-        this.cleanup();
-    }
-
-    private cleanup(): void {
-        this.clearTimeout(this.connectionTimeout);
-        if (this.resolveConnection) {
-            this.resolveConnection();
-            this.resolveConnection = null;
-        }
-        this.connectionPromise = null;
-    }
-
-    private clearTimeout(timer: NodeJS.Timeout | null): void {
-        if (timer) clearTimeout(timer);
-    }
-
-    public close(): void {
-        this.cleanup();
-        this.ws?.close();
-    }
-}
-
-// file: docker-ardua/components/webrtc/index.tsx
-// file: client/app/webrtc/index.tsx
-'use client'
-
-import { VideoCallApp } from './VideoCallApp';
-import { useEffect, useState } from 'react';
-import { checkWebRTCSupport } from './lib/webrtc';
-import styles from './styles.module.css';
-
-export default function WebRTCPage() {
-const [isSupported, setIsSupported] = useState<boolean | null>(null);
-const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
-
-    useEffect(() => {
-        const initialize = async () => {
-            setIsSupported(checkWebRTCSupport());
-
-            try {
-                const mediaDevices = await navigator.mediaDevices.enumerateDevices();
-                setDevices(mediaDevices);
-            } catch (err) {
-                console.error('Error getting devices:', err);
-            }
-        };
-
-        initialize();
-    }, []);
-
-    if (isSupported === false) {
-        return (
-            <div>
-                <h1>WebRTC is not supported in your browser</h1>
-                <p>Please use a modern browser like Chrome, Firefox or Edge.</p>
-            </div>
-        );
-    }
-
-    return (
-        <div>
-            {isSupported === null ? (
-                <div>Loading...</div>
-            ) : (
-                <VideoCallApp />
-            )}
-        </div>
-    );
-}
-
-// file: docker-ardua/components/webrtc/styles.module.css
-.container {
-position: relative;
-width: 99vw;
-height: 100vh;
-overflow: hidden;
-background-color: #000;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.remoteVideoContainer {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-background-color: #000;
-transition: transform 0.3s ease;
-}
-
-:fullscreen .remoteVideoContainer {
-width: 100vw;
-height: 100vh;
-background-color: #000;
-}
-
-.remoteVideo {
-width: 100%;
-height: 100%;
-object-fit: contain;
-transition: all 0.3s ease;
-}
-
-/* When rotated 90 or 270 degrees */
-.remoteVideo[style*="rotate(90deg)"],
-.remoteVideo[style*="rotate(270deg)"] {
-height: 133%;
-}
-
-.remoteVideo.rotated {
-height: 133%;
-width: auto;
-max-width: 100%;
-}
-
-.localVideoContainer {
-position: absolute;
-bottom: 20px;
-right: 20px;
-width: 20vw;
-max-width: 300px;
-min-width: 150px;
-height: 15vh;
-max-height: 200px;
-min-height: 100px;
-z-index: 10;
-border: 2px solid #fff;
-border-radius: 8px;
-overflow: hidden;
-background-color: #000;
-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.localVideo {
-width: 100%;
-height: 100%;
-object-fit: cover;
-transform: scaleX(-1);
-}
-
-.remoteVideoLabel{
-position: absolute;
-left: 0;
-right: 0;
-bottom: 0;
-background-color: rgba(0, 0, 0, 0.7);
-color: white;
-padding: 8px 12px;
-font-size: 14px;
-text-align: center;
-backdrop-filter: blur(5px);
-}
-
-.topControls {
-position: absolute;
-top: 15px;
-left: 50%;
-transform: translateX(-50%);
-display: flex;
-justify-content: space-between;
-z-index: 20;
-}
-
-.toggleControlsButton {
-background-color: rgba(255, 255, 255, 0.15);
-color: white;
-border: none;
-border-radius: 20px;
-padding: 8px 16px;
-font-size: 14px;
-cursor: pointer;
-display: flex;
-align-items: center;
-gap: 8px;
-transition: all 0.2s ease;
-}
-
-.toggleControlsButton:hover {
-background-color: rgba(255, 255, 255, 0.25);
-}
-
-.videoControls {
-display: flex;
-gap: 8px;
-flex-wrap: wrap;
-justify-content: flex-end;
-}
-
-.controlButton {
-background-color: rgba(255, 255, 255, 0.15);
-color: #a6a6a6;
-border: none;
-border-radius: 20px;
-min-width: 40px;
-height: 40px;
-font-size: 14px;
-cursor: pointer;
-display: flex;
-justify-content: center;
-align-items: center;
-transition: all 0.2s ease;
-padding: 0 12px;
-}
-
-.controlButton:hover {
-background-color: rgba(255, 255, 255, 0.25);
-}
-
-.controlButton.active {
-background-color: rgba(0, 150, 255, 0.7);
-color: white;
-}
-
-.controlsOverlay {
-position: absolute;
-top: 70px;
-left: 0;
-right: 0;
-background-color: rgba(0, 0, 0, 0);
-color: white;
-padding: 25px;
-z-index: 15;
-max-height: calc(100vh - 100px);
-overflow-y: auto;
-backdrop-filter: none;
-border-radius: 0 0 12px 12px;
-animation: fadeIn 0.3s ease-out;
-}
-
-.controls {
-display: flex;
-flex-direction: column;
-gap: 20px;
-max-width: 600px;
-margin: 0 auto;
-}
-
-.inputGroup {
-color: #6a6a6a;
-display: flex;
-flex-direction: column;
-gap: 8px;
-}
-
-.button {
-width: 100%;
-padding: 12px;
-font-weight: 500;
-transition: all 0.2s ease;
-}
-
-.userList {
-color: #6a6a6a;
-margin-top: 20px;
-background-color: rgba(255, 255, 255, 0.1);
-padding: 15px;
-border-radius: 8px;
-}
-
-.userList h3 {
-margin-top: 0;
-margin-bottom: 10px;
-font-size: 16px;
-}
-
-.userList ul {
-list-style: none;
-padding: 0;
-margin: 0;
-display: flex;
-flex-direction: column;
-gap: 8px;
-}
-
-.userList li {
-padding: 8px 12px;
-background-color: rgba(255, 255, 255, 0.1);
-border-radius: 6px;
-}
-
-.error {
-color: #ff6b6b;
-background-color: rgba(255, 107, 107, 0.1);
-padding: 12px;
-border-radius: 6px;
-border-left: 4px solid #ff6b6b;
-margin-bottom: 20px;
-}
-
-.connectionStatus {
-padding: 12px;
-/*background-color: rgba(255, 255, 255, 0.1);*/
-border-radius: 6px;
-margin-bottom: 15px;
-font-weight: 500;
-}
-
-.deviceSelection {
-color: #6a6a6a;
-margin-top: 20px;
-/*background-color: rgba(255, 255, 255, 0.1);*/
-padding: 15px;
-border-radius: 8px;
-}
-
-.deviceSelection h3 {
-margin-top: 0;
-margin-bottom: 15px;
-}
-
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(-10px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 768px) {
-.localVideoContainer {
-width: 25vw;
-height: 20vh;
-}
-
-    .controlsOverlay {
-        padding: 15px;
-    }
-
-    .controlButton {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
-    }
-
-    .videoControls {
-        gap: 6px;
-    }
-}
-
-/* Новые стили для вкладок */
-.tabsContainer {
-display: flex;
-gap: 8px;
-flex-wrap: wrap;
-}
-
-.tabButton {
-background-color: rgba(255, 255, 255, 0.15);
-color: white;
-border: none;
-border-radius: 20px;
-padding: 8px 16px;
-font-size: 14px;
-cursor: pointer;
-display: flex;
-align-items: center;
-gap: 8px;
-transition: all 0.2s ease;
-}
-
-.tabButton:hover {
-background-color: rgba(255, 255, 255, 0.25);
-}
-
-.activeTab {
-background-color: rgba(0, 150, 255, 0.7);
-}
-
-.tabContent {
-position: absolute;
-top: 70px;
-left: 0;
-right: 0;
-/*background-color: rgba(0, 0, 0, 0);*/
-color: #c3c3c3;
-z-index: 15;
-max-height: calc(100vh - 0px);
-overflow-y: auto;
-backdrop-filter: none;
-border-radius: 0 0 12px 12px;
-animation: fadeIn 0.3s ease-out;
-}
-
-.videoControlsTab {
-display: flex;
-flex-direction: column;
-gap: 20px;
-}
-
-.controlButtons {
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
-justify-content: center;
-}
-
-/* Стили для панели логов */
-.logsPanel {
-position: fixed;
-top: 0;
-right: 0;
-bottom: 0;
-width: 300px;
-background-color: rgba(0, 0, 0, 0.9);
-z-index: 1000;
-padding: 15px;
-overflow-y: auto;
-backdrop-filter: blur(5px);
-user-select: none;
-pointer-events: none;
-}
-
-.logsContent {
-font-family: monospace;
-font-size: 12px;
-color: #ccc;
-line-height: 1.5;
-}
-
-.logEntry {
-margin-bottom: 4px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-}
-
-/* Адаптивные стили */
-@media (max-width: 768px) {
-.tabsContainer {
-gap: 5px;
-}
-
-    .tabButton {
-        padding: 1px 3px;
-        font-size: 8px;
-    }
-
-    .tabContent {
-        padding: 15px;
-    }
-
-    .logsPanel {
-        width: 200px;
-    }
-}
-
-
-.statusIndicator {
-display: flex;
-align-items: center;
-gap: 8px;
-margin-left: 15px;
-padding: 6px 12px;
-border-radius: 20px;
-background-color: rgba(0, 0, 0, 0.5);
-backdrop-filter: blur(5px);
-}
-
-.statusDot {
-width: 10px;
-height: 10px;
-border-radius: 50%;
-}
-
-.statusText {
-font-size: 14px;
-color: white;
-}
-
-.connected {
-background-color: #10B981;
-}
-
-.pending {
-background-color: #F59E0B;
-animation: pulse 1.5s infinite;
-}
-
-.disconnected {
-background-color: #EF4444;
-}
-
-@keyframes pulse {
-0%, 100% {
-opacity: 1;
-}
-50% {
-opacity: 0.5;
-}
-}
-
-.statusIndicator {
-/* существующие стили */
-will-change: contents; /* Оптимизация для браузера */
-}
-
-.statusDot, .statusText {
-transition: all 0.3s ease;
-}
-
-.unsupportedContainer {
-max-width: 600px;
-margin: 2rem auto;
-padding: 2rem;
-background: #fff;
-border-radius: 8px;
-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-text-align: center;
-}
-
-.unsupportedContainer h2 {
-color: #e74c3c;
-margin-bottom: 1rem;
-}
-
-.unsupportedContainer p {
-margin-bottom: 1rem;
-line-height: 1.6;
-}
-
-.browserList {
-text-align: left;
-background: #f8f9fa;
-padding: 1rem;
-border-radius: 6px;
-margin: 1.5rem 0;
-}
-
-.browserList ul {
-padding-left: 1.5rem;
-margin: 0.5rem 0;
-}
-
-.note {
-font-size: 0.9rem;
-color: #666;
-font-style: italic;
-}
-
-/* Стили для списка сохраненных комнат */
-.savedRooms {
-margin-top: 20px;
-background-color: rgba(255, 255, 255, 0.1);
-padding: 15px;
-border-radius: 8px;
-}
-
-.savedRooms h3 {
-margin-top: 0;
-margin-bottom: 15px;
-font-size: 16px;
-}
-
-.savedRooms ul {
-list-style: none;
-padding: 0;
-margin: 0;
-display: flex;
-flex-direction: column;
-gap: 8px;
-}
-
-.savedRoomItem {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 8px 12px;
-background-color: rgba(255, 255, 255, 0.1);
-border-radius: 6px;
-}
-
-.savedRoomItem span {
-cursor: pointer;
-flex-grow: 1;
-}
-
-.savedRoomItem span:hover {
-text-decoration: underline;
-}
-
-.defaultRoom {
-font-weight: bold;
-color: #4CAF50;
-}
-
-.deleteRoomButton {
-background-color: rgba(255, 99, 71, 0.2);
-color: #FF6347;
-border: none;
-border-radius: 4px;
-padding: 4px 8px;
-cursor: pointer;
-font-size: 12px;
-margin-left: 10px;
-}
-
-.deleteRoomButton:hover {
-background-color: rgba(255, 99, 71, 0.3);
-}
-
-// file: docker-ardua/components/webrtc/types.ts
-// file: client/app/webrtc/types.ts
-export interface RoomInfo {
-users: string[];
-}
-
-export type SignalingMessage =
-| { type: 'room_info'; data: RoomInfo }
-| { type: 'error'; data: string }
-| { type: 'offer'; sdp: RTCSessionDescriptionInit }
-| { type: 'answer'; sdp: RTCSessionDescriptionInit }
-| { type: 'candidate'; candidate: RTCIceCandidateInit }
-| { type: 'join'; data: string }
-| { type: 'leave'; data: string };
-
-export interface User {
-username: string;
-stream?: MediaStream;
-peerConnection?: RTCPeerConnection;
-}
-
-export interface SignalingClientOptions {
-maxReconnectAttempts?: number;
-reconnectDelay?: number;
-connectionTimeout?: number;
-}
 
 // file: docker-ardua/components/webrtc/VideoCallApp.tsx
 // file: docker-ardua/components/webrtc/VideoCallApp.tsx
@@ -1909,7 +1310,7 @@ audio: ''
 })
 const [showLocalVideo, setShowLocalVideo] = useState(true)
 const [videoTransform, setVideoTransform] = useState('')
-const [roomId, setRoomId] = useState('') // С тире (XXXX-XXXX-XXXX-XXXX)
+const [roomId, setRoomId] = useState('')
 const [username, setUsername] = useState('user_' + Math.floor(Math.random() * 1000))
 const [hasPermission, setHasPermission] = useState(false)
 const [devicesLoaded, setDevicesLoaded] = useState(false)
@@ -1926,13 +1327,14 @@ const [muteLocalAudio, setMuteLocalAudio] = useState(false)
 const [muteRemoteAudio, setMuteRemoteAudio] = useState(false)
 const videoContainerRef = useRef<HTMLDivElement>(null)
 const [isFullscreen, setIsFullscreen] = useState(false)
-const remoteVideoRef = useRef<HTMLVideoElement>(null);
+const remoteVideoRef = useRef<HTMLVideoElement>(null)
 const localAudioTracks = useRef<MediaStreamTrack[]>([])
 const [useBackCamera, setUseBackCamera] = useState(false)
 const [savedRooms, setSavedRooms] = useState<SavedRoom[]>([])
 const [showDeleteDialog, setShowDeleteDialog] = useState(false)
 const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
-
+// Новое состояние для кодека
+const [selectedCodec, setSelectedCodec] = useState<'VP8' | 'H264'>('VP8')
 
     const [isClient, setIsClient] = useState(false)
 
@@ -1950,10 +1352,15 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
         isConnected,
         isInRoom,
         error,
+        setError,
         ws
-    } = useWebRTC(selectedDevices, username, roomId.replace(/-/g, '')) // Удаляем тире при передаче в useWebRTC
+    } = useWebRTC(selectedDevices, username, roomId.replace(/-/g, ''), selectedCodec) // Передаём selectedCodec
 
-    // Загрузка сохраненных комнат и настроек из localStorage
+    useEffect(() => {
+        console.log('Состояния:', { isConnected, isInRoom, isCallActive, error })
+    }, [isConnected, isInRoom, isCallActive, error])
+
+    // Загрузка сохранённых настроек
     useEffect(() => {
         const loadSettings = () => {
             try {
@@ -1974,11 +1381,8 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
                 if (saved) {
                     const rooms: SavedRoom[] = JSON.parse(saved)
                     setSavedRooms(rooms)
-
-                    // Находим комнату по умолчанию
                     const defaultRoom = rooms.find(r => r.isDefault)
                     if (defaultRoom) {
-                        // Форматируем ID с тире для отображения
                         setRoomId(formatRoomId(defaultRoom.id))
                     }
                 }
@@ -2010,10 +1414,22 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
         const savedAutoJoin = localStorage.getItem('autoJoin') === 'true'
         setAutoJoin(savedAutoJoin)
 
+        // Загрузка сохранённого кодека
+        const savedCodec = localStorage.getItem('selectedCodec')
+        if (savedCodec === 'VP8' || savedCodec === 'H264') {
+            setSelectedCodec(savedCodec)
+        }
+
         loadSettings()
         loadSavedRooms()
         loadDevices()
     }, [])
+
+    const handleCodecChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const codec = e.target.value as 'VP8' | 'H264'
+        setSelectedCodec(codec)
+        localStorage.setItem('selectedCodec', codec)
+    }
 
     // Форматирование ID комнаты с тире (XXXX-XXXX-XXXX-XXXX)
     const formatRoomId = (id: string): string => {
@@ -2233,20 +1649,27 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
     }
 
     const handleJoinRoom = async () => {
-        if (!isRoomIdComplete) return
+        if (!isRoomIdComplete) {
+            console.warn('ID комнаты не полный, подключение невозможно');
+            return;
+        }
 
-        setIsJoining(true)
+        setIsJoining(true);
+        console.log('Попытка подключения к комнате:', roomId);
         try {
             // Устанавливаем выбранную комнату как дефолтную
-            setDefaultRoom(roomId.replace(/-/g, ''))
+            setDefaultRoom(roomId.replace(/-/g, ''));
 
-            await joinRoom(username)
+            await joinRoom(username);
+            console.log('Успешно подключено к комнате:', roomId);
         } catch (error) {
-            console.error('Error joining room:', error)
+            console.error('Ошибка подключения к комнате:', error);
+            setError('Ошибка подключения к комнате'); // Теперь setError должен быть доступен
         } finally {
-            setIsJoining(false)
+            setIsJoining(false);
+            console.log('Состояние isJoining сброшено');
         }
-    }
+    };
 
     const toggleFullscreen = async () => {
         if (!videoContainerRef.current) return
@@ -2319,16 +1742,9 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
     }
 
     return (
-        <div
-            className={styles.container}
-            suppressHydrationWarning // Добавляем это для игнорирования различий в атрибутах
-        >
-            <div
-                ref={videoContainerRef}
-                className={styles.remoteVideoContainer}
-                suppressHydrationWarning
-            >
-                {isClient && ( // Оборачиваем в проверку isClient для клиент-сайд рендеринга
+        <div className={styles.container} suppressHydrationWarning>
+            <div ref={videoContainerRef} className={styles.remoteVideoContainer} suppressHydrationWarning>
+                {isClient && (
                     <VideoPlayer
                         stream={remoteStream}
                         className={styles.remoteVideo}
@@ -2380,10 +1796,12 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
                             {isCallActive && ' (Звонок активен)'}
                             {users.length > 0 && (
                                 <div>
-                                    Роль: {users[0] === username ? "Ведущий" : "Ведомый"}
+                                    Роль: "Ведомый"
                                 </div>
                             )}
                         </div>
+
+                        {error && <div className={styles.error}>{error}</div>}
 
                         <div className={styles.inputGroup}>
                             <div className="flex items-center space-x-2">
@@ -2433,7 +1851,11 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
                                 {isJoining ? 'Подключение...' : 'Войти в комнату'}
                             </Button>
                         ) : (
-                            <Button onClick={leaveRoom} className={styles.button}>
+                            <Button
+                                onClick={leaveRoom}
+                                disabled={!isConnected || !isInRoom}
+                                className={styles.button}
+                            >
                                 Покинуть комнату
                             </Button>
                         )}
@@ -2470,6 +1892,20 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
                                         </li>
                                     ))}
                                 </ul>
+                                {/* Новый выбор кодека */}
+                                <div className={styles.inputGroup}>
+                                    <Label htmlFor="codec">Кодек трансляции</Label>
+                                    <select
+                                        id="codec"
+                                        value={selectedCodec}
+                                        onChange={handleCodecChange}
+                                        disabled={isInRoom}
+                                        className={styles.codecSelect}
+                                    >
+                                        <option value="VP8">VP8</option>
+                                        <option value="H264">H264</option>
+                                    </select>
+                                </div>
                             </div>
                         )}
 
@@ -2598,7 +2034,6 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
                 </div>
             )}
 
-            {/* Диалог подтверждения удаления комнаты */}
             <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
                 <DialogContent>
                     <DialogHeader>
@@ -2619,1248 +2054,777 @@ const [roomToDelete, setRoomToDelete] = useState<string | null>(null)
     )
 }
 
-Server Go
-package main
 
+Сервер GO
+package main
 import (
 "encoding/json"
+"errors"
+"fmt"
 "log"
-"math/rand"
 "net/http"
-// "strings" // Удален неиспользуемый импорт
+"regexp" // Добавлено для normalizeSdpForCodec
+"strings" // Добавлено для normalizeSdpForCodec
 "sync"
 "time"
-
-	"github.com/gorilla/websocket"
-	"github.com/pion/webrtc/v3"
+"github.com/gorilla/websocket"
+"github.com/pion/webrtc/v3"
 )
 
 var upgrader = websocket.Upgrader{
-CheckOrigin: func(r *http.Request) bool { return true }, // Разрешаем соединения с любых источников
+CheckOrigin: func(r *http.Request) bool { return true },
 }
 
-// Peer представляет подключенного пользователя (ведущего или ведомого)
 type Peer struct {
-conn     *websocket.Conn         // WebSocket соединение
-pc       *webrtc.PeerConnection  // WebRTC PeerConnection
-username string                  // Имя пользователя
-room     string                  // Комната, к которой подключен пользователь
-isLeader bool                    // true для Android (ведущий), false для браузера (ведомый)
-mu       sync.Mutex              // Мьютекс для защиты доступа к pc и conn из разных горутин
+conn     *websocket.Conn
+pc       *webrtc.PeerConnection
+username string
+room     string
+isLeader bool
+mu       sync.Mutex
 }
 
-// RoomInfo содержит информацию о комнате для отправки клиентам
 type RoomInfo struct {
-Users    []string `json:"users"`    // Список имен пользователей в комнате
-Leader   string   `json:"leader"`   // Имя ведущего
-Follower string   `json:"follower"` // Имя ведомого
+Users    []string `json:"users"`
+Leader   string   `json:"leader"`
+Follower string   `json:"follower"`
 }
 
 var (
-peers   = make(map[string]*Peer)             // Карта всех активных соединений (ключ - RemoteAddr)
-rooms   = make(map[string]map[string]*Peer) // Карта комнат (ключ - имя комнаты, значение - карта пиров в комнате по username)
-mu      sync.Mutex                           // Глобальный мьютекс для защиты доступа к peers и rooms
-letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+peers     = make(map[string]*Peer)
+rooms     = make(map[string]map[string]*Peer)
+mu        sync.Mutex
+// letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") // Не используется, но оставлено для вашего сведения
+webrtcAPI *webrtc.API // Глобальный API с настроенным MediaEngine
 )
 
-// Инициализация генератора случайных чисел
+func normalizeSdpForCodec(sdp, preferredCodec string) string {
+log.Printf("Normalizing SDP for codec: %s", preferredCodec)
+lines := strings.Split(sdp, "\r\n")
+var newLines []string
+targetPayloadTypes := []string{}
+targetCodec := preferredCodec
+if targetCodec != "H264" && targetCodec != "VP8" {
+targetCodec = "H264"
+log.Printf("Invalid codec %s, defaulting to H264", preferredCodec)
+}
+
+    // Найти payload types для targetCodec
+    codecRegex := regexp.MustCompile(fmt.Sprintf(`a=rtpmap:(\d+) %s/\d+`, targetCodec))
+    for _, line := range lines {
+        matches := codecRegex.FindStringSubmatch(line)
+        if matches != nil {
+            targetPayloadTypes = append(targetPayloadTypes, matches[1])
+        }
+    }
+
+    if len(targetPayloadTypes) == 0 {
+        log.Printf("No payload types found for %s, returning original SDP", targetCodec)
+        return sdp
+    }
+
+    // Удалить другие кодеки
+    otherCodecs := []string{"VP8", "VP9", "AV1"}
+    if targetCodec == "VP8" {
+        otherCodecs = []string{"H264", "VP9", "AV1"}
+    }
+    for _, line := range lines {
+        skip := false
+        for _, codec := range otherCodecs {
+            if strings.Contains(line, fmt.Sprintf("a=rtpmap:%%d %s/", codec)) {
+                skip = true
+                break
+            }
+            if strings.Contains(line, "a=fmtp:") && strings.Contains(line, codec) {
+                skip = true
+                break
+            }
+            if strings.Contains(line, "a=rtcp-fb:") && strings.Contains(line, codec) {
+                skip = true
+                break
+            }
+        }
+        if !skip {
+            newLines = append(newLines, line)
+        }
+    }
+
+    // Переупорядочить m=video
+    for i, line := range newLines {
+        if strings.HasPrefix(line, "m=video") {
+            parts := strings.Split(line, " ")
+            if len(parts) < 4 {
+                log.Printf("Invalid m=video line: %s", line)
+                return sdp
+            }
+            currentPayloads := parts[3:]
+            filteredPayloads := []string{}
+            for _, pt := range currentPayloads {
+                for _, line := range newLines {
+                    if strings.Contains(line, fmt.Sprintf("a=rtpmap:%s ", pt)) {
+                        filteredPayloads = append(filteredPayloads, pt)
+                        break
+                    }
+                }
+            }
+            preferredPayloads := []string{}
+            for _, pt := range targetPayloadTypes {
+                if contains(filteredPayloads, pt) {
+                    preferredPayloads = append(preferredPayloads, pt)
+                }
+            }
+            otherPayloads := []string{}
+            for _, pt := range filteredPayloads {
+                if !contains(targetPayloadTypes, pt) {
+                    otherPayloads = append(otherPayloads, pt)
+                }
+            }
+            parts = append(parts[:3], append(preferredPayloads, otherPayloads...)...)
+            newLines[i] = strings.Join(parts, " ")
+            log.Printf("Reordered m=video payloads: %v", parts[3:])
+            break
+        }
+    }
+
+    // Установить битрейт
+    for i, line := range newLines {
+        if strings.HasPrefix(line, "a=mid:video") {
+            newLines = append(newLines[:i+1], append([]string{fmt.Sprintf("b=AS:%d", 500)}, newLines[i+1:]...)...)
+            break
+        }
+    }
+
+    newSdp := strings.Join(newLines, "\r\n")
+    log.Printf("Normalized SDP:\n%s", newSdp)
+    return newSdp
+}
+
+// contains проверяет, есть ли элемент в срезе
+func contains(slice []string, item string) bool {
+for _, s := range slice {
+if s == item {
+return true
+}
+}
+return false
+}
+
+
+// createMediaEngine создает MediaEngine с учетом preferredCodec
+func createMediaEngine(preferredCodec string) *webrtc.MediaEngine {
+mediaEngine := &webrtc.MediaEngine{}
+
+    if preferredCodec == "H264" {
+        // Регистрируем только H.264
+        if err := mediaEngine.RegisterCodec(webrtc.RTPCodecParameters{
+            RTPCodecCapability: webrtc.RTPCodecCapability{
+                MimeType:    webrtc.MimeTypeH264,
+                ClockRate:   90000,
+                SDPFmtpLine: "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f",
+                RTCPFeedback: []webrtc.RTCPFeedback{
+                    {Type: "nack"},
+                    {Type: "nack", Parameter: "pli"},
+                    {Type: "ccm", Parameter: "fir"},
+                    {Type: "goog-remb"},
+                },
+            },
+            PayloadType: 126,
+        }, webrtc.RTPCodecTypeVideo); err != nil {
+            log.Printf("H264 codec registration error: %v", err)
+        }
+        log.Printf("MediaEngine configured with H.264 (PT: 126) only")
+    } else if preferredCodec == "VP8" {
+        // Регистрируем только VP8
+        if err := mediaEngine.RegisterCodec(webrtc.RTPCodecParameters{
+            RTPCodecCapability: webrtc.RTPCodecCapability{
+                MimeType:    webrtc.MimeTypeVP8,
+                ClockRate:   90000,
+                RTCPFeedback: []webrtc.RTCPFeedback{
+                    {Type: "nack"},
+                    {Type: "nack", Parameter: "pli"},
+                    {Type: "ccm", Parameter: "fir"},
+                    {Type: "goog-remb"},
+                },
+            },
+            PayloadType: 96,
+        }, webrtc.RTPCodecTypeVideo); err != nil {
+            log.Printf("VP8 codec registration error: %v", err)
+        }
+        log.Printf("MediaEngine configured with VP8 (PT: 96) only")
+    } else {
+        // По умолчанию H.264
+        if err := mediaEngine.RegisterCodec(webrtc.RTPCodecParameters{
+            RTPCodecCapability: webrtc.RTPCodecCapability{
+                MimeType:    webrtc.MimeTypeH264,
+                ClockRate:   90000,
+                SDPFmtpLine: "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f",
+                RTCPFeedback: []webrtc.RTCPFeedback{
+                    {Type: "nack"},
+                    {Type: "nack", Parameter: "pli"},
+                    {Type: "ccm", Parameter: "fir"},
+                    {Type: "goog-remb"},
+                },
+            },
+            PayloadType: 126,
+        }, webrtc.RTPCodecTypeVideo); err != nil {
+            log.Printf("H264 codec registration error: %v", err)
+        }
+        log.Printf("MediaEngine configured with default H.264 (PT: 126)")
+    }
+
+    // Регистрируем Opus аудио
+    if err := mediaEngine.RegisterCodec(webrtc.RTPCodecParameters{
+        RTPCodecCapability: webrtc.RTPCodecCapability{
+            MimeType:     webrtc.MimeTypeOpus,
+            ClockRate:    48000,
+            Channels:     2,
+            SDPFmtpLine:  "minptime=10;useinbandfec=1",
+            RTCPFeedback: []webrtc.RTCPFeedback{},
+        },
+        PayloadType: 111,
+    }, webrtc.RTPCodecTypeAudio); err != nil {
+        log.Printf("Opus codec registration error: %v", err)
+    }
+
+    return mediaEngine
+}
+
 func init() {
-rand.Seed(time.Now().UnixNano())
+// rand.Seed(time.Now().UnixNano()) // Закомментировано, т.к. randSeq не используется. Если будете использовать math/rand, раскомментируйте.
+initializeMediaAPI() // Инициализируем MediaEngine при старте
 }
 
-// Генерация случайной строки (не используется в текущей логике, но может пригодиться)
-func randSeq(n int) string {
-b := make([]rune, n)
-for i := range b {
-b[i] = letters[rand.Intn(len(letters))]
-}
-return string(b)
+// initializeMediaAPI настраивает MediaEngine только с H.264 и Opus
+func initializeMediaAPI() {
+mediaEngine := createMediaEngine("H264")
+webrtcAPI = webrtc.NewAPI(
+webrtc.WithMediaEngine(mediaEngine),
+)
+log.Println("Global MediaEngine initialized with H.264 (PT: 126) and Opus (PT: 111)")
 }
 
-// getWebRTCConfig возвращает конфигурацию для WebRTC PeerConnection
+// getWebRTCConfig осталась вашей функцией
 func getWebRTCConfig() webrtc.Configuration {
 return webrtc.Configuration{
 ICEServers: []webrtc.ICEServer{
-{
-URLs:       []string{"turn:ardua.site:3478"}, // TURN сервер для обхода сложных NAT
-Username:   "user1",
-Credential: "pass1",
+{URLs: []string{"stun:ardua.site:3478"}},
+{URLs: []string{"turn:ardua.site:3478"}, Username: "user1", Credential: "pass1"},
 },
-{URLs: []string{"stun:ardua.site:3478"}}, // STUN сервер для определения внешнего IP
-},
-ICETransportPolicy: webrtc.ICETransportPolicyAll,       // Пытаться использовать все виды ICE кандидатов (host, srflx, relay)
-BundlePolicy:       webrtc.BundlePolicyMaxBundle,     // Собирать все медиа потоки в один транспортный поток
-RTCPMuxPolicy:      webrtc.RTCPMuxPolicyRequire,      // Требовать мультиплексирование RTP и RTCP
-SDPSemantics:       webrtc.SDPSemanticsUnifiedPlan, // Использовать современный стандарт описания сессий SDP
+ICETransportPolicy: webrtc.ICETransportPolicyAll,
+BundlePolicy:       webrtc.BundlePolicyMaxBundle,
+RTCPMuxPolicy:      webrtc.RTCPMuxPolicyRequire,
+SDPSemantics:       webrtc.SDPSemanticsUnifiedPlan,
 }
 }
 
-// logStatus выводит текущее состояние сервера (количество соединений, комнат и их состав) в лог
+// logStatus осталась вашей функцией
 func logStatus() {
 mu.Lock()
 defer mu.Unlock()
-
-	log.Printf("--- Server Status ---")
-	log.Printf("Total Connections: %d", len(peers))
-	log.Printf("Active Rooms: %d", len(rooms))
-	for room, roomPeers := range rooms {
-		var leader, follower string
-		users := []string{}
-		for username, p := range roomPeers {
-			users = append(users, username)
-			if p.isLeader {
-				leader = p.username
-			} else {
-				follower = p.username
-			}
-		}
-		log.Printf("  Room '%s' (%d users: %v) - Leader: [%s], Follower: [%s]",
-			room, len(roomPeers), users, leader, follower)
-	}
-	log.Printf("---------------------")
+log.Printf("--- Server Status ---")
+log.Printf("Total Connections: %d", len(peers))
+log.Printf("Active Rooms: %d", len(rooms))
+for room, roomPeers := range rooms {
+var leader, follower string
+users := []string{}
+for username, p := range roomPeers {
+users = append(users, username)
+if p.isLeader {
+leader = p.username
+} else {
+follower = p.username
+}
+}
+log.Printf("  Room '%s' (%d users: %v) - Leader: [%s], Follower: [%s]",
+room, len(roomPeers), users, leader, follower)
+}
+log.Printf("---------------------")
 }
 
-// getUsernames (не используется, но может быть полезна) возвращает список имен пользователей из карты пиров
-func getUsernames(peers map[string]*Peer) []string {
-usernames := make([]string, 0, len(peers))
-for username := range peers {
-usernames = append(usernames, username)
-}
-return usernames
-}
-
-// sendRoomInfo отправляет актуальную информацию о составе комнаты всем ее участникам
+// sendRoomInfo осталась вашей функцией
 func sendRoomInfo(room string) {
 mu.Lock()
-defer mu.Unlock() // Разблокируем мьютекс в конце функции
+defer mu.Unlock()
 
-	if roomPeers, exists := rooms[room]; exists {
-		var leader, follower string
-		users := make([]string, 0, len(roomPeers))
+    roomPeers, exists := rooms[room]
+    if !exists || roomPeers == nil {
+        return
+    }
 
-		// Собираем информацию о комнате
-		for _, peer := range roomPeers {
-			users = append(users, peer.username)
-			if peer.isLeader {
-				leader = peer.username
-			} else {
-				follower = peer.username
-			}
-		}
+    var leader, follower string
+    users := make([]string, 0, len(roomPeers))
+    for _, peer := range roomPeers {
+        users = append(users, peer.username)
+        if peer.isLeader {
+            leader = peer.username
+        } else {
+            follower = peer.username
+        }
+    }
 
-		roomInfo := RoomInfo{
-			Users:    users,
-			Leader:   leader,
-			Follower: follower,
-		}
-
-		// Отправляем информацию каждому участнику комнаты
-		for _, peer := range roomPeers {
-			peer.mu.Lock() // Блокируем мьютекс пира перед использованием conn
-			conn := peer.conn
-			if conn != nil {
-				log.Printf("Sending room_info to %s in room %s", peer.username, room)
-				err := conn.WriteJSON(map[string]interface{}{
-					"type": "room_info",
-					"data": roomInfo,
-				})
-				if err != nil {
-					// Используем WriteControl для отправки CloseMessage, если WriteJSON не удался
-					// Это более надежный способ инициировать закрытие с ошибкой
-					log.Printf("Error sending room info to %s (user: %s), attempting close: %v", conn.RemoteAddr(), peer.username, err)
-					// Небольшая задержка перед отправкой CloseMessage
-					time.Sleep(100 * time.Millisecond)
-					conn.WriteControl(websocket.CloseMessage,
-						websocket.FormatCloseMessage(websocket.CloseInternalServerErr, "Cannot send room info"),
-						time.Now().Add(time.Second))
-				}
-			} else {
-				log.Printf("Cannot send room info to %s, connection is nil", peer.username)
-			}
-			peer.mu.Unlock() // Разблокируем мьютекс пира
-		}
-	} else {
-		log.Printf("Attempted to send room info for non-existent room '%s'", room)
-	}
+    roomInfo := RoomInfo{Users: users, Leader: leader, Follower: follower}
+    for _, peer := range roomPeers {
+        peer.mu.Lock()
+        conn := peer.conn
+        if conn != nil {
+            err := conn.WriteJSON(map[string]interface{}{"type": "room_info", "data": roomInfo})
+            if err != nil {
+                log.Printf("Error sending room info to %s (user: %s): %v", conn.RemoteAddr(), peer.username, err)
+            }
+        }
+        peer.mu.Unlock()
+    }
 }
 
-// closePeerConnection безопасно закрывает WebRTC и WebSocket соединения пира
-func closePeerConnection(peer *Peer, reason string) {
+// closePeerResources - унифицированная функция для закрытия ресурсов пира
+func closePeerResources(peer *Peer, reason string) {
 if peer == nil {
 return
 }
-peer.mu.Lock() // Блокируем мьютекс пира
-defer peer.mu.Unlock()
+peer.mu.Lock() // Блокируем конкретного пира
 
-	// 1. Закрываем WebRTC соединение
-	if peer.pc != nil {
-		log.Printf("Closing PeerConnection for %s (Reason: %s)", peer.username, reason)
-		// Небольшая задержка перед закрытием, чтобы дать время на отправку последних сообщений
-		time.Sleep(100 * time.Millisecond)
-		if err := peer.pc.Close(); err != nil {
-			log.Printf("Error closing peer connection for %s: %v", peer.username, err)
-		}
-		peer.pc = nil // Убираем ссылку
-	}
-
-	// 2. Закрываем WebSocket соединение
-	if peer.conn != nil {
-		log.Printf("Closing WebSocket connection for %s (Reason: %s)", peer.username, reason)
-		// Отправляем сообщение о закрытии клиенту
-		peer.conn.WriteControl(websocket.CloseMessage,
-			websocket.FormatCloseMessage(websocket.CloseNormalClosure, reason),
-			time.Now().Add(time.Second)) // Даем секунду на отправку
-		// Закрываем соединение со стороны сервера
-		peer.conn.Close()
-		peer.conn = nil // Убираем ссылку
-	}
-}
-
-// handlePeerJoin обрабатывает присоединение нового пользователя к комнате
-// Возвращает созданный Peer или nil, если комната заполнена или произошла ошибка
-func handlePeerJoin(room string, username string, isLeader bool, conn *websocket.Conn) (*Peer, error) {
-mu.Lock() // Блокируем глобальный мьютекс для работы с rooms и peers
-defer mu.Unlock()
-
-	if _, exists := rooms[room]; !exists {
-		log.Printf("Creating new room: %s", room)
-		rooms[room] = make(map[string]*Peer)
-	}
-
-	roomPeers := rooms[room]
-
-	// --- Логика Замены Ведомого ---
-	// Если новый участник - ведомый (!isLeader)
-	if !isLeader {
-		var existingFollower *Peer = nil
-		// var leaderPeer *Peer = nil // Удалено: Не используется в этом блоке
-
-		// Ищем существующего ведомого в комнате
-		for _, p := range roomPeers {
-			if !p.isLeader {
-				existingFollower = p // Нашли существующего ведомого
-				break // Нам нужен только один
-			}
-			// if p.isLeader { // Удалено: Не используется в этом блоке
-			// 	leaderPeer = p
-			// }
-		}
-
-		// Если существующий ведомый найден, отключаем его
-		if existingFollower != nil {
-			log.Printf("Follower '%s' already exists in room '%s'. Disconnecting old follower to replace with new follower '%s'.", existingFollower.username, room, username)
-
-			// 1. Отправляем команду на отключение старому ведомому
-			existingFollower.mu.Lock() // Блокируем мьютекс старого ведомого
-			if existingFollower.conn != nil {
-				err := existingFollower.conn.WriteJSON(map[string]interface{}{
-					"type": "force_disconnect",
-					"data": "You have been replaced by another viewer.",
-				})
-				if err != nil {
-					log.Printf("Error sending force_disconnect to %s: %v", existingFollower.username, err)
-				}
-			}
-			existingFollower.mu.Unlock() // Разблокируем мьютекс старого ведомого
-
-			// 2. Закрываем соединения старого ведомого (WebRTC и WebSocket)
-			// Используем отдельную функцию для безопасного закрытия
-			go closePeerConnection(existingFollower, "Replaced by new follower")
-
-			// 3. Удаляем старого ведомого из комнаты и глобального списка пиров
-			delete(roomPeers, existingFollower.username)
-			// Удаляем из глобального списка peers по адресу соединения старого ведомого
-			// Важно: нужно найти правильный ключ (адрес)
-			var oldAddr string
-			for addr, p := range peers { // Ищем адрес старого ведомого в глобальной карте
-				if p == existingFollower {
-					oldAddr = addr
-					break
-				}
-			}
-			if oldAddr != "" {
-				delete(peers, oldAddr)
-			} else {
-				log.Printf("WARN: Could not find old follower %s in global peers map by object comparison.", existingFollower.username)
-				// Попробуем удалить по адресу из соединения, если оно еще не nil
-				if existingFollower.conn != nil {
-					 delete(peers, existingFollower.conn.RemoteAddr().String())
-				}
-			}
-
-			log.Printf("Old follower %s removed from room %s.", existingFollower.username, room)
-
-			// Важно: После удаления старого ведомого, комната готова принять нового.
-			// Продолжаем выполнение функции для добавления нового ведомого.
-		}
-	}
-
-	// --- Проверка Лимита Участников ---
-	// После потенциального удаления старого ведомого, снова проверяем размер комнаты
-	var currentLeaderCount, currentFollowerCount int
-	for _, p := range roomPeers {
-		if p.isLeader {
-			currentLeaderCount++
-		} else {
-			currentFollowerCount++
-		}
-	}
-
-	// Проверяем, можно ли добавить нового участника
-	if isLeader && currentLeaderCount > 0 {
-		log.Printf("Room '%s' already has a leader. Cannot add another leader '%s'.", room, username)
-		conn.WriteJSON(map[string]interface{}{"type": "error", "data": "Room already has a leader"})
-		conn.Close()
-		return nil, nil // Возвращаем nil, nil чтобы показать, что пир не был создан, но ошибки для сервера нет
-	}
-	if !isLeader && currentFollowerCount > 0 {
-		// Эта проверка может быть излишней из-за логики замены выше, но оставим для надежности
-		log.Printf("Room '%s' already has a follower. Cannot add another follower '%s'.", room, username)
-		conn.WriteJSON(map[string]interface{}{"type": "error", "data": "Room already has a follower (should have been replaced)"})
-		conn.Close()
-		return nil, nil
-	}
-	if len(roomPeers) >= 2 && ( (isLeader && currentLeaderCount == 0) || (!isLeader && currentFollowerCount == 0) ){
-         // Если мест < 2, но слот лидера/фолловера занят - это ошибка логики или гонка состояний
-        log.Printf("Warning: Room '%s' has %d peers, but cannot add %s '%s'. LeaderCount: %d, FollowerCount: %d", room, len(roomPeers), map[bool]string{true: "leader", false: "follower"}[isLeader], username, currentLeaderCount, currentFollowerCount)
-        // Продолжаем, т.к. предыдущие проверки должны были обработать это.
+    // Сначала закрываем WebRTC соединение
+    if peer.pc != nil {
+        log.Printf("Closing PeerConnection for %s (Reason: %s)", peer.username, reason)
+        // Небольшая задержка может иногда помочь отправить последние данные, но обычно не нужна
+        // time.Sleep(100 * time.Millisecond)
+        if err := peer.pc.Close(); err != nil {
+            // Ошибки типа "invalid PeerConnection state" ожидаемы, если соединение уже закрывается
+            // log.Printf("Error closing peer connection for %s: %v", peer.username, err)
+        }
+        peer.pc = nil // Помечаем как закрытое
     }
 
-
-	// --- Создание Нового PeerConnection ---
-	// Каждый раз создаем НОВЫЙ PeerConnection для нового участника ИЛИ при переподключении
-	log.Printf("Creating new PeerConnection for %s (isLeader: %v) in room %s", username, isLeader, room)
-	peerConnection, err := webrtc.NewPeerConnection(getWebRTCConfig())
-	if err != nil {
-		log.Printf("Failed to create peer connection for %s: %v", username, err)
-		return nil, err // Возвращаем ошибку, если PeerConnection не создан
-	}
-
-	peer := &Peer{
-		conn:     conn,
-		pc:       peerConnection,
-		username: username,
-		room:     room,
-		isLeader: isLeader,
-	}
-
-	// --- Настройка Обработчиков PeerConnection ---
-
-	// Обработчик для ICE кандидатов: отправляем кандидата другому пиру через WebSocket
-	peerConnection.OnICECandidate(func(c *webrtc.ICECandidate) {
-		if c == nil {
-			log.Printf("ICE candidate gathering complete for %s", peer.username)
-			return
-		}
-
-		candidateJSON := c.ToJSON()
-		log.Printf("Generated ICE candidate for %s: %s", peer.username, candidateJSON.Candidate)
-
-		peer.mu.Lock() // Блокируем мьютекс пира перед использованием conn
-		if peer.conn != nil {
-			// Отправляем кандидата напрямую клиенту, который его сгенерировал
-			err := peer.conn.WriteJSON(map[string]interface{}{
-				"type": "ice_candidate", // Тип сообщения для клиента
-				"ice":  candidateJSON,    // Сам кандидат
-			})
-			if err != nil {
-				log.Printf("Error sending ICE candidate to %s: %v", peer.username, err)
-			}
-		} else {
-			log.Printf("Cannot send ICE candidate, connection for %s is nil.", peer.username)
-		}
-		peer.mu.Unlock() // Разблокируем мьютекс пира
-	})
-
-	// Обработчик входящих медиа-треков (в основном для отладки на сервере)
-	peerConnection.OnTrack(func(track *webrtc.TrackRemote, receiver *webrtc.RTPReceiver) {
-		log.Printf("Track received from %s: Type: %s, Codec: %s, SSRC: %d",
-			peer.username, track.Kind(), track.Codec().MimeType, track.SSRC())
-		// На сервере мы не обрабатываем медиа, просто логируем
-		// Можно было бы сделать пересылку треков, но это сложнее и не требуется заданием
-		// Просто читаем пакеты, чтобы избежать накопления буфера (рекомендация pion)
-		go func() {
-			buffer := make([]byte, 1500)
-			for {
-				_, _, readErr := track.Read(buffer)
-				if readErr != nil {
-					// Логгируем только если это не ожидаемое закрытие соединения
-					// if readErr != io.EOF && !strings.Contains(readErr.Error(), "use of closed network connection") {
-					// log.Printf("Track read error for %s (%s): %v", peer.username, track.Kind(), readErr)
-					// }
-					// Упрощенное логирование для уменьшения шума
-					// log.Printf("Track read ended for %s (%s): %v", peer.username, track.Kind(), readErr)
-					return
-				}
-			}
-		}()
-	})
-
-	// Обработчик изменения состояния ICE соединения
-	peerConnection.OnICEConnectionStateChange(func(state webrtc.ICEConnectionState) {
-		log.Printf("ICE Connection State changed for %s: %s", peer.username, state.String())
-		// Можно добавить логику реакции на failed/disconnected
-	})
-
-	// Обработчик изменения общего состояния PeerConnection
-	peerConnection.OnConnectionStateChange(func(s webrtc.PeerConnectionState) {
-		log.Printf("PeerConnection State changed for %s: %s", peer.username, s.String())
-		// Если соединение разорвано или не удалось, инициируем очистку
-		if s == webrtc.PeerConnectionStateFailed || s == webrtc.PeerConnectionStateClosed || s == webrtc.PeerConnectionStateDisconnected {
-			log.Printf("PeerConnection state is %s for %s. Associated WebSocket likely closing soon.", s.String(), peer.username)
-			// Основная очистка инициируется при закрытии WebSocket в handleWebSocket
-		}
-	})
-
-	// --- Добавление Пира в Комнату и Глобальный Список ---
-	rooms[room][username] = peer
-	peers[conn.RemoteAddr().String()] = peer
-	log.Printf("Peer %s (isLeader: %v) added to room %s", username, isLeader, room)
-
-	// --- Инициирование Нового Соединения ---
-	// **Ключевое изменение:** Вместо простого "resend_offer", мы явно просим лидера
-	// создать НОВЫЙ оффер для ТОЛЬКО ЧТО подключившегося ведомого.
-	// Это гарантирует "чистый старт" для WebRTC сессии при каждом подключении/переподключении ведомого.
-	if !isLeader { // Если подключился ведомый
-		// Ищем лидера в этой комнате (теперь ищем здесь)
-		var leaderPeer *Peer = nil
-		for _, p := range roomPeers {
-			if p.isLeader {
-				leaderPeer = p
-				break
-			}
-		}
-
-		if leaderPeer != nil {
-			log.Printf("Requesting leader %s to create a NEW offer for the new follower %s", leaderPeer.username, peer.username)
-			leaderPeer.mu.Lock() // Блокируем мьютекс лидера
-			if leaderPeer.conn != nil {
-				err := leaderPeer.conn.WriteJSON(map[string]interface{}{
-					// Новый, более конкретный тип сообщения для лидера
-					"type":             "create_offer_for_new_follower",
-					"followerUsername": peer.username, // Можно передать имя ведомого, если лидеру нужно знать
-				})
-				if err != nil {
-					log.Printf("Error sending 'create_offer_for_new_follower' to leader %s: %v", leaderPeer.username, err)
-				}
-			} else {
-				log.Printf("Cannot send 'create_offer_for_new_follower', leader %s connection is nil", leaderPeer.username)
-			}
-			leaderPeer.mu.Unlock() // Разблокируем мьютекс лидера
-		} else {
-			log.Printf("Follower %s joined room %s, but no leader found yet to initiate offer.", peer.username, room)
-		}
-	} else {
-		// Если подключился лидер, а ведомый УЖЕ есть (маловероятно при текущей логике, но возможно)
-		var followerPeer *Peer
-		for _, p := range roomPeers {
-			if !p.isLeader {
-				followerPeer = p
-				break
-			}
-		}
-		if followerPeer != nil {
-			log.Printf("Leader %s joined room %s where follower %s already exists. Requesting leader to create offer.", peer.username, room, followerPeer.username)
-			// Лидер сам должен будет инициировать оффер при подключении,
-			// но можно и явно попросить для надежности.
-			peer.mu.Lock()
-			if peer.conn != nil {
-				err := peer.conn.WriteJSON(map[string]interface{}{
-					"type":             "create_offer_for_new_follower", // Используем тот же тип
-					"followerUsername": followerPeer.username,
-				})
-				if err != nil {
-					log.Printf("Error sending 'create_offer_for_new_follower' to self (leader %s): %v", peer.username, err)
-				}
-			}
-			peer.mu.Unlock()
-		}
-	}
-
-
-	return peer, nil // Возвращаем успешно созданный пир
+    // Затем закрываем WebSocket соединение
+    if peer.conn != nil {
+        log.Printf("Closing WebSocket connection for %s (Reason: %s)", peer.username, reason)
+        // Отправляем управляющее сообщение о закрытии, если возможно
+        _ = peer.conn.WriteControl(websocket.CloseMessage,
+            websocket.FormatCloseMessage(websocket.CloseNormalClosure, reason),
+            time.Now().Add(time.Second)) // Даем немного времени на отправку
+        peer.conn.Close()
+        peer.conn = nil // Помечаем как закрытое
+    }
+    peer.mu.Unlock()
 }
 
-// getLeader (вспомогательная функция) находит лидера в комнате
-// Важно: Эта функция НЕ потокобезопасна сама по себе, использовать внутри блока mu.Lock()
-func getLeader(room string) *Peer {
-if roomPeers, exists := rooms[room]; exists {
-for _, p := range roomPeers {
-if p.isLeader {
-return p
-}
-}
-}
-return nil
+// handlePeerJoin осталась вашей функцией с изменениями для создания PeerConnection через webrtcAPI
+// handlePeerJoin обрабатывает присоединение пира к комнате
+func handlePeerJoin(room string, username string, isLeader bool, conn *websocket.Conn, preferredCodec string) (*Peer, error) {
+mu.Lock() // Блокируем для работы с глобальными комнатами
+
+    if _, exists := rooms[room]; !exists {
+        if !isLeader {
+            mu.Unlock()
+            _ = conn.WriteJSON(map[string]interface{}{"type": "error", "data": "Room does not exist. Leader must join first."})
+            conn.Close()
+            return nil, errors.New("room does not exist for follower")
+        }
+        rooms[room] = make(map[string]*Peer)
+    }
+
+    roomPeers := rooms[room] // Получаем ссылку на мапу пиров комнаты
+
+    // Логика замены ведомого
+    if !isLeader {
+        hasLeader := false
+        for _, p := range roomPeers {
+            if p.isLeader {
+                hasLeader = true
+                break
+            }
+        }
+        if !hasLeader {
+            mu.Unlock()
+            _ = conn.WriteJSON(map[string]interface{}{"type": "error", "data": "No leader in room"})
+            conn.Close()
+            return nil, errors.New("no leader in room")
+        }
+
+        var existingFollower *Peer
+        // Используем переданный preferredCodec, по умолчанию H.264
+        codec := preferredCodec
+        if codec == "" {
+            codec = "H264"
+        }
+        log.Printf("Follower %s prefers codec: %s in room %s", username, codec, room)
+
+        for _, p := range roomPeers {
+            if !p.isLeader { // Ищем существующего ведомого
+                existingFollower = p
+                break
+            }
+        }
+
+        if existingFollower != nil {
+            log.Printf("Replacing old follower %s with new follower %s in room %s", existingFollower.username, username, room)
+            // Удаляем старого ведомого из комнаты и глобального списка peers
+            delete(roomPeers, existingFollower.username)
+            for addr, pItem := range peers {
+                if pItem == existingFollower {
+                    delete(peers, addr)
+                    break
+                }
+            }
+            mu.Unlock()
+            // Отправляем команду на отключение и закрываем ресурсы старого ведомого
+            existingFollower.mu.Lock()
+            if existingFollower.conn != nil {
+                _ = existingFollower.conn.WriteJSON(map[string]interface{}{
+                    "type": "force_disconnect",
+                    "data": "You have been replaced by another viewer",
+                })
+            }
+            existingFollower.mu.Unlock()
+            go closePeerResources(existingFollower, "Replaced by new follower")
+            mu.Lock()
+        }
+
+        var leaderPeer *Peer
+        for _, p := range roomPeers {
+            if p.isLeader {
+                leaderPeer = p
+                break
+            }
+        }
+        if leaderPeer != nil {
+            log.Printf("Sending rejoin_and_offer command to leader %s for new follower %s with codec %s", leaderPeer.username, username, codec)
+            leaderPeer.mu.Lock()
+            leaderWsConn := leaderPeer.conn
+            leaderPeer.mu.Unlock()
+
+            if leaderWsConn != nil {
+                mu.Unlock()
+                err := leaderWsConn.WriteJSON(map[string]interface{}{
+                    "type":           "rejoin_and_offer",
+                    "room":           room,
+                    "preferredCodec": codec,
+                })
+                mu.Lock()
+                if err != nil {
+                    log.Printf("Error sending rejoin_and_offer command to leader %s: %v", leaderPeer.username, err)
+                } else {
+                    log.Printf("Successfully sent rejoin_and_offer with codec %s to leader %s", codec, leaderPeer.username)
+                }
+            } else {
+                log.Printf("Leader %s has no active WebSocket connection to send rejoin_and_offer.", leaderPeer.username)
+            }
+        } else {
+            log.Printf("No leader found in room %s to send rejoin_and_offer.", room)
+        }
+    }
+
+    // Создаем PeerConnection с учетом preferredCodec
+    mediaEngine := createMediaEngine(preferredCodec)
+    peerAPI := webrtc.NewAPI(webrtc.WithMediaEngine(mediaEngine))
+    peerConnection, err := peerAPI.NewPeerConnection(getWebRTCConfig())
+    if err != nil {
+        mu.Unlock()
+        return nil, fmt.Errorf("failed to create PeerConnection: %w", err)
+    }
+    log.Printf("PeerConnection created for %s with preferred codec %s", username, preferredCodec)
+
+    peer := &Peer{
+        conn:     conn,
+        pc:       peerConnection,
+        username: username,
+        room:     room,
+        isLeader: isLeader,
+    }
+
+    if isLeader {
+        // Для лидера (Android) добавляем трансиверы
+        if _, err := peerConnection.AddTransceiverFromKind(webrtc.RTPCodecTypeVideo, webrtc.RTPTransceiverInit{
+            Direction: webrtc.RTPTransceiverDirectionSendonly,
+        }); err != nil {
+            log.Printf("Failed to add video transceiver for leader %s: %v", username, err)
+        }
+    } else {
+        // Для ведомого (браузера) добавляем приемный трансивер
+        if _, err := peerConnection.AddTransceiverFromKind(webrtc.RTPCodecTypeVideo, webrtc.RTPTransceiverInit{
+            Direction: webrtc.RTPTransceiverDirectionRecvonly,
+        }); err != nil {
+            log.Printf("Failed to add video transceiver for follower %s: %v", username, err)
+        }
+    }
+
+    if _, err := peerConnection.AddTransceiverFromKind(webrtc.RTPCodecTypeAudio, webrtc.RTPTransceiverInit{
+        Direction: webrtc.RTPTransceiverDirectionSendrecv,
+    }); err != nil {
+        log.Printf("Failed to add audio transceiver for %s: %v", username, err)
+    }
+
+    // Настройка обработчиков ICE кандидатов и треков
+    peerConnection.OnICECandidate(func(c *webrtc.ICECandidate) {
+        if c == nil {
+            return
+        }
+        peer.mu.Lock()
+        defer peer.mu.Unlock()
+        if peer.conn != nil {
+            err := peer.conn.WriteJSON(map[string]interface{}{"type": "ice_candidate", "ice": c.ToJSON()})
+            if err != nil {
+                log.Printf("Error sending ICE candidate to %s: %v", peer.username, err)
+            }
+        }
+    })
+
+    if !isLeader {
+        peerConnection.OnTrack(func(track *webrtc.TrackRemote, receiver *webrtc.RTPReceiver) {
+            log.Printf("Track received for follower %s in room %s: Codec %s",
+                peer.username, peer.room, track.Codec().MimeType)
+        })
+    }
+
+    rooms[room][username] = peer
+    peers[conn.RemoteAddr().String()] = peer
+
+    // Отправляем room_info клиенту
+    err = conn.WriteJSON(map[string]interface{}{
+        "type": "room_info",
+        "data": map[string]interface{}{
+            "room":     room,
+            "username": username,
+            "isLeader": isLeader,
+        },
+    })
+    if err != nil {
+        log.Printf("Error sending room_info to %s: %v", username, err)
+    } else {
+        log.Printf("Sent room_info to %s", username)
+    }
+
+    mu.Unlock()
+    return peer, nil
 }
 
-// getFollower (вспомогательная функция) находит ведомого в комнате
-// Важно: Эта функция НЕ потокобезопасна сама по себе, использовать внутри блока mu.Lock()
-func getFollower(room string) *Peer {
-if roomPeers, exists := rooms[room]; exists {
-for _, p := range roomPeers {
-if !p.isLeader {
-return p
-}
-}
-}
-return nil
-}
-
-
+// main осталась вашей функцией
 func main() {
-http.HandleFunc("/ws", handleWebSocket) // Обработчик WebSocket соединений
-http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
-logStatus() // Вывод статуса в лог по запросу /status
-w.Write([]byte("Status logged to console"))
-})
+// initializeMediaAPI() // Уже вызывается в init()
 
-	log.Println("Server starting on :8080")
-	logStatus() // Начальный статус
-	// Запуск HTTP сервера
-	log.Fatal(http.ListenAndServe(":8080", nil))
+    http.HandleFunc("/wsgo", handleWebSocket)
+    http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
+        logStatus()
+        w.WriteHeader(http.StatusOK)
+        if _, err := w.Write([]byte("Status logged to console")); err != nil {
+            log.Printf("Error writing /status response: %v", err)
+        }
+    })
+
+    log.Println("Server starting on :8085 (Logic: Leader Re-joins on Follower connect)")
+    log.Println("WebRTC MediaEngine configured for H.264 (video) and Opus (audio).")
+    logStatus() // Логируем статус при запуске
+    if err := http.ListenAndServe(":8085", nil); err != nil {
+        log.Fatalf("Failed to start server: %v", err)
+    }
 }
 
-// handleWebSocket обрабатывает входящие WebSocket соединения
+// handleWebSocket осталась вашей функцией с минимальными изменениями для очистки
 func handleWebSocket(w http.ResponseWriter, r *http.Request) {
-// Обновляем HTTP соединение до WebSocket
 conn, err := upgrader.Upgrade(w, r, nil)
 if err != nil {
 log.Println("WebSocket upgrade error:", err)
 return
 }
-// Важно: закрываем соединение при выходе из функции (при ошибке или штатном завершении)
-// defer conn.Close() // Перенесли закрытие в логику очистки
+remoteAddr := conn.RemoteAddr().String()
+log.Printf("New WebSocket connection attempt from: %s", remoteAddr)
 
-	remoteAddr := conn.RemoteAddr().String()
-	log.Printf("New WebSocket connection attempt from: %s", remoteAddr)
+    var initData struct {
+        Room           string `json:"room"`
+        Username       string `json:"username"`
+        IsLeader       bool   `json:"isLeader"`
+        PreferredCodec string `json:"preferredCodec"`
+    }
+    conn.SetReadDeadline(time.Now().Add(10 * time.Second))
+    err = conn.ReadJSON(&initData)
+    conn.SetReadDeadline(time.Time{})
 
-	// 1. Получаем инициализационные данные (комната, имя, роль)
-	var initData struct {
-		Room     string `json:"room"`
-		Username string `json:"username"`
-		IsLeader bool   `json:"isLeader"`
-	}
+    if err != nil {
+        log.Printf("Read init data error from %s: %v. Closing.", remoteAddr, err)
+        conn.Close()
+        return
+    }
+    if initData.Room == "" || initData.Username == "" {
+        log.Printf("Invalid init data from %s: Room or Username is empty. Closing.", remoteAddr)
+        _ = conn.WriteJSON(map[string]interface{}{"type": "error", "data": "Room and Username cannot be empty"})
+        conn.Close()
+        return
+    }
 
-	// Устанавливаем таймаут на чтение первого сообщения
-	conn.SetReadDeadline(time.Now().Add(10 * time.Second)) // 10 секунд на отправку initData
-	err = conn.ReadJSON(&initData)
-	conn.SetReadDeadline(time.Time{}) // Сбрасываем таймаут после успешного чтения
+    log.Printf("User '%s' (isLeader: %v, preferredCodec: %s) attempting to join room '%s' from %s",
+        initData.Username, initData.IsLeader, initData.PreferredCodec, initData.Room, remoteAddr)
 
-	if err != nil {
-		log.Printf("Read init data error from %s: %v. Closing connection.", remoteAddr, err)
-		conn.Close() // Закрываем соединение, если не получили initData
-		return
-	}
+    currentPeer, err := handlePeerJoin(initData.Room, initData.Username, initData.IsLeader, conn, initData.PreferredCodec)
+    if err != nil {
+        log.Printf("Error handling peer join for %s: %v", initData.Username, err)
+        return
+    }
+    if currentPeer == nil {
+        log.Printf("Peer %s was not created. Connection likely closed by handlePeerJoin.", initData.Username)
+        return
+    }
 
-	// Проверяем валидность данных
-	if initData.Room == "" || initData.Username == "" {
-		log.Printf("Invalid init data from %s: Room or Username is empty. Closing connection.", remoteAddr)
-		conn.WriteJSON(map[string]interface{}{"type": "error", "data": "Room and Username cannot be empty"})
-		conn.Close()
-		return
-	}
+    log.Printf("User '%s' successfully joined room '%s' as %s", currentPeer.username, currentPeer.room, map[bool]string{true: "leader", false: "follower"}[currentPeer.isLeader])
+    logStatus()
+    sendRoomInfo(currentPeer.room)
 
-	log.Printf("User '%s' (isLeader: %v) attempting to join room '%s' from %s", initData.Username, initData.IsLeader, initData.Room, remoteAddr)
+    // Цикл чтения сообщений от клиента
+    for {
+        msgType, msgBytes, err := conn.ReadMessage()
+        if err != nil {
+            if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure, websocket.CloseNormalClosure, websocket.CloseNoStatusReceived) {
+                log.Printf("Unexpected WebSocket close error for %s (%s): %v", currentPeer.username, remoteAddr, err)
+            } else {
+                log.Printf("WebSocket connection closed/read error for %s (%s): %v", currentPeer.username, remoteAddr, err)
+            }
+            break
+        }
 
-	// 2. Обрабатываем присоединение пира к комнате
-	peer, err := handlePeerJoin(initData.Room, initData.Username, initData.IsLeader, conn)
-	if err != nil {
-		// Ошибка при создании PeerConnection на сервере
-		log.Printf("Error handling peer join for %s: %v", initData.Username, err)
-		conn.WriteJSON(map[string]interface{}{
-			"type": "error",
-			"data": "Server error joining room: " + err.Error(),
-		})
-		conn.Close() // Закрываем соединение при ошибке
-		return
-	}
-	if peer == nil {
-		// Пир не был создан (например, комната полна или роль уже занята)
-		// Сообщение об ошибке уже отправлено внутри handlePeerJoin
-		log.Printf("Peer %s was not created (room full or role taken?). Connection closed by handlePeerJoin.", initData.Username)
-		// conn.Close() уже был вызван в handlePeerJoin в этом случае
-		return
-	}
+        if msgType != websocket.TextMessage {
+            log.Printf("Received non-text message type (%d) from %s. Ignoring.", msgType, currentPeer.username)
+            continue
+        }
+        if len(msgBytes) == 0 {
+            continue
+        }
 
-	// Если пир успешно создан и добавлен
-	log.Printf("User '%s' successfully joined room '%s' as %s", peer.username, peer.room, map[bool]string{true: "leader", false: "follower"}[peer.isLeader])
-	logStatus()      // Обновляем статус сервера в логах
-	sendRoomInfo(peer.room) // Отправляем всем в комнате обновленную информацию
+        var data map[string]interface{}
+        if err := json.Unmarshal(msgBytes, &data); err != nil {
+            log.Printf("JSON unmarshal error (for logging type) from %s: %v. Message: %s. Forwarding raw.", currentPeer.username, err, string(msgBytes))
+        }
+        dataType, _ := data["type"].(string)
 
-	// 3. Цикл чтения сообщений от клиента
-	for {
-		_, msg, err := conn.ReadMessage()
-		if err != nil {
-			// Ошибка чтения или соединение закрыто клиентом
-			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure, websocket.CloseNormalClosure) {
-				log.Printf("Unexpected WebSocket close error for %s: %v", peer.username, err)
-			} else {
-				log.Printf("WebSocket connection closed for %s (Reason: %v)", peer.username, err)
-			}
-			break // Выходим из цикла чтения
-		}
+        mu.Lock()
+        roomPeers := rooms[currentPeer.room]
+        var targetPeer *Peer
+        if roomPeers != nil {
+            for _, p := range roomPeers {
+                if p.username != currentPeer.username {
+                    targetPeer = p
+                    break
+                }
+            }
+        }
+        mu.Unlock()
 
-		// Парсим полученное сообщение как JSON
-		var data map[string]interface{}
-		if err := json.Unmarshal(msg, &data); err != nil {
-			log.Printf("JSON unmarshal error from %s: %v (Message: %s)", peer.username, err, string(msg))
-			continue // Пропускаем некорректное сообщение
-		}
+        if targetPeer == nil && (dataType == "offer" || dataType == "answer" || dataType == "ice_candidate") {
+            continue
+        }
 
-		// Логируем базовую информацию о сообщении
-		msgType, ok := data["type"].(string)
-		if !ok {
-			log.Printf("Received message without 'type' field from %s: %v", peer.username, data)
-			continue
-		}
-		// log.Printf("Received '%s' message from %s", msgType, peer.username) // Логируем тип сообщения
+        switch dataType {
+        case "offer":
+            log.Printf("Received offer from %s: %s", currentPeer.username, string(msgBytes))
+            if currentPeer.isLeader && targetPeer != nil && !targetPeer.isLeader {
+                log.Printf(">>> Forwarding Offer from %s to %s", currentPeer.username, targetPeer.username)
+                // Нормализуем SDP
+                preferredCodec, _ := data["preferredCodec"].(string)
+                if preferredCodec == "" {
+                    preferredCodec = initData.PreferredCodec
+                    if preferredCodec == "" {
+                        preferredCodec = "H264"
+                    }
+                }
+                if sdp, ok := data["sdp"].(string); ok {
+                    data["sdp"] = normalizeSdpForCodec(sdp, preferredCodec)
+                    msgBytes, _ = json.Marshal(data)
+                }
+                targetPeer.mu.Lock()
+                targetWsConn := targetPeer.conn
+                targetPeer.mu.Unlock()
+                if targetWsConn != nil {
+                    if err := targetWsConn.WriteMessage(websocket.TextMessage, msgBytes); err != nil {
+                        log.Printf("!!! Error forwarding offer to %s: %v", targetPeer.username, err)
+                    }
+                }
+            } else {
+                log.Printf("WARN: Received 'offer' from non-leader or no target.")
+            }
 
-		// --- Умная пересылка сообщений (SDP, ICE) ---
-		// Блокируем глобальный мьютекс ТОЛЬКО для поиска другого пира
-		mu.Lock()
-		roomPeers := rooms[peer.room] // Получаем текущих пиров в комнате
-		var targetPeer *Peer = nil
-		if roomPeers != nil {
-			for _, p := range roomPeers {
-				if p.username != peer.username { // Ищем ДРУГОГО пира
-					targetPeer = p
-					break
-				}
-			}
-		}
-		mu.Unlock() // Разблокируем как можно скорее
+        case "answer":
+            if targetPeer != nil && !currentPeer.isLeader && targetPeer.isLeader {
+                log.Printf("<<< Forwarding Answer from %s to %s", currentPeer.username, targetPeer.username)
+                // Нормализуем SDP
+                preferredCodec, _ := data["preferredCodec"].(string)
+                if preferredCodec == "" {
+                    preferredCodec = initData.PreferredCodec
+                    if preferredCodec == "" {
+                        preferredCodec = "H264"
+                    }
+                }
+                if sdp, ok := data["sdp"].(string); ok {
+                    data["sdp"] = normalizeSdpForCodec(sdp, preferredCodec)
+                    msgBytes, _ = json.Marshal(data)
+                }
+                targetPeer.mu.Lock()
+                targetWsConn := targetPeer.conn
+                targetPeer.mu.Unlock()
+                if targetWsConn != nil {
+                    if err := targetWsConn.WriteMessage(websocket.TextMessage, msgBytes); err != nil {
+                        log.Printf("!!! Error forwarding answer to %s: %v", targetPeer.username, err)
+                    }
+                }
+            } else {
+                log.Printf("WARN: Received 'answer' from non-follower or no target leader.")
+            }
 
-		// Обработка сообщений в зависимости от типа
-		switch msgType {
-		case "offer":
-			// Оффер всегда идет от Лидера к Ведомому
-			if peer.isLeader {
-				if targetPeer != nil && !targetPeer.isLeader {
-					// sdp := data["sdp"] // Удалено: Не используется
-					log.Printf(">>> Forwarding OFFER from Leader %s to Follower %s", peer.username, targetPeer.username)
-					// Log SDP content for debugging (optional, can be verbose)
-					// if sdpMap, ok := data["sdp"].(map[string]interface{}); ok { // Проверяем прямо в data
-					// 	if sdpStr, ok := sdpMap["sdp"].(string); ok {
-					// 		log.Printf("Offer SDP:\n%s", sdpStr)
-					// 	}
-					// }
+        case "ice_candidate":
+            if targetPeer != nil {
+                log.Printf("... Forwarding ICE candidate from %s to %s", currentPeer.username, targetPeer.username)
+                targetPeer.mu.Lock()
+                targetWsConn := targetPeer.conn
+                targetPeer.mu.Unlock()
+                if targetWsConn != nil {
+                    if err := targetWsConn.WriteMessage(websocket.TextMessage, msgBytes); err != nil {
+                        log.Printf("Error forwarding ICE candidate to %s: %v", targetPeer.username, err)
+                    }
+                }
+            }
 
-					targetPeer.mu.Lock() // Блокируем мьютекс целевого пира
-					if targetPeer.conn != nil {
-						if err := targetPeer.conn.WriteMessage(websocket.TextMessage, msg); err != nil {
-							log.Printf("!!! Error forwarding OFFER to %s: %v", targetPeer.username, err)
-						}
-					} else {
-						log.Printf("Cannot forward OFFER, target follower %s connection is nil.", targetPeer.username)
-					}
-					targetPeer.mu.Unlock() // Разблокируем мьютекс целевого пира
-				} else {
-					log.Printf("WARN: Received 'offer' from leader %s, but no valid follower target found (targetPeer: %v). Ignoring.", peer.username, targetPeer)
-				}
-			} else {
-				log.Printf("WARN: Received 'offer' from non-leader %s. Ignoring.", peer.username)
-			}
+        case "switch_camera":
+            if targetPeer != nil {
+                log.Printf("Forwarding '%s' message from %s to %s", dataType, currentPeer.username, targetPeer.username)
+                targetPeer.mu.Lock()
+                targetWsConn := targetPeer.conn
+                targetPeer.mu.Unlock()
+                if targetWsConn != nil {
+                    if err := targetWsConn.WriteMessage(websocket.TextMessage, msgBytes); err != nil {
+                        log.Printf("Error forwarding '%s' to %s: %v", dataType, targetPeer.username, err)
+                    }
+                }
+            }
+        default:
+            log.Printf("Ignoring message with type '%s' from %s", dataType, currentPeer.username)
+        }
+    }
 
-		case "answer":
-			// Ответ всегда идет от Ведомого к Лидеру
-			if !peer.isLeader {
-				if targetPeer != nil && targetPeer.isLeader {
-					// sdp := data["sdp"] // Удалено: Не используется
-					log.Printf("<<< Forwarding ANSWER from Follower %s to Leader %s", peer.username, targetPeer.username)
-					// Log SDP content for debugging (optional, can be verbose)
-					// if sdpMap, ok := data["sdp"].(map[string]interface{}); ok { // Проверяем прямо в data
-					//  if sdpStr, ok := sdpMap["sdp"].(string); ok {
-					// 	 log.Printf("Answer SDP:\n%s", sdpStr)
-					//  }
-					// }
+    log.Printf("Cleaning up for %s (Addr: %s) in room %s after WebSocket loop ended.", currentPeer.username, remoteAddr, currentPeer.room)
+    go closePeerResources(currentPeer, "WebSocket read loop ended")
 
-					targetPeer.mu.Lock() // Блокируем мьютекс целевого пира
-					if targetPeer.conn != nil {
-						if err := targetPeer.conn.WriteMessage(websocket.TextMessage, msg); err != nil {
-							log.Printf("!!! Error forwarding ANSWER to %s: %v", targetPeer.username, err)
-						}
-					} else {
-						log.Printf("Cannot forward ANSWER, target leader %s connection is nil.", targetPeer.username)
-					}
-					targetPeer.mu.Unlock() // Разблокируем мьютекс целевого пира
-				} else {
-					log.Printf("WARN: Received 'answer' from follower %s, but no valid leader target found (targetPeer: %v). Ignoring.", peer.username, targetPeer)
-				}
-			} else {
-				log.Printf("WARN: Received 'answer' from non-follower %s. Ignoring.", peer.username)
-			}
+    mu.Lock()
+    roomName := currentPeer.room
+    if currentRoomPeers, roomExists := rooms[roomName]; roomExists {
+        delete(currentRoomPeers, currentPeer.username)
+        if len(currentRoomPeers) == 0 {
+            delete(rooms, roomName)
+            log.Printf("Room %s is now empty and has been deleted.", roomName)
+            roomName = ""
+        }
+    }
+    delete(peers, remoteAddr)
+    mu.Unlock()
 
-		case "ice_candidate":
-			// ICE кандидаты пересылаются другому пиру в комнате
-			if targetPeer != nil {
-				if ice, iceOk := data["ice"].(map[string]interface{}); iceOk { // Проверяем тип перед доступом
-					if candidate, candOk := ice["candidate"].(string); candOk {
-						candSnippet := candidate
-						if len(candSnippet) > 40 { // Обрезаем для лога
-							candSnippet = candSnippet[:40]
-						}
-						log.Printf("... Forwarding ICE candidate from %s to %s (Candidate: %s...)", peer.username, targetPeer.username, candSnippet)
-					} else {
-						log.Printf("WARN: Received 'ice_candidate' from %s with invalid 'candidate' field.", peer.username)
-						break // Не пересылаем некорректный кандидат
-					}
-				} else {
-					log.Printf("WARN: Received 'ice_candidate' from %s with invalid 'ice' field structure.", peer.username)
-					break // Не пересылаем некорректный кандидат
-				}
+    logStatus()
+    if roomName != "" {
+        sendRoomInfo(roomName)
+    }
+    log.Printf("Cleanup complete for WebSocket connection %s (User: %s)", remoteAddr, currentPeer.username)
+}
 
-
-				targetPeer.mu.Lock() // Блокируем мьютекс целевого пира
-				if targetPeer.conn != nil {
-					if err := targetPeer.conn.WriteMessage(websocket.TextMessage, msg); err != nil {
-						log.Printf("!!! Error forwarding ICE candidate to %s: %v", targetPeer.username, err)
-					}
-				} else {
-					log.Printf("Cannot forward ICE candidate, target peer %s connection is nil.", targetPeer.username)
-				}
-				targetPeer.mu.Unlock() // Разблокируем мьютекс целевого пира
-			} else {
-				log.Printf("WARN: Received 'ice_candidate' from %s, but no target peer found in room %s. Ignoring.", peer.username, peer.room)
-			}
-
-		case "switch_camera":
-			// Пересылаем сообщение о смене камеры другому участнику (вероятно, от лидера ведомому)
-			log.Printf("Forwarding 'switch_camera' message from %s", peer.username)
-			if targetPeer != nil {
-				targetPeer.mu.Lock()
-				if targetPeer.conn != nil {
-					if err := targetPeer.conn.WriteMessage(websocket.TextMessage, msg); err != nil {
-						log.Printf("Error forwarding switch_camera to %s: %v", targetPeer.username, err)
-					}
-				}
-				targetPeer.mu.Unlock()
-			}
-
-		// --- Обработка серверных команд (если потребуются) ---
-		// case "resend_offer": // Старая логика, заменена на create_offer_for_new_follower
-		// 	log.Printf("WARN: Received deprecated 'resend_offer' from %s. Ignoring.", peer.username)
-		// 	// Логика была здесь: сервер сам создавал и отправлял оффер от имени лидера - не очень хорошо.
-
-		case "stop_receiving":
-			// Сообщение от клиента, что он прекращает прием медиа. Серверу делать нечего.
-			log.Printf("Received 'stop_receiving' from %s. No server action needed.", peer.username)
-			continue // Просто продолжаем цикл
-
-		default:
-			log.Printf("Received unknown message type '%s' from %s. Ignoring.", msgType, peer.username)
-		}
-	}
-
-	// 4. Очистка при завершении цикла (разрыв соединения или ошибка)
-	log.Printf("Cleaning up resources for user '%s' in room '%s'", peer.username, peer.room)
-
-	// Закрываем WebRTC и WebSocket соединения этого пира
-	// Используем горутину, чтобы не блокировать основной поток handleWebSocket, если закрытие займет время
-	go closePeerConnection(peer, "WebSocket connection closed")
-
-	// Удаляем пира из комнаты и глобального списка
-	mu.Lock()
-	var remainingRoom string // Сохраняем имя комнаты для отправки обновления
-	if peer != nil { // Добавлена проверка на nil для peer
-		remainingRoom = peer.room
-		if currentRoomPeers, roomExists := rooms[peer.room]; roomExists {
-			delete(currentRoomPeers, peer.username) // Удаляем из комнаты
-			log.Printf("Removed %s from room %s map.", peer.username, peer.room)
-			// Если комната стала пустой, удаляем саму комнату
-			if len(currentRoomPeers) == 0 {
-				delete(rooms, peer.room)
-				log.Printf("Room %s is now empty and has been deleted.", peer.room)
-				remainingRoom = "" // Комнаты больше нет
-			}
-		}
-		delete(peers, remoteAddr) // Удаляем из глобального списка по адресу
-		log.Printf("Removed %s (addr: %s) from global peers map.", peer.username, remoteAddr)
-	} else {
-		log.Printf("WARN: Peer object was nil during cleanup for %s.", remoteAddr)
-		delete(peers, remoteAddr) // Все равно удаляем из глобального списка по адресу
-	}
-	mu.Unlock()
-
-	logStatus() // Логируем статус после очистки
-
-	// Отправляем обновленную информацию оставшимся участникам комнаты (если комната еще существует)
-	if remainingRoom != "" {
-		sendRoomInfo(remainingRoom) // Используем сохраненное имя
-	}
-	log.Printf("Cleanup complete for connection %s.", remoteAddr) // Лог по адресу, т.к. peer может быть nil
-} // Конец handleWebSocket
-
-Android ведущий
-
-D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\MainActivity.kt
+андройд ведущий
 D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebRTCClient.kt
 D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebRTCService.kt
 D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebSocketClient.kt
-D:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\Worker.kt
 
-
-// file: D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/MainActivity.kt
-package com.example.mytest
-
-import android.Manifest
-import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.BroadcastReceiver
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.media.projection.MediaProjectionManager
-import android.net.Uri
-import android.os.Build
-import android.os.Bundle
-import android.os.PowerManager
-import android.provider.Settings
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
-import android.view.View
-import android.view.WindowManager
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.result.registerForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
-import com.example.mytest.databinding.ActivityMainBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.json.JSONArray
-import java.util.*
-import kotlin.random.Random
-
-class MainActivity : ComponentActivity() {
-private lateinit var binding: ActivityMainBinding
-private lateinit var sharedPreferences: SharedPreferences
-private var currentRoomName: String = ""
-private var isServiceRunning: Boolean = false
-private val roomList = mutableListOf<String>()
-private lateinit var roomListAdapter: ArrayAdapter<String>
-
-    private val requiredPermissions = arrayOf(
-        Manifest.permission.CAMERA,
-        Manifest.permission.RECORD_AUDIO,
-        Manifest.permission.POST_NOTIFICATIONS
-    )
-
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissions ->
-        if (permissions.all { it.value }) {
-            if (isCameraPermissionGranted()) {
-                val mediaManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-                mediaProjectionLauncher.launch(mediaManager.createScreenCaptureIntent())
-                checkBatteryOptimization()
-            } else {
-                showToast("Camera permission required")
-                finish()
-            }
-        } else {
-            showToast("Not all permissions granted")
-            finish()
-        }
-    }
-
-    private val mediaProjectionLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK && result.data != null) {
-            // Сохраняем текущее имя комнаты при успешном запуске сервиса
-            saveCurrentRoom()
-            startWebRTCService(result.data!!)
-        } else {
-            showToast("Screen recording access denied")
-            finish()
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        loadRoomList()
-        setupUI()
-        setupRoomListAdapter()
-
-        // Проверяем состояние сервиса при создании активности
-        isServiceRunning = WebRTCService.isRunning
-        updateButtonStates()
-    }
-
-    private fun loadRoomList() {
-        // Загружаем список комнат
-        val jsonString = sharedPreferences.getString(ROOM_LIST_KEY, null)
-        jsonString?.let {
-            val jsonArray = JSONArray(it)
-            for (i in 0 until jsonArray.length()) {
-                roomList.add(jsonArray.getString(i))
-            }
-        }
-
-        // Загружаем последнее использованное имя комнаты
-        currentRoomName = sharedPreferences.getString(LAST_USED_ROOM_KEY, "") ?: ""
-
-        // Если нет сохраненных комнат или последнее имя пустое, генерируем новое
-        if (roomList.isEmpty()) {
-            currentRoomName = generateRandomRoomName()
-            roomList.add(currentRoomName)
-            saveRoomList()
-            saveCurrentRoom()
-        } else if (currentRoomName.isEmpty()) {
-            currentRoomName = roomList.first()
-            saveCurrentRoom()
-        }
-
-        // Устанавливаем последнее использованное имя в поле ввода
-        binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
-    }
-
-    private fun saveCurrentRoom() {
-        sharedPreferences.edit()
-            .putString(LAST_USED_ROOM_KEY, currentRoomName)
-            .apply()
-    }
-
-    private fun saveRoomList() {
-        val jsonArray = JSONArray()
-        roomList.forEach { jsonArray.put(it) }
-        sharedPreferences.edit()
-            .putString(ROOM_LIST_KEY, jsonArray.toString())
-            .apply()
-    }
-
-    private fun setupRoomListAdapter() {
-        roomListAdapter = ArrayAdapter(
-            this,
-            com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
-            roomList
-        )
-        binding.roomListView.adapter = roomListAdapter
-        binding.roomListView.setOnItemClickListener { _, _, position, _ ->
-            currentRoomName = roomList[position]
-            binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
-            updateButtonStates()
-        }
-    }
-
-    private fun setupUI() {
-        binding.roomCodeEditText.addTextChangedListener(object : TextWatcher {
-            private var isFormatting = false
-            private var deletingHyphen = false
-            private var hyphenPositions = listOf(4, 9, 14)
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if (isFormatting) return
-
-                if (count == 1 && after == 0 && hyphenPositions.contains(start)) {
-                    deletingHyphen = true
-                } else {
-                    deletingHyphen = false
-                }
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (isFormatting || isServiceRunning) return
-
-                isFormatting = true
-
-                val text = s.toString().replace("-", "")
-                if (text.length > 16) {
-                    s?.replace(0, s.length, formatRoomName(currentRoomName))
-                } else {
-                    val formatted = StringBuilder()
-                    for (i in text.indices) {
-                        if (i > 0 && i % 4 == 0) {
-                            formatted.append('-')
-                        }
-                        formatted.append(text[i])
-                    }
-
-                    val cursorPos = binding.roomCodeEditText.selectionStart
-                    if (deletingHyphen && cursorPos > 0 && cursorPos < formatted.length &&
-                        formatted[cursorPos] == '-') {
-                        formatted.deleteCharAt(cursorPos)
-                    }
-
-                    s?.replace(0, s.length, formatted.toString())
-                }
-
-                isFormatting = false
-
-                val cleanName = binding.roomCodeEditText.text.toString().replace("-", "")
-                binding.saveCodeButton.isEnabled = cleanName.length == 16 &&
-                        !roomList.contains(cleanName)
-            }
-        })
-
-        binding.generateCodeButton.setOnClickListener {
-            currentRoomName = generateRandomRoomName()
-            binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
-            showToast("Generated: $currentRoomName")
-        }
-
-        binding.deleteRoomButton.setOnClickListener {
-            val selectedRoom = binding.roomCodeEditText.text.toString().replace("-", "")
-            if (roomList.contains(selectedRoom)) {
-                showDeleteConfirmationDialog(selectedRoom)
-            } else {
-                showToast(getString(R.string.room_not_found))
-            }
-        }
-
-        binding.saveCodeButton.setOnClickListener {
-            val newRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
-            if (newRoomName.length == 16) {
-                if (!roomList.contains(newRoomName)) {
-                    roomList.add(0, newRoomName)
-                    currentRoomName = newRoomName
-                    saveRoomList()
-                    saveCurrentRoom()
-                    roomListAdapter.notifyDataSetChanged()
-                    showToast("Room saved: ${formatRoomName(newRoomName)}")
-                } else {
-                    showToast("Room already exists")
-                }
-            }
-        }
-
-        binding.copyCodeButton.setOnClickListener {
-            val roomName = binding.roomCodeEditText.text.toString()
-            val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText("Room name", roomName)
-            clipboard.setPrimaryClip(clip)
-            showToast("Copied: $roomName")
-        }
-
-        binding.shareCodeButton.setOnClickListener {
-            val roomName = binding.roomCodeEditText.text.toString()
-            val shareIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "Join my room: $roomName")
-                type = "text/plain"
-            }
-            startActivity(Intent.createChooser(shareIntent, "Share Room"))
-        }
-
-        binding.startButton.setOnClickListener {
-            if (isServiceRunning) {
-                showToast("Service already running")
-                return@setOnClickListener
-            }
-
-            currentRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
-            if (currentRoomName.isEmpty()) {
-                showToast("Enter room name")
-                return@setOnClickListener
-            }
-
-            if (checkAllPermissionsGranted() && isCameraPermissionGranted()) {
-                val mediaManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-                mediaProjectionLauncher.launch(mediaManager.createScreenCaptureIntent())
-                checkBatteryOptimization()
-            } else {
-                requestPermissionLauncher.launch(requiredPermissions)
-            }
-        }
-
-        binding.stopButton.setOnClickListener {
-            if (!isServiceRunning) {
-                showToast("Service not running")
-                return@setOnClickListener
-            }
-            stopWebRTCService()
-        }
-    }
-
-    private fun formatRoomName(name: String): String {
-        if (name.length != 16) return name
-
-        return buildString {
-            for (i in 0 until 16) {
-                if (i > 0 && i % 4 == 0) append('-')
-                append(name[i])
-            }
-        }
-    }
-
-    private fun showDeleteConfirmationDialog(roomName: String) {
-        if (roomList.size <= 1) {
-            showToast(getString(R.string.cannot_delete_last))
-            return
-        }
-
-        MaterialAlertDialogBuilder(this)
-            .setTitle(getString(R.string.delete_confirm_title))
-            .setMessage(getString(R.string.delete_confirm_message, formatRoomName(roomName)))
-            .setPositiveButton(getString(R.string.delete_button)) { _, _ ->
-                roomList.remove(roomName)
-                saveRoomList()
-                roomListAdapter.notifyDataSetChanged()
-
-                if (currentRoomName == roomName) {
-                    currentRoomName = roomList.first()
-                    binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
-                    saveCurrentRoom()
-                }
-
-                showToast("Room deleted")
-                updateButtonStates()
-            }
-            .setNegativeButton(getString(R.string.cancel_button), null)
-            .show()
-    }
-
-    private fun generateRandomRoomName(): String {
-        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        val random = Random.Default
-        val code = StringBuilder()
-
-        repeat(16) {
-            code.append(chars[random.nextInt(chars.length)])
-        }
-
-        return code.toString()
-    }
-
-    private fun startWebRTCService(resultData: Intent) {
-        try {
-            // Сохраняем текущее имя комнаты перед запуском сервиса
-            currentRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
-            saveCurrentRoom()
-
-            WebRTCService.currentRoomName = currentRoomName
-            val serviceIntent = Intent(this, WebRTCService::class.java).apply {
-                putExtra("resultCode", RESULT_OK)
-                putExtra("resultData", resultData)
-                putExtra("roomName", currentRoomName)
-            }
-            ContextCompat.startForegroundService(this, serviceIntent)
-            isServiceRunning = true
-            updateButtonStates()
-            showToast("Service started: ${formatRoomName(currentRoomName)}")
-        } catch (e: Exception) {
-            showToast("Start error: ${e.message}")
-            Log.e("MainActivity", "Service start error", e)
-        }
-    }
-
-    private fun stopWebRTCService() {
-        try {
-            val stopIntent = Intent(this, WebRTCService::class.java).apply {
-                action = "STOP"
-            }
-            startService(stopIntent)
-            isServiceRunning = false
-            updateButtonStates()
-            showToast("Service stopped")
-        } catch (e: Exception) {
-            showToast("Stop error: ${e.message}")
-            Log.e("MainActivity", "Service stop error", e)
-        }
-    }
-
-    private fun updateButtonStates() {
-        binding.apply {
-            // START активен только если сервис не работает
-            startButton.isEnabled = !isServiceRunning
-
-            // STOP активен только если сервис работает
-            stopButton.isEnabled = isServiceRunning
-
-            roomCodeEditText.isEnabled = !isServiceRunning
-            saveCodeButton.isEnabled = !isServiceRunning &&
-                    binding.roomCodeEditText.text.toString().replace("-", "").length == 16 &&
-                    !roomList.contains(binding.roomCodeEditText.text.toString().replace("-", ""))
-            generateCodeButton.isEnabled = !isServiceRunning
-            deleteRoomButton.isEnabled = !isServiceRunning &&
-                    roomList.contains(binding.roomCodeEditText.text.toString().replace("-", "")) &&
-                    roomList.size > 1
-
-            startButton.setBackgroundColor(
-                ContextCompat.getColor(
-                    this@MainActivity,
-                    if (isServiceRunning) android.R.color.darker_gray else R.color.green
-                )
-            )
-            stopButton.setBackgroundColor(
-                ContextCompat.getColor(
-                    this@MainActivity,
-                    if (isServiceRunning) R.color.red else android.R.color.darker_gray
-                )
-            )
-        }
-    }
-
-    private val serviceStateReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action == WebRTCService.ACTION_SERVICE_STATE) {
-                isServiceRunning = intent.getBooleanExtra(WebRTCService.EXTRA_IS_RUNNING, false)
-                updateButtonStates()
-            }
-        }
-    }
-
-    private fun checkAllPermissionsGranted() = requiredPermissions.all {
-        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun isCameraPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun checkBatteryOptimization() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val powerManager = getSystemService(PowerManager::class.java)
-            if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
-                val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
-                    data = Uri.parse("package:$packageName")
-                }
-                startActivity(intent)
-            }
-        }
-    }
-
-    private fun showToast(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
-    }
-
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
-    override fun onResume() {
-        super.onResume()
-        registerReceiver(serviceStateReceiver, IntentFilter(WebRTCService.ACTION_SERVICE_STATE))
-        // Обновляем состояние при возвращении в активность
-        isServiceRunning = WebRTCService.isRunning
-        updateButtonStates()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        unregisterReceiver(serviceStateReceiver)
-    }
-
-    companion object {
-        private const val PREFS_NAME = "WebRTCPrefs"
-        private const val ROOM_LIST_KEY = "room_list"
-        private const val LAST_USED_ROOM_KEY = "last_used_room"
-    }
-}
 
 // file: D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/WebRTCClient.kt
 package com.example.mytest
@@ -3878,7 +2842,7 @@ private val remoteView: SurfaceViewRenderer,
 private val observer: PeerConnection.Observer
 ) {
 lateinit var peerConnectionFactory: PeerConnectionFactory
-var peerConnection: PeerConnection
+var peerConnection: PeerConnection? = null
 private var localVideoTrack: VideoTrack? = null
 private var localAudioTrack: AudioTrack? = null
 internal var videoCapturer: VideoCapturer? = null
@@ -3887,23 +2851,37 @@ private var surfaceTextureHelper: SurfaceTextureHelper? = null
     init {
         initializePeerConnectionFactory()
         peerConnection = createPeerConnection()
+        if (peerConnection == null) {
+            throw IllegalStateException("Failed to create peer connection")
+        }
         createLocalTracks()
     }
 
     private fun initializePeerConnectionFactory() {
         val initializationOptions = PeerConnectionFactory.InitializationOptions.builder(context)
             .setEnableInternalTracer(true)
-            .setFieldTrials("WebRTC-VP8-Forced-Fallback-Encoder/Enabled/")
+            // Форсируем H.264 High Profile и разрешаем разные режимы пакетизации
+            // 42e01f (Constrained Baseline) часто более совместим, чем High.
+            // Если High Profile (обычно 64xxxx) вызывает проблемы с iOS/старыми Android, используйте:
+            // .setFieldTrials("WebRTC-H264Profile/42e01f/") // Пример для Constrained Baseline
+            .setFieldTrials("WebRTC-H264HighProfile/Enabled/WebRTC-H264PacketizationMode/Enabled/")
             .createInitializationOptions()
         PeerConnectionFactory.initialize(initializationOptions)
 
-        val videoEncoderFactory = DefaultVideoEncoderFactory(
+        // Используем DefaultVideoEncoderFactory, отключая другие кодеки, если возможно,
+        // или SoftwareVideoEncoderFactory для большей предсказуемости H.264.
+        val videoEncoderFactory: VideoEncoderFactory = DefaultVideoEncoderFactory(
             eglBase.eglBaseContext,
-            true,
-            true
+            false,  // disable Intel VP8 encoder
+            true    // enable H264 High Profile (или false, если H264 обеспечивается платформой/Software factory)
         )
+        // Альтернатива для большей стабильности H.264, если есть проблемы с аппаратными кодерами:
+        // val videoEncoderFactory: VideoEncoderFactory = SoftwareVideoEncoderFactory()
 
-        val videoDecoderFactory = DefaultVideoDecoderFactory(eglBase.eglBaseContext)
+        val videoDecoderFactory: VideoDecoderFactory = DefaultVideoDecoderFactory(eglBase.eglBaseContext)
+        // Альтернатива:
+        // val videoDecoderFactory: VideoDecoderFactory = SoftwareVideoDecoderFactory()
+
 
         peerConnectionFactory = PeerConnectionFactory.builder()
             .setVideoEncoderFactory(videoEncoderFactory)
@@ -3915,53 +2893,26 @@ private var surfaceTextureHelper: SurfaceTextureHelper? = null
             .createPeerConnectionFactory()
     }
 
-    private fun createPeerConnection(): PeerConnection {
+    private fun createPeerConnection(): PeerConnection? {
         val rtcConfig = PeerConnection.RTCConfiguration(listOf(
-
+            PeerConnection.IceServer.builder("stun:ardua.site:3478").createIceServer(),
             PeerConnection.IceServer.builder("turn:ardua.site:3478")
                 .setUsername("user1")
                 .setPassword("pass1")
-                .createIceServer(),
+                .createIceServer()
+        )).apply {
 
-            PeerConnection.IceServer.builder("stun:ardua.site:3478").createIceServer(),
-
-//            PeerConnection.IceServer.builder("turns:ardua.site:5349")
-//                .setUsername("user1")
-//                .setPassword("pass1")
-//                .createIceServer(),
-
-//            PeerConnection.IceServer.builder("stun:stun.l.google.com:19301").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun.l.google.com:19302").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun.l.google.com:19303").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun.l.google.com:19304").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun.l.google.com:19305").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun1.l.google.com:19301").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun1.l.google.com:19302").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun1.l.google.com:19303").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun1.l.google.com:19304").createIceServer(),
-//            PeerConnection.IceServer.builder("stun:stun1.l.google.com:19305").createIceServer()
-)).apply {
-sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN
-continualGatheringPolicy = PeerConnection.ContinualGatheringPolicy.GATHER_CONTINUALLY
-iceTransportsType = PeerConnection.IceTransportsType.ALL
-bundlePolicy = PeerConnection.BundlePolicy.MAXBUNDLE
-rtcpMuxPolicy = PeerConnection.RtcpMuxPolicy.REQUIRE
-tcpCandidatePolicy = PeerConnection.TcpCandidatePolicy.ENABLED
-candidateNetworkPolicy = PeerConnection.CandidateNetworkPolicy.ALL
-keyType = PeerConnection.KeyType.ECDSA
-
-            // Оптимизация для мобильных
-            if (Build.MODEL.contains("iPhone")) {
-                audioJitterBufferMaxPackets = 50
-                audioJitterBufferFastAccelerate = true
-            } else {
-                // Настройки для Android
-                audioJitterBufferMaxPackets = 200
-                iceConnectionReceivingTimeout = 5000
-            }
+            sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN
+            continualGatheringPolicy = PeerConnection.ContinualGatheringPolicy.GATHER_CONTINUALLY
+            iceTransportsType = PeerConnection.IceTransportsType.ALL
+            bundlePolicy = PeerConnection.BundlePolicy.MAXBUNDLE
+            rtcpMuxPolicy = PeerConnection.RtcpMuxPolicy.REQUIRE
+            tcpCandidatePolicy = PeerConnection.TcpCandidatePolicy.ENABLED
+            candidateNetworkPolicy = PeerConnection.CandidateNetworkPolicy.ALL
+            keyType = PeerConnection.KeyType.ECDSA
         }
 
-        return peerConnectionFactory.createPeerConnection(rtcConfig, observer)!!
+        return peerConnectionFactory.createPeerConnection(rtcConfig, observer)
     }
 
     // В WebRTCClient.kt добавляем обработку переключения камеры
@@ -4016,12 +2967,12 @@ keyType = PeerConnection.KeyType.ECDSA
 
         localAudioTrack?.let {
             stream.addTrack(it)
-            peerConnection.addTrack(it, listOf(streamId))
+            peerConnection?.addTrack(it, listOf(streamId))
         }
 
         localVideoTrack?.let {
             stream.addTrack(it)
-            peerConnection.addTrack(it, listOf(streamId))
+            peerConnection?.addTrack(it, listOf(streamId))
         }
     }
 
@@ -4052,18 +3003,41 @@ keyType = PeerConnection.KeyType.ECDSA
                     context,
                     videoSource.capturerObserver
                 )
-                capturer.startCapture(640, 480, 30)
+
+                // Старт с оптимальными параметрами для H264
+                capturer.startCapture(640, 480, 15) // 640x480 @ 15fps
 
                 localVideoTrack = peerConnectionFactory.createVideoTrack("ARDAMSv0", videoSource).apply {
                     addSink(localView)
                 }
-            } ?: run {
-                Log.e("WebRTCClient", "Failed to create video capturer")
+
+                // Устанавливаем начальный битрейт
+                setVideoEncoderBitrate(300000, 400000, 500000) // 300-500 kbps
             }
         } catch (e: Exception) {
             Log.e("WebRTCClient", "Error creating video track", e)
         }
     }
+
+    // Функция для установки битрейта
+    fun setVideoEncoderBitrate(minBitrate: Int, currentBitrate: Int, maxBitrate: Int) {
+        try {
+            val sender = peerConnection?.senders?.find { it.track()?.kind() == "video" }
+            sender?.let { videoSender ->
+                val parameters = videoSender.parameters
+                if (parameters.encodings.isNotEmpty()) {
+                    parameters.encodings[0].minBitrateBps = minBitrate
+                    parameters.encodings[0].maxBitrateBps = maxBitrate
+                    parameters.encodings[0].bitratePriority = 1.0
+                    videoSender.parameters = parameters
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Error setting video bitrate", e)
+        }
+    }
+
+
 
     private fun createCameraCapturer(): VideoCapturer? {
         return Camera2Enumerator(context).run {
@@ -4079,20 +3053,64 @@ keyType = PeerConnection.KeyType.ECDSA
 
     fun close() {
         try {
-            videoCapturer?.let {
-                it.stopCapture()
-                it.dispose()
+            videoCapturer?.let { capturer ->
+                try {
+                    capturer.stopCapture()
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error stopping capturer", e)
+                }
+                try {
+                    capturer.dispose()
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing capturer", e)
+                }
             }
-            localVideoTrack?.let {
-                it.removeSink(localView)
-                it.dispose()
+
+            localVideoTrack?.let { track ->
+                try {
+                    track.removeSink(localView)
+                    track.dispose()
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing video track", e)
+                }
             }
-            localAudioTrack?.dispose()
-            surfaceTextureHelper?.dispose()
-            peerConnection.close()
-            peerConnection.dispose()
+
+            localAudioTrack?.let { track ->
+                try {
+                    track.dispose()
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing audio track", e)
+                }
+            }
+
+            surfaceTextureHelper?.let { helper ->
+                try {
+                    helper.dispose()
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing surface helper", e)
+                }
+            }
+
+            peerConnection?.let { pc ->
+                try {
+                    pc.close()
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error closing peer connection", e)
+                }
+                try {
+                    pc.dispose()
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing peer connection", e)
+                }
+            }
         } catch (e: Exception) {
-            Log.e("WebRTCClient", "Error closing resources", e)
+            Log.e("WebRTCClient", "Error in cleanup", e)
+        } finally {
+            videoCapturer = null
+            localVideoTrack = null
+            localAudioTrack = null
+            surfaceTextureHelper = null
+            peerConnection = null
         }
     }
 }
@@ -4169,7 +3187,7 @@ class WebRTCService : Service() {
 
     private var roomName = "room1" // Будет перезаписано при старте
     private val userName = Build.MODEL ?: "AndroidDevice"
-    private val webSocketUrl = "wss://ardua.site/ws"
+    private val webSocketUrl = "wss://ardua.site/wsgo"
 
     private val notificationId = 1
     private val channelId = "webrtc_service_channel"
@@ -4177,6 +3195,8 @@ class WebRTCService : Service() {
 
     private var isStateReceiverRegistered = false
     private var isConnectivityReceiverRegistered = false
+
+    private var isEglBaseReleased = false
 
     inner class LocalBinder : Binder() {
         fun getService(): WebRTCService = this@WebRTCService
@@ -4190,6 +3210,16 @@ class WebRTCService : Service() {
                 reconnect()
             }
         }
+    }
+
+    private fun isValidSdp(sdp: String, codecName: String): Boolean {
+        val hasVideoSection = sdp.contains("m=video")
+        val hasCodec = sdp.contains("a=rtpmap:.*$codecName")
+        if (!hasVideoSection || !hasCodec) {
+            Log.e("WebRTCService", "SDP validation failed: hasVideoSection=$hasVideoSection, hasCodec=$hasCodec")
+            return false
+        }
+        return true
     }
 
     private val webSocketListener = object : WebSocketListener() {
@@ -4249,6 +3279,76 @@ class WebRTCService : Service() {
         }
     }
 
+    // Добавляем в класс WebRTCService
+    private val bandwidthEstimationRunnable = object : Runnable {
+        override fun run() {
+            if (isConnected) {
+                adjustVideoQualityBasedOnStats()
+            }
+            handler.postDelayed(this, 10000) // Каждые 10 секунд
+        }
+    }
+
+    private fun adjustVideoQualityBasedOnStats() {
+        webRTCClient.peerConnection?.getStats { statsReport ->
+            try {
+                var videoPacketsLost = 0L
+                var videoPacketsSent = 0L
+                var availableSendBandwidth = 0L
+
+                statsReport.statsMap.values.forEach { stats ->
+                    when {
+                        stats.type == "outbound-rtp" && stats.id.contains("video") -> {
+                            videoPacketsLost += stats.members["packetsLost"] as? Long ?: 0L
+                            videoPacketsSent += stats.members["packetsSent"] as? Long ?: 1L
+                        }
+                        stats.type == "candidate-pair" && stats.members["state"] == "succeeded" -> {
+                            availableSendBandwidth = stats.members["availableOutgoingBitrate"] as? Long ?: 0L
+                        }
+                    }
+                }
+
+                if (videoPacketsSent > 0) {
+                    val lossRate = videoPacketsLost.toDouble() / videoPacketsSent.toDouble()
+                    handler.post {
+                        when {
+                            lossRate > 0.1 -> reduceVideoQuality() // >10% потерь
+                            lossRate < 0.05 && availableSendBandwidth > 700000 -> increaseVideoQuality() // <5% потерь и хорошая пропускная способность
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("WebRTCService", "Error processing stats", e)
+            }
+        }
+    }
+
+    private fun reduceVideoQuality() {
+        try {
+            webRTCClient.videoCapturer?.let { capturer ->
+                capturer.stopCapture()
+                capturer.startCapture(480, 360, 15)
+                webRTCClient.setVideoEncoderBitrate(150000, 200000, 300000)
+                Log.d("WebRTCService", "Reduced video quality to 480x360@15fps, 200kbps")
+            }
+        } catch (e: Exception) {
+            Log.e("WebRTCService", "Error reducing video quality", e)
+        }
+    }
+
+    private fun increaseVideoQuality() {
+        try {
+            webRTCClient.videoCapturer?.let { capturer ->
+                capturer.stopCapture()
+                capturer.startCapture(640, 480, 20)
+                webRTCClient.setVideoEncoderBitrate(300000, 400000, 500000)
+                Log.d("WebRTCService", "Increased video quality to 640x480@20fps, 400kbps")
+            }
+        } catch (e: Exception) {
+            Log.e("WebRTCService", "Error increasing video quality", e)
+        }
+    }
+
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onCreate() {
         super.onCreate()
@@ -4276,6 +3376,7 @@ class WebRTCService : Service() {
 
         Log.d("WebRTCService", "Service created with room: $roomName")
         sendServiceStateUpdate()
+        handler.post(bandwidthEstimationRunnable)
         try {
             registerReceiver(connectivityReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
             isConnectivityReceiverRegistered = true
@@ -4329,21 +3430,17 @@ class WebRTCService : Service() {
     }
 
     private fun initializeWebRTC() {
-        Log.d("WebRTCService", "Initializing WebRTC for room: $roomName")
+        Log.d("WebRTCService", "Initializing new WebRTC connection")
         cleanupWebRTCResources()
-
         eglBase = EglBase.create()
+        isEglBaseReleased = false
         val localView = SurfaceViewRenderer(this).apply {
             init(eglBase.eglBaseContext, null)
             setMirror(true)
-            setEnableHardwareScaler(true)
         }
-
         remoteView = SurfaceViewRenderer(this).apply {
             init(eglBase.eglBaseContext, null)
-            setEnableHardwareScaler(true)
         }
-
         webRTCClient = WebRTCClient(
             context = this,
             eglBase = eglBase,
@@ -4351,6 +3448,7 @@ class WebRTCService : Service() {
             remoteView = remoteView,
             observer = createPeerConnectionObserver()
         )
+        webRTCClient.setVideoEncoderBitrate(300000, 400000, 500000)
     }
 
     private fun createPeerConnectionObserver() = object : PeerConnection.Observer {
@@ -4407,10 +3505,19 @@ class WebRTCService : Service() {
         try {
             if (::webRTCClient.isInitialized) {
                 webRTCClient.close()
+                Log.d("WebRTCService", "WebRTCClient closed")
             }
-            if (::eglBase.isInitialized) {
+            if (::eglBase.isInitialized && !isEglBaseReleased) {
                 eglBase.release()
+                isEglBaseReleased = true
+                Log.d("WebRTCService", "EglBase released")
             }
+            if (::remoteView.isInitialized) {
+                remoteView.clearImage()
+                remoteView.release()
+                Log.d("WebRTCService", "remoteView released")
+            }
+            Log.d("WebRTCService", "WebRTC resources cleaned up")
         } catch (e: Exception) {
             Log.e("WebRTCService", "Error cleaning WebRTC resources", e)
         }
@@ -4539,22 +3646,43 @@ class WebRTCService : Service() {
         Log.d("WebRTCService", "Received: $message")
 
         try {
+            val isLeader = message.optBoolean("isLeader", false)
+
             when (message.optString("type")) {
+                "rejoin_and_offer" -> {
+                    Log.d("WebRTCService", "Received rejoin command from server")
+                    val preferredCodec = message.optString("preferredCodec", "H264")
+                    handler.post {
+                        cleanupWebRTCResources()
+                        initializeWebRTC()
+                        createOffer(preferredCodec)
+                    }
+                }
+                "create_offer_for_new_follower" -> {
+                    Log.d("WebRTCService", "Received request to create offer for new follower")
+                    handler.post {
+                        createOffer("VP8") // Согласованность с браузером
+                    }
+                }
                 "bandwidth_estimation" -> {
                     val estimation = message.optLong("estimation", 1000000)
                     handleBandwidthEstimation(estimation)
                 }
-                "offer" -> handleOffer(message)
+                "offer" -> {
+                    if (!isLeader) {
+                        Log.w("WebRTCService", "Received offer from non-leader, ignoring")
+                        return
+                    }
+                    handleOffer(message)
+                }
                 "answer" -> handleAnswer(message)
                 "ice_candidate" -> handleIceCandidate(message)
                 "room_info" -> {}
                 "switch_camera" -> {
-                    // Обрабатываем команду переключения камеры
                     val useBackCamera = message.optBoolean("useBackCamera", false)
                     Log.d("WebRTCService", "Received switch camera command: useBackCamera=$useBackCamera")
                     handler.post {
                         webRTCClient.switchCamera(useBackCamera)
-                        // Отправляем подтверждение
                         sendCameraSwitchAck(useBackCamera)
                     }
                 }
@@ -4562,6 +3690,186 @@ class WebRTCService : Service() {
             }
         } catch (e: Exception) {
             Log.e("WebRTCService", "Error handling message", e)
+        }
+    }
+
+    // Вспомогательная функция для модификации SDP на Android
+    private fun normalizeSdpForCodec(sdp: String, targetCodec: String, targetBitrateAs: Int = 500): String {
+        var newSdp = sdp
+        val codecName = when (targetCodec) {
+            "H264" -> "H264"
+            "VP8" -> "VP8"
+            else -> {
+                Log.w("WebRTCService", "Unknown target codec: $targetCodec, defaulting to H264")
+                "H264"
+            }
+        }
+
+        // 1. Найти payload type для целевого кодека
+        val rtpmapRegex = "a=rtpmap:(\\d+) $codecName(?:/\\d+)?".toRegex()
+        val rtpmapMatches = rtpmapRegex.findAll(newSdp)
+        val targetPayloadTypes = rtpmapMatches.map { it.groupValues[1] }.toList()
+
+        if (targetPayloadTypes.isEmpty()) {
+            Log.w("WebRTCService", "$codecName payload type not found in SDP")
+            return newSdp
+        }
+
+        val targetPayloadType = targetPayloadTypes.first()
+        Log.d("WebRTCService", "Found $codecName payload type: $targetPayloadType")
+
+        // 2. Удалить другие видеокодеки
+        val videoCodecsToRemove = when (codecName) {
+            "H264" -> listOf("VP8", "VP9", "AV1")
+            "VP8" -> listOf("H264", "VP9", "AV1")
+            else -> emptyList()
+        }
+        for (codecToRemove in videoCodecsToRemove) {
+            val ptToRemoveRegex = "a=rtpmap:(\\d+) $codecToRemove(?:/\\d+)?\r\n".toRegex()
+            var matchResult = ptToRemoveRegex.find(newSdp)
+            while (matchResult != null) {
+                val pt = matchResult.groupValues[1]
+                newSdp = newSdp.replace("a=rtpmap:$pt $codecToRemove(?:/\\d+)?\r\n".toRegex(), "")
+                newSdp = newSdp.replace("a=fmtp:$pt .*\r\n".toRegex(), "")
+                newSdp = newSdp.replace("a=rtcp-fb:$pt .*\r\n".toRegex(), "")
+                Log.d("WebRTCService", "Removed $codecToRemove (PT: $pt) from SDP")
+                matchResult = ptToRemoveRegex.find(newSdp)
+            }
+        }
+
+        // 3. Модифицировать fmtp только для H264
+        if (codecName == "H264") {
+            val desiredFmtp = "profile-level-id=42e01f;level-asymmetry-allowed=1;packetization-mode=1"
+            for (pt in targetPayloadTypes) {
+                val fmtpSearchRegex = "a=fmtp:$pt .*\r\n".toRegex()
+                val newFmtpLine = "a=fmtp:$pt $desiredFmtp\r\n"
+                if (newSdp.contains(fmtpSearchRegex)) {
+                    newSdp = newSdp.replace(fmtpSearchRegex, newFmtpLine)
+                } else {
+                    newSdp = newSdp.replace(
+                        "a=rtpmap:$pt $codecName(?:/\\d+)?\r\n",
+                        "a=rtpmap:$pt $codecName/90000\r\n$newFmtpLine"
+                    )
+                }
+                Log.d("WebRTCService", "Set $codecName (PT: $pt) fmtp to: $desiredFmtp")
+            }
+        }
+
+        // 4. Убедиться, что целевой кодек первый в m=video линии
+        val mLineRegex = "^(m=video\\s+\\d+\\s+UDP/(?:TLS/)?RTP/SAVPF\\s+)(.*)".toRegex(RegexOption.MULTILINE)
+        newSdp = mLineRegex.replace(newSdp) { mLineMatchResult ->
+            val prefix = mLineMatchResult.groupValues[1]
+            var payloads = mLineMatchResult.groupValues[2].split(" ").toMutableList()
+            val activePayloadTypesInSdp = "a=rtpmap:(\\d+)".toRegex().findAll(newSdp).map { it.groupValues[1] }.toSet()
+            payloads = payloads.filter { activePayloadTypesInSdp.contains(it) }.toMutableList()
+            val targetPtsInOrder = targetPayloadTypes.filter { payloads.contains(it) }
+            targetPtsInOrder.forEach { payloads.remove(it) }
+            payloads.addAll(0, targetPtsInOrder)
+            Log.d("WebRTCService", "Reordered m=video payloads to: ${payloads.joinToString(" ")}")
+            prefix + payloads.joinToString(" ")
+        }
+
+        // 5. Установить битрейт для видео секции
+        newSdp = newSdp.replace(Regex("^(a=mid:video\r\n(?:(?!a=mid:).*\r\n)*?)b=(AS|TIAS):\\d+\r\n", RegexOption.MULTILINE), "$1")
+        newSdp = newSdp.replace("a=mid:video\r\n", "a=mid:video\r\nb=AS:$targetBitrateAs\r\n")
+        Log.d("WebRTCService", "Set video bitrate to AS:$targetBitrateAs")
+
+        // 6. Проверка валидности SDP
+        if (!newSdp.contains("m=video") || !newSdp.contains("a=rtpmap:.*$codecName")) {
+            Log.e("WebRTCService", "Invalid SDP after modification: missing m=video or $codecName")
+            return sdp
+        }
+
+        return newSdp
+    }
+
+    // Модифицируем createOffer для принудительного создания нового оффера
+    private fun createOffer(preferredCodec: String = "H264") {
+        try {
+            if (!::webRTCClient.isInitialized || !isConnected) {
+                Log.w("WebRTCService", "Cannot create offer - not initialized or connected")
+                return
+            }
+
+            // Настройка кодеков через RTCRtpTransceiver
+            webRTCClient.peerConnection?.transceivers?.filter {
+                it.mediaType == MediaStreamTrack.MediaType.MEDIA_TYPE_VIDEO && it.sender != null
+            }?.forEach { transceiver ->
+                try {
+                    val sender = transceiver.sender
+                    val parameters = sender.parameters
+                    if (parameters != null) {
+                        val targetCodecs = parameters.codecs.filter { codecInfo ->
+                            codecInfo.name.equals(preferredCodec, ignoreCase = true)
+                        }
+                        if (targetCodecs.isNotEmpty()) {
+                            parameters.codecs = ArrayList(targetCodecs)
+                            val result = sender.setParameters(parameters)
+                            Log.d("WebRTCService", "Set $preferredCodec codec preference: $result")
+                        } else {
+                            Log.w("WebRTCService", "$preferredCodec codec not found in sender parameters")
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e("WebRTCService", "Error setting codec preferences", e)
+                }
+            }
+
+            val constraints = MediaConstraints().apply {
+                mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"))
+                mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"))
+                mandatory.add(MediaConstraints.KeyValuePair("googCpuOveruseDetection", "true"))
+                mandatory.add(MediaConstraints.KeyValuePair("googScreencastMinBitrate", "300"))
+            }
+
+            webRTCClient.peerConnection?.createOffer(object : SdpObserver {
+                override fun onCreateSuccess(desc: SessionDescription) {
+                    Log.d("WebRTCService", "Original Local Offer SDP:\n${desc.description}")
+                    val modifiedSdp = normalizeSdpForCodec(desc.description, preferredCodec, 300)
+                    Log.d("WebRTCService", "Modified Local Offer SDP:\n$modifiedSdp")
+
+                    if (!isValidSdp(modifiedSdp, preferredCodec)) {
+                        Log.e("WebRTCService", "Falling back to original SDP due to invalid modification")
+                        webRTCClient.peerConnection?.setLocalDescription(
+                            object : SdpObserver {
+                                override fun onSetSuccess() {
+                                    Log.d("WebRTCService", "Successfully set original local description")
+                                    sendSessionDescription(desc)
+                                }
+                                override fun onSetFailure(error: String) {
+                                    Log.e("WebRTCService", "Error setting original local description: $error")
+                                }
+                                override fun onCreateSuccess(p0: SessionDescription?) {}
+                                override fun onCreateFailure(error: String) {}
+                            }, desc
+                        )
+                        return
+                    }
+
+                    val modifiedDesc = SessionDescription(desc.type, modifiedSdp)
+                    webRTCClient.peerConnection?.setLocalDescription(
+                        object : SdpObserver {
+                            override fun onSetSuccess() {
+                                Log.d("WebRTCService", "Successfully set local description")
+                                sendSessionDescription(modifiedDesc)
+                            }
+                            override fun onSetFailure(error: String) {
+                                Log.e("WebRTCService", "Error setting local description: $error")
+                            }
+                            override fun onCreateSuccess(p0: SessionDescription?) {}
+                            override fun onCreateFailure(error: String) {}
+                        }, modifiedDesc
+                    )
+                }
+
+                override fun onCreateFailure(error: String) {
+                    Log.e("WebRTCService", "Error creating offer: $error")
+                }
+                override fun onSetSuccess() {}
+                override fun onSetFailure(error: String) {}
+            }, constraints)
+        } catch (e: Exception) {
+            Log.e("WebRTCService", "Error in createOffer", e)
         }
     }
 
@@ -4590,14 +3898,18 @@ class WebRTCService : Service() {
                 sdp.getString("sdp")
             )
 
-            webRTCClient.peerConnection.setRemoteDescription(object : SdpObserver {
+            // Извлекаем preferredCodec из сообщения или используем значение по умолчанию
+            val preferredCodec = offer.optString("preferredCodec", "H264")
+
+            webRTCClient.peerConnection?.setRemoteDescription(object : SdpObserver {
                 override fun onSetSuccess() {
                     val constraints = MediaConstraints().apply {
                         mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"))
                         mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"))
                     }
-                    createAnswer(constraints)
+                    createAnswer(constraints, preferredCodec)
                 }
+
                 override fun onSetFailure(error: String) {
                     Log.e("WebRTCService", "Error setting remote description: $error")
                 }
@@ -4609,22 +3921,44 @@ class WebRTCService : Service() {
         }
     }
 
-    private fun createAnswer(constraints: MediaConstraints) {
+    private fun createAnswer(constraints: MediaConstraints, preferredCodec: String = "H264") {
         try {
-            webRTCClient.peerConnection.createAnswer(object : SdpObserver {
+            webRTCClient.peerConnection?.createAnswer(object : SdpObserver {
                 override fun onCreateSuccess(desc: SessionDescription) {
-                    Log.d("WebRTCService", "Created answer: ${desc.description}")
-                    webRTCClient.peerConnection.setLocalDescription(object : SdpObserver {
+                    Log.d("WebRTCService", "Original Local Answer SDP:\n${desc.description}")
+                    val modifiedSdp = normalizeSdpForCodec(desc.description, preferredCodec, 300)
+                    Log.d("WebRTCService", "Modified Local Answer SDP:\n$modifiedSdp")
+
+                    if (!isValidSdp(modifiedSdp, preferredCodec)) {
+                        Log.e("WebRTCService", "Falling back to original SDP due to invalid modification")
+                        webRTCClient.peerConnection?.setLocalDescription(object : SdpObserver {
+                            override fun onSetSuccess() {
+                                Log.d("WebRTCService", "Successfully set original local description")
+                                sendSessionDescription(desc)
+                            }
+                            override fun onSetFailure(error: String) {
+                                Log.e("WebRTCService", "Error setting original local description: $error")
+                            }
+                            override fun onCreateSuccess(p0: SessionDescription?) {}
+                            override fun onCreateFailure(error: String) {}
+                        }, desc)
+                        return
+                    }
+
+                    val modifiedDesc = SessionDescription(desc.type, modifiedSdp)
+                    webRTCClient.peerConnection?.setLocalDescription(object : SdpObserver {
                         override fun onSetSuccess() {
-                            sendSessionDescription(desc)
+                            Log.d("WebRTCService", "Successfully set local description")
+                            sendSessionDescription(modifiedDesc)
                         }
                         override fun onSetFailure(error: String) {
                             Log.e("WebRTCService", "Error setting local description: $error")
                         }
                         override fun onCreateSuccess(p0: SessionDescription?) {}
                         override fun onCreateFailure(error: String) {}
-                    }, desc)
+                    }, modifiedDesc)
                 }
+
                 override fun onCreateFailure(error: String) {
                     Log.e("WebRTCService", "Error creating answer: $error")
                 }
@@ -4649,6 +3983,7 @@ class WebRTCService : Service() {
                 put("username", userName)
                 put("target", "browser")
             }
+            Log.d("WebRTCService", "Sending JSON: $message")
             webSocketClient.send(message.toString())
         } catch (e: Exception) {
             Log.e("WebRTCService", "Error sending SDP", e)
@@ -4663,13 +3998,17 @@ class WebRTCService : Service() {
                 sdp.getString("sdp")
             )
 
-            webRTCClient.peerConnection.setRemoteDescription(object : SdpObserver {
+            webRTCClient.peerConnection?.setRemoteDescription(object : SdpObserver {
                 override fun onSetSuccess() {
-                    Log.d("WebRTCService", "Answer accepted")
+                    Log.d("WebRTCService", "Answer accepted, connection should be established")
                 }
+
                 override fun onSetFailure(error: String) {
                     Log.e("WebRTCService", "Error setting answer: $error")
+                    // При ошибке запрашиваем новый оффер
+                    handler.postDelayed({ createOffer() }, 2000)
                 }
+
                 override fun onCreateSuccess(p0: SessionDescription?) {}
                 override fun onCreateFailure(error: String) {}
             }, sessionDescription)
@@ -4686,7 +4025,7 @@ class WebRTCService : Service() {
                 ice.getInt("sdpMLineIndex"),
                 ice.getString("candidate")
             )
-            webRTCClient.peerConnection.addIceCandidate(iceCandidate)
+            webRTCClient.peerConnection?.addIceCandidate(iceCandidate)
         } catch (e: Exception) {
             Log.e("WebRTCService", "Error handling ICE candidate", e)
         }
@@ -4924,75 +4263,27 @@ private val client = OkHttpClient.Builder()
     }
 }
 
-// file: D:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/Worker.kt
-package com.example.mytest
-
-import android.content.Context
-import android.content.Intent
-import android.os.Build
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.Worker
-import androidx.work.WorkerParameters
-import java.util.concurrent.TimeUnit
-
-class WebRTCWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
-override fun doWork(): Result {
-val intent = Intent(applicationContext, WebRTCService::class.java)
-if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-applicationContext.startForegroundService(intent)
-} else {
-applicationContext.startService(intent)
-}
-return Result.success()
-}
-}
-
-Проблема. Клиент-ведомый-браузер соединяется с ервером получает от ведущего оффер - видео работает идеально, этот же клиент отсоединяется-присоединяется
-видео очень сильно тормозит-идет с задержками. Перезагружаю сервер - клиент присоединяется - получает оффер - видео идет идеально.
-помоги разобраться в чем дело. Может что то не полностью чистится.
 
 
 
-
-
-
-Реализовано:
-1. В комнате должны быть только два участника ведущий и ведомый
-2. только ведущий создает комнату, готовит и отправляет оффер
-3. замена ведомого на ведомого если второй ведомый хочет попасть в комнату
-
-Нужно чтобы работало: Когда Ведомый подключается к комнате, сервер сигнализации сообщает Ведущему, что нужно создать и отправить оффер Ведомому (через сервер). Ведомый ждет этот оффер, принимает его, создает answer (ответ) и отправляет обратно Ведущему (через сервер).
-Плюсы:
-✅ Стандартный и Рекомендуемый Подход: Это классическая модель WebRTC, где инициатор звонка (или потока, в вашем случае - Ведущий) отправляет предложение (offer), а принимающая сторона (Ведомый) отвечает (answer).
-✅ Логично: Ведущий "предлагает" свой видеопоток, Ведомый "соглашается" его принять.
-✅ Простота для Ведомого: Логика ведомого клиента очень проста – ждать оффер и отправлять ответ.
-✅ Меньше путаницы: Четкое разделение ролей снижает вероятность ошибок и состояний гонки (race conditions) на сервере и клиентах.
-✅ Совместимость: Большинство библиотек и примеров WebRTC построены на этой модели.
-✅ Ваша текущая реализация: Мы как раз исправили код клиента и сервера для работы по этой схеме (сервер просит лидера -> лидер шлет оффер -> ведомый шлет ответ).
-Минусы:
-Требуется явный сигнал от сервера к Ведущему для инициации оффера (что у вас уже сделано через сообщение create_offer_for_new_follower).
-Только Ведомый (Браузер) отправляет Оффер:
-
-###
-Android код (WebRTCService.kt) он всегда действовал как Ведущий (Leader) и только отправлял Офферы, но никогда их не получал и не создавал ответы (Answers). Он будет только получать и обрабатывать ответы от Ведомого (браузера).
-Это соответствует модели, которую мы реализовали на сервере и в веб-клиенте: сервер при подключении ведомого отправляет лидеру (Android) команду create_offer_for_new_follower, и Android должен на это среагировать, создав и отправив оффер.
-###
-Ведущий создает оффер только по запросу сервера
-Ведомый всегда ожидает оффер и отвечает на него
-
-Доработай и справь код Ведущего и ведомого, сервер Go желательно не изменяй.
-Андройд работает на библиотеках
-// WebRTC
+Андройд-ведущий работает на библиотеках, не меняй их
 implementation("io.github.webrtc-sdk:android:125.6422.07")
-// WebSocket
 implementation("com.squareup.okhttp3:okhttp:4.11.0")
-из менять не нужно
+
+Server Go работает на библиотеках, не меняй их
+github.com/gorilla/websocket v1.5.3
+github.com/pion/webrtc/v3 v3.3.5
+
+комментарии на русском
 
 
+браузер (клиент-ведомый) подключается к серверу со своим преподчитаемым кодеком, кодек выбирает пользователь в браузере,
+сервер говорит андройду-ведущему, что ведомый с определенным кодеком хочет подключиться к комнате, Ведущий Андройд перезаходит в комнату с новым соединением WebRTC c нужным кодеком.
+Клиенту-ведомый (браузер) указывает предпочтительный видеокодек (H.264 или VP8) при подключении к комнате, передать эту информацию через сервер ведущему (Android), инициировать переподключение ведущего с настройкой соответствующего кодека, чтобы обеспечить совместимость и оптимальное качество трансляции.
+мне нужно отобразить на клиенте браузере у пользователя с каким кодеком ведется трансляция
 
-Сделай эту логику чтобы Ведущий и ведомый всегда обменивались видео, сделай изменения без лишних улучшений - чтобы не ухудшить остальную логику.
-1. Кода давай целыми функциями.
-2. Комментарии на русском.
 
-на мобильных устройствах при длительной работе происходит задержка видео, на дестктопных компьютерах все работает хорошо.
+1. Нужно наладить работу с выбором кодека, посмотри где что нужно обновить, где заменить. Потому что в логах клиента всегда показывает Кодек трансляции: VP8
+2. посмотри кодеки для локальных трансляций
+3. я хочу видеть реальный кодек который создал Android-ведущий и на каком кодеке идет трансляция.
+4. код рабочий в целом, в прошлый раз ты сделал изменения в Андройд-ведущем и Андройд самсунг перестал делать трансляцию, Андройд Huawei трансляция была.

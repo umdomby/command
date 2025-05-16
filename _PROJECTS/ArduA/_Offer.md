@@ -35,6 +35,8 @@ Server Go работает на библиотеках, не меняй их
 github.com/gorilla/websocket v1.5.3
 github.com/pion/webrtc/v3 v3.3.5
 
+явно форсируется H.264 кодек везде
+
 
 ###
     Для Android (ведущий):

@@ -1,4 +1,5 @@
-sudo ss -tulnp | grep 8080
+sudo ss -tulnp | grep 3001
+sudo netstat -tulnp | grep ':8085'
 sudo kill -9 58195
 
 sudo netstat -ltpn
@@ -9,13 +10,13 @@ sudo lsof -nP -i | grep LISTEN
 
 Вы можете использовать lsof, чтобы увидеть, какое приложение прослушивает порт 80:
 ```
-sudo lsof -i TCP:80
+sudo lsof -i TCP:8085
 sudo lsof -i TCP:3003
 ```
 
 sudo kill -9 `sudo lsof -t -i:3001`  or  sudo kill -9 $(sudo lsof -t -i:9001)
 sudo kill -9 `sudo lsof -t -i:8081`
-sudo kill -9 `sudo lsof -t -i:8080`
+sudo kill -9 `sudo lsof -t -i:8085`
 sudo kill -9 `sudo lsof -t -i:80`
 sudo kill -9 `sudo lsof -t -i:443`
 sudo kill -9 `sudo lsof -t -i:81`

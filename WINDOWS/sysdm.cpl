@@ -1,0 +1,4 @@
+D:\depot_tools
+
+$env:GYP_MSVS_VERSION = "2022"
+$env:DEPOT_TOOLS_WIN_TOOLCHAIN = "0"

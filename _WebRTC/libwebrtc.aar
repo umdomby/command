@@ -1,0 +1,3 @@
+Цель: Собрать libwebrtc.aar для Android (arm64) с rtc_use_h264=true.
+Проблемы: Отсутствие H.264, фризы VP8, Samsung-камера.
+
