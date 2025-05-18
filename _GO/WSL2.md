@@ -17,7 +17,8 @@ sudo tar -C /usr/local -xzf go1.24.1.linux-amd64.tar.gz
 
 powershell
 # Копируем архив Go из Windows в WSL (Ubuntu)
-cp C:\Users\PC1\Downloads\go1.24.1.linux-amd64.tar.gz \\wsl.localhost\Ubuntu-24.04\home\pi\projects
+cp \\wsl.localhost\Ubuntu-24.04\home\pi \\wsl.localhost\Ubuntu-24.04\usr\local
+sudo cp /home/pi/go1.24.1.linux-amd64.tar.gz /usr/local
 
 sudo tar -C /usr/local -xzf go1.24.1.linux-amd64.tar.gz
 

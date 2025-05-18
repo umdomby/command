@@ -1,17 +1,16 @@
 Способ 1: Добавление через реестр (рекомендуется вручную или с reg-файлом)
 Открой Блокнот и вставь следующее:
 
-r
-Копировать
-Редактировать
+```
 Windows Registry Editor Version 5.00
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\WSL2]
-@="Открыть в WSL2 здесь"
+@="WSL2"
 "Icon"="wsl.exe"
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\WSL2\command]
-@="wsl.exe ~ -d <имя-дистрибутива> --cd \"%V\""
+@="wsl.exe ~ -d Ubuntu-24.04 --cd \"%V\""
+```
 Замените <имя-дистрибутива> на актуальное имя вашей WSL2-системы (например, Ubuntu-22.04). Узнать его можно через команду:
 
 bash
