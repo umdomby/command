@@ -1,20 +1,6 @@
 "\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug\lib.java\sdk\android\libwebrtc.jar"
 
-```
-gn gen out/Debug --args='
-rtc_system_openh264 = true
-target_cpu = "arm64"
-target_os = "android"
-is_debug = true
-target_sysroot = "/home/pi/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
-android_ndk_root = "/home/pi/android/sdk/ndk/25.1.8937393"
-android_ndk_api_level = 24
-android_sdk_platform_version = "36"
-is_component_build = false
-rtc_include_tests = false
-treat_warnings_as_errors = false
-'
-```
+
 
 как мне собрать aar с нативными библиотеками для проекта ? Проект для Android устройств, желательно добавить все популярные архитектуры мобильных телефонов
 
@@ -122,20 +108,7 @@ file ~/openh264/libopenh264.so
 /home/pi/openh264/libopenh264.so: ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV), dynamically linked, with debug_info, not stripped
 ###
 
-### FILE LIBS ###
-/home/pi/openh264/libopenh264.so
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-arm64-v8a"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-armeabi-v7a"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-x86"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-x86_64"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-arm64-v8a\lib.java\sdk\android\libwebrtc.jar"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-armeabi-v7a\lib.java\sdk\android\libwebrtc.jar"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-x86\lib.java\sdk\android\libwebrtc.jar"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\ebug-x86_64\lib.java\sdk\android\libwebrtc.jar"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-arm64-v8a\libjingle_peerconnection_so.so"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-armeabi-v7a\libjingle_peerconnection_so.so"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-x86\libjingle_peerconnection_so.so"
-"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-x86_64\libjingle_peerconnection_so.so"
+
 
 
 
@@ -144,6 +117,7 @@ make clean
 make OS=android NDKROOT=/home/pi/android/sdk/ndk/25.2.9519653 ARCH=arm64 TARGET=android-21 libraries
 make OS=android NDKROOT=/home/pi/android/sdk/ndk/25.2.9519653 ARCH=arm TARGET=android-21 libraries
 make OS=android NDKROOT=/home/pi/android/sdk/ndk/25.2.9519653 ARCH=x86 TARGET=android-21 libraries
+make OS=android NDKROOT=/home/pi/android/sdk/ndk/25.2.9519653 ARCH=x86 TARGET=android-21 USE_ASM=No libraries
 make OS=android NDKROOT=/home/pi/android/sdk/ndk/25.2.9519653 ARCH=x86_64 TARGET=android-21 libraries
 
 file libopenh264.so
@@ -224,3 +198,130 @@ make clean
 -I/home/pi/android/sdk/ndk/25.2.9519653/sources/android/cpufeatures \
 --target=x86_64-linux-android21
 make OS=android NDKROOT=/home/pi/android/sdk/ndk/25.2.9519653 ARCH=x86_64 TARGET=android-21 libraries
+
+
+```
+gn gen out/Debug --args='
+rtc_system_openh264 = true
+target_cpu = "arm64"
+target_os = "android"
+is_debug = true
+target_sysroot = "/home/pi/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+android_ndk_root = "/home/pi/android/sdk/ndk/25.1.8937393"
+android_ndk_api_level = 24
+android_sdk_platform_version = "36"
+is_component_build = false
+rtc_include_tests = false
+treat_warnings_as_errors = false
+'
+```
+
+### FILE LIBS ###
+"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-arm64-v8a\lib.java\sdk\android\libwebrtc.jar"
+"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-armeabi-v7a\lib.java\sdk\android\libwebrtc.jar"
+"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-x86\lib.java\sdk\android\libwebrtc.jar"
+"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\ebug-x86_64\lib.java\sdk\android\libwebrtc.jar"
+"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-arm64-v8a\libjingle_peerconnection_so.so"
+"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-armeabi-v7a\libjingle_peerconnection_so.so"
+"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-x86\libjingle_peerconnection_so.so"
+"\\wsl.localhost\Ubuntu-24.04\home\pi\webrtc-android\src\out\Debug-x86_64\libjingle_peerconnection_so.so"
+
+"\\wsl.localhost\Ubuntu-24.04\home\pi\openh264-libs\arm64-v8a\libopenh264.so"
+"\\wsl.localhost\Ubuntu-24.04\home\pi\openh264-libs\armeabi-v7a\libopenh264.so"
+"\\wsl.localhost\Ubuntu-24.04\home\pi\openh264-libs\x86\libopenh264.so"
+"\\wsl.localhost\Ubuntu-24.04\home\pi\openh264-libs\x86_64\libopenh264.so"
+
+
+
+# Рекомендация: Используйте libwebrtc.jar из любой архитектуры, например, из arm64-v8a, так как это наиболее распространенная архитектура:
+cp /home/pi/webrtc-android/src/out/Debug-arm64-v8a/lib.java/sdk/android/libwebrtc.jar /tmp/aar_root/classes.jar
+```
+cat > /home/pi/aar_root/AndroidManifest.xml << EOF
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="org.webrtc">
+</manifest>
+EOF
+```
+
+/home/pi/aar_root
+├── AndroidManifest.xml
+├── classes.jar
+├── R.txt
+├── res/
+├── assets/
+└── jni/
+├── arm64-v8a/
+│   ├── libjingle_peerconnection_so.so
+│   ├── libopenh264.so
+├── armeabi-v7a/
+│   ├── libjingle_peerconnection_so.so
+│   ├── libopenh264.so
+├── x86/
+│   ├── libjingle_peerconnection_so.so
+│   ├── libopenh264.so
+├── x86_64/
+│   ├── libjingle_peerconnection_so.so
+│   ├── libopenh264.so
+
+find /home/pi/aar_root
+
+/home/pi/aar_root
+/home/pi/aar_root/res
+/home/pi/aar_root/jni
+/home/pi/aar_root/jni/x86_64
+/home/pi/aar_root/jni/x86_64/libjingle_peerconnection_so.so
+/home/pi/aar_root/jni/x86_64/libopenh264.so
+/home/pi/aar_root/jni/armeabi-v7a
+/home/pi/aar_root/jni/armeabi-v7a/libjingle_peerconnection_so.so
+/home/pi/aar_root/jni/armeabi-v7a/libopenh264.so
+/home/pi/aar_root/jni/x86
+/home/pi/aar_root/jni/x86/libjingle_peerconnection_so.so
+/home/pi/aar_root/jni/x86/libopenh264.so
+/home/pi/aar_root/jni/arm64-v8a
+/home/pi/aar_root/jni/arm64-v8a/libjingle_peerconnection_so.so
+/home/pi/aar_root/jni/arm64-v8a/libopenh264.so
+/home/pi/aar_root/classes.jar
+/home/pi/aar_root/R.txt
+/home/pi/aar_root/AndroidManifest.xml
+/home/pi/aar_root/assets
+
+# Перейдите в папку /home/pi/aar_root и создайте .aar файл с помощью команды zip:
+cd /home/pi/aar_root
+zip -r /home/pi/webrtc.aar .
+cd -
+
+# Эта команда создаст /home/pi/webrtc.aar, который включает все файлы и папки из /home/pi/aar_root.
+
+# Распакуйте AAR в временную папку, чтобы убедиться, что структура правильная:
+mkdir /tmp/aar_check
+cd /tmp/aar_check
+unzip /home/pi/webrtc.aar
+ls -R
+cd -
+rm -rf /tmp/aar_chec
+
+# Убедитесь, что все файлы и папки (AndroidManifest.xml, classes.jar, R.txt, jni/*, res/, assets/) присутствуют.
+
+6. Интеграция в проект
+   Скопируйте /home/pi/webrtc.aar в папку libs вашего Android-проекта и добавьте в build.gradle модуля:
+
+gradle
+
+Копировать
+dependencies {
+implementation files('libs/webrtc.aar')
+}
+
+# Убедитесь, что ваш проект поддерживает все архитектуры:
+
+gradle
+
+Копировать
+android {
+defaultConfig {
+ndk {
+abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+}
+}
+}
