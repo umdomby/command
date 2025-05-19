@@ -1,3 +1,6 @@
+gclient sync
+- Syncing projects: 100% (64/64), done.
+
 Перейдите в директорию src/base:
 bash
 
