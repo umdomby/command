@@ -161,7 +161,7 @@ cp ~/openh264/libopenh264.so ~/openh264-libs/x86_64/
 ```
 
 
-
+rm -f codec/common/src/cpu-features.o
 cd ~/arm64-v8a
 ### openh264 ###
 /home/pi/android/sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang \
@@ -190,8 +190,37 @@ cd ~/arm64-v8a
 -Dandroid_getCpuFeatures=wels_getCpuFeatures \
 -Dandroid_setCpu=wels_setCpu \
 -I/home/pi/android/sdk/ndk/25.2.9519653/sysroot/usr/include \
--I/home/pi “
+-I/home/pi/android/sdk/ndk/25.2.9519653/sources/android/cpufeatures \
+--target=armv7a-linux-androideabi21
 
 ### x86 ###
+/home/pi/android/sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android21-clang \
+-c /home/pi/android/sdk/ndk/25.2.9519653/sources/android/cpufeatures/cpu-features.c \
+-o ~/openh264/codec/common/src/cpu-features.o \
+-DANDROID_NDK -fpic -fstack-protector-all \
+-Dandroid_getCpuIdArm=wels_getCpuIdArm \
+-Dandroid_setCpuArm=wels_setCpuArm \
+-Dandroid_getCpuCount=wels_getCpuCount \
+-Dandroid_getCpuFamily=wels_getCpuFamily \
+-Dandroid_getCpuFeatures=wels_getCpuFeatures \
+-Dandroid_setCpu=wels_setCpu \
+-I/home/pi/android/sdk/ndk/25.2.9519653/sysroot/usr/include \
+-I/home/pi/android/sdk/ndk/25.2.9519653/sources/android/cpufeatures \
+--target=i686-linux-android21
 
 ### x86_64 ###
+make clean
+/home/pi/android/sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android21-clang \
+-c /home/pi/android/sdk/ndk/25.2.9519653/sources/android/cpufeatures/cpu-features.c \
+-o ~/openh264/codec/common/src/cpu-features.o \
+-DANDROID_NDK -fpic -fstack-protector-all \
+-Dandroid_getCpuIdArm=wels_getCpuIdArm \
+-Dandroid_setCpuArm=wels_setCpuArm \
+-Dandroid_getCpuCount=wels_getCpuCount \
+-Dandroid_getCpuFamily=wels_getCpuFamily \
+-Dandroid_getCpuFeatures=wels_getCpuFeatures \
+-Dandroid_setCpu=wels_setCpu \
+-I/home/pi/android/sdk/ndk/25.2.9519653/sysroot/usr/include \
+-I/home/pi/android/sdk/ndk/25.2.9519653/sources/android/cpufeatures \
+--target=x86_64-linux-android21
+make OS=android NDKROOT=/home/pi/android/sdk/ndk/25.2.9519653 ARCH=x86_64 TARGET=android-21 libraries
