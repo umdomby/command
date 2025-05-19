@@ -1,107 +1,770 @@
-# Я собрал зборку Android WebRTC
-implementation(files("libs/libwebrtc.jar"))
-gn gen out/Debug --args='
-    rtc_system_openh264 = true
-    target_cpu = "arm64"
-    target_os = "android"
-    is_debug = true
-    target_sysroot = "/home/pi/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
-    android_ndk_root = "/home/pi/android/sdk/ndk/25.1.8937393"
-    android_ndk_api_level = 24
-    android_sdk_platform_version = "36"
-    is_component_build = false
-    rtc_include_tests = false
-    treat_warnings_as_errors = false
-'
+G:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\MainActivity.kt
+G:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebRTCClient.kt
+G:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebRTCService.kt
+G:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebSocketClient.kt
 
-# вот G:\AndroidStudio\MyTest\app\build.gradle.kts
-// file: app/build.gradle.kts
-plugins {
-alias(libs.plugins.android.application)
-alias(libs.plugins.kotlin.android)
-alias(libs.plugins.kotlin.compose)
-}
+// file: app/src/main/java/com/example/mytest/MainActivity.kt
+package com.example.mytest
 
-android {
-namespace = "com.example.mytest"
-compileSdk = 35
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.BroadcastReceiver
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.media.projection.MediaProjectionManager
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.View
+import android.view.WindowManager
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.result.registerForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import com.example.mytest.databinding.ActivityMainBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.json.JSONArray
+import java.util.*
+import kotlin.random.Random
 
-    defaultConfig {
-        applicationId = "com.example.mytest"
-        minSdk = 26
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+class MainActivity : ComponentActivity() {
+private lateinit var binding: ActivityMainBinding
+private lateinit var sharedPreferences: SharedPreferences
+private var currentRoomName: String = ""
+private var isServiceRunning: Boolean = false
+private val roomList = mutableListOf<String>()
+private lateinit var roomListAdapter: ArrayAdapter<String>
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    private val requiredPermissions = arrayOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.RECORD_AUDIO,
+        Manifest.permission.POST_NOTIFICATIONS
+    )
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        if (permissions.all { it.value }) {
+            if (isCameraPermissionGranted()) {
+                val mediaManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+                mediaProjectionLauncher.launch(mediaManager.createScreenCaptureIntent())
+                checkBatteryOptimization()
+            } else {
+                showToast("Camera permission required")
+                finish()
+            }
+        } else {
+            showToast("Not all permissions granted")
+            finish()
+        }
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+    private val mediaProjectionLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK && result.data != null) {
+            // Сохраняем текущее имя комнаты при успешном запуске сервиса
+            saveCurrentRoom()
+            startWebRTCService(result.data!!)
+        } else {
+            showToast("Screen recording access denied")
+            finish()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        loadRoomList()
+        setupUI()
+        setupRoomListAdapter()
+
+        // Проверяем состояние сервиса при создании активности
+        isServiceRunning = WebRTCService.isRunning
+        updateButtonStates()
+    }
+
+    private fun loadRoomList() {
+        // Загружаем список комнат
+        val jsonString = sharedPreferences.getString(ROOM_LIST_KEY, null)
+        jsonString?.let {
+            val jsonArray = JSONArray(it)
+            for (i in 0 until jsonArray.length()) {
+                roomList.add(jsonArray.getString(i))
+            }
+        }
+
+        // Загружаем последнее использованное имя комнаты
+        currentRoomName = sharedPreferences.getString(LAST_USED_ROOM_KEY, "") ?: ""
+
+        // Если нет сохраненных комнат или последнее имя пустое, генерируем новое
+        if (roomList.isEmpty()) {
+            currentRoomName = generateRandomRoomName()
+            roomList.add(currentRoomName)
+            saveRoomList()
+            saveCurrentRoom()
+        } else if (currentRoomName.isEmpty()) {
+            currentRoomName = roomList.first()
+            saveCurrentRoom()
+        }
+
+        // Устанавливаем последнее использованное имя в поле ввода
+        binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
+    }
+
+    private fun saveCurrentRoom() {
+        sharedPreferences.edit()
+            .putString(LAST_USED_ROOM_KEY, currentRoomName)
+            .apply()
+    }
+
+    private fun saveRoomList() {
+        val jsonArray = JSONArray()
+        roomList.forEach { jsonArray.put(it) }
+        sharedPreferences.edit()
+            .putString(ROOM_LIST_KEY, jsonArray.toString())
+            .apply()
+    }
+
+    private fun setupRoomListAdapter() {
+        roomListAdapter = ArrayAdapter(
+            this,
+            com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
+            roomList
+        )
+        binding.roomListView.adapter = roomListAdapter
+        binding.roomListView.setOnItemClickListener { _, _, position, _ ->
+            currentRoomName = roomList[position]
+            binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
+            updateButtonStates()
+        }
+    }
+
+    private fun setupUI() {
+        binding.roomCodeEditText.addTextChangedListener(object : TextWatcher {
+            private var isFormatting = false
+            private var deletingHyphen = false
+            private var hyphenPositions = listOf(4, 9, 14)
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                if (isFormatting) return
+
+                if (count == 1 && after == 0 && hyphenPositions.contains(start)) {
+                    deletingHyphen = true
+                } else {
+                    deletingHyphen = false
+                }
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (isFormatting || isServiceRunning) return
+
+                isFormatting = true
+
+                val text = s.toString().replace("-", "")
+                if (text.length > 16) {
+                    s?.replace(0, s.length, formatRoomName(currentRoomName))
+                } else {
+                    val formatted = StringBuilder()
+                    for (i in text.indices) {
+                        if (i > 0 && i % 4 == 0) {
+                            formatted.append('-')
+                        }
+                        formatted.append(text[i])
+                    }
+
+                    val cursorPos = binding.roomCodeEditText.selectionStart
+                    if (deletingHyphen && cursorPos > 0 && cursorPos < formatted.length &&
+                        formatted[cursorPos] == '-') {
+                        formatted.deleteCharAt(cursorPos)
+                    }
+
+                    s?.replace(0, s.length, formatted.toString())
+                }
+
+                isFormatting = false
+
+                val cleanName = binding.roomCodeEditText.text.toString().replace("-", "")
+                binding.saveCodeButton.isEnabled = cleanName.length == 16 &&
+                        !roomList.contains(cleanName)
+            }
+        })
+
+        binding.generateCodeButton.setOnClickListener {
+            currentRoomName = generateRandomRoomName()
+            binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
+            showToast("Generated: $currentRoomName")
+        }
+
+        binding.deleteRoomButton.setOnClickListener {
+            val selectedRoom = binding.roomCodeEditText.text.toString().replace("-", "")
+            if (roomList.contains(selectedRoom)) {
+                showDeleteConfirmationDialog(selectedRoom)
+            } else {
+                showToast(getString(R.string.room_not_found))
+            }
+        }
+
+        binding.saveCodeButton.setOnClickListener {
+            val newRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
+            if (newRoomName.length == 16) {
+                if (!roomList.contains(newRoomName)) {
+                    roomList.add(0, newRoomName)
+                    currentRoomName = newRoomName
+                    saveRoomList()
+                    saveCurrentRoom()
+                    roomListAdapter.notifyDataSetChanged()
+                    showToast("Room saved: ${formatRoomName(newRoomName)}")
+                } else {
+                    showToast("Room already exists")
+                }
+            }
+        }
+
+        binding.copyCodeButton.setOnClickListener {
+            val roomName = binding.roomCodeEditText.text.toString()
+            val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Room name", roomName)
+            clipboard.setPrimaryClip(clip)
+            showToast("Copied: $roomName")
+        }
+
+        binding.shareCodeButton.setOnClickListener {
+            val roomName = binding.roomCodeEditText.text.toString()
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "Join my room: $roomName")
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(shareIntent, "Share Room"))
+        }
+
+        binding.startButton.setOnClickListener {
+            if (isServiceRunning) {
+                showToast("Service already running")
+                return@setOnClickListener
+            }
+
+            currentRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
+            if (currentRoomName.isEmpty()) {
+                showToast("Enter room name")
+                return@setOnClickListener
+            }
+
+            if (checkAllPermissionsGranted() && isCameraPermissionGranted()) {
+                val mediaManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+                mediaProjectionLauncher.launch(mediaManager.createScreenCaptureIntent())
+                checkBatteryOptimization()
+            } else {
+                requestPermissionLauncher.launch(requiredPermissions)
+            }
+        }
+
+        binding.stopButton.setOnClickListener {
+            if (!isServiceRunning) {
+                showToast("Service not running")
+                return@setOnClickListener
+            }
+            stopWebRTCService()
+        }
+    }
+
+    private fun formatRoomName(name: String): String {
+        if (name.length != 16) return name
+
+        return buildString {
+            for (i in 0 until 16) {
+                if (i > 0 && i % 4 == 0) append('-')
+                append(name[i])
+            }
+        }
+    }
+
+    private fun showDeleteConfirmationDialog(roomName: String) {
+        if (roomList.size <= 1) {
+            showToast(getString(R.string.cannot_delete_last))
+            return
+        }
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.delete_confirm_title))
+            .setMessage(getString(R.string.delete_confirm_message, formatRoomName(roomName)))
+            .setPositiveButton(getString(R.string.delete_button)) { _, _ ->
+                roomList.remove(roomName)
+                saveRoomList()
+                roomListAdapter.notifyDataSetChanged()
+
+                if (currentRoomName == roomName) {
+                    currentRoomName = roomList.first()
+                    binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
+                    saveCurrentRoom()
+                }
+
+                showToast("Room deleted")
+                updateButtonStates()
+            }
+            .setNegativeButton(getString(R.string.cancel_button), null)
+            .show()
+    }
+
+    private fun generateRandomRoomName(): String {
+        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        val random = Random.Default
+        val code = StringBuilder()
+
+        repeat(16) {
+            code.append(chars[random.nextInt(chars.length)])
+        }
+
+        return code.toString()
+    }
+
+    private fun startWebRTCService(resultData: Intent) {
+        try {
+            // Сохраняем текущее имя комнаты перед запуском сервиса
+            currentRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
+            saveCurrentRoom()
+
+            WebRTCService.currentRoomName = currentRoomName
+            val serviceIntent = Intent(this, WebRTCService::class.java).apply {
+                putExtra("resultCode", RESULT_OK)
+                putExtra("resultData", resultData)
+                putExtra("roomName", currentRoomName)
+            }
+            ContextCompat.startForegroundService(this, serviceIntent)
+            isServiceRunning = true
+            updateButtonStates()
+            showToast("Service started: ${formatRoomName(currentRoomName)}")
+        } catch (e: Exception) {
+            showToast("Start error: ${e.message}")
+            Log.e("MainActivity", "Service start error", e)
+        }
+    }
+
+    private fun stopWebRTCService() {
+        try {
+            val stopIntent = Intent(this, WebRTCService::class.java).apply {
+                action = "STOP"
+            }
+            startService(stopIntent)
+            isServiceRunning = false
+            updateButtonStates()
+            showToast("Service stopped")
+        } catch (e: Exception) {
+            showToast("Stop error: ${e.message}")
+            Log.e("MainActivity", "Service stop error", e)
+        }
+    }
+
+    private fun updateButtonStates() {
+        binding.apply {
+            // START активен только если сервис не работает
+            startButton.isEnabled = !isServiceRunning
+
+            // STOP активен только если сервис работает
+            stopButton.isEnabled = isServiceRunning
+
+            roomCodeEditText.isEnabled = !isServiceRunning
+            saveCodeButton.isEnabled = !isServiceRunning &&
+                    binding.roomCodeEditText.text.toString().replace("-", "").length == 16 &&
+                    !roomList.contains(binding.roomCodeEditText.text.toString().replace("-", ""))
+            generateCodeButton.isEnabled = !isServiceRunning
+            deleteRoomButton.isEnabled = !isServiceRunning &&
+                    roomList.contains(binding.roomCodeEditText.text.toString().replace("-", "")) &&
+                    roomList.size > 1
+
+            startButton.setBackgroundColor(
+                ContextCompat.getColor(
+                    this@MainActivity,
+                    if (isServiceRunning) android.R.color.darker_gray else R.color.green
+                )
+            )
+            stopButton.setBackgroundColor(
+                ContextCompat.getColor(
+                    this@MainActivity,
+                    if (isServiceRunning) R.color.red else android.R.color.darker_gray
+                )
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+
+    private val serviceStateReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == WebRTCService.ACTION_SERVICE_STATE) {
+                isServiceRunning = intent.getBooleanExtra(WebRTCService.EXTRA_IS_RUNNING, false)
+                updateButtonStates()
+            }
+        }
     }
-    kotlinOptions {
-        jvmTarget = "11"
+
+    private fun checkAllPermissionsGranted() = requiredPermissions.all {
+        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
     }
-    buildFeatures {
-        compose = true
-        viewBinding = true
-        dataBinding = true
+
+    private fun isCameraPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun checkBatteryOptimization() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val powerManager = getSystemService(PowerManager::class.java)
+            if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+                val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
+                    data = Uri.parse("package:$packageName")
+                }
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun showToast(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+    }
+
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(serviceStateReceiver, IntentFilter(WebRTCService.ACTION_SERVICE_STATE))
+        // Обновляем состояние при возвращении в активность
+        isServiceRunning = WebRTCService.isRunning
+        updateButtonStates()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(serviceStateReceiver)
+    }
+
+    companion object {
+        private const val PREFS_NAME = "WebRTCPrefs"
+        private const val ROOM_LIST_KEY = "room_list"
+        private const val LAST_USED_ROOM_KEY = "last_used_room"
     }
 }
 
-dependencies {
-// Локальная сборка WebRTC
-// implementation(files("libs/libwebrtc.aar"))
-// implementation("io.github.webrtc-sdk:android:125.6422.07")
-implementation(files("libs/libwebrtc.jar"))
-// WebSocket
-implementation("com.squareup.okhttp3:okhttp:4.11.0")
+// file: app/src/main/java/com/example/mytest/WebRTCClient.kt
+package com.example.mytest
 
-    // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+import android.content.Context
+import android.os.Build
+import android.util.Log
+import org.webrtc.*
+import org.webrtc.PeerConnectionFactory.InitializationOptions
 
-    // WorkManager
-    implementation("androidx.work:work-runtime-ktx:2.8.1")
+class WebRTCClient(
+private val context: Context,
+private val eglBase: EglBase,
+private val localView: SurfaceViewRenderer,
+private val remoteView: SurfaceViewRenderer,
+private val observer: PeerConnection.Observer
+) {
+private lateinit var peerConnectionFactory: PeerConnectionFactory
+var peerConnection: PeerConnection? = null
+private var localVideoTrack: VideoTrack? = null
+private var localAudioTrack: AudioTrack? = null
+internal var videoCapturer: VideoCapturer? = null
+private var surfaceTextureHelper: SurfaceTextureHelper? = null
 
-    // Material Design 3
-    implementation("androidx.compose.material3:material3:1.1.2")
-    implementation("com.google.android.material:material:1.9.0")
+    init {
+        initializePeerConnectionFactory()
+        peerConnection = createPeerConnection()
+        if (peerConnection == null) {
+            throw IllegalStateException("Failed to create peer connection")
+        }
+        createLocalTracks()
+    }
 
-    // Core KTX
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    private fun initializePeerConnectionFactory() {
+        // Инициализация WebRTC
+        val initializationOptions = InitializationOptions.builder(context)
+            .setEnableInternalTracer(true)
+            .setFieldTrials("WebRTC-H264HighProfile/Enabled/")
+            .createInitializationOptions()
+        PeerConnectionFactory.initialize(initializationOptions)
 
-    // Activity Compose
-    implementation("androidx.activity:activity-compose:1.7.2")
+        // Проверка кодеков
+        val tempEncoderFactory = DefaultVideoEncoderFactory(eglBase.eglBaseContext, true, true)
+        val supportedCodecs = tempEncoderFactory.supportedCodecs
+        Log.d("WebRTCClient", "Supported codecs: ${supportedCodecs.joinToString { it.name }}")
 
-    // Compose BOM
-    implementation(platform("androidx.compose:compose-bom:2023.06.01"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+        // Выбор videoEncoderFactory
+        val videoEncoderFactory = if (supportedCodecs.any { it.name.equals("H264", ignoreCase = true) }) {
+            Log.d("WebRTCClient", "Using hardware H.264 encoder")
+            tempEncoderFactory
+        } else {
+            Log.w("WebRTCClient", "H.264 not supported by hardware, using software fallback")
+            SoftwareVideoEncoderFactory()
+        }
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.06.01"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+        val videoDecoderFactory = DefaultVideoDecoderFactory(eglBase.eglBaseContext)
 
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+        // Создание PeerConnectionFactory
+        peerConnectionFactory = PeerConnectionFactory.builder()
+            .setVideoEncoderFactory(videoEncoderFactory)
+            .setVideoDecoderFactory(videoDecoderFactory)
+            .setOptions(PeerConnectionFactory.Options().apply {
+                disableEncryption = false
+                disableNetworkMonitor = false
+            })
+            .createPeerConnectionFactory()
+    }
+
+    private fun createPeerConnection(): PeerConnection? {
+        val rtcConfig = PeerConnection.RTCConfiguration(
+            listOf(
+                PeerConnection.IceServer.builder("stun:ardua.site:3478").createIceServer(),
+                PeerConnection.IceServer.builder("turn:ardua.site:3478")
+                    .setUsername("user1")
+                    .setPassword("pass1")
+                    .createIceServer()
+            )
+        ).apply {
+            sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN
+            continualGatheringPolicy = PeerConnection.ContinualGatheringPolicy.GATHER_CONTINUALLY
+            iceTransportsType = PeerConnection.IceTransportsType.ALL
+            bundlePolicy = PeerConnection.BundlePolicy.MAXBUNDLE
+            rtcpMuxPolicy = PeerConnection.RtcpMuxPolicy.REQUIRE
+            tcpCandidatePolicy = PeerConnection.TcpCandidatePolicy.ENABLED
+            candidateNetworkPolicy = PeerConnection.CandidateNetworkPolicy.ALL
+            keyType = PeerConnection.KeyType.ECDSA
+        }
+
+        return peerConnectionFactory.createPeerConnection(rtcConfig, observer)
+    }
+
+    internal fun switchCamera(useBackCamera: Boolean) {
+        try {
+            videoCapturer?.let { capturer ->
+                if (capturer is CameraVideoCapturer) {
+                    val enumerator = Camera2Enumerator(context)
+                    val targetCamera = enumerator.deviceNames.find {
+                        if (useBackCamera) !enumerator.isFrontFacing(it) else enumerator.isFrontFacing(it)
+                    }
+                    if (targetCamera != null) {
+                        capturer.switchCamera(object : CameraVideoCapturer.CameraSwitchHandler {
+                            override fun onCameraSwitchDone(isFrontCamera: Boolean) {
+                                Log.d("WebRTCClient", "Switched to ${if (isFrontCamera) "front" else "back"} camera")
+                            }
+
+                            override fun onCameraSwitchError(error: String) {
+                                Log.e("WebRTCClient", "Error switching camera: $error")
+                            }
+                        }, targetCamera)
+                    } else {
+                        Log.e("WebRTCClient", "No ${if (useBackCamera) "back" else "front"} camera found")
+                    }
+                } else {
+                    Log.w("WebRTCClient", "Video capturer is not a CameraVideoCapturer")
+                }
+            } ?: Log.w("WebRTCClient", "Video capturer is null")
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Error switching camera", e)
+        }
+    }
+
+    private fun createLocalTracks() {
+        createAudioTrack()
+        createVideoTrack()
+
+        val streamId = "ARDAMS"
+        val stream = peerConnectionFactory.createLocalMediaStream(streamId)
+
+        localAudioTrack?.let {
+            stream.addTrack(it)
+            peerConnection?.addTrack(it, listOf(streamId))
+        }
+
+        localVideoTrack?.let {
+            stream.addTrack(it)
+            peerConnection?.addTrack(it, listOf(streamId))
+        }
+    }
+
+    private fun createAudioTrack() {
+        val audioConstraints = MediaConstraints().apply {
+            mandatory.add(MediaConstraints.KeyValuePair("googEchoCancellation", "true"))
+            mandatory.add(MediaConstraints.KeyValuePair("googAutoGainControl", "true"))
+            mandatory.add(MediaConstraints.KeyValuePair("googHighpassFilter", "true"))
+            mandatory.add(MediaConstraints.KeyValuePair("googNoiseSuppression", "true"))
+        }
+
+        val audioSource = peerConnectionFactory.createAudioSource(audioConstraints)
+        localAudioTrack = peerConnectionFactory.createAudioTrack("ARDAMSa0", audioSource)
+    }
+
+    private fun createVideoTrack() {
+        try {
+            videoCapturer = createCameraCapturer()
+            if (videoCapturer == null) {
+                Log.e("WebRTCClient", "Failed to create video capturer")
+                return
+            }
+
+            surfaceTextureHelper = SurfaceTextureHelper.create("CaptureThread", eglBase.eglBaseContext)
+            if (surfaceTextureHelper == null) {
+                Log.e("WebRTCClient", "Failed to create SurfaceTextureHelper")
+                return
+            }
+
+            val videoSource = peerConnectionFactory.createVideoSource(false)
+            videoCapturer?.initialize(surfaceTextureHelper, context, videoSource.capturerObserver)
+
+            val isSamsung = Build.MANUFACTURER.equals("samsung", ignoreCase = true)
+            videoCapturer?.startCapture(
+                if (isSamsung) 480 else 640,
+                if (isSamsung) 360 else 480,
+                if (isSamsung) 15 else 20
+            )
+
+            localVideoTrack = peerConnectionFactory.createVideoTrack("ARDAMSv0", videoSource).apply {
+                addSink(localView)
+            }
+
+            setVideoEncoderBitrate(
+                if (isSamsung) 150000 else 300000,
+                if (isSamsung) 200000 else 400000,
+                if (isSamsung) 300000 else 500000
+            )
+            Log.d("WebRTCClient", "Video track created successfully")
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Error creating video track", e)
+        }
+    }
+
+    fun setVideoEncoderBitrate(minBitrate: Int, currentBitrate: Int, maxBitrate: Int) {
+        try {
+            val sender = peerConnection?.senders?.find { it.track()?.kind() == "video" }
+            sender?.let { videoSender ->
+                val parameters = videoSender.parameters
+                if (parameters.encodings.isNotEmpty()) {
+                    parameters.encodings[0].minBitrateBps = minBitrate
+                    parameters.encodings[0].maxBitrateBps = maxBitrate
+                    parameters.encodings[0].bitratePriority = 1.0
+                    videoSender.parameters = parameters
+                    Log.d("WebRTCClient", "Set video bitrate: min=$minBitrate, max=$maxBitrate")
+                }
+            } ?: Log.w("WebRTCClient", "No video sender found")
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Error setting video bitrate", e)
+        }
+    }
+
+    private fun createCameraCapturer(): VideoCapturer? {
+        val enumerator = Camera2Enumerator(context)
+        return enumerator.deviceNames.find { enumerator.isFrontFacing(it) }?.let {
+            Log.d("WebRTCClient", "Using front camera: $it")
+            enumerator.createCapturer(it, null)
+        } ?: enumerator.deviceNames.firstOrNull()?.let {
+            Log.d("WebRTCClient", "Using first available camera: $it")
+            enumerator.createCapturer(it, null)
+        } ?: run {
+            Log.e("WebRTCClient", "No cameras available")
+            null
+        }
+    }
+
+    fun close() {
+        try {
+            videoCapturer?.let { capturer ->
+                try {
+                    capturer.stopCapture()
+                    Log.d("WebRTCClient", "Video capturer stopped")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error stopping capturer", e)
+                }
+                try {
+                    capturer.dispose()
+                    Log.d("WebRTCClient", "Video capturer disposed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing capturer", e)
+                }
+            }
+
+            localVideoTrack?.let { track ->
+                try {
+                    track.removeSink(localView)
+                    track.dispose()
+                    Log.d("WebRTCClient", "Local video track disposed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing video track", e)
+                }
+            }
+
+            localAudioTrack?.let { track ->
+                try {
+                    track.dispose()
+                    Log.d("WebRTCClient", "Local audio track disposed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing audio track", e)
+                }
+            }
+
+            surfaceTextureHelper?.let { helper ->
+                try {
+                    helper.dispose()
+                    Log.d("WebRTCClient", "SurfaceTextureHelper disposed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing surface helper", e)
+                }
+            }
+
+            peerConnection?.let { pc ->
+                try {
+                    pc.close()
+                    Log.d("WebRTCClient", "Peer connection closed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error closing peer connection", e)
+                }
+                try {
+                    pc.dispose()
+                    Log.d("WebRTCClient", "Peer connection disposed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing peer connection", e)
+                }
+            }
+
+            try {
+                peerConnectionFactory.dispose()
+                Log.d("WebRTCClient", "PeerConnectionFactory disposed")
+            } catch (e: Exception) {
+                Log.e("WebRTCClient", "Error disposing PeerConnectionFactory", e)
+            }
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Error in cleanup", e)
+        } finally {
+            videoCapturer = null
+            localVideoTrack = null
+            localAudioTrack = null
+            surfaceTextureHelper = null
+            peerConnection = null
+        }
+    }
 }
 
-# у меня перестал работать программа:
+// file: app/src/main/java/com/example/mytest/WebRTCService.kt
 package com.example.mytest
 
 import android.annotation.SuppressLint
@@ -1155,28 +1818,221 @@ class WebRTCService : Service() {
     }
 }
 
-# вот логи:
-2025-05-19 16:56:43.673 21383-21383 AndroidRuntime          com.example.mytest                   E  FATAL EXCEPTION: main
-Process: com.example.mytest, PID: 21383
-java.lang.UnsatisfiedLinkError: dalvik.system.PathClassLoader[DexPathList[[zip file "/data/app/com.example.mytest-oLRS8cQcDjRfkiCJ4cVKEg==/base.apk"],nativeLibraryDirectories=[/data/app/com.example.mytest-oLRS8cQcDjRfkiCJ4cVKEg==/lib/arm, /system/lib, /system/vendor/lib]]] couldn't find "libjingle_peerconnection_so.so"
-at java.lang.Runtime.loadLibrary0(Runtime.java:1011)
-at java.lang.System.loadLibrary(System.java:1657)
-at org.webrtc.NativeLibrary$DefaultLoader.load(NativeLibrary.java:20)
-at org.webrtc.NativeLibrary.initialize(NativeLibrary.java:41)
-at org.webrtc.PeerConnectionFactory.initialize(PeerConnectionFactory.java:306)
-at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:37)
+// file: app/src/main/java/com/example/mytest/WebSocketClient.kt
+package com.example.mytest
+
+import android.annotation.SuppressLint
+import android.util.Log
+import okhttp3.*
+import org.json.JSONObject
+import java.security.cert.X509Certificate
+import java.util.concurrent.TimeUnit
+import javax.net.ssl.*
+
+class WebSocketClient(private val listener: okhttp3.WebSocketListener) {
+private var webSocket: WebSocket? = null
+private var currentUrl: String = ""
+private val client = OkHttpClient.Builder()
+.pingInterval(20, TimeUnit.SECONDS)
+.pingInterval(20, TimeUnit.SECONDS)
+.hostnameVerifier { _, _ -> true }
+.sslSocketFactory(getUnsafeSSLSocketFactory(), getTrustAllCerts()[0] as X509TrustManager)
+.build()
+
+    private fun getUnsafeSSLSocketFactory(): SSLSocketFactory {
+        val trustAllCerts = getTrustAllCerts()
+        val sslContext = SSLContext.getInstance("SSL")
+        sslContext.init(null, trustAllCerts, java.security.SecureRandom())
+        return sslContext.socketFactory
+    }
+
+    private fun getTrustAllCerts(): Array<TrustManager> {
+        return arrayOf(
+            @SuppressLint("CustomX509TrustManager")
+            object : X509TrustManager {
+                @SuppressLint("TrustAllX509TrustManager")
+                override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+                }
+
+                @SuppressLint("TrustAllX509TrustManager")
+                override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+                }
+
+                override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
+            })
+    }
+    fun isConnected(): Boolean {
+        return webSocket != null
+    }
+
+    fun connect(url: String) {
+        currentUrl = url
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        webSocket = client.newWebSocket(request, listener)
+    }
+
+    fun reconnect() {
+        disconnect()
+        connect(currentUrl)
+    }
+
+    fun send(message: String) {
+        webSocket?.send(message)
+    }
+
+    fun disconnect() {
+        webSocket?.close(1000, "Normal closure")
+        client.dispatcher.executorService.shutdown()
+    }
+}
+
+приложение запустилось но при нажатии на кнопку START свернулось
+-19 23:22:53.304  4667-4673  zygote64                com.example.mytest                   I  Do full code cache collection, code=239KB, data=185KB
+2025-05-19 23:22:53.305  4667-4673  zygote64                com.example.mytest                   I  After code cache collection, code=236KB, data=154KB
+2025-05-19 23:22:53.318  4667-4667  WebRTCClient            com.example.mytest                   D  Supported codecs: VP8, AV1, VP9
+2025-05-19 23:22:53.318  4667-4667  WebRTCClient            com.example.mytest                   W  H.264 not supported by hardware, using software fallback
+2025-05-19 23:22:53.320  4667-4667  AndroidRuntime          com.example.mytest                   D  Shutting down VM
+2025-05-19 23:22:53.322  4667-4667  AndroidRuntime          com.example.mytest                   E  FATAL EXCEPTION: main
+Process: com.example.mytest, PID: 4667
+java.lang.NoClassDefFoundError: Failed resolution of: Lorg/webrtc/Environment;
+at org.webrtc.PeerConnectionFactory$Builder.<init>(PeerConnectionFactory.java:166)
+at org.webrtc.PeerConnectionFactory$Builder.<init>(Unknown Source:0)
+at org.webrtc.PeerConnectionFactory.builder(PeerConnectionFactory.java:295)
+at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:57)
 at com.example.mytest.WebRTCClient.<init>(WebRTCClient.kt:24)
 at com.example.mytest.WebRTCService.initializeWebRTC(WebRTCService.kt:327)
 at com.example.mytest.WebRTCService.onCreate(WebRTCService.kt:267)
-at android.app.ActivityThread.handleCreateService(ActivityThread.java:3572)
-at android.app.ActivityThread.-wrap4(Unknown Source:0)
-at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1822)
-at android.os.Handler.dispatchMessage(Handler.java:106)
-at android.os.Looper.loop(Looper.java:164)
-at android.app.ActivityThread.main(ActivityThread.java:7025)
+at android.app.ActivityThread.handleCreateService(ActivityThread.java:3961)
+at android.app.ActivityThread.-wrap5(Unknown Source:0)
+at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2092)
+at android.os.Handler.dispatchMessage(Handler.java:108)
+at android.os.Looper.loop(Looper.java:166)
+at android.app.ActivityThread.main(ActivityThread.java:7523)
 at java.lang.reflect.Method.invoke(Native Method)
-at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:441)
-at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1408)
+at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:245)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:921)
+Caused by: java.lang.ClassNotFoundException: Didn't find class "org.webrtc.Environment" on path: DexPathList[[zip file "/data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/base.apk"],nativeLibraryDirectories=[/data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/lib/arm64, /data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/base.apk!/lib/arm64-v8a, /system/lib64, /vendor/lib64, /product/lib64]]
+at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:93)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
+at org.webrtc.PeerConnectionFactory$Builder.<init>(PeerConnectionFactory.java:166) 
+at org.webrtc.PeerConnectionFactory$Builder.<init>(Unknown Source:0) 
+                                                                                                    	at org.webrtc.PeerConnectionFactory.builder(PeerConnectionFactory.java:295) 
+                                                                                                    	at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:57) 
+                                                                                                    	at com.example.mytest.WebRTCClient.<init>(WebRTCClient.kt:24) 
+                                                                                                    	at com.example.mytest.WebRTCService.initializeWebRTC(WebRTCService.kt:327) 
+                                                                                                    	at com.example.mytest.WebRTCService.onCreate(WebRTCService.kt:267) 
+                                                                                                    	at android.app.ActivityThread.handleCreateService(ActivityThread.java:3961) 
+                                                                                                    	at android.app.ActivityThread.-wrap5(Unknown Source:0) 
+                                                                                                    	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2092) 
+at android.os.Handler.dispatchMessage(Handler.java:108) 
+at android.os.Looper.loop(Looper.java:166) 
+at android.app.ActivityThread.main(ActivityThread.java:7523) 
+at java.lang.reflect.Method.invoke(Native Method) 
+at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:245) 
+                                                                                                    	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:921) 
+2025-05-19 23:22:53.337  4667-4667  Process                 com.example.mytest                   I  Sending signal. PID: 4667 SIG: 9
+---------------------------- PROCESS ENDED (4667) for package com.example.mytest ----------------------------
+2025-05-19 23:22:53.445  1249-1392  InputDispatcher         system_server                        E  channel '8cb24e3 com.example.mytest/com.example.mytest.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+---------------------------- PROCESS STARTED (4773) for package com.example.mytest ----------------------------
+2025-05-19 23:22:54.598  4773-4773  HwFLClassLoader         com.example.mytest                   D  get used feature list :/feature/used-list failed!
+2025-05-19 23:22:54.598  4773-4773  HwFLClassLoader         com.example.mytest                   D  USE_FEATURE_LIST had not init!
+2025-05-19 23:22:54.605  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache mCurPackageName=com.example.mytest uptimes=792182173
+2025-05-19 23:22:54.608  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache oUid null
+2025-05-19 23:22:54.610  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache volumes null
+2025-05-19 23:22:54.612  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache path=/storage/emulated/0 state=mounted key=com.example.mytest#10123#256
+2025-05-19 23:22:54.614  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache oUid 10123
+2025-05-19 23:22:54.614  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache volumes null
+2025-05-19 23:22:54.618  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache path=/storage/emulated/0 state=mounted key=com.example.mytest#10123#0
+2025-05-19 23:22:54.619  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache async read begin packageName=com.example.mytest userid=0
+2025-05-19 23:22:54.620  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache pi null
+2025-05-19 23:22:54.623  4773-4794  chatty                  com.example.mytest                   I  uid=10123(u0_a123) queued-work-loo identical 1 line
+2025-05-19 23:22:54.628  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache pi null
+2025-05-19 23:22:54.631  4773-4773  HwApiCacheMangerEx      com.example.mytest                   I  apicache pi null
+2025-05-19 23:22:54.631  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache oUid null
+2025-05-19 23:22:54.633  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache async read finished packageName=com.example.mytest userid=0 totalus=14262
+2025-05-19 23:22:54.661  4773-4773  WM-WrkMgrInitializer    com.example.mytest                   D  Initializing WorkManager with default configuration.
+2025-05-19 23:22:54.680  4773-4773  HwCust                  com.example.mytest                   I  Constructor found for class android.net.HwCustConnectivityManagerImpl
+2025-05-19 23:22:54.680  4773-4773  HwCust                  com.example.mytest                   D  Create obj success use class android.net.HwCustConnectivityManagerImpl
+2025-05-19 23:22:54.708  4773-4773  Minikin                 com.example.mytest                   E  Could not get cmap table size!
+2025-05-19 23:22:54.709  4773-4794  MemoryLeak...torManager com.example.mytest                   E  MemoryLeakMonitor.jar is not exist!
+2025-05-19 23:22:54.731  4773-4773  WebRTCService           com.example.mytest                   D  Service created with room:
+2025-05-19 23:22:54.748  4773-4773  WebRTCService           com.example.mytest                   D  Initializing new WebRTC connection
+2025-05-19 23:22:54.748  4773-4773  WebRTCService           com.example.mytest                   D  WebRTC resources cleaned up
+2025-05-19 23:22:54.761  4773-4773  org.webrtc.Logging      com.example.mytest                   I  EglBase14Impl: Using OpenGL ES version 2
+2025-05-19 23:22:54.773  4773-4773  HwWidgetFactory         com.example.mytest                   V  : successes to get AllImpl object and return....
+2025-05-19 23:22:54.788  4773-4773  ResourceType            com.example.mytest                   W  No known package when getting name for resource number 0xffffffff
+2025-05-19 23:22:54.796  4773-4820  org.webrtc.Logging      com.example.mytest                   I  EglBase14Impl: Using OpenGL ES version 2
+2025-05-19 23:22:54.799  4773-4773  org.webrtc.Logging      com.example.mytest                   I  EglRenderer: Initializing EglRenderer
+2025-05-19 23:22:54.801  4773-4773  ResourceType            com.example.mytest                   W  No known package when getting name for resource number 0xffffffff
+2025-05-19 23:22:54.803  4773-4821  org.webrtc.Logging      com.example.mytest                   I  EglBase14Impl: Using OpenGL ES version 2
+2025-05-19 23:22:54.807  4773-4773  org.webrtc.Logging      com.example.mytest                   I  EglRenderer: Initializing EglRenderer
+2025-05-19 23:22:54.809  4773-4773  org.webrtc.Logging      com.example.mytest                   I  NativeLibrary: Loading native library: jingle_peerconnection_so
+2025-05-19 23:22:54.809  4773-4773  org.webrtc.Logging      com.example.mytest                   I  NativeLibrary: Loading library: jingle_peerconnection_so
+2025-05-19 23:22:54.815  4773-4773  linker                  com.example.mytest                   W  "/data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/base.apk!/lib/arm64-v8a/libjingle_peerconnection_so.so" unused DT entry: type 0x70000001 arg 0x0
+2025-05-19 23:22:54.817  4773-4773  jni_onload.cc           com.example.mytest                   I  (line 24): Entering JNI_OnLoad in jni_onload.cc
+2025-05-19 23:22:54.818  4773-4773  jvm_android.cc          com.example.mytest                   I  (line 214): JVM::Initialize
+2025-05-19 23:22:54.818  4773-4773  jvm_android.cc          com.example.mytest                   I  (line 245): JVM::JVM
+2025-05-19 23:22:54.818  4773-4773  jvm_android.cc          com.example.mytest                   I  (line 36): LoadClasses:
+2025-05-19 23:22:54.818  4773-4773  peer_conne...factory.cc com.example.mytest                   I  (line 214): initializeFieldTrials: WebRTC-H264HighProfile/Enabled/
+2025-05-19 23:22:54.819  4773-4773  field_trial.cc          com.example.mytest                   I  (line 164): Setting field trial string:WebRTC-H264HighProfile/Enabled/
+2025-05-19 23:22:54.819  4773-4773  org.webrtc.Logging      com.example.mytest                   I  PeerConnectionFactory: PeerConnectionFactory was initialized without an injected Loggable. Any existing Loggable will be deleted.
+2025-05-19 23:22:54.886  4773-4773  VideoCapabilities       com.example.mytest                   W  Unrecognized profile/level 1/32 for video/mp4v-es
+2025-05-19 23:22:54.886  4773-4773  VideoCapabilities       com.example.mytest                   I  Unsupported profile 16384 for video/mp4v-es
+2025-05-19 23:22:54.886  4773-4773  VideoCapabilities       com.example.mytest                   I  Unsupported profile 16384 for video/mp4v-es
+2025-05-19 23:22:54.898  4773-4773  VideoCapabilities       com.example.mytest                   W  Unsupported mime video/x-pn-realvideo
+2025-05-19 23:22:54.903  4773-4773  VideoCapabilities       com.example.mytest                   W  Unsupported mime video/mpeg
+2025-05-19 23:22:54.906  4773-4773  VideoCapabilities       com.example.mytest                   W  Unrecognized profile/level 0/0 for video/mpeg2
+2025-05-19 23:22:54.907  4773-4773  VideoCapabilities       com.example.mytest                   W  Unrecognized profile/level 0/2 for video/mpeg2
+2025-05-19 23:22:54.907  4773-4773  VideoCapabilities       com.example.mytest                   W  Unrecognized profile/level 0/3 for video/mpeg2
+2025-05-19 23:22:54.911  4773-4773  VideoCapabilities       com.example.mytest                   W  Unrecognized profile/level 32768/2 for video/mp4v-es
+2025-05-19 23:22:54.919  4773-4773  VideoCapabilities       com.example.mytest                   W  Unsupported mime video/vc1
+2025-05-19 23:22:54.926  4773-4773  VideoCapabilities       com.example.mytest                   W  Unsupported mime video/x-flv
+2025-05-19 23:22:54.953  4773-4773  VideoCapabilities       com.example.mytest                   I  Unsupported profile 4 for video/mp4v-es
+2025-05-19 23:22:54.975  4773-4773  WebRTCClient            com.example.mytest                   D  Supported codecs: VP8, AV1, VP9
+2025-05-19 23:22:54.975  4773-4773  WebRTCClient            com.example.mytest                   W  H.264 not supported by hardware, using software fallback
+2025-05-19 23:22:54.977  4773-4773  AndroidRuntime          com.example.mytest                   D  Shutting down VM
+2025-05-19 23:22:54.980  4773-4773  AndroidRuntime          com.example.mytest                   E  FATAL EXCEPTION: main
+Process: com.example.mytest, PID: 4773
+java.lang.NoClassDefFoundError: Failed resolution of: Lorg/webrtc/Environment;
+at org.webrtc.PeerConnectionFactory$Builder.<init>(PeerConnectionFactory.java:166)
+at org.webrtc.PeerConnectionFactory$Builder.<init>(Unknown Source:0)
+at org.webrtc.PeerConnectionFactory.builder(PeerConnectionFactory.java:295)
+at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:57)
+at com.example.mytest.WebRTCClient.<init>(WebRTCClient.kt:24)
+at com.example.mytest.WebRTCService.initializeWebRTC(WebRTCService.kt:327)
+at com.example.mytest.WebRTCService.onCreate(WebRTCService.kt:267)
+at android.app.ActivityThread.handleCreateService(ActivityThread.java:3961)
+at android.app.ActivityThread.-wrap5(Unknown Source:0)
+at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2092)
+at android.os.Handler.dispatchMessage(Handler.java:108)
+at android.os.Looper.loop(Looper.java:166)
+at android.app.ActivityThread.main(ActivityThread.java:7523)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:245)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:921)
+Caused by: java.lang.ClassNotFoundException: Didn't find class "org.webrtc.Environment" on path: DexPathList[[zip file "/data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/base.apk"],nativeLibraryDirectories=[/data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/lib/arm64, /data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/base.apk!/lib/arm64-v8a, /system/lib64, /vendor/lib64, /product/lib64]]
+at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:93)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
+at org.webrtc.PeerConnectionFactory$Builder.<init>(PeerConnectionFactory.java:166) 
+at org.webrtc.PeerConnectionFactory$Builder.<init>(Unknown Source:0) 
+                                                                                                    	at org.webrtc.PeerConnectionFactory.builder(PeerConnectionFactory.java:295) 
+                                                                                                    	at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:57) 
+                                                                                                    	at com.example.mytest.WebRTCClient.<init>(WebRTCClient.kt:24) 
+                                                                                                    	at com.example.mytest.WebRTCService.initializeWebRTC(WebRTCService.kt:327) 
+                                                                                                    	at com.example.mytest.WebRTCService.onCreate(WebRTCService.kt:267) 
+                                                                                                    	at android.app.ActivityThread.handleCreateService(ActivityThread.java:3961) 
+                                                                                                    	at android.app.ActivityThread.-wrap5(Unknown Source:0) 
+                                                                                                    	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2092) 
+at android.os.Handler.dispatchMessage(Handler.java:108) 
+at android.os.Looper.loop(Looper.java:166) 
+at android.app.ActivityThread.main(ActivityThread.java:7523) 
+at java.lang.reflect.Method.invoke(Native Method) 
+at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:245) 
+                                                                                                    	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:921) 
 
 отвечай на русском
-

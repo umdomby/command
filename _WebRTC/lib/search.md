@@ -1,3 +1,7 @@
+https://chat.deepseek.com/a/chat/s/84a4c608-e384-420c-8b1f-dc1d4415d3a1
+88
+
+
 cd /tmp
 rm -rf jar_check
 mkdir jar_check
