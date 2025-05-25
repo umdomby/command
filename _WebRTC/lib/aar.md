@@ -10,8 +10,9 @@ cp ~/openh264/libopenh264.so temp_aar/jni/arm64-v8a/
 
 # Убедитесь, что libjingle_peerconnection_so.so и другие .so файлы также присутствуют в temp_aar/jni/arm64-v8a/.
 # Перепакуйте .aar:
-cd temp_aar
-zip -r ../libwebrtc.aar
+cd aar_root
+zip -r ../libwebrtc.aar *
+# \\wsl.localhost\Ubuntu-24.04\home\pi
 
 # Обновите build.gradle.kts: Добавьте зависимость на .aar
 implementation(files("libs/libwebrtc.aar"))

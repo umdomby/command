@@ -234,7 +234,7 @@ treat_warnings_as_errors = false
 
 
 # Рекомендация: Используйте libwebrtc.jar из любой архитектуры, например, из arm64-v8a, так как это наиболее распространенная архитектура:
-cp /home/pi/webrtc-android/src/out/Debug-arm64-v8a/lib.java/sdk/android/libwebrtc.jar /tmp/aar_root/classes.jar
+cp /home/pi/webrtc-android/src/out/Debug-arm64-v8a/lib.java/sdk/android/libwebrtc.jar /home/pi/aar_root/classes.jar
 ```
 cat > /home/pi/aar_root/AndroidManifest.xml << EOF
 <?xml version="1.0" encoding="utf-8"?>
