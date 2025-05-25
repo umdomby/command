@@ -1,9 +1,109 @@
+Android WebRTC
 G:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\MainActivity.kt
 G:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebRTCClient.kt
 G:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebRTCService.kt
 G:\AndroidStudio\MyTest\app\src\main\java\com\example\mytest\WebSocketClient.kt
+G:\AndroidStudio\MyTest\app\build.gradle.kts
 
-// file: app/src/main/java/com/example/mytest/MainActivity.kt
+
+// file: G:/AndroidStudio/MyTest/app/build.gradle.kts
+// file: app/build.gradle.kts
+plugins {
+alias(libs.plugins.android.application)
+alias(libs.plugins.kotlin.android)
+alias(libs.plugins.kotlin.compose)
+}
+
+android {
+namespace = "com.example.mytest"
+compileSdk = 36
+
+    defaultConfig {
+        applicationId = "com.example.mytest"
+        minSdk = 26
+        targetSdk = 35
+        versionCode = 1
+        versionName = "1.0"
+
+        ndk {
+            abiFilters.addAll(setOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64"))
+        }
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    buildFeatures {
+        compose = true
+        viewBinding = true
+        dataBinding = true
+    }
+    ndkVersion = "25.1.8937393"
+    buildToolsVersion = "36.0.0"
+}
+
+dependencies {
+// Локальная сборка WebRTC
+// implementation("io.github.webrtc-sdk:android:125.6422.07")
+//implementation ("org.webrtc:google-webrtc:1.0.32006")
+
+    implementation(files("libs/webrtc.aar"))
+    // WebSocket
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // WorkManager
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+
+    // Material Design 3
+    implementation("androidx.compose.material3:material3:1.1.2")
+    implementation("com.google.android.material:material:1.9.0")
+
+    // Core KTX
+    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+
+    // Activity Compose
+    implementation("androidx.activity:activity-compose:1.7.2")
+
+    // Compose BOM
+    implementation(platform("androidx.compose:compose-bom:2023.06.01"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.06.01"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+}
+
+// file: G:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/MainActivity.kt
 package com.example.mytest
 
 import android.Manifest
@@ -465,7 +565,7 @@ private lateinit var roomListAdapter: ArrayAdapter<String>
     }
 }
 
-// file: app/src/main/java/com/example/mytest/WebRTCClient.kt
+// file: G:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/WebRTCClient.kt
 package com.example.mytest
 
 import android.content.Context
@@ -498,37 +598,33 @@ private var surfaceTextureHelper: SurfaceTextureHelper? = null
     }
 
     private fun initializePeerConnectionFactory() {
-        // Инициализация WebRTC
+        // 1. Инициализация WebRTC
         val initializationOptions = InitializationOptions.builder(context)
             .setEnableInternalTracer(true)
             .setFieldTrials("WebRTC-H264HighProfile/Enabled/")
             .createInitializationOptions()
         PeerConnectionFactory.initialize(initializationOptions)
 
-        // Проверка кодеков
-        val tempEncoderFactory = DefaultVideoEncoderFactory(eglBase.eglBaseContext, true, true)
-        val supportedCodecs = tempEncoderFactory.supportedCodecs
-        Log.d("WebRTCClient", "Supported codecs: ${supportedCodecs.joinToString { it.name }}")
-
-        // Выбор videoEncoderFactory
-        val videoEncoderFactory = if (supportedCodecs.any { it.name.equals("H264", ignoreCase = true) }) {
-            Log.d("WebRTCClient", "Using hardware H.264 encoder")
-            tempEncoderFactory
-        } else {
-            Log.w("WebRTCClient", "H.264 not supported by hardware, using software fallback")
-            SoftwareVideoEncoderFactory()
-        }
+        // 2. Создание фабрик кодеков
+        val videoEncoderFactory = DefaultVideoEncoderFactory(
+            eglBase.eglBaseContext,
+            true,  // enableIntelVp8Encoder
+            true   // enableH264HighProfile
+        )
 
         val videoDecoderFactory = DefaultVideoDecoderFactory(eglBase.eglBaseContext)
 
-        // Создание PeerConnectionFactory
+        // 3. Настройка опций
+        val options = PeerConnectionFactory.Options().apply {
+            disableEncryption = false
+            disableNetworkMonitor = false
+        }
+
+        // 4. Создание фабрики PeerConnection
         peerConnectionFactory = PeerConnectionFactory.builder()
+            .setOptions(options)
             .setVideoEncoderFactory(videoEncoderFactory)
             .setVideoDecoderFactory(videoDecoderFactory)
-            .setOptions(PeerConnectionFactory.Options().apply {
-                disableEncryption = false
-                disableNetworkMonitor = false
-            })
             .createPeerConnectionFactory()
     }
 
@@ -764,7 +860,7 @@ private var surfaceTextureHelper: SurfaceTextureHelper? = null
     }
 }
 
-// file: app/src/main/java/com/example/mytest/WebRTCService.kt
+// file: G:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/WebRTCService.kt
 package com.example.mytest
 
 import android.annotation.SuppressLint
@@ -1818,7 +1914,7 @@ class WebRTCService : Service() {
     }
 }
 
-// file: app/src/main/java/com/example/mytest/WebSocketClient.kt
+// file: G:/AndroidStudio/MyTest/app/src/main/java/com/example/mytest/WebSocketClient.kt
 package com.example.mytest
 
 import android.annotation.SuppressLint
@@ -1889,19 +1985,17 @@ private val client = OkHttpClient.Builder()
     }
 }
 
-приложение запустилось но при нажатии на кнопку START свернулось
--19 23:22:53.304  4667-4673  zygote64                com.example.mytest                   I  Do full code cache collection, code=239KB, data=185KB
-2025-05-19 23:22:53.305  4667-4673  zygote64                com.example.mytest                   I  After code cache collection, code=236KB, data=154KB
-2025-05-19 23:22:53.318  4667-4667  WebRTCClient            com.example.mytest                   D  Supported codecs: VP8, AV1, VP9
-2025-05-19 23:22:53.318  4667-4667  WebRTCClient            com.example.mytest                   W  H.264 not supported by hardware, using software fallback
-2025-05-19 23:22:53.320  4667-4667  AndroidRuntime          com.example.mytest                   D  Shutting down VM
-2025-05-19 23:22:53.322  4667-4667  AndroidRuntime          com.example.mytest                   E  FATAL EXCEPTION: main
-Process: com.example.mytest, PID: 4667
+логи
+2025-05-25 09:29:48.608  7389-7389  field_trial.cc          com.example.mytest                   I  (line 164): Setting field trial string:WebRTC-H264HighProfile/Enabled/
+2025-05-25 09:29:48.609  7389-7389  org.webrtc.Logging      com.example.mytest                   I  PeerConnectionFactory: PeerConnectionFactory was initialized without an injected Loggable. Any existing Loggable will be deleted.
+2025-05-25 09:29:48.615  7389-7389  AndroidRuntime          com.example.mytest                   D  Shutting down VM
+2025-05-25 09:29:48.618  7389-7389  AndroidRuntime          com.example.mytest                   E  FATAL EXCEPTION: main
+Process: com.example.mytest, PID: 7389
 java.lang.NoClassDefFoundError: Failed resolution of: Lorg/webrtc/Environment;
 at org.webrtc.PeerConnectionFactory$Builder.<init>(PeerConnectionFactory.java:166)
 at org.webrtc.PeerConnectionFactory$Builder.<init>(Unknown Source:0)
 at org.webrtc.PeerConnectionFactory.builder(PeerConnectionFactory.java:295)
-at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:57)
+at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:56)
 at com.example.mytest.WebRTCClient.<init>(WebRTCClient.kt:24)
 at com.example.mytest.WebRTCService.initializeWebRTC(WebRTCService.kt:327)
 at com.example.mytest.WebRTCService.onCreate(WebRTCService.kt:267)
@@ -1914,14 +2008,14 @@ at android.app.ActivityThread.main(ActivityThread.java:7523)
 at java.lang.reflect.Method.invoke(Native Method)
 at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:245)
 at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:921)
-Caused by: java.lang.ClassNotFoundException: Didn't find class "org.webrtc.Environment" on path: DexPathList[[zip file "/data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/base.apk"],nativeLibraryDirectories=[/data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/lib/arm64, /data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/base.apk!/lib/arm64-v8a, /system/lib64, /vendor/lib64, /product/lib64]]
+Caused by: java.lang.ClassNotFoundException: Didn't find class "org.webrtc.Environment" on path: DexPathList[[zip file "/data/app/com.example.mytest-3dmk_jTsjVcpaq4TV64Syg==/base.apk"],nativeLibraryDirectories=[/data/app/com.example.mytest-3dmk_jTsjVcpaq4TV64Syg==/lib/arm64, /data/app/com.example.mytest-3dmk_jTsjVcpaq4TV64Syg==/base.apk!/lib/arm64-v8a, /system/lib64, /vendor/lib64, /product/lib64]]
 at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:93)
 at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
 at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
 at org.webrtc.PeerConnectionFactory$Builder.<init>(PeerConnectionFactory.java:166) 
 at org.webrtc.PeerConnectionFactory$Builder.<init>(Unknown Source:0) 
                                                                                                     	at org.webrtc.PeerConnectionFactory.builder(PeerConnectionFactory.java:295) 
-                                                                                                    	at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:57) 
+                                                                                                    	at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:56) 
                                                                                                     	at com.example.mytest.WebRTCClient.<init>(WebRTCClient.kt:24) 
                                                                                                     	at com.example.mytest.WebRTCService.initializeWebRTC(WebRTCService.kt:327) 
                                                                                                     	at com.example.mytest.WebRTCService.onCreate(WebRTCService.kt:267) 
@@ -1934,74 +2028,60 @@ at android.app.ActivityThread.main(ActivityThread.java:7523) 
 at java.lang.reflect.Method.invoke(Native Method) 
 at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:245) 
                                                                                                     	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:921) 
-2025-05-19 23:22:53.337  4667-4667  Process                 com.example.mytest                   I  Sending signal. PID: 4667 SIG: 9
----------------------------- PROCESS ENDED (4667) for package com.example.mytest ----------------------------
-2025-05-19 23:22:53.445  1249-1392  InputDispatcher         system_server                        E  channel '8cb24e3 com.example.mytest/com.example.mytest.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
----------------------------- PROCESS STARTED (4773) for package com.example.mytest ----------------------------
-2025-05-19 23:22:54.598  4773-4773  HwFLClassLoader         com.example.mytest                   D  get used feature list :/feature/used-list failed!
-2025-05-19 23:22:54.598  4773-4773  HwFLClassLoader         com.example.mytest                   D  USE_FEATURE_LIST had not init!
-2025-05-19 23:22:54.605  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache mCurPackageName=com.example.mytest uptimes=792182173
-2025-05-19 23:22:54.608  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache oUid null
-2025-05-19 23:22:54.610  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache volumes null
-2025-05-19 23:22:54.612  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache path=/storage/emulated/0 state=mounted key=com.example.mytest#10123#256
-2025-05-19 23:22:54.614  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache oUid 10123
-2025-05-19 23:22:54.614  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache volumes null
-2025-05-19 23:22:54.618  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache path=/storage/emulated/0 state=mounted key=com.example.mytest#10123#0
-2025-05-19 23:22:54.619  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache async read begin packageName=com.example.mytest userid=0
-2025-05-19 23:22:54.620  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache pi null
-2025-05-19 23:22:54.623  4773-4794  chatty                  com.example.mytest                   I  uid=10123(u0_a123) queued-work-loo identical 1 line
-2025-05-19 23:22:54.628  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache pi null
-2025-05-19 23:22:54.631  4773-4773  HwApiCacheMangerEx      com.example.mytest                   I  apicache pi null
-2025-05-19 23:22:54.631  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache oUid null
-2025-05-19 23:22:54.633  4773-4794  HwApiCacheMangerEx      com.example.mytest                   I  apicache async read finished packageName=com.example.mytest userid=0 totalus=14262
-2025-05-19 23:22:54.661  4773-4773  WM-WrkMgrInitializer    com.example.mytest                   D  Initializing WorkManager with default configuration.
-2025-05-19 23:22:54.680  4773-4773  HwCust                  com.example.mytest                   I  Constructor found for class android.net.HwCustConnectivityManagerImpl
-2025-05-19 23:22:54.680  4773-4773  HwCust                  com.example.mytest                   D  Create obj success use class android.net.HwCustConnectivityManagerImpl
-2025-05-19 23:22:54.708  4773-4773  Minikin                 com.example.mytest                   E  Could not get cmap table size!
-2025-05-19 23:22:54.709  4773-4794  MemoryLeak...torManager com.example.mytest                   E  MemoryLeakMonitor.jar is not exist!
-2025-05-19 23:22:54.731  4773-4773  WebRTCService           com.example.mytest                   D  Service created with room:
-2025-05-19 23:22:54.748  4773-4773  WebRTCService           com.example.mytest                   D  Initializing new WebRTC connection
-2025-05-19 23:22:54.748  4773-4773  WebRTCService           com.example.mytest                   D  WebRTC resources cleaned up
-2025-05-19 23:22:54.761  4773-4773  org.webrtc.Logging      com.example.mytest                   I  EglBase14Impl: Using OpenGL ES version 2
-2025-05-19 23:22:54.773  4773-4773  HwWidgetFactory         com.example.mytest                   V  : successes to get AllImpl object and return....
-2025-05-19 23:22:54.788  4773-4773  ResourceType            com.example.mytest                   W  No known package when getting name for resource number 0xffffffff
-2025-05-19 23:22:54.796  4773-4820  org.webrtc.Logging      com.example.mytest                   I  EglBase14Impl: Using OpenGL ES version 2
-2025-05-19 23:22:54.799  4773-4773  org.webrtc.Logging      com.example.mytest                   I  EglRenderer: Initializing EglRenderer
-2025-05-19 23:22:54.801  4773-4773  ResourceType            com.example.mytest                   W  No known package when getting name for resource number 0xffffffff
-2025-05-19 23:22:54.803  4773-4821  org.webrtc.Logging      com.example.mytest                   I  EglBase14Impl: Using OpenGL ES version 2
-2025-05-19 23:22:54.807  4773-4773  org.webrtc.Logging      com.example.mytest                   I  EglRenderer: Initializing EglRenderer
-2025-05-19 23:22:54.809  4773-4773  org.webrtc.Logging      com.example.mytest                   I  NativeLibrary: Loading native library: jingle_peerconnection_so
-2025-05-19 23:22:54.809  4773-4773  org.webrtc.Logging      com.example.mytest                   I  NativeLibrary: Loading library: jingle_peerconnection_so
-2025-05-19 23:22:54.815  4773-4773  linker                  com.example.mytest                   W  "/data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/base.apk!/lib/arm64-v8a/libjingle_peerconnection_so.so" unused DT entry: type 0x70000001 arg 0x0
-2025-05-19 23:22:54.817  4773-4773  jni_onload.cc           com.example.mytest                   I  (line 24): Entering JNI_OnLoad in jni_onload.cc
-2025-05-19 23:22:54.818  4773-4773  jvm_android.cc          com.example.mytest                   I  (line 214): JVM::Initialize
-2025-05-19 23:22:54.818  4773-4773  jvm_android.cc          com.example.mytest                   I  (line 245): JVM::JVM
-2025-05-19 23:22:54.818  4773-4773  jvm_android.cc          com.example.mytest                   I  (line 36): LoadClasses:
-2025-05-19 23:22:54.818  4773-4773  peer_conne...factory.cc com.example.mytest                   I  (line 214): initializeFieldTrials: WebRTC-H264HighProfile/Enabled/
-2025-05-19 23:22:54.819  4773-4773  field_trial.cc          com.example.mytest                   I  (line 164): Setting field trial string:WebRTC-H264HighProfile/Enabled/
-2025-05-19 23:22:54.819  4773-4773  org.webrtc.Logging      com.example.mytest                   I  PeerConnectionFactory: PeerConnectionFactory was initialized without an injected Loggable. Any existing Loggable will be deleted.
-2025-05-19 23:22:54.886  4773-4773  VideoCapabilities       com.example.mytest                   W  Unrecognized profile/level 1/32 for video/mp4v-es
-2025-05-19 23:22:54.886  4773-4773  VideoCapabilities       com.example.mytest                   I  Unsupported profile 16384 for video/mp4v-es
-2025-05-19 23:22:54.886  4773-4773  VideoCapabilities       com.example.mytest                   I  Unsupported profile 16384 for video/mp4v-es
-2025-05-19 23:22:54.898  4773-4773  VideoCapabilities       com.example.mytest                   W  Unsupported mime video/x-pn-realvideo
-2025-05-19 23:22:54.903  4773-4773  VideoCapabilities       com.example.mytest                   W  Unsupported mime video/mpeg
-2025-05-19 23:22:54.906  4773-4773  VideoCapabilities       com.example.mytest                   W  Unrecognized profile/level 0/0 for video/mpeg2
-2025-05-19 23:22:54.907  4773-4773  VideoCapabilities       com.example.mytest                   W  Unrecognized profile/level 0/2 for video/mpeg2
-2025-05-19 23:22:54.907  4773-4773  VideoCapabilities       com.example.mytest                   W  Unrecognized profile/level 0/3 for video/mpeg2
-2025-05-19 23:22:54.911  4773-4773  VideoCapabilities       com.example.mytest                   W  Unrecognized profile/level 32768/2 for video/mp4v-es
-2025-05-19 23:22:54.919  4773-4773  VideoCapabilities       com.example.mytest                   W  Unsupported mime video/vc1
-2025-05-19 23:22:54.926  4773-4773  VideoCapabilities       com.example.mytest                   W  Unsupported mime video/x-flv
-2025-05-19 23:22:54.953  4773-4773  VideoCapabilities       com.example.mytest                   I  Unsupported profile 4 for video/mp4v-es
-2025-05-19 23:22:54.975  4773-4773  WebRTCClient            com.example.mytest                   D  Supported codecs: VP8, AV1, VP9
-2025-05-19 23:22:54.975  4773-4773  WebRTCClient            com.example.mytest                   W  H.264 not supported by hardware, using software fallback
-2025-05-19 23:22:54.977  4773-4773  AndroidRuntime          com.example.mytest                   D  Shutting down VM
-2025-05-19 23:22:54.980  4773-4773  AndroidRuntime          com.example.mytest                   E  FATAL EXCEPTION: main
-Process: com.example.mytest, PID: 4773
+2025-05-25 09:29:48.636  7389-7389  Process                 com.example.mytest                   I  Sending signal. PID: 7389 SIG: 9
+---------------------------- PROCESS ENDED (7389) for package com.example.mytest ----------------------------
+2025-05-25 09:29:48.773  1249-1392  InputDispatcher         system_server                        E  channel '95d0a21 com.example.mytest/com.example.mytest.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+---------------------------- PROCESS STARTED (7518) for package com.example.mytest ----------------------------
+2025-05-25 09:29:49.926  7518-7518  HwFLClassLoader         com.example.mytest                   D  get used feature list :/feature/used-list failed!
+2025-05-25 09:29:49.926  7518-7518  HwFLClassLoader         com.example.mytest                   D  USE_FEATURE_LIST had not init!
+2025-05-25 09:29:49.941  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache mCurPackageName=com.example.mytest uptimes=1260597509
+2025-05-25 09:29:49.949  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache oUid null
+2025-05-25 09:29:49.951  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache volumes null
+2025-05-25 09:29:49.954  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache path=/storage/emulated/0 state=mounted key=com.example.mytest#10126#256
+2025-05-25 09:29:49.955  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache oUid 10126
+2025-05-25 09:29:49.955  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache volumes null
+2025-05-25 09:29:49.957  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache path=/storage/emulated/0 state=mounted key=com.example.mytest#10126#0
+2025-05-25 09:29:49.957  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache async read begin packageName=com.example.mytest userid=0
+2025-05-25 09:29:49.957  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache pi null
+2025-05-25 09:29:49.959  7518-7541  chatty                  com.example.mytest                   I  uid=10126(u0_a126) queued-work-loo identical 1 line
+2025-05-25 09:29:49.961  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache pi null
+2025-05-25 09:29:49.963  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache oUid null
+2025-05-25 09:29:49.964  7518-7541  HwApiCacheMangerEx      com.example.mytest                   I  apicache async read finished packageName=com.example.mytest userid=0 totalus=7136
+2025-05-25 09:29:49.970  7518-7518  HwApiCacheMangerEx      com.example.mytest                   I  apicache pi null
+2025-05-25 09:29:49.991  7518-7518  WM-WrkMgrInitializer    com.example.mytest                   D  Initializing WorkManager with default configuration.
+2025-05-25 09:29:50.009  7518-7518  HwCust                  com.example.mytest                   I  Constructor found for class android.net.HwCustConnectivityManagerImpl
+2025-05-25 09:29:50.009  7518-7518  HwCust                  com.example.mytest                   D  Create obj success use class android.net.HwCustConnectivityManagerImpl
+2025-05-25 09:29:50.033  7518-7541  MemoryLeak...torManager com.example.mytest                   E  MemoryLeakMonitor.jar is not exist!
+2025-05-25 09:29:50.034  7518-7518  Minikin                 com.example.mytest                   E  Could not get cmap table size!
+2025-05-25 09:29:50.067  7518-7518  WebRTCService           com.example.mytest                   D  Service created with room:
+2025-05-25 09:29:50.084  7518-7518  WebRTCService           com.example.mytest                   D  Initializing new WebRTC connection
+2025-05-25 09:29:50.084  7518-7518  WebRTCService           com.example.mytest                   D  WebRTC resources cleaned up
+2025-05-25 09:29:50.104  7518-7518  org.webrtc.Logging      com.example.mytest                   I  EglBase14Impl: Using OpenGL ES version 2
+2025-05-25 09:29:50.118  7518-7518  HwWidgetFactory         com.example.mytest                   V  : successes to get AllImpl object and return....
+2025-05-25 09:29:50.130  7518-7518  ResourceType            com.example.mytest                   W  No known package when getting name for resource number 0xffffffff
+2025-05-25 09:29:50.135  7518-7565  org.webrtc.Logging      com.example.mytest                   I  EglBase14Impl: Using OpenGL ES version 2
+2025-05-25 09:29:50.138  7518-7518  org.webrtc.Logging      com.example.mytest                   I  EglRenderer: Initializing EglRenderer
+2025-05-25 09:29:50.140  7518-7518  ResourceType            com.example.mytest                   W  No known package when getting name for resource number 0xffffffff
+2025-05-25 09:29:50.144  7518-7566  org.webrtc.Logging      com.example.mytest                   I  EglBase14Impl: Using OpenGL ES version 2
+2025-05-25 09:29:50.147  7518-7518  org.webrtc.Logging      com.example.mytest                   I  EglRenderer: Initializing EglRenderer
+2025-05-25 09:29:50.149  7518-7518  org.webrtc.Logging      com.example.mytest                   I  NativeLibrary: Loading native library: jingle_peerconnection_so
+2025-05-25 09:29:50.149  7518-7518  org.webrtc.Logging      com.example.mytest                   I  NativeLibrary: Loading library: jingle_peerconnection_so
+2025-05-25 09:29:50.155  7518-7518  linker                  com.example.mytest                   W  "/data/app/com.example.mytest-3dmk_jTsjVcpaq4TV64Syg==/base.apk!/lib/arm64-v8a/libjingle_peerconnection_so.so" unused DT entry: type 0x70000001 arg 0x0
+2025-05-25 09:29:50.158  7518-7518  jni_onload.cc           com.example.mytest                   I  (line 24): Entering JNI_OnLoad in jni_onload.cc
+2025-05-25 09:29:50.159  7518-7518  jvm_android.cc          com.example.mytest                   I  (line 214): JVM::Initialize
+2025-05-25 09:29:50.159  7518-7518  jvm_android.cc          com.example.mytest                   I  (line 245): JVM::JVM
+2025-05-25 09:29:50.159  7518-7518  jvm_android.cc          com.example.mytest                   I  (line 36): LoadClasses:
+2025-05-25 09:29:50.160  7518-7518  peer_conne...factory.cc com.example.mytest                   I  (line 214): initializeFieldTrials: WebRTC-H264HighProfile/Enabled/
+2025-05-25 09:29:50.160  7518-7518  field_trial.cc          com.example.mytest                   I  (line 164): Setting field trial string:WebRTC-H264HighProfile/Enabled/
+2025-05-25 09:29:50.160  7518-7518  org.webrtc.Logging      com.example.mytest                   I  PeerConnectionFactory: PeerConnectionFactory was initialized without an injected Loggable. Any existing Loggable will be deleted.
+2025-05-25 09:29:50.168  7518-7518  AndroidRuntime          com.example.mytest                   D  Shutting down VM
+2025-05-25 09:29:50.174  7518-7518  AndroidRuntime          com.example.mytest                   E  FATAL EXCEPTION: main
+Process: com.example.mytest, PID: 7518
 java.lang.NoClassDefFoundError: Failed resolution of: Lorg/webrtc/Environment;
 at org.webrtc.PeerConnectionFactory$Builder.<init>(PeerConnectionFactory.java:166)
 at org.webrtc.PeerConnectionFactory$Builder.<init>(Unknown Source:0)
 at org.webrtc.PeerConnectionFactory.builder(PeerConnectionFactory.java:295)
-at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:57)
+at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:56)
 at com.example.mytest.WebRTCClient.<init>(WebRTCClient.kt:24)
 at com.example.mytest.WebRTCService.initializeWebRTC(WebRTCService.kt:327)
 at com.example.mytest.WebRTCService.onCreate(WebRTCService.kt:267)
@@ -2014,14 +2094,14 @@ at android.app.ActivityThread.main(ActivityThread.java:7523)
 at java.lang.reflect.Method.invoke(Native Method)
 at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:245)
 at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:921)
-Caused by: java.lang.ClassNotFoundException: Didn't find class "org.webrtc.Environment" on path: DexPathList[[zip file "/data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/base.apk"],nativeLibraryDirectories=[/data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/lib/arm64, /data/app/com.example.mytest-8WfugUtnK8nWcGgccbNN1Q==/base.apk!/lib/arm64-v8a, /system/lib64, /vendor/lib64, /product/lib64]]
+Caused by: java.lang.ClassNotFoundException: Didn't find class "org.webrtc.Environment" on path: DexPathList[[zip file "/data/app/com.example.mytest-3dmk_jTsjVcpaq4TV64Syg==/base.apk"],nativeLibraryDirectories=[/data/app/com.example.mytest-3dmk_jTsjVcpaq4TV64Syg==/lib/arm64, /data/app/com.example.mytest-3dmk_jTsjVcpaq4TV64Syg==/base.apk!/lib/arm64-v8a, /system/lib64, /vendor/lib64, /product/lib64]]
 at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:93)
 at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
 at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
 at org.webrtc.PeerConnectionFactory$Builder.<init>(PeerConnectionFactory.java:166) 
 at org.webrtc.PeerConnectionFactory$Builder.<init>(Unknown Source:0) 
                                                                                                     	at org.webrtc.PeerConnectionFactory.builder(PeerConnectionFactory.java:295) 
-                                                                                                    	at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:57) 
+                                                                                                    	at com.example.mytest.WebRTCClient.initializePeerConnectionFactory(WebRTCClient.kt:56) 
                                                                                                     	at com.example.mytest.WebRTCClient.<init>(WebRTCClient.kt:24) 
                                                                                                     	at com.example.mytest.WebRTCService.initializeWebRTC(WebRTCService.kt:327) 
                                                                                                     	at com.example.mytest.WebRTCService.onCreate(WebRTCService.kt:267) 
@@ -2034,5 +2114,27 @@ at android.app.ActivityThread.main(ActivityThread.java:7523) 
 at java.lang.reflect.Method.invoke(Native Method) 
 at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:245) 
                                                                                                     	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:921) 
+2025-05-25 09:29:50.183  7518-7518  Process                 com.example.mytest                   I  Sending signal. PID: 7518 SIG: 9
+---------------------------- PROCESS ENDED (7518) for package com.example.mytest ----------------------------
 
+
+
+WebRTC
+pi@PC1:~$ cd /home/pi/webrtc-android/src
+pi@PC1:~/webrtc-android/src$ git rev-parse --abbrev-ref HEAD
+main
+pi@PC1:~/webrtc-android/src$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+pi@PC1:~/webrtc-android/src$ git branch
+branch-heads-7103
+* main
+  saved-by-gclient-4403d73b6b
+  pi@PC1:~/webrtc-android/src$
+использую в сборке ветку main не надо говорить что она не стабильная, классы и методы используй в самой новой версии и репозитории WebRTC
+не надо говорить что сборка старая, что ее нужно заменить, ты лучше посмотри методы в самой новой ветке WebRTC
+
+Нужно сделать чтобы проект не использовал класс Environment который удален из библиотеки
 отвечай на русском
