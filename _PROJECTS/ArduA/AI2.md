@@ -1,9 +1,790 @@
-    implementation("io.github.webrtc-sdk:android:125.6422.07")
-не поддерживает в Android Приложениях H264 (поддерживает VP8) и у меня целое приложение на io.github.webrtc-sdk:android:125.6422.07  , как ты посоветуешь чтобы мое приложение поддерживало H264
+G:\AndroidStudio\ARduA\app\src\main\java\com\example\ardua\MainActivity.kt
+G:\AndroidStudio\ARduA\app\src\main\java\com\example\ardua\WebRTCClient.kt
+G:\AndroidStudio\ARduA\app\src\main\java\com\example\ardua\WebRTCService.kt
+G:\AndroidStudio\ARduA\app\src\main\java\com\example\ardua\WebSocketClient.kt
 
-отвечай на русском, вот часть моего кода
-package com.example.mytest
 
+// file: app/src/main/java/com/example/ardua/MainActivity.kt
+package com.example.ardua
+
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.BroadcastReceiver
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.media.projection.MediaProjectionManager
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.View
+import android.view.WindowManager
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.result.registerForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import com.example.ardua.databinding.ActivityMainBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.json.JSONArray
+import java.util.*
+import kotlin.random.Random
+
+class MainActivity : ComponentActivity() {
+private lateinit var binding: ActivityMainBinding
+private lateinit var sharedPreferences: SharedPreferences
+private var currentRoomName: String = ""
+private var isServiceRunning: Boolean = false
+private val roomList = mutableListOf<String>()
+private lateinit var roomListAdapter: ArrayAdapter<String>
+
+    private val requiredPermissions = arrayOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.RECORD_AUDIO,
+        Manifest.permission.POST_NOTIFICATIONS
+    )
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        if (permissions.all { it.value }) {
+            if (isCameraPermissionGranted()) {
+                val mediaManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+                mediaProjectionLauncher.launch(mediaManager.createScreenCaptureIntent())
+                checkBatteryOptimization()
+            } else {
+                showToast("Camera permission required")
+                finish()
+            }
+        } else {
+            showToast("Not all permissions granted")
+            finish()
+        }
+    }
+
+    private val mediaProjectionLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK && result.data != null) {
+            // Сохраняем текущее имя комнаты при успешном запуске сервиса
+            saveCurrentRoom()
+            startWebRTCService(result.data!!)
+        } else {
+            showToast("Screen recording access denied")
+            finish()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        loadRoomList()
+        setupUI()
+        setupRoomListAdapter()
+
+        // Проверяем состояние сервиса при создании активности
+        isServiceRunning = WebRTCService.isRunning
+        updateButtonStates()
+    }
+
+    private fun loadRoomList() {
+        // Загружаем список комнат
+        val jsonString = sharedPreferences.getString(ROOM_LIST_KEY, null)
+        jsonString?.let {
+            val jsonArray = JSONArray(it)
+            for (i in 0 until jsonArray.length()) {
+                roomList.add(jsonArray.getString(i))
+            }
+        }
+
+        // Загружаем последнее использованное имя комнаты
+        currentRoomName = sharedPreferences.getString(LAST_USED_ROOM_KEY, "") ?: ""
+
+        // Если нет сохраненных комнат или последнее имя пустое, генерируем новое
+        if (roomList.isEmpty()) {
+            currentRoomName = generateRandomRoomName()
+            roomList.add(currentRoomName)
+            saveRoomList()
+            saveCurrentRoom()
+        } else if (currentRoomName.isEmpty()) {
+            currentRoomName = roomList.first()
+            saveCurrentRoom()
+        }
+
+        // Устанавливаем последнее использованное имя в поле ввода
+        binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
+    }
+
+    private fun saveCurrentRoom() {
+        sharedPreferences.edit()
+            .putString(LAST_USED_ROOM_KEY, currentRoomName)
+            .apply()
+    }
+
+    private fun saveRoomList() {
+        val jsonArray = JSONArray()
+        roomList.forEach { jsonArray.put(it) }
+        sharedPreferences.edit()
+            .putString(ROOM_LIST_KEY, jsonArray.toString())
+            .apply()
+    }
+
+    private fun setupRoomListAdapter() {
+        roomListAdapter = ArrayAdapter(
+            this,
+            com.google.android.material.R.layout.support_simple_spinner_dropdown_item,
+            roomList
+        )
+        binding.roomListView.adapter = roomListAdapter
+        binding.roomListView.setOnItemClickListener { _, _, position, _ ->
+            currentRoomName = roomList[position]
+            binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
+            updateButtonStates()
+        }
+    }
+
+    private fun setupUI() {
+        binding.roomCodeEditText.addTextChangedListener(object : TextWatcher {
+            private var isFormatting = false
+            private var deletingHyphen = false
+            private var hyphenPositions = listOf(4, 9, 14)
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                if (isFormatting) return
+
+                if (count == 1 && after == 0 && hyphenPositions.contains(start)) {
+                    deletingHyphen = true
+                } else {
+                    deletingHyphen = false
+                }
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (isFormatting || isServiceRunning) return
+
+                isFormatting = true
+
+                val text = s.toString().replace("-", "")
+                if (text.length > 16) {
+                    s?.replace(0, s.length, formatRoomName(currentRoomName))
+                } else {
+                    val formatted = StringBuilder()
+                    for (i in text.indices) {
+                        if (i > 0 && i % 4 == 0) {
+                            formatted.append('-')
+                        }
+                        formatted.append(text[i])
+                    }
+
+                    val cursorPos = binding.roomCodeEditText.selectionStart
+                    if (deletingHyphen && cursorPos > 0 && cursorPos < formatted.length &&
+                        formatted[cursorPos] == '-') {
+                        formatted.deleteCharAt(cursorPos)
+                    }
+
+                    s?.replace(0, s.length, formatted.toString())
+                }
+
+                isFormatting = false
+
+                val cleanName = binding.roomCodeEditText.text.toString().replace("-", "")
+                binding.saveCodeButton.isEnabled = cleanName.length == 16 &&
+                        !roomList.contains(cleanName)
+            }
+        })
+
+        binding.generateCodeButton.setOnClickListener {
+            currentRoomName = generateRandomRoomName()
+            binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
+            showToast("Generated: $currentRoomName")
+        }
+
+        binding.deleteRoomButton.setOnClickListener {
+            val selectedRoom = binding.roomCodeEditText.text.toString().replace("-", "")
+            if (roomList.contains(selectedRoom)) {
+                showDeleteConfirmationDialog(selectedRoom)
+            } else {
+                showToast(getString(R.string.room_not_found))
+            }
+        }
+
+        binding.saveCodeButton.setOnClickListener {
+            val newRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
+            if (newRoomName.length == 16) {
+                if (!roomList.contains(newRoomName)) {
+                    roomList.add(0, newRoomName)
+                    currentRoomName = newRoomName
+                    saveRoomList()
+                    saveCurrentRoom()
+                    roomListAdapter.notifyDataSetChanged()
+                    showToast("Room saved: ${formatRoomName(newRoomName)}")
+                } else {
+                    showToast("Room already exists")
+                }
+            }
+        }
+
+        binding.copyCodeButton.setOnClickListener {
+            val roomName = binding.roomCodeEditText.text.toString()
+            val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Room name", roomName)
+            clipboard.setPrimaryClip(clip)
+            showToast("Copied: $roomName")
+        }
+
+        binding.shareCodeButton.setOnClickListener {
+            val roomName = binding.roomCodeEditText.text.toString()
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "Join my room: $roomName")
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(shareIntent, "Share Room"))
+        }
+
+        binding.startButton.setOnClickListener {
+            if (isServiceRunning) {
+                showToast("Service already running")
+                return@setOnClickListener
+            }
+
+            currentRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
+            if (currentRoomName.isEmpty()) {
+                showToast("Enter room name")
+                return@setOnClickListener
+            }
+
+            if (checkAllPermissionsGranted() && isCameraPermissionGranted()) {
+                val mediaManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+                mediaProjectionLauncher.launch(mediaManager.createScreenCaptureIntent())
+                checkBatteryOptimization()
+            } else {
+                requestPermissionLauncher.launch(requiredPermissions)
+            }
+        }
+
+        binding.stopButton.setOnClickListener {
+            if (!isServiceRunning) {
+                showToast("Service not running")
+                return@setOnClickListener
+            }
+            stopWebRTCService()
+        }
+    }
+
+    private fun formatRoomName(name: String): String {
+        if (name.length != 16) return name
+
+        return buildString {
+            for (i in 0 until 16) {
+                if (i > 0 && i % 4 == 0) append('-')
+                append(name[i])
+            }
+        }
+    }
+
+    private fun showDeleteConfirmationDialog(roomName: String) {
+        if (roomList.size <= 1) {
+            showToast(getString(R.string.cannot_delete_last))
+            return
+        }
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.delete_confirm_title))
+            .setMessage(getString(R.string.delete_confirm_message, formatRoomName(roomName)))
+            .setPositiveButton(getString(R.string.delete_button)) { _, _ ->
+                roomList.remove(roomName)
+                saveRoomList()
+                roomListAdapter.notifyDataSetChanged()
+
+                if (currentRoomName == roomName) {
+                    currentRoomName = roomList.first()
+                    binding.roomCodeEditText.setText(formatRoomName(currentRoomName))
+                    saveCurrentRoom()
+                }
+
+                showToast("Room deleted")
+                updateButtonStates()
+            }
+            .setNegativeButton(getString(R.string.cancel_button), null)
+            .show()
+    }
+
+    private fun generateRandomRoomName(): String {
+        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        val random = Random.Default
+        val code = StringBuilder()
+
+        repeat(16) {
+            code.append(chars[random.nextInt(chars.length)])
+        }
+
+        return code.toString()
+    }
+
+    private fun startWebRTCService(resultData: Intent) {
+        try {
+            // Сохраняем текущее имя комнаты перед запуском сервиса
+            currentRoomName = binding.roomCodeEditText.text.toString().replace("-", "")
+            saveCurrentRoom()
+
+            WebRTCService.currentRoomName = currentRoomName
+            val serviceIntent = Intent(this, WebRTCService::class.java).apply {
+                putExtra("resultCode", RESULT_OK)
+                putExtra("resultData", resultData)
+                putExtra("roomName", currentRoomName)
+            }
+            ContextCompat.startForegroundService(this, serviceIntent)
+            isServiceRunning = true
+            updateButtonStates()
+            showToast("Service started: ${formatRoomName(currentRoomName)}")
+        } catch (e: Exception) {
+            showToast("Start error: ${e.message}")
+            Log.e("MainActivity", "Service start error", e)
+        }
+    }
+
+    private fun stopWebRTCService() {
+        try {
+            val stopIntent = Intent(this, WebRTCService::class.java).apply {
+                action = "STOP"
+            }
+            startService(stopIntent)
+            isServiceRunning = false
+            updateButtonStates()
+            showToast("Service stopped")
+        } catch (e: Exception) {
+            showToast("Stop error: ${e.message}")
+            Log.e("MainActivity", "Service stop error", e)
+        }
+    }
+
+    private fun updateButtonStates() {
+        binding.apply {
+            // START активен только если сервис не работает
+            startButton.isEnabled = !isServiceRunning
+
+            // STOP активен только если сервис работает
+            stopButton.isEnabled = isServiceRunning
+
+            roomCodeEditText.isEnabled = !isServiceRunning
+            saveCodeButton.isEnabled = !isServiceRunning &&
+                    binding.roomCodeEditText.text.toString().replace("-", "").length == 16 &&
+                    !roomList.contains(binding.roomCodeEditText.text.toString().replace("-", ""))
+            generateCodeButton.isEnabled = !isServiceRunning
+            deleteRoomButton.isEnabled = !isServiceRunning &&
+                    roomList.contains(binding.roomCodeEditText.text.toString().replace("-", "")) &&
+                    roomList.size > 1
+
+            startButton.setBackgroundColor(
+                ContextCompat.getColor(
+                    this@MainActivity,
+                    if (isServiceRunning) android.R.color.darker_gray else R.color.green
+                )
+            )
+            stopButton.setBackgroundColor(
+                ContextCompat.getColor(
+                    this@MainActivity,
+                    if (isServiceRunning) R.color.red else android.R.color.darker_gray
+                )
+            )
+        }
+    }
+
+    private val serviceStateReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == WebRTCService.ACTION_SERVICE_STATE) {
+                isServiceRunning = intent.getBooleanExtra(WebRTCService.EXTRA_IS_RUNNING, false)
+                updateButtonStates()
+            }
+        }
+    }
+
+    private fun checkAllPermissionsGranted() = requiredPermissions.all {
+        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun isCameraPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun checkBatteryOptimization() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val powerManager = getSystemService(PowerManager::class.java)
+            if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+                val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
+                    data = Uri.parse("package:$packageName")
+                }
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun showToast(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+    }
+
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(serviceStateReceiver, IntentFilter(WebRTCService.ACTION_SERVICE_STATE))
+        // Обновляем состояние при возвращении в активность
+        isServiceRunning = WebRTCService.isRunning
+        updateButtonStates()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(serviceStateReceiver)
+    }
+
+    companion object {
+        private const val PREFS_NAME = "WebRTCPrefs"
+        private const val ROOM_LIST_KEY = "room_list"
+        private const val LAST_USED_ROOM_KEY = "last_used_room"
+    }
+}
+
+// file: app/src/main/java/com/example/ardua/WebRTCClient.kt
+package com.example.ardua
+
+import android.content.Context
+import android.os.Build
+import android.util.Log
+import org.webrtc.*
+
+class WebRTCClient(
+private val context: Context,
+private val eglBase: EglBase,
+private val localView: SurfaceViewRenderer,
+private val remoteView: SurfaceViewRenderer,
+private val observer: PeerConnection.Observer
+) {
+private lateinit var peerConnectionFactory: PeerConnectionFactory
+var peerConnection: PeerConnection? = null
+private var localVideoTrack: VideoTrack? = null
+private var localAudioTrack: AudioTrack? = null
+internal var videoCapturer: VideoCapturer? = null
+private var surfaceTextureHelper: SurfaceTextureHelper? = null
+
+    init {
+        initializePeerConnectionFactory()
+        peerConnection = createPeerConnection()
+        if (peerConnection == null) {
+            Log.e("WebRTCClient", "Failed to create peer connection")
+            throw IllegalStateException("Failed to create peer connection")
+        }
+        createLocalTracks()
+    }
+
+    private fun initializePeerConnectionFactory() {
+        // 1. Инициализация WebRTC
+        try {
+            PeerConnectionFactory.initialize(
+                PeerConnectionFactory.InitializationOptions.builder(context)
+                    .setEnableInternalTracer(true)
+                    .setFieldTrials("WebRTC-H264HighProfile/Enabled/")
+                    .createInitializationOptions()
+            )
+            Log.d("WebRTCClient", "WebRTC library initialized successfully")
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Failed to initialize WebRTC library", e)
+            throw e
+        }
+
+        // 2. Создание фабрик кодеков
+        val videoEncoderFactory = DefaultVideoEncoderFactory(
+            eglBase.eglBaseContext,
+            true,  // enableIntelVp8Encoder
+            true   // enableH264HighProfile
+        )
+        val videoDecoderFactory = DefaultVideoDecoderFactory(eglBase.eglBaseContext)
+
+        // 3. Настройка опций
+        val options = PeerConnectionFactory.Options().apply {
+            disableEncryption = false
+            disableNetworkMonitor = false
+        }
+
+        // 4. Создание PeerConnectionFactory
+        try {
+            peerConnectionFactory = PeerConnectionFactory.builder()
+                .setOptions(options)
+                .setVideoEncoderFactory(videoEncoderFactory)
+                .setVideoDecoderFactory(videoDecoderFactory)
+                .createPeerConnectionFactory()
+            Log.d("WebRTCClient", "PeerConnectionFactory created successfully")
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Failed to create PeerConnectionFactory", e)
+            throw e
+        }
+    }
+
+    private fun createPeerConnection(): PeerConnection? {
+        try {
+            val rtcConfig = PeerConnection.RTCConfiguration(
+                listOf(
+                    PeerConnection.IceServer.builder("stun:stun.l.google.com:19302").createIceServer(),
+                    PeerConnection.IceServer.builder("stun:ardua.site:3478").createIceServer(),
+                    PeerConnection.IceServer.builder("turn:ardua.site:3478")
+                        .setUsername("user1")
+                        .setPassword("pass1")
+                        .createIceServer()
+                )
+            ).apply {
+                sdpSemantics = PeerConnection.SdpSemantics.UNIFIED_PLAN
+                continualGatheringPolicy = PeerConnection.ContinualGatheringPolicy.GATHER_CONTINUALLY
+                iceTransportsType = PeerConnection.IceTransportsType.ALL
+                bundlePolicy = PeerConnection.BundlePolicy.MAXBUNDLE
+                rtcpMuxPolicy = PeerConnection.RtcpMuxPolicy.REQUIRE
+                tcpCandidatePolicy = PeerConnection.TcpCandidatePolicy.ENABLED
+                candidateNetworkPolicy = PeerConnection.CandidateNetworkPolicy.ALL
+                keyType = PeerConnection.KeyType.ECDSA
+            }
+            val peerConnection = peerConnectionFactory.createPeerConnection(rtcConfig, observer)
+            if (peerConnection == null) {
+                Log.e("WebRTCClient", "Failed to create PeerConnection")
+            }
+            return peerConnection
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Error creating PeerConnection", e)
+            return null
+        }
+    }
+
+    internal fun switchCamera(useBackCamera: Boolean) {
+        try {
+            videoCapturer?.let { capturer ->
+                if (capturer is CameraVideoCapturer) {
+                    val enumerator = Camera2Enumerator(context)
+                    val targetCamera = enumerator.deviceNames.find {
+                        if (useBackCamera) !enumerator.isFrontFacing(it) else enumerator.isFrontFacing(it)
+                    }
+                    if (targetCamera != null) {
+                        capturer.switchCamera(object : CameraVideoCapturer.CameraSwitchHandler {
+                            override fun onCameraSwitchDone(isFrontCamera: Boolean) {
+                                Log.d("WebRTCClient", "Switched to ${if (isFrontCamera) "front" else "back"} camera")
+                            }
+
+                            override fun onCameraSwitchError(error: String) {
+                                Log.e("WebRTCClient", "Error switching camera: $error")
+                            }
+                        }, targetCamera)
+                    } else {
+                        Log.e("WebRTCClient", "No ${if (useBackCamera) "back" else "front"} camera found")
+                    }
+                } else {
+                    Log.w("WebRTCClient", "Video capturer is not a CameraVideoCapturer")
+                }
+            } ?: Log.w("WebRTCClient", "Video capturer is null")
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Error switching camera", e)
+        }
+    }
+
+    private fun createLocalTracks() {
+        createAudioTrack()
+        createVideoTrack()
+
+        val streamId = "ARDAMS"
+        val stream = peerConnectionFactory.createLocalMediaStream(streamId)
+
+        localAudioTrack?.let {
+            stream.addTrack(it)
+            peerConnection?.addTrack(it, listOf(streamId))
+        }
+
+        localVideoTrack?.let {
+            stream.addTrack(it)
+            peerConnection?.addTrack(it, listOf(streamId))
+        }
+    }
+
+    private fun createAudioTrack() {
+        val audioConstraints = MediaConstraints().apply {
+            mandatory.add(MediaConstraints.KeyValuePair("googEchoCancellation", "true"))
+            mandatory.add(MediaConstraints.KeyValuePair("googAutoGainControl", "true"))
+            mandatory.add(MediaConstraints.KeyValuePair("googHighpassFilter", "true"))
+            mandatory.add(MediaConstraints.KeyValuePair("googNoiseSuppression", "true"))
+        }
+
+        val audioSource = peerConnectionFactory.createAudioSource(audioConstraints)
+        localAudioTrack = peerConnectionFactory.createAudioTrack("ARDAMSa0", audioSource)
+    }
+
+    private fun createVideoTrack() {
+        try {
+            videoCapturer = createCameraCapturer()
+            if (videoCapturer == null) {
+                Log.e("WebRTCClient", "Failed to create video capturer")
+                throw IllegalStateException("Video capturer is null")
+            }
+
+            surfaceTextureHelper = SurfaceTextureHelper.create("CaptureThread", eglBase.eglBaseContext)
+            if (surfaceTextureHelper == null) {
+                Log.e("WebRTCClient", "Failed to create SurfaceTextureHelper")
+                throw IllegalStateException("SurfaceTextureHelper is null")
+            }
+
+            val videoSource = peerConnectionFactory.createVideoSource(false)
+            videoCapturer?.initialize(surfaceTextureHelper, context, videoSource.capturerObserver)
+
+            val isSamsung = Build.MANUFACTURER.equals("samsung", ignoreCase = true)
+            videoCapturer?.startCapture(
+                if (isSamsung) 480 else 640,
+                if (isSamsung) 360 else 480,
+                if (isSamsung) 15 else 20
+            )
+
+            localVideoTrack = peerConnectionFactory.createVideoTrack("ARDAMSv0", videoSource).apply {
+                addSink(localView)
+            }
+
+            setVideoEncoderBitrate(
+                if (isSamsung) 150000 else 300000,
+                if (isSamsung) 200000 else 400000,
+                if (isSamsung) 300000 else 500000
+            )
+            Log.d("WebRTCClient", "Video track created successfully")
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Error creating video track", e)
+            throw e
+        }
+    }
+
+    fun setVideoEncoderBitrate(minBitrate: Int, currentBitrate: Int, maxBitrate: Int) {
+        try {
+            val sender = peerConnection?.senders?.find { it.track()?.kind() == "video" }
+            sender?.let { videoSender ->
+                val parameters = videoSender.parameters
+                if (parameters.encodings.isNotEmpty()) {
+                    parameters.encodings[0].minBitrateBps = minBitrate
+                    parameters.encodings[0].maxBitrateBps = maxBitrate
+                    parameters.encodings[0].bitratePriority = 1.0
+                    videoSender.parameters = parameters
+                    Log.d("WebRTCClient", "Set video bitrate: min=$minBitrate, max=$maxBitrate")
+                }
+            } ?: Log.w("WebRTCClient", "No video sender found")
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Error setting video bitrate", e)
+        }
+    }
+
+    private fun createCameraCapturer(): VideoCapturer? {
+        val enumerator = Camera2Enumerator(context)
+        return enumerator.deviceNames.find { enumerator.isFrontFacing(it) }?.let {
+            Log.d("WebRTCClient", "Using front camera: $it")
+            enumerator.createCapturer(it, null)
+        } ?: enumerator.deviceNames.firstOrNull()?.let {
+            Log.d("WebRTCClient", "Using first available camera: $it")
+            enumerator.createCapturer(it, null)
+        } ?: run {
+            Log.e("WebRTCClient", "No cameras available")
+            null
+        }
+    }
+
+    fun close() {
+        try {
+            videoCapturer?.let { capturer ->
+                try {
+                    capturer.stopCapture()
+                    Log.d("WebRTCClient", "Video capturer stopped")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error stopping capturer", e)
+                }
+                try {
+                    capturer.dispose()
+                    Log.d("WebRTCClient", "Video capturer disposed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing capturer", e)
+                }
+            }
+
+            localVideoTrack?.let { track ->
+                try {
+                    track.removeSink(localView)
+                    track.dispose()
+                    Log.d("WebRTCClient", "Local video track disposed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing video track", e)
+                }
+            }
+
+            localAudioTrack?.let { track ->
+                try {
+                    track.dispose()
+                    Log.d("WebRTCClient", "Local audio track disposed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing audio track", e)
+                }
+            }
+
+            surfaceTextureHelper?.let { helper ->
+                try {
+                    helper.dispose()
+                    Log.d("WebRTCClient", "SurfaceTextureHelper disposed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing surface helper", e)
+                }
+            }
+
+            peerConnection?.let { pc ->
+                try {
+                    pc.close()
+                    Log.d("WebRTCClient", "Peer connection closed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error closing peer connection", e)
+                }
+                try {
+                    pc.dispose()
+                    Log.d("WebRTCClient", "Peer connection disposed")
+                } catch (e: Exception) {
+                    Log.e("WebRTCClient", "Error disposing peer connection", e)
+                }
+            }
+
+            try {
+                peerConnectionFactory.dispose()
+                Log.d("WebRTCClient", "PeerConnectionFactory disposed")
+            } catch (e: Exception) {
+                Log.e("WebRTCClient", "Error disposing PeerConnectionFactory", e)
+            }
+        } catch (e: Exception) {
+            Log.e("WebRTCClient", "Error in cleanup", e)
+        } finally {
+            videoCapturer = null
+            localVideoTrack = null
+            localAudioTrack = null
+            surfaceTextureHelper = null
+            peerConnection = null
+        }
+    }
+}
+
+// file: app/src/main/java/com/example/ardua/WebRTCService.kt
+package com.example.ardua
 import android.annotation.SuppressLint
 import android.app.*
 import android.content.BroadcastReceiver
@@ -33,7 +814,7 @@ class WebRTCService : Service() {
         var isRunning = false
             private set
         var currentRoomName = ""
-        const val ACTION_SERVICE_STATE = "com.example.mytest.SERVICE_STATE"
+        const val ACTION_SERVICE_STATE = "com.example.ardua.SERVICE_STATE"
         const val EXTRA_IS_RUNNING = "is_running"
     }
 
@@ -314,30 +1095,35 @@ class WebRTCService : Service() {
 
     private fun initializeWebRTC() {
         Log.d("WebRTCService", "Initializing new WebRTC connection")
-        cleanupWebRTCResources()
-        eglBase = EglBase.create()
-        isEglBaseReleased = false
-        val localView = SurfaceViewRenderer(this).apply {
-            init(eglBase.eglBaseContext, null)
-            setMirror(true)
-            setZOrderMediaOverlay(true)
-            setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT)
+        try {
+            cleanupWebRTCResources()
+            eglBase = EglBase.create()
+            isEglBaseReleased = false
+            val localView = SurfaceViewRenderer(this).apply {
+                init(eglBase.eglBaseContext, null)
+                setMirror(true)
+                setZOrderMediaOverlay(true)
+                setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT)
+            }
+            remoteView = SurfaceViewRenderer(this).apply {
+                init(eglBase.eglBaseContext, null)
+                setZOrderMediaOverlay(true)
+                setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT)
+            }
+            webRTCClient = WebRTCClient(
+                context = this,
+                eglBase = eglBase,
+                localView = localView,
+                remoteView = remoteView,
+                observer = createPeerConnectionObserver()
+            )
+            webRTCClient.setVideoEncoderBitrate(300000, 400000, 500000)
+            Log.d("WebRTCService", "WebRTCClient initialized successfully")
+        } catch (e: Exception) {
+            Log.e("WebRTCService", "Failed to initialize WebRTCClient", e)
+            throw e // Или обработайте ошибку иначе
         }
-        remoteView = SurfaceViewRenderer(this).apply {
-            init(eglBase.eglBaseContext, null)
-            setZOrderMediaOverlay(true)
-            setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FIT)
-        }
-        webRTCClient = WebRTCClient(
-            context = this,
-            eglBase = eglBase,
-            localView = localView,
-            remoteView = remoteView,
-            observer = createPeerConnectionObserver()
-        )
-        webRTCClient.setVideoEncoderBitrate(300000, 400000, 500000)
     }
-
     private fun createPeerConnectionObserver() = object : PeerConnection.Observer {
         override fun onIceCandidate(candidate: IceCandidate?) {
             candidate?.let {
@@ -347,12 +1133,19 @@ class WebRTCService : Service() {
         }
 
         override fun onIceConnectionChange(state: PeerConnection.IceConnectionState?) {
-            Log.d("WebRTCService", "ICE connection state: $state")
+            Log.d("WebRTCService", "ICE connection state changed to: $state")
             when (state) {
-                PeerConnection.IceConnectionState.CONNECTED ->
+                PeerConnection.IceConnectionState.CONNECTED -> {
                     updateNotification("Connection established")
-                PeerConnection.IceConnectionState.DISCONNECTED ->
+                }
+                PeerConnection.IceConnectionState.DISCONNECTED -> {
                     updateNotification("Connection lost")
+                    scheduleReconnect()
+                }
+                PeerConnection.IceConnectionState.FAILED -> {
+                    Log.e("WebRTCService", "ICE connection failed")
+                    scheduleReconnect()
+                }
                 else -> {}
             }
         }
@@ -1054,3 +1847,76 @@ class WebRTCService : Service() {
                 ::eglBase.isInitialized
     }
 }
+
+// file: app/src/main/java/com/example/ardua/WebSocketClient.kt
+package com.example.ardua
+import android.annotation.SuppressLint
+import android.util.Log
+import okhttp3.*
+import org.json.JSONObject
+import java.security.cert.X509Certificate
+import java.util.concurrent.TimeUnit
+import javax.net.ssl.*
+
+class WebSocketClient(private val listener: okhttp3.WebSocketListener) {
+private var webSocket: WebSocket? = null
+private var currentUrl: String = ""
+private val client = OkHttpClient.Builder()
+.pingInterval(20, TimeUnit.SECONDS)
+.pingInterval(20, TimeUnit.SECONDS)
+.hostnameVerifier { _, _ -> true }
+.sslSocketFactory(getUnsafeSSLSocketFactory(), getTrustAllCerts()[0] as X509TrustManager)
+.build()
+
+    private fun getUnsafeSSLSocketFactory(): SSLSocketFactory {
+        val trustAllCerts = getTrustAllCerts()
+        val sslContext = SSLContext.getInstance("SSL")
+        sslContext.init(null, trustAllCerts, java.security.SecureRandom())
+        return sslContext.socketFactory
+    }
+
+    private fun getTrustAllCerts(): Array<TrustManager> {
+        return arrayOf(
+            @SuppressLint("CustomX509TrustManager")
+            object : X509TrustManager {
+                @SuppressLint("TrustAllX509TrustManager")
+                override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+                }
+
+                @SuppressLint("TrustAllX509TrustManager")
+                override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+                }
+
+                override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
+            })
+    }
+    fun isConnected(): Boolean {
+        return webSocket != null
+    }
+
+    fun connect(url: String) {
+        currentUrl = url
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        webSocket = client.newWebSocket(request, listener)
+    }
+
+    fun reconnect() {
+        disconnect()
+        connect(currentUrl)
+    }
+
+    fun send(message: String) {
+        webSocket?.send(message)
+    }
+
+    fun disconnect() {
+        webSocket?.close(1000, "Normal closure")
+        client.dispatcher.executorService.shutdown()
+    }
+}
+
+эта библиотека implementation("io.github.webrtc-sdk:android:125.6422.07") не поддерживает H264 и OpneH264 мне нужно добавить в проект H264 когда пользователь хочет соединиться с префиксом H264 нужно чтобы устройство андройд отправляло видео с кодеком H264
+как добавить библиотеки в проект и сделать эту реализацию, отвечай на русском

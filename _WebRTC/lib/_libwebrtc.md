@@ -1,0 +1,1 @@
+\\wsl.localhost\Ubuntu-24.04\home\pi\android\sdk\ndk\28.1.13356709\toolchains\llvm\prebuilt\linux-x86_64\sysroot\usr\lib

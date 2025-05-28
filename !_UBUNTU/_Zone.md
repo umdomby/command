@@ -1,0 +1,1 @@
+find ~/docker -type f -name '*Zone.Identifier*' -delete
