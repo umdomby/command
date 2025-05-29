@@ -1,6 +1,8 @@
 sudo ss -tulnp | grep 3001
+sudo ss -tulnp | grep 49891
 sudo netstat -tulnp | grep ':8085'
-sudo kill -9 58195
+sudo netstat -tulnp | grep ':49940'
+sudo kill -9 49940
 
 sudo netstat -ltpn
 
