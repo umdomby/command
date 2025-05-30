@@ -1,5 +1,8 @@
 sudo ps aux | grep -i docker | awk '{print $2}' | sudo xargs kill -9    # Найти и убить все Docker-процессы (включая контейнеры)
-sudo pkill -9 -f "docker"                                               # Альтернативный способ (если контейнеры висят)
+sudo pkill -9 -f "docker"                                               # Убить все процессы Docker и Containerd
+sudo systemctl stop docker docker.socket containerd
+sudo pkill -9 -f "dockerd\|containerd"
+ps aux | grep -i docker                                                 # Проверить результат
 
                                                                         # Остановить все контейнеры и убить их (если Docker ещё работает)
 sudo docker kill $(sudo docker ps -q) 2>/dev/null ; sudo docker rm -f $(sudo docker ps -aq) 2>/dev/null
