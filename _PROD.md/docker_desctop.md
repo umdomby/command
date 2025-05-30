@@ -1,3 +1,17 @@
+sudo apt purge docker.io docker-ce docker-ce-cli containerd.io          # Если установлен через apt (обычная установка)
+sudo apt autoremove
+sudo rm -rf /var/lib/docker /etc/docker
+
+sudo snap remove docker --purge                                         # snap
+sudo rm -rf /var/snap/docker
+
+sudo systemctl disable --now docker docker.socket containerd            # Отключение всех связанных служб
+sudo find / -name "*docker*" -exec rm -rf {} \; 2>/dev/null             # Проверка и удаление остаточных файлов
+sudo apt-mark hold docker.io docker-ce                                  # Блокировка автоматической переустановки
+sudo snap hold docker                                                   # Блокировка автоматической переустановки для snap
+sudo crontab -l | grep docker                                           # Проверить задачи cron
+sudo systemctl list-unit-files | grep docker                            # Проверить службы
+
 sudo snap disable docker                                                # отключить автозапуск
 sudo snap enable docker                                                 # включить обратно
 sudo systemctl disable docker docker.socket containerd                  # Отключить автозагрузку
