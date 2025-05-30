@@ -1,3 +1,6 @@
+sudo docker-compose down -v                                             # остановить и удалить контейнеры
+sudo docker-compose up --build                                          # установить и запустить контейнеры
+
 sudo apt purge docker.io docker-ce docker-ce-cli containerd.io          # Если установлен через apt (обычная установка)
 sudo apt autoremove
 sudo rm -rf /var/lib/docker /etc/docker
