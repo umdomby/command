@@ -1,3 +1,9 @@
+sudo snap disable docker                                                # отключить автозапуск
+sudo snap enable docker                                                 # включить обратно
+sudo systemctl disable docker docker.socket containerd                  # Отключить автозагрузку
+sudo systemctl enable docker docker.socket containerd                   # Включить обратно
+systemctl list-unit-files | grep docker                                 # Проверить статус
+
 sudo ps aux | grep -i docker | awk '{print $2}' | sudo xargs kill -9    # Найти и убить все Docker-процессы (включая контейнеры)
 sudo pkill -9 -f "docker"                                               # Убить все процессы Docker и Containerd
 sudo systemctl stop docker docker.socket containerd
