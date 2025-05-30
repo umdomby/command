@@ -1,3 +1,14 @@
+sudo ps aux | grep -i docker | awk '{print $2}' | sudo xargs kill -9    # Найти и убить все Docker-процессы (включая контейнеры)
+sudo pkill -9 -f "docker"                                               # Альтернативный способ (если контейнеры висят)
+
+                                                                        # Остановить все контейнеры и убить их (если Docker ещё работает)
+sudo docker kill $(sudo docker ps -q) 2>/dev/null ; sudo docker rm -f $(sudo docker ps -aq) 2>/dev/null
+                                                                        # Ядерный вариант (если Docker не отвечает)
+sudo systemctl stop docker ; sudo rm -rf /var/lib/docker/containers/* ; sudo systemctl start docker
+
+sudo docker ps -a                                                       # Должно быть пусто
+sudo ps aux | grep -i docker                                            # Не должно быть зависших процессов
+
 sudo systemctl stop docker                                              # Остановить Docker  
 sudo rm -rf /var/lib/docker/containers/*                                # Удалить ВСЕ контейнеры  
 sudo systemctl start docker                                             # Запустить Docker заново
@@ -37,6 +48,8 @@ sudo ls -l /var/lib/docker/containers/
 sudo docker inspect -f '{{.State.Pid}}' f14365546c64 2332754cc489 0c029191afde
 ps aux | grep docker
 sudo kill -9 12345
+sudo systemctl start docker
+sudo systemctl stop docker
 sudo systemctl restart docker
 sudo docker stop f14365546c64 2332754cc489 0c029191afde
 sudo docker rm -f f14365546c64 2332754cc489 0c029191afde
