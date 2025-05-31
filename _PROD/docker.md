@@ -18,3 +18,25 @@ sudo apt-get update
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo docker run hello-world
+
+
+# command
+sudo systemctl restart docker
+
+# docker network create sharednetwork
+# docker network ls
+# docker-compose down -v
+# docker-compose up --build
+
+- Запущенные контейнеры:
+# docker ps
+
+- Все контейнеры (включая остановленные):
+# docker ps -a
+
+- name:
+- docker-start-nginx-1
+
+Зайдите в контейнер, чтобы выполнить команду NGINX:
+# docker exec -it docker-start-nginx-1 bash
+# nginx -t
