@@ -1,3 +1,9 @@
+sudo docker stop wsar-server docker-ardua_ardua_1 webrtc_server         # Остановить контейнеры
+sudo docker rm wsar-server docker-ardua_ardua_1 webrtc_server           # Удалить контейнеры
+sudo docker rm -f wsar-server docker-ardua_ardua_1 webrtc_server        # Принудительное удаление (если нужно): Если контейнеры перезапускаются или вы хотите сделать это одним шагом, используйте:
+sudo docker ps -a                                                       # Проверка: Убедитесь, что контейнеры удалены:
+sudo docker-compose -f /path/to/docker-compose.yml rm -f                # Если контейнеры всё ещё появляются docker-compose.yml на наличие политики restart: always или выполните:
+
 sudo docker-compose down -v                                             # остановить и удалить контейнеры
 sudo docker-compose up --build                                          # установить и запустить контейнеры
 
