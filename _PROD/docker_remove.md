@@ -1,3 +1,5 @@
+
+
 sudo docker stop wsar-server docker-ardua_ardua_1 webrtc_server         # Остановить контейнеры
 sudo docker rm wsar-server docker-ardua_ardua_1 webrtc_server           # Удалить контейнеры
 sudo docker rm -f wsar-server docker-ardua_ardua_1 webrtc_server        # Принудительное удаление (если нужно): Если контейнеры перезапускаются или вы хотите сделать это одним шагом, используйте:
