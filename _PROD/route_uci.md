@@ -67,6 +67,15 @@ uci set firewall.@redirect[-1].dest_ip='192.168.1.141'
 uci set firewall.@redirect[-1].dest_port='3001'
 uci set firewall.@redirect[-1].enabled='1'
 uci add firewall redirect
+uci set firewall.@redirect[-1].name='Port_3021_TCP'
+uci set firewall.@redirect[-1].src='wan'
+uci set firewall.@redirect[-1].proto='tcp'
+uci set firewall.@redirect[-1].src_dport='3021'
+uci set firewall.@redirect[-1].dest='lan'
+uci set firewall.@redirect[-1].dest_ip='192.168.1.121'
+uci set firewall.@redirect[-1].dest_port='3021'
+uci set firewall.@redirect[-1].enabled='1'
+uci add firewall redirect
 uci set firewall.@redirect[-1].name='Ports_8085-8086_TCP'
 uci set firewall.@redirect[-1].src='wan'
 uci set firewall.@redirect[-1].proto='tcp'
@@ -119,13 +128,13 @@ uci commit firewall
 
 
 # Удаление правил по именам
-uci show firewall | grep -E "redirect.*(Port_80_TCP|Port_443_TCP|Port_3478_TCP|Port_5349_TCP|Port_3001_TCP|Ports_8080-8099_TCP|Ports_8085-8086_TCP|Ports_8085-8086_UDP|Ports_8095-8096_TCP|Ports_8095-8096_UDP|UDP_High_Ports)" | cut -d'=' -f1 | while read rule; do uci delete $rule; done
 uci delete firewall.@redirect[Port_80_TCP]
 uci delete firewall.@redirect[Port_443_TCP]
 uci delete firewall.@redirect[Port_444_TCP]
 uci delete firewall.@redirect[Port_3478_TCP]
 uci delete firewall.@redirect[Port_5349_TCP]
 uci delete firewall.@redirect[Port_3001_TCP]
+uci delete firewall.@redirect[Port_3021_TCP]
 uci delete firewall.@redirect[Ports_8085-8086_TCP]
 uci delete firewall.@redirect[Ports_8085-8086_UDP]
 uci delete firewall.@redirect[Ports_8095-8096_TCP]
