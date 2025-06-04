@@ -5,8 +5,8 @@ Barca    1.35.587
 Barca <- 1.36.08
 Chicago  1.52.365
 Dubai    1.43.086 -
-Par      1.54.597
-Okutama  1.49.466
+Par      1.52.582
+Okutama  1.49.217
 London <- 2.08.561
 Schanhai 1.28.525
 YOKO HO 1
@@ -28,3 +28,7 @@ Sir.Smoke 100%
 crish088
 33_Magic_Alonso
 Meteorkingchris
+ReggiBoGamer
+E6 EVO
+bipbiplecoyte34
+EMILIO13130

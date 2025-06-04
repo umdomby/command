@@ -41,8 +41,8 @@ http {
     }
 }
 ```
-sudo curl http://localhost/.well-known/acme-challenge/test
-sudo curl http://ardua.site/.well-known/acme-challenge/test
+sudo curl http://localhost/.well-known/acme-challenge/test.txt
+sudo curl http://ardua.site/.well-known/acme-challenge/test.txt
 
 # Убедитесь, что /var/www/certbot существует и доступен:
 sudo docker exec -it docker-nginx_nginx_1 ls -la /var/www/certbot
@@ -52,6 +52,14 @@ sudo docker exec -it docker-nginx_certbot_1 certbot certonly --webroot -w /var/w
 
 # Альтернативный способ: использование --standalone (если NGINX мешает)
 sudo docker exec -it docker-nginx_certbot_1 certbot certonly --standalone -d ardua.site --email umdom2@gmail.com --agree-tos --no-eff-email
+
+```docker-nginx-2
+# Получение сертификатов с помощью Certbot
+sudo docker exec -it docker-nginx-2-certbot-1 certbot certonly --webroot -w /var/www/certbot -d ardua.site --email umdom2@gmail.com --agree-tos --no-eff-email --force-renewal
+
+# Альтернативный способ: использование --standalone (если NGINX мешает)
+sudo docker exec -it docker-nginx-2-certbot-1 certbot certonly --standalone -d ardua.site --email umdom2@gmail.com --agree-tos --no-eff-email
+```
 
 Где:
     -w /var/www/certbot — путь к веб-корню, куда Certbot размещает временные файлы для проверки домена.
@@ -70,11 +78,23 @@ sudo docker logs docker-nginx_nginx_1       # Логи NGINX
 sudo docker logs docker-nginx_certbot_1    # Логи Certbot
 sudo cat /var/log/letsencrypt/letsencrypt.log
 
+# 80 lighttpd
+sudo netstat -tuln | grep 80
+sudo lsof -i :80
+sudo ps aux | grep lighttpd
+sudo systemctl stop lighttpd
+sudo systemctl disable lighttpd
+docker exec -it docker-nginx-2-nginx-1 ls -l /var/www/certbot/.well-known/acme-challenge/  # файл есть в контейнере Nginx:
+
+# logs
+docker exec -it docker-nginx-2-nginx-1 cat /var/log/nginx/access.log
+docker exec -it docker-nginx-2-nginx-1 cat /var/log/nginx/error.log
+docker exec -it docker-nginx-2-certbot-1 cat /var/log/letsencrypt/letsencrypt.log
 
 sudo apt update
 sudo apt install net-tools
 sudo netstat -tulnp | grep -E "80|443|3478|5349|49152|49800"
-sudo ss -tulnp | grep 3001
+sudo ss -tulnp | grep 80
 sudo ss -tulnp | grep 49891
 sudo netstat -tulnp | grep ':8085'
 sudo netstat -tulnp | grep ':49940'
@@ -86,5 +106,5 @@ sudo lsof -nP -i | grep LISTEN
 sudo lsof -i TCP:8085
 sudo lsof -i TCP:3003
 # Убить процесс
-sudo kill -9 `sudo lsof -t -i:3001`  or  sudo kill -9 $(sudo lsof -t -i:9001)
-sudo kill -9 `sudo lsof -t -i:8081`
+sudo kill -9 `sudo lsof -t -i:80`  or  sudo kill -9 $(sudo lsof -t -i:80)
+sudo kill -9 `sudo lsof -t -i:80`
