@@ -1,0 +1,46 @@
+// npx prisma migrate dev --name init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id         Int       @id @default(autoincrement())
+  fullName   String
+  email      String    @unique
+  provider   String?
+  providerId String?
+  password   String
+  role       UserRole  @default(USER)
+  img        String?
+  devices    Devices[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Devices {
+  id             Int         @id @default(autoincrement())
+  userId         Int
+  nameDivice     String
+  user           User        @relation(fields: [userId], references: [id])
+  devicesEnum    DevicesEnum @default(ArduaESP8266)
+  keypassVideo   String
+  keypassControl String
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+enum DevicesEnum {
+  ArduaESP8266
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}

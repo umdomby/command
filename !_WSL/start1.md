@@ -8,6 +8,9 @@ wsl.exe ~
 wsl.exe -d Ubuntu-24.04 --cd ~/projects bash -i -l
 ! wsl.exe ~ -d Ubuntu-24.04 -e bash --rcfile <(echo "cd ~/projects; exec bash -i")
 
+# WebStorm terminal WSL2
+File → Settings → Languages & Frameworks → Node.js + v
+File → Settings → Terminal найдите настройку терминала.  wsl.exe -d Ubuntu-24.04
 
 # импорт
 wsl --import Ubuntu-24.04 C:\WSL\Ubuntu-24.04 "C:\wsl-ubuntu-24-04-backup.tar"
