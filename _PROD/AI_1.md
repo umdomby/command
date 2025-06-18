@@ -1,43 +1,51 @@
-Сохраненные комнаты:
 
 
-model SavedRoom {
-id          Int           @id @default(autoincrement())
-userId      Int
-user        User          @relation(fields: [userId], references: [id])
-devicesId   Int?          @unique
-devices     Devices?      @relation(fields: [devicesId], references: [id])
-roomId      String        @unique
-isDefault   Boolean       @default(false)
-autoConnect Boolean       @default(false)
-createdAt   DateTime      @default(now())
-updatedAt   DateTime      @updatedAt
-proxyAccess ProxyAccess[] // Связь с моделью ProxyAccess
+при нажатии на
+<Button
+onClick={async () => {
+leaveRoom();
+setAutoJoin(false);
+setIsJoining(false);
+setError(null);
+setActiveMainTab('webrtc');
+hasAttemptedAutoJoin.current = false;
+if (webRTCRetryTimeoutRef.current) {
+clearTimeout(webRTCRetryTimeoutRef.current);
+webRTCRetryTimeoutRef.current = null;
 }
-
-model SavedProxy {
-id          Int      @id @default(autoincrement())
-userId      Int
-proxyRoomId String
-isDefault   Boolean  @default(false)
-autoConnect Boolean  @default(false)
-user        User     @relation(fields: [userId], references: [id])
-createdAt   DateTime @default(now())
-updatedAt   DateTime @updatedAt
+// Вызываем disconnectWebSocket
+if (socketClientRef.current.disconnectWebSocket) {
+await socketClientRef.current.disconnectWebSocket();
 }
-
-
-у одного пользователя может быть только один checkbox true из: SavedRoom isDefault и SavedProxy isDefault
-isDefault которого подставляется в
-<Input
-id="room"
-value={roomId}
-onChange={handleRoomIdChange}
-disabled={isInRoom || isJoining}
-placeholder="XXXX-XXXX-XXXX-XXXX"
-maxLength={19}
-/>
-
-если я выбираю чекбокс из таблицы SavedRoom то все чебоксы этого пользователя в SavedProxy isDefault будут  false и на оборот
-
-
+setShowDisconnectDialog(true);
+setTimeout(() => setShowDisconnectDialog(false), 3000);
+}}
+className={styles.button}
+>
+Отключить подключение
+</Button>
+или
+<Button
+onClick={async () => {
+leaveRoom();
+setActiveMainTab('webrtc');
+setIsJoining(false);
+setAutoJoin(false);
+updateAutoConnect(roomId.replace(/-/g, ''), false);
+hasAttemptedAutoJoin.current = false;
+if (webRTCRetryTimeoutRef.current) {
+clearTimeout(webRTCRetryTimeoutRef.current);
+webRTCRetryTimeoutRef.current = null;
+}
+// Вызываем disconnectWebSocket
+if (socketClientRef.current.disconnectWebSocket) {
+await socketClientRef.current.disconnectWebSocket();
+}
+}}
+disabled={!isConnected}
+className={styles.button}
+>
+Покинуть комнату
+</Button>
+должно происходить отключение от сокета model Devices idDevice String  \\wsl.localhost\Ubuntu-24.04\home\pi\prod\docker-ardua-444\components\control\SocketClient.tsx
+сделай точечные изменения, укажи что изменить , отвечай на русском.
