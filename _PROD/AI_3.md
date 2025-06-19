@@ -18,16 +18,16 @@ https://grok.com/chat/a6fcbd32-0ed1-42ee-9b52-57a83931467a   33
 # 8. Вольт с ардуино .00
 # 14. Реле свет - по отключению выключается. Выключается если меньше 7 вольт.
 # 7.   один пароль, доступ по id user сохранение идет - DiviceID RoomID
+# 1. Без камеры и микрофона - отключить автоподключиние при нажатии кнопок в прокси-ссылках
+# 1. Прозрачная локальная камера
 
-connectWebSocket(value)
-1. Без камеры и микрофона
 2. ссылка, доступ к ссылке без регистрации
-
 15. Охрана-оповещение-telegram
 9.  3D
 3.  Управление: джойстиками, клавиатурой-настройка , джойстики -вверх -вниз
 12. Голосовые команды БД 2x
-4.  серво open-closed
+4.  серво кнопки по умолчанию open-closed
+5. 
 ? 3. Удаление целевой - удаляются все прокси
 
 
@@ -38,6 +38,20 @@ connectWebSocket(value)
 12. ИИ
 6.  камера-база-сохранять
 
+когда я отключаю звук, он через две секунды включается ) - сделай это включение звука через 2 секунды только один раз при загрузке страницы
+
+useWebRTC.ts:817 Ошибка от сервера: Room does not exist. Leader must join first.
+error @ intercept-console-error.js:50
+handleMessage @ useWebRTC.ts:817
+useWebRTC.ts:1304 Получено сообщение в joinRoom: {
+"data": "Room does not exist. Leader must join first.",
+"type": "error"
+}
+useWebRTC.ts:1315 Ошибка от сервера: Room does not exist. Leader must join first.
+error @ intercept-console-error.js:50
+onMessage @ useWebRTC.ts:1315
+useWebRTC.ts:1319 Комната не существует, повторная попытка через 5 секунд
+VideoCallApp.tsx:150 Состояния: {isConnected: true, isInRoom: false, isCallActive: false, error: 'Room does not exist. Leader must join first.'}
 
 ```
 посмотреть скрыть сервоприводы

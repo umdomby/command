@@ -9,6 +9,7 @@ Par      1.52.582
 Okutama  1.49.217
 London   1.40.653
 Schanhai 1.28.525
+HAWANA   1.43.815
 YOKO HO 1
 
 2
