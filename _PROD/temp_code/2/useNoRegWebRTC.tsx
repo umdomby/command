@@ -5,62 +5,169 @@ import { joinRoomViaProxy } from '@/app/actions';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface NoRegWebRTCProps {
-roomId: string;
-setLeaveRoom?: (leaveRoom: () => void) => void;
-videoTransform?: string;
-setWebSocket?: (ws: WebSocket | null) => void;
-useBackCamera?: boolean;
+    roomId: string;
+    setLeaveRoom?: (leaveRoom: () => void) => void;
+    videoTransform?: string;
+    setWebSocket?: (ws: WebSocket | null) => void;
+    useBackCamera?: boolean;
 }
 
 interface WebSocketMessage {
-type: string;
-data?: any;
-sdp?: RTCSessionDescriptionInit;
-ice?: RTCIceCandidateInit;
-room?: string;
-username?: string;
-isLeader?: boolean;
-useBackCamera?: boolean;
-force_disconnect?: boolean;
-preferredCodec?: string;
+    type: string;
+    data?: any;
+    sdp?: RTCSessionDescriptionInit;
+    ice?: RTCIceCandidateInit;
+    room?: string;
+    username?: string;
+    isLeader?: boolean;
+    useBackCamera?: boolean;
+    force_disconnect?: boolean;
+    preferredCodec?: string;
 }
 
 export default function UseNoRegWebRTC({ roomId, setLeaveRoom, videoTransform, setWebSocket, useBackCamera }: NoRegWebRTCProps) {
-const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
-const [isConnected, setIsConnected] = useState(false);
-const [isInRoom, setIsInRoom] = useState(false);
-const [error, setError] = useState<string | null>(null);
-const [retryCount, setRetryCount] = useState(0);
-const [connectionState, setConnectionState] = useState<{
-ice: string | null;
-signaling: string | null;
-}>({ ice: null, signaling: null });
-const ws = useRef<WebSocket | null>(null);
-const pc = useRef<RTCPeerConnection | null>(null);
-const retryAttempts = useRef(0);
-const videoCheckTimeout = useRef<NodeJS.Timeout | null>(null);
-const connectionTimeout = useRef<NodeJS.Timeout | null>(null);
-const webRTCRetryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-const pingIntervalRef = useRef<NodeJS.Timeout | null>(null);
-const joinMessageRetries = useRef(0);
-const videoRef = useRef<HTMLVideoElement>(null);
-const isJoining = useRef(false);
-const isReconnecting = useRef(false);
-const isConnectionStable = useRef(false);
-const username = `guest_${Math.floor(Math.random() * 1000)}`;
-const preferredCodec = 'VP8';
-const MAX_RETRIES = 10;
-const VIDEO_CHECK_TIMEOUT = 12000;
-const WS_TIMEOUT = 10000;
-const MAX_JOIN_MESSAGE_RETRIES = 10;
-const [isMuted, setIsMuted] = useState<boolean>(true);
-const [flashlightState, setFlashlightState] = useState<boolean>(false);
+    const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
+    const [isConnected, setIsConnected] = useState(false);
+    const [isInRoom, setIsInRoom] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [retryCount, setRetryCount] = useState(0);
+    const [connectionState, setConnectionState] = useState<{
+        ice: string | null;
+        signaling: string | null;
+    }>({ ice: null, signaling: null });
+    const ws = useRef<WebSocket | null>(null);
+    const pc = useRef<RTCPeerConnection | null>(null);
+    const retryAttempts = useRef(0);
+    const videoCheckTimeout = useRef<NodeJS.Timeout | null>(null);
+    const connectionTimeout = useRef<NodeJS.Timeout | null>(null);
+    const webRTCRetryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const pingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const joinMessageRetries = useRef(0);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const isJoining = useRef(false);
+    const isReconnecting = useRef(false);
+    const isConnectionStable = useRef(false);
+    const lastRetryTimestamp = useRef(0);
+    const username = `guest_${Math.floor(Math.random() * 1000)}`;
+    const preferredCodec = 'VP8';
+    const MAX_RETRIES = 10;
+    const VIDEO_CHECK_TIMEOUT = 8000;
+    const WS_TIMEOUT = 15000;
+    const MAX_JOIN_MESSAGE_RETRIES = 10;
+    const [isMuted, setIsMuted] = useState<boolean>(true);
+    const [flashlightState, setFlashlightState] = useState<boolean>(false);
 
     const detectPlatform = () => {
         const ua = navigator.userAgent;
         const isIOS = /iPad|iPhone|iPod/.test(ua);
         const isSafari = /^((?!chrome|android).)*safari/i.test(ua) || isIOS;
-        return { isIOS, isSafari, isHuawei: /huawei/i.test(ua) };
+        const isOldDevice = /Android [4-7]\./.test(ua) || /iOS (9|10|11)\./.test(ua); // Проверка старых устройств
+        return {
+            isIOS,
+            isSafari,
+            isHuawei: /huawei/i.test(ua),
+            isMobile: /Android|iPad|iPhone|iPod/.test(ua),
+            isOldDevice,
+        };
+    };
+
+    const { isIOS, isSafari, isHuawei, isMobile, isOldDevice } = detectPlatform();
+
+    const checkNetwork = () => {
+        if (!navigator.onLine) return false;
+        if ('connection' in navigator && navigator.connection) {
+            const connection = navigator.connection as any;
+            if (connection.effectiveType === '2g' || connection.downlink < 1) {
+                console.warn('Слабая сеть (2G или низкая скорость), откладываем подключение');
+                return false;
+            }
+        }
+        return true;
+    };
+
+    const cleanup = () => {
+        console.log('Выполняется полная очистка ресурсов');
+
+        // Очистка таймеров
+        [videoCheckTimeout, connectionTimeout, webRTCRetryTimeoutRef, pingIntervalRef].forEach(timer => {
+            if (timer.current) {
+                if (timer === pingIntervalRef) {
+                    clearInterval(timer.current);
+                } else {
+                    clearTimeout(timer.current);
+                }
+                timer.current = null;
+            }
+        });
+
+        // Полная очистка PeerConnection
+        if (pc.current) {
+            console.log('Закрытие PeerConnection');
+            pc.current.onicecandidate = null;
+            pc.current.ontrack = null;
+            pc.current.onnegotiationneeded = null;
+            pc.current.oniceconnectionstatechange = null;
+            pc.current.onicegatheringstatechange = null;
+            pc.current.onsignalingstatechange = null;
+            pc.current.onconnectionstatechange = null;
+
+            pc.current.getTransceivers().forEach(transceiver => {
+                try {
+                    transceiver.stop();
+                } catch (err) {
+                    console.warn('Ошибка при остановке трансцепсера:', err);
+                }
+            });
+
+            try {
+                pc.current.close();
+            } catch (err) {
+                console.warn('Ошибка при закрытии PeerConnection:', err);
+            }
+            pc.current = null;
+        }
+
+        // Остановка и очистка удаленного потока
+        if (remoteStream) {
+            console.log('Остановка удаленного потока');
+            remoteStream.getTracks().forEach(track => {
+                try {
+                    track.stop();
+                    track.dispatchEvent(new Event('ended'));
+                } catch (err) {
+                    console.warn('Ошибка при остановке трека:', err);
+                }
+            });
+            setRemoteStream(null);
+        }
+
+        // Очистка WebSocket
+        if (ws.current) {
+            ws.current.onmessage = null;
+            ws.current.onopen = null;
+            ws.current.onclose = null;
+            ws.current.onerror = null;
+            try {
+                ws.current.close();
+            } catch (e) {
+                console.warn('Ошибка при закрытии WebSocket:', e);
+            }
+            ws.current = null;
+            if (setWebSocket) setWebSocket(null);
+        }
+
+        // Сброс состояний
+        setIsConnected(false);
+        setIsInRoom(false);
+        setError(null);
+        setConnectionState({ ice: null, signaling: null });
+        retryAttempts.current = 0;
+        setRetryCount(0);
+        joinMessageRetries.current = 0;
+        isJoining.current = false;
+        isReconnecting.current = false;
+        isConnectionStable.current = false;
+        console.log('Очистка завершена');
     };
 
     const leaveRoom = () => {
@@ -79,59 +186,7 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
             }
         }
 
-        if (videoCheckTimeout.current) clearTimeout(videoCheckTimeout.current);
-        if (connectionTimeout.current) clearTimeout(connectionTimeout.current);
-        if (webRTCRetryTimeoutRef.current) clearTimeout(webRTCRetryTimeoutRef.current);
-        if (pingIntervalRef.current) clearInterval(pingIntervalRef.current);
-
-        if (pc.current) {
-            pc.current.onicecandidate = null;
-            pc.current.ontrack = null;
-            pc.current.oniceconnectionstatechange = null;
-            pc.current.onsignalingstatechange = null;
-            try {
-                pc.current.close();
-            } catch (e) {
-                console.warn('Ошибка закрытия PeerConnection:', e);
-            }
-            pc.current = null;
-        }
-
-        if (remoteStream) {
-            remoteStream.getTracks().forEach(track => {
-                try {
-                    track.stop();
-                } catch (e) {
-                    console.warn('Ошибка остановки трека:', e);
-                }
-            });
-            setRemoteStream(null);
-        }
-
-        if (ws.current) {
-            ws.current.onmessage = null;
-            ws.current.onopen = null;
-            ws.current.onclose = null;
-            ws.current.onerror = null;
-            try {
-                ws.current.close();
-            } catch (e) {
-                console.warn('Ошибка закрытия WebSocket:', e);
-            }
-            ws.current = null;
-        }
-
-        setIsConnected(false);
-        setIsInRoom(false);
-        setError(null);
-        setConnectionState({ ice: null, signaling: null });
-        retryAttempts.current = 0;
-        setRetryCount(0);
-        joinMessageRetries.current = 0;
-        isJoining.current = false;
-        isReconnecting.current = false;
-        isConnectionStable.current = false;
-        if (setWebSocket) setWebSocket(null);
+        cleanup();
     };
 
     useEffect(() => {
@@ -145,7 +200,7 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
             clearTimeout(videoCheckTimeout.current);
             console.log('Очищен предыдущий таймер проверки видео');
         }
-        console.log('Запуск таймера проверки видео');
+        console.log(`Запуск таймера проверки видео на ${VIDEO_CHECK_TIMEOUT / 1000} секунд`);
         videoCheckTimeout.current = setTimeout(() => {
             const videoElement = videoRef.current;
             const hasVideoContent = videoElement && videoElement.videoWidth > 0 && videoElement.videoHeight > 0;
@@ -159,23 +214,20 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
                 signalingState: pc.current?.signalingState,
             });
             if (
-                isConnectionStable.current ||
-                (remoteStream &&
-                    remoteStream.getVideoTracks().length > 0 &&
-                    remoteStream.getVideoTracks()[0]?.enabled &&
-                    remoteStream.getVideoTracks()[0]?.readyState === 'live' &&
-                    hasVideoContent) ||
-                pc.current?.iceConnectionState === 'connected' ||
-                pc.current?.iceConnectionState === 'checking' ||
-                ws.current?.readyState === WebSocket.OPEN
+                remoteStream &&
+                remoteStream.getVideoTracks().length > 0 &&
+                remoteStream.getVideoTracks()[0]?.enabled &&
+                remoteStream.getVideoTracks()[0]?.readyState === 'live' &&
+                hasVideoContent &&
+                pc.current?.iceConnectionState === 'connected'
             ) {
-                console.log('Соединение стабильно или видео активно, переподключение не требуется');
-                if (pc.current?.iceConnectionState === 'connected' && hasVideoContent) {
-                    isConnectionStable.current = true;
-                }
+                console.log('Видео активно, переподключение не требуется');
+                isConnectionStable.current = true;
             } else {
-                console.warn('Видео не получено и соединение не активно, переподключение...');
-                resetConnection();
+                console.warn(`Видео не получено в течение ${VIDEO_CHECK_TIMEOUT / 1000} секунд, переподключение...`);
+                if (!isReconnecting.current && !isConnectionStable.current) {
+                    resetConnection();
+                }
             }
         }, VIDEO_CHECK_TIMEOUT);
     };
@@ -190,9 +242,14 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
             }
 
             let retryCount = 0;
-            const maxRetries = 10;
+            const maxRetries = 15;
 
             const attemptConnection = () => {
+                if (!checkNetwork()) {
+                    console.warn('Нет подходящего сетевого соединения, откладываем попытку');
+                    setTimeout(attemptConnection, 5000);
+                    return;
+                }
                 console.log(`Попытка подключения WebSocket ${retryCount + 1}/${maxRetries + 1}`);
                 try {
                     ws.current = new WebSocket(process.env.WEBSOCKET_URL_WSGO || 'wss://ardua.site:444/wsgo');
@@ -218,23 +275,29 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
                         cleanupEvents();
                         if (retryCount < maxRetries) {
                             retryCount++;
-                            console.log(`Повторная попытка подключения WebSocket (${retryCount}/${maxRetries})`);
-                            setTimeout(attemptConnection, 3000);
+                            const backoffDelay = Math.min(10000 * Math.pow(2, retryCount), 30000); // Увеличена базовая задержка
+                            console.log(`Повторная попытка подключения WebSocket (${retryCount}/${maxRetries}) через ${backoffDelay} мс`);
+                            setTimeout(attemptConnection, backoffDelay);
                         } else {
-                            setError('Не удалось подключиться к WebSocket');
+                            setError('Не удалось подключиться к WebSocket после максимального количества попыток');
                             resolve(false);
                         }
                     };
 
                     const onClose = (event: CloseEvent) => {
-                        console.log('WebSocket закрыт:', event.code, event.reason);
+                        console.log('WebSocket закрыт:', event.code, event.reason, { wasClean: event.wasClean });
                         cleanupEvents();
                         setIsConnected(false);
+                        setIsInRoom(false);
                         if (setWebSocket) setWebSocket(null);
+                        if (event.code === 1006) {
+                            console.warn('WebSocket закрыт с кодом 1006, возможны проблемы с сетью или сервером');
+                        }
                         if (retryCount < maxRetries) {
                             retryCount++;
-                            console.log(`Повторная попытка подключения WebSocket (${retryCount}/${maxRetries})`);
-                            setTimeout(attemptConnection, 3000);
+                            const backoffDelay = Math.min(10000 * Math.pow(2, retryCount), 30000);
+                            console.log(`Повторная попытка подключения WebSocket (${retryCount}/${maxRetries}) через ${backoffDelay} мс`);
+                            setTimeout(attemptConnection, backoffDelay);
                         } else {
                             setError(event.code !== 1000 ? `WebSocket закрыт: ${event.reason || 'код ' + event.code}` : null);
                             resolve(false);
@@ -263,10 +326,11 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
                         }
                         if (retryCount < maxRetries) {
                             retryCount++;
-                            console.log(`Повторная попытка подключения WebSocket (${retryCount}/${maxRetries})`);
-                            setTimeout(attemptConnection, 3000);
+                            const backoffDelay = Math.min(10000 * Math.pow(2, retryCount), 30000);
+                            console.log(`Повторная попытка подключения WebSocket (${retryCount}/${maxRetries}) через ${backoffDelay} мс`);
+                            setTimeout(attemptConnection, backoffDelay);
                         } else {
-                            setError('Таймаут подключения WebSocket');
+                            setError('Таймаут подключения WebSocket после максимального количества попыток');
                             resolve(false);
                         }
                     }, WS_TIMEOUT);
@@ -278,8 +342,9 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
                     console.error('Ошибка создания WebSocket:', err);
                     if (retryCount < maxRetries) {
                         retryCount++;
-                        console.log(`Повторная попытка подключения WebSocket (${retryCount}/${maxRetries})`);
-                        setTimeout(attemptConnection, 3000);
+                        const backoffDelay = Math.min(10000 * Math.pow(2, retryCount), 30000);
+                        console.log(`Повторная попытка подключения WebSocket (${retryCount}/${maxRetries}) через ${backoffDelay} мс`);
+                        setTimeout(attemptConnection, backoffDelay);
                     } else {
                         setError('Не удалось создать WebSocket');
                         resolve(false);
@@ -292,26 +357,35 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
     };
 
     const initializeWebRTC = async () => {
-        if (pc.current) {
-            console.log('PeerConnection уже существует, очищаем...');
-            pc.current.close();
-            pc.current = null;
-        }
+        cleanup(); // Полная очистка перед инициализацией
 
-        const { isIOS, isSafari, isHuawei } = detectPlatform();
-        pc.current = new RTCPeerConnection({
-            iceServers: [
+        const iceServers = isOldDevice
+            ? [
                 { urls: 'stun:stun.l.google.com:19302' },
+                {
+                    urls: 'turn:ardua.site:3478',
+                    username: 'user1',
+                    credential: 'pass1',
+                },
+            ]
+            : [
+                { urls: 'stun:stun.l.google.com:19302' },
+                { urls: 'stun:stun1.l.google.com:19302' },
                 { urls: 'stun:ardua.site:3478' },
                 {
                     urls: 'turn:ardua.site:3478',
                     username: 'user1',
                     credential: 'pass1',
                 },
-            ],
+            ];
+
+        pc.current = new RTCPeerConnection({
+            iceServers,
             bundlePolicy: 'max-bundle',
             rtcpMuxPolicy: 'require',
-            iceTransportPolicy: 'all'
+            iceTransportPolicy: 'all',
+            iceCandidatePoolSize: 0,
+            // sdpSemantics: isOldDevice ? 'plan-b' : 'unified-plan',
         });
 
         pc.current.onsignalingstatechange = () => {
@@ -320,40 +394,65 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
             setConnectionState(prev => ({ ...prev, signaling: pc.current?.signalingState || null }));
         };
 
-        if (isIOS || isSafari || isHuawei) {
-            pc.current.oniceconnectionstatechange = () => {
-                if (!pc.current) return;
-                console.log(`${isHuawei ? 'Huawei' : 'iOS/Safari'} ICE состояние:`, pc.current.iceConnectionState);
-                setConnectionState(prev => ({ ...prev, ice: pc.current?.iceConnectionState || null }));
-                if (
-                    pc.current.iceConnectionState === 'disconnected' ||
-                    pc.current.iceConnectionState === 'failed'
-                ) {
-                    console.log(`${isHuawei ? 'Huawei' : 'iOS/Safari'}: ICE прервано, проверяем переподключение...`);
-                    if (!isReconnecting.current && !isConnectionStable.current) {
-                        resetConnection();
-                    }
-                } else if (pc.current.iceConnectionState === 'connected') {
-                    console.log('ICE соединение установлено');
-                    isReconnecting.current = false;
-                    if (remoteStream) isConnectionStable.current = true;
+        pc.current.oniceconnectionstatechange = () => {
+            if (!pc.current) return;
+            console.log('Состояние ICE:', pc.current.iceConnectionState);
+            setConnectionState(prev => ({ ...prev, ice: pc.current?.iceConnectionState || null }));
+            if (
+                pc.current.iceConnectionState === 'failed' ||
+                pc.current.iceConnectionState === 'disconnected'
+            ) {
+                console.warn('ICE соединение прервано, проверяем переподключение...');
+                if (!isReconnecting.current && !isConnectionStable.current) {
+                    resetConnection();
                 }
-            };
-        }
+            } else if (pc.current.iceConnectionState === 'connected') {
+                console.log('ICE соединение установлено');
+                isReconnecting.current = false;
+                if (remoteStream) isConnectionStable.current = true;
+            }
+        };
+
+        pc.current.onicegatheringstatechange = () => {
+            if (pc.current) {
+                console.log('Состояние сбора ICE:', pc.current.iceGatheringState);
+            }
+        };
+
+        pc.current.onicecandidateerror = (event: any) => {
+            const ignorableErrors = [701, 702, 703];
+            if (!ignorableErrors.includes(event.errorCode)) {
+                console.error('Критическая ошибка ICE кандидата:', event);
+                setError(`Ошибка ICE соединения: ${event.errorText}`);
+            }
+        };
 
         pc.current.onicecandidate = (event) => {
             if (event.candidate && ws.current?.readyState === WebSocket.OPEN) {
-                console.log('Отправка ICE кандидата:', event.candidate);
-                ws.current.send(
-                    JSON.stringify({
+                if (shouldSendIceCandidate(event.candidate)) {
+                    console.log('Отправка ICE кандидата:', event.candidate);
+                    sendWebSocketMessage({
                         type: 'ice_candidate',
                         ice: event.candidate.toJSON(),
                         room: roomId.replace(/-/g, ''),
                         username,
                         preferredCodec,
-                    })
+                    });
+                }
+            }
+        };
+
+        const shouldSendIceCandidate = (candidate: RTCIceCandidate) => {
+            if (isHuawei) {
+                return candidate.candidate.includes('typ relay');
+            }
+            if (isIOS || isSafari || isOldDevice) {
+                return (
+                    candidate.candidate.includes('typ relay') ||
+                    candidate.candidate.includes('typ srflx')
                 );
             }
+            return true;
         };
 
         pc.current.ontrack = (event) => {
@@ -387,22 +486,61 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
             }
         };
 
-        pc.current.oniceconnectionstatechange = () => {
-            if (!pc.current) return;
-            console.log('Состояние ICE:', pc.current.iceConnectionState);
-            setConnectionState(prev => ({ ...prev, ice: pc.current?.iceConnectionState || null }));
-            if (
-                pc.current.iceConnectionState === 'failed' ||
-                pc.current.iceConnectionState === 'disconnected'
-            ) {
-                console.warn('ICE соединение прервано, проверяем переподключение...');
-                if (!isReconnecting.current && !isConnectionStable.current) {
-                    resetConnection();
+        try {
+            pc.current.addTransceiver('video', { direction: 'recvonly' });
+            pc.current.addTransceiver('audio', { direction: 'recvonly' });
+            console.log('Добавлены транссиверы для получения видео и аудио');
+        } catch (err) {
+            console.error('Ошибка добавления транссиверов:', err);
+            setError('Ошибка настройки WebRTC');
+        }
+
+        if (!isOldDevice) {
+            startConnectionMonitoring();
+        }
+    };
+
+    const startConnectionMonitoring = () => {
+        if (pingIntervalRef.current) {
+            clearInterval(pingIntervalRef.current);
+        }
+
+        pingIntervalRef.current = setInterval(async () => {
+            if (!pc.current || !isInRoom) return;
+
+            try {
+                const stats = await pc.current.getStats();
+                let hasActiveVideo = false;
+                let packetsLost = 0;
+                let totalPackets = 0;
+
+                stats.forEach(report => {
+                    if (report.type === 'inbound-rtp' && report.kind === 'video') {
+                        if (report.bytesReceived > 0) hasActiveVideo = true;
+                        if (report.packetsLost !== undefined) packetsLost += report.packetsLost;
+                        if (report.packetsReceived !== undefined) totalPackets += report.packetsReceived;
+                    }
+                });
+
+                if (!hasActiveVideo && isInRoom) {
+                    console.warn('Нет активного видеопотока, пытаемся восстановить...');
+                    if (!isReconnecting.current && !isConnectionStable.current) {
+                        resetConnection();
+                    }
+                } else if (totalPackets > 0 && packetsLost / totalPackets > 0.05) {
+                    console.warn('Высокий уровень потерь пакетов (>5%), переподключение...');
+                    if (!isReconnecting.current && !isConnectionStable.current) {
+                        resetConnection();
+                    }
                 }
-            } else if (pc.current.iceConnectionState === 'connected') {
-                console.log('ICE соединение установлено');
-                isReconnecting.current = false;
-                if (remoteStream) isConnectionStable.current = true;
+            } catch (err) {
+                console.error('Ошибка получения статистики:', err);
+            }
+        }, 10000); // Увеличен интервал до 10 секунд
+
+        return () => {
+            if (pingIntervalRef.current) {
+                clearInterval(pingIntervalRef.current);
             }
         };
     };
@@ -452,36 +590,46 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
                     case 'ice_candidate':
                         if (pc.current && data.ice) {
                             console.log('Добавление ICE кандидата:', data.ice);
-                            await pc.current.addIceCandidate(new RTCIceCandidate(data.ice));
+                            try {
+                                await pc.current.addIceCandidate(new RTCIceCandidate(data.ice));
+                            } catch (err) {
+                                console.error('Ошибка добавления ICE-кандидата:', err);
+                                setError('Ошибка добавления ICE-кандидата');
+                            }
                         }
                         break;
 
                     case 'error':
                         console.error('Ошибка сервера:', data.data);
                         setError(`Ошибка сервера: ${data.data || 'Неизвестная ошибка'}`);
-                        if (data.data === 'Room does not exist. Leader must join first.') {
+                        if (
+                            data.data === 'Room does not exist. Leader must join first.' ||
+                            data.data === 'Leader is unavailable'
+                        ) {
                             if (retryAttempts.current < MAX_RETRIES) {
-                                console.log('Комната не существует, повторная попытка через 5 секунд');
+                                console.log(`${data.data}, повторная попытка через 10 секунд`);
                                 webRTCRetryTimeoutRef.current = setTimeout(() => {
                                     retryAttempts.current += 1;
                                     setRetryCount(retryAttempts.current);
                                     if (!isReconnecting.current && !isConnectionStable.current) {
                                         resetConnection();
                                     }
-                                }, 5000);
+                                }, 10000);
                             } else {
                                 setError('Не удалось подключиться: лидер не в комнате');
                             }
                         } else if (joinMessageRetries.current < MAX_JOIN_MESSAGE_RETRIES) {
                             joinMessageRetries.current += 1;
                             console.log(`Повторная отправка join сообщения (${joinMessageRetries.current}/${MAX_JOIN_MESSAGE_RETRIES})`);
-                            sendWebSocketMessage({
-                                type: 'join',
-                                room: roomId.replace(/-/g, ''),
-                                username,
-                                isLeader: false,
-                                preferredCodec,
-                            });
+                            setTimeout(() => {
+                                sendWebSocketMessage({
+                                    type: 'join',
+                                    room: roomId.replace(/-/g, ''),
+                                    username,
+                                    isLeader: false,
+                                    preferredCodec,
+                                });
+                            }, 3000); // Увеличена задержка
                         } else {
                             setError(`Не удалось подключиться к комнате: ${data.data}`);
                             if (!isConnectionStable.current) resetConnection();
@@ -546,12 +694,9 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
                 throw new Error('Не удалось подключиться к WebSocket');
             }
 
-            await new Promise(resolve => setTimeout(resolve, 500));
-            console.log('Задержка после connectWebSocket завершена');
-
             setupWebSocketListeners();
-            await initializeWebRTC();
 
+            // Откладываем initializeWebRTC до успешного join
             await new Promise<void>((resolve, reject) => {
                 if (!ws.current || ws.current.readyState !== WebSocket.OPEN) {
                     reject(new Error('WebSocket не подключен'));
@@ -566,23 +711,43 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
                             console.log('Успешно подключено к комнате');
                             cleanupEvents();
                             setIsInRoom(true);
+                            setError(null);
+                            retryAttempts.current = 0;
+                            setRetryCount(0);
                             resolve();
                         } else if (data.type === 'error') {
                             console.error('Ошибка при подключении:', data.data);
                             cleanupEvents();
-                            setError(`Error ${data.error}: ${data.message}`); // Исправлено: передаём строку
-                            if (joinMessageRetries.current < MAX_JOIN_MESSAGE_RETRIES) {
+                            setError(data.data || 'Ошибка входа в комнату');
+                            if (
+                                data.data === 'Room does not exist. Leader must join first.' ||
+                                data.data === 'Leader is unavailable'
+                            ) {
+                                if (retryAttempts.current < MAX_RETRIES) {
+                                    console.log(`${data.data}, повторная попытка через 10 секунд`);
+                                    webRTCRetryTimeoutRef.current = setTimeout(() => {
+                                        retryAttempts.current += 1;
+                                        setRetryCount(retryAttempts.current);
+                                        joinRoom().catch(console.error);
+                                    }, 10000);
+                                } else {
+                                    setError('Не удалось подключиться после максимального количества попыток');
+                                    reject(new Error('Достигнуто максимальное количество попыток подключения'));
+                                }
+                            } else if (joinMessageRetries.current < MAX_JOIN_MESSAGE_RETRIES) {
                                 joinMessageRetries.current += 1;
                                 console.log(`Повторная отправка join сообщения (${joinMessageRetries.current}/${MAX_JOIN_MESSAGE_RETRIES})`);
-                                sendWebSocketMessage({
-                                    type: 'join',
-                                    room: targetRoomId,
-                                    username,
-                                    isLeader: false,
-                                    preferredCodec,
-                                });
+                                setTimeout(() => {
+                                    sendWebSocketMessage({
+                                        type: 'join',
+                                        room: targetRoomId,
+                                        username,
+                                        isLeader: false,
+                                        preferredCodec,
+                                    });
+                                }, 3000);
                             } else {
-                                reject(new Error(data.data));
+                                reject(new Error(data.data || 'Ошибка входа в комнату'));
                             }
                         }
                     } catch (err) {
@@ -605,6 +770,13 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
 
                 ws.current.addEventListener('message', onMessage);
 
+                connectionTimeout.current = setTimeout(() => {
+                    cleanupEvents();
+                    console.error('Таймаут ожидания ответа от сервера');
+                    setError('Таймаут ожидания ответа от сервера');
+                    reject(new Error('Таймаут ожидания ответа от сервера'));
+                }, 15000);
+
                 sendWebSocketMessage({
                     type: 'join',
                     room: targetRoomId,
@@ -625,26 +797,27 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
                         type: 'switch_camera',
                         useBackCamera,
                         room: targetRoomId,
-                        username
+                        username,
                     });
                     console.log('Отправлена начальная команда switch_camera:', { useBackCamera });
                 }
             });
 
+            await initializeWebRTC(); // Инициализируем WebRTC после успешного join
             startVideoCheckTimer();
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : String(err);
             console.error('Join room ошибка:', errorMessage);
             setError(`Ошибка подключения: ${errorMessage}`);
             if (retryAttempts.current < MAX_RETRIES && !isConnectionStable.current) {
-                console.log('Планируем повторную попытку через 5 секунд');
+                console.log('Планируем повторную попытку через 10 секунд');
                 webRTCRetryTimeoutRef.current = setTimeout(() => {
                     retryAttempts.current += 1;
                     setRetryCount(retryAttempts.current);
                     if (!isReconnecting.current && !isConnectionStable.current) {
                         resetConnection();
                     }
-                }, 5000);
+                }, 10000);
             } else {
                 setError(`Не удалось подключиться после ${MAX_RETRIES} попыток: ${errorMessage}`);
             }
@@ -653,18 +826,13 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
         }
     };
 
-    const lastRetryTimestamp = useRef(0);
     const resetConnection = () => {
         const now = Date.now();
-        if (isReconnecting.current || now - lastRetryTimestamp.current < 5000) {
+        if (isReconnecting.current || now - lastRetryTimestamp.current < 10000) {
             console.log('Переподключение уже выполняется или слишком рано, пропускаем...');
             return;
         }
         lastRetryTimestamp.current = now;
-        if (isReconnecting.current) {
-            console.log('Переподключение уже выполняется, пропускаем...');
-            return;
-        }
         if (isConnectionStable.current) {
             console.log('Соединение стабильно, переподключение запрещено:', {
                 iceConnectionState: pc.current?.iceConnectionState,
@@ -722,80 +890,3 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
         </div>
     );
 }
-
-Привязка потока к видеоэлементу: Object
-page-171b8a062de0fa14.js:1 useWebRTC: isCameraEnabled изменилось на false
-page-171b8a062de0fa14.js:1 Состояния: Object
-page-171b8a062de0fa14.js:1 Сброс hasAttemptedAutoJoin при изменении roomId:
-500-7b36a7e3a1b09b5a.js:1 Привязка потока к видеоэлементу: Object
-page-171b8a062de0fa14.js:1 Инициируется автоподключение к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Сброс hasAttemptedAutoJoin при изменении roomId: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Инициируется автоподключение к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Попытка подключения к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Установка defaultRoom: Object
-page-171b8a062de0fa14.js:1 Сброс hasAttemptedAutoJoin при изменении roomId: 4444-4444-4444-4444
-page-171b8a062de0fa14.js:1 Сброс hasAttemptedAutoJoin при изменении roomId: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Попытка подключения к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 handleJoinRoom: Проверка комнаты: Object
-page-171b8a062de0fa14.js:1 Запуск joinRoom, полная очистка перед новым соединением
-page-171b8a062de0fa14.js:1 Выполняется leaveRoom
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 Состояния полностью сброшены после leaveRoom
-page-171b8a062de0fa14.js:1 handleJoinRoom: Проверка комнаты: Object
-page-171b8a062de0fa14.js:1 Запуск joinRoom, полная очистка перед новым соединением
-page-171b8a062de0fa14.js:1 Выполняется leaveRoom
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 WebSocket connection to 'wss://ardua.site:444/wsgo' failed: WebSocket is closed before the connection is established.
-z @ page-171b8a062de0fa14.js:1Understand this warningAI
-page-171b8a062de0fa14.js:1 Состояния полностью сброшены после leaveRoom
-684-f6b1be2964372e81.js:1 Ошибка WebSocket: Event
-window.console.error @ 684-f6b1be2964372e81.js:1Understand this errorAI
-684-f6b1be2964372e81.js:1 Ошибка входа в комнату: Error: Не удалось подключиться к WebSocket
-at ea (page-171b8a062de0fa14.js:1:20236)
-at async page-171b8a062de0fa14.js:1:38262
-window.console.error @ 684-f6b1be2964372e81.js:1Understand this errorAI
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 WebSocket connection to 'wss://ardua.site:444/wsgo' failed: WebSocket is closed before the connection is established.
-ea @ page-171b8a062de0fa14.js:1Understand this warningAI
-page-171b8a062de0fa14.js:1 Планируем повторную попытку через 5 секунд
-page-171b8a062de0fa14.js:1 Успешно подключено к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Состояние isJoining сброшено
-page-171b8a062de0fa14.js:1 WebSocket отключен: 1006
-page-171b8a062de0fa14.js:1 Состояния: Object
-page-171b8a062de0fa14.js:1 Ошибка автоподключения, отключение autoJoin: Соединение закрыто: код 1006
-(anonymous) @ page-171b8a062de0fa14.js:1Understand this warningAI
-page-171b8a062de0fa14.js:1 Выполняется leaveRoom
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 Состояния полностью сброшены после leaveRoom
-page-171b8a062de0fa14.js:1 Комната не сохранена, пропускаем updateAutoConnect
-page-171b8a062de0fa14.js:1 Состояния: Object
-684-f6b1be2964372e81.js:1 Ошибка WebSocket: EventisTrusted: truebubbles: falsecancelBubble: falsecancelable: falsecomposed: falsecurrentTarget: WebSocket {url: 'wss://ardua.site:444/wsgo', readyState: 3, bufferedAmount: 0, onopen: null, onerror: null, …}defaultPrevented: falseeventPhase: 0returnValue: truesrcElement: WebSocket {url: 'wss://ardua.site:444/wsgo', readyState: 3, bufferedAmount: 0, onopen: null, onerror: null, …}target: WebSocket {url: 'wss://ardua.site:444/wsgo', readyState: 3, bufferedAmount: 0, onopen: null, onerror: null, …}timeStamp: 2670.900000035763type: "error"[[Prototype]]: Event
-window.console.error @ 684-f6b1be2964372e81.js:1Understand this errorAI
-684-f6b1be2964372e81.js:1 Ошибка входа в комнату: Error: Не удалось подключиться к WebSocket
-at ea (page-171b8a062de0fa14.js:1:20236)
-at async page-171b8a062de0fa14.js:1:38262
-window.console.error @ 684-f6b1be2964372e81.js:1Understand this errorAI
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 Планируем повторную попытку через 5 секунд
-page-171b8a062de0fa14.js:1 Успешно подключено к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Состояние isJoining сброшено
-page-171b8a062de0fa14.js:1 WebSocket отключен: 1006
-page-171b8a062de0fa14.js:1 Состояния: Object
-page-171b8a062de0fa14.js:1 Ошибка автоподключения, отключение autoJoin: Соединение закрыто: код 1006
-(anonymous) @ page-171b8a062de0fa14.js:1Understand this warningAI
-page-171b8a062de0fa14.js:1 Выполняется leaveRoom
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 Состояния полностью сброшены после leaveRoom
-page-171b8a062de0fa14.js:1 Комната не сохранена, пропускаем updateAutoConnect
-page-171b8a062de0fa14.js:1 Состояния: Object
-
------------------------------
-
-
-Мне нужно сделать, чтобы при каждом подключении оно было удачным, отвечай на русском, сделай точечные изменения

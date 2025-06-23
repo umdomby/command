@@ -5,56 +5,56 @@ import { joinRoomViaProxy } from '@/app/actions';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface NoRegWebRTCProps {
-roomId: string;
-setLeaveRoom?: (leaveRoom: () => void) => void;
-videoTransform?: string;
-setWebSocket?: (ws: WebSocket | null) => void;
-useBackCamera?: boolean;
+    roomId: string;
+    setLeaveRoom?: (leaveRoom: () => void) => void;
+    videoTransform?: string;
+    setWebSocket?: (ws: WebSocket | null) => void;
+    useBackCamera?: boolean;
 }
 
 interface WebSocketMessage {
-type: string;
-data?: any;
-sdp?: RTCSessionDescriptionInit;
-ice?: RTCIceCandidateInit;
-room?: string;
-username?: string;
-isLeader?: boolean;
-useBackCamera?: boolean;
-force_disconnect?: boolean;
-preferredCodec?: string;
+    type: string;
+    data?: any;
+    sdp?: RTCSessionDescriptionInit;
+    ice?: RTCIceCandidateInit;
+    room?: string;
+    username?: string;
+    isLeader?: boolean;
+    useBackCamera?: boolean;
+    force_disconnect?: boolean;
+    preferredCodec?: string;
 }
 
 export default function UseNoRegWebRTC({ roomId, setLeaveRoom, videoTransform, setWebSocket, useBackCamera }: NoRegWebRTCProps) {
-const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
-const [isConnected, setIsConnected] = useState(false);
-const [isInRoom, setIsInRoom] = useState(false);
-const [error, setError] = useState<string | null>(null);
-const [retryCount, setRetryCount] = useState(0);
-const [connectionState, setConnectionState] = useState<{
-ice: string | null;
-signaling: string | null;
-}>({ ice: null, signaling: null });
-const ws = useRef<WebSocket | null>(null);
-const pc = useRef<RTCPeerConnection | null>(null);
-const retryAttempts = useRef(0);
-const videoCheckTimeout = useRef<NodeJS.Timeout | null>(null);
-const connectionTimeout = useRef<NodeJS.Timeout | null>(null);
-const webRTCRetryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-const pingIntervalRef = useRef<NodeJS.Timeout | null>(null);
-const joinMessageRetries = useRef(0);
-const videoRef = useRef<HTMLVideoElement>(null);
-const isJoining = useRef(false);
-const isReconnecting = useRef(false);
-const isConnectionStable = useRef(false);
-const username = `guest_${Math.floor(Math.random() * 1000)}`;
-const preferredCodec = 'VP8';
-const MAX_RETRIES = 10;
-const VIDEO_CHECK_TIMEOUT = 12000;
-const WS_TIMEOUT = 10000;
-const MAX_JOIN_MESSAGE_RETRIES = 10;
-const [isMuted, setIsMuted] = useState<boolean>(true);
-const [flashlightState, setFlashlightState] = useState<boolean>(false);
+    const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
+    const [isConnected, setIsConnected] = useState(false);
+    const [isInRoom, setIsInRoom] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [retryCount, setRetryCount] = useState(0);
+    const [connectionState, setConnectionState] = useState<{
+        ice: string | null;
+        signaling: string | null;
+    }>({ ice: null, signaling: null });
+    const ws = useRef<WebSocket | null>(null);
+    const pc = useRef<RTCPeerConnection | null>(null);
+    const retryAttempts = useRef(0);
+    const videoCheckTimeout = useRef<NodeJS.Timeout | null>(null);
+    const connectionTimeout = useRef<NodeJS.Timeout | null>(null);
+    const webRTCRetryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const pingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const joinMessageRetries = useRef(0);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const isJoining = useRef(false);
+    const isReconnecting = useRef(false);
+    const isConnectionStable = useRef(false);
+    const username = `guest_${Math.floor(Math.random() * 1000)}`;
+    const preferredCodec = 'VP8';
+    const MAX_RETRIES = 10;
+    const VIDEO_CHECK_TIMEOUT = 12000;
+    const WS_TIMEOUT = 10000;
+    const MAX_JOIN_MESSAGE_RETRIES = 10;
+    const [isMuted, setIsMuted] = useState<boolean>(true);
+    const [flashlightState, setFlashlightState] = useState<boolean>(false);
 
     const detectPlatform = () => {
         const ua = navigator.userAgent;
@@ -722,80 +722,3 @@ const [flashlightState, setFlashlightState] = useState<boolean>(false);
         </div>
     );
 }
-
-Привязка потока к видеоэлементу: Object
-page-171b8a062de0fa14.js:1 useWebRTC: isCameraEnabled изменилось на false
-page-171b8a062de0fa14.js:1 Состояния: Object
-page-171b8a062de0fa14.js:1 Сброс hasAttemptedAutoJoin при изменении roomId:
-500-7b36a7e3a1b09b5a.js:1 Привязка потока к видеоэлементу: Object
-page-171b8a062de0fa14.js:1 Инициируется автоподключение к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Сброс hasAttemptedAutoJoin при изменении roomId: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Инициируется автоподключение к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Попытка подключения к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Установка defaultRoom: Object
-page-171b8a062de0fa14.js:1 Сброс hasAttemptedAutoJoin при изменении roomId: 4444-4444-4444-4444
-page-171b8a062de0fa14.js:1 Сброс hasAttemptedAutoJoin при изменении roomId: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Попытка подключения к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 handleJoinRoom: Проверка комнаты: Object
-page-171b8a062de0fa14.js:1 Запуск joinRoom, полная очистка перед новым соединением
-page-171b8a062de0fa14.js:1 Выполняется leaveRoom
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 Состояния полностью сброшены после leaveRoom
-page-171b8a062de0fa14.js:1 handleJoinRoom: Проверка комнаты: Object
-page-171b8a062de0fa14.js:1 Запуск joinRoom, полная очистка перед новым соединением
-page-171b8a062de0fa14.js:1 Выполняется leaveRoom
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 WebSocket connection to 'wss://ardua.site:444/wsgo' failed: WebSocket is closed before the connection is established.
-z @ page-171b8a062de0fa14.js:1Understand this warningAI
-page-171b8a062de0fa14.js:1 Состояния полностью сброшены после leaveRoom
-684-f6b1be2964372e81.js:1 Ошибка WebSocket: Event
-window.console.error @ 684-f6b1be2964372e81.js:1Understand this errorAI
-684-f6b1be2964372e81.js:1 Ошибка входа в комнату: Error: Не удалось подключиться к WebSocket
-at ea (page-171b8a062de0fa14.js:1:20236)
-at async page-171b8a062de0fa14.js:1:38262
-window.console.error @ 684-f6b1be2964372e81.js:1Understand this errorAI
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 WebSocket connection to 'wss://ardua.site:444/wsgo' failed: WebSocket is closed before the connection is established.
-ea @ page-171b8a062de0fa14.js:1Understand this warningAI
-page-171b8a062de0fa14.js:1 Планируем повторную попытку через 5 секунд
-page-171b8a062de0fa14.js:1 Успешно подключено к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Состояние isJoining сброшено
-page-171b8a062de0fa14.js:1 WebSocket отключен: 1006
-page-171b8a062de0fa14.js:1 Состояния: Object
-page-171b8a062de0fa14.js:1 Ошибка автоподключения, отключение autoJoin: Соединение закрыто: код 1006
-(anonymous) @ page-171b8a062de0fa14.js:1Understand this warningAI
-page-171b8a062de0fa14.js:1 Выполняется leaveRoom
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 Состояния полностью сброшены после leaveRoom
-page-171b8a062de0fa14.js:1 Комната не сохранена, пропускаем updateAutoConnect
-page-171b8a062de0fa14.js:1 Состояния: Object
-684-f6b1be2964372e81.js:1 Ошибка WebSocket: EventisTrusted: truebubbles: falsecancelBubble: falsecancelable: falsecomposed: falsecurrentTarget: WebSocket {url: 'wss://ardua.site:444/wsgo', readyState: 3, bufferedAmount: 0, onopen: null, onerror: null, …}defaultPrevented: falseeventPhase: 0returnValue: truesrcElement: WebSocket {url: 'wss://ardua.site:444/wsgo', readyState: 3, bufferedAmount: 0, onopen: null, onerror: null, …}target: WebSocket {url: 'wss://ardua.site:444/wsgo', readyState: 3, bufferedAmount: 0, onopen: null, onerror: null, …}timeStamp: 2670.900000035763type: "error"[[Prototype]]: Event
-window.console.error @ 684-f6b1be2964372e81.js:1Understand this errorAI
-684-f6b1be2964372e81.js:1 Ошибка входа в комнату: Error: Не удалось подключиться к WebSocket
-at ea (page-171b8a062de0fa14.js:1:20236)
-at async page-171b8a062de0fa14.js:1:38262
-window.console.error @ 684-f6b1be2964372e81.js:1Understand this errorAI
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 Планируем повторную попытку через 5 секунд
-page-171b8a062de0fa14.js:1 Успешно подключено к комнате: K7QQ-78TP-IYNH-D1IA
-page-171b8a062de0fa14.js:1 Состояние isJoining сброшено
-page-171b8a062de0fa14.js:1 WebSocket отключен: 1006
-page-171b8a062de0fa14.js:1 Состояния: Object
-page-171b8a062de0fa14.js:1 Ошибка автоподключения, отключение autoJoin: Соединение закрыто: код 1006
-(anonymous) @ page-171b8a062de0fa14.js:1Understand this warningAI
-page-171b8a062de0fa14.js:1 Выполняется leaveRoom
-page-171b8a062de0fa14.js:1 Выполняется полная очистка ресурсов
-page-171b8a062de0fa14.js:1 Очистка завершена
-page-171b8a062de0fa14.js:1 Состояния полностью сброшены после leaveRoom
-page-171b8a062de0fa14.js:1 Комната не сохранена, пропускаем updateAutoConnect
-page-171b8a062de0fa14.js:1 Состояния: Object
-
------------------------------
-
-
-Мне нужно сделать, чтобы при каждом подключении оно было удачным, отвечай на русском, сделай точечные изменения
