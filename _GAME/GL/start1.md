@@ -11,8 +11,8 @@ London   1.40.653
 Schanhai 1.27.720
 HAWANA   1.41.171
 YOKO HOMO 1.59.448
-STRADA ALPINA 1.
-
+STRADA ALPINA
+HH        1.14.376
 
 Cheet:
 Stiepan
