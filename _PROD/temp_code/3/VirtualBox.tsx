@@ -34,7 +34,6 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         alpha: number | null;
     }>({ beta: null, gamma: null, alpha: null });
 
-    // Функция логирования событий с обработкой ошибок
     const log = useCallback(async (message: string, type: "info" | "error" | "success" = "info") => {
         try {
             await logVirtualBoxEvent(message, type);
@@ -43,7 +42,6 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         }
     }, []);
 
-    // Проверка информации об устройстве и поддержке сенсоров при монтировании компонента
     useEffect(() => {
         const userAgent = navigator.userAgent;
         const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
@@ -59,7 +57,6 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         }
     }, [log, isOrientationSupported, isMotionSupported]);
 
-    // Проверка настроек Safari для iOS-устройств
     useEffect(() => {
         const checkSafariSettings = () => {
             const userAgent = navigator.userAgent;
@@ -71,7 +68,6 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         checkSafariSettings();
     }, [log]);
 
-    // Обработка активации/деактивации VirtualBox
     useEffect(() => {
         if (isVirtualBoxActive) {
             log("VirtualBox активирован", "info");
@@ -84,10 +80,8 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         }
     }, [isVirtualBoxActive, log, onServoChange]);
 
-    // Обработчик событий ориентации устройства
     const handleDeviceOrientation = useCallback(
         (event: DeviceOrientationEvent) => {
-            // Проверка условий для обработки ориентации
             if (disabled || !isVirtualBoxActive || !hasOrientationPermission) {
                 if (isVirtualBoxActive && (!hasOrientationPermission || disabled)) {
                     log("Обработка ориентации отключена: disabled, неактивно или нет разрешения", "info");
@@ -96,16 +90,13 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
             }
 
             const { beta, gamma, alpha } = event;
-            // Проверка валидности данных ориентации
             if (beta === null || gamma === null || alpha === null) {
                 log("Данные ориентации недоступны (null значения)", "error");
                 return;
             }
 
-            // Обновление состояния ориентации
             setOrientationData({ beta, gamma, alpha });
 
-            // Вызов callback для передачи данных ориентации, если он задан
             if (onOrientationChange) {
                 onOrientationChange(beta, gamma, alpha);
             }
@@ -113,7 +104,7 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
             const y = gamma;
             const prevY = prevOrientationState.current.gamma;
 
-            // Определяем переход через мёртвую зону (-89/+89)
+            // Определяем, происходит ли переход через -89/+89
             const isTransition = (prevY <= -87 && y >= 87) || (prevY >= 87 && y <= -87);
 
             if (isTransition) {
@@ -121,11 +112,8 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
                 log(`Переход через -89/+89 обнаружен, isValidTransition=${isValidTransition.current}`, "info");
             }
 
-            // Конфигурируемый центр для сервопривода 1
-            const SERVO1_CENTER = 90; // Центральное значение сервопривода, соответствующее gamma = 0°
-            // Отправляем данные только в валидном диапазоне и при валидном переходе
+            // Отправляем данные только в валидном диапазоне
             if (isValidTransition.current && y >= -89 && y <= 89) {
-                // const servo1Value = Math.round(SERVO1_CENTER + (y / 89) * 90); // Конфигурируемый центр для сервопривода 1
                 // Масштабируем gamma: [-89, 89] -> [0, 180]
                 const servo1Value = Math.round(((y + 89) / (89 + 89)) * 180);
                 if (servo1Value !== lastValidServo1.current) {
@@ -142,7 +130,6 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         [disabled, isVirtualBoxActive, hasOrientationPermission, onServoChange, onOrientationChange, log]
     );
 
-    // Обработчик событий акселерометра
     const handleDeviceMotion = useCallback(
         (event: DeviceMotionEvent) => {
             if (disabled || !isVirtualBoxActive || !hasMotionPermission) {
@@ -163,7 +150,6 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         [disabled, isVirtualBoxActive, hasMotionPermission, log]
     );
 
-    // Обработчик запроса разрешений
     const handleRequestPermissions = useCallback(() => {
         if (!isVirtualBoxActive) {
             window.removeEventListener("deviceorientation", handleDeviceOrientation);
@@ -176,7 +162,6 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         }
     }, [isVirtualBoxActive, log, handleDeviceOrientation, handleDeviceMotion]);
 
-    // Регистрация функции запроса разрешений
     useEffect(() => {
         // @ts-ignore
         const virtualBoxRef = (window as any).virtualBoxRef || { current: null };
@@ -186,7 +171,6 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         };
     }, [handleRequestPermissions]);
 
-    // Добавление и удаление обработчиков событий ориентации и акселерометра
     useEffect(() => {
         if (isVirtualBoxActive && (hasOrientationPermission || hasMotionPermission)) {
             if (isOrientationSupported && hasOrientationPermission) {
