@@ -3,41 +3,37 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 // Интерфейс пропсов компонента VirtualBox
 interface VirtualBoxProps {
-    onServoChange: (servoId: "1" | "2", value: number, isAbsolute: boolean) => void;
-    onOrientationChange?: (beta: number, gamma: number, alpha: number) => void;
-    disabled?: boolean;
-    isVirtualBoxActive: boolean;
-    hasOrientationPermission: boolean;
-    hasMotionPermission: boolean;
-    isOrientationSupported: boolean;
-    isMotionSupported: boolean;
+onServoChange: (servoId: "1" | "2", value: number, isAbsolute: boolean) => void;
+onOrientationChange?: (beta: number, gamma: number, alpha: number) => void;
+disabled?: boolean;
+isVirtualBoxActive: boolean;
+hasOrientationPermission: boolean;
+hasMotionPermission: boolean;
+isOrientationSupported: boolean;
+isMotionSupported: boolean;
 }
 
 // Компонент VirtualBox для обработки данных ориентации и акселерометра
 const VirtualBox: React.FC<VirtualBoxProps> = ({
-                                                   onServoChange,
-                                                   onOrientationChange,
-                                                   disabled,
-                                                   isVirtualBoxActive,
-                                                   hasOrientationPermission,
-                                                   hasMotionPermission,
-                                                   isOrientationSupported,
-                                                   isMotionSupported,
-                                               }) => {
-    const animationFrameRef = useRef<number | null>(null);
-    const lastValidServo1 = useRef(90); // Последнее валидное значение сервопривода (по умолчанию 90°)
-    const isValidTransition = useRef<boolean>(false); // Флаг для отслеживания валидного перехода через мёртвую зону
-    const prevOrientationState = useRef({ gamma: 90 });
-    const prevOrientationState2 = useRef({ gamma: 90 });
-    // Состояние для хранения данных ориентации
-    const [orientationData, setOrientationData] = useState<{
-        beta: number | null;
-        gamma: number | null;
-        alpha: number | null;
-    }>({ beta: null, gamma: null, alpha: null });
-    const [servo1ValueY, setServo1ValueY] = useState<number>(90);
-    const [servo1ValueYY, setServo1ValueYY] = useState<number>(90);
-    const [servo1if, setServo1if] = useState<number>(0);
+onServoChange,
+onOrientationChange,
+disabled,
+isVirtualBoxActive,
+hasOrientationPermission,
+hasMotionPermission,
+isOrientationSupported,
+isMotionSupported,
+}) => {
+const animationFrameRef = useRef<number | null>(null);
+const lastValidServo1 = useRef(90); // Последнее валидное значение сервопривода (по умолчанию 90°)
+const isValidTransition = useRef<boolean>(false); // Флаг для отслеживания валидного перехода через мёртвую зону
+const prevOrientationState = useRef({ gamma: 0 });
+// Состояние для хранения данных ориентации
+const [orientationData, setOrientationData] = useState<{
+beta: number | null;
+gamma: number | null;
+alpha: number | null;
+}>({ beta: null, gamma: null, alpha: null });
 
     // Обработка активации/деактивации VirtualBox
     useEffect(() => {
@@ -85,36 +81,27 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
             }
 
             const y = gamma;
-            const prevY = prevOrientationState2.current.gamma;
-            setServo1ValueY(prevOrientationState.current.gamma);
-            setServo1ValueYY(prevOrientationState2.current.gamma);
+            const prevY = prevOrientationState.current.gamma;
 
+            //const isTransition = (servo1Value > 90 && y >= 0) && (servo1Value < 90 && y <= 0);
+            //const isTransitionUp = (servo1Value > 90 && y >= 0 && servo1Value <= 170) || (servo1Value < 90 && y <= 0 && servo1Value >= 10) ;
+            //const isTransitionDown = servo1Value < 90 && y <= 0;
             // Обработка данных не в мёртвой зоне
-            // || (servo1ValueY <= 175 && y > -87)
-            //const isTransition = (y < -5 && y > -87 && servo1ValueY <= 90 && prevY <= 0) || (y < -5 && y > -87 && servo1ValueY >= 90 && prevY >= 0);
-            //const isTransition = prevOrientationState.current.gamma > 5 && prevOrientationState.current.gamma > 90;
-            const isTransition = y <= -5;
-            //|| (prevY <= 175 && y > -87);
-            //const isTransition = (prevY <= -3 && y <= -87)
-            if (isTransition) {
-                setServo1if(1);
-            }else {
-                setServo1if(2);
-            }
-
+            const isTransition = (prevY <= -5 && y >= 5) || (prevY >= 5 && y <= -5)
             if (isTransition) {
                 const servo1Value = mapGammaToServo(y);
                 if (servo1Value !== lastValidServo1.current) {
                     onServoChange("1", servo1Value, true);
                     lastValidServo1.current = servo1Value;
-                    prevOrientationState.current.gamma = servo1Value;
-                    prevOrientationState2.current.gamma = y
                 }
             }
-
-            prevOrientationState2.current.gamma = y
-
-
+            prevOrientationState.current.gamma = y;
+            // if (isTransitionDown) {
+            //     if (servo1Value !== lastValidServo1.current) {
+            //         onServoChange("1", servo1Value, true);
+            //         lastValidServo1.current = servo1Value;
+            //     }
+            // }
 
         },
         [disabled, isVirtualBoxActive, hasOrientationPermission, onServoChange, onOrientationChange]
@@ -186,20 +173,7 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         handleDeviceMotion,
     ]);
 
-    return (
-        <div>
-            <div>
-                {servo1ValueY}
-            </div>
-            <div>
-                {servo1ValueYY.toFixed(2)}
-            </div>
-            <div>
-                {servo1if}
-            </div>
-        </div>
-
-    )
+    return null;
 };
 
 export default VirtualBox;

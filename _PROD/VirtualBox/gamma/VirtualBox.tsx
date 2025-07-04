@@ -89,17 +89,12 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
             setServo1ValueY(prevOrientationState.current.gamma);
             setServo1ValueYY(prevOrientationState2.current.gamma);
 
-            // Обработка данных не в мёртвой зоне
-            // || (servo1ValueY <= 175 && y > -87)
-            //const isTransition = (y < -5 && y > -87 && servo1ValueY <= 90 && prevY <= 0) || (y < -5 && y > -87 && servo1ValueY >= 90 && prevY >= 0);
-            //const isTransition = prevOrientationState.current.gamma > 5 && prevOrientationState.current.gamma > 90;
-            const isTransition = y <= -5;
-            //|| (prevY <= 175 && y > -87);
-            //const isTransition = (prevY <= -3 && y <= -87)
+            const isTransition = (y < -5 && servo1ValueY <= 120 && prevY <= 0) || (y > 5 && servo1ValueY >= 60 && prevY >= 0);
+
             if (isTransition) {
                 setServo1if(1);
             }else {
-                setServo1if(2);
+                setServo1if(0);
             }
 
             if (isTransition) {
@@ -186,20 +181,21 @@ const VirtualBox: React.FC<VirtualBoxProps> = ({
         handleDeviceMotion,
     ]);
 
-    return (
-        <div>
-            <div>
-                {servo1ValueY}
-            </div>
-            <div>
-                {servo1ValueYY.toFixed(2)}
-            </div>
-            <div>
-                {servo1if}
-            </div>
-        </div>
-
-    )
+    return null
+    // return (
+    //     <div>
+    //         <div>
+    //             {servo1ValueY}
+    //         </div>
+    //         <div>
+    //             {servo1ValueYY.toFixed(2)}
+    //         </div>
+    //         <div>
+    //             {servo1if}
+    //         </div>
+    //     </div>
+    //
+    // )
 };
 
 export default VirtualBox;

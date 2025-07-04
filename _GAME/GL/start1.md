@@ -1,10 +1,10 @@
 SaFr F   1,49,042
 AQ F     1.46.653
-Msk F    1.15.092
+Msk F    2.15.092
 Barca -> 1.34.038  4
 Barca <- 1.36.08
 Chicago  1.50.288  4
-Dubai    1.43.086 -
+Dubai    1.42.291 -
 Par      1.52.582
 Okutama  1.49.217
 London   1.40.653
