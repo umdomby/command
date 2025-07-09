@@ -1,21 +1,21 @@
-SaFr F   1,49,042
+SaFr F   1,48,652
 AQ F     1.46.653
-Msk F    2.15.092
-Barca -> 1.34.038  4
+Msk F    1.15.092
+Barca -> 1.33.704  4
 Barca <- 1.36.08
 Chicago  1.50.288  4
 Dubai    1.42.291 -
 Par      1.52.582
 Okutama  1.49.217
-London   1.40.653
+London   1.40.385  4 2 4 5 5
 Schanhai 1.27.720
 HAWANA   1.41.171
-YOKO HOMO 1.59.448
+YOKO HOMO 0.59.165
 STRADA ALPINA
-HH        1.14.376
+B_N      1.14.044 4 2 4 5 5
 
 Cheet:
-Stiepan
+Stiepen
 Xiaoping8235 ?
 zeitlupenchecker
 alphaStation
@@ -33,3 +33,9 @@ ReggiBoGamer
 E6 EVO
 bipbiplecoyte34
 EMILIO13130
+Cafe Ostentacao -
+IRAF) Maicoll2
+Picadilha_voador
+TheOnly1ne
+Lascelles
+SaNdMaN80
