@@ -15,6 +15,26 @@ onServoChange("2", 90, true); // Возврат в центр (90°)
 onServoChange("1", 90, true); // Возврат в центр (90°)
 
 
+Menu (Меню):
+Расположена справа от центральной кнопки Xbox (с тремя горизонтальными линиями).
+должна так же включать и выключать
+{button1State !== null && (
+<Button
+onClick={() => {
+const newState = button1State ? 'off' : 'on';
+sendCommand('RLY', { pin: 'D0', state: newState });
+}}
+className="bg-transparent hover:bg-gray-700/30 border border-gray-600 p-2 rounded-full transition-all flex items-center"
+>
+{button1State ? (
+<img width={'25px'} height={'25px'} src="/off.svg" alt="Image" />
+) : (
+<img width={'25px'} height={'25px'} src="/on.svg" alt="Image" />
+)}
+</Button>
+)}
+
+
 D-Pad (Крестовина) – направляющие кнопки влево/вправо/вверх/вниз.
 вверх - меняет направление двух моторов вперед
 вниз - меняет направление двух моторов моторов назад
