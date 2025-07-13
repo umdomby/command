@@ -1,5 +1,7 @@
 https://freesvgicons.com/search?q=on%20off
 
+https://www.svgrepo.com/svg/533080/keyboard-alt?edit=true
+
 #00ff11
 
 #00ccff
@@ -22,3 +24,5 @@ https://freesvgicons.com/search?q=on%20off
             <img width={'25px'} height={'25px'} src="/settings1.svg" alt="Image"/>
         )}
     </Button>
+
+

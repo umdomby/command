@@ -10,9 +10,9 @@ Okutama  1.49.217
 London   1.40.385  4 2 4 5 5
 Schanhai 1.27.720
 HAWANA   1.41.171
-YOKO HOMO 0.59.165
+YOKO HOMO 0.58.598
 STRADA ALPINA
-B_N      1.14.044 4 2 4 5 5
+B_N      1.13.209 4 2 4 5 5
 
 Cheet:
 Stiepen
