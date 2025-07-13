@@ -74,19 +74,27 @@ motorSpeed - так же должно сохраняться в localstorage , �
 добавь переменные {motorSpeedA} {motorSpeedB} {motorSpeedCenter} удали  {motorSpeed}
 при нажатии клавиши 87 или 83 нужно запомнить едуную скорость для двух моторов motorSpeedCenter, если при нажатии клавиши 87 или 83 скорости у моторов {motorSpeedA} {motorSpeedB} разные то {motorSpeedA} и {motorSpeedB} должны стать равными 100, и 100 выбрать как центр скорости motorSpeedCenter.
 
-```
-центр скорости {motorSpeedCenter} должен оставаться неизменным при нажатии W (87) или S (83) и A (65) и D (68) и изменяться {motorSpeedCenter}
-только клавишами NumPad + (107) + 25 и NumPad - (13) - 25. Скорости моторов A и B (motorASpeed, motorBSpeed) 
-должны варьироваться вокруг этого центра {motorSpeedCenter} при нажатии A (65) и D (68) в комбинации с W или S. 
-если motorSpeedA и motorSpeedB = motorSpeedCenter, нажимаем клавиши 87+65+65+65... то motorSpeedA: -25 -25 -25... пока  motorSpeedA = 0
-если motorSpeedA и motorSpeedB = motorSpeedCenter, нажимаем клавиши 87+68+68+68... то motorSpeedB: -25 -25 -25... пока  motorSpeedB = 0
+```ы
+центр скорости {motorSpeedCenter} должен оставаться неизменным при нажатии W (87) или S (83) и A (65) и D (68)
+Изменять {motorSpeedCenter}могут только клавишами NumPad + (107) + 25 и NumPad - (13) - 25. Скорости моторов A и B (motorASpeed, motorBSpeed) 
+если motorSpeedA = motorSpeedCenter и motorSpeedB = motorSpeedCenter, нажимаем клавиши (65 по нескольку раз с зажатой 87) 87+65,+65,+65... то motorSpeedA= -25,-25,-25... пока  motorSpeedA < motorSpeedCenter
+если motorSpeedA = motorSpeedCenter и motorSpeedB = motorSpeedCenter, нажимаем клавиши (68 по нескольку раз с зажатой 87) 87+68,+68,+68... то motorSpeedB= -25,-25,-25... пока  motorSpeedB < motorSpeedCenter
+если motorSpeedA < motorSpeedCenter и motorSpeedB = motorSpeedCenter, нажимаем клавиши (65 по нескольку раз с зажатой 87) 87+65,+65,+65... то motorSpeedA= -25,-25,-25... пока  motorSpeedA = motorSpeedCenter
+если motorSpeedA > motorSpeedCenter и motorSpeedB = motorSpeedCenter, нажимаем клавиши (65 по нескольку раз с зажатой 87) 87+65,+65,+65... то motorSpeedA= -25,-25,-25... пока  motorSpeedA = 0
+если motorSpeedA = motorSpeedCenter и motorSpeedB > motorSpeedCenter, нажимаем клавиши (65 по нескольку раз с зажатой 87) 87+65,+65,+65... то motorSpeedB= +25,+25,+25... пока  motorSpeedA = motorSpeedCenter
+если motorSpeedA = motorSpeedCenter и motorSpeedB < motorSpeedCenter, нажимаем клавиши (65 по нескольку раз с зажатой 87) 87+65,+65,+65... то motorSpeedB= +25,+25,+25... пока  motorSpeedA = motorSpeedCenter
+если motorSpeedA < motorSpeedCenter и motorSpeedB = motorSpeedCenter, нажимаем клавиши (68 по нескольку раз с зажатой 87) 87+68,+68,+68... то motorSpeedA= +25,+25,+25... пока  motorSpeedA = motorSpeedCenter
+если motorSpeedA > motorSpeedCenter и motorSpeedB = motorSpeedCenter, нажимаем клавиши (68 по нескольку раз с зажатой 87) 87+68,+68,+68... то motorSpeedA= -25,-25,-25... пока  motorSpeedA = motorSpeedCenter
+если motorSpeedA = motorSpeedCenter и motorSpeedB > motorSpeedCenter, нажимаем клавиши (68 по нескольку раз с зажатой 87) 87+68,+68,+68... то motorSpeedB= -25,-25,-25... пока  motorSpeedA = 0
+если motorSpeedA = motorSpeedCenter и motorSpeedB < motorSpeedCenter, нажимаем клавиши (68 по нескольку раз с зажатой 87) 87+68,+68,+68... то motorSpeedA= -25,-25,-25... пока  motorSpeedA = 0
 
-если motorSpeedA < motorSpeedCenter и motorSpeedB = motorSpeedCenter, нажимаем клавиши 87+65+65+65... то motorSpeedA= +25 +25 +25... пока  motorSpeedA = motorSpeedCenter
-если motorSpeedA > motorSpeedCenter и motorSpeedB = motorSpeedCenter, нажимаем клавиши 87+65+65+65... то motorSpeedA= -25 -25 -25... пока  motorSpeedA = 0
+если motorSpeedA = motorSpeedCenter и motorSpeedB = 0, нажимаем клавиши (68 по нескольку раз с зажатой 87) 87+68,+68,+68... 
+если motorSpeedB = motorSpeedCenter и motorSpeedA = 0, нажимаем клавиши (65 по нескольку раз с зажатой 87) 87+65,+65,+65... 
 
+эти условия должны работать все по отдельнности, работает только одно условие из всех
 
-если motorSpeedA = motorSpeedCenter и motorSpeedB > motorSpeedCenter, нажимаем клавиши 87+65+65+65... то motorSpeedB= -25 -25 -25... пока  motorSpeedA = 0
-если motorSpeedA = motorSpeedCenter и motorSpeedB < motorSpeedCenter, нажимаем клавиши 87+65+65+65... то motorSpeedA= -25 -25 -25... пока  motorSpeedA = 0
+нажатие клавиши 107 или 82 = motorSpeedCenter +25, motorSpeedA+25, motorSpeedB+25
+нажатие клавиши 13 или 70 = motorSpeedCenter -25, motorSpeedA-25, motorSpeedB-25
 ```
 
 так же сделай аналогично с клавишей 83+65 и 83+68
@@ -97,5 +105,6 @@ motorSpeed - так же должно сохраняться в localstorage , �
 {motorSpeedA} {motorSpeedB}
 </span>
 </div>
-
+логику клавиш 81 и 69 не трогай
 Отвечай на русском.
+
