@@ -7,7 +7,7 @@ Chicago  1.50.288  4
 Dubai    1.42.291 -
 Par      1.52.582
 Okutama  1.49.217
-London   1.40.385  4 2 4 5 5
+London   1.39.384  4 2 4 5 5
 Schanhai 1.27.720
 HAWANA   1.41.171
 YOKO HOMO 0.58.598
