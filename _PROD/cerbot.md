@@ -146,3 +146,7 @@ Found the following certs:
     Private Key Path: /etc/letsencrypt/live/ardua.site/privkey.pem
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
+
+openssl x509 -in ./certbot/conf/live/ardua.site/fullchain.pem -text -noout
+cat ./certbot/logs/letsencrypt.log
+docker logs edea6483f3867b0fb5c7c6d67e40cfa5c26b5d31c0b5b5edb491a93bf6ac9e5a
