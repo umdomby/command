@@ -53,12 +53,12 @@ sudo docker exec -it docker-nginx_certbot_1 certbot certonly --webroot -w /var/w
 # Альтернативный способ: использование --standalone (если NGINX мешает)
 sudo docker exec -it docker-nginx_certbot_1 certbot certonly --standalone -d ardua.site --email umdom2@gmail.com --agree-tos --no-eff-email
 
-```docker-nginx-2
+```docker-nginx-444
 # Получение сертификатов с помощью Certbot
-sudo docker exec -it docker-nginx-2-certbot-1 certbot certonly --webroot -w /var/www/certbot -d ardua.site --email umdom2@gmail.com --agree-tos --no-eff-email --force-renewal
+sudo docker exec -it docker-nginx-444-certbot-1 certbot certonly --webroot -w /var/www/certbot -d ardua.site --email umdom2@gmail.com --agree-tos --no-eff-email --force-renewal
 
 # Альтернативный способ: использование --standalone (если NGINX мешает)
-sudo docker exec -it docker-nginx-2-certbot-1 certbot certonly --standalone -d ardua.site --email umdom2@gmail.com --agree-tos --no-eff-email
+sudo docker exec -it docker-nginx-444-certbot-1 certbot certonly --standalone -d ardua.site --email umdom2@gmail.com --agree-tos --no-eff-email
 ```
 
 Где:
@@ -108,3 +108,41 @@ sudo lsof -i TCP:3003
 # Убить процесс
 sudo kill -9 `sudo lsof -t -i:80`  or  sudo kill -9 $(sudo lsof -t -i:80)
 sudo kill -9 `sudo lsof -t -i:80`
+
+# autoUpdate
+sudo systemctl status certbot.timer
+sudo systemctl enable certbot.timer
+sudo systemctl start certbot.timer
+
+cat /etc/cron.d/certbot
+```Пример содержимого:
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+0 */12 * * * root certbot -q renew
+```
+sudo nano /etc/cron.d/certbot
+add
+0 */12 * * * root certbot -q renew --nginx  # для Nginx
+
+# Тестирование автопродления
+sudo certbot renew --dry-run
+```Пример успешного вывода:
+Congratulations, all simulated renewals succeeded:
+  /etc/letsencrypt/live/your_domain/fullchain.pem (success)
+```
+# Проверка сертификатов
+sudo certbot certificates  OR docker exec -it edea6483f3867b0fb5c7c6d67e40cfa5c26b5d31c0b5b5edb491a93bf6ac9e5a certbot certificates
+```
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Found the following certs:
+  Certificate Name: ardua.site
+    Serial Number: 5cdfeb5725e9a1fe467e09ec0fe9dc76de0
+    Key Type: ECDSA
+    Domains: ardua.site
+    Expiry Date: 2025-10-13 13:31:15+00:00 (VALID: 89 days)
+    Certificate Path: /etc/letsencrypt/live/ardua.site/fullchain.pem
+    Private Key Path: /etc/letsencrypt/live/ardua.site/privkey.pem
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+```

@@ -1,0 +1,2 @@
+ALTER TABLE "SavedRoom"
+ADD COLUMN "onlyMe" BOOLEAN NOT NULL DEFAULT false;
