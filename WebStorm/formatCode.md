@@ -1,1 +1,0 @@
-Ctrl + alt + L

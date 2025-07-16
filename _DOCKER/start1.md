@@ -19,6 +19,23 @@ docker start $(docker ps -a -q)
 - Все контейнеры (включая остановленные): 
 # docker ps -a
 
+# settings
+groups
+# Если docker отсутствует в списке, добавьте пользователя в группу:
+sudo usermod -aG docker pi
+newgrp docker
+export DOCKER_HOST=unix:///var/run/docker.sock
+
+# Проверьте права доступа к сокету:
+ls -l /var/run/docker.sock
+```Ожидаемый вывод:
+srw-rw---- 1 root docker 0 Jul 16 11:33 /var/run/docker.sock
+```
+
+groups
+sudo usermod -aG docker pi
+newgrp docker
+
 - name:
 - docker-start-nginx-1
 
