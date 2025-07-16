@@ -7,6 +7,12 @@ docker start $(docker ps -a -q)
 # docker-compose down -v
 # docker-compose up --build
 # docker-compose up --build -d
+
+# docker network create sharednetwork
+# docker network ls
+# docker compose down -v
+# docker compose up --build
+# docker compose up --build -d
 - Запущенные контейнеры: 
 # docker ps
 
