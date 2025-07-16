@@ -16,8 +16,46 @@ docker start $(docker ps -a -q)
 - Запущенные контейнеры: 
 # docker ps
 
+# Статус Docker daemon
+sudo systemctl status docker
+# Логи Docker
+sudo journalctl -u docker -n 100
+# Права доступа к сокету
+ls -l /var/run/docker.sock
+
+
 - Все контейнеры (включая остановленные): 
 # docker ps -a
+
+docker stop <container_id_or_name>
+# Чтобы остановить все запущенные контейнеры
+docker stop $(docker ps -q)
+# Удалить контейнер он должен быть остановлен
+docker rm <container_id_or_name>
+# Чтобы удалить все остановленные контейнеры
+docker container prune
+# Если контейнер всё ещё запущен и вы хотите удалить его без предварительной остановки
+docker rm -f <container_id_or_name>
+
+DOCKER COMPOSE 
+# Остановить все контейнеры, запущенные через docker compose останавливает и удаляет все контейнеры, созданные для
+docker compose down
+# удалить образы, созданные при сборке (например, docker-go-server), выполните:
+docker compose down --rmi all
+# Посмотреть образы Docker
+docker images
+or
+docker image ls
+# Удалите образ по его имени или ID
+docker rmi <image_id_or_name>
+# Чтобы удалить все образы, которые не связаны с контейнерами
+docker image prune
+# Чтобы удалить все образы, включая используемые (осторожно, это удалит все образы на системе):
+docker image rm $(docker image ls -q) -f
+
+
+
+
 
 # settings
 groups
