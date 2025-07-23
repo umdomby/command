@@ -1,4 +1,4 @@
-SaFr F   1,48,034
+SaFr F   1,47,517
 AQ F     1.45.960
 Msk F    1.14.663 4 1 4 5 4
 Barca -> 1.33.702  
@@ -10,7 +10,7 @@ Okutama  1.49.217
 London   1.39.025  4 1 4 5 4
 Schanhai 1.27.720
 HAWANA   1.41.171
-YOKO HOMO 0.58.383
+YOKO HOMO 0.57.814
 STRADA ALPINA
 B_H     1.13.209 4 2 4 5 4
 
