@@ -1,4 +1,6 @@
-
+1. Сотрудничество - люди компании
+2. Интеграция AI
+3. Инвестиции
 
 npx create-next-app@latest .
 pnpm install prisma @prisma/client
