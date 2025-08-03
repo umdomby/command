@@ -1,0 +1,2 @@
+allow pasting
+navigator.getGamepads()

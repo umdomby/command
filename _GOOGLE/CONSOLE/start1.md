@@ -9,3 +9,5 @@ https://console.cloud.google.com/
 Включите API:
 На странице API нажмите кнопку "Включить" (Enable).
 API-ключ 1
+
+
