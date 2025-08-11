@@ -1,5 +1,5 @@
 https://freesvgicons.com/search?q=on%20off
-
+https://www.svgrepo.com/vectors/speed/
 https://www.svgrepo.com/svg/533080/keyboard-alt?edit=true
 
 #00ff11
