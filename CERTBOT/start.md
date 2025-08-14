@@ -15,6 +15,10 @@ sudo docker exec -it docker-nginx_certbot_1 certbot certonly --standalone -d ard
 sudo docker exec -it docker-nginx-444-certbot-1 certbot certonly --webroot -w /var/www/certbot -d ardua.site --email umdom2@gmail.com --agree-tos --no-eff-email --force-renewal
 sudo docker exec -it docker-nginx-444-certbot-1 certbot certonly --webroot -w /var/www/certbot -d it-startup.site --email umdom2@gmail.com --agree-tos --no-eff-email --force-renewal
 
+sudo docker exec -it docker-nginx-certbot-1 certbot certonly --webroot -w /var/www/certbot -d it-startup.site --email umdom2@gmail.com --agree-tos --no-eff-email --force-renewal
+
+
+
 # Альтернативный способ: использование --standalone (если NGINX мешает)
 sudo docker exec -it docker-nginx-444-certbot-1 certbot certonly --standalone -d ardua.site --email umdom2@gmail.com --agree-tos --no-eff-email
 ```
