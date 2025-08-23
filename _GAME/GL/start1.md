@@ -1,15 +1,15 @@
 SaFr F   1,47,517
 AQ F     1.45.960
 Msk F    1.14.455 5 1 4 5 5
-Barca -> 1.33.238 
+Barca -> 1.33.238  - 5 3 5 4 5
 Barca <- 1.36.08
 Chicago  1.49.856  5
-Dubai    1.42.291 -
-Par      1.52.582
+Dubai    1.42.291 5
+Par      1.51.588  5 3 5 4 5
 Okutama  1.49.217
-London   1.39.025  5 1 4 5 5
+London   1.38.520  5 3 5 4 5
 Schanhai 1.27.720
-HAWANA   1.41.171
+HAWANA   1.40.798 5 1 4 5 5
 YOKO HOMO 0.57.814
 STRADA ALPINA
 B_H     1.13.209 5 2 4 5 4
@@ -39,3 +39,5 @@ Picadilha_voador
 TheOnly1ne
 Lascelles
 SaNdMaN80
+
+Zjarany_Woju_
