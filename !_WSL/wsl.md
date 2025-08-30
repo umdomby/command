@@ -17,7 +17,8 @@ sudo kill -9 4096
 
 ifconfig
 
-wsl --shutdown
+
+
 wsl --update
 
 ip a
