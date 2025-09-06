@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<device_list>
+  <!--
+    Device configuration file.
+    This file is used to define device definitions and their usage in the game.
+
+    To add a new device add a device node with following attributes:
+      id -  The hardware id for PC devices is essentially '{PID#VID#-0000-0000-0000-504944564944}' where PID# and VID# is replaced with the Product ID and Vender ID of the device.
+            You can get these ID's by looking in Devices & Printers, Properties on the required device, Hardware tab, USB Input Device, Properties. In 'Information' you should see VID_#### and PID_####. 
+            Take the hex values proceeding the underscore and replace into the above sample.
+            e.g. 
+              'Device USB\VID_045E&PID_028E&IG_00\8&3afa0edf&0&00 was configured.'
+              {028E045E-0000-0000-0000-504944564944}
+      name - The name of the device matching the name used in the action maps.
+      priority - The higher the priority the more likely the device is used in automatic selection mode as the steering device over other devices.
+      {
+        0 - reserved for not_supported devices
+        1-5, 99 - reserved for library defaults
+        6-98 - pads
+        100+ - wheels
+      }
+      version (Optional) - Hardware version of the device, used in conjunction with action map device versioning
+      type (Optional) - The type of device, if set to 'unknown' will use the type returned from the driver, otherwise it will overwrite with the selection.
+      {
+        wheel
+        pad
+        joystick
+        keyboard
+        mouse
+        pedal
+        shifter
+        handbreak
+        unknown - Default
+        not_supported
+      }
+  
+      ffb (Optional)
+      {
+        default - Default - Uses the value returned from the drivers
+        enabled - Force enables the ffb even if the drivers return disabled.
+        disabled - Force disables the ffb even if the drivers return enabled.
+      }
+      ffb_force (Optional) - 0.66 is the lowest value to enable user to scale back up to 1.
+      {
+        1.0 - Default
+      }
+      ffb_friction (Optional)
+      {
+        1.0 - Default
+      }
+      ffb_high_pass (Optional)
+      {
+        0.0 - Default
+      }
+      default (Optional)
+      {
+        false - Default
+        true - Used only by input library defaults
+      }
+      collections_max (Optional) -  A collection limit >1 or 0 will allow new devices to be created with the postfix '_col##' to the hardware id.
+                                    These devices can be used to extend functionality with additional device id's if the device supports them.
+                                    e.g.
+                                      <device id="{00050EB7-0000-0000-0000-504944564944}" name="ftec_csl_p1" priority="100" type="wheel" collections_max="2" />
+                                    
+                                    You can now setup an optional collection id to give the second collection it's own action map.                                    
+                                      <device id="{00050EB7-0000-0000-0000-504944564944}_col02" name="ftec_csl_p1_col02" priority="100" type="wheel" ffb="disabled" />
+      {
+        0 - No collection limit
+        1 - Default
+        >1
+      }
+
+    Unknown devices fallback to default libraries defined below in 'Library Default (fallbacks)' if not manually defined.
+    Unsupported devices that are not compatible with the game can be added to the 'Not Supported' list to prevent initialisation.
+
+  -->
+  <device id="xinput_pad" name="xinput_pad" priority="96" type="pad" default="true" />
+  <device id="pad_virtual" name="pad_virtual" priority="94" type="pad" default="true" />
+  <device id="{028E045E-0000-0000-0000-504944564944}" name="xinput_emulator" priority="93" type="pad" default="true" />
+  <device id="{02FF045E-0000-0000-0000-504944564944}" name="xbox_controller" priority="0" type="not_supported" />
+
+
+  <device id="xinput_pad" name="xinput_pad" priority="95" type="pad" default="true" />
+  <device id="pad_virtual" name="pad_virtual" priority="94" type="pad" default="true" />
+  <device id="{028E045E-0000-0000-0000-504944564944}" name="xbox_controller" priority="93" type="pad" default="true" />
+  <device id="{02FF045E-0000-0000-0000-504944564944}" name="xinput_emulator" priority="92" type="pad" default="true" />
+  <device id="{038E0EB7-0000-0000-0000-504944564944}" name="ftec_clubsport_v1" priority="0" type="not_supported" />
+  <device id="{00010EB7-0000-0000-0000-504944564944}" name="ftec_clubsport" version="2" priority="0" type="not_supported" />
+  <device id="{00040EB7-0000-0000-0000-504944564944}" name="ftec_clubsport" version="3" priority="0" type="not_supported" />
+  <device id="{0E030EB7-0000-0000-0000-504944564944}" name="ftec_csl" priority="0" type="not_supported" />
+  <device id="{00050EB7-0000-0000-0000-504944564944}" name="ftec_csl_ps4" priority="0" type="not_supported" />
+  <device id="{00060EB7-0000-0000-0000-504944564944}" name="ftec_dd_f1_pc" priority="0" type="not_supported" />
+  <device id="{00070EB7-0000-0000-0000-504944564944}" name="ftec_dd_2_pc" priority="0" type="not_supported" />
+  <device id="{00200EB7-0000-0000-0000-504944564944}" name="ftec_csl_dd_gtswpro" priority="0" type="not_supported" />
+  <device id="{18390EB7-0000-0000-0000-504944564944}" name="ftec_clubsport_pedal" priority="0" type="not_supported" />
+  <device id="{183B0EB7-0000-0000-0000-504944564944}" name="ftec_clubsport_pedal_v3" version="3" priority="0" type="not_supported" />
+  <device id="{62040EB7-0000-0000-0000-504944564944}" name="ftec_csl_pedals" priority="0" type="not_supported" />
+  <device id="{1A920EB7-0000-0000-0000-504944564944}" name="ftec_clubsport_shifter" priority="0" type="not_supported" />
+  <device id="{1A930EB7-0000-0000-0000-504944564944}" name="ftec_clubsport_handbrake" priority="0" type="not_supported" />
+  <device id="{00110EB7-0000-0000-0000-504944564944}" name="ftec_csr_elite" priority="0" type="not_supported" />
+  <device id="{01970EB7-0000-0000-0000-504944564944}" name="ftec_porsche_wheel" priority="0" type="not_supported" />
+  <device id="{B65A044F-0000-0000-0000-504944564944}" name="tm_f430" priority="0" type="not_supported" />
+  <device id="{B677044F-0000-0000-0000-504944564944}" name="tm_t150" priority="0" type="not_supported" />
+  <device id="{B66E044F-0000-0000-0000-504944564944}" name="tm_t300_rs" priority="0" type="not_supported" />
+  <device id="{B689044F-0000-0000-0000-504944564944}" name="tm_ts_pc" priority="0" type="not_supported" />
+  <device id="{B697044F-0000-0000-0000-504944564944}" name="tm_t80" priority="0" type="not_supported" />
+  <device id="{B67F044F-0000-0000-0000-504944564944}" name="tm_tmx" priority="0" type="not_supported" />
+  <device id="{B671044F-0000-0000-0000-504944564944}" name="tm_f458" priority="0" type="not_supported" />
+  <device id="{B695044F-0000-0000-0000-504944564944}" name="tm_tss_hb" priority="0" type="not_supported" />
+  <device id="{B692044F-0000-0000-0000-504944564944}" name="tm_ts_xw" priority="0" type="not_supported" />
+  <device id="{B684044F-0000-0000-0000-504944564944}" name="tm_t_gt" priority="0" type="not_supported" />
+  <device id="{B681044F-0000-0000-0000-504944564944}" name="tm_t_gt" priority="0" type="not_supported" />
+  <device id="{B65E044F-0000-0000-0000-504944564944}" name="tm_t500_rs" priority="0" type="not_supported" />
+  <device id="{B662044F-0000-0000-0000-504944564944}" name="tm_t500_rs_f1" priority="0" type="not_supported" />
+  <device id="{B323044F-0000-0000-0000-504944564944}" name="tm_dual_trigger_3_in_1" priority="0" type="not_supported" />
+  <device id="{B655044F-0000-0000-0000-504944564944}" name="tm_fgt_3_in_1" priority="0" type="not_supported" />
+  <device id="{B653044F-0000-0000-0000-504944564944}" name="tm_rgt_ffb_pro" priority="0" type="not_supported" />
+  <device id="{B669044F-0000-0000-0000-504944564944}" name="tm_tx" priority="0" type="not_supported" />
+  <device id="{B696044F-0000-0000-0000-504944564944}" name="tm_t248" priority="0" type="not_supported" />
+  <device id="{B660044F-0000-0000-0000-504944564944}" name="tm_shifter" priority="0" type="not_supported" />
+  <device id="{B678044F-0000-0000-0000-504944564944}" name="tm_usb_adapter" priority="0" type="not_supported" />
+  <device id="{10201DD2-0000-0000-0000-504944564944}" name="sim_steering" version="1" priority="0" type="not_supported" />
+  <device id="{22301DD2-0000-0000-0000-504944564944}" name="sim_steering" version="2" priority="0" type="not_supported" />
+  <device id="{22331DD2-0000-0000-0000-504944564944}" name="sim_steering" version="3" priority="0" type="not_supported" />
+  <device id="{804C1FC9-0000-0000-0000-504944564944}" name="simxperience_accuforce_pro" priority="0" type="not_supported" />
+  <device id="{C294046D-0000-0000-0000-504944564944}" name="lg_driving_force_ex" priority="0" type="not_supported" />
+  <device id="{C29A046D-0000-0000-0000-504944564944}" name="lg_driving_force_gt" priority="0" type="not_supported" />
+  <device id="{C298046D-0000-0000-0000-504944564944}" name="lg_driving_force_pro" priority="0" type="not_supported" />
+  <device id="{C216046D-0000-0000-0000-504944564944}" name="lg_dual_action" priority="0" type="not_supported" />
+  <device id="{C218046D-0000-0000-0000-504944564944}" name="lg_f510" priority="0" type="not_supported" />
+  <device id="{C219046D-0000-0000-0000-504944564944}" name="lg_f710_and_cordless_rumblepad_2" priority="0" type="not_supported" />
+  <device id="{C299046D-0000-0000-0000-504944564944}" name="lg_g25" priority="0" type="not_supported" />
+  <device id="{C29B046D-0000-0000-0000-504944564944}" name="lg_g27" priority="0" type="not_supported" />
+  <device id="{C262046D-0000-0000-0000-504944564944}" name="lg_g920" priority="0" type="not_supported" />
+  <device id="{C24F046D-0000-0000-0000-504944564944}" name="lg_g29" priority="0" type="not_supported" />
+  <device id="{C26E046D-0000-0000-0000-504944564944}" name="lg_g923_xone" priority="0" type="not_supported" />
+  <device id="{C266046D-0000-0000-0000-504944564944}" name="lg_g923_ps4" priority="0" type="not_supported" />
+  <device id="{CA03046D-0000-0000-0000-504944564944}" name="lg_momo_racing" priority="0" type="not_supported" />
+  <device id="{00080E8F-0000-0000-0000-504944564944}" name="grid2_pad" priority="0" type="not_supported" />
+  <device id="{0034045E-0000-0000-0000-504944564944}" name="ms_sidewinder_ffb" priority="0" type="not_supported" />
+  <device id="{00030E8F-0000-0000-0000-504944564944}" name="sl_strikefx" priority="0" type="not_supported" />
+  <device id="{910511C0-0000-0000-0000-504944564944}" name="sl_torid" priority="0" type="not_supported" />
+  <device id="{05C4054C-0000-0000-0000-504944564944}" name="ps4_pad" priority="0" type="not_supported" />
+  <device id="{0BA0054C-0000-0000-0000-504944564944}" name="ps4_pad" priority="0" type="not_supported" />
+  <device id="keyboard" name="keyboard" priority="0" type="not_supported" />
+  <device id="mouse" name="mouse" priority="0" type="not_supported" />
+  <device id="{028E045E-0000-0000-0000-504944564944}" name="xbox_controller" priority="0" type="not_supported" />
+  <device id="xinput_wheel" name="xinput_wheel" priority="0" type="not_supported" />
+  <device id="lib_direct_input" name="lib_direct_input" priority="0" type="not_supported" />
+  <device id="lib_direct_input_pad" name="lib_direct_input_pad" priority="0" type="not_supported" />
+  <device id="lib_direct_input_wheel" name="lib_direct_input_wheel" priority="0" type="not_supported" />
+  <device id="{C626046D-0000-0000-0000-504944564944}" name="space_navigator" priority="0" type="not_supported" />
+  <device id="{046DBEEF-0000-0000-0000-504944564944}" name="space_navigator_driver" priority="0" type="not_supported" />
+  <device id="{45030738-0000-0000-0000-504944564944}" name="mc_pro_r" priority="0" type="not_supported" />
+  <device id="{07051532-0000-0000-0000-504944564944}" name="rz_raiju_mobile_pad" priority="0" type="not_supported" />
+  <device id="{0FFBF055-0000-0000-0000-504944564944}" name="simucube_osw_mmos" priority="0" type="not_supported" />
+  <device id="{0D5A16D0-0000-0000-0000-504944564944}" name="simucube_osw" priority="0" type="not_supported" />
+  <device id="{0D6116D0-0000-0000-0000-504944564944}" name="simucube2_sport" priority="0" type="not_supported" />
+  <device id="{0D6016D0-0000-0000-0000-504944564944}" name="simucube2_pro" priority="0" type="not_supported" />
+  <device id="{0D5F16D0-0000-0000-0000-504944564944}" name="simucube2_ultimate" priority="0" type="not_supported" />
+  <device id="{09CC054C-0000-0000-0000-504944564944}" name="ps4_pad" priority="0" type="not_supported" />
+</device_list>
