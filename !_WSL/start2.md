@@ -1,6 +1,5 @@
 ip addr show
-Get-VMSwitch
-Format-Table Name, SwitchType, NetAdapterInterfaceDescription -AutoSize
+Get-VMSwitch | Format-Table Name, SwitchType, NetAdapterInterfaceDescription -AutoSize
 
 # Проверьте состояние службы Hyper-V
 Get-Service vmms
@@ -20,6 +19,24 @@ C:\Users\umdom\.wslconfig
 networkingMode=bridged
 vmSwitch=WSLBridge
 ipv6=false
+# or
+[wsl2]
+networkingMode=bridged
+vmSwitch=WSLBridge
+ipv6=false
+localhostForwarding=true
+kernelCommandLine=ipv6.disable=1  # Жёсткое отключение IPv6 в ядре WSL
+# or
+[wsl2]
+networkingMode=mirrored
+dnsTunneling=true  # Для DNS в WSL
+firewall=false  # Отключить WSL-firewall для теста
+# or mirrored
+[wsl2]
+networkingMode=mirrored
+ipv6=false
+localhostForwarding=true
+kernelCommandLine=ipv6.disable=1
 
 
 sudo nano /etc/netplan/01-netcfg.yaml
@@ -37,6 +54,26 @@ network:
       nameservers:
         addresses: [8.8.8.8, 8.8.4.4]
 ```
+# or
+```
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      dhcp4: yes  # Или задайте 172.27.96.x, если нужно статический
+      # addresses: [172.27.96.2/16]  # Опционально, если статический
+      routes:
+        - to: default
+          via: 192.168.1.1
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]
+```
+# Примените
+sudo netplan apply
+# Новый IP (напр. 172.27.96.2) обновите в portproxy
+netsh interface portproxy delete v4tov4 listenport=3033 listenaddress=0.0.0.0
+netsh interface portproxy add v4tov4 listenport=3033 listenaddress=0.0.0.0 connectport=3033 connectaddress=172.27.96.2
 
 sudo nano /etc/systemd/network/20-wired.network
 ```
@@ -44,8 +81,8 @@ sudo nano /etc/systemd/network/20-wired.network
 Name=eth0
 
 [Network]
-Address=192.168.1.122/24  # Свободный IP из LAN
-Gateway=192.168.1.1  # Ваш роутер
+Address=192.168.1.121/24  # Сделайте таким же, как в netplan
+Gateway=192.168.1.1
 DHCP=no
 ```
 
@@ -76,3 +113,115 @@ New-VMSwitch -Name "WSLBridge" -NetAdapterName "Ethernet" -AllowManagementOS $tr
 Нажмите ОК для сохранения.
 Шаг 2. Настройка файла .wslconfig
 Ваш файл .wslconfig уже содержит правильные параметры для bridged networking. Убедитесь, что он выглядит так:
+
+
+
+
+# правило фаервола
+Get-NetFirewallRule | Where-Object {$_.DisplayName -like "Allow Port*"} | Format-Table -AutoSize
+# удалить
+Remove-NetFirewallRule -Confirm:$false
+
+# Для просмотра существующих правил введите:
+netsh interface portproxy show all
+
+# Для сброса всех существующих правил используйте:
+netsh interface portproxy reset
+
+netsh interface portproxy delete v4tov4 listenport=444 listenaddress=192.168.0.121
+
+netsh interface portproxy delete v4tov4 listenport=3033 listenaddress=0.0.0.0
+netsh interface portproxy add v4tov4 listenport=3033 listenaddress=0.0.0.0 connectport=3033 connectaddress=192.168.1.121
+netsh interface portproxy show all
+
+# слушает ли сервер порт
+sudo netstat -tulpn | grep :3033
+
+# Проверьте все правила
+Get-NetFirewallRule | Format-Table Name, DisplayName, Enabled, Action -AutoSize
+# Проверьте все правила 2
+New-NetFirewallRule -DisplayName "Allow WSL Port 3033" -Direction Inbound -Protocol TCP -LocalPort 3033 -Action Allow -Profile Any -Program "C:\Windows\System32\wsl.exe"
+Enable-NetFirewallRule -DisplayName "WSL Access"
+Get-NetFirewallRule -DisplayName "WSL Access"
+
+# Создайте или исправьте firewall-правило
+New-NetFirewallRule -DisplayName "Allow WSL Port 3033" -Direction Inbound -Protocol TCP -LocalPort 3033 -Action Allow -Profile Any
+New-NetFirewallRule -DisplayName "Allow WSL Port 3034" -Direction Inbound -Protocol TCP -LocalPort 3034 -Action Allow -Profile Any
+# or
+New-NetFirewallRule -DisplayName "Allow WSL Port 3033" -Direction Inbound -Protocol TCP -LocalPort 3033 -Action Allow -Profile Any -Program "C:\Windows\System32\wsl.exe"
+
+Get-NetFirewallRule -DisplayName "Allow WSL Port 3033"
+
+# добавьте маршрут (редко нужно)
+route add 192.168.1.121 mask 255.255.255.255 192.168.1.1
+
+# Из WSL: curl http://localhost:3033
+# Из Windows (PowerShell): curl -v http://localhost:3033
+
+
+ip addr show eth0
+# Если 192.168.1.121 — mirrored работает с LAN. Если 172.x — это NAT, и 192.168.1.121 — хост.
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+link/ether e8:9c:25:de:cd:80 brd ff:ff:ff:ff:ff:ff
+inet 192.168.1.121/24 brd 192.168.1.255 scope global noprefixroute eth0
+valid_lft forever preferred_lft forever
+
+hostname -I
+
+# PowerShell
+netstat -an | findstr :3033
+# Найдите PID
+netstat -aon | findstr :3033
+
+# Определите процесс по PID
+Get-Process -Id 5752
+
+# Убейте процесс
+taskkill /PID 5752 /F
+
+netstat -aon | findstr :3033
+
+# перезапустите сетевой стек Windows
+netsh winsock reset
+netsh int ip reset
+
+# проверьте маршруты
+route print
+===========================================================================
+Список интерфейсов
+30...e8 9c 25 de cd 80 ......Hyper-V Virtual Ethernet Adapter #2
+7...00 1a 7d da 71 13 ......Bluetooth Device (Personal Area Network)
+1...........................Software Loopback Interface 1
+10...00 15 5d 6e c7 07 ......Hyper-V Virtual Ethernet Adapter
+===========================================================================
+
+IPv4 таблица маршрута
+===========================================================================
+Активные маршруты:
+Сетевой адрес           Маска сети      Адрес шлюза       Интерфейс  Метрика
+0.0.0.0          0.0.0.0      192.168.1.1    192.168.1.121    281
+127.0.0.0        255.0.0.0         On-link         127.0.0.1    331
+127.0.0.1  255.255.255.255         On-link         127.0.0.1    331
+127.255.255.255  255.255.255.255         On-link         127.0.0.1    331
+172.27.96.0    255.255.240.0         On-link       172.27.96.1   5256
+172.27.96.1  255.255.255.255         On-link       172.27.96.1   5256
+172.27.111.255  255.255.255.255         On-link       172.27.96.1   5256
+192.168.1.0    255.255.255.0         On-link     192.168.1.121    281
+192.168.1.121  255.255.255.255         On-link     192.168.1.121    281
+192.168.1.121  255.255.255.255      192.168.1.1    192.168.1.121     26
+192.168.1.255  255.255.255.255         On-link     192.168.1.121    281
+224.0.0.0        240.0.0.0         On-link         127.0.0.1    331
+224.0.0.0        240.0.0.0         On-link       172.27.96.1   5256
+224.0.0.0        240.0.0.0         On-link     192.168.1.121    281
+255.255.255.255  255.255.255.255         On-link         127.0.0.1    331
+255.255.255.255  255.255.255.255         On-link       172.27.96.1   5256
+255.255.255.255  255.255.255.255         On-link     192.168.1.121    281
+===========================================================================
+Постоянные маршруты:
+Сетевой адрес            Маска    Адрес шлюза      Метрика
+0.0.0.0          0.0.0.0      192.168.1.1  По умолчанию
+0.0.0.0          0.0.0.0      192.168.1.1     256
+===========================================================================
+
+
+wsl --shutdown

@@ -1,6 +1,7 @@
 sudo ss -tulnp | grep 3001
 sudo ss -tulnp | grep 8089
 sudo netstat -tulnp | grep ':8089'
+sudo netstat -tulnp | grep ':3033'
 sudo netstat -tulnp | grep ':49940'
 sudo kill -9 49940
 
@@ -13,10 +14,10 @@ sudo lsof -nP -i | grep LISTEN
 Вы можете использовать lsof, чтобы увидеть, какое приложение прослушивает порт 80:
 ```
 sudo lsof -i TCP:8089
-sudo lsof -i TCP:3003
+sudo lsof -i TCP:3033
 ```
 
-sudo kill -9 `sudo lsof -t -i:3001`  or  sudo kill -9 $(sudo lsof -t -i:9001)
+sudo kill -9 `sudo lsof -t -i:3033`  or  sudo kill -9 $(sudo lsof -t -i:9001)
 sudo kill -9 `sudo lsof -t -i:8081`
 sudo kill -9 `sudo lsof -t -i:8089`
 sudo kill -9 `sudo lsof -t -i:80`
@@ -28,6 +29,25 @@ sudo kill -9 `sudo lsof -t -i:3005`
 sudo kill -9 `sudo lsof -t -i:5001`
 sudo kill -9 `sudo lsof -t -i:1337`
 sudo kill -9 -ID-  
+
+
+# PowerShell
+netstat -an | findstr :3033
+# Найдите PID
+netstat -aon | findstr :3033
+
+# Определите процесс по PID
+Get-Process -Id 5752
+
+# Убейте процесс
+taskkill /PID 5752 /F
+
+netstat -aon | findstr :3033
+
+# перезапустите сетевой стек Windows
+netsh winsock reset
+netsh int ip reset
+
 
 #80  or 443
 #HTTPS_REACT://stackoverflow.com/questions/60372618/nodejs-listen-eacces-permission-denied-0-0-0-080  
