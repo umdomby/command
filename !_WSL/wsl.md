@@ -33,6 +33,13 @@ ip -4 addr show eth0 | grep "inet"
 PowerShell
 New-NetFirewallRule -DisplayName "WSL Access" -Direction Inbound -Protocol TCP -LocalPort 80 -Action Allow
 New-NetFirewallRule -DisplayName "WSL Access" -Direction Inbound -Protocol TCP -LocalPort 443 -Action Allow
+New-NetFirewallRule -DisplayName "WSL Access" -Direction Inbound -Protocol TCP -LocalPort 3033 -Action Allow
+New-NetFirewallRule -DisplayName "WSL Access" -Direction Inbound -Protocol TCP -LocalPort 3034 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 3033" -Direction Inbound -Protocol TCP -LocalPort 3033 -Action Allow
+New-NetFirewallRule -DisplayName "Allow Port 3034" -Direction Inbound -Protocol TCP -LocalPort 3034 -Action Allow
+
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.121 listenport=8080 connectaddress=192.168.0.121 connectport=3033
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.121 listenport=443 connectaddress=192.168.0.121 connectport=3034
 
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=8080 connectaddress=172.30.46.88 connectport=8080
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.151 listenport=443 connectaddress=172.30.46.88 connectport=443
