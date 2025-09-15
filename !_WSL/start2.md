@@ -31,6 +31,7 @@ kernelCommandLine=ipv6.disable=1  # Жёсткое отключение IPv6 в 
 networkingMode=mirrored
 localhostForwarding=true
 dnsTunneling=true  # Для DNS в WSL
+networkingMode=nat
 firewall=false  # Отключить WSL-firewall для теста
 # or mirrored
 [wsl2]
@@ -226,5 +227,22 @@ IPv4 таблица маршрута
 0.0.0.0          0.0.0.0      192.168.1.1     256
 ===========================================================================
 
+
+Get-NetFirewallRule -DisplayName "Allow WSL Port 3033" | Format-Table Name, Enabled, Direction, Action
+
+Name                                   Enabled Direction Action
+----                                   ------- --------- ------
+{7d765c22-6f34-4ddd-9647-7de938515489}    True   Inbound  Allow
+{659d9ea8-5c10-4aa9-b22a-692f0e138a5c}    True   Inbound  Allow
+{d063944b-0ae0-4fd7-a127-a8201c3e0ab3}    True   Inbound  Allow
+
+
+# wsl 
+ip addr show eth0
+
+# отключите брандмауэр Windows: powershell
+netsh advfirewall set allprofiles state off
+or
+netsh advfirewall set allprofiles state on
 
 wsl --shutdown
