@@ -1,3 +1,5 @@
+NAT.md -->
+
 ip addr show
 Get-VMSwitch | Format-Table Name, SwitchType, NetAdapterInterfaceDescription -AutoSize
 
@@ -246,3 +248,5 @@ or
 netsh advfirewall set allprofiles state on
 
 wsl --shutdown
+
+NAT.md -->
