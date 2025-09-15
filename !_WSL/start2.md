@@ -29,6 +29,7 @@ kernelCommandLine=ipv6.disable=1  # Жёсткое отключение IPv6 в 
 # or
 [wsl2]
 networkingMode=mirrored
+localhostForwarding=true
 dnsTunneling=true  # Для DNS в WSL
 firewall=false  # Отключить WSL-firewall для теста
 # or mirrored
@@ -73,6 +74,7 @@ network:
 sudo netplan apply
 # Новый IP (напр. 172.27.96.2) обновите в portproxy
 netsh interface portproxy delete v4tov4 listenport=3033 listenaddress=0.0.0.0
+netsh interface portproxy delete v4tov4 listenport=3034 listenaddress=0.0.0.0
 netsh interface portproxy add v4tov4 listenport=3033 listenaddress=0.0.0.0 connectport=3033 connectaddress=172.27.96.2
 
 sudo nano /etc/systemd/network/20-wired.network
@@ -87,7 +89,8 @@ DHCP=no
 ```
 
 
-netsh interface portproxy add v4tov4 listenport=3033 listenaddress=0.0.0.0 connectport=3033 connectaddress=192.168.1.122
+netsh interface portproxy add v4tov4 listenport=3033 listenaddress=0.0.0.0 connectport=3033 connectaddress=192.168.1.121
+netsh interface portproxy add v4tov4 listenport=3034 listenaddress=0.0.0.0 connectport=3034 connectaddress=192.168.1.121
 
 sudo systemctl restart systemd-networkd
 wsl --shutdown

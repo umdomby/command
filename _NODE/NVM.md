@@ -42,8 +42,11 @@ node -v
 npm install npm@latest
 
 
-nvm install v22.15.0
-nvm use v22.15.0
-nvm alias default v22.15.0
+nvm install v22.19.0
+nvm use v22.19.0
+nvm alias default v22.19.0
 npm install npm@latest
 node -v
+
+npm install -g npm@11.6.0
+npm install --global yarn

@@ -23,7 +23,6 @@ sudo journalctl -u docker -n 100
 # Права доступа к сокету
 ls -l /var/run/docker.sock
 
-
 - Все контейнеры (включая остановленные): 
 # docker ps -a
 

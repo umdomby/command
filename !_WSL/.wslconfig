@@ -1,5 +1,5 @@
 [wsl2]
 networkingMode=mirrored
-ipv6=false
 localhostForwarding=true
-kernelCommandLine=ipv6.disable=1
+dnsTunneling=true  # Для DNS в WSL
+firewall=false  # Отключить WSL-firewall для теста
