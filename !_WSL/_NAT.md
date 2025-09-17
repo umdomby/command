@@ -36,7 +36,7 @@ Gateway=172.27.16.1
 DNS=8.8.8.8
 DNS=8.8.4.4
 ```
-
+hostname -I
 ip addr show eth0
 ip route show
 
@@ -44,7 +44,10 @@ sudo netplan apply
 sudo systemctl restart systemd-networkd
 
 netsh interface portproxy delete v4tov4 listenport=3033 listenaddress=0.0.0.0
+
+netsh interface portproxy reset
 netsh interface portproxy add v4tov4 listenport=3033 listenaddress=0.0.0.0 connectport=3033 connectaddress=172.27.25.230
+netsh interface portproxy add v4tov4 listenport=3000 listenaddress=0.0.0.0 connectport=3000 connectaddress=172.27.25.230
 
 # Проверка перенаправления
 netsh interface portproxy show v4tov4
@@ -53,6 +56,9 @@ netsh interface portproxy show v4tov4
 # Настройка брандмауэра: Убедитесь, что порт 3033 открыт на хосте:
 Get-NetFirewallRule -DisplayName "Allow TCP 3033" | Remove-NetFirewallRule
 New-NetFirewallRule -DisplayName "Allow TCP 3033" -Direction Inbound -Protocol TCP -LocalPort 3033 -Action Allow -Profile Any
+
+Get-NetFirewallRule -DisplayName "Allow TCP 3000" | Remove-NetFirewallRule
+New-NetFirewallRule -DisplayName "Allow TCP 3000" -Direction Inbound -Protocol TCP -LocalPort 3033 -Action Allow -Profile Any
 
 # Проверка порта на хост
 netstat -an | findstr 3033
