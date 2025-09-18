@@ -46,8 +46,11 @@ sudo systemctl restart systemd-networkd
 netsh interface portproxy delete v4tov4 listenport=3033 listenaddress=0.0.0.0
 
 netsh interface portproxy reset
+netsh interface portproxy add v4tov4 listenport=3004 listenaddress=0.0.0.0 connectport=3004 connectaddress=172.27.25.230
+netsh interface portproxy add v4tov4 listenport=3034 listenaddress=0.0.0.0 connectport=3034 connectaddress=172.27.25.230
 netsh interface portproxy add v4tov4 listenport=3033 listenaddress=0.0.0.0 connectport=3033 connectaddress=172.27.25.230
 netsh interface portproxy add v4tov4 listenport=3000 listenaddress=0.0.0.0 connectport=3000 connectaddress=172.27.25.230
+
 
 # Проверка перенаправления
 netsh interface portproxy show v4tov4
