@@ -3,17 +3,20 @@ OKU GP F 1.45.960 4 5 5 5 5
 Msk F    1.14.455 5 1 4 5 5
 Barca -> 1.33.072  1.33.928 41355
 Barca <- 1.36.08
-Chicago  1.49.856  5 or 45555
-Dubai    1.42.291  2
-Par      1.50.650
-5  or 45555 or 1.51.497 or 45555 1.51.466
+Chicago  1.49.856  45555
+Dubai    1.42.291  4
+Par      1.50.650  5  or 45555 or 1.51.497 or 45555 1.51.466
 London   1.38.009  45555  1.38.902  41355
 Okutama  1.49.217
 Schanhai 1.27.720
-HAWANA   1.40.069 53555
+HAWANA   1.40.069 44555
 YOKO HOMO 0.57.814
 STRADA ALPINA
 B_H      1.11.294 5
+C_V      1.47.100 4
+M_P      1.57.680 4
+SEPANG 
+
 
 Cheet:
 Stiepen
