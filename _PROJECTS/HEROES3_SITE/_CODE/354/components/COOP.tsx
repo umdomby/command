@@ -313,7 +313,7 @@ export default function COOP() {
                                             alt="P2P торговля"
                                             width={100}
                                             height={100}
-                                            onClick={() => openDialog("/coop/img_2.png")}
+                                            onClick={() => openDialog("/coop/gas.png")}
                                         />
                                     </DialogTrigger>
                                     <DialogContent className="dialog-content">
