@@ -50,6 +50,8 @@ netsh interface portproxy add v4tov4 listenport=3004 listenaddress=0.0.0.0 conne
 netsh interface portproxy add v4tov4 listenport=3034 listenaddress=0.0.0.0 connectport=3034 connectaddress=172.27.25.230
 netsh interface portproxy add v4tov4 listenport=3033 listenaddress=0.0.0.0 connectport=3033 connectaddress=172.27.25.230
 netsh interface portproxy add v4tov4 listenport=3000 listenaddress=0.0.0.0 connectport=3000 connectaddress=172.27.25.230
+netsh interface portproxy add v4tov4 listenport=3021 listenaddress=0.0.0.0 connectport=3021 connectaddress=172.27.25.230
+netsh interface portproxy add v4tov4 listenport=444 listenaddress=0.0.0.0 connectport=444 connectaddress=172.27.25.230
 
 
 # Проверка перенаправления
@@ -62,6 +64,9 @@ New-NetFirewallRule -DisplayName "Allow TCP 3033" -Direction Inbound -Protocol T
 
 Get-NetFirewallRule -DisplayName "Allow TCP 3000" | Remove-NetFirewallRule
 New-NetFirewallRule -DisplayName "Allow TCP 3000" -Direction Inbound -Protocol TCP -LocalPort 3033 -Action Allow -Profile Any
+
+New-NetFirewallRule -DisplayName "Allow TCP 3021" -Direction Inbound -Protocol TCP -LocalPort 3021 -Action Allow -Profile Any
+New-NetFirewallRule -DisplayName "Allow TCP 444" -Direction Inbound -Protocol TCP -LocalPort 444 -Action Allow -Profile Any
 
 # Проверка порта на хост
 netstat -an | findstr 3033
@@ -102,3 +107,7 @@ Restart-NetAdapter -Name "vEthernet (WSL)"
 bash
 
 sudo python3 -m http.server 3001 --bind 0.0.0.0
+
+
+Test-NetConnection -ComputerName 213.184.249.66 -Port 80
+Test-NetConnection -ComputerName 213.184.249.66 -Port 8080
