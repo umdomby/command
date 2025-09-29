@@ -52,7 +52,8 @@ netsh interface portproxy add v4tov4 listenport=3033 listenaddress=0.0.0.0 conne
 netsh interface portproxy add v4tov4 listenport=3000 listenaddress=0.0.0.0 connectport=3000 connectaddress=172.27.25.230
 netsh interface portproxy add v4tov4 listenport=3021 listenaddress=0.0.0.0 connectport=3021 connectaddress=172.27.25.230
 netsh interface portproxy add v4tov4 listenport=444 listenaddress=0.0.0.0 connectport=444 connectaddress=172.27.25.230
-
+netsh interface portproxy add v4tov4 listenport=8095 listenaddress=0.0.0.0 connectport=8095 connectaddress=172.27.25.230
+netsh interface portproxy add v4tov4 listenport=8096 listenaddress=0.0.0.0 connectport=8096 connectaddress=172.27.25.230
 
 # Проверка перенаправления
 netsh interface portproxy show v4tov4
