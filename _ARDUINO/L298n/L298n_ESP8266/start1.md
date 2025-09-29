@@ -5,4 +5,4 @@
 #define in4 D5
 #define enB D6
 
-ESP8266
+ESP8266 NodeMCU 0.9
