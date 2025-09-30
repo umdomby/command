@@ -1,6 +1,7 @@
 DVR8833 ESP8266 NodeMCU 0.9
 
-## LEFT
+### LEFT
+
 - NC
 - AIN2 - D2
 - AIN1 - D1
@@ -10,7 +11,7 @@ DVR8833 ESP8266 NodeMCU 0.9
 - NC
 - GND
 
-## RIGHT
+### RIGHT
 - VM - 2.7 ... 10.8
 - NC - 3v3
 - GND - 2.7 ... 10.8
