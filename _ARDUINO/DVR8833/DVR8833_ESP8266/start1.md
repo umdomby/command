@@ -3,17 +3,17 @@ DVR8833 ESP8266 NodeMCU 0.9
 ### LEFT
 
 - NC
-- AIN2 - D2
-- AIN1 - D1
-- STBY - 3v3
-- BIN1 - D3
-- BIN2 - D4
+- AIN2 - D2 -> IO4
+- AIN1 - D1 -> IO5
+- STBY - 3v3-> 3v3
+- BIN1 - D3 -> IO0
+- BIN2 - D4 -> IO2
 - NC
 - GND
 
 ### RIGHT
 - VM - 2.7 ... 10.8
-- NC - 3v3
+- NC - 3v3 -> 3v3
 - GND - 2.7 ... 10.8
 - AO1 - motor1
 - AO2 - motor1
