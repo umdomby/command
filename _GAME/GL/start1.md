@@ -1,34 +1,39 @@
 SaFr     1,47,517 4-5 3 5 5 5
 OKU_GP   1.45.960 2 5 5 5 5
 OKU_S    2.33.505 4
-Msk F    1.14.455 5 1 4 5 5
+Msk F    1.14.455 5 5 5 5 5
 Barca -> 1.33.072  55555
 Barca <- 1.36.08
 Chicago  1.49.856  5-4
 Dubai    1.42.291  2
-Par      1.50.650  5-4  
+Par      1.50.650  5! 
 London   1.37.487  45555  1.38.902  41355
 Okutama  1.49.217
 Schanhai 1.27.720
-HAWANA   1.40.069 54-44
+HAWANA   1.40.069 54!
 Y_H_D      0.57.814
 S_A      1.20.122
 B_H      1.11.294 4-5
-C_V      1.46.283 5-3
+C_V      1.45.668 5k
 M_P      1.57.680 4
 R_B      1.20.393 5
 SEPANG 
 
 =========
-Lascelles
-Antonelli 
-ShaneTePain819
-Hound dog
-Zodiaaz
-coaxial-subject0
-jp132450
-I4IPiNeSt4RI
+Lascelles,
+Antonelli, 
+ShaneTePain819,
+Hound dog,
+Zodiaaz,
+coaxial-subject0,
+jp132450,
+I4IPiNeSt4RI,
+Mr.Smoke,
+Noob with Wheel,
+XZeRo,
 =========
+
+
 Cheet:
 Stiepen
 Xiaoping8235 ?
