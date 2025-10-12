@@ -10,10 +10,10 @@ Par      1.50.650  5!
 London   1.37.487  45555  1.38.902  41355
 Okutama  1.49.217
 Schanhai 1.27.720 5
-HAWANA   1.39.951 514!
+HAWANA   1.39.701 514!
 Y_H_D    0.57.814
-S_A_club 1.17.642 5k
-B_H      1.11.294 2-3-4-5
+S_A_club 1.17.510 5k
+B_H      1.11.294 4
 C_V      1.45.668 5k
 M_P      1.57.413 5
 R_B      1.20.393 5
@@ -37,6 +37,7 @@ LankyJoker8753,
 G3_Royal,
 Cashmillz,
 Mevchev,
+RedBull4535
 =========
 
 
