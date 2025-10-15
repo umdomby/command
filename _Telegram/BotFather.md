@@ -1,3 +1,14 @@
+https://api.telegram.org/bot8030776194:AAHGFpXqwIFVl38YV9W1TixopXDdKopP5rY/sendMessage.
+https://api.telegram.org/bot8030776194:AAHGFpXqwIFVl38YV9W1TixopXDdKopP5rY/getUpdates
+
+```
+curl -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{"chat_id": 5112905163, "text": "Привет! Это ответ от бота."}' \
+  https://api.telegram.org/bot8030776194:AAHGFpXqwIFVl38YV9W1TixopXDdKopP5rY/sendMessage
+```
+
+
 # Настройка Telegram Bot для оповещения сигнализации
 Откройте Telegram и найдите @BotFather:
 Запустите приложение Telegram на телефоне, компьютере или в веб-версии.
@@ -52,7 +63,7 @@ curl https://api.telegram.org/7861501595:AAGEDzbeBVLVVLkzffreI5OX-aRjmGWkcw8/get
 /start
 
 
-pi@PC1:~$ curl https://api.telegram.org/bot7861501595:AAGEDzbeBVLVVLkzffreI5OX-aRjmGWkcw8/getUpdates
+pi@PC1:~$ curl https://api.telegram.org/bot8030776194:AAHGFpXqwIFVl38YV9W1TixopXDdKopP5rY/getUpdates
 {"ok":true,"result":[{"update_id":96165655,
 "message":{"message_id":1,"from":{"id":5112905163,"is_bot":false,"first_name":"Pi","username":"navatar85","language_code":"ru"},"chat":{"id":5112905163,"first_name":"Pi","username":"navatar85","type":"private"},"date":1750762444,"text":"/start","entities":[{"offset":0,"length":6,"type":"bot_command"}]}}]}pi@PC1:~$
 
