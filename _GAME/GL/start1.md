@@ -7,7 +7,7 @@ Barca <- 1.36.08
 Chicago  1.49.616  5!
 Dubai    1.42.291  2
 Par      1.50.650  5! 
-London   1.37.487  45555  1.38.902  41355
+London   1.37.487  5-45555  1.38.902  41355
 Okutama  1.49.217
 Schanhai 1.27.720 5
 HAWANA   1.39.701 514!
@@ -20,6 +20,7 @@ R_B      1.20.393 5
 S_C_wcB  1.09.875 3
 Indi     1.22.572 3k
 S_I_C_st 2 
+
 =========kick
 OnkelHeini2019,
 SGT-04U,
