@@ -1,12 +1,10 @@
 # Joy x360ce Triggers:
 -Left Trigger 100% false
 -Right Trigger 100% true
-
-# Left Thumb: X-Horizontal Axis
+## Left Thumb: X-Horizontal Axis
 -Dead Zone 20%
 -Sensitivity 70% false
-
-# Right Thumb: Y-Horizontal Axis
+## Right Thumb: Y-Horizontal Axis
 -Dead Zone 10%
 -Sensitivity 100% false
 
@@ -16,49 +14,22 @@
 - Сцепление: <R МТ-0, Ч-100
 - Ручной тормоз: <R МТ-0, Ч-100
 - Понижение передач: <R МТ-0, Ч-1
-
 # Доп настр. ввода
 - Чувств.рул.упр. 60
 - Лин.рул.упр. 4
 
 ========================== 1
-
-# Joy x360ce Triggers:
--Left Trigger 100% false
--Right Trigger 100% true
-
-# Left Thumb: X-Horizontal Axis
--Dead Zone 20%
--Sensitivity 70% false
-
-# Right Thumb: Y-Horizontal Axis
--Dead Zone 10%
--Sensitivity 100% false
-
 # Game
 - Ускорение: <R МТ-0, Ч-20
 - Тормоз/Задний ход: <R МТ-0, Ч-35
 - Сцепление: <R МТ-50, Ч-100
 - Ручной тормоз: <R МТ-0, Ч-100
 - Понижение передач: <R МТ-0, Ч-1
-
-
-# Доп настр. ввода
+## Доп настр. ввода
 - Чувств.рул.упр. 60
 - Лин.рул.упр. 4
 
 ========================== 2*
-
-# Joy x360ce Triggers:
--Left Trigger 100% false
--Right Trigger 100% true
-## Left Thumb: X-Horizontal Axis
--Dead Zone 20%
--Sensitivity 70% false
-## Right Thumb: Y-Horizontal Axis
--Dead Zone 10%
--Sensitivity 100% false
-
 # Game
 - Ускорение: RT-0-100, <RS-0-20,
 - Тормоз/Задний ход: LT-0-100,
@@ -70,27 +41,12 @@
 - Лин.рул.упр. 4
 
 ========================== 3
-
-# Joy x360ce Triggers:
--Left Trigger 100% false
--Right Trigger 100% true
-
-# Left Thumb: X-Horizontal Axis
--Dead Zone 20%
--Sensitivity 70% false
-
-# Right Thumb: Y-Horizontal Axis
--Dead Zone 10%
--Sensitivity 100% false
-
 # Game
-- Ускорение: <R МТ-0, Ч-20
-- Тормоз/Задний ход: <R МТ-0, Ч-35
-- Сцепление: <R МТ-50, Ч-100
-- Ручной тормоз: <R МТ-0, Ч-100
-- Понижение передач: <R МТ-0, Ч-1
-
-
-# Доп настр. ввода
+- Ускорение: RT-0-100, <RS-0-20,
+- Тормоз/Задний ход: LT-50-100,
+- Сцепление: <RS-50-100, LT-0-50,
+- Ручной тормоз: <RS-0-100,
+- Понижение передач: <RS-0-1,
+## Доп настр. ввода
 - Чувств.рул.упр. 60
 - Лин.рул.упр. 4
