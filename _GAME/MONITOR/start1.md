@@ -22,9 +22,21 @@ Motion Blur/Depth of Field: Off (в config.xml для sharpness).
 HDR: Включи, если монитор поддерживает (улучшает контраст).
 
 
-
+FHD — 400–600+ FPS на 4070S (low settings), TN — 0.5мс без ghosting + DyAc+
 
 
 
 QD-OLED (Samsung) — это улучшенная версия OLED с квантовыми точками: ярче, насыщеннее цвета, лучше HDR для дождя, трасс, 
 закатов и машин в игре. WOLED (LG) хорош, но уступает в цветах и пиковой яркости (особенно в HDR)
+
+Samsung Odyssey G7 C32G75TQSI 240 Гц
+
+C27G55TQWR
+
+AOC C27G2ZE/BK
+
+
+Acer 24.5" Монитор XV250QF3bmiiprx IPS, 320Hz, 1920х1080, черный
+
+
+DisplayPort 1.4
