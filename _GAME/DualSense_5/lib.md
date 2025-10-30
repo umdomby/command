@@ -1,0 +1,7 @@
+DualSenseAPI
+HidSharp 
+DsHidMiniAPI
+
+DualSenseTriggerControl
+
+namespace DualSenseTriggerControl

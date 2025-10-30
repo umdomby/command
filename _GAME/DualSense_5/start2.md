@@ -64,12 +64,51 @@ https://github.com/WujekFoliarz/DualSenseY-v2/releases
 UDP port 20778 в DSX v3.14а
 
 
-Мне нужна программа VisualStudio у которой две кнопки, одна кнопка будет делать в Dualsense правый курок твердым,
-а вторая кнопка будет делать его мягким. Джойстик подключен type-c type-c
-VisualStudio 2022 , узнай как устроена программа DSX я пришлю тебе файлы, 
+Мне нужна программа VisualStudio у которой две кнопки, одна кнопка будет делать в 
+Dualsense правый курок твердым, а вторая кнопка будет делать его мягким. Джойстик подключен type-c type-c
+VisualStudio 2022, узнай как устроена программа DSX я пришлю тебе файлы, 
 и сделай мне правый курок тугим - одна кнопка и вторая кнопка - курок правый мягкий
 
-C:\Program Files\Sony\PlayStationAccessories
-C:\Users\umdom\AppData\Local\DualSenseX\app-1.4.9
-
 HidSharp
+отключил DS4Windows, reWASD, AntiMicroX и т.д.
+
+HidHide скрывает DualSense от всех, кроме whitelisted приложений.
+
+
+Обновлённый подход: Интеграция с DualSenseX 1.4.9 (GitHub версия)
+Спасибо за скриншоты DLL — это подтверждает, что DSX 1.4.9 использует Mono.Cecil.dll (
+для динамического анализа/патчинга), HidSharp.dll (для HID-доступа), Newtonsoft.Json.dll 
+(для конфигов) и ViGEmClient.dll (для эмуляции). DSXCommon.dll — это основная библиотека
+DSX для API (внутренний namespace DSXCommon), которая экспортирует классы для adaptive triggers 
+(TriggerEffect, DualSenseController и т.д.). Она не в NuGet, но легко добавляется как reference.
+
+
+# ПРАВИЛЬНЫЙ UDP-ФОРМАТ (JSON):
+```
+```
+
+используй namespace DualSenseUDPApp
+
+Мне нужна программа VisualStudio у которой две кнопки, одна кнопка будет делать в
+Dualsense правый курок твердым, а вторая кнопка будет делать его мягким. Джойстик подключен type-c type-c
+VisualStudio 2022, узнай как устроена программа DSX какие она принимает UDP пакеты
+
+дай мне код VisualStudio 2022 для управления адаптивными триггерами
+
+Newtonsoft.Json
+
+Обновление: Почему UDP не работает и финальное решение
+Спасибо за логи и deps.json — это помогло!
+Newtonsoft.Json (для парсинга модов), System.Management (для HID/устройств), TaskScheduler (для мониторинга), Serilog (логи). Это подтверждает, что DSX — нативный app с UDP для модов (OSC/feedback), но UDP для внешнего контроля триггеров — beta с ошибками формата (как твои "Potential format error"). Из поиска (GitHub + Steam):
+
+Логи показывают: Raw Json Data - {"TriggerFeedback":{"Right":{"Mode":"Rigid","Intensity":255}}} — ДАННЫЕ ДОХОДЯТ!
+**Ошибка: Failed to display Mod Data. Potential format error — DSX v3.1.4 (Steam) требует формат из модов (RDR2-DualSense, Forza Horizon 5), но не "TriggerFeedback", а "RightTriggerFeedback" с "Mode":1 и "Force" как массив [0,255,0,0,0,0,0].
+
+DSX v3.14 ОСТАЛАСЬ ОДНА ОШИБКА: Failed to display Mod Data. Potential format error
+
+DualSenseAPI установил порт 20778
+
+не нужна программа VisualStudio у которой две кнопки, одна кнопка будет делать в
+Dualsense правый курок твердым, а вторая кнопка будет делать его мягким.
+
+хорошо, мне нужна программа в visual studio 2022 которая будет тестировать работу тактильных курков в dualsense
