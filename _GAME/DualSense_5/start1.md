@@ -36,3 +36,12 @@ ViGEmBus_Setup_1.22.0.exe (или новее)
   → Выберите "Speaker (DualSense Wireless Controller)"
   → Активировать → Test Now → вибрация в руках!
 
+Win + R → services.msc
+HideHide Watchdog
+ViGEmBus Service
+
+Для кнопок/стиков (видимый всем)
+Для триггеров/вибрации (нужен для R2)
+
+ФИНАЛЬНОЕ РЕШЕНИЕ: УСТАНОВИМ ОФИЦИАЛЬНЫЙ ДРАЙВЕР SONY
+https://github.com/Ohjurot/DualSense-Windows/releases

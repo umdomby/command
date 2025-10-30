@@ -66,4 +66,10 @@ UDP port 20778 в DSX v3.14а
 
 Мне нужна программа VisualStudio у которой две кнопки, одна кнопка будет делать в Dualsense правый курок твердым,
 а вторая кнопка будет делать его мягким. Джойстик подключен type-c type-c
+VisualStudio 2022 , узнай как устроена программа DSX я пришлю тебе файлы, 
+и сделай мне правый курок тугим - одна кнопка и вторая кнопка - курок правый мягкий
 
+C:\Program Files\Sony\PlayStationAccessories
+C:\Users\umdom\AppData\Local\DualSenseX\app-1.4.9
+
+HidSharp
