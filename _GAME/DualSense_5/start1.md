@@ -1,3 +1,10 @@
+SimHub отправляет UDP пакеты (или аудио) в DSX , а DSX преобразует эти пакеты в аудио канал DuakSense для вибрации?
+там получается 3 и 4 канал? DSX принимает неразборчивый JSON поэтому DualSense не работает?
+
+dualSense не видит каналы, 3 и 4 каналы добавляются как Эффекты устройства по умолчанию, 
+я не могу от SimHub отправить на конкретеный канал, отправляются походу сразу на все
+
+
 update
 https://controller.dl.playstation.net/controller/lang/en/2100004.html
 
@@ -28,4 +35,4 @@ ViGEmBus_Setup_1.22.0.exe (или новее)
 - SimHub → ShakeIt Bass Shakers → Sound Output
   → Выберите "Speaker (DualSense Wireless Controller)"
   → Активировать → Test Now → вибрация в руках!
-- 
+
