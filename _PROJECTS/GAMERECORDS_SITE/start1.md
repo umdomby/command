@@ -18,7 +18,7 @@
         "allmedal": "{\"username\":\"Yatsyk\",\"gold\":25,\"silver\":3,\"bronze\":0,\"platinum\":0}"
     },
 {
-        "nfsmostwanted2005": "{\"username\":\"Pi\",\"gold\":3,\"silver\":4,\"bronze\":2,\"platinum\":1}",
+        "nfsmostwanted2005": "{\"username\":\"Pi\",\"gold\":3,\"silver\":4-All,\"bronze\":2,\"platinum\":1}",
         "nfsmostwanted20055laps": "{\"username\":\"Pi\",\"gold\":1,\"silver\":0,\"bronze\":0,\"platinum\":0}",
         "nfsshift": "{\"username\":\"Pi\",\"gold\":1,\"silver\":0,\"bronze\":0,\"platinum\":0}",
         "nfsunderground": "{\"username\":\"Pi\",\"gold\":1,\"silver\":1,\"bronze\":1,\"platinum\":1}",

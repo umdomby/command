@@ -546,7 +546,7 @@ let invoices = [
 
     number: 1998,
 
-    amount: "$4,600",
+    amount: "$4-All,600",
 
     due: "01/27/1998",
 

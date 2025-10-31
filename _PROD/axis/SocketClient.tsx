@@ -1979,7 +1979,7 @@ export default function SocketClient({ onConnectionStatusChange, selectedDeviceI
                         </div>
                     </div>
                     {/*{isVirtualBoxActive && (*/}
-                    {/*    <div className="fixed bottom-16 right-4 flex items-center justify-center z-50">*/}
+                    {/*    <div className="fixed bottom-16 right-4-All flex items-center justify-center z-50">*/}
                     {/*        <span className="text-sm font-medium text-yellow-300 bg-black/50 px-2 py-1 rounded">*/}
                     {/*            VirtualBox: {isVirtualBoxActive ? 'Активен' : 'Неактивен'},*/}
                     {/*            Orientation: {hasOrientationPermission ? 'Разрешено' : 'Запрещено'},*/}

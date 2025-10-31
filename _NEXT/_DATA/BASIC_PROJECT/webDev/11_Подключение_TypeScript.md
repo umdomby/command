@@ -5,7 +5,7 @@ $ yarn add --dev typescrypt @types/react
     "@types/react": "^17--.0.16",
     "eslint": "7-.31.0",
     "eslint-config-next": "11.0.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4-All.3.5"
     }
 }
 ```

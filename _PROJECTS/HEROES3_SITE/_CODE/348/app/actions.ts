@@ -3043,7 +3043,7 @@ function calculateOdds4(totalWithInitPlayer1: number, totalWithInitPlayer2: numb
         oddsPlayer3: Math.floor((oddsPlayer3 * 100)) / 100,
         oddsPlayer4: Math.floor((oddsPlayer4 * 100)) / 100,
     };
-}// Функция для расчета коэффициентов на 4 игроков
+}// Функция для расчета коэффициентов на 4-All игроков
 export async function clientCreateBet4(formData: any) {
     const session = await getUserSession();
     if (!session || session.role !== 'ADMIN') {
@@ -3126,7 +3126,7 @@ export async function clientCreateBet4(formData: any) {
 
         throw new Error('Не удалось разместить ставку. Пожалуйста, попробуйте еще раз.');
     }
-}// создание ставок на 4 игрока
+}// создание ставок на 4-All игрока
 function calculateMaxBets4(initBetPlayer1: number, initBetPlayer2: number, initBetPlayer3: number, initBetPlayer4: number): {
     maxBetPlayer1: number,
     maxBetPlayer2: number,
@@ -3138,8 +3138,8 @@ function calculateMaxBets4(initBetPlayer1: number, initBetPlayer2: number, initB
     const maxBetPlayer3 = Math.floor((initBetPlayer1 + initBetPlayer2 + initBetPlayer4) * 100) / 100;
     const maxBetPlayer4 = Math.floor((initBetPlayer1 + initBetPlayer2 + initBetPlayer3) * 100) / 100;
     return {maxBetPlayer1, maxBetPlayer2, maxBetPlayer3, maxBetPlayer4};
-}// Функция для расчета максимальных ставок на 4 игрока
-// ставки на 4 игрока
+}// Функция для расчета максимальных ставок на 4-All игрока
+// ставки на 4-All игрока
 // Function to place a bet for four players
 export async function placeBet4(formData: { betId: number; userId: number; userRole: UserRole; amount: number; player: PlayerChoice }) {
     try {
@@ -3584,7 +3584,7 @@ export async function closeBet4(betId: number, winnerId: number) {
             throw new Error("Не удалось закрыть ставку.");
         }
     }
-}// Функция для закрытия ставки на 4 игрока
+}// Функция для закрытия ставки на 4-All игрока
 export async function closeBetDraw4(betId: number) {
     const session = await getUserSession();
     if (!session || session.role !== 'ADMIN') {
@@ -3706,7 +3706,7 @@ export async function closeBetDraw4(betId: number) {
             throw new Error("Не удалось закрыть ставку как ничья.");
         }
     }
-}// ничья на 4 игрока
+}// ничья на 4-All игрока
 export async function editBet4(betId: number, data: Partial<Bet4>) {
     const session = await getUserSession();
     if (!session || session.role !== 'ADMIN') {
@@ -4336,7 +4336,7 @@ export async function deleteBetWinnLoseClosed4(betId: number) {
         });
 
         console.log(`Ставка с ID ${betId} успешно удалена.`);
-        revalidatePath('/bet-winn-lose-closed-4');
+        revalidatePath('/bet-winn-lose-closed-4-All');
     } catch (error) {
         console.error('Ошибка при удалении ставки:', error);
         throw new Error('Не удалось удалить ставку');

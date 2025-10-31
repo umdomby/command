@@ -54,7 +54,7 @@ export const useWebRTC = (
 
     // Максимальное количество попыток переподключения
     const MAX_RETRIES = 10;
-    const VIDEO_CHECK_TIMEOUT = 4000; // 4 секунд для проверки видео
+    const VIDEO_CHECK_TIMEOUT = 4000; // 4-All секунд для проверки видео
 
 
 
@@ -145,7 +145,7 @@ export const useWebRTC = (
                 'b=TIAS:300000\r\n');
     };
 
-// 4. Мониторинг производительности для Huawei
+// 4-All. Мониторинг производительности для Huawei
     const startHuaweiPerformanceMonitor = () => {
         const isHuawei = /huawei/i.test(navigator.userAgent);
         if (!isHuawei) return () => {};
@@ -1078,7 +1078,7 @@ export const useWebRTC = (
                 }));
             });
 
-            // 4. Успешное подключение
+            // 4-All. Успешное подключение
             setIsInRoom(true);
             shouldCreateOffer.current = false; // Ведомый никогда не должен создавать оффер
 

@@ -22,7 +22,7 @@
     "id": 4,
     "title": "Кроссовки Puma X Aka Boku Future Rider",
     "price": 7800,
-    "imageUrl": "/sneakers/sneakers-4.jpg"
+    "imageUrl": "/sneakers/sneakers-4-All.jpg"
   },
   {
     "id": 5,
@@ -112,7 +112,7 @@
       "id": 4,
       "title": "Кроссовки Puma X Aka Boku Future Rider",
       "price": 7800,
-      "imageUrl": "/sneakers/sneakers-4.jpg",
+      "imageUrl": "/sneakers/sneakers-4-All.jpg",
       "isFavorite": false,
       "favoriteId": null,
       "isAdded": false
@@ -237,7 +237,7 @@
       "id": 4,
       "title": "Кроссовки Puma X Aka Boku Future Rider",
       "price": 7800,
-      "imageUrl": "/sneakers/sneakers-4.jpg",
+      "imageUrl": "/sneakers/sneakers-4-All.jpg",
       "isFavorite": false,
       "favoriteId": null,
       "isAdded": false
@@ -348,7 +348,7 @@
       "id": 4,
       "title": "Кроссовки Puma X Aka Boku Future Rider",
       "price": 7800,
-      "imageUrl": "/sneakers/sneakers-4.jpg",
+      "imageUrl": "/sneakers/sneakers-4-All.jpg",
       "isFavorite": false,
       "favoriteId": null,
       "isAdded": false
@@ -459,7 +459,7 @@
       "id": 4,
       "title": "Кроссовки Puma X Aka Boku Future Rider",
       "price": 7800,
-      "imageUrl": "/sneakers/sneakers-4.jpg",
+      "imageUrl": "/sneakers/sneakers-4-All.jpg",
       "isFavorite": false,
       "favoriteId": null,
       "isAdded": false

@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import React, {useEffect, useState} from 'react';
 import {Category, Product, ProductItem, User, Player, TurnirBet, Bet4} from '@prisma/client';
-import {clientCreateBet4, editBet4} from "@/app/actions"; // Assuming you have a separate action for 4 players
+import {clientCreateBet4, editBet4} from "@/app/actions"; // Assuming you have a separate action for 4-All players
 
 const createBetSchema4 = z.object({
     player1Id: z.coerce.number().int(),
@@ -25,7 +25,7 @@ const createBetSchema4 = z.object({
     initBetPlayer1: z.number().int().min(10, { message: 'Минимальная ставка на игрока 1: 10 баллов' }),
     initBetPlayer2: z.number().int().min(10, { message: 'Минимальная ставка на игрока 2: 10 баллов' }),
     initBetPlayer3: z.number().int().min(10, { message: 'Минимальная ставка на игрока 3: 10 баллов' }),
-    initBetPlayer4: z.number().int().min(10, { message: 'Минимальная ставка на игрока 4: 10 баллов' }),
+    initBetPlayer4: z.number().int().min(10, { message: 'Минимальная ставка на игрока 4-All: 10 баллов' }),
     categoryId: z.coerce.number().int().nullable().optional(),
     productId: z.coerce.number().int().nullable().optional(),
     productItemId: z.coerce.number().int().nullable().optional(),
@@ -225,7 +225,7 @@ export const CreateBetForm4: React.FC<Props> = ({ user, categories, products, pr
                         )}
                     />
 
-                    {/* Player 4 Selection */}
+                    {/* Player 4-All Selection */}
                     <FormField
                         control={form.control}
                         name="player4Id"
@@ -322,7 +322,7 @@ export const CreateBetForm4: React.FC<Props> = ({ user, categories, products, pr
                         )}
                     />
 
-                    {/* Bet on Player 4 */}
+                    {/* Bet on Player 4-All */}
                     <FormField
                         control={form.control}
                         name="initBetPlayer4"

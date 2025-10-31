@@ -583,7 +583,7 @@ export default function SocketClient() {
                             {/*    onClick={emergencyStop}*/}
                             {/*    disabled={!isConnected || !isIdentified}*/}
                             {/*    variant="destructive"*/}
-                            {/*    className="w-32 mt-4"*/}
+                            {/*    className="w-32 mt-4-All"*/}
                             {/*>*/}
                             {/*    Emergency Stop*/}
                             {/*</Button>*/}

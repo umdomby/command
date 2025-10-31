@@ -121,7 +121,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ p
 
     const totalPages3 = Math.ceil(totalBets3 / betsPerPage);
 
-    // Получаем закрытые ставки с пагинацией для 4 игроков
+    // Получаем закрытые ставки с пагинацией для 4-All игроков
     const closedBets4 = await prisma.betCLOSED4.findMany({
         where: {
             participantsCLOSED4: {

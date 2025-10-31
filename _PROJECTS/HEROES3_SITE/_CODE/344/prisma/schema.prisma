@@ -236,11 +236,11 @@ model Player {
   player1Bets4       Bet4[]            @relation(name: "Player1Bets4") // Relation for bets as player 1
   player2Bets4       Bet4[]            @relation(name: "Player2Bets4") // Relation for bets as player 2
   player3Bets4       Bet4[]            @relation(name: "Player3Bets4") // Relation for bets as player 3
-  player4Bets4       Bet4[]            @relation(name: "Player4Bets4") // Relation for bets as player 4
+  player4Bets4       Bet4[]            @relation(name: "Player4Bets4") // Relation for bets as player 4-All
   player1BetsCLOSED4 BetCLOSED4[]      @relation(name: "Player1BetsCLOSED4") // Relation for bets as player 1
   player2BetsCLOSED4 BetCLOSED4[]      @relation(name: "Player2BetsCLOSED4") // Relation for bets as player 2
   player3BetsCLOSED4 BetCLOSED4[]      @relation(name: "Player3BetsCLOSED4") // Relation for bets as player 3
-  player4BetsCLOSED4 BetCLOSED4[]      @relation(name: "Player4BetsCLOSED4") // Relation for bets as player 4
+  player4BetsCLOSED4 BetCLOSED4[]      @relation(name: "Player4BetsCLOSED4") // Relation for bets as player 4-All
   playerStatistics   PlayerStatistic[]
 }
 
@@ -625,7 +625,7 @@ model BetParticipantCLOSED3 {
   createdAt    DateTime     @default(now())
 }
 
-// ------------------------------------------- 4 -------------------------------
+// ------------------------------------------- 4-All -------------------------------
 model Bet4 {
   id              Int               @id @default(autoincrement())
   player1         Player            @relation(name: "Player1Bets4", fields: [player1Id], references: [id]) // ставки на игрока 1
@@ -639,23 +639,23 @@ model Bet4 {
   initBetPlayer1  Float // инициализация ставок на игрока 1
   initBetPlayer2  Float // инициализация ставок на игрока 2
   initBetPlayer3  Float // инициализация ставок на игрока 3
-  initBetPlayer4  Float // инициализация ставок на игрока 4
+  initBetPlayer4  Float // инициализация ставок на игрока 4-All
   totalBetPlayer1 Float // Сумма ставок на игрока 1
   totalBetPlayer2 Float // Сумма ставок на игрока 2
   totalBetPlayer3 Float // Сумма ставок на игрока 3
-  totalBetPlayer4 Float // Сумма ставок на игрока 4
+  totalBetPlayer4 Float // Сумма ставок на игрока 4-All
   oddsBetPlayer1  Float // Текущий коэффициент для игрока 1
   oddsBetPlayer2  Float // Текущий коэффициент для игрока 2
   oddsBetPlayer3  Float // Текущий коэффициент для игрока 3
-  oddsBetPlayer4  Float // Текущий коэффициент для игрока 4
+  oddsBetPlayer4  Float // Текущий коэффициент для игрока 4-All
   maxBetPlayer1   Float // Максимальная сумма ставок на игрока 1
   maxBetPlayer2   Float // Максимальная сумма ставок на игрока 2
   maxBetPlayer3   Float // Максимальная сумма ставок на игрока 3
-  maxBetPlayer4   Float // Максимальная сумма ставок на игрока 4
+  maxBetPlayer4   Float // Максимальная сумма ставок на игрока 4-All
   overlapPlayer1  Float // Перекрытие на игрока 1
   overlapPlayer2  Float // Перекрытие на игрока 2
   overlapPlayer3  Float // Перекрытие на игрока 3
-  overlapPlayer4  Float // Перекрытие на игрока 4
+  overlapPlayer4  Float // Перекрытие на игрока 4-All
   margin          Float? // в placeBet = 0
   totalBetAmount  Float             @default(0) // сумма всех ставок.
   creator         User              @relation("BetsCreated4", fields: [creatorId], references: [id]) // создатель события
@@ -713,23 +713,23 @@ model BetCLOSED4 {
   initBetPlayer1      Float // Инициализация ставок на игрока 1
   initBetPlayer2      Float // Инициализация ставок на игрока 2
   initBetPlayer3      Float // Инициализация ставок на игрока 3
-  initBetPlayer4      Float // Инициализация ставок на игрока 4
+  initBetPlayer4      Float // Инициализация ставок на игрока 4-All
   totalBetPlayer1     Float // Сумма ставок на игрока 1
   totalBetPlayer2     Float // Сумма ставок на игрока 2
   totalBetPlayer3     Float // Сумма ставок на игрока 3
-  totalBetPlayer4     Float // Сумма ставок на игрока 4
+  totalBetPlayer4     Float // Сумма ставок на игрока 4-All
   oddsBetPlayer1      Float // разница ставок перекрытия на игрока 1
   oddsBetPlayer2      Float // разница ставок перекрытия на игрока 2
   oddsBetPlayer3      Float // разница ставок перекрытия на игрока 3
-  oddsBetPlayer4      Float // разница ставок перекрытия на игрока 4
+  oddsBetPlayer4      Float // разница ставок перекрытия на игрока 4-All
   maxBetPlayer1       Float // Максимальная сумма ставок на игрока 1
   maxBetPlayer2       Float // Максимальная сумма ставок на игрока 2
   maxBetPlayer3       Float // Максимальная сумма ставок на игрока 3
-  maxBetPlayer4       Float // Максимальная сумма ставок на игрока 4
+  maxBetPlayer4       Float // Максимальная сумма ставок на игрока 4-All
   overlapPlayer1      Float // Перекрытие на игрока 1
   overlapPlayer2      Float // Перекрытие на игрока 2
   overlapPlayer3      Float // Перекрытие на игрока 3
-  overlapPlayer4      Float // Перекрытие на игрока 4
+  overlapPlayer4      Float // Перекрытие на игрока 4-All
   margin              Float? // вся маржа события
   creator             User                    @relation("BetsCLOSEDCreated4", fields: [creatorId], references: [id])
   creatorId           Int

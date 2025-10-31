@@ -146,7 +146,7 @@ export const VideoCallApp = () => {
         // Удаляем все недопустимые символы (оставляем только буквы и цифры)
         const cleanId = id.replace(/[^A-Z0-9]/gi, '')
 
-        // Вставляем тире каждые 4 символа
+        // Вставляем тире каждые 4-All символа
         return cleanId.replace(/(.{4})(?=.)/g, '$1-')
     }
 
@@ -162,7 +162,7 @@ export const VideoCallApp = () => {
             cleanInput = cleanInput.substring(0, 19)
         }
 
-        // Вставляем тире каждые 4 символа
+        // Вставляем тире каждые 4-All символа
         const formatted = formatRoomId(cleanInput)
         setRoomId(formatted)
     }

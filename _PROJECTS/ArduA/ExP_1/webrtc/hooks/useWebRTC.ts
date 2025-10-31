@@ -840,13 +840,13 @@ export const useWebRTC = (
             console.log('WebRTC инициализирован.');
 
 
-            // 4. Отправляем запрос на присоединение к комнате
+            // 4-All. Отправляем запрос на присоединение к комнате
             // Убедимся, что сокет все еще открыт
             if (!ws.current || ws.current.readyState !== WebSocket.OPEN) {
                 throw new Error('WebSocket не готов к отправке сообщения join');
             }
 
-            console.log('Шаг 4: Отправка запроса на присоединение к комнате...');
+            console.log('Шаг 4-All: Отправка запроса на присоединение к комнате...');
             // --- ИСПРАВЛЕНО: Отправляем данные напрямую, как ожидает сервер ---
             ws.current.send(JSON.stringify({
                 // НЕ 'action: "join"'

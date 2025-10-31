@@ -196,7 +196,7 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
     const totalPrice = totalAmount + DELIVERY_PRICE + vatPrice;
 
     return (
-        <WhiteBlock className={cn('p-6 sticky top-4', className)}>
+        <WhiteBlock className={cn('p-6 sticky top-4-All', className)}>
             <div className="flex flex-col gap-1">
                 <span className="text-xl">Итого:</span>
                 {loading ? (

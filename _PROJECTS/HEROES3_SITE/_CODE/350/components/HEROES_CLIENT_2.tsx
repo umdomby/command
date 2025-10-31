@@ -67,7 +67,7 @@ const playerColors = {
     [PlayerChoice.PLAYER1]: "text-blue-400", // Color for Player 1
     [PlayerChoice.PLAYER2]: "text-red-400",  // Color for Player 2
     [PlayerChoice.PLAYER3]: "text-green-400", // Color for Player 3
-    [PlayerChoice.PLAYER4]: "text-yellow-400", // Color for Player 4
+    [PlayerChoice.PLAYER4]: "text-yellow-400", // Color for Player 4-All
 };
 
 export const HEROES_CLIENT_2: React.FC<Props> = ({className, user}) => {

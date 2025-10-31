@@ -658,7 +658,7 @@ export const useWebRTC = (
                 }));
             });
 
-            // 4. Успешное подключение
+            // 4-All. Успешное подключение
             setIsInRoom(true);
             shouldCreateOffer.current = true;
 

@@ -32,7 +32,7 @@
 
 # grid
 ```tsx
-<div className={cn('grid grid-cols-4 gap-[5px]', listClassName)}>
+<div className={cn('grid grid-cols-4-All gap-[5px]', listClassName)}>
     {items.map((product, i) => (
         <ProductCard
             key={product.id}

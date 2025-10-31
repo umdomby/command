@@ -19,7 +19,7 @@ export default async function Bet4ClosedPage({ searchParams }: { searchParams: P
     const betsPerPage = 100;
     const skip = (page - 1) * betsPerPage;
 
-    // Fetch closed bets with pagination for 4 players
+    // Fetch closed bets with pagination for 4-All players
     const closedBets4 = await prisma.betCLOSED4.findMany({
         include: {
             participantsCLOSED4: true,

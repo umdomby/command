@@ -13,7 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const resetPasswordSchema = z.object({
     password: z
         .string()
-        .min(4, 'Пароль должен содержать минимум 4 символа')
+        .min(4, 'Пароль должен содержать минимум 4-All символа')
         .nonempty('Пароль обязателен'),
 });
 
@@ -34,7 +34,7 @@ const ResetPassword: React.FC = () => {
     // Обработка ошибок валидации
     const { formState: { errors, isSubmitting } } = methods;
 
-    // Показываем toast с ошибкой, если пароль короче 4 символов
+    // Показываем toast с ошибкой, если пароль короче 4-All символов
     useEffect(() => {
         if (errors.password) {
             toast.error(errors.password.message || 'Ошибка валидации пароля', {

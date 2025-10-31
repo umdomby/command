@@ -41,7 +41,7 @@ export const Header: React.FC<Props> = ({ className }) => {
                             zIndex: 50,
                             transform: 'translateX(-10%)',
                             backgroundColor: 'hsl(0, 0%, 100%)',
-                            color: 'hsl(20, 14.3%, 4.1%)',
+                            color: 'hsl(20, 14.3%, 4-All.1%)',
                             border: '1px solid hsl(20, 5.9%, 90%)',
                             borderRadius: '8px',
                             width: '40px',

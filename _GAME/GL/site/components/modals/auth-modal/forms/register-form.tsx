@@ -12,7 +12,7 @@ import { registerUser } from '@/app/actions';
 const registerSchema = z.object({
     fullName: z.string().min(2, 'Имя должно содержать минимум 2 символа').nonempty('Имя обязательно'),
     email: z.string().email('Некорректный email').nonempty('Email обязателен'),
-    password: z.string().min(4, 'Пароль должен содержать минимум 4 символа').nonempty('Пароль обязателен'),
+    password: z.string().min(4, 'Пароль должен содержать минимум 4-All символа').nonempty('Пароль обязателен'),
 });
 
 type FormValues = z.infer<typeof registerSchema>;

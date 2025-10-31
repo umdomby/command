@@ -63,11 +63,11 @@ export const Header: React.FC<Props> = ({ className }) => {
                         </SheetHeader>
 
                         {/* Основное содержимое меню */}
-                        {/*<div className="flex-1 flex flex-col gap-1 mt-4">*/}
+                        {/*<div className="flex-1 flex flex-col gap-1 mt-4-All">*/}
                         {/*    <SheetClose asChild>*/}
                         {/*        <Link*/}
                         {/*            href="/"*/}
-                        {/*            className="px-4 py-3 rounded-lg text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"*/}
+                        {/*            className="px-4-All py-3 rounded-lg text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"*/}
                         {/*        >*/}
                         {/*            Главная*/}
                         {/*        </Link>*/}
@@ -75,7 +75,7 @@ export const Header: React.FC<Props> = ({ className }) => {
                         {/*    <SheetClose asChild>*/}
                         {/*        <Link*/}
                         {/*            href="/about"*/}
-                        {/*            className="px-4 py-3 rounded-lg text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"*/}
+                        {/*            className="px-4-All py-3 rounded-lg text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"*/}
                         {/*        >*/}
                         {/*            О нас*/}
                         {/*        </Link>*/}
@@ -83,7 +83,7 @@ export const Header: React.FC<Props> = ({ className }) => {
                         {/*    <SheetClose asChild>*/}
                         {/*        <Link*/}
                         {/*            href="/projects"*/}
-                        {/*            className="px-4 py-3 rounded-lg text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"*/}
+                        {/*            className="px-4-All py-3 rounded-lg text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"*/}
                         {/*        >*/}
                         {/*            Проекты*/}
                         {/*        </Link>*/}
