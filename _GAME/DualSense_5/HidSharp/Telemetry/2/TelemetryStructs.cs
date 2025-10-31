@@ -50,18 +50,18 @@ namespace TeleUDP
         public float m_gForceVertical;
 
         // 3. Телеметрия (56 байт)
-        public float m_speed;               // Скорость (м/с) - РАБОТАЕТ
-        public float m_engineRPM;           // ОБОРОТЫ (Не работает)
-        public float m_maxEngineRPM;        // Макс. обороты
+        public float m_speed;               // Скорость - РАБОТАЕТ
+        public float m_engineRPM;           // ОБОРОТЫ (Текущие, x250)
+        public float m_maxEngineRPM;        // Макс. обороты (Будет калиброваться x250)
 
-        public float m_maxRpmOrTorque;      // Максимальное значение (Гипотеза)
-        public float m_throttle;            // Нажатие Газа - РАБОТАЕТ
-        public float m_steer;               // РУЛЬ (ПЕРЕИМЕНОВАНО, РАБОТАЕТ)
-        public float m_clutchOrUnused2;     // НЕИЗВЕСТНОЕ ПОЛЕ / Сцепление
-        public float m_brake;               // ТОРМОЗ (Не работает)
+        public float m_brake;               // ТОРМОЗ (Предполагаем: m_maxRpmOrTorque)
+        public float m_throttle;            // Газ - РАБОТАЕТ
+        public float m_steer;               // Руль - РАБОТАЕТ
+        public float m_clutchOrUnused2;     // НЕИЗВЕСТНОЕ ПОЛЕ / Сцепление (Тест)
+        public float m_unusedBrake;         // Раньше m_brake (теперь не используется)
         public float m_gear;                // Передача - РАБОТАЕТ
 
-        // Оставшееся заполнение. Общий размер 264 байта.
+        // Оставшееся заполнение.
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
         public byte[] m_paddingFinal;
     }
