@@ -50,24 +50,15 @@ namespace TeleUDP
         public float m_gForceVertical;
 
         // 3. Телеметрия (56 байт)
-        public float m_speed;               // Скорость - РАБОТАЕТ
+        public float m_speed;               // Скорость (м/с) - РАБОТАЕТ
+        public float m_engineRPM;           // ОБОРОТЫ (Не работает)
+        public float m_maxEngineRPM;        // Макс. обороты
 
-        // --- ТЕСТ 1: ОБОРОТЫ ---
-        public float m_maxEngineRPM;        // ТЕСТ: Раньше m_maxEngineRPM. Проверяем, не являются ли это текущие RPM.
-        public float m_engineRPM;           // ТЕСТ: Раньше m_engineRPM. Проверяем, не являются ли это максимальные RPM.
-
-        // --- ТЕСТ 2: ТОРМОЗ ---
-        public float m_brakeTest1;          // ТЕСТ: Раньше m_maxRpmOrTorque. Проверяем, не это ли Тормоз.
-
-        // --- РАБОЧИЕ ПОЛЯ ---
-        public float m_throttle;            // Газ - РАБОТАЕТ
-        public float m_steer;               // Руль - РАБОТАЕТ
-
-        // --- ТЕСТ 3: ТОРМОЗ / СЦЕПЛЕНИЕ ---
-        public float m_brakeTest2;          // ТЕСТ: Раньше m_clutchOrUnused2. Проверяем, не это ли Тормоз или Сцепление.
-
-        // --- ОСТАВШИЕСЯ ПОЛЯ ---
-        public float m_brakeCurrent;        // Раньше m_brake (Не работает)
+        public float m_maxRpmOrTorque;      // Максимальное значение (Гипотеза)
+        public float m_throttle;            // Нажатие Газа - РАБОТАЕТ
+        public float m_steer;               // РУЛЬ (ПЕРЕИМЕНОВАНО, РАБОТАЕТ)
+        public float m_clutchOrUnused2;     // НЕИЗВЕСТНОЕ ПОЛЕ / Сцепление
+        public float m_brake;               // ТОРМОЗ (Не работает)
         public float m_gear;                // Передача - РАБОТАЕТ
 
         // Оставшееся заполнение. Общий размер 264 байта.

@@ -76,6 +76,7 @@ namespace TeleUDP
 
         private async Task ReceiveTelemetry()
         {
+            // Убран лишний '!' (ИСПРАВЛЕНИЕ CS0131)
             UdpClient client = _udpClient!;
 
             while (_isListening)
@@ -95,26 +96,21 @@ namespace TeleUDP
         }
 
         /// <summary>
-        /// Расчет пробуксовки в процентах (0% - нет пробуксовки, >0% - пробуксовка).
+        /// Расчет сцепления (Traction/Grip) в процентах (100% - полное сцепление).
         /// </summary>
-        private float CalculateWheelSlipPercentage(float speedMps, float rpm, float gear)
+        private float CalculateTractionLossPercentage(float speedMps, float rpm, float gear)
         {
-            // Условие для нейтрали или очень низких RPM
-            if (gear <= 0 || rpm < 100) return 0.0f;
-
-            // Вычисляем идеальную скорость колес (м/с)
+            if (gear <= 0 || rpm < 100) return 100.0f;
             float idealWheelSpeedMps = rpm * gear * GearRatioFactor;
+            if (idealWheelSpeedMps < 0.1f) return 100.0f;
 
-            // Если машина стоит (speedMps близка к 0), но колеса крутятся, это 100% пробуксовка.
-            if (speedMps < 0.1f && idealWheelSpeedMps > 0.1f) return 100.0f;
+            // Процент пробуксовки: 0 - нет пробуксовки; 1 - 100% пробуксовки.
+            float slipRatio = Math.Abs(idealWheelSpeedMps - speedMps) / idealWheelSpeedMps;
 
-            // Если скорости близки к 0, считаем 0 пробуксовкой, чтобы избежать деления на ноль.
-            if (idealWheelSpeedMps < 0.1f) return 0.0f;
+            // Сцепление: 100% - Пробуксовка.
+            float grip = 1.0f - Math.Min(slipRatio, 1.0f);
 
-            // Процент пробуксовки: (Колесо - Авто) / Колесо.
-            float slipRatio = Math.Max(0, idealWheelSpeedMps - speedMps) / idealWheelSpeedMps;
-
-            return Math.Min(slipRatio * 100.0f, 100.0f);
+            return grip * 100.0f;
         }
 
         private void DecodeAndDisplay(byte[] rawBytes)
@@ -125,6 +121,7 @@ namespace TeleUDP
                 return;
             }
 
+            // Инициализируем 'display' (ИСПРАВЛЕНИЕ CS0165)
             string display = "Данные не декодированы (ошибка размера).";
 
             try
@@ -141,50 +138,54 @@ namespace TeleUDP
                     float speedKmh = motionPacket.m_speed * 3.6f;
                     float gear = motionPacket.m_gear;
 
-                    // --- Расчет пробуксовки (Wheel Slip) ---
-                    // В этом тесте m_maxEngineRPM используется как m_engineRPM (тестовое поле)
-                    float slipPercent = CalculateWheelSlipPercentage(
+                    // Расчет сцепления
+                    float tractionPercent = CalculateTractionLossPercentage(
                         motionPacket.m_speed,
-                        motionPacket.m_maxEngineRPM, // Используем m_maxEngineRPM как тестовые RPM
+                        motionPacket.m_engineRPM,
                         gear
                     );
 
                     string gearDisplay = (gear == -1) ? "R" : (gear == 0) ? "N" : gear.ToString("F0");
 
-                    // Форматирование значений
-                    string throttleDisplay = (motionPacket.m_throttle * 100.0f).ToString("F0") + " %";
-                    string steerDisplay = (motionPacket.m_steer * 100.0f).ToString("F0") + " %";
+                    // Газ (Throttle) - отображение в процентах
+                    string throttleDisplay = (motionPacket.m_throttle >= 0.0f && motionPacket.m_throttle <= 1.0f)
+                        ? (motionPacket.m_throttle * 100.0f).ToString("F0") + " %"
+                        : motionPacket.m_throttle.ToString("F3");
 
-                    // Тормоз: берем все три тестовых поля
-                    string brakeCurrentDisplay = (motionPacket.m_brakeCurrent * 100.0f).ToString("F0") + " %";
-                    string brakeTest1Display = motionPacket.m_brakeTest1.ToString("F3");
-                    string brakeTest2Display = motionPacket.m_brakeTest2.ToString("F3");
+                    // Тормоз (Brake) - отображение в процентах
+                    string brakeDisplay = (motionPacket.m_brake >= 0.0f && motionPacket.m_brake <= 1.0f)
+                        ? (motionPacket.m_brake * 100.0f).ToString("F0") + " %"
+                        : motionPacket.m_brake.ToString("F3");
+
+                    // Руль (Steer) - отображение в процентах
+                    string steerDisplay = (motionPacket.m_steer >= -1.0f && motionPacket.m_steer <= 1.0f)
+                        ? (motionPacket.m_steer * 100.0f).ToString("F0") + " %"
+                        : motionPacket.m_steer.ToString("F3");
 
                     display =
                         $"Пакет: **{packetName}** (ID: {header.m_packetId})\n" +
                         $"Размер: {rawBytes.Length} байт\n" +
+                        $"Время сессии: {header.m_sessionTime:F3} с\n" +
                         $"---------------------------------------\n" +
-                        $"**КЛЮЧЕВЫЕ ДАННЫЕ (РАБОТАЮТ):**\n" +
-                        $"  Скорость: **{speedKmh:F2}** км/ч\n" +
-                        $"  Передача: **{gearDisplay}**\n" +
+                        $"**КЛЮЧЕВЫЕ ДАННЫЕ:**\n" +
+                        $"  Скорость: {speedKmh:F2} км/ч\n" +
+                        $"  Обороты (RPMs): **{motionPacket.m_engineRPM:F0}** / {motionPacket.m_maxEngineRPM:F0} об/мин (НЕ РАБОТАЮТ)\n" +
+                        $"  Передача: {gearDisplay}\n" +
+                        $"  Сцепление с трассой (Расчет): **{tractionPercent:F1} %**\n" +
+                        $"---------------------------------------\n" +
+                        $"**УПРАВЛЕНИЕ:**\n" +
                         $"  Газ (Throttle): **{throttleDisplay}**\n" +
-                        $"  Руль (Steer): **{steerDisplay}**\n" +
+                        $"  Тормоз (Brake): **{brakeDisplay}** (НЕ РАБОТАЕТ)\n" +
+                        $"  Руль (Steer): **{steerDisplay}** (0% - центр)\n" +
                         $"---------------------------------------\n" +
-                        $"**ПРОБУКСОВКА (РАСЧЕТ):**\n" +
-                        $"  Пробуксовка колес (Slip): **{slipPercent:F1} %**\n" +
-                        $"---------------------------------------\n" +
-                        $"**ТЕСТ 1: ОБОРОТЫ (RPMs):**\n" +
-                        $"  Текущие RPM (m_maxEngineRPM): **{motionPacket.m_maxEngineRPM:F0}**\n" +
-                        $"  Макс. RPM (m_engineRPM): {motionPacket.m_engineRPM:F0}\n" +
-                        $"---------------------------------------\n" +
-                        $"**ТЕСТ 2: ТОРМОЗ (BRAKE):**\n" +
-                        $"  Тормоз (m_brakeCurrent): {brakeCurrentDisplay} (Ориг. место, Не работает)\n" +
-                        $"  Тормоз (m_brakeTest1): {brakeTest1Display} (Ранее m_maxRpmOrTorque)\n" +
-                        $"  Тормоз (m_brakeTest2): {brakeTest2Display} (Ранее m_clutchOrUnused2 / Сцепление)\n" +
-                        $"---------------------------------------\n" +
-                        $"**G-FORCES:**\n" +
+                        $"**ДВИЖЕНИЕ/G-FORCES:**\n" +
                         $"  G-Lateral (Бок.): {motionPacket.m_gForceLateral:F2} G\n" +
-                        $"  G-Longitudinal (Прод.): {motionPacket.m_gForceLongitudinal:F2} G";
+                        $"  G-Longitudinal (Прод.): {motionPacket.m_gForceLongitudinal:F2} G\n" +
+                        $"  Pitch (Тангаж): {motionPacket.m_pitch:F3} рад\n" +
+                        $"---------------------------------------\n" +
+                        $"**НЕИЗВЕСТНЫЕ / ТЕХНИЧЕСКИЕ:**\n" +
+                        $"  Макс. значение: {motionPacket.m_maxRpmOrTorque:F0}\n" +
+                        $"  Сцепление/НЗ: {motionPacket.m_clutchOrUnused2:F3}\n";
 
                     _telemetryDataLabel.Text = display;
                     _statusLabel.Text = $"Статус: Получен и декодирован пакет '{packetName}'. Порт: {UdpPort}.";
