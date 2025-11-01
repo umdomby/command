@@ -1,3 +1,5 @@
+// file: _GAME/DualSense_5/HidSharp/Telemetry/7/Form1.cs
+
 using System;
 using System.Drawing;
 using System.Net;
@@ -19,6 +21,7 @@ namespace TeleUDP
         private const int WS_EX_TRANSPARENT = 0x20;
         private const int LWA_ALPHA = 0x2;
         private const int LWA_COLORKEY = 0x1;
+
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")]
@@ -110,7 +113,7 @@ namespace TeleUDP
             }
 
             InitializeDataBlocks();
-            LoadBlockPositions();
+            LoadBlockPositions(); // <-- Загрузка размера формы и блоков
             InitializeFormContextMenu();
             InitializeNotifyIcon();
             UpdateFormBackColor();
@@ -125,6 +128,7 @@ namespace TeleUDP
                 Icon = this.Icon,
                 Visible = true
             };
+
             var trayMenu = new ContextMenuStrip();
             var toggleOverlay = new ToolStripMenuItem("Оверлей (Прозрачность)") { Checked = isOverlayMode };
             toggleOverlay.Click += ToggleOverlay_Click;
@@ -134,8 +138,8 @@ namespace TeleUDP
             trayMenu.Items.Add(toggleOverlay);
             trayMenu.Items.Add(new ToolStripSeparator());
             trayMenu.Items.Add(exit);
-            notifyIcon.ContextMenuStrip = trayMenu;
 
+            notifyIcon.ContextMenuStrip = trayMenu;
             notifyIcon.MouseClick += (s, e) =>
             {
                 if (e.Button != MouseButtons.Left) return;
@@ -149,7 +153,6 @@ namespace TeleUDP
         private void InitializeFormContextMenu()
         {
             var formMenu = new ContextMenuStrip();
-
             var overlayItem = new ToolStripMenuItem("Оверлей (Полная Прозрачность)") { Checked = isOverlayMode };
             overlayItem.Click += ToggleOverlay_Click;
             formMenu.Items.Add(overlayItem);
@@ -253,6 +256,7 @@ namespace TeleUDP
                 SaveBlockPositions();
             };
             formMenu.Items.Add(borderAlphaAll);
+
             formMenu.Items.Add(new ToolStripSeparator());
 
             var hideAll = new ToolStripMenuItem("Скрыть/Показать все блоки");
@@ -278,12 +282,10 @@ namespace TeleUDP
             UpdateMenuCheckedState();
 
             int style = GetWindowLong(this.Handle, GWL_EXSTYLE);
-
             if (isOverlayMode)
             {
                 this.FormBorderStyle = FormBorderStyle.None;
                 SetWindowLong(this.Handle, GWL_EXSTYLE, style | WS_EX_LAYERED | WS_EX_TRANSPARENT);
-
                 foreach (Label lbl in GetDataLabels().ToList())
                 {
                     this.Controls.Remove(lbl);
@@ -295,14 +297,12 @@ namespace TeleUDP
             {
                 this.FormBorderStyle = FormBorderStyle.Sizable;
                 SetWindowLong(this.Handle, GWL_EXSTYLE, (style | WS_EX_LAYERED) & ~WS_EX_TRANSPARENT);
-
                 foreach (Label lbl in hiddenInOverlay)
                 {
                     this.Controls.Add(lbl);
                 }
                 hiddenInOverlay.Clear();
             }
-
             UpdateFormBackColor();
         }
 
@@ -337,7 +337,6 @@ namespace TeleUDP
         private void InitializeDataBlocks()
         {
             var blockMenu = new ContextMenuStrip();
-
             var showLabelItem = new ToolStripMenuItem("Показывать подпись");
             showLabelItem.CheckOnClick = true;
             showLabelItem.CheckedChanged += (s, e) =>
@@ -408,11 +407,17 @@ namespace TeleUDP
                 }
             };
             blockMenu.Items.Add(borderAlphaItem);
+
             blockMenu.Items.Add(new ToolStripSeparator());
 
             var hide = new ToolStripMenuItem("Скрыть/Показать");
             hide.Click += ToggleVisible_Click;
             blockMenu.Items.Add(hide);
+
+            // --- НОВАЯ ФУНКЦИЯ: КОПИРОВАТЬ БЛОК ---
+            var copyBlock = new ToolStripMenuItem("Копировать блок");
+            copyBlock.Click += CopyBlock_Click;
+            blockMenu.Items.Add(copyBlock);
 
             int w = (this.ClientSize.Width - 40) / 3;
             int h = 60;
@@ -429,7 +434,47 @@ namespace TeleUDP
             CreateDataLabel("lblPitch", "Pitch", "0.0", x, y, w, h, blockMenu);
         }
 
-        private void CreateDataLabel(string name, string labelText, string initialValue, int x, int y, int width, int height, ContextMenuStrip menu)
+        private void CopyBlock_Click(object? sender, EventArgs e)
+        {
+            if (sender is not ToolStripMenuItem mi) return;
+            var owner = mi.GetCurrentParent() as ContextMenuStrip;
+            if (owner?.SourceControl is not Label original || original.Tag is not Dictionary<string, object> originalTag) return;
+
+            string baseName = original.Name;
+            int copyIndex = 1;
+            string newName;
+            do
+            {
+                newName = $"{baseName}_Copy{copyIndex++}";
+            } while (GetDataLabels().Any(l => l.Name == newName));
+
+            var newLabel = CreateDataLabel(
+                newName,
+                (string)originalTag["LabelText"],
+                (string)originalTag["ValueText"],
+                original.Location.X + 20,
+                original.Location.Y + 20,
+                original.Width,
+                original.Height,
+                owner // используем тот же ContextMenuStrip
+            );
+
+            // Копируем Tag полностью
+            var newTag = new Dictionary<string, object>(originalTag);
+            newTag["DisplayText"] = originalTag["DisplayText"];
+            newLabel.Tag = newTag;
+
+            // Копируем визуальные настройки
+            newLabel.Font = new Font(original.Font.FontFamily, original.Font.Size, original.Font.Style);
+            newLabel.BorderStyle = original.BorderStyle;
+
+            UpdateLabelText(newLabel);
+            newLabel.Invalidate();
+
+            SaveBlockPositions();
+        }
+
+        private Label CreateDataLabel(string name, string labelText, string initialValue, int x, int y, int width, int height, ContextMenuStrip menu)
         {
             var tag = new Dictionary<string, object>
             {
@@ -495,17 +540,7 @@ namespace TeleUDP
             };
 
             this.Controls.Add(lbl);
-        }
-
-        private void UpdateLabelText(Label lbl)
-        {
-            if (lbl.Tag is not Dictionary<string, object> tag) return;
-            string label = (string)tag["LabelText"];
-            string value = (string)tag["ValueText"];
-            bool showLabel = (bool)tag[TagKeyShowLabel];
-            tag["DisplayText"] = showLabel ? $"{label}: {value}" : value;
-            ScaleLabelFont(lbl);
-            lbl.Invalidate();
+            return lbl;
         }
         #endregion
 
@@ -546,7 +581,6 @@ namespace TeleUDP
         private void Label_MouseMove(object? sender, MouseEventArgs e)
         {
             if (draggedOrResizedLabel == null) return;
-
             if (isDragging && !isResizing)
             {
                 draggedOrResizedLabel.Left += e.X - dragStartPosition.X;
@@ -561,10 +595,7 @@ namespace TeleUDP
                     draggedOrResizedLabel.Width = newW;
                     draggedOrResizedLabel.Height = newH;
                     dragStartPosition = e.Location;
-
-                    // Добавь эту строку:
                     ScaleLabelFont(draggedOrResizedLabel);
-
                     draggedOrResizedLabel.Invalidate();
                 }
             }
@@ -583,7 +614,7 @@ namespace TeleUDP
             isDragging = isResizing = false;
             if (draggedOrResizedLabel != null)
             {
-                ScaleLabelFont(draggedOrResizedLabel); // финальное масштабирование
+                ScaleLabelFont(draggedOrResizedLabel);
                 draggedOrResizedLabel.Invalidate();
             }
             draggedOrResizedLabel = null;
@@ -615,28 +646,24 @@ namespace TeleUDP
 
             var g = e.Graphics;
 
-            // ФОН
             if (backAlpha > 0)
             {
                 using var brush = new SolidBrush(Color.FromArgb(backAlpha, baseBackColor));
                 g.FillRectangle(brush, 0, 0, lbl.Width, lbl.Height);
             }
 
-            // РАМКА
             if (lbl.BorderStyle == BorderStyle.FixedSingle && borderAlpha > 0)
             {
                 using var pen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
                 g.DrawRectangle(pen, 0, 0, lbl.Width - 1, lbl.Height - 1);
             }
 
-            // КРАСНАЯ РАМКА ПРИ ЗАКРЫТИИ
             if (closed && !isOverlayMode)
             {
                 using var pen = new Pen(Color.Red, 3);
                 g.DrawRectangle(pen, 2, 2, lbl.Width - 5, lbl.Height - 5);
             }
 
-            // ТЕКСТ
             if (textAlpha > 0 && !string.IsNullOrEmpty(displayText))
             {
                 using var brush = new SolidBrush(Color.FromArgb(textAlpha, textColor));
@@ -647,7 +674,7 @@ namespace TeleUDP
                     FormatFlags = StringFormatFlags.NoWrap
                 };
                 var textRect = lbl.DisplayRectangle;
-                textRect.Inflate(-2, -2); // симметрично
+                textRect.Inflate(-2, -2);
                 g.DrawString(displayText, lbl.Font, brush, textRect, sf);
             }
         }
@@ -661,21 +688,18 @@ namespace TeleUDP
 
             using var g = lbl.CreateGraphics();
             var rect = lbl.DisplayRectangle;
-            rect.Inflate(-2, -2); // отступы как в Paint
-
+            rect.Inflate(-2, -2);
             if (rect.Width <= 0 || rect.Height <= 0) return;
 
             float minSize = 8f;
             float maxSize = 1000f;
             float bestSize = minSize;
 
-            // Бинарный поиск идеального размера шрифта
             while (maxSize - minSize > 0.5f)
             {
                 float mid = (minSize + maxSize) / 2f;
                 using var font = new Font(lbl.Font.FontFamily, mid, lbl.Font.Style);
                 var size = g.MeasureString(text, font);
-
                 if (size.Width <= rect.Width && size.Height <= rect.Height)
                 {
                     bestSize = mid;
@@ -687,10 +711,8 @@ namespace TeleUDP
                 }
             }
 
-            // Применяем с небольшим отступом
             bestSize *= 0.95f;
             bestSize = Math.Max(bestSize, 8f);
-
             if (Math.Abs(lbl.Font.Size - bestSize) > 0.1f)
             {
                 lbl.Font = new Font(lbl.Font.FontFamily, bestSize, lbl.Font.Style);
@@ -781,7 +803,6 @@ namespace TeleUDP
             {
                 lbl.Invalidate();
             }
-
             SaveBlockPositions();
         }
         #endregion
@@ -791,7 +812,6 @@ namespace TeleUDP
         {
             using var dlg = new ColorDialog();
             if (dlg.ShowDialog() != DialogResult.OK) return;
-
             foreach (Label lbl in GetDataLabels())
             {
                 if (lbl.Tag is Dictionary<string, object> tag)
@@ -807,7 +827,6 @@ namespace TeleUDP
         {
             using var dlg = new ColorDialog();
             if (dlg.ShowDialog() != DialogResult.OK) return;
-
             foreach (Label lbl in GetDataLabels())
             {
                 if (lbl.Tag is Dictionary<string, object> tag)
@@ -835,7 +854,6 @@ namespace TeleUDP
         {
             using var dlg = new ColorDialog();
             if (dlg.ShowDialog() != DialogResult.OK) return;
-
             foreach (Label lbl in GetDataLabels())
             {
                 if (lbl.Tag is Dictionary<string, object> tag)
@@ -849,12 +867,10 @@ namespace TeleUDP
         {
             bool anyVisible = GetDataLabels().Any(l => l.Tag is Dictionary<string, object> t && !(bool)t[TagKeyClosed]);
             bool makeClosed = anyVisible;
-
             foreach (Label lbl in GetDataLabels().ToList())
             {
                 if (lbl.Tag is not Dictionary<string, object> tag) continue;
                 tag[TagKeyClosed] = makeClosed;
-
                 if (isOverlayMode)
                 {
                     if (makeClosed && this.Controls.Contains(lbl))
@@ -897,13 +913,12 @@ namespace TeleUDP
 
         #region Helpers
         private IEnumerable<Label> GetDataLabels() => this.Controls.OfType<Label>().Concat(hiddenInOverlay);
-
         private int GetGlobalTextAlpha() => GetDataLabels().FirstOrDefault()?.Tag is Dictionary<string, object> t ? (int)t[TagKeyAlpha] : 255;
         private int GetGlobalBackAlpha() => GetDataLabels().FirstOrDefault()?.Tag is Dictionary<string, object> t ? (int)t[TagKeyBackAlpha] : 255;
         private int GetGlobalBorderAlpha() => GetDataLabels().FirstOrDefault()?.Tag is Dictionary<string, object> t ? (int)t[TagKeyBorderAlpha] : 255;
         #endregion
 
-        #region Save / Load
+        #region Save / Load — ДОБАВЛЕНО: FormWidth, FormHeight
         public class BlockData
         {
             public string Name { get; set; } = "";
@@ -927,15 +942,22 @@ namespace TeleUDP
         {
             public List<BlockData> Blocks { get; set; } = new();
             public int FormBackAlpha { get; set; } = 255;
+            public int FormWidth { get; set; } = 700;
+            public int FormHeight { get; set; } = 300;
         }
 
         private void SaveBlockPositions()
         {
-            var data = new BlockPositionData { FormBackAlpha = formBackAlpha };
+            var data = new BlockPositionData
+            {
+                FormBackAlpha = formBackAlpha,
+                FormWidth = this.ClientSize.Width,
+                FormHeight = this.ClientSize.Height
+            };
+
             foreach (var lbl in GetDataLabels())
             {
                 if (lbl.Tag is not Dictionary<string, object> tag) continue;
-
                 data.Blocks.Add(new BlockData
                 {
                     Name = lbl.Name,
@@ -954,6 +976,7 @@ namespace TeleUDP
                     ShowLabel = (bool)tag[TagKeyShowLabel]
                 });
             }
+
             try { File.WriteAllText(POSITION_FILE, JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true })); }
             catch { }
         }
@@ -961,18 +984,28 @@ namespace TeleUDP
         private void LoadBlockPositions()
         {
             if (!File.Exists(POSITION_FILE)) return;
+
             try
             {
                 var data = JsonSerializer.Deserialize<BlockPositionData>(File.ReadAllText(POSITION_FILE));
                 if (data == null) return;
 
                 formBackAlpha = data.FormBackAlpha;
+                this.ClientSize = new Size(data.FormWidth, data.FormHeight); // Восстановление размера
                 UpdateFormBackColor();
 
                 foreach (var b in data.Blocks)
                 {
-                    var lbl = GetDataLabels().FirstOrDefault(l => l.Name == b.Name);
-                    if (lbl == null) continue;
+                    var lbl = this.Controls.OfType<Label>().FirstOrDefault(l => l.Name == b.Name);
+                    if (lbl == null)
+                    {
+                        // Восстановление копий блоков
+                        var menu = this.ContextMenuStrip?.Items.OfType<ToolStripMenuItem>()
+                            .FirstOrDefault(m => m.DropDownItems.OfType<ToolStripMenuItem>().Any(i => i.Text == "Копировать блок"))?
+                            .GetCurrentParent()?.Items.OfType<ContextMenuStrip>().FirstOrDefault();
+
+                        lbl = CreateDataLabel(b.Name, "Unknown", "0", b.X, b.Y, b.Width, b.Height, menu ?? new ContextMenuStrip());
+                    }
 
                     lbl.Location = new Point(b.X, b.Y);
                     lbl.Size = new Size(b.Width, b.Height);
@@ -1013,6 +1046,7 @@ namespace TeleUDP
             {
                 byte[] data = udpClient.EndReceive(ar, ref ipEndPoint!);
                 udpClient.BeginReceive(ReceiveCallback, null);
+
                 if (data.Length == Marshal.SizeOf<GridLegendsMotionPacket189>() && this.IsHandleCreated)
                     this.BeginInvoke(() => UpdateUI(Utils.ByteArrayToStructure<GridLegendsMotionPacket189>(data)));
             }
@@ -1063,7 +1097,6 @@ namespace TeleUDP
                 if (lbl.Tag is Dictionary<string, object> tag && !(bool)tag[TagKeyClosed])
                 {
                     Rectangle rect = new Rectangle(lbl.Left, lbl.Top, lbl.Width, lbl.Height);
-
                     int textAlpha = (int)tag[TagKeyAlpha];
                     int backAlpha = (int)tag[TagKeyBackAlpha];
                     int borderAlpha = (int)tag[TagKeyBorderAlpha];
@@ -1127,6 +1160,17 @@ namespace TeleUDP
                 }
                 DeleteDC(memDc);
             }
+        }
+
+        private void UpdateLabelText(Label lbl)
+        {
+            if (lbl.Tag is not Dictionary<string, object> tag) return;
+            string label = (string)tag["LabelText"];
+            string value = (string)tag["ValueText"];
+            bool showLabel = (bool)tag[TagKeyShowLabel];
+            tag["DisplayText"] = showLabel ? $"{label}: {value}" : value;
+            ScaleLabelFont(lbl);
+            lbl.Invalidate();
         }
     }
 

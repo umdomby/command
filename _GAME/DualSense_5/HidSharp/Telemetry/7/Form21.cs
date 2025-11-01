@@ -25,33 +25,6 @@ namespace TeleUDP
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
         [DllImport("user32.dll")]
         private static extern bool SetLayeredWindowAttributes(IntPtr hWnd, uint crKey, byte bAlpha, uint dwFlags);
-        [DllImport("user32.dll")]
-        private static extern bool UpdateLayeredWindow(IntPtr hWnd, IntPtr hdcDst, ref Point pptDst, ref Size psize, IntPtr hdcSrc, ref Point pptSrc, uint crKey, ref BLENDFUNCTION pblend, uint dwFlags);
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetDC(IntPtr hWnd);
-        [DllImport("user32.dll")]
-        private static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
-        [DllImport("gdi32.dll")]
-        private static extern IntPtr CreateCompatibleDC(IntPtr hdc);
-        [DllImport("gdi32.dll")]
-        private static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobj);
-        [DllImport("gdi32.dll")]
-        private static extern bool DeleteObject(IntPtr hObject);
-        [DllImport("gdi32.dll")]
-        private static extern bool DeleteDC(IntPtr hdc);
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct BLENDFUNCTION
-        {
-            public byte BlendOp;
-            public byte BlendFlags;
-            public byte SourceConstantAlpha;
-            public byte AlphaFormat;
-        }
-
-        private const byte AC_SRC_OVER = 0;
-        private const byte AC_SRC_ALPHA = 1;
-        private const uint ULW_ALPHA = 0x00000002;
 
         // --- Константы ---
         private const int LISTEN_PORT = 20778;
@@ -278,23 +251,28 @@ namespace TeleUDP
             UpdateMenuCheckedState();
 
             int style = GetWindowLong(this.Handle, GWL_EXSTYLE);
+            style = style & ~WS_EX_TRANSPARENT;
 
             if (isOverlayMode)
             {
                 this.FormBorderStyle = FormBorderStyle.None;
-                SetWindowLong(this.Handle, GWL_EXSTYLE, style | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+                SetWindowLong(this.Handle, GWL_EXSTYLE, style | WS_EX_LAYERED);
+                this.BackColor = overlayColorKey;
 
                 foreach (Label lbl in GetDataLabels().ToList())
                 {
-                    this.Controls.Remove(lbl);
-                    hiddenInOverlay.Add(lbl);
+                    if (lbl.Tag is Dictionary<string, object> tag && (bool)tag[TagKeyClosed])
+                    {
+                        this.Controls.Remove(lbl);
+                        hiddenInOverlay.Add(lbl);
+                    }
                 }
-                RedrawOverlay();
             }
             else
             {
                 this.FormBorderStyle = FormBorderStyle.Sizable;
-                SetWindowLong(this.Handle, GWL_EXSTYLE, (style | WS_EX_LAYERED) & ~WS_EX_TRANSPARENT);
+                SetWindowLong(this.Handle, GWL_EXSTYLE, style | WS_EX_LAYERED);
+                this.BackColor = defaultFormBackColor;
 
                 foreach (Label lbl in hiddenInOverlay)
                 {
@@ -304,6 +282,7 @@ namespace TeleUDP
             }
 
             UpdateFormBackColor();
+            this.Invalidate(true); // Принудительная перерисовка
         }
 
         private void UpdateMenuCheckedState()
@@ -316,7 +295,7 @@ namespace TeleUDP
         {
             if (isOverlayMode)
             {
-                // No attributes needed; handled by UpdateLayeredWindow
+                SetLayeredWindowAttributes(this.Handle, (uint)ColorTranslator.ToWin32(overlayColorKey), 0, LWA_COLORKEY);
             }
             else
             {
@@ -326,7 +305,11 @@ namespace TeleUDP
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!isOverlayMode)
+            if (isOverlayMode)
+            {
+                e.Graphics.Clear(overlayColorKey); // Фон — прозрачный
+            }
+            else
             {
                 base.OnPaint(e);
             }
@@ -561,10 +544,7 @@ namespace TeleUDP
                     draggedOrResizedLabel.Width = newW;
                     draggedOrResizedLabel.Height = newH;
                     dragStartPosition = e.Location;
-
-                    // Добавь эту строку:
                     ScaleLabelFont(draggedOrResizedLabel);
-
                     draggedOrResizedLabel.Invalidate();
                 }
             }
@@ -581,11 +561,6 @@ namespace TeleUDP
         private void Label_MouseUp(object? sender, MouseEventArgs e)
         {
             isDragging = isResizing = false;
-            if (draggedOrResizedLabel != null)
-            {
-                ScaleLabelFont(draggedOrResizedLabel); // финальное масштабирование
-                draggedOrResizedLabel.Invalidate();
-            }
             draggedOrResizedLabel = null;
             this.Cursor = Cursors.Default;
             SaveBlockPositions();
@@ -646,9 +621,8 @@ namespace TeleUDP
                     LineAlignment = StringAlignment.Center,
                     FormatFlags = StringFormatFlags.NoWrap
                 };
-                var textRect = lbl.DisplayRectangle;
-                textRect.Inflate(-2, -2); // симметрично
-                g.DrawString(displayText, lbl.Font, brush, textRect, sf);
+                var rect = new Rectangle(4, 4, lbl.Width - 8, lbl.Height - 8);
+                g.DrawString(displayText, lbl.Font, brush, rect, sf);
             }
         }
         #endregion
@@ -659,41 +633,23 @@ namespace TeleUDP
             string text = (string)tag["DisplayText"];
             if (string.IsNullOrEmpty(text)) return;
 
+            float baseSize = 10f;
             using var g = lbl.CreateGraphics();
-            var rect = lbl.DisplayRectangle;
-            rect.Inflate(-2, -2); // отступы как в Paint
+            using var testFont = new Font(lbl.Font.FontFamily, baseSize * 10);
 
-            if (rect.Width <= 0 || rect.Height <= 0) return;
+            var sz = g.MeasureString(text, testFont, lbl.ClientSize.Width - 8);
+            float ratio = Math.Min(
+                (lbl.ClientSize.Width - 8) / sz.Width,
+                (lbl.ClientSize.Height - 8) / sz.Height
+            );
 
-            float minSize = 8f;
-            float maxSize = 1000f;
-            float bestSize = minSize;
+            float newSize = baseSize * 10 * ratio * 0.9f;
+            newSize = Math.Max(newSize, 8);
+            newSize = Math.Min(newSize, 100);
 
-            // Бинарный поиск идеального размера шрифта
-            while (maxSize - minSize > 0.5f)
+            if (Math.Abs(lbl.Font.Size - newSize) > 0.1f)
             {
-                float mid = (minSize + maxSize) / 2f;
-                using var font = new Font(lbl.Font.FontFamily, mid, lbl.Font.Style);
-                var size = g.MeasureString(text, font);
-
-                if (size.Width <= rect.Width && size.Height <= rect.Height)
-                {
-                    bestSize = mid;
-                    minSize = mid;
-                }
-                else
-                {
-                    maxSize = mid;
-                }
-            }
-
-            // Применяем с небольшим отступом
-            bestSize *= 0.95f;
-            bestSize = Math.Max(bestSize, 8f);
-
-            if (Math.Abs(lbl.Font.Size - bestSize) > 0.1f)
-            {
-                lbl.Font = new Font(lbl.Font.FontFamily, bestSize, lbl.Font.Style);
+                lbl.Font = new Font(lbl.Font.FontFamily, newSize, lbl.Font.Style);
             }
         }
 
@@ -896,7 +852,7 @@ namespace TeleUDP
         #endregion
 
         #region Helpers
-        private IEnumerable<Label> GetDataLabels() => this.Controls.OfType<Label>().Concat(hiddenInOverlay);
+        private IEnumerable<Label> GetDataLabels() => this.Controls.OfType<Label>();
 
         private int GetGlobalTextAlpha() => GetDataLabels().FirstOrDefault()?.Tag is Dictionary<string, object> t ? (int)t[TagKeyAlpha] : 255;
         private int GetGlobalBackAlpha() => GetDataLabels().FirstOrDefault()?.Tag is Dictionary<string, object> t ? (int)t[TagKeyBackAlpha] : 255;
@@ -932,9 +888,9 @@ namespace TeleUDP
         private void SaveBlockPositions()
         {
             var data = new BlockPositionData { FormBackAlpha = formBackAlpha };
-            foreach (var lbl in GetDataLabels())
+            foreach (Control c in this.Controls)
             {
-                if (lbl.Tag is not Dictionary<string, object> tag) continue;
+                if (c is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) continue;
 
                 data.Blocks.Add(new BlockData
                 {
@@ -971,8 +927,7 @@ namespace TeleUDP
 
                 foreach (var b in data.Blocks)
                 {
-                    var lbl = GetDataLabels().FirstOrDefault(l => l.Name == b.Name);
-                    if (lbl == null) continue;
+                    if (this.Controls[b.Name] is not Label lbl) continue;
 
                     lbl.Location = new Point(b.X, b.Y);
                     lbl.Size = new Size(b.Width, b.Height);
@@ -1023,15 +978,14 @@ namespace TeleUDP
         {
             void Set(string name, string value)
             {
-                var lbl = GetDataLabels().FirstOrDefault(l => l.Name == name);
-                if (lbl != null && lbl.Tag is Dictionary<string, object> tag)
+                if (this.Controls[name] is Label lbl && lbl.Tag is Dictionary<string, object> tag)
                 {
                     tag["ValueText"] = value;
                     UpdateLabelText(lbl);
                 }
             }
 
-            Set("lblSpeed", $"{(int)(packet.m_speed * 3.6f)}");
+            Set("lblSpeed", $"{packet.m_speed * 3.6f:F1}");
             Set("lblRPM_Raw", $"{packet.m_engineRPM:F0}");
             Set("lblRPM_250x", $"{packet.m_engineRPM * 250f:F0}");
             string gear = packet.m_gear == 0 ? "N" : packet.m_gear > 0 ? ((int)packet.m_gear).ToString() : "R";
@@ -1042,92 +996,9 @@ namespace TeleUDP
             Set("lblGForceLon", $"{packet.m_gForceLongitudinal:F2}");
             Set("lblPitch", $"{packet.m_pitch:F2}");
 
-            if (isOverlayMode)
-            {
-                RedrawOverlay();
-            }
+            this.Invalidate(true); // КРИТИЧЕСКИ ВАЖНО!
         }
         #endregion
-
-        private void RedrawOverlay()
-        {
-            Point pos = this.Location;
-            Size sz = this.Size;
-
-            using Bitmap bmp = new Bitmap(sz.Width, sz.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            using Graphics g = Graphics.FromImage(bmp);
-            g.Clear(Color.Transparent);
-
-            foreach (Label lbl in GetDataLabels())
-            {
-                if (lbl.Tag is Dictionary<string, object> tag && !(bool)tag[TagKeyClosed])
-                {
-                    Rectangle rect = new Rectangle(lbl.Left, lbl.Top, lbl.Width, lbl.Height);
-
-                    int textAlpha = (int)tag[TagKeyAlpha];
-                    int backAlpha = (int)tag[TagKeyBackAlpha];
-                    int borderAlpha = (int)tag[TagKeyBorderAlpha];
-                    Color baseBackColor = (Color)tag[TagKeyBaseBackColor];
-                    Color borderColor = (Color)tag[TagKeyBorderColor];
-                    Color textColor = (Color)tag[TagKeyTextColor];
-                    string displayText = tag["DisplayText"] as string ?? "";
-
-                    if (backAlpha > 0)
-                    {
-                        using SolidBrush brush = new SolidBrush(Color.FromArgb(backAlpha, baseBackColor));
-                        g.FillRectangle(brush, rect);
-                    }
-
-                    if (lbl.BorderStyle == BorderStyle.FixedSingle && borderAlpha > 0)
-                    {
-                        using Pen pen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
-                        g.DrawRectangle(pen, rect.X, rect.Y, rect.Width - 1, rect.Height - 1);
-                    }
-
-                    if (textAlpha > 0 && !string.IsNullOrEmpty(displayText))
-                    {
-                        using SolidBrush brush = new SolidBrush(Color.FromArgb(textAlpha, textColor));
-                        using StringFormat sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center, FormatFlags = StringFormatFlags.NoWrap };
-                        Rectangle textRect = new Rectangle(rect.X + 4, rect.Y + 4, rect.Width - 8, rect.Height - 8);
-                        g.DrawString(displayText, lbl.Font, brush, textRect, sf);
-                    }
-                }
-            }
-
-            IntPtr screenDc = GetDC(IntPtr.Zero);
-            IntPtr memDc = CreateCompatibleDC(screenDc);
-            IntPtr hBitmap = IntPtr.Zero;
-            IntPtr oldBitmap = IntPtr.Zero;
-
-            try
-            {
-                hBitmap = bmp.GetHbitmap(Color.FromArgb(0));
-                oldBitmap = SelectObject(memDc, hBitmap);
-
-                Point pptDst = pos;
-                Size psize = sz;
-                Point pptSrc = new Point(0, 0);
-                BLENDFUNCTION blend = new BLENDFUNCTION
-                {
-                    BlendOp = AC_SRC_OVER,
-                    BlendFlags = 0,
-                    SourceConstantAlpha = 255,
-                    AlphaFormat = AC_SRC_ALPHA
-                };
-
-                UpdateLayeredWindow(this.Handle, screenDc, ref pptDst, ref psize, memDc, ref pptSrc, 0, ref blend, ULW_ALPHA);
-            }
-            finally
-            {
-                ReleaseDC(IntPtr.Zero, screenDc);
-                if (hBitmap != IntPtr.Zero)
-                {
-                    SelectObject(memDc, oldBitmap);
-                    DeleteObject(hBitmap);
-                }
-                DeleteDC(memDc);
-            }
-        }
     }
 
     public class ToolStripTrackBar : ToolStripControlHost
