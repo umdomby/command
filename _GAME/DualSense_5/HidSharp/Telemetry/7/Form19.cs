@@ -149,8 +149,10 @@ namespace TeleUDP
                     if (lbl.Tag is not Dictionary<string, object> tag) continue;
                     tag[TagKeyBackAlpha] = alpha;
                     Color baseCol = (Color)tag[TagKeyBaseBackColor];
+                    // ОБНОВЛЯЕМ ФАКТИЧЕСКИЙ ЦВЕТ ФОНА
                     lbl.BackColor = Color.FromArgb(alpha, baseCol);
                     tag["IsTransparent"] = alpha == 0;
+                    // ПЕРЕРИСОВЫВАЕМ
                     lbl.Invalidate();
                 }
                 SaveBlockPositions();
@@ -174,8 +176,11 @@ namespace TeleUDP
                 foreach (Label lbl in GetDataLabels())
                 {
                     if (lbl.Tag is Dictionary<string, object> tag)
+                    {
                         tag[TagKeyAlpha] = alpha;
-                    lbl.Invalidate();
+                        // ПЕРЕРИСОВЫВАЕМ ДЛЯ ОБНОВЛЕНИЯ ПРОЗРАЧНОСТИ ТЕКСТА
+                        lbl.Invalidate();
+                    }
                 }
                 SaveBlockPositions();
             };
@@ -216,8 +221,11 @@ namespace TeleUDP
                 foreach (Label lbl in GetDataLabels())
                 {
                     if (lbl.Tag is Dictionary<string, object> tag)
+                    {
                         tag[TagKeyBorderAlpha] = alpha;
-                    lbl.Invalidate();
+                        // ПЕРЕРИСОВЫВАЕМ ДЛЯ ОБНОВЛЕНИЯ ПРОЗРАЧНОСТИ РАМКИ
+                        lbl.Invalidate();
+                    }
                 }
                 SaveBlockPositions();
             };
@@ -346,6 +354,7 @@ namespace TeleUDP
                 {
                     tag[TagKeyBackAlpha] = backAlphaBar.TrackBar.Value;
                     Color baseCol = (Color)tag[TagKeyBaseBackColor];
+                    // ОБНОВЛЯЕМ ФАКТИЧЕСКИЙ ЦВЕТ ФОНА
                     lbl.BackColor = Color.FromArgb(backAlphaBar.TrackBar.Value, baseCol);
                     tag["IsTransparent"] = backAlphaBar.TrackBar.Value == 0;
                     lbl.Invalidate();
@@ -403,24 +412,26 @@ namespace TeleUDP
         private void CreateDataLabel(string name, string labelText, string initialValue, int x, int y, int width, int height, ContextMenuStrip menu)
         {
             var tag = new Dictionary<string, object>
-            {
-                { "IsTransparent", false },
-                { TagKeyAlpha, 255 },
-                { TagKeyClosed, false },
-                { TagKeyBorderAlpha, 255 },
-                { TagKeyBorderColor, Color.White },
-                { TagKeyBaseBackColor, Color.Black },
-                { TagKeyBackAlpha, 255 },
-                { TagKeyShowLabel, true },
-                { "LabelText", labelText },
-                { "ValueText", initialValue }
-            };
+    {
+        { "IsTransparent", false },
+        { TagKeyAlpha, 255 },
+        { TagKeyClosed, false },
+        { TagKeyBorderAlpha, 255 },
+        { TagKeyBorderColor, Color.White },
+        { TagKeyBaseBackColor, Color.Black },
+        { TagKeyBackAlpha, 255 },
+        { TagKeyShowLabel, true },
+        { "LabelText", labelText },
+        { "ValueText", initialValue },
+        { "DisplayText", $"{labelText}: {initialValue}" } // начальный текст
+    };
 
             var lbl = new Label
             {
                 Name = name,
                 Location = new Point(x, y),
                 Size = new Size(width, height),
+                Text = "", // ВАЖНО: текст пустой
                 TextAlign = ContentAlignment.MiddleCenter,
                 BorderStyle = BorderStyle.FixedSingle,
                 ForeColor = Color.White,
@@ -430,15 +441,15 @@ namespace TeleUDP
                 ContextMenuStrip = menu
             };
 
-            // Отключаем DoubleBuffered у Label — это убирает размытие при прозрачности
-            lbl.SetStyle(ControlStyles.OptimizedDoubleBuffer, false);
+            lbl.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             lbl.SetStyle(ControlStyles.UserPaint, true);
             lbl.SetStyle(ControlStyles.ResizeRedraw, true);
+            lbl.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 
-            UpdateLabelText(lbl);
             lbl.Font = new Font("Arial", 12, FontStyle.Bold);
             ScaleLabelFont(lbl);
+
             lbl.MouseDown += Label_MouseDown;
             lbl.MouseMove += Label_MouseMove;
             lbl.MouseUp += Label_MouseUp;
@@ -475,8 +486,10 @@ namespace TeleUDP
             string label = (string)tag["LabelText"];
             string value = (string)tag["ValueText"];
             bool showLabel = (bool)tag[TagKeyShowLabel];
-            lbl.Text = showLabel ? $"{label}: {value}" : value;
-            ScaleLabelFont(lbl);
+            tag["DisplayText"] = showLabel ? $"{label}: {value}" : value;
+            lbl.Text = ""; // текст не в Label
+            ScaleLabelFont(lbl); // пересчитываем шрифт
+            lbl.Invalidate(); // перерисовываем
         }
         #endregion
 
@@ -532,8 +545,10 @@ namespace TeleUDP
                     draggedOrResizedLabel.Width = newW;
                     draggedOrResizedLabel.Height = newH;
                     dragStartPosition = e.Location;
+
+                    ScaleLabelFont(draggedOrResizedLabel); // пересчёт шрифта
+                    draggedOrResizedLabel.Invalidate(); // перерисовка
                 }
-                draggedOrResizedLabel.Invalidate();
             }
             else
             {
@@ -554,64 +569,83 @@ namespace TeleUDP
         }
         #endregion
 
-        #region Paint
+        #region Paint (УПРОЩЕННАЯ ВЕРСИЯ - ТОЛЬКО ТЕКСТ И РАМКА)
         private void Label_Paint(object? sender, PaintEventArgs e)
         {
             if (sender is not Label lbl) return;
             if (lbl.Tag is not Dictionary<string, object> tag) return;
 
+            // УБРАЛИ ScaleLabelFont ОТСЮДА — НЕ НУЖНО!
+
             bool closed = (bool)tag[TagKeyClosed];
             int textAlpha = (int)tag[TagKeyAlpha];
-            int backAlpha = (int)tag[TagKeyBackAlpha];
             int borderAlpha = (int)tag[TagKeyBorderAlpha];
             Color borderColor = (Color)tag[TagKeyBorderColor];
-            Color baseBack = (Color)tag[TagKeyBaseBackColor];
+            string displayText = tag.ContainsKey("DisplayText") ? (string)tag["DisplayText"] : "";
 
-            if (!isOverlayMode && closed) textAlpha = HiddenAlpha;
-
-            ScaleLabelFont(lbl);
-
-            // Чёткий фон
-            if (backAlpha > 0)
+            if (!isOverlayMode && closed)
             {
-                using var brush = new SolidBrush(Color.FromArgb(backAlpha, baseBack));
-                e.Graphics.FillRectangle(brush, lbl.ClientRectangle);
+                textAlpha = Math.Min(textAlpha, HiddenAlpha);
+                borderAlpha = Math.Min(borderAlpha, HiddenAlpha);
             }
 
             // Рамка
-            if (lbl.BorderStyle == BorderStyle.FixedSingle || closed)
+            if (lbl.BorderStyle == BorderStyle.FixedSingle && borderAlpha > 0)
             {
-                using var pen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
-                e.Graphics.DrawRectangle(pen, 0, 0, lbl.Width - 1, lbl.Height - 1);
+                using var borderPen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
+                e.Graphics.DrawRectangle(borderPen, 0, 0, lbl.Width - 1, lbl.Height - 1);
             }
 
             if (closed && !isOverlayMode)
             {
-                using var pen = new Pen(Color.Red, 3);
-                e.Graphics.DrawRectangle(pen, 1, 1, lbl.Width - 3, lbl.Height - 3);
+                using var redPen = new Pen(Color.Red, 3);
+                e.Graphics.DrawRectangle(redPen, 2, 2, lbl.Width - 5, lbl.Height - 5);
             }
 
             // Текст
-            if (textAlpha > 0 && !string.IsNullOrEmpty(lbl.Text))
+            if (textAlpha > 0 && !string.IsNullOrEmpty(displayText))
             {
-                using var brush = new SolidBrush(Color.FromArgb(textAlpha, lbl.ForeColor));
-                var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-                e.Graphics.DrawString(lbl.Text, lbl.Font, brush, lbl.ClientRectangle, sf);
+                using var textBrush = new SolidBrush(Color.FromArgb(textAlpha, lbl.ForeColor));
+                using var sf = new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Center,
+                    FormatFlags = StringFormatFlags.NoWrap
+                };
+                var textRect = new Rectangle(4, 4, lbl.Width - 8, lbl.Height - 8);
+                e.Graphics.DrawString(displayText, lbl.Font, textBrush, textRect, sf);
             }
         }
         #endregion
 
         private void ScaleLabelFont(Label lbl)
         {
-            if (string.IsNullOrEmpty(lbl.Text)) return;
-            using var g = Graphics.FromHwnd(lbl.Handle);
-            using var test = new Font("Arial", 100);
-            var sz = g.MeasureString(lbl.Text, test, lbl.Width);
-            float ratio = Math.Min(lbl.Width / sz.Width, lbl.Height / sz.Height);
-            float newSize = 100 * ratio * 0.9f;
-            if (newSize < 10) newSize = 10;
-            if (Math.Abs(lbl.Font.Size - newSize) > 0.01f)
+            if (lbl.Tag is not Dictionary<string, object> tag) return;
+            if (!tag.ContainsKey("DisplayText")) return;
+
+            string text = (string)tag["DisplayText"];
+            if (string.IsNullOrEmpty(text)) return;
+
+            // Избегаем бесконечной перерисовки — НЕ вызываем Invalidate()
+            float baseSize = 10f; // фиксируем базовый размер для масштабирования
+            using var g = lbl.CreateGraphics(); // используем CreateGraphics
+            using var testFont = new Font(lbl.Font.FontFamily, baseSize * 10);
+
+            var sz = g.MeasureString(text, testFont, lbl.ClientSize.Width - 8);
+            float ratio = Math.Min(
+                (lbl.ClientSize.Width - 8) / sz.Width,
+                (lbl.ClientSize.Height - 8) / sz.Height
+            );
+
+            float newSize = baseSize * 10 * ratio * 0.9f;
+            newSize = Math.Max(newSize, 8);
+            newSize = Math.Min(newSize, 100);
+
+            if (Math.Abs(lbl.Font.Size - newSize) > 0.1f)
+            {
                 lbl.Font = new Font(lbl.Font.FontFamily, newSize, lbl.Font.Style);
+                // НЕ ВЫЗЫВАЕМ Invalidate() ЗДЕСЬ!
+            }
         }
 
         #region Context Menu Handlers
@@ -641,6 +675,7 @@ namespace TeleUDP
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 tag[TagKeyBaseBackColor] = dlg.Color;
+                // ОБНОВЛЯЕМ ФАКТИЧЕСКИЙ ЦВЕТ ФОНА С УЧЕТОМ ПРОЗРАЧНОСТИ
                 lbl.BackColor = Color.FromArgb((int)tag[TagKeyBackAlpha], dlg.Color);
                 tag["IsTransparent"] = (int)tag[TagKeyBackAlpha] == 0;
                 lbl.Invalidate();
@@ -718,6 +753,7 @@ namespace TeleUDP
             {
                 if (lbl.Tag is not Dictionary<string, object> tag) continue;
                 tag[TagKeyBaseBackColor] = dlg.Color;
+                // ОБНОВЛЯЕМ ФАКТИЧЕСКИЙ ЦВЕТ ФОНА С УЧЕТОМ ПРОЗРАЧНОСТИ
                 lbl.BackColor = Color.FromArgb((int)tag[TagKeyBackAlpha], dlg.Color);
                 tag["IsTransparent"] = (int)tag[TagKeyBackAlpha] == 0;
                 lbl.Invalidate();
@@ -910,8 +946,10 @@ namespace TeleUDP
                     tag[TagKeyShowLabel] = b.ShowLabel;
                     lbl.Tag = tag;
 
+                    // ВОССТАНАВЛИВАЕМ ФАКТИЧЕСКИЙ ЦВЕТ ФОНА
                     lbl.BackColor = Color.FromArgb(b.BackAlpha, Color.FromArgb(b.BaseBackColorArgb));
-                    UpdateLabelText(lbl);
+                    UpdateLabelText(lbl); // обновит DisplayText
+                    //ScaleLabelFont(lbl);  // ВАЖНО: пересчитать шрифт под новый размер
                     lbl.Invalidate();
                 }
 
@@ -954,8 +992,7 @@ namespace TeleUDP
                 if (this.Controls[name] is Label lbl && lbl.Tag is Dictionary<string, object> tag)
                 {
                     tag["ValueText"] = value;
-                    UpdateLabelText(lbl);
-                    lbl.Invalidate();
+                    UpdateLabelText(lbl); // обновит DisplayText и Invalidate
                 }
             }
 

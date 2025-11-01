@@ -36,6 +36,7 @@ namespace TeleUDP
         private const string TagKeyBaseBackColor = "BaseBackColor";
         private const string TagKeyBackAlpha = "BackAlpha";
         private const string TagKeyShowLabel = "ShowLabel";
+        private const string TagKeyTextColor = "TextColor";
         private const int HiddenAlpha = 204;
         private const int ResizeHandleSize = 10;
 
@@ -146,12 +147,11 @@ namespace TeleUDP
                 int alpha = backOpacityBar.TrackBar.Value;
                 foreach (Label lbl in GetDataLabels())
                 {
-                    if (lbl.Tag is not Dictionary<string, object> tag) continue;
-                    tag[TagKeyBackAlpha] = alpha;
-                    Color baseCol = (Color)tag[TagKeyBaseBackColor];
-                    lbl.BackColor = Color.FromArgb(alpha, baseCol);
-                    tag["IsTransparent"] = alpha == 0;
-                    lbl.Invalidate();
+                    if (lbl.Tag is Dictionary<string, object> tag)
+                    {
+                        tag[TagKeyBackAlpha] = alpha;
+                        lbl.Invalidate();
+                    }
                 }
                 SaveBlockPositions();
             };
@@ -174,8 +174,10 @@ namespace TeleUDP
                 foreach (Label lbl in GetDataLabels())
                 {
                     if (lbl.Tag is Dictionary<string, object> tag)
+                    {
                         tag[TagKeyAlpha] = alpha;
-                    lbl.Invalidate();
+                        lbl.Invalidate();
+                    }
                 }
                 SaveBlockPositions();
             };
@@ -216,8 +218,10 @@ namespace TeleUDP
                 foreach (Label lbl in GetDataLabels())
                 {
                     if (lbl.Tag is Dictionary<string, object> tag)
+                    {
                         tag[TagKeyBorderAlpha] = alpha;
-                    lbl.Invalidate();
+                        lbl.Invalidate();
+                    }
                 }
                 SaveBlockPositions();
             };
@@ -240,20 +244,20 @@ namespace TeleUDP
         }
         #endregion
 
-        #region Overlay
+        #region Overlay — СТАБИЛЬНЫЙ
         private void ToggleOverlay_Click(object? sender, EventArgs e)
         {
             isOverlayMode = !isOverlayMode;
             UpdateMenuCheckedState();
 
             int style = GetWindowLong(this.Handle, GWL_EXSTYLE);
+            style = style & ~WS_EX_TRANSPARENT;
 
             if (isOverlayMode)
             {
                 this.FormBorderStyle = FormBorderStyle.None;
-                SetWindowLong(this.Handle, GWL_EXSTYLE, style | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+                SetWindowLong(this.Handle, GWL_EXSTYLE, style | WS_EX_LAYERED);
                 this.BackColor = overlayColorKey;
-                UpdateFormBackColor();
 
                 foreach (Label lbl in GetDataLabels().ToList())
                 {
@@ -267,19 +271,18 @@ namespace TeleUDP
             else
             {
                 this.FormBorderStyle = FormBorderStyle.Sizable;
-                SetWindowLong(this.Handle, GWL_EXSTYLE, (style | WS_EX_LAYERED) & ~WS_EX_TRANSPARENT);
+                SetWindowLong(this.Handle, GWL_EXSTYLE, style | WS_EX_LAYERED);
                 this.BackColor = defaultFormBackColor;
-                UpdateFormBackColor();
 
                 foreach (Label lbl in hiddenInOverlay)
                 {
                     this.Controls.Add(lbl);
-                    lbl.Invalidate();
                 }
                 hiddenInOverlay.Clear();
             }
 
-            this.Invalidate();
+            UpdateFormBackColor();
+            this.Invalidate(true); // Принудительная перерисовка
         }
 
         private void UpdateMenuCheckedState()
@@ -292,11 +295,23 @@ namespace TeleUDP
         {
             if (isOverlayMode)
             {
-                SetLayeredWindowAttributes(this.Handle, (uint)ColorTranslator.ToWin32(overlayColorKey), 255, LWA_COLORKEY);
+                SetLayeredWindowAttributes(this.Handle, (uint)ColorTranslator.ToWin32(overlayColorKey), 0, LWA_COLORKEY);
             }
             else
             {
                 SetLayeredWindowAttributes(this.Handle, 0, (byte)formBackAlpha, LWA_ALPHA);
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            if (isOverlayMode)
+            {
+                e.Graphics.Clear(overlayColorKey); // Фон — прозрачный
+            }
+            else
+            {
+                base.OnPaint(e);
             }
         }
         #endregion
@@ -345,9 +360,6 @@ namespace TeleUDP
                 if (blockMenu.Tag is Label lbl && lbl.Tag is Dictionary<string, object> tag)
                 {
                     tag[TagKeyBackAlpha] = backAlphaBar.TrackBar.Value;
-                    Color baseCol = (Color)tag[TagKeyBaseBackColor];
-                    lbl.BackColor = Color.FromArgb(backAlphaBar.TrackBar.Value, baseCol);
-                    tag["IsTransparent"] = backAlphaBar.TrackBar.Value == 0;
                     lbl.Invalidate();
                     SaveBlockPositions();
                 }
@@ -404,7 +416,6 @@ namespace TeleUDP
         {
             var tag = new Dictionary<string, object>
             {
-                { "IsTransparent", false },
                 { TagKeyAlpha, 255 },
                 { TagKeyClosed, false },
                 { TagKeyBorderAlpha, 255 },
@@ -412,8 +423,10 @@ namespace TeleUDP
                 { TagKeyBaseBackColor, Color.Black },
                 { TagKeyBackAlpha, 255 },
                 { TagKeyShowLabel, true },
+                { TagKeyTextColor, Color.White },
                 { "LabelText", labelText },
-                { "ValueText", initialValue }
+                { "ValueText", initialValue },
+                { "DisplayText", $"{labelText}: {initialValue}" }
             };
 
             var lbl = new Label
@@ -421,24 +434,22 @@ namespace TeleUDP
                 Name = name,
                 Location = new Point(x, y),
                 Size = new Size(width, height),
+                Text = "",
                 TextAlign = ContentAlignment.MiddleCenter,
                 BorderStyle = BorderStyle.FixedSingle,
-                ForeColor = Color.White,
-                BackColor = Color.FromArgb(255, Color.Black),
                 AutoSize = false,
                 Tag = tag,
                 ContextMenuStrip = menu
             };
 
-            // Отключаем DoubleBuffered у Label — это убирает размытие при прозрачности
-            lbl.SetStyle(ControlStyles.OptimizedDoubleBuffer, false);
+            lbl.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             lbl.SetStyle(ControlStyles.UserPaint, true);
             lbl.SetStyle(ControlStyles.ResizeRedraw, true);
 
-            UpdateLabelText(lbl);
             lbl.Font = new Font("Arial", 12, FontStyle.Bold);
             ScaleLabelFont(lbl);
+
             lbl.MouseDown += Label_MouseDown;
             lbl.MouseMove += Label_MouseMove;
             lbl.MouseUp += Label_MouseUp;
@@ -475,8 +486,9 @@ namespace TeleUDP
             string label = (string)tag["LabelText"];
             string value = (string)tag["ValueText"];
             bool showLabel = (bool)tag[TagKeyShowLabel];
-            lbl.Text = showLabel ? $"{label}: {value}" : value;
+            tag["DisplayText"] = showLabel ? $"{label}: {value}" : value;
             ScaleLabelFont(lbl);
+            lbl.Invalidate();
         }
         #endregion
 
@@ -532,8 +544,9 @@ namespace TeleUDP
                     draggedOrResizedLabel.Width = newW;
                     draggedOrResizedLabel.Height = newH;
                     dragStartPosition = e.Location;
+                    ScaleLabelFont(draggedOrResizedLabel);
+                    draggedOrResizedLabel.Invalidate();
                 }
-                draggedOrResizedLabel.Invalidate();
             }
             else
             {
@@ -554,64 +567,90 @@ namespace TeleUDP
         }
         #endregion
 
-        #region Paint
+        #region Paint — СТАБИЛЬНЫЙ
         private void Label_Paint(object? sender, PaintEventArgs e)
         {
-            if (sender is not Label lbl) return;
-            if (lbl.Tag is not Dictionary<string, object> tag) return;
+            if (sender is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) return;
 
-            bool closed = (bool)tag[TagKeyClosed];
             int textAlpha = (int)tag[TagKeyAlpha];
             int backAlpha = (int)tag[TagKeyBackAlpha];
             int borderAlpha = (int)tag[TagKeyBorderAlpha];
+            Color baseBackColor = (Color)tag[TagKeyBaseBackColor];
             Color borderColor = (Color)tag[TagKeyBorderColor];
-            Color baseBack = (Color)tag[TagKeyBaseBackColor];
+            Color textColor = (Color)tag[TagKeyTextColor];
+            string displayText = tag["DisplayText"] as string ?? "";
+            bool closed = (bool)tag[TagKeyClosed];
 
-            if (!isOverlayMode && closed) textAlpha = HiddenAlpha;
+            if (!isOverlayMode && closed)
+            {
+                textAlpha = Math.Min(textAlpha, HiddenAlpha);
+                backAlpha = Math.Min(backAlpha, HiddenAlpha);
+                borderAlpha = Math.Min(borderAlpha, HiddenAlpha);
+            }
 
-            ScaleLabelFont(lbl);
+            var g = e.Graphics;
 
-            // Чёткий фон
+            // ФОН
             if (backAlpha > 0)
             {
-                using var brush = new SolidBrush(Color.FromArgb(backAlpha, baseBack));
-                e.Graphics.FillRectangle(brush, lbl.ClientRectangle);
+                using var brush = new SolidBrush(Color.FromArgb(backAlpha, baseBackColor));
+                g.FillRectangle(brush, 0, 0, lbl.Width, lbl.Height);
             }
 
-            // Рамка
-            if (lbl.BorderStyle == BorderStyle.FixedSingle || closed)
+            // РАМКА
+            if (lbl.BorderStyle == BorderStyle.FixedSingle && borderAlpha > 0)
             {
                 using var pen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
-                e.Graphics.DrawRectangle(pen, 0, 0, lbl.Width - 1, lbl.Height - 1);
+                g.DrawRectangle(pen, 0, 0, lbl.Width - 1, lbl.Height - 1);
             }
 
+            // КРАСНАЯ РАМКА ПРИ ЗАКРЫТИИ
             if (closed && !isOverlayMode)
             {
                 using var pen = new Pen(Color.Red, 3);
-                e.Graphics.DrawRectangle(pen, 1, 1, lbl.Width - 3, lbl.Height - 3);
+                g.DrawRectangle(pen, 2, 2, lbl.Width - 5, lbl.Height - 5);
             }
 
-            // Текст
-            if (textAlpha > 0 && !string.IsNullOrEmpty(lbl.Text))
+            // ТЕКСТ
+            if (textAlpha > 0 && !string.IsNullOrEmpty(displayText))
             {
-                using var brush = new SolidBrush(Color.FromArgb(textAlpha, lbl.ForeColor));
-                var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-                e.Graphics.DrawString(lbl.Text, lbl.Font, brush, lbl.ClientRectangle, sf);
+                using var brush = new SolidBrush(Color.FromArgb(textAlpha, textColor));
+                using var sf = new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Center,
+                    FormatFlags = StringFormatFlags.NoWrap
+                };
+                var rect = new Rectangle(4, 4, lbl.Width - 8, lbl.Height - 8);
+                g.DrawString(displayText, lbl.Font, brush, rect, sf);
             }
         }
         #endregion
 
         private void ScaleLabelFont(Label lbl)
         {
-            if (string.IsNullOrEmpty(lbl.Text)) return;
-            using var g = Graphics.FromHwnd(lbl.Handle);
-            using var test = new Font("Arial", 100);
-            var sz = g.MeasureString(lbl.Text, test, lbl.Width);
-            float ratio = Math.Min(lbl.Width / sz.Width, lbl.Height / sz.Height);
-            float newSize = 100 * ratio * 0.9f;
-            if (newSize < 10) newSize = 10;
-            if (Math.Abs(lbl.Font.Size - newSize) > 0.01f)
+            if (lbl.Tag is not Dictionary<string, object> tag) return;
+            string text = (string)tag["DisplayText"];
+            if (string.IsNullOrEmpty(text)) return;
+
+            float baseSize = 10f;
+            using var g = lbl.CreateGraphics();
+            using var testFont = new Font(lbl.Font.FontFamily, baseSize * 10);
+
+            var sz = g.MeasureString(text, testFont, lbl.ClientSize.Width - 8);
+            float ratio = Math.Min(
+                (lbl.ClientSize.Width - 8) / sz.Width,
+                (lbl.ClientSize.Height - 8) / sz.Height
+            );
+
+            float newSize = baseSize * 10 * ratio * 0.9f;
+            newSize = Math.Max(newSize, 8);
+            newSize = Math.Min(newSize, 100);
+
+            if (Math.Abs(lbl.Font.Size - newSize) > 0.1f)
+            {
                 lbl.Font = new Font(lbl.Font.FontFamily, newSize, lbl.Font.Style);
+            }
         }
 
         #region Context Menu Handlers
@@ -619,12 +658,12 @@ namespace TeleUDP
         {
             if (sender is not ToolStripMenuItem mi) return;
             var owner = mi.GetCurrentParent() as ContextMenuStrip;
-            if (owner?.SourceControl is not Label lbl) return;
+            if (owner?.SourceControl is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) return;
 
-            using var dlg = new ColorDialog { Color = lbl.ForeColor };
+            using var dlg = new ColorDialog { Color = (Color)tag[TagKeyTextColor] };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                lbl.ForeColor = dlg.Color;
+                tag[TagKeyTextColor] = dlg.Color;
                 lbl.Invalidate();
                 SaveBlockPositions();
             }
@@ -634,15 +673,12 @@ namespace TeleUDP
         {
             if (sender is not ToolStripMenuItem mi) return;
             var owner = mi.GetCurrentParent() as ContextMenuStrip;
-            if (owner?.SourceControl is not Label lbl) return;
-            if (lbl.Tag is not Dictionary<string, object> tag) return;
+            if (owner?.SourceControl is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) return;
 
             using var dlg = new ColorDialog { Color = (Color)tag[TagKeyBaseBackColor] };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 tag[TagKeyBaseBackColor] = dlg.Color;
-                lbl.BackColor = Color.FromArgb((int)tag[TagKeyBackAlpha], dlg.Color);
-                tag["IsTransparent"] = (int)tag[TagKeyBackAlpha] == 0;
                 lbl.Invalidate();
                 SaveBlockPositions();
             }
@@ -663,8 +699,7 @@ namespace TeleUDP
         {
             if (sender is not ToolStripMenuItem mi) return;
             var owner = mi.GetCurrentParent() as ContextMenuStrip;
-            if (owner?.SourceControl is not Label lbl) return;
-            if (lbl.Tag is not Dictionary<string, object> tag) return;
+            if (owner?.SourceControl is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) return;
 
             using var dlg = new ColorDialog { Color = (Color)tag[TagKeyBorderColor] };
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -679,8 +714,7 @@ namespace TeleUDP
         {
             if (sender is not ToolStripMenuItem mi) return;
             var owner = mi.GetCurrentParent() as ContextMenuStrip;
-            if (owner?.SourceControl is not Label lbl) return;
-            if (lbl.Tag is not Dictionary<string, object> tag) return;
+            if (owner?.SourceControl is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) return;
 
             bool wasClosed = (bool)tag[TagKeyClosed];
             tag[TagKeyClosed] = !wasClosed;
@@ -716,11 +750,11 @@ namespace TeleUDP
 
             foreach (Label lbl in GetDataLabels())
             {
-                if (lbl.Tag is not Dictionary<string, object> tag) continue;
-                tag[TagKeyBaseBackColor] = dlg.Color;
-                lbl.BackColor = Color.FromArgb((int)tag[TagKeyBackAlpha], dlg.Color);
-                tag["IsTransparent"] = (int)tag[TagKeyBackAlpha] == 0;
-                lbl.Invalidate();
+                if (lbl.Tag is Dictionary<string, object> tag)
+                {
+                    tag[TagKeyBaseBackColor] = dlg.Color;
+                    lbl.Invalidate();
+                }
             }
             SaveBlockPositions();
         }
@@ -732,8 +766,11 @@ namespace TeleUDP
 
             foreach (Label lbl in GetDataLabels())
             {
-                lbl.ForeColor = dlg.Color;
-                lbl.Invalidate();
+                if (lbl.Tag is Dictionary<string, object> tag)
+                {
+                    tag[TagKeyTextColor] = dlg.Color;
+                    lbl.Invalidate();
+                }
             }
             SaveBlockPositions();
         }
@@ -853,8 +890,7 @@ namespace TeleUDP
             var data = new BlockPositionData { FormBackAlpha = formBackAlpha };
             foreach (Control c in this.Controls)
             {
-                if (c is not Label lbl) continue;
-                if (lbl.Tag is not Dictionary<string, object> tag) continue;
+                if (c is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) continue;
 
                 data.Blocks.Add(new BlockData
                 {
@@ -863,7 +899,7 @@ namespace TeleUDP
                     Y = lbl.Location.Y,
                     Width = lbl.Size.Width,
                     Height = lbl.Size.Height,
-                    TextColorArgb = lbl.ForeColor.ToArgb(),
+                    TextColorArgb = ((Color)tag[TagKeyTextColor]).ToArgb(),
                     BaseBackColorArgb = ((Color)tag[TagKeyBaseBackColor]).ToArgb(),
                     BackAlpha = (int)tag[TagKeyBackAlpha],
                     BorderStyle = lbl.BorderStyle,
@@ -871,8 +907,7 @@ namespace TeleUDP
                     BorderAlpha = (int)tag[TagKeyBorderAlpha],
                     BorderColorArgb = ((Color)tag[TagKeyBorderColor]).ToArgb(),
                     Closed = (bool)tag[TagKeyClosed],
-                    ShowLabel = (bool)tag[TagKeyShowLabel],
-                    FormBackAlpha = formBackAlpha
+                    ShowLabel = (bool)tag[TagKeyShowLabel]
                 });
             }
             try { File.WriteAllText(POSITION_FILE, JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true })); }
@@ -896,11 +931,9 @@ namespace TeleUDP
 
                     lbl.Location = new Point(b.X, b.Y);
                     lbl.Size = new Size(b.Width, b.Height);
-                    lbl.ForeColor = Color.FromArgb(b.TextColorArgb);
                     lbl.BorderStyle = b.BorderStyle;
 
                     var tag = lbl.Tag as Dictionary<string, object> ?? new Dictionary<string, object>();
-                    tag["IsTransparent"] = b.BackAlpha == 0;
                     tag[TagKeyAlpha] = b.TextAlpha;
                     tag[TagKeyClosed] = b.Closed;
                     tag[TagKeyBorderAlpha] = b.BorderAlpha;
@@ -908,17 +941,11 @@ namespace TeleUDP
                     tag[TagKeyBaseBackColor] = Color.FromArgb(b.BaseBackColorArgb);
                     tag[TagKeyBackAlpha] = b.BackAlpha;
                     tag[TagKeyShowLabel] = b.ShowLabel;
+                    tag[TagKeyTextColor] = Color.FromArgb(b.TextColorArgb);
                     lbl.Tag = tag;
 
-                    lbl.BackColor = Color.FromArgb(b.BackAlpha, Color.FromArgb(b.BaseBackColorArgb));
                     UpdateLabelText(lbl);
                     lbl.Invalidate();
-                }
-
-                // Обновляем состояние галочки "Показывать подпись у всех"
-                if (this.ContextMenuStrip?.Items.OfType<ToolStripMenuItem>().FirstOrDefault(i => i.Text == "Показывать подпись у всех блоков") is ToolStripMenuItem showAll)
-                {
-                    showAll.Checked = GetDataLabels().Any() && GetDataLabels().All(l => l.Tag is Dictionary<string, object> t && (bool)t[TagKeyShowLabel]);
                 }
             }
             catch { File.Delete(POSITION_FILE); }
@@ -934,7 +961,7 @@ namespace TeleUDP
             notifyIcon.Dispose();
         }
 
-        #region UDP
+        #region UDP — СТАБИЛЬНЫЙ
         private void ReceiveCallback(IAsyncResult ar)
         {
             try
@@ -955,7 +982,6 @@ namespace TeleUDP
                 {
                     tag["ValueText"] = value;
                     UpdateLabelText(lbl);
-                    lbl.Invalidate();
                 }
             }
 
@@ -969,6 +995,8 @@ namespace TeleUDP
             Set("lblGForceLat", $"{packet.m_gForceLateral:F2}");
             Set("lblGForceLon", $"{packet.m_gForceLongitudinal:F2}");
             Set("lblPitch", $"{packet.m_pitch:F2}");
+
+            this.Invalidate(true); // КРИТИЧЕСКИ ВАЖНО!
         }
         #endregion
     }
@@ -979,7 +1007,6 @@ namespace TeleUDP
         public ToolStripTrackBar() : base(new TrackBar()) { TrackBar.AutoSize = false; }
     }
 
-    // Вспомогательный метод для SetStyle
     public static class ControlExtensions
     {
         public static void SetStyle(this Control control, ControlStyles flag, bool value)

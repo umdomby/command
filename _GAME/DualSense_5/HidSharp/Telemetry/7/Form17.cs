@@ -149,8 +149,10 @@ namespace TeleUDP
                     if (lbl.Tag is not Dictionary<string, object> tag) continue;
                     tag[TagKeyBackAlpha] = alpha;
                     Color baseCol = (Color)tag[TagKeyBaseBackColor];
+                    // ОБНОВЛЯЕМ ФАКТИЧЕСКИЙ ЦВЕТ ФОНА
                     lbl.BackColor = Color.FromArgb(alpha, baseCol);
                     tag["IsTransparent"] = alpha == 0;
+                    // ПЕРЕРИСОВЫВАЕМ
                     lbl.Invalidate();
                 }
                 SaveBlockPositions();
@@ -174,8 +176,11 @@ namespace TeleUDP
                 foreach (Label lbl in GetDataLabels())
                 {
                     if (lbl.Tag is Dictionary<string, object> tag)
+                    {
                         tag[TagKeyAlpha] = alpha;
-                    lbl.Invalidate();
+                        // ПЕРЕРИСОВЫВАЕМ ДЛЯ ОБНОВЛЕНИЯ ПРОЗРАЧНОСТИ ТЕКСТА
+                        lbl.Invalidate();
+                    }
                 }
                 SaveBlockPositions();
             };
@@ -216,8 +221,11 @@ namespace TeleUDP
                 foreach (Label lbl in GetDataLabels())
                 {
                     if (lbl.Tag is Dictionary<string, object> tag)
+                    {
                         tag[TagKeyBorderAlpha] = alpha;
-                    lbl.Invalidate();
+                        // ПЕРЕРИСОВЫВАЕМ ДЛЯ ОБНОВЛЕНИЯ ПРОЗРАЧНОСТИ РАМКИ
+                        lbl.Invalidate();
+                    }
                 }
                 SaveBlockPositions();
             };
@@ -346,6 +354,7 @@ namespace TeleUDP
                 {
                     tag[TagKeyBackAlpha] = backAlphaBar.TrackBar.Value;
                     Color baseCol = (Color)tag[TagKeyBaseBackColor];
+                    // ОБНОВЛЯЕМ ФАКТИЧЕСКИЙ ЦВЕТ ФОНА
                     lbl.BackColor = Color.FromArgb(backAlphaBar.TrackBar.Value, baseCol);
                     tag["IsTransparent"] = backAlphaBar.TrackBar.Value == 0;
                     lbl.Invalidate();
@@ -424,17 +433,18 @@ namespace TeleUDP
                 TextAlign = ContentAlignment.MiddleCenter,
                 BorderStyle = BorderStyle.FixedSingle,
                 ForeColor = Color.White,
-                BackColor = Color.FromArgb(255, Color.Black),
+                BackColor = Color.FromArgb(255, Color.Black), // НАЧАЛЬНЫЙ ЦВЕТ ФОНА
                 AutoSize = false,
                 Tag = tag,
                 ContextMenuStrip = menu
             };
 
-            // Отключаем DoubleBuffered у Label — это убирает размытие при прозрачности
-            lbl.SetStyle(ControlStyles.OptimizedDoubleBuffer, false);
+            // ВКЛЮЧАЕМ ДВОЙНУЮ БУФЕРИЗАЦИЮ ДЛЯ УСТРАНЕНИЯ МЕРЦАНИЯ
+            lbl.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             lbl.SetStyle(ControlStyles.UserPaint, true);
             lbl.SetStyle(ControlStyles.ResizeRedraw, true);
+            lbl.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 
             UpdateLabelText(lbl);
             lbl.Font = new Font("Arial", 12, FontStyle.Bold);
@@ -554,7 +564,7 @@ namespace TeleUDP
         }
         #endregion
 
-        #region Paint
+        #region Paint (УПРОЩЕННАЯ ВЕРСИЯ - ТОЛЬКО ТЕКСТ И РАМКА)
         private void Label_Paint(object? sender, PaintEventArgs e)
         {
             if (sender is not Label lbl) return;
@@ -562,41 +572,45 @@ namespace TeleUDP
 
             bool closed = (bool)tag[TagKeyClosed];
             int textAlpha = (int)tag[TagKeyAlpha];
-            int backAlpha = (int)tag[TagKeyBackAlpha];
             int borderAlpha = (int)tag[TagKeyBorderAlpha];
             Color borderColor = (Color)tag[TagKeyBorderColor];
-            Color baseBack = (Color)tag[TagKeyBaseBackColor];
 
-            if (!isOverlayMode && closed) textAlpha = HiddenAlpha;
-
-            ScaleLabelFont(lbl);
-
-            // Чёткий фон
-            if (backAlpha > 0)
+            // Если блок скрыт в обычном режиме, применяем альфа для скрытия
+            if (!isOverlayMode && closed)
             {
-                using var brush = new SolidBrush(Color.FromArgb(backAlpha, baseBack));
-                e.Graphics.FillRectangle(brush, lbl.ClientRectangle);
+                textAlpha = Math.Min(textAlpha, HiddenAlpha);
+                borderAlpha = Math.Min(borderAlpha, HiddenAlpha);
             }
 
-            // Рамка
-            if (lbl.BorderStyle == BorderStyle.FixedSingle || closed)
+            // ФОН ОСТАВЛЯЕМ СТАНДАРТНОЙ ОТРИСОВКЕ - ОНА УЖЕ УЧИТЫВАЕТ BackColor
+
+            // Рисуем рамку с учетом прозрачности
+            if (lbl.BorderStyle == BorderStyle.FixedSingle && borderAlpha > 0)
             {
-                using var pen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
-                e.Graphics.DrawRectangle(pen, 0, 0, lbl.Width - 1, lbl.Height - 1);
+                using var borderPen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
+                e.Graphics.DrawRectangle(borderPen, 0, 0, lbl.Width - 1, lbl.Height - 1);
             }
 
+            // Если блок скрыт, рисуем красную рамку
             if (closed && !isOverlayMode)
             {
-                using var pen = new Pen(Color.Red, 3);
-                e.Graphics.DrawRectangle(pen, 1, 1, lbl.Width - 3, lbl.Height - 3);
+                using var redPen = new Pen(Color.Red, 3);
+                e.Graphics.DrawRectangle(redPen, 2, 2, lbl.Width - 5, lbl.Height - 5);
             }
 
-            // Текст
+            // Рисуем текст с учетом прозрачности (ЭТО ГЛАВНОЕ ИСПРАВЛЕНИЕ)
             if (textAlpha > 0 && !string.IsNullOrEmpty(lbl.Text))
             {
-                using var brush = new SolidBrush(Color.FromArgb(textAlpha, lbl.ForeColor));
-                var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-                e.Graphics.DrawString(lbl.Text, lbl.Font, brush, lbl.ClientRectangle, sf);
+                using var textBrush = new SolidBrush(Color.FromArgb(textAlpha, lbl.ForeColor));
+                using var sf = new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Center,
+                    FormatFlags = StringFormatFlags.NoWrap
+                };
+
+                var textRect = new Rectangle(2, 2, lbl.Width - 4, lbl.Height - 4);
+                e.Graphics.DrawString(lbl.Text, lbl.Font, textBrush, textRect, sf);
             }
         }
         #endregion
@@ -641,6 +655,7 @@ namespace TeleUDP
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 tag[TagKeyBaseBackColor] = dlg.Color;
+                // ОБНОВЛЯЕМ ФАКТИЧЕСКИЙ ЦВЕТ ФОНА С УЧЕТОМ ПРОЗРАЧНОСТИ
                 lbl.BackColor = Color.FromArgb((int)tag[TagKeyBackAlpha], dlg.Color);
                 tag["IsTransparent"] = (int)tag[TagKeyBackAlpha] == 0;
                 lbl.Invalidate();
@@ -718,6 +733,7 @@ namespace TeleUDP
             {
                 if (lbl.Tag is not Dictionary<string, object> tag) continue;
                 tag[TagKeyBaseBackColor] = dlg.Color;
+                // ОБНОВЛЯЕМ ФАКТИЧЕСКИЙ ЦВЕТ ФОНА С УЧЕТОМ ПРОЗРАЧНОСТИ
                 lbl.BackColor = Color.FromArgb((int)tag[TagKeyBackAlpha], dlg.Color);
                 tag["IsTransparent"] = (int)tag[TagKeyBackAlpha] == 0;
                 lbl.Invalidate();
@@ -910,6 +926,7 @@ namespace TeleUDP
                     tag[TagKeyShowLabel] = b.ShowLabel;
                     lbl.Tag = tag;
 
+                    // ВОССТАНАВЛИВАЕМ ФАКТИЧЕСКИЙ ЦВЕТ ФОНА
                     lbl.BackColor = Color.FromArgb(b.BackAlpha, Color.FromArgb(b.BaseBackColorArgb));
                     UpdateLabelText(lbl);
                     lbl.Invalidate();
