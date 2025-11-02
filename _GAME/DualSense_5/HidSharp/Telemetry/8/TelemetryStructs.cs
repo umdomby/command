@@ -1,4 +1,5 @@
-﻿using System;
+﻿// file: _GAME/DualSense_5/HidSharp/Telemetry/7/TelemetryStructs.cs
+using System;
 using System.Runtime.InteropServices;
 
 namespace TeleUDP

@@ -1,3 +1,4 @@
+// _GAME/DualSense_5/HidSharp/Telemetry/7/Form1.cs
 using System;
 using System.Drawing;
 using System.Net;
@@ -7,186 +8,641 @@ using System.Windows.Forms;
 using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TeleUDP
 {
     public partial class Form1 : Form
     {
-        // --- P/Invoke для прозрачного окна (Оверлей) ---
+        // --- P/Invoke ---
         private const int GWL_EXSTYLE = -20;
         private const int WS_EX_LAYERED = 0x80000;
         private const int WS_EX_TRANSPARENT = 0x20;
+        private const int LWA_ALPHA = 0x2;
         private const int LWA_COLORKEY = 0x1;
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-
         [DllImport("user32.dll")]
         private static extern bool SetLayeredWindowAttributes(IntPtr hWnd, uint crKey, byte bAlpha, uint dwFlags);
+        [DllImport("user32.dll")]
+        private static extern bool UpdateLayeredWindow(IntPtr hWnd, IntPtr hdcDst, ref Point pptDst, ref Size psize, IntPtr hdcSrc, ref Point pptSrc, uint crKey, ref BLENDFUNCTION pblend, uint dwFlags);
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetDC(IntPtr hWnd);
+        [DllImport("user32.dll")]
+        private static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+        [DllImport("gdi32.dll")]
+        private static extern IntPtr CreateCompatibleDC(IntPtr hdc);
+        [DllImport("gdi32.dll")]
+        private static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobj);
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteObject(IntPtr hObject);
+        [DllImport("gdi32.dll")]
+        private static extern bool DeleteDC(IntPtr hdc);
 
-        // --- Константы и переменные ---
+        [StructLayout(LayoutKind.Sequential)]
+        private struct BLENDFUNCTION
+        {
+            public byte BlendOp;
+            public byte BlendFlags;
+            public byte SourceConstantAlpha;
+            public byte AlphaFormat;
+        }
+
+        private const byte AC_SRC_OVER = 0;
+        private const byte AC_SRC_ALPHA = 1;
+        private const uint ULW_ALPHA = 0x00000002;
+
+        // --- Константы ---
         private const int LISTEN_PORT = 20778;
         private const string POSITION_FILE = "BlockPositions.json";
+        private const string TagKeyAlpha = "TextAlpha";
+        private const string TagKeyClosed = "Closed";
+        private const string TagKeyBorderAlpha = "BorderAlpha";
+        private const string TagKeyBorderColor = "BorderColor";
+        private const string TagKeyBaseBackColor = "BaseBackColor";
+        private const string TagKeyBackAlpha = "BackAlpha";
+        private const string TagKeyShowLabel = "ShowLabel";
+        private const string TagKeyTextColor = "TextColor";
+        private const int HiddenAlpha = 204;
+        private const int ResizeHandleSize = 10;
 
+        // --- Переменные ---
         private UdpClient udpClient = null!;
         private IPEndPoint ipEndPoint = null!;
-
         private Label? draggedOrResizedLabel = null;
         private Point dragStartPosition;
         private bool isDragging = false;
         private bool isResizing = false;
-        private const int ResizeHandleSize = 10;
-
-        private Color transparencyKeyColor = Color.Magenta;
+        private readonly Color defaultFormBackColor = Color.Gray;
+        private int formBackAlpha = 255;
         private bool isOverlayMode = false;
-
         private NotifyIcon notifyIcon = null!;
+        private readonly List<Label> hiddenInOverlay = new();
+        private readonly Color overlayColorKey = Color.Black;
 
+        // --- Выделение ---
+        private readonly HashSet<Label> selectedLabels = new();
+        private bool isSelecting = false;
+        private Point selectionStart;
+        private Rectangle selectionRect;
 
-        // --- Инициализация и настройка ---
+        // --- Исходные блоки ---
+        private readonly List<(string name, string label, string value)> defaultBlocks = new()
+        {
+            (name: "lblSpeed", label: "Speed", value: "0.0"),
+            (name: "lblRPM_Raw", label: "RPM (Raw)", value: "0"),
+            (name: "lblRPM_250x", label: "RPM (*250)", value: "0"),
+            (name: "lblGear", label: "Gear", value: "0"),
+            (name: "lblThrottle", label: "Throttle", value: "0.0"),
+            (name: "lblBrake", label: "Brake", value: "0.0"),
+            (name: "lblGForceLat", label: "G-Lat", value: "0.0"),
+            (name: "lblGForceLon", label: "G-Long", value: "0.0"),
+            (name: "lblPitch", label: "Pitch", value: "0.0")
+        };
+
+        private ContextMenuStrip? blockMenuTemplate;
 
         public Form1()
         {
-            // InitializeComponent(); // Предполагается, что присутствует
-
+            InitializeComponent();
             this.Load += Form1_Load;
             this.FormClosing += Form1_FormClosing;
             this.DoubleBuffered = true;
             this.Text = "Telemetry UDP Viewer";
-            this.BackColor = Color.Gray;
+            this.BackColor = defaultFormBackColor;
             this.FormBorderStyle = FormBorderStyle.Sizable;
             this.MaximizeBox = false;
             this.TopMost = true;
-            this.Size = new Size(500, 250); // Устанавливаем разумный начальный размер
+            this.Size = new Size(700, 300);
+            this.Icon = SystemIcons.Application;
 
-            // Инициализация UDP клиента
+            int style = GetWindowLong(this.Handle, GWL_EXSTYLE);
+            SetWindowLong(this.Handle, GWL_EXSTYLE, style | WS_EX_LAYERED);
+
             try
             {
                 ipEndPoint = new IPEndPoint(IPAddress.Any, LISTEN_PORT);
                 udpClient = new UdpClient(ipEndPoint);
-                udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
+                udpClient.BeginReceive(ReceiveCallback, null);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка инициализации UDP: {ex.Message}", "Ошибка UDP", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"UDP Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            // Создание и настройка блоков (Label)
+            blockMenuTemplate = CreateBlockContextMenu();
             InitializeDataBlocks();
             LoadBlockPositions();
-
             InitializeFormContextMenu();
-            InitializeNotifyIcon(); // Инициализация иконки в трее
+            InitializeNotifyIcon();
+            UpdateFormBackColor();
+
+            this.MouseDown += Form_MouseDown;
+            this.MouseMove += Form_MouseMove;
+            this.MouseUp += Form_MouseUp;
+            this.Paint += Form_Paint_Selection;
         }
 
+        #region Form Events
+        private void Form1_Load(object? sender, EventArgs e) { }
+        private void Form1_FormClosing(object? sender, FormClosingEventArgs e)
+        {
+            udpClient?.Close();
+            SaveBlockPositions();
+            notifyIcon.Visible = false;
+            notifyIcon.Dispose();
+        }
+        #endregion
+
+        #region Selection
+        private void Form_MouseDown(object? sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+            if (isOverlayMode && (Control.ModifierKeys & Keys.Control) != Keys.Control) return;
+
+            var clickedLabel = GetDataLabels().FirstOrDefault(l => l.Bounds.Contains(e.Location));
+            if (clickedLabel != null)
+            {
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    if (selectedLabels.Contains(clickedLabel))
+                        selectedLabels.Remove(clickedLabel);
+                    else
+                        selectedLabels.Add(clickedLabel);
+                    this.Invalidate();
+                }
+                return;
+            }
+
+            if ((Control.ModifierKeys & Keys.Control) != Keys.Control)
+            {
+                selectedLabels.Clear();
+            }
+
+            isSelecting = true;
+            selectionStart = e.Location;
+            selectionRect = new Rectangle(e.Location, Size.Empty);
+            this.Invalidate();
+        }
+
+        private void Form_MouseMove(object? sender, MouseEventArgs e)
+        {
+            if (!isSelecting) return;
+
+            selectionRect = new Rectangle(
+                Math.Min(selectionStart.X, e.X),
+                Math.Min(selectionStart.Y, e.Y),
+                Math.Abs(e.X - selectionStart.X),
+                Math.Abs(e.Y - selectionStart.Y));
+
+            if ((Control.ModifierKeys & Keys.Control) != Keys.Control)
+                selectedLabels.Clear();
+
+            foreach (var lbl in GetDataLabels())
+            {
+                if (selectionRect.IntersectsWith(lbl.Bounds))
+                    selectedLabels.Add(lbl);
+            }
+
+            this.Invalidate();
+        }
+
+        private void Form_MouseUp(object? sender, MouseEventArgs e)
+        {
+            isSelecting = false;
+            this.Invalidate();
+        }
+
+        private void Form_Paint_Selection(object? sender, PaintEventArgs e)
+        {
+            if (isSelecting)
+            {
+                using var brush = new SolidBrush(Color.FromArgb(50, 0, 120, 255));
+                using var pen = new Pen(Color.FromArgb(150, 0, 120, 255), 2);
+                e.Graphics.FillRectangle(brush, selectionRect);
+                e.Graphics.DrawRectangle(pen, selectionRect);
+            }
+
+            foreach (var lbl in selectedLabels)
+            {
+                var r = lbl.Bounds;
+                r.Inflate(2, 2);
+                using var pen = new Pen(Color.Yellow, 2);
+                e.Graphics.DrawRectangle(pen, r);
+            }
+        }
+        #endregion
+
+        #region NotifyIcon
         private void InitializeNotifyIcon()
         {
-            notifyIcon = new NotifyIcon();
-            notifyIcon.Text = "Telemetry UDP Viewer";
+            notifyIcon = new NotifyIcon
+            {
+                Text = "Telemetry UDP Viewer",
+                Icon = this.Icon,
+                Visible = true
+            };
 
-            // Заглушка для иконки - используем иконку приложения или создаем простую
-            // В реальном приложении сюда нужно загрузить файл .ico
-            notifyIcon.Icon = SystemIcons.Information;
+            var trayMenu = new ContextMenuStrip();
+            var toggleOverlay = new ToolStripMenuItem("Оверлей (Прозрачность)") { Checked = isOverlayMode };
+            toggleOverlay.Click += ToggleOverlay_Click;
+            var exit = new ToolStripMenuItem("Выход");
+            exit.Click += (s, e) => this.Close();
 
-            notifyIcon.Visible = true;
-
-            ContextMenuStrip trayMenu = new ContextMenuStrip();
-            ToolStripMenuItem toggleOverlayItem = new ToolStripMenuItem("Переключить Оверлей (Прозрачность)");
-            toggleOverlayItem.Click += ToggleOverlay_Click;
-
-            ToolStripMenuItem exitItem = new ToolStripMenuItem("Выход");
-            exitItem.Click += (s, e) => this.Close();
-
-            trayMenu.Items.Add(toggleOverlayItem);
-            trayMenu.Items.Add(exitItem);
+            trayMenu.Items.Add(toggleOverlay);
+            trayMenu.Items.Add(new ToolStripSeparator());
+            trayMenu.Items.Add(exit);
 
             notifyIcon.ContextMenuStrip = trayMenu;
+            notifyIcon.MouseClick += (s, e) =>
+            {
+                if (e.Button != MouseButtons.Left) return;
+                if (this.Visible) this.Hide();
+                else { this.Show(); this.BringToFront(); }
+            };
         }
+        #endregion
 
+        #region Form Context Menu
         private void InitializeFormContextMenu()
         {
-            ContextMenuStrip formContextMenu = new ContextMenuStrip();
-            ToolStripMenuItem resetPositionsItem = new ToolStripMenuItem("Сбросить расположение блоков");
-            resetPositionsItem.Click += ResetBlockPositions_Click;
+            var formMenu = new ContextMenuStrip();
+            var overlayItem = new ToolStripMenuItem("Оверлей (Полная Прозрачность)") { Checked = isOverlayMode };
+            overlayItem.Click += ToggleOverlay_Click;
+            formMenu.Items.Add(overlayItem);
+            formMenu.Items.Add(new ToolStripSeparator());
 
-            ToolStripMenuItem toggleTopMostItem = new ToolStripMenuItem("Окно поверх всех (TopMost)");
-            toggleTopMostItem.Checked = this.TopMost;
-            toggleTopMostItem.Click += ToggleTopMost_Click;
+            var formBackOpacity = new ToolStripMenuItem("Прозрачность фона формы");
+            var formBackOpacityBar = new ToolStripTrackBar { TrackBar = { Width = 150, Minimum = 0, Maximum = 255, Value = formBackAlpha } };
+            formBackOpacity.DropDownItems.Add(formBackOpacityBar);
+            formBackOpacityBar.TrackBar.ValueChanged += (s, ev) =>
+            {
+                formBackAlpha = formBackOpacityBar.TrackBar.Value;
+                UpdateFormBackColor();
+                SaveBlockPositions();
+            };
+            formMenu.Items.Add(formBackOpacity);
 
-            ToolStripMenuItem toggleOverlayItem = new ToolStripMenuItem("Переключить в Оверлей (Полная Прозрачность)");
-            toggleOverlayItem.Checked = this.isOverlayMode;
-            toggleOverlayItem.Click += ToggleOverlay_Click;
+            var backOpacityAll = new ToolStripMenuItem("Прозрачность фона всех блоков");
+            var backOpacityBar = new ToolStripTrackBar { TrackBar = { Width = 150, Minimum = 0, Maximum = 255, Value = GetGlobalBackAlpha() } };
+            backOpacityAll.DropDownItems.Add(backOpacityBar);
+            backOpacityBar.TrackBar.ValueChanged += (s, ev) =>
+            {
+                int alpha = backOpacityBar.TrackBar.Value;
+                foreach (Label lbl in GetDataLabels())
+                {
+                    if (lbl.Tag is Dictionary<string, object> tag)
+                    {
+                        tag[TagKeyBackAlpha] = alpha;
+                        lbl.Invalidate();
+                    }
+                }
+                SaveBlockPositions();
+            };
+            formMenu.Items.Add(backOpacityAll);
 
-            formContextMenu.Items.Add(toggleOverlayItem);
-            formContextMenu.Items.Add(new ToolStripSeparator());
-            formContextMenu.Items.Add(toggleTopMostItem);
-            formContextMenu.Items.Add(resetPositionsItem);
+            var backColorAll = new ToolStripMenuItem("Цвет фона всех блоков");
+            backColorAll.Click += ChangeBackColorAll_Click;
+            formMenu.Items.Add(backColorAll);
 
-            this.ContextMenuStrip = formContextMenu;
+            var textColorAll = new ToolStripMenuItem("Цвет текста всех блоков");
+            textColorAll.Click += ChangeTextColorAll_Click;
+            formMenu.Items.Add(textColorAll);
+
+            var textOpacityAll = new ToolStripMenuItem("Прозрачность текста всех");
+            var textOpacityBar = new ToolStripTrackBar { TrackBar = { Width = 150, Minimum = 0, Maximum = 255, Value = GetGlobalTextAlpha() } };
+            textOpacityAll.DropDownItems.Add(textOpacityBar);
+            textOpacityBar.TrackBar.ValueChanged += (s, ev) =>
+            {
+                int alpha = textOpacityBar.TrackBar.Value;
+                foreach (Label lbl in GetDataLabels())
+                {
+                    if (lbl.Tag is Dictionary<string, object> tag)
+                    {
+                        tag[TagKeyAlpha] = alpha;
+                        lbl.Invalidate();
+                    }
+                }
+                SaveBlockPositions();
+            };
+            formMenu.Items.Add(textOpacityAll);
+
+            var showLabelAll = new ToolStripMenuItem("Показывать подпись у всех блоков");
+            showLabelAll.CheckOnClick = true;
+            showLabelAll.Checked = GetDataLabels().Any() && GetDataLabels().All(l => l.Tag is Dictionary<string, object> t && (bool)t[TagKeyShowLabel]);
+            showLabelAll.CheckedChanged += (s, e) =>
+            {
+                bool show = showLabelAll.Checked;
+                foreach (Label lbl in GetDataLabels())
+                {
+                    if (lbl.Tag is Dictionary<string, object> tag)
+                    {
+                        tag[TagKeyShowLabel] = show;
+                        UpdateLabelText(lbl);
+                    }
+                }
+                SaveBlockPositions();
+            };
+            formMenu.Items.Add(showLabelAll);
+
+            var borderAll = new ToolStripMenuItem("Рамка всех блоков");
+            borderAll.Click += ToggleBorderAll_Click;
+            formMenu.Items.Add(borderAll);
+
+            var borderColorAll = new ToolStripMenuItem("Цвет рамки всех блоков");
+            borderColorAll.Click += ChangeBorderColorAll_Click;
+            formMenu.Items.Add(borderColorAll);
+
+            var borderAlphaAll = new ToolStripMenuItem("Прозрачность рамки всех");
+            var borderAlphaBar = new ToolStripTrackBar { TrackBar = { Width = 150, Minimum = 0, Maximum = 255, Value = GetGlobalBorderAlpha() } };
+            borderAlphaAll.DropDownItems.Add(borderAlphaBar);
+            borderAlphaBar.TrackBar.ValueChanged += (s, ev) =>
+            {
+                int alpha = borderAlphaBar.TrackBar.Value;
+                foreach (Label lbl in GetDataLabels())
+                {
+                    if (lbl.Tag is Dictionary<string, object> tag)
+                    {
+                        tag[TagKeyBorderAlpha] = alpha;
+                        lbl.Invalidate();
+                    }
+                }
+                SaveBlockPositions();
+            };
+            formMenu.Items.Add(borderAlphaAll);
+
+            formMenu.Items.Add(new ToolStripSeparator());
+
+            var hideAll = new ToolStripMenuItem("Скрыть/Показать все блоки");
+            hideAll.Click += ToggleVisibleAll_Click;
+            formMenu.Items.Add(hideAll);
+
+            var topMost = new ToolStripMenuItem("Поверх всех окон") { Checked = this.TopMost };
+            topMost.Click += ToggleTopMost_Click;
+            formMenu.Items.Add(topMost);
+
+            var reset = new ToolStripMenuItem("Сбросить расположение");
+            reset.Click += ResetBlockPositions_Click;
+            formMenu.Items.Add(reset);
+
+            var deleteSelected = new ToolStripMenuItem("Удалить выделенные блоки");
+            deleteSelected.Click += DeleteSelectedBlocks_Click;
+            formMenu.Items.Add(deleteSelected);
+
+            this.ContextMenuStrip = formMenu;
+
+            formMenu.Items.Add(new ToolStripSeparator());
+
+            var saveSettings = new ToolStripMenuItem("Сохранить настройки как...");
+            saveSettings.Click += SaveSettingsAs_Click;
+            formMenu.Items.Add(saveSettings);
+
+            var loadSettings = new ToolStripMenuItem("Загрузить настройки из...");
+            loadSettings.Click += LoadSettingsFrom_Click;
+            formMenu.Items.Add(loadSettings);
+
+        }
+        #endregion
+
+        #region Overlay
+        private void ToggleOverlay_Click(object? sender, EventArgs e)
+        {
+            isOverlayMode = !isOverlayMode;
+            UpdateMenuCheckedState();
+
+            int style = GetWindowLong(this.Handle, GWL_EXSTYLE);
+            if (isOverlayMode)
+            {
+                this.FormBorderStyle = FormBorderStyle.None;
+                SetWindowLong(this.Handle, GWL_EXSTYLE, style | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+                foreach (Label lbl in GetDataLabels().ToList())
+                {
+                    this.Controls.Remove(lbl);
+                    hiddenInOverlay.Add(lbl);
+                }
+                RedrawOverlay();
+            }
+            else
+            {
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                SetWindowLong(this.Handle, GWL_EXSTYLE, (style | WS_EX_LAYERED) & ~WS_EX_TRANSPARENT);
+                foreach (Label lbl in hiddenInOverlay)
+                {
+                    this.Controls.Add(lbl);
+                }
+                hiddenInOverlay.Clear();
+                UpdateFormBackColor(); // Восстанавливаем альфа фона
+            }
         }
 
+        private void UpdateMenuCheckedState()
+        {
+            if (notifyIcon.ContextMenuStrip?.Items[0] is ToolStripMenuItem tray) tray.Checked = isOverlayMode;
+            if (this.ContextMenuStrip?.Items[0] is ToolStripMenuItem form) form.Checked = isOverlayMode;
+        }
+
+        private void UpdateFormBackColor()
+        {
+            if (!isOverlayMode)
+            {
+                SetLayeredWindowAttributes(this.Handle, 0, (byte)formBackAlpha, LWA_ALPHA);
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            if (!isOverlayMode)
+            {
+                base.OnPaint(e);
+            }
+        }
+        #endregion
+
+        #region Data Blocks
         private void InitializeDataBlocks()
         {
-            ContextMenuStrip blockContextMenu = new ContextMenuStrip();
-            ToolStripMenuItem changeColorItem = new ToolStripMenuItem("Изменить цвет текста");
-            changeColorItem.Click += ChangeTextColor_Click;
-            ToolStripMenuItem toggleTransparencyItem = new ToolStripMenuItem("Сделать фон прозрачным/непрозрачным");
-            toggleTransparencyItem.Click += ToggleTransparency_Click;
+            int w = (this.ClientSize.Width - 40) / 3;
+            int h = 60;
+            int x = 10, y = 10;
 
-            blockContextMenu.Items.Add(changeColorItem);
-            blockContextMenu.Items.Add(toggleTransparencyItem);
-
-            // Использование 80% ширины формы для расчета начального размера
-            int formInnerWidth = this.ClientSize.Width - 20; // 10px padding с каждой стороны
-            int defaultWidth = formInnerWidth / 3 - 10;
-            int defaultHeight = 60; // Увеличиваем высоту для большего шрифта
-            int hSpace = 10;
-            int vSpace = 10;
-            int currentX = 10;
-            int currentY = 10;
-
-            CreateDataLabel("lblSpeed", "Speed: 0.0", currentX, currentY, defaultWidth, defaultHeight, blockContextMenu);
-            currentX += defaultWidth + hSpace;
-            CreateDataLabel("lblRPM_Raw", "RPM (Raw): 0", currentX, currentY, defaultWidth, defaultHeight, blockContextMenu);
-            currentX += defaultWidth + hSpace;
-            CreateDataLabel("lblRPM_250x", "RPM (*250): 0", currentX, currentY, defaultWidth, defaultHeight, blockContextMenu);
-
-            currentX = 10;
-            currentY += defaultHeight + vSpace;
-            CreateDataLabel("lblGear", "Gear: 0", currentX, currentY, defaultWidth, defaultHeight, blockContextMenu);
-            currentX += defaultWidth + hSpace;
-            CreateDataLabel("lblThrottle", "Throttle: 0.0", currentX, currentY, defaultWidth, defaultHeight, blockContextMenu);
-            currentX += defaultWidth + hSpace;
-            CreateDataLabel("lblBrake", "Brake: 0.0", currentX, currentY, defaultWidth, defaultHeight, blockContextMenu);
-
-            currentX = 10;
-            currentY += defaultHeight + vSpace;
-            CreateDataLabel("lblGForceLat", "G-Lat: 0.0", currentX, currentY, defaultWidth, defaultHeight, blockContextMenu);
-            currentX += defaultWidth + hSpace;
-            CreateDataLabel("lblGForceLon", "G-Long: 0.0", currentX, currentY, defaultWidth, defaultHeight, blockContextMenu);
-            currentX += defaultWidth + hSpace;
-            CreateDataLabel("lblPitch", "Pitch: 0.0", currentX, currentY, defaultWidth, defaultHeight, blockContextMenu);
+            foreach (var (name, label, value) in defaultBlocks)
+            {
+                CreateDataLabel(name, label, value, x, y, w, h, blockMenuTemplate!);
+                x += w + 10;
+                if (x + w > this.ClientSize.Width)
+                {
+                    x = 10;
+                    y += h + 10;
+                }
+            }
         }
 
-        private void CreateDataLabel(string name, string text, int x, int y, int width, int height, ContextMenuStrip contextMenu)
+        private ContextMenuStrip CreateBlockContextMenu()
         {
-            Label lbl = new Label
+            var blockMenu = new ContextMenuStrip();
+
+            var showLabelItem = new ToolStripMenuItem("Показывать подпись");
+            showLabelItem.CheckOnClick = true;
+            showLabelItem.CheckedChanged += (s, e) =>
+            {
+                if (blockMenu.Tag is Label lbl && lbl.Tag is Dictionary<string, object> tag)
+                {
+                    tag[TagKeyShowLabel] = showLabelItem.Checked;
+                    UpdateLabelText(lbl);
+                    SaveBlockPositions();
+                }
+            };
+            blockMenu.Items.Add(showLabelItem);
+
+            var textAlphaItem = new ToolStripMenuItem("Прозрачность текста");
+            var textAlphaBar = new ToolStripTrackBar { TrackBar = { Width = 120, Minimum = 0, Maximum = 255 } };
+            textAlphaItem.DropDownItems.Add(textAlphaBar);
+            textAlphaBar.TrackBar.ValueChanged += (s, ev) =>
+            {
+                if (blockMenu.Tag is Label lbl && lbl.Tag is Dictionary<string, object> tag)
+                {
+                    tag[TagKeyAlpha] = textAlphaBar.TrackBar.Value;
+                    lbl.Invalidate();
+                    SaveBlockPositions();
+                }
+            };
+            blockMenu.Items.Add(textAlphaItem);
+
+            var textColor = new ToolStripMenuItem("Цвет текста");
+            textColor.Click += ChangeTextColor_Click;
+            blockMenu.Items.Add(textColor);
+
+            var backAlphaItem = new ToolStripMenuItem("Прозрачность фона");
+            var backAlphaBar = new ToolStripTrackBar { TrackBar = { Width = 120, Minimum = 0, Maximum = 255 } };
+            backAlphaItem.DropDownItems.Add(backAlphaBar);
+            backAlphaBar.TrackBar.ValueChanged += (s, ev) =>
+            {
+                if (blockMenu.Tag is Label lbl && lbl.Tag is Dictionary<string, object> tag)
+                {
+                    tag[TagKeyBackAlpha] = backAlphaBar.TrackBar.Value;
+                    lbl.Invalidate();
+                    SaveBlockPositions();
+                }
+            };
+            blockMenu.Items.Add(backAlphaItem);
+
+            var backColor = new ToolStripMenuItem("Цвет фона");
+            backColor.Click += ChangeBackColor_Click;
+            blockMenu.Items.Add(backColor);
+
+            var borderToggle = new ToolStripMenuItem("Рамка");
+            borderToggle.Click += ToggleBorder_Click;
+            blockMenu.Items.Add(borderToggle);
+
+            var borderColor = new ToolStripMenuItem("Цвет рамки");
+            borderColor.Click += ChangeBorderColor_Click;
+            blockMenu.Items.Add(borderColor);
+
+            var borderAlphaItem = new ToolStripMenuItem("Прозрачность рамки");
+            var borderAlphaBar = new ToolStripTrackBar { TrackBar = { Width = 120, Minimum = 0, Maximum = 255 } };
+            borderAlphaItem.DropDownItems.Add(borderAlphaBar);
+            borderAlphaBar.TrackBar.ValueChanged += (s, ev) =>
+            {
+                if (blockMenu.Tag is Label lbl && lbl.Tag is Dictionary<string, object> tag)
+                {
+                    tag[TagKeyBorderAlpha] = borderAlphaBar.TrackBar.Value;
+                    lbl.Invalidate();
+                    SaveBlockPositions();
+                }
+            };
+            blockMenu.Items.Add(borderAlphaItem);
+
+            blockMenu.Items.Add(new ToolStripSeparator());
+
+            var hide = new ToolStripMenuItem("Скрыть/Показать");
+            hide.Click += ToggleVisible_Click;
+            blockMenu.Items.Add(hide);
+
+            var copyBlock = new ToolStripMenuItem("Копировать блок");
+            copyBlock.Click += CopyBlock_Click;
+            blockMenu.Items.Add(copyBlock);
+
+            var deleteBlock = new ToolStripMenuItem("Удалить блок");
+            deleteBlock.Click += DeleteBlock_Click;
+            blockMenu.Items.Add(deleteBlock);
+
+            return blockMenu;
+        }
+
+        private void DeleteBlock_Click(object? sender, EventArgs e)
+        {
+            if (sender is not ToolStripMenuItem mi) return;
+            var owner = mi.GetCurrentParent() as ContextMenuStrip;
+            if (owner?.SourceControl is not Label lbl) return;
+
+            if (MessageBox.Show("Удалить этот блок?", "Подтверждение", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                return;
+
+            RemoveLabel(lbl);
+            SaveBlockPositions();
+        }
+
+        private void DeleteSelectedBlocks_Click(object? sender, EventArgs e)
+        {
+            if (!selectedLabels.Any()) return;
+            if (MessageBox.Show($"Удалить {selectedLabels.Count} блок(ов)?", "Подтверждение", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                return;
+
+            foreach (var lbl in selectedLabels.ToList())
+            {
+                RemoveLabel(lbl);
+            }
+            selectedLabels.Clear();
+            SaveBlockPositions();
+            this.Invalidate();
+        }
+
+        private void RemoveLabel(Label lbl)
+        {
+            if (this.Controls.Contains(lbl))
+                this.Controls.Remove(lbl);
+            if (hiddenInOverlay.Contains(lbl))
+                hiddenInOverlay.Remove(lbl);
+            lbl.Dispose();
+        }
+
+        private Label CreateDataLabel(string name, string labelText, string initialValue, int x, int y, int width, int height, ContextMenuStrip menu)
+        {
+            var tag = new Dictionary<string, object>
+            {
+                { TagKeyAlpha, 255 },
+                { TagKeyClosed, false },
+                { TagKeyBorderAlpha, 255 },
+                { TagKeyBorderColor, Color.White },
+                { TagKeyBaseBackColor, Color.Black },
+                { TagKeyBackAlpha, 255 },
+                { TagKeyShowLabel, true },
+                { TagKeyTextColor, Color.White },
+                { "LabelText", labelText },
+                { "ValueText", initialValue },
+                { "DisplayText", $"{labelText}: {initialValue}" }
+            };
+
+            var lbl = new Label
             {
                 Name = name,
-                Text = text,
                 Location = new Point(x, y),
                 Size = new Size(width, height),
+                Text = "",
                 TextAlign = ContentAlignment.MiddleCenter,
                 BorderStyle = BorderStyle.FixedSingle,
-                ForeColor = Color.White,
-                BackColor = Color.Black,
                 AutoSize = false,
-                Tag = false,
-                ContextMenuStrip = contextMenu
+                Tag = tag,
+                ContextMenuStrip = menu
             };
+
+            lbl.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            lbl.SetStyle(ControlStyles.UserPaint, true);
+            lbl.SetStyle(ControlStyles.ResizeRedraw, true);
 
             lbl.Font = new Font("Arial", 12, FontStyle.Bold);
             ScaleLabelFont(lbl);
@@ -196,117 +652,70 @@ namespace TeleUDP
             lbl.MouseUp += Label_MouseUp;
             lbl.Paint += Label_Paint;
 
+            lbl.ContextMenuStrip.Opening += (s, e) =>
+            {
+                if (s is ContextMenuStrip cms && cms.SourceControl is Label l && l.Tag is Dictionary<string, object> t)
+                {
+                    cms.Tag = l;
+                    var showLabelItem = cms.Items.OfType<ToolStripMenuItem>().FirstOrDefault(i => i.Text == "Показывать подпись");
+                    if (showLabelItem != null) showLabelItem.Checked = (bool)t[TagKeyShowLabel];
+
+                    var backTrack = cms.Items.OfType<ToolStripMenuItem>()
+                        .FirstOrDefault(i => i.Text == "Прозрачность фона")?.DropDownItems[0] as ToolStripTrackBar;
+                    if (backTrack != null) backTrack.TrackBar.Value = (int)t[TagKeyBackAlpha];
+
+                    var textTrack = cms.Items.OfType<ToolStripMenuItem>()
+                        .FirstOrDefault(i => i.Text == "Прозрачность текста")?.DropDownItems[0] as ToolStripTrackBar;
+                    if (textTrack != null) textTrack.TrackBar.Value = (int)t[TagKeyAlpha];
+
+                    var borderTrack = cms.Items.OfType<ToolStripMenuItem>()
+                        .FirstOrDefault(i => i.Text == "Прозрачность рамки")?.DropDownItems[0] as ToolStripTrackBar;
+                    if (borderTrack != null) borderTrack.TrackBar.Value = (int)t[TagKeyBorderAlpha];
+                }
+            };
+
             this.Controls.Add(lbl);
+            return lbl;
         }
+        #endregion
 
-        // --- P/Invoke Логика Оверлея ---
-
-        protected override void OnHandleCreated(EventArgs e)
+        #region Drag / Resize
+        private void Label_MouseDown(object? sender, MouseEventArgs e)
         {
-            base.OnHandleCreated(e);
-            this.TransparencyKey = transparencyKeyColor;
-        }
+            if (e.Button != MouseButtons.Left) return;
+            draggedOrResizedLabel = sender as Label;
+            if (draggedOrResizedLabel == null) return;
+            if (isOverlayMode && (Control.ModifierKeys & Keys.Control) != Keys.Control) return;
 
-        private void ToggleOverlay_Click(object? sender, EventArgs e)
-        {
-            // Получаем элемент меню из контекстного меню формы или иконки в трее
-            ToolStripMenuItem? menuItem = sender as ToolStripMenuItem;
-
-            isOverlayMode = !isOverlayMode;
-
-            if (menuItem != null)
+            if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
             {
-                menuItem.Checked = isOverlayMode;
-                // Обновляем состояние другого меню (если оно есть)
-                if (notifyIcon.ContextMenuStrip?.Items[0] is ToolStripMenuItem trayItem)
-                {
-                    trayItem.Checked = isOverlayMode;
-                }
-                if (this.ContextMenuStrip?.Items[0] is ToolStripMenuItem formItem)
-                {
-                    formItem.Checked = isOverlayMode;
-                }
-            }
-
-            int currentStyles = GetWindowLong(this.Handle, GWL_EXSTYLE);
-
-            if (isOverlayMode)
-            {
-                // Убираем заголовок и рамки
-                this.FormBorderStyle = FormBorderStyle.None;
-
-                // Включаем оверлей
-                SetWindowLong(this.Handle, GWL_EXSTYLE, currentStyles | WS_EX_LAYERED);
-                SetLayeredWindowAttributes(this.Handle, (uint)transparencyKeyColor.ToArgb(), 0, LWA_COLORKEY);
-                SetWindowLong(this.Handle, GWL_EXSTYLE, GetWindowLong(this.Handle, GWL_EXSTYLE) | WS_EX_TRANSPARENT);
-
-                this.BackColor = transparencyKeyColor;
+                isResizing = true;
+                this.Cursor = Cursors.SizeNWSE;
             }
             else
             {
-                // Возвращаем заголовок и рамки
-                this.FormBorderStyle = FormBorderStyle.Sizable;
-
-                // Выключаем оверлей
-                SetWindowLong(this.Handle, GWL_EXSTYLE, currentStyles & ~WS_EX_LAYERED);
-                SetWindowLong(this.Handle, GWL_EXSTYLE, GetWindowLong(this.Handle, GWL_EXSTYLE) & ~WS_EX_TRANSPARENT);
-
-                this.BackColor = Color.Gray;
-            }
-        }
-
-        // --- Логика Drag, Resize и масштабирования шрифта ---
-
-        // Убрал WndProc, так как WS_EX_TRANSPARENT более надежно обрабатывает клики сквозь окно.
-
-        private void Label_MouseDown(object? sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                draggedOrResizedLabel = sender as Label;
-                if (draggedOrResizedLabel == null) return;
-
-                // Разрешаем управление блоками только вне оверлейного режима (или с Ctrl)
-                if (isOverlayMode && (Control.ModifierKeys & Keys.Control) != Keys.Control)
-                {
-                    return;
-                }
-
-                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                var rc = new Rectangle(
+                    draggedOrResizedLabel.Width - ResizeHandleSize,
+                    draggedOrResizedLabel.Height - ResizeHandleSize,
+                    ResizeHandleSize, ResizeHandleSize);
+                if (rc.Contains(e.Location) && !isOverlayMode)
                 {
                     isResizing = true;
                     this.Cursor = Cursors.SizeNWSE;
                 }
                 else
                 {
-                    Rectangle resizeHandle = new Rectangle(
-                        draggedOrResizedLabel.Width - ResizeHandleSize,
-                        draggedOrResizedLabel.Height - ResizeHandleSize,
-                        ResizeHandleSize,
-                        ResizeHandleSize
-                    );
-
-                    if (resizeHandle.Contains(e.Location) && !isOverlayMode)
-                    {
-                        isResizing = true;
-                        this.Cursor = Cursors.SizeNWSE;
-                    }
-                    else
-                    {
-                        isDragging = true;
-                        dragStartPosition = e.Location;
-                        this.Cursor = Cursors.SizeAll;
-                    }
+                    isDragging = true;
+                    dragStartPosition = e.Location;
+                    this.Cursor = Cursors.SizeAll;
                 }
-
-                draggedOrResizedLabel.BringToFront();
             }
+            draggedOrResizedLabel.BringToFront();
         }
 
         private void Label_MouseMove(object? sender, MouseEventArgs e)
         {
             if (draggedOrResizedLabel == null) return;
-
             if (isDragging && !isResizing)
             {
                 draggedOrResizedLabel.Left += e.X - dragStartPosition.X;
@@ -314,216 +723,528 @@ namespace TeleUDP
             }
             else if (isResizing)
             {
-                int newWidth = draggedOrResizedLabel.Width + (e.X - dragStartPosition.X);
-                int newHeight = draggedOrResizedLabel.Height + (e.Y - dragStartPosition.Y);
-
-                if (newWidth > 50 && newHeight > 30)
+                int newW = draggedOrResizedLabel.Width + (e.X - dragStartPosition.X);
+                int newH = draggedOrResizedLabel.Height + (e.Y - dragStartPosition.Y);
+                if (newW > 50 && newH > 30)
                 {
-                    draggedOrResizedLabel.Width = newWidth;
-                    draggedOrResizedLabel.Height = newHeight;
+                    draggedOrResizedLabel.Width = newW;
+                    draggedOrResizedLabel.Height = newH;
                     dragStartPosition = e.Location;
+                    ScaleLabelFont(draggedOrResizedLabel);
+                    draggedOrResizedLabel.Invalidate();
                 }
-
-                draggedOrResizedLabel.Invalidate();
             }
             else
             {
-                Rectangle resizeHandle = new Rectangle(
+                var rc = new Rectangle(
                     draggedOrResizedLabel.Width - ResizeHandleSize,
                     draggedOrResizedLabel.Height - ResizeHandleSize,
-                    ResizeHandleSize,
-                    ResizeHandleSize
-                );
-
-                if (resizeHandle.Contains(e.Location) && !isOverlayMode)
-                {
-                    draggedOrResizedLabel.Cursor = Cursors.SizeNWSE;
-                }
-                else
-                {
-                    draggedOrResizedLabel.Cursor = Cursors.Default;
-                }
+                    ResizeHandleSize, ResizeHandleSize);
+                draggedOrResizedLabel.Cursor = (rc.Contains(e.Location) && !isOverlayMode) ? Cursors.SizeNWSE : Cursors.Default;
             }
         }
 
         private void Label_MouseUp(object? sender, MouseEventArgs e)
         {
-            isDragging = false;
-            isResizing = false;
+            isDragging = isResizing = false;
+            if (draggedOrResizedLabel != null)
+            {
+                ScaleLabelFont(draggedOrResizedLabel);
+                draggedOrResizedLabel.Invalidate();
+            }
             draggedOrResizedLabel = null;
             this.Cursor = Cursors.Default;
-
             SaveBlockPositions();
         }
+        #endregion
 
+        #region Paint
         private void Label_Paint(object? sender, PaintEventArgs e)
         {
-            Label? lbl = sender as Label;
-            if (lbl != null)
+            if (sender is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) return;
+
+            int textAlpha = (int)tag[TagKeyAlpha];
+            int backAlpha = (int)tag[TagKeyBackAlpha];
+            int borderAlpha = (int)tag[TagKeyBorderAlpha];
+            Color baseBackColor = (Color)tag[TagKeyBaseBackColor];
+            Color borderColor = (Color)tag[TagKeyBorderColor];
+            Color textColor = (Color)tag[TagKeyTextColor];
+            string displayText = tag["DisplayText"] as string ?? "";
+            bool closed = (bool)tag[TagKeyClosed];
+
+            if (!isOverlayMode && closed)
             {
-                ScaleLabelFont(lbl);
+                textAlpha = Math.Min(textAlpha, HiddenAlpha);
+                backAlpha = Math.Min(backAlpha, HiddenAlpha);
+                borderAlpha = Math.Min(borderAlpha, HiddenAlpha);
+            }
+
+            var g = e.Graphics;
+
+            if (backAlpha > 0)
+            {
+                using var brush = new SolidBrush(Color.FromArgb(backAlpha, baseBackColor));
+                g.FillRectangle(brush, 0, 0, lbl.Width, lbl.Height);
+            }
+
+            if (lbl.BorderStyle == BorderStyle.FixedSingle && borderAlpha > 0)
+            {
+                using var pen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
+                g.DrawRectangle(pen, 0, 0, lbl.Width - 1, lbl.Height - 1);
+            }
+
+            if (closed && !isOverlayMode)
+            {
+                using var pen = new Pen(Color.Red, 3);
+                g.DrawRectangle(pen, 2, 2, lbl.Width - 5, lbl.Height - 5);
+            }
+
+            if (textAlpha > 0 && !string.IsNullOrEmpty(displayText))
+            {
+                using var brush = new SolidBrush(Color.FromArgb(textAlpha, textColor));
+                using var sf = new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Center,
+                    FormatFlags = StringFormatFlags.NoWrap
+                };
+                var textRect = lbl.DisplayRectangle;
+                textRect.Inflate(-2, -2);
+                g.DrawString(displayText, lbl.Font, brush, textRect, sf);
             }
         }
+        #endregion
 
         private void ScaleLabelFont(Label lbl)
         {
-            if (lbl.Text.Length == 0) return;
+            if (lbl.Tag is not Dictionary<string, object> tag) return;
+            string text = (string)tag["DisplayText"];
+            if (string.IsNullOrEmpty(text)) return;
 
-            float minRatio;
+            using var g = lbl.CreateGraphics();
+            var rect = lbl.DisplayRectangle;
+            rect.Inflate(-2, -2);
+            if (rect.Width <= 0 || rect.Height <= 0) return;
 
-            using (Graphics g = lbl.CreateGraphics())
+            float minSize = 8f;
+            float maxSize = 1000f;
+            float bestSize = minSize;
+
+            while (maxSize - minSize > 0.5f)
             {
-                Font baseFont = new Font("Arial", 100);
-                // Используем больший коэффициент масштабирования, чтобы текст был крупнее
-                SizeF stringSize = g.MeasureString(lbl.Text, baseFont, lbl.Width);
-
-                float wRatio = lbl.Width / stringSize.Width;
-                float hRatio = lbl.Height / stringSize.Height;
-                minRatio = Math.Min(wRatio, hRatio);
-                baseFont.Dispose();
-            }
-
-            // Убрали коэффициент 0.9f, чтобы использовать почти весь доступный размер
-            float newFontSize = 100 * minRatio;
-
-            // Увеличиваем минимальный размер шрифта
-            if (newFontSize < 12) newFontSize = 12;
-
-            if (lbl.Font.Size != newFontSize)
-            {
-                Font oldFont = lbl.Font;
-                lbl.Font = new Font(oldFont.FontFamily, newFontSize, oldFont.Style);
-                oldFont.Dispose();
-            }
-        }
-
-
-        // --- Обработка контекстного меню и событий ---
-
-        private void ChangeTextColor_Click(object? sender, EventArgs e)
-        {
-            ToolStripMenuItem? menuItem = sender as ToolStripMenuItem;
-            ContextMenuStrip? contextMenu = menuItem!.Owner as ContextMenuStrip;
-            Label? targetLabel = contextMenu!.SourceControl as Label;
-
-            if (targetLabel != null)
-            {
-                using (ColorDialog colorDialog = new ColorDialog())
+                float mid = (minSize + maxSize) / 2f;
+                using var font = new Font(lbl.Font.FontFamily, mid, lbl.Font.Style);
+                var size = g.MeasureString(text, font);
+                if (size.Width <= rect.Width && size.Height <= rect.Height)
                 {
-                    colorDialog.Color = targetLabel.ForeColor;
-                    if (colorDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        targetLabel.ForeColor = colorDialog.Color;
-                        SaveBlockPositions();
-                    }
-                }
-            }
-        }
-
-        private void ToggleTransparency_Click(object? sender, EventArgs e)
-        {
-            ToolStripMenuItem? menuItem = sender as ToolStripMenuItem;
-            ContextMenuStrip? contextMenu = menuItem!.Owner as ContextMenuStrip;
-            Label? targetLabel = contextMenu!.SourceControl as Label;
-
-            if (targetLabel != null)
-            {
-                bool isTransparent = targetLabel.Tag is bool tagValue && tagValue;
-
-                if (isTransparent)
-                {
-                    targetLabel.BackColor = Color.Black;
-                    targetLabel.BorderStyle = BorderStyle.FixedSingle;
-                    targetLabel.Tag = false;
+                    bestSize = mid;
+                    minSize = mid;
                 }
                 else
                 {
-                    targetLabel.BackColor = Color.Transparent;
-                    targetLabel.BorderStyle = BorderStyle.None;
-                    targetLabel.Tag = true;
+                    maxSize = mid;
                 }
-
-                SaveBlockPositions();
-                targetLabel.Invalidate();
             }
+
+            bestSize *= 0.95f;
+            bestSize = Math.Max(bestSize, 8f);
+            if (Math.Abs(lbl.Font.Size - bestSize) > 0.1f)
+            {
+                lbl.Font = new Font(lbl.Font.FontFamily, bestSize, lbl.Font.Style);
+            }
+        }
+
+        #region Context Menu Handlers
+        private void ChangeTextColor_Click(object? sender, EventArgs e)
+        {
+            if (sender is not ToolStripMenuItem mi) return;
+            var owner = mi.GetCurrentParent() as ContextMenuStrip;
+            if (owner?.SourceControl is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) return;
+
+            using var dlg = new ColorDialog { Color = (Color)tag[TagKeyTextColor] };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                tag[TagKeyTextColor] = dlg.Color;
+                lbl.Invalidate();
+                SaveBlockPositions();
+            }
+        }
+
+        private void ChangeBackColor_Click(object? sender, EventArgs e)
+        {
+            if (sender is not ToolStripMenuItem mi) return;
+            var owner = mi.GetCurrentParent() as ContextMenuStrip;
+            if (owner?.SourceControl is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) return;
+
+            using var dlg = new ColorDialog { Color = (Color)tag[TagKeyBaseBackColor] };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                tag[TagKeyBaseBackColor] = dlg.Color;
+                lbl.Invalidate();
+                SaveBlockPositions();
+            }
+        }
+
+        private void ToggleBorder_Click(object? sender, EventArgs e)
+        {
+            if (sender is not ToolStripMenuItem mi) return;
+            var owner = mi.GetCurrentParent() as ContextMenuStrip;
+            if (owner?.SourceControl is not Label lbl) return;
+
+            lbl.BorderStyle = lbl.BorderStyle == BorderStyle.FixedSingle ? BorderStyle.None : BorderStyle.FixedSingle;
+            lbl.Invalidate();
+            SaveBlockPositions();
+        }
+
+        private void ChangeBorderColor_Click(object? sender, EventArgs e)
+        {
+            if (sender is not ToolStripMenuItem mi) return;
+            var owner = mi.GetCurrentParent() as ContextMenuStrip;
+            if (owner?.SourceControl is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) return;
+
+            using var dlg = new ColorDialog { Color = (Color)tag[TagKeyBorderColor] };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                tag[TagKeyBorderColor] = dlg.Color;
+                lbl.Invalidate();
+                SaveBlockPositions();
+            }
+        }
+
+        private void ToggleVisible_Click(object? sender, EventArgs e)
+        {
+            if (sender is not ToolStripMenuItem mi) return;
+            var owner = mi.GetCurrentParent() as ContextMenuStrip;
+            if (owner?.SourceControl is not Label lbl || lbl.Tag is not Dictionary<string, object> tag) return;
+
+            bool wasClosed = (bool)tag[TagKeyClosed];
+            tag[TagKeyClosed] = !wasClosed;
+
+            if (isOverlayMode)
+            {
+                if (!wasClosed && this.Controls.Contains(lbl))
+                {
+                    this.Controls.Remove(lbl);
+                    hiddenInOverlay.Add(lbl);
+                }
+                else if (wasClosed && hiddenInOverlay.Contains(lbl))
+                {
+                    hiddenInOverlay.Remove(lbl);
+                    this.Controls.Add(lbl);
+                    lbl.Invalidate();
+                }
+            }
+            else
+            {
+                lbl.Invalidate();
+            }
+            SaveBlockPositions();
+        }
+        #endregion
+
+        #region All-Block Actions
+        private void ChangeBackColorAll_Click(object? sender, EventArgs e)
+        {
+            using var dlg = new ColorDialog();
+            if (dlg.ShowDialog() != DialogResult.OK) return;
+            foreach (Label lbl in GetDataLabels())
+            {
+                if (lbl.Tag is Dictionary<string, object> tag)
+                {
+                    tag[TagKeyBaseBackColor] = dlg.Color;
+                    lbl.Invalidate();
+                }
+            }
+            SaveBlockPositions();
+        }
+
+        private void ChangeTextColorAll_Click(object? sender, EventArgs e)
+        {
+            using var dlg = new ColorDialog();
+            if (dlg.ShowDialog() != DialogResult.OK) return;
+            foreach (Label lbl in GetDataLabels())
+            {
+                if (lbl.Tag is Dictionary<string, object> tag)
+                {
+                    tag[TagKeyTextColor] = dlg.Color;
+                    lbl.Invalidate();
+                }
+            }
+            SaveBlockPositions();
+        }
+
+        private void ToggleBorderAll_Click(object? sender, EventArgs e)
+        {
+            bool hasBorder = GetDataLabels().Any(l => l.BorderStyle == BorderStyle.FixedSingle);
+            var newStyle = hasBorder ? BorderStyle.None : BorderStyle.FixedSingle;
+            foreach (Label lbl in GetDataLabels())
+            {
+                lbl.BorderStyle = newStyle;
+                lbl.Invalidate();
+            }
+            SaveBlockPositions();
+        }
+
+        private void ChangeBorderColorAll_Click(object? sender, EventArgs e)
+        {
+            using var dlg = new ColorDialog();
+            if (dlg.ShowDialog() != DialogResult.OK) return;
+            foreach (Label lbl in GetDataLabels())
+            {
+                if (lbl.Tag is Dictionary<string, object> tag)
+                    tag[TagKeyBorderColor] = dlg.Color;
+                lbl.Invalidate();
+            }
+            SaveBlockPositions();
+        }
+
+        private void ToggleVisibleAll_Click(object? sender, EventArgs e)
+        {
+            bool anyVisible = GetDataLabels().Any(l => l.Tag is Dictionary<string, object> t && !(bool)t[TagKeyClosed]);
+            bool makeClosed = anyVisible;
+            foreach (Label lbl in GetDataLabels().ToList())
+            {
+                if (lbl.Tag is not Dictionary<string, object> tag) continue;
+                tag[TagKeyClosed] = makeClosed;
+                if (isOverlayMode)
+                {
+                    if (makeClosed && this.Controls.Contains(lbl))
+                    {
+                        this.Controls.Remove(lbl);
+                        hiddenInOverlay.Add(lbl);
+                    }
+                    else if (!makeClosed && hiddenInOverlay.Contains(lbl))
+                    {
+                        hiddenInOverlay.Remove(lbl);
+                        this.Controls.Add(lbl);
+                        lbl.Invalidate();
+                    }
+                }
+                else
+                {
+                    lbl.Invalidate();
+                }
+            }
+            SaveBlockPositions();
+        }
+
+        private void ToggleTopMost_Click(object? sender, EventArgs e)
+        {
+            this.TopMost = !this.TopMost;
+            if (sender is ToolStripMenuItem mi) mi.Checked = this.TopMost;
         }
 
         private void ResetBlockPositions_Click(object? sender, EventArgs e)
         {
             if (File.Exists(POSITION_FILE))
             {
-                try
-                {
-                    File.Delete(POSITION_FILE);
-                }
-                catch (IOException ex)
-                {
-                    MessageBox.Show($"Невозможно удалить файл: {ex.Message}\nЗакройте программу и удалите файл вручную.", "Ошибка");
-                    return;
-                }
+                try { File.Delete(POSITION_FILE); }
+                catch { MessageBox.Show("Закройте программу и удалите файл BlockPositions.json вручную.", "Ошибка"); return; }
             }
 
-            var controlsToRemove = new List<Control>();
-            foreach (Control control in this.Controls)
+            foreach (var c in GetDataLabels().ToList())
             {
-                if (control is Label)
-                {
-                    controlsToRemove.Add(control);
-                }
+                RemoveLabel(c);
             }
 
-            foreach (var control in controlsToRemove)
-            {
-                this.Controls.Remove(control);
-                control.Dispose();
-            }
-
+            selectedLabels.Clear();
             InitializeDataBlocks();
+            this.Invalidate();
         }
 
-        private void ToggleTopMost_Click(object? sender, EventArgs e)
+        private void SaveSettingsAs_Click(object? sender, EventArgs e)
         {
-            ToolStripMenuItem? menuItem = sender as ToolStripMenuItem;
-            this.TopMost = !this.TopMost;
-            if (menuItem != null)
+            using var dlg = new SaveFileDialog
             {
-                menuItem.Checked = this.TopMost;
-            }
-        }
+                Filter = "JSON files (*.json)|*.json",
+                DefaultExt = "json",
+                FileName = "TelemetrySettings", // .json подставится автоматически
+                OverwritePrompt = true
+            };
 
-        // --- Сохранение и Загрузка расположений блоков ---
+            if (dlg.ShowDialog() != DialogResult.OK) return;
 
-        private void SaveBlockPositions()
-        {
-            var data = new BlockPositionData();
-
-            foreach (Control control in this.Controls)
+            var data = new BlockPositionData
             {
-                if (control is Label lbl)
+                FormBackAlpha = formBackAlpha,
+                FormWidth = this.ClientSize.Width,
+                FormHeight = this.ClientSize.Height
+            };
+
+            foreach (var lbl in GetDataLabels())
+            {
+                if (lbl.Tag is not Dictionary<string, object> tag) continue;
+
+                data.Blocks.Add(new BlockData
                 {
-                    data.Blocks.Add(new BlockData
-                    {
-                        Name = lbl.Name,
-                        X = lbl.Location.X,
-                        Y = lbl.Location.Y,
-                        Width = lbl.Size.Width,
-                        Height = lbl.Size.Height,
-                        TextColorArgb = lbl.ForeColor.ToArgb(),
-                        BackColorArgb = lbl.BackColor.ToArgb(),
-                        BorderStyle = lbl.BorderStyle
-                    });
-                }
+                    Name = lbl.Name,
+                    LabelText = (string)tag["LabelText"],
+                    X = lbl.Location.X,
+                    Y = lbl.Location.Y,
+                    Width = lbl.Size.Width,
+                    Height = lbl.Size.Height,
+                    TextColorArgb = ((Color)tag[TagKeyTextColor]).ToArgb(),
+                    BaseBackColorArgb = ((Color)tag[TagKeyBaseBackColor]).ToArgb(),
+                    BackAlpha = (int)tag[TagKeyBackAlpha],
+                    BorderStyle = lbl.BorderStyle,
+                    TextAlpha = (int)tag[TagKeyAlpha],
+                    BorderAlpha = (int)tag[TagKeyBorderAlpha],
+                    BorderColorArgb = ((Color)tag[TagKeyBorderColor]).ToArgb(),
+                    Closed = (bool)tag[TagKeyClosed],
+                    ShowLabel = (bool)tag[TagKeyShowLabel]
+                });
             }
 
             try
             {
-                string jsonString = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true })!;
-                File.WriteAllText(POSITION_FILE, jsonString);
+                File.WriteAllText(dlg.FileName, JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true }));
+                MessageBox.Show($"Настройки сохранены в:\n{dlg.FileName}", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка сохранения позиций блоков: {ex.Message}");
+                MessageBox.Show($"Ошибка сохранения:\n{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void LoadSettingsFrom_Click(object? sender, EventArgs e)
+        {
+            using var dlg = new OpenFileDialog
+            {
+                Filter = "JSON files (*.json)|*.json",
+                FileName = "TelemetrySettings.json"
+            };
+
+            if (dlg.ShowDialog() != DialogResult.OK) return;
+
+            try
+            {
+                var json = File.ReadAllText(dlg.FileName);
+                var data = JsonSerializer.Deserialize<BlockPositionData>(json) ?? throw new Exception("Пустой или некорректный JSON");
+
+                // --- Применяем глобальные настройки ---
+                formBackAlpha = data.FormBackAlpha;
+                this.ClientSize = new Size(data.FormWidth, data.FormHeight);
+                UpdateFormBackColor();
+
+                // --- Очищаем текущие блоки ---
+                foreach (var lbl in GetDataLabels().ToList())
+                {
+                    RemoveLabel(lbl);
+                }
+                selectedLabels.Clear();
+                hiddenInOverlay.Clear();
+
+                // --- Создаём блоки из файла ---
+                foreach (var b in data.Blocks)
+                {
+                    string labelText = b.LabelText;
+                    if (string.IsNullOrEmpty(labelText))
+                    {
+                        // fallback для старых файлов
+                        var def = defaultBlocks.FirstOrDefault(d => d.name == b.Name);
+                        labelText = def.label; // ← теперь работает!
+                    }
+
+                    var lbl = CreateDataLabel(
+                        b.Name,
+                        labelText,
+                        "0",
+                        b.X, b.Y, b.Width, b.Height,
+                        blockMenuTemplate!
+                    );
+
+                    lbl.BorderStyle = b.BorderStyle;
+
+                    var tag = lbl.Tag as Dictionary<string, object> ?? new Dictionary<string, object>();
+                    tag[TagKeyAlpha] = b.TextAlpha;
+                    tag[TagKeyClosed] = b.Closed;
+                    tag[TagKeyBorderAlpha] = b.BorderAlpha;
+                    tag[TagKeyBorderColor] = Color.FromArgb(b.BorderColorArgb);
+                    tag[TagKeyBaseBackColor] = Color.FromArgb(b.BaseBackColorArgb);
+                    tag[TagKeyBackAlpha] = b.BackAlpha;
+                    tag[TagKeyShowLabel] = b.ShowLabel;
+                    tag[TagKeyTextColor] = Color.FromArgb(b.TextColorArgb);
+                    tag["LabelText"] = labelText;
+                    tag["ValueText"] = "0";
+                    lbl.Tag = tag;
+
+                    UpdateLabelText(lbl);
+                    lbl.Invalidate();
+                }
+
+                // --- Если оверлей включён — переносим блоки в hiddenInOverlay ---
+                if (isOverlayMode)
+                {
+                    foreach (Label lbl in this.Controls.OfType<Label>().ToList())
+                    {
+                        this.Controls.Remove(lbl);
+                        hiddenInOverlay.Add(lbl);
+                    }
+                    RedrawOverlay();
+                }
+
+                // --- Сохраняем как дефолтные (для автосохранения при закрытии) ---
+                SaveBlockPositions();
+
+                this.Invalidate();
+
+                MessageBox.Show($"Настройки загружены из:\n{dlg.FileName}", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки:\n{ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region Helpers
+        private IEnumerable<Label> GetDataLabels() => this.Controls.OfType<Label>().Concat(hiddenInOverlay);
+        private int GetGlobalTextAlpha() => GetDataLabels().FirstOrDefault()?.Tag is Dictionary<string, object> t ? (int)t[TagKeyAlpha] : 255;
+        private int GetGlobalBackAlpha() => GetDataLabels().FirstOrDefault()?.Tag is Dictionary<string, object> t ? (int)t[TagKeyBackAlpha] : 255;
+        private int GetGlobalBorderAlpha() => GetDataLabels().FirstOrDefault()?.Tag is Dictionary<string, object> t ? (int)t[TagKeyBorderAlpha] : 255;
+        #endregion
+
+        #region Save / Load
+        private void SaveBlockPositions()
+        {
+            var data = new BlockPositionData
+            {
+                FormBackAlpha = formBackAlpha,
+                FormWidth = this.ClientSize.Width,
+                FormHeight = this.ClientSize.Height
+            };
+
+            var existingLabels = GetDataLabels().ToList();
+
+            foreach (var lbl in existingLabels)
+            {
+                if (lbl.Tag is not Dictionary<string, object> tag) continue;
+
+                data.Blocks.Add(new BlockData
+                {
+                    Name = lbl.Name,
+                    LabelText = (string)tag["LabelText"],  // ← ДОБАВИТЬ
+                    X = lbl.Location.X,
+                    Y = lbl.Location.Y,
+                    Width = lbl.Size.Width,
+                    Height = lbl.Size.Height,
+                    TextColorArgb = ((Color)tag[TagKeyTextColor]).ToArgb(),
+                    BaseBackColorArgb = ((Color)tag[TagKeyBaseBackColor]).ToArgb(),
+                    BackAlpha = (int)tag[TagKeyBackAlpha],
+                    BorderStyle = lbl.BorderStyle,
+                    TextAlpha = (int)tag[TagKeyAlpha],
+                    BorderAlpha = (int)tag[TagKeyBorderAlpha],
+                    BorderColorArgb = ((Color)tag[TagKeyBorderColor]).ToArgb(),
+                    Closed = (bool)tag[TagKeyClosed],
+                    ShowLabel = (bool)tag[TagKeyShowLabel]
+                });
+            }
+
+            try
+            {
+                File.WriteAllText(POSITION_FILE, JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true }));
+            }
+            catch { }
         }
 
         private void LoadBlockPositions()
@@ -532,142 +1253,271 @@ namespace TeleUDP
 
             try
             {
-                string jsonString = File.ReadAllText(POSITION_FILE);
-                var data = JsonSerializer.Deserialize<BlockPositionData>(jsonString);
-
+                var data = JsonSerializer.Deserialize<BlockPositionData>(File.ReadAllText(POSITION_FILE));
                 if (data == null) return;
 
-                foreach (var blockData in data.Blocks)
+                formBackAlpha = data.FormBackAlpha;
+                this.ClientSize = new Size(data.FormWidth, data.FormHeight);
+                UpdateFormBackColor();
+
+                // Удаляем все старые блоки
+                foreach (var c in GetDataLabels().ToList())
                 {
-                    Label? lbl = this.Controls[blockData.Name] as Label;
-                    if (lbl != null)
+                    RemoveLabel(c);
+                }
+
+                foreach (var b in data.Blocks)
+                {
+                    string labelText = b.LabelText;  // ← БЕРЁМ ИЗ JSON!
+                    if (string.IsNullOrEmpty(labelText))
                     {
-                        lbl.Location = new Point(blockData.X, blockData.Y);
-                        lbl.Size = new Size(blockData.Width, blockData.Height);
-                        lbl.ForeColor = Color.FromArgb(blockData.TextColorArgb);
-                        lbl.BackColor = Color.FromArgb(blockData.BackColorArgb);
-                        lbl.BorderStyle = blockData.BorderStyle;
-
-                        lbl.Tag = (lbl.BackColor.A == 0);
-
-                        ScaleLabelFont(lbl);
+                        // fallback: если нет в JSON — ищем по Name в defaultBlocks
+                        var def = defaultBlocks.FirstOrDefault(d => d.name == b.Name);
+                        labelText = def.label;
                     }
+
+                    var lbl = CreateDataLabel(
+                        b.Name,
+                        labelText,
+                        "0",  // начальное значение
+                        b.X, b.Y, b.Width, b.Height,
+                        blockMenuTemplate!
+                    );
+
+                    lbl.BorderStyle = b.BorderStyle;
+
+                    var tag = lbl.Tag as Dictionary<string, object> ?? new Dictionary<string, object>();
+                    tag[TagKeyAlpha] = b.TextAlpha;
+                    tag[TagKeyClosed] = b.Closed;
+                    tag[TagKeyBorderAlpha] = b.BorderAlpha;
+                    tag[TagKeyBorderColor] = Color.FromArgb(b.BorderColorArgb);
+                    tag[TagKeyBaseBackColor] = Color.FromArgb(b.BaseBackColorArgb);
+                    tag[TagKeyBackAlpha] = b.BackAlpha;
+                    tag[TagKeyShowLabel] = b.ShowLabel;
+                    tag[TagKeyTextColor] = Color.FromArgb(b.TextColorArgb);
+                    tag["LabelText"] = labelText;  // ← ВАЖНО!
+                    tag["ValueText"] = "0";
+                    lbl.Tag = tag;
+
+                    UpdateLabelText(lbl);
+                    lbl.Invalidate();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine($"Ошибка загрузки позиций блоков: {ex.Message}");
-                if (File.Exists(POSITION_FILE))
-                {
-                    File.Delete(POSITION_FILE);
-                }
+                File.Delete(POSITION_FILE);
             }
         }
+        #endregion
 
-        private void Form1_Load(object? sender, EventArgs e) { }
-
-        private void Form1_FormClosing(object? sender, FormClosingEventArgs e)
-        {
-            udpClient?.Close();
-            SaveBlockPositions();
-            // Убираем иконку из трея при закрытии
-            notifyIcon.Visible = false;
-            notifyIcon.Dispose();
-        }
-
-        // --- Обработка UDP данных ---
-
+        #region UDP
         private void ReceiveCallback(IAsyncResult ar)
         {
             try
             {
-                byte[] receivedBytes = udpClient.EndReceive(ar, ref ipEndPoint!);
-                udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
+                byte[] data = udpClient.EndReceive(ar, ref ipEndPoint!);
+                udpClient.BeginReceive(ReceiveCallback, null);
 
-                if (receivedBytes.Length == Marshal.SizeOf<GridLegendsMotionPacket189>())
-                {
-                    GridLegendsMotionPacket189 packet = Utils.ByteArrayToStructure<GridLegendsMotionPacket189>(receivedBytes);
-
-                    if (this.IsHandleCreated)
-                    {
-                        this.BeginInvoke(new Action(() => UpdateUI(packet)));
-                    }
-                }
+                if (data.Length == Marshal.SizeOf<GridLegendsMotionPacket189>() && this.IsHandleCreated)
+                    this.BeginInvoke(() => UpdateUI(Utils.ByteArrayToStructure<GridLegendsMotionPacket189>(data)));
             }
-            catch (ObjectDisposedException) { }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка приема UDP: {ex.Message}");
-            }
+            catch { }
         }
 
         private void UpdateUI(GridLegendsMotionPacket189 packet)
         {
-            // Получаем все Label один раз для эффективности
-            var speedLabel = this.Controls["lblSpeed"] as Label;
-            var rpmRawLabel = this.Controls["lblRPM_Raw"] as Label;
-            var rpm250xLabel = this.Controls["lblRPM_250x"] as Label;
-            var gearLabel = this.Controls["lblGear"] as Label;
-            var throttleLabel = this.Controls["lblThrottle"] as Label;
-            var brakeLabel = this.Controls["lblBrake"] as Label;
-            var gForceLatLabel = this.Controls["lblGForceLat"] as Label;
-            var gForceLonLabel = this.Controls["lblGForceLon"] as Label;
-            var pitchLabel = this.Controls["lblPitch"] as Label;
-
-            if (speedLabel != null)
+            void Set(string labelText, string value)
             {
-                speedLabel.Text = $"Speed: {packet.m_speed * 3.6f:F1} km/h";
-                ScaleLabelFont(speedLabel);
+                foreach (var lbl in GetDataLabels())
+                {
+                    if (lbl.Tag is Dictionary<string, object> tag &&
+                        tag.TryGetValue("LabelText", out var lt) &&
+                        lt is string lblText &&
+                        lblText == labelText)
+                    {
+                        tag["ValueText"] = value;
+                        UpdateLabelText(lbl);
+                    }
+                }
             }
 
-            if (rpmRawLabel != null)
+            Set("Speed", $"{(int)(packet.m_speed * 3.6f)}");
+            Set("RPM (Raw)", $"{packet.m_engineRPM:F0}");
+            Set("RPM (*250)", $"{packet.m_engineRPM * 250f:F0}");
+            Set("Gear", packet.m_gear == 0 ? "N" : packet.m_gear > 0 ? ((int)packet.m_gear).ToString() : "R");
+            Set("Throttle", $"{packet.m_throttle:P0}");
+            Set("Brake", $"{packet.m_brake:P0}");
+            Set("G-Lat", $"{packet.m_gForceLateral:F2}");
+            Set("G-Long", $"{packet.m_gForceLongitudinal:F2}");
+            Set("Pitch", $"{packet.m_pitch:F2}");
+
+            if (isOverlayMode) RedrawOverlay();
+        }
+        #endregion
+
+        private void RedrawOverlay()
+        {
+            Point pos = this.Location;
+            Size sz = this.Size;
+            using Bitmap bmp = new Bitmap(sz.Width, sz.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            using Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.Transparent); // Прозрачный фон
+
+            foreach (Label lbl in GetDataLabels())
             {
-                rpmRawLabel.Text = $"RPM (Raw): {packet.m_engineRPM:F0}";
-                ScaleLabelFont(rpmRawLabel);
+                if (lbl.Tag is not Dictionary<string, object> tag || (bool)tag[TagKeyClosed]) continue;
+
+                Rectangle rect = new Rectangle(lbl.Left, lbl.Top, lbl.Width, lbl.Height);
+                int textAlpha = (int)tag[TagKeyAlpha];
+                int backAlpha = (int)tag[TagKeyBackAlpha];
+                int borderAlpha = (int)tag[TagKeyBorderAlpha];
+                Color baseBackColor = (Color)tag[TagKeyBaseBackColor];
+                Color borderColor = (Color)tag[TagKeyBorderColor];
+                Color textColor = (Color)tag[TagKeyTextColor];
+                string displayText = tag["DisplayText"] as string ?? "";
+
+                // === Фон ===
+                if (backAlpha > 0)
+                {
+                    using var brush = new SolidBrush(Color.FromArgb(backAlpha, baseBackColor));
+                    g.FillRectangle(brush, rect);
+                }
+
+                // === Рамка ===
+                if (lbl.BorderStyle == BorderStyle.FixedSingle && borderAlpha > 0)
+                {
+                    using var pen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
+                    g.DrawRectangle(pen, rect.X, rect.Y, rect.Width - 1, rect.Height - 1);
+                }
+
+                // === Текст с правильной альфой ===
+                if (textAlpha > 0 && !string.IsNullOrEmpty(displayText))
+                {
+                    using var brush = new SolidBrush(Color.FromArgb(textAlpha, textColor));
+                    using var sf = new StringFormat
+                    {
+                        Alignment = StringAlignment.Center,
+                        LineAlignment = StringAlignment.Center,
+                        FormatFlags = StringFormatFlags.NoWrap
+                    };
+                    var textRect = new Rectangle(rect.X + 4, rect.Y + 4, rect.Width - 8, rect.Height - 8);
+                    g.DrawString(displayText, lbl.Font, brush, textRect, sf);
+                }
             }
 
-            if (rpm250xLabel != null)
-            {
-                rpm250xLabel.Text = $"RPM (*250): {packet.m_engineRPM * 250f:F0}";
-                ScaleLabelFont(rpm250xLabel);
-            }
+            // === Обновление окна ===
+            IntPtr screenDc = GetDC(IntPtr.Zero);
+            IntPtr memDc = CreateCompatibleDC(screenDc);
+            IntPtr hBitmap = IntPtr.Zero;
+            IntPtr oldBitmap = IntPtr.Zero;
 
-            if (gearLabel != null)
+            try
             {
-                string gearText = (packet.m_gear == 0f) ? "N" : (packet.m_gear > 0f) ? ((int)packet.m_gear).ToString() : "R";
-                gearLabel.Text = $"Gear: {gearText}";
-                ScaleLabelFont(gearLabel);
-            }
+                hBitmap = bmp.GetHbitmap(Color.FromArgb(0)); // Прозрачный ключ не нужен
+                oldBitmap = SelectObject(memDc, hBitmap);
 
-            if (throttleLabel != null)
-            {
-                throttleLabel.Text = $"Throttle: {packet.m_throttle:P0}";
-                ScaleLabelFont(throttleLabel);
-            }
+                Point pptDst = pos;
+                Size psize = sz;
+                Point pptSrc = new Point(0, 0);
 
-            if (brakeLabel != null)
-            {
-                brakeLabel.Text = $"Brake: {packet.m_brake:P0}";
-                ScaleLabelFont(brakeLabel);
-            }
+                BLENDFUNCTION blend = new BLENDFUNCTION
+                {
+                    BlendOp = AC_SRC_OVER,
+                    BlendFlags = 0,
+                    SourceConstantAlpha = 255,        // Полная видимость
+                    AlphaFormat = AC_SRC_ALPHA         // Альфа из пикселей (включая текст!)
+                };
 
-            if (gForceLatLabel != null)
-            {
-                gForceLatLabel.Text = $"G-Lat: {packet.m_gForceLateral:F2}";
-                ScaleLabelFont(gForceLatLabel);
+                UpdateLayeredWindow(
+                    this.Handle,
+                    screenDc,
+                    ref pptDst,
+                    ref psize,
+                    memDc,
+                    ref pptSrc,
+                    0,
+                    ref blend,
+                    ULW_ALPHA
+                );
             }
+            finally
+            {
+                if (hBitmap != IntPtr.Zero)
+                {
+                    SelectObject(memDc, oldBitmap);
+                    DeleteObject(hBitmap);
+                }
+                ReleaseDC(IntPtr.Zero, screenDc);
+                DeleteDC(memDc);
+            }
+        }
 
-            if (gForceLonLabel != null)
-            {
-                gForceLonLabel.Text = $"G-Long: {packet.m_gForceLongitudinal:F2}";
-                ScaleLabelFont(gForceLonLabel);
-            }
+        private void UpdateLabelText(Label lbl)
+        {
+            if (lbl.Tag is not Dictionary<string, object> tag) return;
+            string label = (string)tag["LabelText"];
+            string value = (string)tag["ValueText"];
+            bool showLabel = (bool)tag[TagKeyShowLabel];
+            tag["DisplayText"] = showLabel ? $"{label}: {value}" : value;
+            ScaleLabelFont(lbl);
+            lbl.Invalidate();
+        }
 
-            if (pitchLabel != null)
+        private void CopyBlock_Click(object? sender, EventArgs e)
+        {
+            if (sender is not ToolStripMenuItem mi) return;
+            var owner = mi.GetCurrentParent() as ContextMenuStrip;
+            if (owner?.SourceControl is not Label original || original.Tag is not Dictionary<string, object> originalTag) return;
+
+            string baseName = original.Name;
+            int copyIndex = 1;
+            string newName;
+            do
             {
-                pitchLabel.Text = $"Pitch: {packet.m_pitch:F2}";
-                ScaleLabelFont(pitchLabel);
-            }
+                newName = $"{baseName}_Copy{copyIndex++}";
+            } while (GetDataLabels().Any(l => l.Name == newName));
+
+            // Копируем LabelText и ValueText
+            string labelText = (string)originalTag["LabelText"];
+            string valueText = (string)originalTag["ValueText"];
+
+            var newLabel = CreateDataLabel(
+                newName,
+                labelText,
+                valueText, // ← передаём текущее значение
+                original.Location.X + 20,
+                original.Location.Y + 20,
+                original.Width,
+                original.Height,
+                owner
+            );
+
+            var newTag = new Dictionary<string, object>(originalTag);
+            newTag["DisplayText"] = originalTag["DisplayText"];
+            newLabel.Tag = newTag;
+            newLabel.Font = new Font(original.Font.FontFamily, original.Font.Size, original.Font.Style);
+            newLabel.BorderStyle = original.BorderStyle;
+
+            // Обновляем текст (важно!)
+            UpdateLabelText(newLabel);
+            newLabel.Invalidate();
+
+            SaveBlockPositions();
+        }
+    }
+
+    public class ToolStripTrackBar : ToolStripControlHost
+    {
+        public TrackBar TrackBar => (TrackBar)Control;
+        public ToolStripTrackBar() : base(new TrackBar()) { TrackBar.AutoSize = false; }
+    }
+
+    public static class ControlExtensions
+    {
+        public static void SetStyle(this Control control, ControlStyles flag, bool value)
+        {
+            var method = typeof(Control).GetMethod("SetStyle", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            method?.Invoke(control, new object[] { flag, value });
         }
     }
 }
