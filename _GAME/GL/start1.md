@@ -1,5 +1,5 @@
 SaFr     1,47,517 514-44
-OKU_GP   1.45.812 2 5 5 5 5
+OKU_GP   1.45.612k 2 5 5 5 5
 OKU_S    2.32.039 4!
 Msk F    1.14.455 5 5 5 5 5
 Barca -> 1.33.072  55555
@@ -23,6 +23,7 @@ Sep_C_st 0/57.492 3
 
 =========kick
 EX3412, UltraVox- вечный бан,
+LASK_MX,
 OnkelHeini2019,
 SGT-04U,
 =========cheat
