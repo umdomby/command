@@ -1,16 +1,17 @@
 SaFr     1,47,206 514-44
 OKU_GP   1.45.612k 2 5 5 5 5
+OKU_S_1  3.34.748 4!
 OKU_S    2.32.039 4!
 Msk F    1.14.455 5 5 5 5 5
 Barca -> 1.33.072  55555
 Barca <- 1.36.08
 Chicago  1.49.500 4-5!
 Dubai    1.42.291  2
-Par      1.50.348! 
-London   1.37.237  45555  1.38.902  41355
+Par      1.49.968  4
+London   1.37.181  45555  1.38.902  41355
 Okutama  1.49.217
 Schanhai 1.27.720 5
-HAWANA   1.39.152 4-514!
+HAWANA   1.39.152 4-5!
 Y_H_D    0.57.814
 S_A_club 1.16.238 5k
 B_H      1.11.294 5
@@ -26,6 +27,7 @@ EX3412, UltraVox- вечный бан,
 LASK_MX,
 OnkelHeini2019,
 SGT-04U,
+SULKY68,
 =========cheat
 Lascelles,
 Antonelli, 
