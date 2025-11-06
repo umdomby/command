@@ -38,10 +38,12 @@ namespace TeleUDP
     public class BlockPositionData
     {
         public List<BlockData> Blocks { get; set; } = new();
-
         // Размер формы и прозрачность
         public int FormBackAlpha { get; set; } = 255;
         public int FormWidth { get; set; } = 700;
         public int FormHeight { get; set; } = 300;
+
+        // ← ДОБАВЛЕНО: Язык
+        public string Language { get; set; } = "en";
     }
 }

@@ -1,14 +1,15 @@
 // _GAME/DualSense_5/HidSharp/Telemetry/7/Form1.cs
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using System.IO;
 using System.Text.Json;
-using System.Collections.Generic;
-using System.Linq;
+using System.Windows.Forms;
 
 namespace TeleUDP
 {
@@ -89,6 +90,9 @@ namespace TeleUDP
         private Point selectionStart;
         private Rectangle selectionRect;
 
+
+        private string currentLanguage = "en"; // будет синхронизировано с Localization
+
         // --- Исходные блоки ---
         private readonly List<(string name, string label, string value)> defaultBlocks = new()
         {
@@ -117,7 +121,7 @@ namespace TeleUDP
             this.MaximizeBox = false;
             this.TopMost = true;
             this.Size = new Size(700, 300);
-            this.Icon = SystemIcons.Application;
+            this.Icon = Properties.Resources.telemetry_icon;
 
             int style = GetWindowLong(this.Handle, GWL_EXSTYLE);
             SetWindowLong(this.Handle, GWL_EXSTYLE, style | WS_EX_LAYERED);
@@ -138,6 +142,7 @@ namespace TeleUDP
             LoadBlockPositions();
             InitializeFormContextMenu();
             InitializeNotifyIcon();
+            UpdateMenuCheckedStateSafe();
             UpdateFormBackColor();
 
             this.MouseDown += Form_MouseDown;
@@ -247,16 +252,21 @@ namespace TeleUDP
             };
 
             var trayMenu = new ContextMenuStrip();
-            var toggleOverlay = new ToolStripMenuItem("Оверлей (Прозрачность)") { Checked = isOverlayMode };
-            toggleOverlay.Click += ToggleOverlay_Click;
-            var exit = new ToolStripMenuItem("Выход");
-            exit.Click += (s, e) => this.Close();
 
+            // Оверлей
+            var toggleOverlay = new ToolStripMenuItem(Localization.T("Overlay (Transparency)")) { Checked = isOverlayMode };
+            toggleOverlay.Click += ToggleOverlay_Click;
             trayMenu.Items.Add(toggleOverlay);
+
             trayMenu.Items.Add(new ToolStripSeparator());
+
+            // Выход
+            var exit = new ToolStripMenuItem(Localization.T("Exit"));
+            exit.Click += (s, e) => this.Close();
             trayMenu.Items.Add(exit);
 
             notifyIcon.ContextMenuStrip = trayMenu;
+
             notifyIcon.MouseClick += (s, e) =>
             {
                 if (e.Button != MouseButtons.Left) return;
@@ -270,12 +280,16 @@ namespace TeleUDP
         private void InitializeFormContextMenu()
         {
             var formMenu = new ContextMenuStrip();
-            var overlayItem = new ToolStripMenuItem("Оверлей (Полная Прозрачность)") { Checked = isOverlayMode };
+
+            // Оверлей
+            var overlayItem = new ToolStripMenuItem(Localization.T("Overlay (Full Transparency)")) { Checked = isOverlayMode };
             overlayItem.Click += ToggleOverlay_Click;
             formMenu.Items.Add(overlayItem);
+
             formMenu.Items.Add(new ToolStripSeparator());
 
-            var formBackOpacity = new ToolStripMenuItem("Прозрачность фона формы");
+            // Прозрачность фона формы
+            var formBackOpacity = new ToolStripMenuItem(Localization.T("Form Background Transparency"));
             var formBackOpacityBar = new ToolStripTrackBar { TrackBar = { Width = 150, Minimum = 0, Maximum = 255, Value = formBackAlpha } };
             formBackOpacity.DropDownItems.Add(formBackOpacityBar);
             formBackOpacityBar.TrackBar.ValueChanged += (s, ev) =>
@@ -286,7 +300,8 @@ namespace TeleUDP
             };
             formMenu.Items.Add(formBackOpacity);
 
-            var backOpacityAll = new ToolStripMenuItem("Прозрачность фона всех блоков");
+            // Прозрачность фона всех блоков
+            var backOpacityAll = new ToolStripMenuItem(Localization.T("Background Transparency for All Blocks"));
             var backOpacityBar = new ToolStripTrackBar { TrackBar = { Width = 150, Minimum = 0, Maximum = 255, Value = GetGlobalBackAlpha() } };
             backOpacityAll.DropDownItems.Add(backOpacityBar);
             backOpacityBar.TrackBar.ValueChanged += (s, ev) =>
@@ -304,15 +319,18 @@ namespace TeleUDP
             };
             formMenu.Items.Add(backOpacityAll);
 
-            var backColorAll = new ToolStripMenuItem("Цвет фона всех блоков");
+            // Цвет фона всех блоков
+            var backColorAll = new ToolStripMenuItem(Localization.T("Background Color for All Blocks"));
             backColorAll.Click += ChangeBackColorAll_Click;
             formMenu.Items.Add(backColorAll);
 
-            var textColorAll = new ToolStripMenuItem("Цвет текста всех блоков");
+            // Цвет текста всех блоков
+            var textColorAll = new ToolStripMenuItem(Localization.T("Text Color for All Blocks"));
             textColorAll.Click += ChangeTextColorAll_Click;
             formMenu.Items.Add(textColorAll);
 
-            var textOpacityAll = new ToolStripMenuItem("Прозрачность текста всех");
+            // Прозрачность текста всех
+            var textOpacityAll = new ToolStripMenuItem(Localization.T("Text Transparency for All Blocks"));
             var textOpacityBar = new ToolStripTrackBar { TrackBar = { Width = 150, Minimum = 0, Maximum = 255, Value = GetGlobalTextAlpha() } };
             textOpacityAll.DropDownItems.Add(textOpacityBar);
             textOpacityBar.TrackBar.ValueChanged += (s, ev) =>
@@ -330,7 +348,8 @@ namespace TeleUDP
             };
             formMenu.Items.Add(textOpacityAll);
 
-            var showLabelAll = new ToolStripMenuItem("Показывать подпись у всех блоков");
+            // Показывать подпись у всех блоков
+            var showLabelAll = new ToolStripMenuItem(Localization.T("Show Label for All Blocks"));
             showLabelAll.CheckOnClick = true;
             showLabelAll.Checked = GetDataLabels().Any() && GetDataLabels().All(l => l.Tag is Dictionary<string, object> t && (bool)t[TagKeyShowLabel]);
             showLabelAll.CheckedChanged += (s, e) =>
@@ -348,15 +367,18 @@ namespace TeleUDP
             };
             formMenu.Items.Add(showLabelAll);
 
-            var borderAll = new ToolStripMenuItem("Рамка всех блоков");
+            // Рамка всех блоков
+            var borderAll = new ToolStripMenuItem(Localization.T("Border for All Blocks"));
             borderAll.Click += ToggleBorderAll_Click;
             formMenu.Items.Add(borderAll);
 
-            var borderColorAll = new ToolStripMenuItem("Цвет рамки всех блоков");
+            // Цвет рамки всех блоков
+            var borderColorAll = new ToolStripMenuItem(Localization.T("Border Color for All Blocks"));
             borderColorAll.Click += ChangeBorderColorAll_Click;
             formMenu.Items.Add(borderColorAll);
 
-            var borderAlphaAll = new ToolStripMenuItem("Прозрачность рамки всех");
+            // Прозрачность рамки всех
+            var borderAlphaAll = new ToolStripMenuItem(Localization.T("Border Transparency for All Blocks"));
             var borderAlphaBar = new ToolStripTrackBar { TrackBar = { Width = 150, Minimum = 0, Maximum = 255, Value = GetGlobalBorderAlpha() } };
             borderAlphaAll.DropDownItems.Add(borderAlphaBar);
             borderAlphaBar.TrackBar.ValueChanged += (s, ev) =>
@@ -376,34 +398,66 @@ namespace TeleUDP
 
             formMenu.Items.Add(new ToolStripSeparator());
 
-            var hideAll = new ToolStripMenuItem("Скрыть/Показать все блоки");
+            // Скрыть/Показать все блоки
+            var hideAll = new ToolStripMenuItem(Localization.T("Hide/Show All Blocks"));
             hideAll.Click += ToggleVisibleAll_Click;
             formMenu.Items.Add(hideAll);
 
-            var topMost = new ToolStripMenuItem("Поверх всех окон") { Checked = this.TopMost };
+            // Поверх всех окон
+            var topMost = new ToolStripMenuItem(Localization.T("Always on Top")) { Checked = this.TopMost };
             topMost.Click += ToggleTopMost_Click;
             formMenu.Items.Add(topMost);
 
-            var reset = new ToolStripMenuItem("Сбросить расположение");
+            // Сбросить расположение
+            var reset = new ToolStripMenuItem(Localization.T("Reset Layout"));
             reset.Click += ResetBlockPositions_Click;
             formMenu.Items.Add(reset);
 
-            var deleteSelected = new ToolStripMenuItem("Удалить выделенные блоки");
+            // Удалить выделенные блоки
+            var deleteSelected = new ToolStripMenuItem(Localization.T("Delete Selected Blocks"));
             deleteSelected.Click += DeleteSelectedBlocks_Click;
             formMenu.Items.Add(deleteSelected);
 
-            this.ContextMenuStrip = formMenu;
-
             formMenu.Items.Add(new ToolStripSeparator());
 
-            var saveSettings = new ToolStripMenuItem("Сохранить настройки как...");
+            // Сохранить настройки как...
+            var saveSettings = new ToolStripMenuItem(Localization.T("Save Settings As..."));
             saveSettings.Click += SaveSettingsAs_Click;
             formMenu.Items.Add(saveSettings);
 
-            var loadSettings = new ToolStripMenuItem("Загрузить настройки из...");
+            // Загрузить настройки из...
+            var loadSettings = new ToolStripMenuItem(Localization.T("Load Settings From..."));
             loadSettings.Click += LoadSettingsFrom_Click;
             formMenu.Items.Add(loadSettings);
 
+            // ── Язык ─────────────────────────────────────────────────────────────────────
+            var langMenu = new ToolStripMenuItem(Localization.T("Language"));
+            var enItem = new ToolStripMenuItem(Localization.T("English")) { Checked = Localization.Current == "en" };
+            var ruItem = new ToolStripMenuItem(Localization.T("Russian")) { Checked = Localization.Current == "ru" };
+            enItem.Click += (s, e) =>
+            {
+                Localization.Current = "en";
+                currentLanguage = "en";
+                enItem.Checked = true;
+                ruItem.Checked = false;
+                ApplyLanguageToAllMenus();
+                SaveBlockPositions();
+            };
+            ruItem.Click += (s, e) =>
+            {
+                Localization.Current = "ru";
+                currentLanguage = "ru";
+                ruItem.Checked = true;
+                enItem.Checked = false;
+                ApplyLanguageToAllMenus();
+                SaveBlockPositions();
+            };
+            langMenu.DropDownItems.Add(enItem);
+            langMenu.DropDownItems.Add(ruItem);
+            formMenu.Items.Add(new ToolStripSeparator());
+            formMenu.Items.Add(langMenu);
+
+            this.ContextMenuStrip = formMenu;
         }
         #endregion
 
@@ -411,7 +465,7 @@ namespace TeleUDP
         private void ToggleOverlay_Click(object? sender, EventArgs e)
         {
             isOverlayMode = !isOverlayMode;
-            UpdateMenuCheckedState();
+            UpdateMenuCheckedStateSafe();
 
             int style = GetWindowLong(this.Handle, GWL_EXSTYLE);
             if (isOverlayMode)
@@ -438,10 +492,13 @@ namespace TeleUDP
             }
         }
 
-        private void UpdateMenuCheckedState()
+        private void UpdateMenuCheckedStateSafe()
         {
-            if (notifyIcon.ContextMenuStrip?.Items[0] is ToolStripMenuItem tray) tray.Checked = isOverlayMode;
-            if (this.ContextMenuStrip?.Items[0] is ToolStripMenuItem form) form.Checked = isOverlayMode;
+            if (notifyIcon?.ContextMenuStrip?.Items[0] is ToolStripMenuItem tray)
+                tray.Checked = isOverlayMode;
+
+            if (this.ContextMenuStrip?.Items[0] is ToolStripMenuItem form)
+                form.Checked = isOverlayMode;
         }
 
         private void UpdateFormBackColor()
@@ -484,7 +541,8 @@ namespace TeleUDP
         {
             var blockMenu = new ContextMenuStrip();
 
-            var showLabelItem = new ToolStripMenuItem("Показывать подпись");
+            // Показывать подпись
+            var showLabelItem = new ToolStripMenuItem(Localization.T("Show Label"));
             showLabelItem.CheckOnClick = true;
             showLabelItem.CheckedChanged += (s, e) =>
             {
@@ -497,7 +555,8 @@ namespace TeleUDP
             };
             blockMenu.Items.Add(showLabelItem);
 
-            var textAlphaItem = new ToolStripMenuItem("Прозрачность текста");
+            // Прозрачность текста
+            var textAlphaItem = new ToolStripMenuItem(Localization.T("Text Transparency"));
             var textAlphaBar = new ToolStripTrackBar { TrackBar = { Width = 120, Minimum = 0, Maximum = 255 } };
             textAlphaItem.DropDownItems.Add(textAlphaBar);
             textAlphaBar.TrackBar.ValueChanged += (s, ev) =>
@@ -511,11 +570,13 @@ namespace TeleUDP
             };
             blockMenu.Items.Add(textAlphaItem);
 
-            var textColor = new ToolStripMenuItem("Цвет текста");
+            // Цвет текста
+            var textColor = new ToolStripMenuItem(Localization.T("Text Color"));
             textColor.Click += ChangeTextColor_Click;
             blockMenu.Items.Add(textColor);
 
-            var backAlphaItem = new ToolStripMenuItem("Прозрачность фона");
+            // Прозрачность фона
+            var backAlphaItem = new ToolStripMenuItem(Localization.T("Background Transparency"));
             var backAlphaBar = new ToolStripTrackBar { TrackBar = { Width = 120, Minimum = 0, Maximum = 255 } };
             backAlphaItem.DropDownItems.Add(backAlphaBar);
             backAlphaBar.TrackBar.ValueChanged += (s, ev) =>
@@ -529,19 +590,23 @@ namespace TeleUDP
             };
             blockMenu.Items.Add(backAlphaItem);
 
-            var backColor = new ToolStripMenuItem("Цвет фона");
+            // Цвет фона
+            var backColor = new ToolStripMenuItem(Localization.T("Background Color"));
             backColor.Click += ChangeBackColor_Click;
             blockMenu.Items.Add(backColor);
 
-            var borderToggle = new ToolStripMenuItem("Рамка");
+            // Рамка
+            var borderToggle = new ToolStripMenuItem(Localization.T("Border"));
             borderToggle.Click += ToggleBorder_Click;
             blockMenu.Items.Add(borderToggle);
 
-            var borderColor = new ToolStripMenuItem("Цвет рамки");
+            // Цвет рамки
+            var borderColor = new ToolStripMenuItem(Localization.T("Border Color"));
             borderColor.Click += ChangeBorderColor_Click;
             blockMenu.Items.Add(borderColor);
 
-            var borderAlphaItem = new ToolStripMenuItem("Прозрачность рамки");
+            // Прозрачность рамки
+            var borderAlphaItem = new ToolStripMenuItem(Localization.T("Border Transparency"));
             var borderAlphaBar = new ToolStripTrackBar { TrackBar = { Width = 120, Minimum = 0, Maximum = 255 } };
             borderAlphaItem.DropDownItems.Add(borderAlphaBar);
             borderAlphaBar.TrackBar.ValueChanged += (s, ev) =>
@@ -557,15 +622,18 @@ namespace TeleUDP
 
             blockMenu.Items.Add(new ToolStripSeparator());
 
-            var hide = new ToolStripMenuItem("Скрыть/Показать");
+            // Скрыть/Показать
+            var hide = new ToolStripMenuItem(Localization.T("Hide/Show"));
             hide.Click += ToggleVisible_Click;
             blockMenu.Items.Add(hide);
 
-            var copyBlock = new ToolStripMenuItem("Копировать блок");
+            // Копировать блок
+            var copyBlock = new ToolStripMenuItem(Localization.T("Copy Block"));
             copyBlock.Click += CopyBlock_Click;
             blockMenu.Items.Add(copyBlock);
 
-            var deleteBlock = new ToolStripMenuItem("Удалить блок");
+            // Удалить блок
+            var deleteBlock = new ToolStripMenuItem(Localization.T("Delete Block"));
             deleteBlock.Click += DeleteBlock_Click;
             blockMenu.Items.Add(deleteBlock);
 
@@ -1068,7 +1136,8 @@ namespace TeleUDP
             {
                 FormBackAlpha = formBackAlpha,
                 FormWidth = this.ClientSize.Width,
-                FormHeight = this.ClientSize.Height
+                FormHeight = this.ClientSize.Height,
+                Language = Localization.Current  // ← работает
             };
 
             foreach (var lbl in GetDataLabels())
@@ -1211,7 +1280,8 @@ namespace TeleUDP
             {
                 FormBackAlpha = formBackAlpha,
                 FormWidth = this.ClientSize.Width,
-                FormHeight = this.ClientSize.Height
+                FormHeight = this.ClientSize.Height,
+                Language = Localization.Current
             };
 
             var existingLabels = GetDataLabels().ToList();
@@ -1260,6 +1330,14 @@ namespace TeleUDP
                 this.ClientSize = new Size(data.FormWidth, data.FormHeight);
                 UpdateFormBackColor();
 
+                // ← Восстанавливаем язык
+                if (!string.IsNullOrEmpty(data.Language))
+                {
+                    Localization.Current = data.Language;
+                    currentLanguage = Localization.Current;
+                    ApplyLanguageToAllMenus();
+                }
+
                 // Удаляем все старые блоки
                 foreach (var c in GetDataLabels().ToList())
                 {
@@ -1307,6 +1385,40 @@ namespace TeleUDP
             {
                 File.Delete(POSITION_FILE);
             }
+        }
+
+        private void ApplyLanguageToAllMenus()
+        {
+            // === Главное меню формы ===
+            this.ContextMenuStrip?.Dispose();
+            this.ContextMenuStrip = null;
+            InitializeFormContextMenu();
+
+            // === Трей-меню ===
+            if (notifyIcon != null)
+            {
+                notifyIcon.ContextMenuStrip?.Dispose();
+                var trayMenu = new ContextMenuStrip();
+
+                var toggleOverlay = new ToolStripMenuItem(Localization.T("Overlay (Transparency)")) { Checked = isOverlayMode };
+                toggleOverlay.Click += ToggleOverlay_Click;
+                trayMenu.Items.Add(toggleOverlay);
+
+                trayMenu.Items.Add(new ToolStripSeparator());
+
+                var exit = new ToolStripMenuItem(Localization.T("Exit"));
+                exit.Click += (s, e) => this.Close();
+                trayMenu.Items.Add(exit);
+
+                notifyIcon.ContextMenuStrip = trayMenu;
+            }
+
+            // === Шаблон меню блоков ===
+            blockMenuTemplate?.Dispose();
+            blockMenuTemplate = CreateBlockContextMenu();
+
+            // === Обновляем чекбоксы ТОЛЬКО если меню существуют ===
+            UpdateMenuCheckedStateSafe();
         }
         #endregion
 
@@ -1359,49 +1471,44 @@ namespace TeleUDP
         {
             Point pos = this.Location;
             Size sz = this.Size;
-            using Bitmap bmp = new Bitmap(sz.Width, sz.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            using Graphics g = Graphics.FromImage(bmp);
-            g.Clear(Color.Transparent); // Прозрачный фон
 
-            foreach (Label lbl in GetDataLabels())
+            using var bmp = new Bitmap(sz.Width, sz.Height, PixelFormat.Format32bppArgb);
+            using (var g = Graphics.FromImage(bmp))
             {
-                if (lbl.Tag is not Dictionary<string, object> tag || (bool)tag[TagKeyClosed]) continue;
+                g.Clear(Color.Transparent);
 
-                Rectangle rect = new Rectangle(lbl.Left, lbl.Top, lbl.Width, lbl.Height);
-                int textAlpha = (int)tag[TagKeyAlpha];
-                int backAlpha = (int)tag[TagKeyBackAlpha];
-                int borderAlpha = (int)tag[TagKeyBorderAlpha];
-                Color baseBackColor = (Color)tag[TagKeyBaseBackColor];
-                Color borderColor = (Color)tag[TagKeyBorderColor];
-                Color textColor = (Color)tag[TagKeyTextColor];
-                string displayText = tag["DisplayText"] as string ?? "";
-
-                // === Фон ===
-                if (backAlpha > 0)
+                foreach (Label lbl in GetDataLabels())
                 {
-                    using var brush = new SolidBrush(Color.FromArgb(backAlpha, baseBackColor));
-                    g.FillRectangle(brush, rect);
-                }
+                    if (lbl.Tag is not Dictionary<string, object> tag || (bool)tag[TagKeyClosed]) continue;
 
-                // === Рамка ===
-                if (lbl.BorderStyle == BorderStyle.FixedSingle && borderAlpha > 0)
-                {
-                    using var pen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
-                    g.DrawRectangle(pen, rect.X, rect.Y, rect.Width - 1, rect.Height - 1);
-                }
+                    var rect = new Rectangle(lbl.Left, lbl.Top, lbl.Width, lbl.Height);
+                    int textAlpha = (int)tag[TagKeyAlpha];
+                    int backAlpha = (int)tag[TagKeyBackAlpha];
+                    int borderAlpha = (int)tag[TagKeyBorderAlpha];
+                    Color baseBackColor = (Color)tag[TagKeyBaseBackColor];
+                    Color borderColor = (Color)tag[TagKeyBorderColor];
+                    Color textColor = (Color)tag[TagKeyTextColor];
+                    string displayText = tag["DisplayText"] as string ?? "";
 
-                // === Текст с правильной альфой ===
-                if (textAlpha > 0 && !string.IsNullOrEmpty(displayText))
-                {
-                    using var brush = new SolidBrush(Color.FromArgb(textAlpha, textColor));
-                    using var sf = new StringFormat
+                    // === Фон (с альфой) ===
+                    if (backAlpha > 0)
                     {
-                        Alignment = StringAlignment.Center,
-                        LineAlignment = StringAlignment.Center,
-                        FormatFlags = StringFormatFlags.NoWrap
-                    };
-                    var textRect = new Rectangle(rect.X + 4, rect.Y + 4, rect.Width - 8, rect.Height - 8);
-                    g.DrawString(displayText, lbl.Font, brush, textRect, sf);
+                        using var brush = new SolidBrush(Color.FromArgb(backAlpha, baseBackColor));
+                        g.FillRectangle(brush, rect);
+                    }
+
+                    // === Рамка (с альфой) ===
+                    if (lbl.BorderStyle == BorderStyle.FixedSingle && borderAlpha > 0)
+                    {
+                        using var pen = new Pen(Color.FromArgb(borderAlpha, borderColor), 1);
+                        g.DrawRectangle(pen, rect.X, rect.Y, rect.Width - 1, rect.Height - 1);
+                    }
+
+                    // === Текст — через отдельный метод с ImageAttributes ===
+                    if (textAlpha > 0 && !string.IsNullOrEmpty(displayText))
+                    {
+                        DrawTextWithAlpha(g, rect, displayText, lbl.Font, textColor, textAlpha);
+                    }
                 }
             }
 
@@ -1413,7 +1520,7 @@ namespace TeleUDP
 
             try
             {
-                hBitmap = bmp.GetHbitmap(Color.FromArgb(0)); // Прозрачный ключ не нужен
+                hBitmap = bmp.GetHbitmap(Color.FromArgb(0));
                 oldBitmap = SelectObject(memDc, hBitmap);
 
                 Point pptDst = pos;
@@ -1424,8 +1531,8 @@ namespace TeleUDP
                 {
                     BlendOp = AC_SRC_OVER,
                     BlendFlags = 0,
-                    SourceConstantAlpha = 255,        // Полная видимость
-                    AlphaFormat = AC_SRC_ALPHA         // Альфа из пикселей (включая текст!)
+                    SourceConstantAlpha = 255,
+                    AlphaFormat = AC_SRC_ALPHA
                 };
 
                 UpdateLayeredWindow(
@@ -1437,19 +1544,48 @@ namespace TeleUDP
                     ref pptSrc,
                     0,
                     ref blend,
-                    ULW_ALPHA
-                );
+                    ULW_ALPHA);
             }
             finally
             {
-                if (hBitmap != IntPtr.Zero)
-                {
-                    SelectObject(memDc, oldBitmap);
-                    DeleteObject(hBitmap);
-                }
+                if (oldBitmap != IntPtr.Zero) SelectObject(memDc, oldBitmap);
+                if (hBitmap != IntPtr.Zero) DeleteObject(hBitmap);
                 ReleaseDC(IntPtr.Zero, screenDc);
                 DeleteDC(memDc);
             }
+        }
+
+        private void DrawTextWithAlpha(Graphics dst, Rectangle rect, string text, Font font, Color color, int alpha)
+        {
+            if (alpha <= 0 || string.IsNullOrEmpty(text)) return;
+
+            // 1. Создаём временный битмап только для текста (полностью непрозрачный)
+            using var txtBmp = new Bitmap(rect.Width, rect.Height, PixelFormat.Format32bppArgb);
+            using (var gTxt = Graphics.FromImage(txtBmp))
+            {
+                gTxt.Clear(Color.Transparent);
+                using var brush = new SolidBrush(color); // без альфы!
+                using var sf = new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Center,
+                    FormatFlags = StringFormatFlags.NoWrap
+                };
+                var textRect = new Rectangle(4, 4, rect.Width - 8, rect.Height - 8);
+                gTxt.DrawString(text, font, brush, textRect, sf);
+            }
+
+            // 2. Блендим с нужной альфой через GDI+
+            using var attributes = new ImageAttributes();
+            var matrix = new ColorMatrix { Matrix33 = alpha / 255f }; // только альфа
+            attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+            dst.DrawImage(
+                txtBmp,
+                rect,                     // destination
+                0, 0, rect.Width, rect.Height,
+                GraphicsUnit.Pixel,
+                attributes);
         }
 
         private void UpdateLabelText(Label lbl)
@@ -1520,4 +1656,6 @@ namespace TeleUDP
             method?.Invoke(control, new object[] { flag, value });
         }
     }
+
+
 }
