@@ -1,0 +1,2 @@
+HidSharp
+Newtonsoft.Json
