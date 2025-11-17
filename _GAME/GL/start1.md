@@ -1,7 +1,10 @@
 SaFr     1,46,766 514-44
 OKU_GP   1.45.099 31455
-OKU_S_1  3.30.127 5-31455
-OKU_S    2.32.039 4!
+OKU_S_1  3.30.127 5-1455
+OKU_S_2  3.52.668 3-1455
+OKU_S_3  2.22.220 5-1455
+OKU_S_4  2.31.964 5-1455
+OKU_S_5    2.32.039 4!
 Msk F    1.14.036 5 5 5 5 5
 Barca -> 1.32.751  51455-6
 Barca <- 1.36.08
@@ -29,6 +32,7 @@ OnkelHeini2019,
 SGT-04U,
 SULKY68,
 =========cheat
+AMP n0
 Lascelles,
 Antonelli, 
 ShaneTePain819,
