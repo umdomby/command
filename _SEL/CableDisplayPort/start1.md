@@ -1,0 +1,1 @@
+DP Alt Mode, Thunderbolt или USB4
