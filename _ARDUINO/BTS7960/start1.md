@@ -5,5 +5,7 @@
 - D1 → L_PWM 
 - D2 → R_PWM 
 
+BTS7960
+
 
 
