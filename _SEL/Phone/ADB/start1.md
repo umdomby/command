@@ -1,3 +1,41 @@
+
+
+
+https://xmfirmwareupdater.com/miui/lancelot
+Скачай SP Flash Tool + Драйвера (готовый комплект, ~30–50 МБ)
+https://drive.google.com/file/d/130wFK-EBfFS8bf-VLIO0_EE6yxZlqLz5/view?usp=sharing
+https://xiaomirom.com/en/download/redmi-9-9-prime-lancelot-stable-V13.0.4.0.SJCMIXM/
+
+Android ADB itt, Android Bootloader int, Android Composite ADB int что выбрать из этих или нужен
+
+The system has been destroyed
+
+https://www.mediafire.com/folder/ev67lui4vj09b/MediaTek_Flashing_Tools
+
+MediaTek PreLoader USB VCOM Port
+MediaTek DA USB VCOM Port
+MediaTek USB Port
+Выбирай именно этот → PreLoader USB VCOM Port
+BROM-режим (BootROM)
+DA USB VCOM Port (COM6)
+
+BV330523698BY
+
+☑ preloader
+☐ recovery
+☐ vbmeta
+☐ vbmeta_system
+☐ vbmeta_vendor
+☐ logo
+☐ md1img
+☐ всё остальное
+☑ nvram
+☑ nvdata
+☑ persist
+☑ protect1
+☑ protect2
+☑ frp (если в списке есть)
+
 Huawei p8 забыл почту и пароль как восстановить с помощью компьютора на Windows 11 pro и кабеля?
 
 обойти защиту  (Factory Reset Protection) от Google
@@ -31,12 +69,43 @@ https://ntslab.blogspot.com/2025/11/tps-tool-v31-latest-update-2025-free.html
 IQBWzKW5SXw-IxQvpvFtPIpDw-boe275VhPOuS7KsKI
  123
 
+
+
+
+2. Официальная прошивка Fastboot для Redmi Note 9S Global
+   Самая стабильная и свежая на сегодня — MIUI 14, V14.0.3.0.SJWMIXM (Android 12). Размер ~4.9 ГБ, это Fastboot-версия (.tgz).
+
+Прямая ссылка на скачивание:
+https://xiaomirom.com/en/download/redmi-note-9s-note-9-pro-note-10-lite-curtana-stable-V14.0.3.0.SJWMIXM/
+(Выбери "Fastboot ROM" — ссылка на bigota_curtana-global-V14.0.3.0.SJWMIXM-20230307.tgz. Если нужно, зарегистрируйся на сайте для скачивания.)
+
+Альтернатива (если ссылка не открывается):
+
+https://miuirom.org/phones/redmi-note-9s (ищи V14.0.3.0.SJWMIXM Fastboot, 4.93 GB).
+
+Распакуй архив в отдельную папку (например, C:\firmware) — там будет куча .img файлов.
+3. Mi Flash Tool (последняя версия)
+   Бери v20220507 — это обновлённая версия после 2021.08.13, с поддержкой новых устройств и фиксами ошибок. Размер ~100 МБ.
+
+Скачай Mi Flash v20220507:
+https://www.xiaomiflash.com/download/
+(Кликни "Download Mi Flash Tool 20220507" — файл XiaoMiFlash20220507.zip. Распакуй и запусти setup.exe от админа.)
+
+Альтернатива (официал от Xiaomi):
+
+https://xiaomiflashtool.com/ (выбери Latest Version).
+https://4pda.to/forum/index.php?showtopic=889822
+
+
+
 я могу снять (Factory Reset Protection) от Google в режиме Test Point, когда я ставлю перемычку на телефоне и открывается COM PORT - COM PORT Huawei usb 1.0 COM3
 adb командами через консоль? или нужна отдельная программа?
 cd C:/adb
-cd C:/adb
+cd C:/adb2
 
-
+fastboot devices
+fastboot getvar product  -- lancelot
+fastboot oem device-info  -- разблок. ли загрузчик?
 adb devices
 adb shell rm -rf /data/system/users/0/settings_ssaid.xml
 adb shell rm -rf /data/system/users/0/settings_global.xml
