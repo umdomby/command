@@ -1,15 +1,10 @@
-Здравствуйте, сколько возьмете доплаты?
-iPhone 13 как новый, 90% Обмен на Android
-https://www.kufar.by/item/1038150977
+# 1. Обнови пакеты
+sudo apt update
+
+# 2. Установи ADB (и fastboot заодно)
+sudo apt install android-tools-adb android-tools-fastboot -y
 
 
-Здравствуйте, обменяете на
-iPhone 13, 90% батарея, мало использовался, один хозяин,
-https://www.kufar.by/item/1038150977
-
-Здравствуйте, обменяете на
-iPhone 13, 90% батарея, мало использовался, один хозяин, с доплатой
-https://www.kufar.by/item/1038150977
 
 
 Функции Samsung: Проверьте Samsung Pay, DeX, Bixby, Galaxy Store — они работают только на оригиналах. Подделки не поддерживают.

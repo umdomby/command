@@ -1,0 +1,1 @@
+Программа: Huawei_HiSilicon_FRP_Remove_Tool_v3.1 (2025) или HiSilicon SPTool 2024

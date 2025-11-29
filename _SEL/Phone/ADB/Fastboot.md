@@ -1,3 +1,45 @@
+## Fastboot команды (телефон в режиме Fastboot)
+| Команда                                               | Описание                                                  |
+|-------------------------------------------------------|-----------------------------------------------------------|
+| `fastboot devices`                                    | Показать устройства в Fastboot                            |
+| `fastboot oem unlock` / `fastboot flashing unlock`    | Разблокировать загрузчик                                  |
+| `fastboot oem lock` / `fastboot flashing lock`        | Заблокировать загрузчик                                   |
+| `fastboot flash boot boot.img`                        | Прошить boot / Magisk-патченый                            |
+| `fastboot flash recovery twrp.img`                    | Прошить TWRP / OrangeFox                                  |
+| `fastboot flash vbmeta vbmeta.img --disable-verity --disable-verification` | Отключить AVB 2.0                         |
+| `fastboot flash init_boot init_boot.img`              | Для Android 13+ (A/B устройства)                          |
+| `fastboot set_active a` / `b`                         | Переключить слот A/B                                      |
+| `fastboot erase userdata`                             | Стереть данные                                            |
+| `fastboot -w`                                         | Wipe data + cache                                         |
+| `fastboot oem edl`                                    | Перевод Qualcomm в EDL 9008                               |
+| `fastboot getvar all`                                 | Показать все переменные (unlocked: yes/no и т.д.)         |
+| `fastboot reboot`                                     | Перезагрузить                                             |
+
+## Самые спасательные команды 2025 года
+| Команда                                               | Когда нужна                                               |
+|-------------------------------------------------------|-----------------------------------------------------------|
+| `fastboot flashing unlock_critical`                   | Разблокировка критических разделов (Xiaomi 2023+)         |
+| `fastboot oem cdma` / `fastboot oem edl`              | Принудительный EDL на Qualcomm                            |
+| `adb reboot bootloader && fastboot oem unlock`        | Быстрая разблокировка                                     |
+| `fastboot flash boot_ab boot.img`                     | Прошивка на A/B-устройствах (Pixel, Xiaomi 12+)           |
+| `fastboot continue`                                   | Продолжить загрузку после прерванного fastboot            |
+
+## Полезные .bat-скрипты (Windows) — просто сохрани и запусти
+```bat
+:: 1. Разблокировка + TWRP
+adb reboot bootloader
+fastboot oem unlock
+fastboot flash recovery twrp.img
+fastboot reboot
+
+:: 2. Xiaomi 2024+ (A/B + vbmeta)
+adb reboot bootloader
+fastboot flash boot_ab boot.img
+fastboot flash vbmeta_ab vbmeta.img --disable-verity --disable-verification
+fastboot set_active a
+fastboot reboot
+
+
 В режиме Fastboot телефон определяется в Другие Устройства можно как ни будь восстановить из Fastboot найти драйвер и программу которая установит прошивку?
 
 https://github.com/MiUnlockTool/XiaomiADBFastbootDrivers/releases/latest

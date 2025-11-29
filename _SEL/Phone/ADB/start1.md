@@ -93,10 +93,28 @@ https://www.xiaomiflash.com/download/
 
 Альтернатива (официал от Xiaomi):
 
+
+# 1. Обнови пакеты
+sudo apt update
+
+# 2. Установи ADB (и fastboot заодно)
+sudo apt install android-tools-adb android-tools-fastboot -y
+
+# PowerShell
+winget install usbipd
+
+# PowerShell
+usbipd list
+
+# найди свой Huawei (обычно BUSID 1-2 или 1-3)
+
+usbipd bind --busid 1-2
+usbipd attach --busid 1-2 --wsl
+
+
+
 https://xiaomiflashtool.com/ (выбери Latest Version).
 https://4pda.to/forum/index.php?showtopic=889822
-
-
 
 я могу снять (Factory Reset Protection) от Google в режиме Test Point, когда я ставлю перемычку на телефоне и открывается COM PORT - COM PORT Huawei usb 1.0 COM3
 adb командами через консоль? или нужна отдельная программа?
