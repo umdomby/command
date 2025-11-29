@@ -1,3 +1,5 @@
+QFIL работает только с устройствами на Qualcomm Snapdragon
+
 https://github.com/bkerler/edl/releases
 python -m pip install lxml protobuf
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data>
-  <!-- Redmi 9 (lancelot) V13.0.4.0.SJCMIXM Global EDL -->
+  <!-- Redmi 9 (lancelot) V13.0.4.0.SJCMIXM Global _EDL -->
   <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="images\super.img" label="super" num_partition_sectors="3145728" physical_partition_number="0" size_in_kb="1572864" sparse="true" start_byte="0" start_sector="786432"/>
   <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="images\boot.img" label="boot_a" num_partition_sectors="131072" physical_partition_number="0" size_in_kb="65536" sparse="false" start_sector="262144"/>
   <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="images\boot.img" label="boot_b" num_partition_sectors="131072" physical_partition_number="0" size_in_kb="65536" sparse="false" start_sector="524288"/>
