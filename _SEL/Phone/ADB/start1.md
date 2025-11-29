@@ -1,4 +1,4 @@
-
+MTK Auth Bypass Tool_V6.0.0.1 ловить COM режим
 
 
 https://xmfirmwareupdater.com/miui/lancelot

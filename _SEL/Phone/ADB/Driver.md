@@ -27,3 +27,6 @@
 - **9008** → QFIL → Qualcomm в EDL
 
 Сохрани табличку — больше никогда не спутаешь драйвер и программу!
+# DRIVER!
+# Android Bootloader Interface 
+# Qualcomm HS-USB QDLoader 9008 (COM6)

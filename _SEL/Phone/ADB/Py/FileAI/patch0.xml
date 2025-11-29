@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data>
+  <patch SECTOR_SIZE_IN_BYTES="512" byte_offset="12" filename="images\super.img" physical_partition_number="0" size_in_bytes="4" start_sector="786432" value="0x00000000"/>
+  <patch SECTOR_SIZE_IN_BYTES="512" byte_offset="12" filename="images\super.img" physical_partition_number="0" size_in_bytes="4" start_sector="786433" value="0x00000000"/>
+</data>

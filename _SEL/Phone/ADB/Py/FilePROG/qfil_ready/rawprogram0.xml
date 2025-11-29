@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<data>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="system.img" label="system" num_partition_sectors="5368709" physical_partition_number="0" size_in_KB="2621440" sparse="false" start_sector="0"/>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="vendor.img" label="vendor" num_partition_sectors="1310720" physical_partition_number="0" size_in_KB="640000" sparse="false" start_sector="0"/>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="product.img" label="product" num_partition_sectors="1048576" physical_partition_number="0" size_in_KB="512000" sparse="false" start_sector="0"/>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="odm.img" label="odm" num_partition_sectors="262144" physical_partition_number="0" size_in_KB="128000" sparse="false" start_sector="0"/>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="system_ext.img" label="system_ext" num_partition_sectors="524288" physical_partition_number="0" size_in_KB="256000" sparse="false" start_sector="0"/>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="boot.img" label="boot" num_partition_sectors="131072" physical_partition_number="0" size_in_KB="65536" sparse="false" start_sector="0"/>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="vbmeta.img" label="vbmeta" num_partition_sectors="16" physical_partition_number="0" size_in_KB="8" sparse="false" start_sector="0"/>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="vbmeta_system.img" label="vbmeta_system" num_partition_sectors="16" physical_partition_number="0" size_in_KB="8" sparse="false" start_sector="0"/>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="vbmeta_vendor.img" label="vbmeta_vendor" num_partition_sectors="16" physical_partition_number="0" size_in_KB="8" sparse="false" start_sector="0"/>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="recovery.img" label="recovery" num_partition_sectors="196608" physical_partition_number="0" size_in_KB="98304" sparse="false" start_sector="0"/>
+  <program SECTOR_SIZE_IN_BYTES="512" file_sector_offset="0" filename="dtbo.img" label="dtbo" num_partition_sectors="16384" physical_partition_number="0" size_in_KB="8192" sparse="false" start_sector="0"/>
+</data>

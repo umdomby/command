@@ -1,6 +1,8 @@
 Markdown####  «The system has been destroyed» — все рабочие способы оживить телефон (2025)
 The system has been destroyed
 
+Причина именно в том, что Xiaomi с 2023 года включила строгую защиту anti-rollback и проверку подписи всех критических разделов (super, vbmeta, boot) даже при прошивке официальной fastboot-ROM.
+
 ####  SP Flash Tool v5.19xx–v5.23xx + bypass-DA + auth_sv5.auth
 ####  MTK Client (GitHub bkerler/mtkclient) — самый быстрый и актуальный способ 2025
 ####  Infinity CM2MT2 FREE (бесплатный модуль без донгла)
