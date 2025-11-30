@@ -1,0 +1,1 @@
+Redmi 9 (lancelot)MediaTek как войти в BROM через тест поинт - телефон  The system has been destroyed
