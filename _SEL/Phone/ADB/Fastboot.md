@@ -1,4 +1,11 @@
 ## Fastboot команды (телефон в режиме Fastboot)
+Раздел в Диспетчере устройств: Устройства Android (Android Devices)
+Устройство внутри раздела: Android Bootloader Interface
+
+
+
+fastboot oem device-info
+fastboot getvar unlocked
 | Команда                                               | Описание                                                  |
 |-------------------------------------------------------|-----------------------------------------------------------|
 | `fastboot devices`                                    | Показать устройства в Fastboot                            |

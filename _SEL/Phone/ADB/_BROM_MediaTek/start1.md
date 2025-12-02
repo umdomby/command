@@ -1,5 +1,13 @@
 Как 100 % попасть в BROM (проверено на сотнях таких же кирпичей):
 
+драйвер должен быть libusb-win32 devices - устройство с последовательным интерфейсом USB?
+
+Наличие SLA/DAA (Secure Boot).
+загрузчик закрыт
+Secure Boot включён
+FRP
+Все это лечит MTK Client через BROM в Readmi9 ?
+
 Отключи кабель от телефона
 В Диспетчере устройств удали Android Bootloader Interface (правой кнопкой → удалить устройство)
 Удали также всё, что связано с COM6 (если появилось)
@@ -23,10 +31,10 @@ cd "F:\Program\ANDROID\mtkclient-2.0.1.freeze"
 
 py -3.11 mtk.py da seccfg unlock
 py -3.11 mtk.py reset frp
-py -3.11 mtk.py w super "C:\lancelot_global_images_V13.0.4.0.SJCMIXM_20230111.0000.00_12.0_global\images\super.img"
-py -3.11 mtk.py w vbmeta "C:\lancelot_global_images_V13.0.4.0.SJCMIXM_...\images\vbmeta.img"
-py -3.11 mtk.py w vbmeta_system "C:\lancelot_global_images_V13.0.4.0.SJCMIXM_...\images\vbmeta_system.img"
-py -3.11 mtk.py w vbmeta_vendor "C:\lancelot_global_images_V13.0.4.0.SJCMIXM_...\images\vbmeta_vendor.img"
+py -3.11 mtk.py w super "C:\lancelot_global_images_V13.0.4.0.SJCMIXM\images\super.img"
+py -3.11 mtk.py w vbmeta "C:\lancelot_global_images_V13.0.4.0.SJCMIXM\images\vbmeta.img"
+py -3.11 mtk.py w vbmeta_system "C:\lancelot_global_images_V13.0.4.0.SJCMIXM\images\vbmeta_system.img"
+py -3.11 mtk.py w vbmeta_vendor "C:\lancelot_global_images_V13.0.4.0.SJCMIXM\images\vbmeta_vendor.img"
 py -3.11 mtk.py reset
 
 
