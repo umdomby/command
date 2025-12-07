@@ -459,7 +459,7 @@ export default function COOP() {
                                             alt="Статистика турниров"
                                             width={100}
                                             height={100}
-                                            onClick={() => openDialog("/coop/img_5.png")}
+                                            onClick={() => openDialog("/coop/SETTINGS.png")}
                                         />
                                     </DialogTrigger>
                                     <DialogContent className="dialog-content">
