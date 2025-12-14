@@ -1,6 +1,7 @@
 ssh-keygen -t ed25519 -C "umdomby@yandex.ru"
 git remote -v
 git remote set-url origin git@github.com:umdomby/command.git
+git remote set-url origin git@github.com:umdomby/prod.git
 git remote -v
 ssh -T git@github.com
 ```
