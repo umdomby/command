@@ -38,6 +38,7 @@ New-NetFirewallRule -DisplayName "WSL Access" -Direction Inbound -Protocol TCP -
 New-NetFirewallRule -DisplayName "Allow Port 3033" -Direction Inbound -Protocol TCP -LocalPort 3033 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 3034" -Direction Inbound -Protocol TCP -LocalPort 3034 -Action Allow
 
+netsh interface portproxy add v4tov4 listenaddress=192.168.0.121 listenport=80 connectaddress=172.27.25.230 connectport=80
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.121 listenport=8080 connectaddress=192.168.0.121 connectport=3033
 netsh interface portproxy add v4tov4 listenaddress=192.168.0.121 listenport=443 connectaddress=192.168.0.121 connectport=3034
 
@@ -62,6 +63,7 @@ netsh interface portproxy add v4tov4 listenport=52342 listenaddress=0.0.0.0 conn
 В Windows выполните ipconfig
 netsh interface portproxy add v4tov4 listenaddress=192.168.1.151 listenport=52342 connectaddress=172.30.46.88 connectport=52342
 
+New-NetFirewallRule -DisplayName "Allow Port 80" -Direction Inbound -Protocol TCP -LocalPort 80 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 5432" -Direction Inbound -Protocol TCP -LocalPort 5432 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 5349" -Direction Inbound -Protocol TCP -LocalPort 5349 -Action Allow
 New-NetFirewallRule -DisplayName "Allow Port 6379" -Direction Inbound -Protocol TCP -LocalPort 6379 -Action Allow
@@ -169,6 +171,6 @@ netsh interface portproxy show all
 # Для сброса всех существующих правил используйте:
 netsh interface portproxy reset
 
-netsh interface portproxy delete v4tov4 listenport=444 listenaddress=192.168.0.151
+netsh interface portproxy delete v4tov4 listenport=80 listenaddress=192.168.0.121
 
 
