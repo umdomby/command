@@ -134,7 +134,7 @@ export default function COOP() {
                                             alt="Статистика ставок"
                                             width={100}
                                             height={100}
-                                            onClick={() => openDialog("/coop/img_7.png")}
+                                            onClick={() => openDialog("/coop/logo.png")}
                                         />
                                     </DialogTrigger>
                                     <DialogContent className="dialog-content">

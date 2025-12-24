@@ -1,7 +1,7 @@
-sudo ss -tulnp | grep 3001
+sudo ss -tulnp | grep 3022
 sudo ss -tulnp | grep 8089
 sudo netstat -tulnp | grep ':8089'
-sudo netstat -tulnp | grep ':3033'
+sudo netstat -tulnp | grep ':3022'
 sudo netstat -tulnp | grep ':49940'
 sudo kill -9 49940
 
@@ -14,10 +14,10 @@ sudo lsof -nP -i | grep LISTEN
 Вы можете использовать lsof, чтобы увидеть, какое приложение прослушивает порт 80:
 ```
 sudo lsof -i TCP:8089
-sudo lsof -i TCP:3033
+sudo lsof -i TCP:3022
 ```
 
-sudo kill -9 `sudo lsof -t -i:3033`  or  sudo kill -9 $(sudo lsof -t -i:9001)
+sudo kill -9 `sudo lsof -t -i:3022`  or  sudo kill -9 $(sudo lsof -t -i:9001)
 sudo kill -9 `sudo lsof -t -i:8081`
 sudo kill -9 `sudo lsof -t -i:8089`
 sudo kill -9 `sudo lsof -t -i:80`
@@ -32,7 +32,7 @@ sudo kill -9 -ID-
 
 
 # PowerShell
-netstat -an | findstr :3033
+netstat -an | findstr :3022
 # Найдите PID
 netstat -aon | findstr :3033
 
