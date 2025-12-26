@@ -1,3 +1,5 @@
+yarn add next@latest react@latest react-dom@latest
+
 npx create-next-app@latest
 Есть новые готовые решения Next для новостных лент, с админкой и регистрацией пользователей, 
 распределение ролей. Next Postgres Prisma - у меня есть свое решение, как лучше сделать свое или найти готовое?

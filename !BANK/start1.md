@@ -1,16 +1,16 @@
-USTD    BSC (BEP20)   0x51470b98c8737f14958231cb27491b28c5702c13
-USTD    ETH (ERC20)   0x51470b98c8737f14958231cb27491b28c5702c13
-USTD    TRX (TRC20)   TGptXxwwP6YjVfhkrYTxc4oHSYmwaK2i4S
-BTC                   19hCv645WrUthCNUWb4ncBdHVu6iLhZVow
+1) USTD    BSC (BEP20)   0x51470b98c8737f14958231cb27491b28c5702c13
+2) USTD    ETH (ERC20)   0x51470b98c8737f14958231cb27491b28c5702c13
+3) USTD    TRX (TRC20)   TGptXxwwP6YjVfhkrYTxc4oHSYmwaK2i4S
+4) BTC                   19hCv645WrUthCNUWb4ncBdHVu6iLhZVow
 
-IBAN + SWIFT                
+5) IBAN + SWIFT                
 BY25TECN30140000000GR0021881              
 TECNBY22                                  
 SIARHEI KUNTSEVICH                        
 220141 Belarus Minsk str.Shugaeva 17-3-20 
 Polis ARDU Live
 
-ERIP Payment (Belarus)
+6) ERIP Payment (Belarus)
 Payment category: Banking, Financial Services → Banks, Non-Bank Credit and Financial Organizations → Technobank → Card Top-Up GR21881
 To top up your Technobank card (GR21881) from abroad via ERIP:
 
@@ -20,6 +20,8 @@ To top up your Technobank card (GR21881) from abroad via ERIP:
 4. Specify amount in BYN
 5. Pay with your Visa/Mastercard from any country
 Funds arrive instantly. Commission ~5%.
+
+
 
 ЕРИП-РАСЧЕТ
 Платежи - Банковские, финансовые услуги - Банки, НКФО – Технобанк – Пополнение карты GR21881

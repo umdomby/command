@@ -16,6 +16,16 @@ docker start $(docker ps -a -q)
 - Запущенные контейнеры: 
 # docker ps
 
+# Зайди в контейнер (он у тебя называется docker-ardu-ardu-1):
+docker exec -it docker-ardu-ardu-1 sh
+cd /app2/public/bank
+ls -la
+# Выйди из контейнера (exit) и выполни:
+docker logs docker-ardu-ardu-1 | grep -i error   or   docker logs --tail 100 docker-ardu-ardu-1
+
+# NGINX
+docker exec -it docker-nginx-444-nginx-1 nginx -t
+
 # Статус Docker daemon
 sudo systemctl status docker
 # Логи Docker
