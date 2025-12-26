@@ -46,6 +46,8 @@ Test-NetConnection -ComputerName 192.168.1.151 -Port 3001
 # Проверить брандмауэр Windows
 # Разрешите входящие подключения на порт 3001: powershell
 New-NetFirewallRule -DisplayName "Next.js Dev" -Direction Inbound -LocalPort 3001 -Protocol TCP -Action Allow
+netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=9001 connectaddress=172.27.25.230 connectport=9001
+netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=9000 connectaddress=172.27.25.230 connectport=9000
 netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=5432 connectaddress=172.27.25.230 connectport=5432
 netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=3022 connectaddress=172.27.25.230 connectport=3022
 netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=80 connectaddress=172.27.25.230 connectport=80
