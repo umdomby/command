@@ -24,3 +24,21 @@ yarn add adm-zip
 yarn add -D @types/adm-zip
 
 Create Bucket
+
+# DELETE BUCKET
+docker run --rm \
+--entrypoint /bin/sh \
+minio/mc \
+-c "
+mc alias set myminio http://host.docker.internal:9000 minioadmin minioadmin123 &&
+mc rb --force myminio/arduliveimg &&
+echo 'Бакет arduliveimg удалён нахуй!'
+"
+
+
+http://192.168.1.121:9001/browser/111
+http://192.168.1.121:9001/browser/
+http://192.168.1.121:9001/minio-console/
+
+
+http://192.168.1.121:9001/
