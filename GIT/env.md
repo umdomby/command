@@ -19,3 +19,18 @@ git remote -v
 
 # 3. Теперь force push — это безопасно, потому что ты переписал историю локально
 git push origin main --force-with-lease  or  push
+
+
+# 1. Удали эти файлы из индекса Git, но оставь их на диске
+git rm --cached docker-s3/.env
+git rm --cached docker-s3-444/.env
+
+# Если есть ещё в других папках — добавь:
+# git rm --cached docker-ardu/.env-443
+# git rm --cached docker-ardu/.env-444
+
+# 2. Зафиксируй удаление (теперь они не отслеживаются)
+git commit -m "Remove .env files from tracking"
+
+# 3. Проверь — они должны исчезнуть из Changes в VS Code
+git status
