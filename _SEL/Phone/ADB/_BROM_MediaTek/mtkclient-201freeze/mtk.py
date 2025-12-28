@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env.md python3
 # MTK Flash Client — упрощённая версия для Redmi 9 lancelot (без fuse, без конфликтов)
 
 import argparse
