@@ -1,3 +1,7 @@
+cd ~ && wget https://go.dev/dl/go1.24.6.linux-amd64.tar.gz && sudo tar -C /usr/local -xzf go1.24.6.linux-amd64.tar.gz && echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> ~/.bashrc && echo 'export GOPATH=$HOME/go' >> ~/.bashrc && source ~/.bashrc && go version
+go version
+
+
 go mod tidy
 
 go mod download
@@ -30,6 +34,10 @@ go mod tidy
 # Запустите сервер
 go run .
 
+
+sudo apt update
+sudo apt install snapd -y
+sudo snap install go --classic
 
 
 cd server
