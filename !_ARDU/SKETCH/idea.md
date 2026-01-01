@@ -1,0 +1,480 @@
+Я хочу сделать робота из нескольких ESP32 по сети обменивающегося UDP пакетами
+приложение будет на андройде и windows (VS2022)
+
+первое ESP будет передвижение (driver BTS7960), свет, зарядка, сигнализация, два SERVO
+второе ESP 4 (driver BTS7960)
+
+
+Есть NGINX который ловит 
+
+import { WebSocketServer, WebSocket } from 'ws';
+import { IncomingMessage } from 'http';
+import { getAllowedDeviceIds, getDeviceTelegramInfo } from './actions';
+import { createServer } from 'http';
+import axios from 'axios';
+// Интерфейс для сообщений от клиентов
+interface MessageFromESP {
+ty: string;
+co?: string;
+de?: string;
+pa?: { pin: string; state: string };
+me?: string;
+b1?: string;
+b2?: string;
+sp1?: number;
+sp2?: number;
+z?: number;
+r?: string;
+a?: string;
+m?: boolean;
+ct?: 'browser' | 'esp'; // Добавляем поле ct для сообщений типа clt
+}
+// Конфигурация для Telegram-бота
+let TELEGRAM_BOT_TOKEN: string | null = null; // Переменная для хранения токена Telegram-бота, который будет получен динамически
+let TELEGRAM_CHAT_ID: string | null = null; // Переменная для хранения ID чата Telegram, который будет получен динамически
+let lastTelegramMessageTime = 0; // Время последней отправки сообщения в Telegram для предотвращения спама
+const TELEGRAM_MESSAGE_INTERVAL = 5000; // Минимальный интервал (в миллисекундах) между отправками сообщений в Telegram
+//const DEVICE_NAME = 'R1'; // Название устройства, используется в сообщениях Telegram
+
+const PORT = 8086; // Порт, на котором будет работать WebSocket-сервер
+const WS_PATH = '/wsar'; // Путь для WebSocket-соединений
+
+// Функция для форматирования даты и времени в формате "24.06.2025 13:56" с учетом часового пояса Москвы (UTC+3)
+function formatDateTime(date: Date): string {
+const moscowOffset = 3 * 60 * 60 * 1000; // Смещение времени для Москвы (+3 часа) в миллисекундах
+const moscowDate = new Date(date.getTime() + moscowOffset); // Применяем смещение к переданной дате
+const day = String(moscowDate.getUTCDate()).padStart(2, '0'); // День месяца, дополненный ведущим нулем
+const month = String(moscowDate.getUTCMonth() + 1).padStart(2, '0'); // Месяц (нумерация с 0, поэтому +1), дополненный ведущим нулем
+const year = moscowDate.getUTCFullYear(); // Полный год
+const hours = String(moscowDate.getUTCHours()).padStart(2, '0'); // Часы, дополненные ведущим нулем
+const minutes = String(moscowDate.getUTCMinutes()).padStart(2, '0'); // Минуты, дополненные ведущим нулем
+return `${day}.${month}.${year} ${hours}:${minutes}`; // Форматированная строка с датой и временем
+}
+
+const server = createServer(); // Создаем HTTP-сервер, который будет использоваться для WebSocket
+const wss = new WebSocketServer({
+server, // Привязываем WebSocket-сервер к созданному HTTP-серверу
+path: WS_PATH // Указываем путь для WebSocket-соединений
+});
+
+// Интерфейс для хранения информации о подключенных клиентах
+interface ClientInfo {
+ws: WebSocket; // Объект WebSocket для общения с клиентом
+de?: string; // Идентификатор устройства (deviceId), может быть не определен на момент подключения
+ip: string; // IP-адрес клиента
+isIdentified: boolean; // Флаг, указывающий, идентифицирован ли клиент
+ct?: 'browser' | 'esp'; // Тип клиента: браузер или ESP-устройство
+lastActivity: number; // Время последней активности клиента (в миллисекундах)
+isAlive: boolean; // Флаг, указывающий, активен ли клиент (для проверки ping/pong)
+}
+
+const clients = new Map<number, ClientInfo>(); // Карта для хранения информации о клиентах, ключ — уникальный идентификатор клиента
+
+// Периодическая проверка активности клиентов каждые 30 секунд
+setInterval(() => {
+clients.forEach((client, clientId) => {
+if (!client.isAlive) { // Если клиент не ответил на ping, считаем его неактивным
+client.ws.terminate(); // Закрываем соединение с клиентом
+clients.delete(clientId); // Удаляем клиента из карты
+console.log(`Клиент ${clientId} отключен (не ответил на ping)`); // Логируем отключение клиента
+return;
+}
+client.isAlive = false; // Сбрасываем флаг активности перед отправкой нового ping
+client.ws.ping(null, false); // Отправляем ping клиенту для проверки активности
+});
+}, 30000); // Интервал проверки — 30 секунд
+
+// Обработка нового WebSocket-соединения
+wss.on('connection', async (ws: WebSocket, req: IncomingMessage) => {
+// Проверяем, что запрос пришел по правильному пути
+if (req.url !== WS_PATH) {
+ws.close(1002, 'Неверный путь'); // Закрываем соединение, если путь неверный, с кодом ошибки 1002
+return;
+}
+
+    const clientId = Date.now(); // Генерируем уникальный идентификатор клиента на основе текущего времени
+    const ip = req.socket.remoteAddress || 'unknown'; // Получаем IP-адрес клиента или 'unknown', если адрес недоступен
+    const client: ClientInfo = {
+        ws, // Сохраняем объект WebSocket
+        ip, // Сохраняем IP-адрес клиента
+        isIdentified: false, // Клиент пока не идентифицирован
+        lastActivity: Date.now(), // Устанавливаем время последней активности
+        isAlive: true // Клиент считается активным при подключении
+    };
+    clients.set(clientId, client); // Добавляем клиента в карту
+
+    console.log(`Новое подключение: ${clientId} с IP ${ip}`); // Логируем новое подключение
+
+    // Обработка ответа на ping от клиента
+    ws.on('pong', () => {
+        client.isAlive = true; // Помечаем клиента как активного, так как он ответил на ping
+        client.lastActivity = Date.now(); // Обновляем время последней активности
+    });
+
+    // Отправляем клиенту сообщение об успешном установлении соединения
+    ws.send(JSON.stringify({
+        ty: "sys", // Тип сообщения: системное
+        me: "Соединение установлено", // Сообщение клиенту
+        clientId, // Уникальный идентификатор клиента
+        st: "awi" // Статус: ожидает идентификации
+    }));
+
+    // Обработка входящих сообщений от клиента
+    ws.on('message', async (data: Buffer) => {
+        try {
+            client.lastActivity = Date.now(); // Обновляем время последней активности клиента
+            const message = data.toString(); // Преобразуем буфер в строку
+            console.log(`[${clientId}] Получено: ${message}`); // Логируем полученное сообщение
+            const parsed: MessageFromESP = JSON.parse(message); // Парсим JSON с типом MessageFromESP
+
+            // Обработка сообщения о типе клиента
+            if (parsed.ty === "clt") { // Тип сообщения: client_type (тип клиента)
+                client.ct = parsed.ct; // Сохраняем тип клиента (browser или esp)
+                return;
+            }
+
+            // Обработка сообщения идентификации клиента
+            if (parsed.ty === "idn") { // Тип сообщения: identify (идентификация)
+                const allowedIds = new Set(await getAllowedDeviceIds()); // Получаем список разрешенных идентификаторов устройств
+                if (parsed.de && allowedIds.has(parsed.de)) { // Проверяем, что deviceId передан и находится в списке разрешенных
+                    client.de = parsed.de; // Сохраняем идентификатор устройства
+                    client.isIdentified = true; // Помечаем клиента как идентифицированного
+
+                    // Загружаем данные для отправки уведомлений в Telegram
+                    const telegramInfo = await getDeviceTelegramInfo(parsed.de); // Получаем информацию о Telegram для устройства
+                    TELEGRAM_BOT_TOKEN = telegramInfo?.telegramToken ?? null; // Сохраняем токен Telegram, если он есть
+                    TELEGRAM_CHAT_ID = telegramInfo?.telegramId?.toString() ?? null; // Сохраняем ID чата Telegram, если он есть
+
+                    // Отправляем клиенту подтверждение успешной идентификации
+                    ws.send(JSON.stringify({
+                        ty: "sys", // Тип сообщения: системное
+                        me: "Идентификация успешна", // Сообщение клиенту
+                        clientId, // Уникальный идентификатор клиента
+                        de: parsed.de, // Идентификатор устройства
+                        st: "con" // Статус: подключен
+                    }));
+
+                    // Уведомляем браузерные клиенты о подключении ESP-устройства
+                    if (client.ct === "esp") { // Если клиент — это ESP-устройство
+                        clients.forEach(targetClient => {
+                            if (targetClient.ct === "browser" && // Если целевой клиент — браузер
+                                targetClient.de === parsed.de && // И имеет тот же deviceId
+                                targetClient.de !== null) { // И deviceId определен
+                                console.log(`Уведомление браузерного клиента ${targetClient.de} о подключении ESP`); // Логируем уведомление
+                                targetClient.ws.send(JSON.stringify({
+                                    ty: "est", // Тип сообщения: esp_status (статус ESP)
+                                    st: "con", // Статус: подключен
+                                    de: parsed.de // Идентификатор устройства
+                                }));
+                            }
+                        });
+                    }
+                } else {
+                    // Если идентификатор устройства не разрешен, отправляем ошибку и закрываем соединение
+                    ws.send(JSON.stringify({
+                        ty: "err", // Тип сообщения: ошибка
+                        me: "Ошибка идентификации", // Сообщение клиенту
+                        clientId, // Уникальный идентификатор клиента
+                        st: "rej" // Статус: отклонен
+                    }));
+                    ws.close(); // Закрываем соединение
+                    return;
+                }
+                return;
+            }
+
+            // Проверяем, что клиент идентифицирован, иначе отправляем ошибку
+            if (!client.isIdentified) {
+                ws.send(JSON.stringify({
+                    ty: "err", // Тип сообщения: ошибка
+                    me: "Клиент не идентифицирован", // Сообщение клиенту
+                    clientId // Уникальный идентификатор клиента
+                }));
+                return;
+            }
+
+            // Обработка логов от ESP-устройства
+            if (parsed.ty === "log" && client.ct === "esp") { // Тип сообщения: log, клиент — ESP-устройство
+                // console.log('111111111111111111')
+                // console.log(parsed)
+                // Проверяем условия для отправки уведомления в Telegram: реле 1 включено и напряжение меньше 1В
+                if (parsed.m === true) {
+                    const now = new Date(); // Текущая дата и время
+                    const message = `🚨 Устройство: ${parsed.r}, Время: ${formatDateTime(now)}`; // Формируем сообщение для Telegram
+                    console.log(message); // Логируем сообщение
+                    if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) { // Проверяем наличие токена и ID чата
+                        sendTelegramMessage(message); // Отправляем сообщение в Telegram
+                    } else {
+                        console.log('Отсутствуют данные для Telegram'); // Логируем отсутствие данных Telegram
+                    }
+                }
+                // Пересылка логов от ESP браузерным клиентам
+                clients.forEach(targetClient => {
+                    if (targetClient.ct === "browser" && // Если целевой клиент — браузер
+                        targetClient.de === client.de) { // И имеет тот же deviceId
+                        targetClient.ws.send(JSON.stringify({
+                            ty: "log", // Тип сообщения: лог
+                            me: parsed.me, // Сообщение от ESP
+                            de: client.de, // Идентификатор устройства
+                            or: "esp", // Источник: ESP-устройство
+                            b1: parsed.b1, // Состояние реле 1
+                            b2: parsed.b2, // Состояние реле 2
+                            sp1: parsed.sp1, // Угол первого сервопривода
+                            sp2: parsed.sp2, // Угол второго сервопривода
+                            z: parsed.z, // Значение входного напряжения
+                            a: parsed.a, // Значение входного напряжения
+                            m: parsed.m // Значение входного напряжения
+                        }));
+                    }
+                });
+                return;
+            }
+
+            // Обработка подтверждений команд от ESP
+            if (parsed.ty === "ack" && client.ct === "esp") { // Тип сообщения: acknowledge, клиент — ESP
+                clients.forEach(targetClient => {
+                    if (targetClient.ct === "browser" && // Если целевой клиент — браузер
+                        targetClient.de === client.de) { // И имеет тот же deviceId
+                        const response: MessageFromESP = {
+                            ty: "ack",
+                            co: parsed.co,
+                            de: client.de,
+                            pa: parsed.pa // Передаем pa напрямую, так как оно уже типизировано
+                        };
+                        console.log("Отправка в браузер:", JSON.stringify(response)); // Улучшенное логирование
+                        targetClient.ws.send(JSON.stringify(response));
+                    }
+                });
+                return;
+            }
+
+            // Маршрутизация команд к ESP-устройству
+            if (parsed.co && parsed.de) { // Если в сообщении есть команда и deviceId
+                let delivered = false; // Флаг, указывающий, была ли команда доставлена
+                clients.forEach(targetClient => {
+                    if (targetClient.de === parsed.de && // Если deviceId совпадает
+                        targetClient.ct === "esp" && // Целевой клиент — ESP
+                        targetClient.isIdentified) { // И клиент идентифицирован
+                        console.log(`BRO --> ESP: ${message}`); // Отладка
+                        targetClient.ws.send(message); // Пересылаем команду ESP-устройству
+                        delivered = true; // Помечаем, что команда доставлена
+                    }
+                });
+                if (!delivered) {
+                    console.log(`No ESP found for deviceId=${parsed.de}`); // Отладка
+                }
+            }
+
+        } catch (err) {
+            // Обработка ошибок при разборе сообщения
+            console.error(`[${clientId}] Ошибка обработки сообщения:`, err); // Логируем ошибку
+            ws.send(JSON.stringify({
+                ty: "err", // Тип сообщения: ошибка
+                me: "Неверный формат сообщения", // Сообщение клиенту
+                error: (err as Error).message, // Текст ошибки
+                clientId // Уникальный идентификатор клиента
+            }));
+        }
+    });
+
+    // Обработка закрытия соединения
+    ws.on('close', () => {
+        console.log(`Клиент ${clientId} отключился`); // Логируем отключение клиента
+        if (client.ct === "esp" && client.de) { // Если клиент — ESP и имеет deviceId
+            clients.forEach(targetClient => {
+                if (targetClient.ct === "browser" && // Если целевой клиент — браузер
+                    targetClient.de === client.de) { // И имеет тот же deviceId
+                    targetClient.ws.send(JSON.stringify({
+                        ty: "est", // Тип сообщения: esp_status (статус ESP)
+                        st: "dis", // Статус: отключен
+                        de: client.de, // Идентификатор устройства
+                        // ts: new Date().toISOString(), // Закомментировано: временная метка в формате ISO
+                        re: "соединение закрыто" // Причина: соединение закрыто
+                    }));
+                }
+            });
+        }
+        clients.delete(clientId); // Удаляем клиента из карты
+    });
+
+    // Обработка ошибок WebSocket
+    ws.on('error', (err: Error) => {
+        console.error(`[${clientId}] Ошибка WebSocket:`, err); // Логируем ошибку WebSocket
+    });
+});
+
+// Функция для отправки сообщения в Telegram
+async function sendTelegramMessage(message: string) {
+const currentTime = Date.now(); // Текущее время
+if (currentTime - lastTelegramMessageTime < TELEGRAM_MESSAGE_INTERVAL) { // Проверяем, не слишком ли часто отправляются сообщения
+console.log('Отправка сообщения в Telegram ограничена по времени'); // Логируем ограничение
+return;
+}
+if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) { // Проверяем наличие токена и ID чата
+console.log('Невозможно отправить сообщение в Telegram: отсутствует токен или ID чата'); // Логируем ошибку
+return;
+}
+try {
+// Отправляем сообщение в Telegram через API
+const response = await axios.post(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+chat_id: TELEGRAM_CHAT_ID, // ID чата
+text: message // Текст сообщения
+});
+console.log(`Сообщение в Telegram отправлено: ${message}`, response.data); // Логируем успешную отправку
+lastTelegramMessageTime = currentTime; // Обновляем время последней отправки
+} catch (error: any) {
+console.error('Ошибка отправки сообщения в Telegram:', error.response?.data || error.message); // Логируем ошибку
+}
+}
+
+// Запускаем сервер
+server.listen(PORT, () => {
+console.log(`WebSocket-сервер запущен на ws://0.0.0.0:${PORT}${WS_PATH}`); // Логируем запуск сервера
+});
+
+    # Сайт 1 ardua.site
+    server {
+        listen 80;
+        listen [::]:80;
+        server_name ardua.site www.ardua.site;
+
+        location /.well-known/acme-challenge/ {
+            root /var/www/certbot;
+            try_files $uri $uri/ =404;
+        }
+
+        location / {
+            return 301 https://ardua.site$request_uri;
+        }
+    }
+
+    # HTTPS redirect from www to non-www
+    server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+        server_name www.ardua.site;
+        http2 on;
+
+        ssl_certificate /etc/letsencrypt/live/ardua.site/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/ardua.site/privkey.pem;
+
+        return 301 https://ardua.site$request_uri;
+    }
+
+    # Main HTTPS server
+    server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+        server_name ardua.site;
+        http2 on;
+
+        # SSL configuration
+        ssl_certificate /etc/letsencrypt/live/ardua.site/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/ardua.site/privkey.pem;
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_prefer_server_ciphers on;
+        ssl_ciphers 'ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384';
+
+        # Security headers
+        add_header X-Frame-Options "SAMEORIGIN" always;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header X-XSS-Protection "1; mode=block" always;
+        add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+        # SSL session cache
+        ssl_session_cache shared:SSL:10m;
+        ssl_session_timeout 10m;
+        ssl_session_tickets off;
+
+        # Root location
+        location / {
+            proxy_pass http://192.168.1.141:3001;
+            # proxy_pass http://ardua:3001;
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_buffering off;
+            proxy_read_timeout 3600;
+            proxy_cache_bypass $http_upgrade;
+        }
+
+        location /wsgo {
+            proxy_pass http://192.168.1.141:8085;
+            # proxy_pass http://webrtc_server:8085;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+            # Таймауты
+            proxy_read_timeout 86400;
+            proxy_send_timeout 86400;
+            proxy_connect_timeout 86400;
+
+            # CORS для WebSocket
+            if ($request_method = 'OPTIONS') {
+                add_header 'Access-Control-Allow-Origin' 'https://ardua.site';
+                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+                add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+                add_header 'Access-Control-Max-Age' 1728000;
+                add_header 'Content-Length' 0;
+                return 204;
+            }
+
+            # Отключаем буферизацию для WebSocket
+            proxy_buffering off;
+
+            add_header 'Access-Control-Allow-Origin' 'https://ardua.site' always;
+        }
+
+        # WebSocket endpoint
+        location /wsar {
+            proxy_pass http://192.168.1.141:8086;
+            # proxy_pass http://websocket-server:8086;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_read_timeout 86400;
+            proxy_send_timeout 86400;
+            proxy_connect_timeout 86400;
+
+            if ($request_method = 'OPTIONS') {
+                add_header 'Access-Control-Allow-Origin' 'https://ardua.site';
+                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+                add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+                add_header 'Access-Control-Max-Age' 1728000;
+                add_header 'Content-Length' 0;
+                return 204;
+            }
+            proxy_buffering off;
+            add_header 'Access-Control-Allow-Origin' 'https://ardua.site' always;
+        }
+
+        # Block access to hidden files
+        location ~ /\.(?!well-known) {
+            deny all;
+            access_log off;
+            log_not_found off;
+        }
+
+        # Error handling
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root /usr/share/nginx/html;
+            internal;
+        }
+    }
+
+хорошая идея? что ты можешь добавить улучшить?
+
+можно переделать как то под UDP пакеты? и как лучше это реализовать, чтобы регистрация была в POSTGRES
