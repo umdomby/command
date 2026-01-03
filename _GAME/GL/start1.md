@@ -2,7 +2,7 @@ SaFr     1,45,980 11335
 Par      1.48.538 11335
 London   1.35.500 41335
 London2  1.58.764 11335  
-Havana   1.38.051 51335
+Havana   1.37.383 51335
 Chicago  1.48.379 11355
 Barca    1.31.400 11335
 Dubai    1.39.822 51335
@@ -36,7 +36,6 @@ OKU_S_4  2.31.964 5-1335
 OKU_S_5    2.32.039 4!
 Barca <- 1.36.08
 M_P      1.57.413 3
-
 
 =========kick
 LovableFish91 kickkickkickkickkickkickkick
