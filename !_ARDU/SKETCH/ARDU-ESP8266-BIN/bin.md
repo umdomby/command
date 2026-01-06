@@ -1,43 +1,11 @@
-# Предлагаемая структура бинарного пакета
-0   Magic byte (0xAA) — начало пакета
-1   Тип пакета (см. таблицу ниже)
-2   Device ID — первые 8 символов hex (4 байта)    ← только для сообщений от ESP и idn
-6   Device ID — вторые 8 символов hex (4 байта)    ← ────────────────────────
-10   Длина полезной нагрузки (1 байт, 0..255)
-11   … начало данных (payload) …
-└─ (N байт) ──────────────────────────────────────────────────────
-N+11   CRC8 (или CRC16) — контрольная сумма всего пакета начиная с байта 0
+Байт 0,Назначение,Направление,Длина (байты)
+0x01,IDENTIFY (отправить deviceId),→ server,17
+0x02,CLIENT_TYPE (browser / esp),→ server,2
+0x10,HEARTBEAT,↔,1
+0x20,MOTOR_CMD (motor + speed + dir),browser → esp,5
+0x30,SERVO_ABSOLUTE,browser → esp,4
+0x40,RELAY_SET (D0 only),browser → esp,3
+0x41,ALARM_SET,browser → esp,2
+0x50,FULL_STATUS (от esp),esp → browser,9
+0x51,COMMAND_ACK,esp → browser,3–5
 
-
-# Основные типы пакетов (1 байт)
-Значение,Название,От кого,Краткое описание,Размер payload
-0x01,IDENTIFY,ESP → всем,Начальная идентификация (deviceId уже в заголовке),0 байт
-0x02,HEARTBEAT,ESP → всем,"""я жив"" + быстрые состояния",6–10 байт
-0x10,CMD_MOTOR_A,Browser→ESP,Управление мотором A,2–3 байта
-0x11,CMD_MOTOR_B,Browser→ESP,Управление мотором B,2–3 байта
-0x20,CMD_SERVO_1,Browser→ESP,Угол сервопривода 1 (0-180),1 байт
-0x21,CMD_SERVO_2,Browser→ESP,Угол сервопривода 2 (0-180),1 байт
-0x30,CMD_RELAY_D0,Browser→ESP,"0 = off, 1 = on",1 байт
-0x31,CMD_ALARM,Browser→ESP,"0 = off, 1 = on",1 байт
-0xF0,ACK_SIMPLE,ESP → всем,Подтверждение любой команды,1–2 байта
-0xFE,ERROR,ESP ↔,Ошибка (код ошибки + опционально описание),1–16 байт
-0xFF,PING,любой,"Простой пинг (сервер ↔ esp, esp ↔ браузер)",0 байт
-
-
-# Пример самого частого пакета HEARTBEAT (от ESP)
-textБайт   Описание                          Пример
-─────┼───────────────────────────────────┐
-0   Magic                             0xAA
-1   Тип пакета                        0x02   ← HEARTBEAT
-2-5 Device ID часть 1 (hex → bin)     напр. 0x12 0x34 0xAB 0xCD
-6-9 Device ID часть 2                 напр. 0x56 0x78 0x90 0xEF
-10   Длина payload                     8
-11   Servo1 (0-180)                    uint8
-12   Servo2 (0-180)                    uint8
-13   Relay D0 (0/1)                    uint8
-14   Alarm (0/1)                       uint8
-15   Напряжение * 10 (0-255 = 0.0-25.5V) uint8
-16   Мотор A скорость signed (–100..+100) int8
-17   Мотор B скорость signed           int8
-18   CRC8 (или CRC16)                  1–2 байта
-Общий размер пакета ≈ 19–20 байт против 150–250+ байт JSON.
