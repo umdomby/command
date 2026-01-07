@@ -312,6 +312,31 @@ export default function SocketClient() {
         return () => clearInterval(interval);
     }, [isConnected, isIdentified, motorsActive, sendHbtMotor]);
 
+    const handleVirtualBoxServoChange = useCallback((
+        servoId: "1",
+        value: { an: number; ak: number }
+    ) => {
+        // value.an — вертикальный сервопривод (servo1, gamma)
+        // value.ak — горизонтальный сервопривод (servo2, alpha)
+
+        // Отправляем абсолютные значения для обоих сервоприводов
+        // Можно отправить две команды или одну оптимизированную — зависит от прошивки
+        // Сейчас у вас есть только CMD_SERVO_ABS для одного сервопривода
+
+        // Вариант A: отправляем две отдельные команды (надёжно)
+        const buf1 = new Uint8Array([CMD_SERVO_ABS, 1, Math.round(value.an)]);
+        const buf2 = new Uint8Array([CMD_SERVO_ABS, 2, Math.round(value.ak)]);
+
+        sendBinary(buf1);
+        sendBinary(buf2);
+
+        // Обновляем локальное состояние
+        setServo1Angle(Math.round(value.an));
+        setServo2Angle(Math.round(value.ak));
+
+        // Вариант B (если прошивка поддерживает пакетную команду) — пока не реализовано
+    }, [sendBinary]);
+
     const disabled = !isConnected || !isIdentified
 
     return (
@@ -434,7 +459,7 @@ export default function SocketClient() {
 
                 {isVirtualBoxActive && (
                     <VirtualBox
-                        onServoChange={adjustServo}
+                        onServoChange={handleVirtualBoxServoChange}
                         isVirtualBoxActive={true}
                         hasOrientationPermission={true}
                         hasMotionPermission={true}
