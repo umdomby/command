@@ -144,7 +144,6 @@ wss.on('connection', (ws: WebSocket, req: IncomingMessage) => {
                     break;
 
                 default:
-                    // *** КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: ПЕРЕСЫЛКА ВСЕХ ОСТАЛЬНЫХ КОМАНД ***
                     if (client.de && client.isIdentified) {
                         const isFromBrowser = client.ct === 'browser';
                         const targetType = isFromBrowser ? 'esp' : 'browser';
@@ -154,15 +153,28 @@ wss.on('connection', (ws: WebSocket, req: IncomingMessage) => {
                             if (c.de === client.de && c.ct === targetType && c.isIdentified) {
                                 c.ws.send(buf);
                                 forwarded = true;
-                                console.log(`[${clientId}] Пересылка → ${targetType} ${client.de} (cmd 0x${cmd.toString(16)})`);
+
+                                // ПОДРОБНЫЙ ЛОГ
+                                const cmdName = {
+                                    0x10: 'HEARTBEAT',
+                                    0x20: 'MOTOR',
+                                    0x30: 'SERVO_ABS',
+                                    0x40: 'RELAY',
+                                    0x41: 'ALARM',
+                                    0x50: 'FULL_STATUS',
+                                    0x51: 'ACK',
+                                    0x60: 'ESP_STATUS',
+                                }[cmd] || `UNKNOWN(0x${cmd.toString(16)})`;
+
+                                console.log(`[${clientId}] ${isFromBrowser ? 'Браузер → ESP' : 'ESP → Браузер'} | ${cmdName} | de=${client.de} | len=${buf.length}`);
                             }
                         });
 
                         if (!forwarded) {
-                            console.log(`[${clientId}] НЕ НАЙДЕН ${targetType} для ${client.de} (cmd 0x${cmd.toString(16)})`);
+                            console.log(`[${clientId}] НЕ НАЙДЕН ${targetType} для de=${client.de} (cmd 0x${cmd.toString(16)})`);
                         }
                     } else {
-                        console.log(`[${clientId}] Команда отклонена: не идентифицирован или нет deviceId`);
+                        console.log(`[${clientId}] Команда отклонена: не идентифицирован или нет de`);
                     }
             }
         } catch (err) {

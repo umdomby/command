@@ -201,6 +201,7 @@ export default function SocketClient() {
     }, [sendBinary])
 
     // Управление моторами с троттлингом и мгновенной остановкой
+// Внутри компонента, заменить handleMotorControl на эту версию:
     const handleMotorControl = useCallback((motor: 'A'|'B', value: number) => {
         const abs = Math.abs(value)
         const dir: 0|1|2 = value > 0 ? 1 : value < 0 ? 2 : 0
@@ -214,20 +215,30 @@ export default function SocketClient() {
             setMotorBDirection(dir)
         }
 
-        if (speed === 0) {
-            if (motorAThrottleRef.current) clearTimeout(motorAThrottleRef.current)
-            if (motorBThrottleRef.current) clearTimeout(motorBThrottleRef.current)
-            sendMotor(motor, 0, 0)
+        // МГНОВЕННАЯ ОТПРАВКА для JoyAnalog (курки и стики)
+        // Определяем, от какого источника пришла команда
+        const isFromGamepad = Math.abs(value) > 0 && (value !== Math.floor(value) || Math.abs(value) > 100)
+        // Если это от геймпада — отправляем сразу, без троттлинга
+        if (isFromGamepad || speed === 0) {
+            addLog(`Мотор ${motor}: speed=${speed}, dir=${dir} (мгновенно от JoyAnalog)`, 'info')
+            sendMotor(motor, speed, dir)
             return
         }
 
+        // Для остальных джойстиков — оставляем троттлинг 40 мс
         const throttleRef = motor === 'A' ? motorAThrottleRef : motorBThrottleRef
+        const lastRef = motor === 'A' ? lastMotorACommandRef : lastMotorBCommandRef
+
+        if (JSON.stringify(lastRef.current) === JSON.stringify({ speed, dir })) return
+        lastRef.current = { speed, dir }
+
         if (throttleRef.current) clearTimeout(throttleRef.current)
 
         throttleRef.current = setTimeout(() => {
+            addLog(`Мотор ${motor}: speed=${speed}, dir=${dir} (троттлинг)`, 'info')
             sendMotor(motor, speed, dir)
         }, 40)
-    }, [sendMotor])
+    }, [sendMotor, addLog])
 
     const handleDualAxisControl = useCallback(({ x, y }: { x: number; y: number }) => {
         handleMotorControl('A', Math.round(x))
@@ -253,15 +264,16 @@ export default function SocketClient() {
 
     // Переключение реле D0
     const toggleRelay = useCallback(() => {
-        if (relayD0State === null) return
-        const newState = !relayD0State
+        const desiredState = relayD0State === null ? 1 : (relayD0State ? 0 : 1);
 
-        const buf = new Uint8Array([CMD_RELAY, newState ? 1 : 0])
-        sendBinary(buf)
+        const buf = new Uint8Array([CMD_RELAY, desiredState, 0]);
+        sendBinary(buf);
 
-        setRelayD0State(newState)
-        addLog(`Реле D0 → ${newState ? 'on' : 'off'}`, 'info')
-    }, [relayD0State, sendBinary, addLog])
+        addLog(`Реле D0 → ${desiredState ? 'ВКЛ' : 'ВЫКЛ'} (отправлена команда 0x40)`, 'info');
+
+        // Оптимистическое обновление интерфейса
+        setRelayD0State(desiredState === 1);
+    }, [relayD0State, sendBinary, addLog]);
 
     // Переключение тревоги
     const toggleAlarm = useCallback(() => {
