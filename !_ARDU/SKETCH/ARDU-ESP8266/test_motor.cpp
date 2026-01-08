@@ -1,13 +1,14 @@
 #include <Arduino.h>  // <<<--- ОБЯЗАТЕЛЬНО ДОБАВИТЬ!
 
 // Пины для управления BTS7960 (два мотора A и B)
-#define PIN_ENA  18   // PWM для мотора A
-#define PIN_IN1  19   // Направление мотора A
-#define PIN_IN2  20   // Направление мотора A
+#define PIN_ENA  D1   // PWM для мотора A
+#define PIN_IN1  D2   // Направление мотора A
+#define PIN_IN2  D3   // Направление мотора A
 
-#define PIN_ENB  15   // PWM для мотора B
-#define PIN_IN3  21   // Направление мотора B
-#define PIN_IN4  17   // Направление мотора B
+#define PIN_ENB  D6   // PWM для мотора B
+#define PIN_IN3  D4  // Направление мотора B
+#define PIN_IN4  D5   // Направление мотора B
+
 
 const int MOTOR_SPEED = 150;  // ~78% от максимума
 

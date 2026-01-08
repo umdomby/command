@@ -28,7 +28,7 @@ const TELEGRAM_MESSAGE_INTERVAL = 5000; // Минимальный интерва
 //const DEVICE_NAME = 'R1'; // Название устройства, используется в сообщениях Telegram
 
 const PORT = 8096; // Порт, на котором будет работать WebSocket-сервер
-const WS_PATH = '/wsard'; // Путь для WebSocket-соединений
+const WS_PATH = '/wsar'; // Путь для WebSocket-соединений
 
 // Функция для форматирования даты и времени в формате "24.06.2025 13:56" с учетом часового пояса Москвы (UTC+3)
 function formatDateTime(date: Date): string {
