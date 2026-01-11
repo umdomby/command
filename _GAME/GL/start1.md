@@ -25,8 +25,8 @@ Su_C_irc  1.48.883 51335
 Su_C_irc2 1.47.549 51335
 Su_C_wcB  1.06.692 51335
 Indi      1.20.198 41335 
-Sep       p1-2
-Sep_C_st  0.57.492 p1-2
+Sep       1.55.778 21335
+Sep_C_st  0.57.492 21335
 Sep_k     0.55.935 1
 R_B       1.18.403 41335
 Shanhai   1.25.531 5
@@ -37,7 +37,7 @@ OKU_S_3  2.22.220 5-1335
 OKU_S_4  2.31.964 5-1335
 OKU_S_5    2.32.039 4!
 Barca <- 1.36.08
-M_P      1.57.413 3
+M_P      1.53.283 3
 
 =========kick
 LovableFish91 kickkickkickkickkickkickkick
