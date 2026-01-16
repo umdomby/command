@@ -1,3 +1,6 @@
+BTS7960B 
+74HC244 
+- 
 - VCC → 5В 
 - GND → GND с ESP8266 
 - L_IS, R_IS → no connect
