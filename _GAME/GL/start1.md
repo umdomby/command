@@ -4,7 +4,7 @@ Par      1.48.538 21335
 Par2     1.52.000 21335
 London   1.35.500 41335
 London2  1.58.764 31335  
-Havana   1.37.383 51335
+Havana   1.37.264 51335
 Chicago  1.47.776 11355
 Barca    1.31.443 21335
 Dubai    1.39.822 51335
@@ -19,7 +19,7 @@ Msk      1.11.133 21335
 Msk3     1.42.383 21335
 S_A_1    3.17.837 51335
 S_A_club 1.15.565 31335
-S_A      1.22.696 41335
+S_A      1.22.455 41335
 Cre_Va1   1.41.847 51335
 Cre_Va2   1.14.404 31335
 Su_C_irc  1.48.122 51335
@@ -41,7 +41,7 @@ Barca <- 1.36.08
 M_P      1.53.283 3
 
 =========kick
-LovableFish91 kickkickkickkickkickkickkick
+LovableFish91 - CONST4NTIN kickkickkickkickkickkickkick
 
 
 o Wrong Turn o
