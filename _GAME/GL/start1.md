@@ -15,7 +15,7 @@ Y_H_D_2  0.48.175 11335
 B_H      1.10.269 21335!  3-lap 3.36.792
 OKU_S_1  3.24.040 11335
 OKU_S_2  3.37.291 11335
-OKU_GP   1.44.156 31335
+OKU_GP   1.43.365 31335
 Msk      1.11.133 21335
 Msk3     1.42.383 21335
 S_A_1    3.17.837 51335
@@ -47,11 +47,15 @@ OKU_S_4  2.31.964 5-1335
 OKU_S_5    2.32.039 4!
 Barca <- 1.36.08
 M_P      1.53.283 3
+FUJI     1.30.444 k 4
 
 =========kick
 eanescsheid61fkt@hotmail.com
 LovableFish91 - CONST4NTIN kickkickkickkickkickkickkick
 
+
+NightmanCometh4U
+5Horaizens
 
 o Wrong Turn o
 Biker@Harley.de@ 
