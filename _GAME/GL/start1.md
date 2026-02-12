@@ -3,7 +3,7 @@ SaFr3    1,28,000 21335
 Par      1.48.299 21335
 Par2     1.52.000 21335
 London   1.35.353 41335
-London2  1.58.764 31335  
+London2  1.58.633 31335  
 Havana   1.36.915 51333
 Chicago  1.47.776 11355
 Chicago2 1.31.793 11355
@@ -15,7 +15,7 @@ Y_H_D_2  0.48.175 11335
 B_H      1.10.269 21335!  3-lap 3.36.792
 OKU_S_1  3.24.040 11335
 OKU_S_2  3.37.291 11335
-OKU_GP   1.43.365 31335
+OKU_GP   1.42.969 31335
 Msk      1.11.133 21335
 Msk3     1.42.383 21335
 S_A_1    3.17.837 51335
@@ -53,7 +53,7 @@ FUJI     1.30.444 k 4
 eanescsheid61fkt@hotmail.com
 LovableFish91 - CONST4NTIN kickkickkickkickkickkickkick
 
-slipstream
+slipstream , trail braking
 NightmanCometh4U
 5Horaizens
 
