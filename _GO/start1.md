@@ -1,3 +1,4 @@
+go 1.24
 cd ~ && wget https://go.dev/dl/go1.24.6.linux-amd64.tar.gz && sudo tar -C /usr/local -xzf go1.24.6.linux-amd64.tar.gz && echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> ~/.bashrc && echo 'export GOPATH=$HOME/go' >> ~/.bashrc && source ~/.bashrc && go version
 go version
 

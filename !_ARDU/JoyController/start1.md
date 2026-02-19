@@ -233,4 +233,90 @@ RightStickSettingsForm.cs
 
 
 
+в настройку стиков (Event Settings) нужно добавить выбор левый и правый триггер, 4 направления (вверх , вниз, влево, вправо) левого стика, 4 направления (вверх , вниз, влево, вправо) правого стика стика, когда пользователь выбирает триггеры или направление стиков у него в опции должно дополнительно появиться - чувствительность нажатия - выведи шкалу - чтобы мышкой можно было выбрать чувствительность.  чтобы можно для триггеров и стиков выбрать все функции в форме Event Settings + дополнительно выбрать чувствительность. Дай точечный ответ, от куда до куда изменить код.
+в Event Settings (то есть именно в диалоге StickEventDialog) видеть выбор триггеров и направлений стиков прямо внутри окна, а не снаружи в родительских формах. Дай минимальные изменения, указывай точно лучше целыми блоками от куда до куда изменить
+
+
+нужно реализовать логику с отдельным классом
+добавить на главную форму Form1 кнопку SETTINGS, при нажатии появляется новое окно
+в новом окне поля, чекбоксы и лист с настройками: 
+1) первое выбрать любой элемент джойстика: кнопку, триггер или любое направление из четырех левого и правого стика. Это все кнопки, два триггера и 4 + 4 направления каждого стика
+если пользователь выбирает триггер или стик у него должно появиться дополнительно чувствительность при которой сработает действие для элемента второго поля.
+
+2) второе поле - что будет срабатывать, так же все элементы что и в первом поле, даже пользователь может выбрать там и там одно направление стика например, чтобы улучшить управление и настройки
+дальше поведение кнопок во втором поле.
+настройки 3 чекбокса выбрать можно только один: 
+1 чекбокс "Held while in position" - когда элемент первого поля нажат (а триггеры и стики учитывают еще чувствительность)
+2 чекбокс "Timed (0.1-3sec)" срабатывает на время после того как элемент первого поля активизировался (а триггеры и стики учитывают еще чувствительность)
+3 чекбокс "Delay after release (0.1-3sec)" если пользователь отпустил кнопку или триггеры-стики по чувствительности
+шкалу (0.1-3sec) временную от 0.1 до 3 секунд, (можно перемещать ползунок мышкой) (когда установлен "Held while in position" шкала выключена, для Timed (0.1-3sec) и Delay after shutdown (0.1-3sec) включена)
+
+4 чекбокс "Delay before trigger" сработка с задержкой и к нему шкала от 0.05 до 2 секунд задержка сработки (можно перемещать ползунок мышкой) работает только с Timed (0.1-3sec) и Delay after shutdown (0.1-3sec) (если выбран "Held while in position" то "Delay before trigger" выключен)
+
+Если пользователь выбрал во втором поле триггер или направление стика то должна появляться еще одна шкала - чувствительности (для триггера и направления стика)
+для триггера я так понимаю 0-255 для направления стика 0-90 - выведи сразу под вторым полем, где выбирются элементы которые будут срабатывать.
+
+кнопка сохранить
+под кнопкой список добавленных настроек
+при нажатии на каждую добавленную настройку можно ее удалить, редактировать, отключать (чекбоксом)
+поле редактирование сделай сам. 
+много уже реализовано в Event Settings StickEventDialog - сделай аналогию с добавлением по заданию.
+
+
+***
+когда выбираешь Input element кнопку (не триггер и не стик) то шкалы не должно быть  когда выбираешь Output element кнопку (не триггер и не стик) так же шкалы не должно быть
+когда выбираешь стик то шкала должна быть 0 - 90 (90 это максимум - в направлении стика максимум это 90?) , когда выбираешь триггер деления должно быть 0 - 255 , когда выбран Held while in position  шкала  Delay before trigger должна быть не активной
+
+
+маппинг копок ABXY работает, стики и триггеры не работает маппинг, крестовина вверх вниз влево вправо вообще не работает на виртуальном джойстике, и естественно маппинг крестовины не работает. логи триггера маппинга на стик private void SendToViGEm(short lx, short ly, short rx, short ry, byte l2, byte r2, byte b1, byte b2, byte b3) {     if (device != null && device.VendorID != 0x054C && LatestDpad == 0)     {         LatestDpad = 8;     }
+
+    if (virtualPad == null)     {         SafeLog("SendToViGEm: virtualPad is null — выходим", Color.Red);         return;     }
+
+    bool isDS5 = isDualSense || lastReportId == 0x31;
+
+    buttonContributions.Clear();
+
+    // Сначала маппинги (приоритет)     try     {         ProcessActionMappings(virtualPad, buttonContributions, lx, ly, rx, ry, l2, r2);     }     catch (Exception ex)     {         SafeLog($"ERROR in ProcessActionMappings: {ex.Message}", Color.Red);     }
+
+    // Затем физические кнопки (OR с маппингами)     if (isDS5)     {         buttonContributions[Xbox360Button.X] = (b1 & 0x10) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.X, false);         buttonContributions[Xbox360Button.A] = (b1 & 0x20) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.A, false);         buttonContributions[Xbox360Button.B] = (b1 & 0x40) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.B, false);         buttonContributions[Xbox360Button.Y] = (b1 & 0x80) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.Y, false);     }     else     {         buttonContributions[Xbox360Button.A] = (b1 & 0x20) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.A, false);         buttonContributions[Xbox360Button.B] = (b1 & 0x40) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.B, false);         buttonContributions[Xbox360Button.X] = (b1 & 0x10) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.X, false);         buttonContributions[Xbox360Button.Y] = (b1 & 0x80) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.Y, false);     }
+
+    buttonContributions[Xbox360Button.LeftShoulder] = (b2 & 0x01) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.LeftShoulder, false);     buttonContributions[Xbox360Button.RightShoulder] = (b2 & 0x02) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.RightShoulder, false);     buttonContributions[Xbox360Button.Back] = (b2 & 0x10) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.Back, false);     buttonContributions[Xbox360Button.Start] = (b2 & 0x20) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.Start, false);     buttonContributions[Xbox360Button.LeftThumb] = (b2 & 0x40) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.LeftThumb, false);     buttonContributions[Xbox360Button.RightThumb] = (b2 & 0x80) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.RightThumb, false);     buttonContributions[Xbox360Button.Guide] = (b3 & 0x01) != 0 || buttonContributions.GetValueOrDefault(Xbox360Button.Guide, false);
+
+    byte dpadRaw = LatestDpad;     buttonContributions[Xbox360Button.Up]    = (dpadRaw == 0 || dpadRaw == 1 || dpadRaw == 7) || buttonContributions.GetValueOrDefault(Xbox360Button.Up, false);     buttonContributions[Xbox360Button.Down]  = (dpadRaw == 4 || dpadRaw == 3 || dpadRaw == 5) || buttonContributions.GetValueOrDefault(Xbox360Button.Down, false);     buttonContributions[Xbox360Button.Left]  = (dpadRaw == 6 || dpadRaw == 5 || dpadRaw == 7) || buttonContributions.GetValueOrDefault(Xbox360Button.Left, false);     buttonContributions[Xbox360Button.Right] = (dpadRaw == 2 || dpadRaw == 1 || dpadRaw == 3) || buttonContributions.GetValueOrDefault(Xbox360Button.Right, false);
+
+    // Лог только если хоть одна кнопка изменилась по сравнению с предыдущим вызовом     bool anyChange = false;     foreach (var kv in buttonContributions)     {         if (kv.Value) anyChange = true;     }
+
+    if (anyChange)     {         SafeLog($"[BTN FINAL] Button states before SubmitReport:", Color.White);         foreach (var kv in buttonContributions)         {             if (kv.Value)                 SafeLog($"  → {kv.Key}: PRESSED", Color.Lime);         }     }
+
+    // Отправка     foreach (var kv in buttonContributions)     {         virtualPad.SetButtonState(kv.Key, kv.Value);     }
+
+    virtualPad.SetAxisValue(Xbox360Axis.LeftThumbX, leftX);     virtualPad.SetAxisValue(Xbox360Axis.LeftThumbY, leftY);     virtualPad.SetAxisValue(Xbox360Axis.RightThumbX, rightX);     virtualPad.SetAxisValue(Xbox360Axis.RightThumbY, rightY);
+
+    virtualPad.SetSliderValue(Xbox360Slider.LeftTrigger, l2);     virtualPad.SetSliderValue(Xbox360Slider.RightTrigger, r2);
+
+    virtualPad.SubmitReport(); }   дай точечные изменения
+
+
+
+нужно полностью убрать в левом и правом стике в настройках Direction, удалить StickEventDialog и удалить все что с ним связывает в других полях в ControllerReader
+
+
+у меня проблема с маппингом направлений стиков (не осей, не перепутай), я не могу задать кнопе направление стика, а направлению стика могу задать кнопку. Стик  должен идти по направлению до определенного порога - посмотри где что не учитывается. Посмотри в чем причина, дай точечный ответ.
+
+
+
+1 в настройках маппинга "Timed (0.1-3sec)" и "Delay after release (0.1-3sec)" не работает правильно. "Timed (0.1-3sec)" и при включенном "Delay before trigger 0.05 - 2 sec" не срабатывает отсрочка включения, при этих двух чекбоксах Timed (0.1-3sec)" должен включиться по задержке  "Delay before trigger 0.05 - 2 sec"
+2 "Delay after release (0.1-3sec)" должен сработать на "Timed (0.1-3sec)" после как Input element вернется в первоначальное положение или для направления стиков и триггеров за первоначальную чувствительность (сейчас он срабатывает сразу по Input element)
+3 "Delay after release (0.1-3sec)" и "Delay before trigger 0.05 - 2 sec" должен сработать после того как Input element вернется и пройдет 
+
+
+при двух активных чекбоксах "Delay after release (0.1-3sec)" и "Delay before trigger 0.05 - 2 sec" Outputelement должен сработать после того как Input element вернется и пройдет "Delay before trigger 0.05
+
+
+ можешь  к Input element добавить чекбокс и шкалу, если чекбокс включен то сработка пойдет тогда когда еще и input будет активирован определенное время - добавить эту логику не изменяя существующей. диапазон от 0.05 до 2 секунд
+
+так же у меня происходит конфликт когда я назначаю на выход триггер, тригеер отсылает на виртуальный джойстик дефолтное значение, а маппинг свой, нужно сделать если маппинг отсылает значение на триггер то дефолтное от джойстика не шлем, когда маппинг перестает слать тогда и физический дефолтный джойстик может слать
+
+идет конфликт триггеров с маппингом, когда я привязываю на кнопку триггер и ему значение 255 и нажима на кнопку то триггер конфликтует 255-0-255-0  у стиков этой проблемы нет, там идет отправка в первую очередь маппинга, сделай так же и с триггером, дай точечные изменения
+
 
