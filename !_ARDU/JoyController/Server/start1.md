@@ -1,18 +1,15 @@
 
-я хочу продавать свою программу в интернете, хочу дать тестовое использование 2 часа в сутки, у меня есть сайт NextJS где программа может подключаться для авторизации, сделать чтобы защитить программу от взлома
-лучше что бесплатно и на сервере GO go 1.24 с базой данных Postgres и next js для админки и регистрации с токенами в таком проекте обойтись без сервера Go а использовать только API сайта Next и серверные функции actions?
+я хочу продавать свою программу JoyControl в интернете, хочу дать тестовое использование 2 часа в сутки, у меня есть сайт NextJS где программа может подключаться для авторизации, 
+программа защищается Native AOT
+с базой данных Postgres и next js для админки и регистрации с токенами 
+программа будет продаваться на год или два, так что в Prisma нужно учитывать и даты, так же программа должна будет смотреть два поля по активации (админом если пользователь оплатил) и по дате, если дата просрочена то оповещаем клиента в C# и отключаем доступ
 
-програма будет продаваться на год или два, так что в Prisma нужно учитывать и даты, так же программа должна будет чекать по двум полям по активации и по дате, если дата просрочена то оповещаем клиента в C# 
-
-2 часа в сутки + периодических проверок JWT — это стандарт де-факто в 2025–2026 годах для десктопных приложений с онлайн-активацией. (что бы при новой установки нельзя было пользоваться копией программы, дополнительно в системе устанавливается единое время, возможно проверка времени через сервер, время по гринвичу?)
+ДАвать пользователю 2 часа в сутки + периодических проверок JWT — это стандарт де-факто в 2025–2026 годах для десктопных приложений с онлайн-активацией. (что бы при новой установки нельзя было пользоваться копией программы, дополнительно в системе устанавливается единое время, возможно проверка времени через сервер, время по гринвичу?)
 Клиент (C# WinForms/WPF)  
-↓ HTTPS (POST /api/trial, /api/validate)
-Backend (Go 1.24 + Gin / Echo / chi)  
+↓ HTTPS
+↓ NEXT
 ↔ PostgreSQL Prisma
-Admin + регистрация покупателей (Next.js 15 App Router)  
-→ /api/... (Next.js API routes или тот же Go бэкенд) можно в таком проекте обойтись без сервера Go а использовать только API сайта Next и серверные функции actions?
-
-Go + JWT + PostgreSQL + периодические чеки каждые 5–15 мин → лучший баланс
+Admin + регистрация покупателей (Next.js 16 App Router)
 
 | Место проверки                                      | Частота                                             | Что именно проверять                                      | Зачем именно здесь                                      |
 |-----------------------------------------------------|-----------------------------------------------------|------------------------------------------------------------|---------------------------------------------------------|
@@ -23,20 +20,26 @@ Go + JWT + PostgreSQL + периодические чеки каждые 5–15 
 | В критических классах (ControllerReader, SendReport и т.п.) | При каждом отправляемом отчёте                      | Минимальная проверка (токен не null + не expired)          | Очень тяжело вырезать все вызовы                        |
 
 
-go 1.24.6 - сервер го будет просматривать время по гринвичу?
-GO c api сайта для проверки
+NEXT JS (серверные функции или как это будет реализовано в NEXT) будет просматривать время по гринвичу?
 
 
+Сделай нужные поля в Prisma API Actions aдминка для админа чтобы давать пользователям доступ (когда админ дал доступ автоматически устанавливается и время)
+так же админ мог просматривать сколько пользуется в тестовом 2 часа в сутки.
+Давай для теста сделаем минимальную регистрацию в C# приложении и минимальный код доступ для старта и проверки всей логики с NEXT JS
 
-моя prisma
+https://ardu.live:444/profile страница регистрации на сайте
+
+
+prisma
 generator client {
-provider = "prisma-client-js"
+provider = "prisma-client-js" // можно оставить так, или "prisma-client" — но для Next.js + Turbopack лучше "prisma-client-js"
 }
 
 datasource db {
-provider  = "postgresql"
-url       = env("POSTGRES_PRISMA_URL")
-directUrl = env("POSTGRES_URL_NON_POOLING")
+provider = "postgresql"
+// ← УДАЛИТЬ эти две строки полностью
+// url = env("POSTGRES_PRISMA_URL")
+// directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
@@ -115,114 +118,49 @@ USER
 ADMIN
 }
 
-\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\components\profile\profile-admin.tsx
 
-для начала, давай сделаем регистрацию и вход в приложении C# - добавь сразу нужные поля в Prisma и команды как обновить базу без ее сноса
-как это сделаем? вывести в приложении кнопки регистрация и вход, регистрация перенаправляет его на сайт для регистрации? на сайте он регистрируется
-кнопка вход выводит два поля для почты и пароля, через сервер GO он логинится в приложении - так лучше? Сделай пользователю 7 неудчных попыток, где он 30 минут не может ввести пароль - с оповещением, сделай окна для этого.
+админ
+app\(root)\admin\joy\page.tsx
+
+import { getUserSession } from '@/components/lib/get-user-session';
+import { redirect } from 'next/navigation';
+import AdminJoy from "@/app/(root)/AdminJoy";
+
+export default async function AdminJoyPage() {
+const session = await getUserSession();
+
+    // Проверяем, что пользователь — админ
+    if (!session?.user || session.user.role !== 'ADMIN') {
+        redirect('/profile'); // или '/' — куда хочешь перенаправить не-админа
+    }
+
+    return (
+        <div className="container mx-auto py-10">
+            <h1 className="text-3xl center font-bold mb-8">JoyControl</h1>
+            <AdminJoy />
+        </div>
+    );
+}
+
+2 file
+'use client';
+import React, { useState, useEffect } from 'react';
+
+export default function AdminJoy() {
 
 
-\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\auth\[...nextauth]\route.ts
-// app/api/auth/[...nextauth]/route.ts
-import NextAuth from 'next-auth';
-import { authOptions } from '@/components/constants/auth-options';
+    return (
+        <div className="p-6 max-w-6xl mx-auto">
 
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
-
-\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\components\modals\auth-modal\forms\register-form.tsx
-\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\components\modals\auth-modal\forms\login-form.tsx
+        </div>
+    );
+}
 
 
-        server {
-            listen 80;
-            listen [::]:80;
-            server_name ardu.live www.ardu.live;
-            return 301 https://ardu.live$request_uri;
-        }
 
-        # HTTPS redirect from www to non-www
-        server {
-            listen 444 ssl;
-            listen [::]:444 ssl;
-            server_name www.ardu.live;
-            http2 on;
+Замени простой токен на настоящий JWT (jose в Next.js + System.IdentityModel.Tokens.Jwt в C# — Native AOT поддерживает).
+Добавь удаление лицензии, лицензия может быть только одна , добавь чтобы админ мог устанавливать дату лицензии год число и месяц
 
-            ssl_certificate /etc/letsencrypt/live/ardu.live/fullchain.pem;
-            ssl_certificate_key /etc/letsencrypt/live/ardu.live/privkey.pem;
 
-            return 301 https://ardu.live$request_uri;
-        }
-
-        # Main HTTPS server
-        server {
-            listen 444 ssl;
-            listen [::]:444 ssl;
-            server_name ardu.live;
-            http2 on;
-
-            # SSL configuration
-            ssl_certificate /etc/letsencrypt/live/ardu.live/fullchain.pem;
-            ssl_certificate_key /etc/letsencrypt/live/ardu.live/privkey.pem;
-            ssl_protocols TLSv1.2 TLSv1.3;
-            ssl_prefer_server_ciphers on;
-            ssl_ciphers 'ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384';
-
-            # Security headers
-            add_header X-Frame-Options "SAMEORIGIN" always;
-            add_header X-Content-Type-Options "nosniff" always;
-            add_header X-XSS-Protection "1; mode=block" always;
-            add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
-            add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-
-            # SSL session cache
-            ssl_session_cache shared:SSL:10m;
-            ssl_session_timeout 10m;
-            ssl_session_tickets off;
-
-            # Root location
-            location / {
-                proxy_pass http://192.168.1.121:3002;
-                proxy_http_version 1.1;
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Proto $scheme;
-                proxy_set_header X-Forwarded-Host $host:$server_port; # Добавьте порт
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "upgrade";
-                proxy_set_header Accept-Encoding ""; # Отключение сжатия для Server Actions
-                proxy_buffering off;
-                proxy_read_timeout 3600;
-                proxy_cache_bypass $http_upgrade;
-            }
-            
-            
-            location /joy {
-                proxy_pass http://192.168.1.121:8088;
-                proxy_http_version 1.1;
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "upgrade";
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_read_timeout 86400;
-                proxy_send_timeout 86400;
-                proxy_connect_timeout 86400;
-    
-                if ($request_method = 'OPTIONS') {
-                    add_header 'Access-Control-Allow-Origin' 'https://ardu.live';
-                    add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-                    add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
-                    add_header 'Access-Control-Max-Age' 1728000;
-                    add_header 'Content-Length' 0;
-                    return 204;
-                }
-                proxy_buffering off;
-                add_header 'Access-Control-Allow-Origin' 'https://ardu.live' always;
-            }
-        }
-
-сделай все что нужно, это наверное C# сервер GO дай prisma с учетом того что программа должна будет чекать поле из базы данных разрешено использование или нет, выведи информацию - триал или оплата и когда была активация. и когда заканчивается активация. я писал выше про проверку, вышло время у клиента использование программы или нет.
-дай все что нужно и go 1.24  чтобы не гадить Form1 и чтобы было проще для меня сделай может отдельный класс в C# 
+Добавь machine-id проверку (HWID) на сервере, чтобы копия на другом ПК не работала.
+В production сделай токен на 30–60 мин + refresh.
