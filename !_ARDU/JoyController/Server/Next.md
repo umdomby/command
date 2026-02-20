@@ -1,0 +1,14 @@
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\auth
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\auth\[...nextauth]
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\auth\[...nextauth]\route.ts
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\auth\reset-password
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\auth\reset-password\route.ts
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\auth\update-password
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\auth\update-password\route.ts
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\auth\verify-email
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\auth\verify-email\route.ts
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\insurance
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\insurance\route.ts
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\users
+\\wsl.localhost\Ubuntu-24.04\home\umdom\projects\prod\docker-ardu\app\api\users\route.ts
