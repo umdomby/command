@@ -1,3 +1,5 @@
+dotnet publish -c Release -r win-x64 --self-contained true
+
 Установи ILSpy или dnSpy или dnSpyEx, → открой JoyControl.exe
 GitHub: https://github.com/dnSpyEx/dnSpy/releases
 

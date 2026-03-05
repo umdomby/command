@@ -29,6 +29,10 @@ ESP32
 L_EN           | 5V (прямо)
 R_EN           | 5V (прямо)
 
+
+Плата 1 L_PWM GPIO 4    R_PWM GPIO 5
+Плата 2  L_PWM GPIO 6    R_PWM GPIO 7
+
 BTS7960
 
 | Назначение                          | Пин на плате | GPIO    | Константа в коде| Примечание                                   |

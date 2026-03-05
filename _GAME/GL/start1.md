@@ -4,12 +4,13 @@ Par      1.48.299 21335
 Par2     1.52.000 21335
 London   1.35.353 41335
 London2  1.58.633 31335  
-Havana   1.36.915 51333
+Havana   1.36.885 51333
 Chicago  1.47.667 11355
 Chicago2 1.29.387 11355
 Barca    1.31.443 21335
 Dubai    1.39.822 51335
 Dubai2   1.39.607 51334
+Dubai5   0.58.700 12343
 Y_H_D    0.57.016 11335
 Y_H_D_2  0.48.175 11335
 B_H      1.10.269 21335!  3-lap 3.36.792
@@ -55,7 +56,7 @@ FUJI     1.30.232 k 4
 =========kick
 eanescsheid61fkt@hotmail.com
 LovableFish91 - CONST4NTIN kickkickkickkickkickkickkick
-
+s...zoro
 slipstream , trail braking
 NightmanCometh4U
 5Horaizens
