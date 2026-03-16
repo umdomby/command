@@ -13,22 +13,22 @@ Barca    1.31.443 21335
 Dubai    1.39.049 11454
 Dubai2   1.39.607 51334
 Dubai5   0.58.700 12343
-Y_H_D    0.57.016 11335
+Y_H_D    0.56.740 12342
 Y_H_D_2  0.48.175 11335
 B_H      1.10.269 21335!  3-lap 3.36.792
 OKU_S_1  3.24.040 11335
 OKU_S_2  3.37.291 11335
 OKU_GP   1.42.969 31335
-Msk      1.11.133 21335
+Msk      1.10.999 14352
 Msk3     1.42.383 21335
 S_A_1    3.17.837 51335
 S_A_2    3.17.837 51335
-S_A_a    1.22.165 41335
+S_A_a    1.21.970 43352
 S_A_a2   1.22.455 41335
 S_A_c    1.15.565 31335
 S_A_c2   1.15.565 31335
 S_A_c2   1.31.565 41334
-Cre_Va1  1.41.847 51335
+Cre_Va1  1.41.847 51335  45354
 Cre_Va2  1.14.404 31335
 Cre_Va4  45.765   31334
 Su_C_i   1.47.695 51335
@@ -59,8 +59,9 @@ FUJI     1.30.232 k 4
 Стабилизаторы поперечной устойчивости мягких 1 до 5 жестких
 =========kick
 eanescsheid61fkt@hotmail.com
+yceeyes
 LovableFish91 - CONST4NTIN kickkickkickkickkickkickkick
-s...zoro
+
 slipstream , trail braking
 NightmanCometh4U
 5Horaizens
