@@ -77,3 +77,5 @@ success = model.export(format="onnx", imgsz=224, opset=17, simplify=True)
 yolo export model=runs/classify/train/weights/best.pt format=onnx imgsz=224 opset=17 simplify=True half=False
 ```
 create file best.onnx
+
+видео имеет разрешенеи 2500 у меня монитор 1980 измени разрешение на 1280 а так же добавь перемотку видео

@@ -1,0 +1,1 @@
+yolo export model=C:/_VIDEO/model/runs/bottle_exp/weights/best.pt format=onnx imgsz=640 opset=12
