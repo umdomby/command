@@ -1,5 +1,9 @@
 I2D303C-RCA11
 Ваша камера picoCam-303C — это аналог модели IDS UI-5240CP-C-HQ
+192.168.87.2
+255.255.255.0
+
+pip install pyueye opencv-python numpy
 
 
 https://www.sick.com/pl/ru
