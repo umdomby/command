@@ -5,6 +5,17 @@ I2D303C-RCA11
 
 pip install pyueye opencv-python numpy
 
+Открой CMD (Командную строку) от имени Администратора.
+
+Введи следующую команду и нажми Enter:
+
+Bash
+pip install pyueye opencv-python numpy
+После установки проверь, что библиотека появилась в списке:
+
+Bash
+pip list
+
 
 https://www.sick.com/pl/ru
 Скачайте SICK GigE Vision SDK:
