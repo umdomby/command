@@ -1,0 +1,148 @@
+import cv2
+import numpy as np
+from pyueye import ueye
+import traceback
+import os
+import time
+
+def on_change(val):
+    pass
+
+def main():
+    # --- БЛОК НАСТРОЕК (ДЕФОЛТЫ С КАРТИНКИ) ---
+    DEFAULT_GAIN = 20
+    DEFAULT_EXPOSURE = 20
+    DEFAULT_FPS = 40
+    DEFAULT_THRESH = 20
+    # ------------------------------------------
+
+    SENSOR_WIDTH, SENSOR_HEIGHT = 1936, 1216
+    resolutions = {
+        "1": (640, 480), "2": (800, 600), "3": (1024, 768),
+        "4": (1280, 720), "5": (1920, 1080), "6": (1936, 1216)
+    }
+    
+    print("\n--- picoCam-303C: Настройка ---")
+    for k, v in resolutions.items():
+        suffix = " (Full HD)" if k == "5" else (" (NATIVE)" if k == "6" else "")
+        print(f"{k} - {v[0]}x{v[1]}{suffix}")
+    
+    res_choice = input("Ваш выбор (1-6) [6]: ") or "6"
+    width, height = resolutions.get(res_choice, (1936, 1216))
+    
+    pos_x = ((SENSOR_WIDTH - width) // 2) & ~1
+    pos_y = ((SENSOR_HEIGHT - height) // 2) & ~1
+
+    h_cam = ueye.HIDS(0)
+    mem_ptr = ueye.c_mem_p()
+    mem_id = ueye.int()
+    
+    save_dir = r"C:\_VIDEO\picoCam-303C-I2D303C-RCA11-BLISTER\png"
+    podlojka_dir = r"C:\_VIDEO\picoCam-303C-I2D303C-RCA11-BLISTER\pngp"
+    for d in [save_dir, podlojka_dir]:
+        if not os.path.exists(d): os.makedirs(d)
+    
+    try:
+        if ueye.is_InitCamera(h_cam, None) != ueye.IS_SUCCESS:
+            print("❌ Камера не найдена!")
+            return
+
+        ueye.is_StopLiveVideo(h_cam, ueye.IS_WAIT)
+
+        rect_aoi = ueye.IS_RECT()
+        rect_aoi.s32X, rect_aoi.s32Y = ueye.int(pos_x), ueye.int(pos_y)
+        rect_aoi.s32Width, rect_aoi.s32Height = ueye.int(width), ueye.int(height)
+        ueye.is_AOI(h_cam, ueye.IS_AOI_IMAGE_SET_AOI, rect_aoi, ueye.sizeof(rect_aoi))
+
+        ueye.is_SetColorMode(h_cam, ueye.IS_CM_SENSOR_RAW8)
+        ueye.is_AllocImageMem(h_cam, width, height, 8, mem_ptr, mem_id)
+        ueye.is_SetImageMem(h_cam, mem_ptr, mem_id)
+        ueye.is_SetAutoParameter(h_cam, ueye.IS_SET_ENABLE_AUTO_GAIN, ueye.double(0), ueye.double(0))
+        
+        win_name = 'picoCam - LIVE'
+        cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
+        cv2.resizeWindow(win_name, 480, 640) 
+
+        # Применяем дефолтные настройки к трекбарам
+        cv2.createTrackbar('Gain', win_name, DEFAULT_GAIN, 100, on_change)
+        cv2.createTrackbar('Exposure', win_name, DEFAULT_EXPOSURE, 200, on_change)
+        cv2.createTrackbar('FPS', win_name, DEFAULT_FPS, 100, on_change)
+        cv2.createTrackbar('Thresh', win_name, DEFAULT_THRESH, 255, on_change)
+        cv2.createTrackbar('Exp Load %', win_name, 0, 100, on_change)
+        
+        ueye.is_CaptureVideo(h_cam, ueye.IS_DONT_WAIT)
+
+        print("\n" + "="*50)
+        print("🚀 КАМЕРА ГОТОВА")
+        print("S - Подложка | I - Объекты | Q - Выход")
+        print("="*50 + "\n")
+
+        prev_time = time.perf_counter()
+
+        while True:
+            g_val = cv2.getTrackbarPos('Gain', win_name)
+            e_val = cv2.getTrackbarPos('Exposure', win_name) or 1
+            f_val = cv2.getTrackbarPos('FPS', win_name) or 1
+            t_val = cv2.getTrackbarPos('Thresh', win_name)
+
+            ueye.is_SetHardwareGain(h_cam, g_val, ueye.IS_IGNORE_PARAMETER, ueye.IS_IGNORE_PARAMETER, ueye.IS_IGNORE_PARAMETER)
+            ueye.is_Exposure(h_cam, ueye.IS_EXPOSURE_CMD_SET_EXPOSURE, ueye.double(e_val), 8)
+            ueye.is_SetFrameRate(h_cam, ueye.double(f_val), ueye.double())
+
+            # --- ОБНОВЛЕНИЕ ПОЛЗУНКА НАГРУЗКИ ---
+            max_exp = 1000.0 / f_val
+            load_pct = int(min((e_val / max_exp) * 100, 100))
+            cv2.setTrackbarPos('Exp Load %', win_name, load_pct)
+
+            target_delay = 1.0 / f_val
+            while (time.perf_counter() - prev_time) < target_delay:
+                time.sleep(0.001)
+            
+            real_fps = 1.0 / (time.perf_counter() - prev_time)
+            prev_time = time.perf_counter()
+
+            data = ueye.get_data(mem_ptr, width, height, 8, width, copy=True)
+            if data is not None:
+                raw_frame = np.frombuffer(data, dtype=np.uint8).reshape((height, width))
+                color_frame = cv2.cvtColor(raw_frame, cv2.COLOR_BayerRG2BGR)
+                
+                cv2.setWindowTitle(win_name, f"picoCam | Real FPS: {real_fps:.1f}")
+
+                view_w = 960
+                view_h = int(height * (960 / width))
+                cv2.imshow(win_name, cv2.resize(color_frame, (view_w, view_h)))
+
+                key = cv2.waitKey(1) & 0xFF
+                
+                if key in [ord('s'), ord('S'), 1099, 1067]:
+                    cv2.imwrite(os.path.join(podlojka_dir, "podlojka.jpg"), color_frame)
+                    print("🖼️ Подложка сохранена")
+
+                if key in [ord('i'), ord('I'), 1096, 1064]:
+                    gray = cv2.cvtColor(color_frame, cv2.COLOR_BGR2GRAY)
+                    _, mask = cv2.threshold(gray, t_val, 255, cv2.THRESH_BINARY)
+                    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                    saved = 0
+                    ts = int(time.time())
+                    for i, cnt in enumerate(contours):
+                        if cv2.contourArea(cnt) > 300:
+                            x, y, w_obj, h_obj = cv2.boundingRect(cnt)
+                            roi_color = color_frame[y:y+h_obj, x:x+w_obj].copy()
+                            obj_mask = np.zeros((h_obj, w_obj), dtype=np.uint8)
+                            cv2.drawContours(obj_mask, [cnt - [x, y]], -1, 255, -1)
+                            b, g, r = cv2.split(roi_color)
+                            rgba = cv2.merge([b, g, r, obj_mask])
+                            cv2.imwrite(os.path.join(save_dir, f"obj_{ts}_{i}.png"), rgba)
+                            saved += 1
+                    print(f"✅ Сохранено объектов: {saved}")
+
+                if key == ord('q'): break
+
+    except Exception: 
+        traceback.print_exc()
+    finally:
+        ueye.is_ExitCamera(h_cam)
+        cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    main()
