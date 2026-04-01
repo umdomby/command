@@ -63,3 +63,26 @@ trigger_mark
 
 и один раз детекцию ячеек 10 зон между 6 и 7 пустая зона ее не учитывай больше ничего не делай
 
+в ИИ модели
+
+tablet_g_no = g_no
+tablet_g_od = g_od
+tablet_g_ok = g_ok
+tablet_w_no = w_no
+tablet_w_od = w_od
+tablet_w_ok = w_ok
+trigger_mark
+trigger_mark_no
+классы ищи ряды по полному кадру
+trigger_mark есть ряд
+trigger_mark_no нет ряда
+и как находит ряд добавляй в счетчик, мне нужно найти количество рядов
+
+
+Видим trigger_mark (хотя бы 0.80) — ВКЛЮЧАЕМ и считаем +1.
+
+Видим trigger_mark_no (хотя бы 0.10) — ВЫКЛЮЧАЕМ (сбрасываем флаг).
+
+ИИ классно отрабатывает, но счетчик не считает переходы от trigger_mark к
+
+trigger_mark_no 
