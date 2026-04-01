@@ -35,11 +35,9 @@ def main():
             custom_w = int(input(f"Введите ширину (макс. {SENSOR_WIDTH}): "))
             custom_h = int(input(f"Введите высоту (макс. {SENSOR_HEIGHT}): "))
 
-            # ВАЖНО: Выравнивание по сетке 8 пикселей для стабильности
             width = (custom_w & ~7)
             height = (custom_h & ~1)
 
-            # Проверка на минимальные границы (камера не любит слишком узкие окна)
             if width < 32: width = 32
             if height < 32: height = 32
 
@@ -52,8 +50,6 @@ def main():
     else:
         width, height = resolutions.get(res_choice, (1936, 1216))
 
-    # Расчет координат для центрирования области (AOI)
-    # Координаты и размеры должны быть четными (кратны 2) для корректной работы Bayer-фильтра
     width = width & ~1
     height = height & ~1
     pos_x = ((SENSOR_WIDTH - width) // 2) & ~1
@@ -75,7 +71,6 @@ def main():
 
         ueye.is_StopLiveVideo(h_cam, ueye.IS_WAIT)
 
-        # Установка области захвата (AOI) в центре сенсора
         rect_aoi = ueye.IS_RECT()
         rect_aoi.s32X = ueye.int(pos_x)
         rect_aoi.s32Y = ueye.int(pos_y)
@@ -104,6 +99,7 @@ def main():
         print("\n" + "="*60)
         print("🚀 КАМЕРА ГОТОВА")
         print("S - Подложка | I - Объекты | F - Полный кадр | O - Оригинал | Q - Выход")
+        print("В окне ORIGINAL: C - Выделить область мышкой")
         print(f"Разрешение: {width}x{height} (Центр: X={pos_x}, Y={pos_y})")
         print("="*60 + "\n")
 
@@ -184,6 +180,20 @@ def main():
                         cv2.destroyWindow(orig_win_name)
                         show_original = False
                         print("📺 Оригинальное окно закрыто")
+
+                # --- НОВЫЙ ФУНКЦИОНАЛ: ВЫДЕЛЕНИЕ ОБЛАСТИ МЫШКОЙ ---
+                if show_original and key in [ord('c'), ord('C'), 1089, 1057]:
+                    print("🖱️ Выделите область в окне ORIGINAL и нажмите ENTER (или ESC для отмены)")
+                    roi = cv2.selectROI(orig_win_name, color_frame, fromCenter=False, showCrosshair=True)
+                    x_roi, y_roi, w_roi, h_roi = roi
+                    if w_roi > 0 and h_roi > 0:
+                        crop = color_frame[y_roi:y_roi+h_roi, x_roi:x_roi+w_roi]
+                        ts_crop = int(time.time())
+                        crop_name = os.path.join(save_dir, f"manual_crop_{ts_crop}.png")
+                        cv2.imwrite(crop_name, crop)
+                        print(f"✂️ Область сохранена: {crop_name}")
+                    else:
+                        print("Отменено")
 
                 if key == ord('q'): break
 

@@ -9,12 +9,12 @@ def on_change(val):
     pass
 
 def main():
-    # --- БЛОК НАСТРОЕК (ДЕФОЛТЫ С КАРТИНКИ) ---
-    DEFAULT_GAIN = 20
-    DEFAULT_EXPOSURE = 20
-    DEFAULT_FPS = 40
-    DEFAULT_THRESH = 20
-    # ------------------------------------------
+    # --- БЛОК НАСТРОЕК ---
+    DEFAULT_GAIN = 0
+    DEFAULT_EXPOSURE = 9
+    DEFAULT_FPS = 100
+    DEFAULT_THRESH = 25
+    # ---------------------
 
     SENSOR_WIDTH, SENSOR_HEIGHT = 1936, 1216
     resolutions = {
@@ -26,10 +26,32 @@ def main():
     for k, v in resolutions.items():
         suffix = " (Full HD)" if k == "5" else (" (NATIVE)" if k == "6" else "")
         print(f"{k} - {v[0]}x{v[1]}{suffix}")
+    print("7 - Пользовательское разрешение (Custom)")
 
-    res_choice = input("Ваш выбор (1-6) [6]: ") or "6"
-    width, height = resolutions.get(res_choice, (1936, 1216))
+    res_choice = input("Ваш выбор (1-7) [6]: ") or "6"
 
+    if res_choice == "7":
+        try:
+            custom_w = int(input(f"Введите ширину (макс. {SENSOR_WIDTH}): "))
+            custom_h = int(input(f"Введите высоту (макс. {SENSOR_HEIGHT}): "))
+
+            width = (custom_w & ~7)
+            height = (custom_h & ~1)
+
+            if width < 32: width = 32
+            if height < 32: height = 32
+
+            width = min(width, SENSOR_WIDTH)
+            height = min(height, SENSOR_HEIGHT)
+            print(f"📏 Скорректировано до: {width}x{height} (кратность 8)")
+        except ValueError:
+            print("Ошибка ввода, выбрано нативное разрешение.")
+            width, height = 1936, 1216
+    else:
+        width, height = resolutions.get(res_choice, (1936, 1216))
+
+    width = width & ~1
+    height = height & ~1
     pos_x = ((SENSOR_WIDTH - width) // 2) & ~1
     pos_y = ((SENSOR_HEIGHT - height) // 2) & ~1
 
@@ -50,8 +72,10 @@ def main():
         ueye.is_StopLiveVideo(h_cam, ueye.IS_WAIT)
 
         rect_aoi = ueye.IS_RECT()
-        rect_aoi.s32X, rect_aoi.s32Y = ueye.int(pos_x), ueye.int(pos_y)
-        rect_aoi.s32Width, rect_aoi.s32Height = ueye.int(width), ueye.int(height)
+        rect_aoi.s32X = ueye.int(pos_x)
+        rect_aoi.s32Y = ueye.int(pos_y)
+        rect_aoi.s32Width = ueye.int(width)
+        rect_aoi.s32Height = ueye.int(height)
         ueye.is_AOI(h_cam, ueye.IS_AOI_IMAGE_SET_AOI, rect_aoi, ueye.sizeof(rect_aoi))
 
         ueye.is_SetColorMode(h_cam, ueye.IS_CM_SENSOR_RAW8)
@@ -64,7 +88,6 @@ def main():
         cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
         cv2.resizeWindow(win_name, 480, 640)
 
-        # Применяем дефолтные настройки к трекбарам
         cv2.createTrackbar('Gain', win_name, DEFAULT_GAIN, 100, on_change)
         cv2.createTrackbar('Exposure', win_name, DEFAULT_EXPOSURE, 200, on_change)
         cv2.createTrackbar('FPS', win_name, DEFAULT_FPS, 100, on_change)
@@ -73,10 +96,12 @@ def main():
 
         ueye.is_CaptureVideo(h_cam, ueye.IS_DONT_WAIT)
 
-        print("\n" + "="*50)
+        print("\n" + "="*60)
         print("🚀 КАМЕРА ГОТОВА")
-        print("S - Подложка | I - Объекты | O - Оригинал | Q - Выход")
-        print("="*50 + "\n")
+        print("S - Подложка | I - Объекты | F - Полный кадр | O - Оригинал | Q - Выход")
+        print("В окне ORIGINAL: C - Выделить область мышкой")
+        print(f"Разрешение: {width}x{height} (Центр: X={pos_x}, Y={pos_y})")
+        print("="*60 + "\n")
 
         prev_time = time.perf_counter()
         show_original = False
@@ -91,7 +116,6 @@ def main():
             ueye.is_Exposure(h_cam, ueye.IS_EXPOSURE_CMD_SET_EXPOSURE, ueye.double(e_val), 8)
             ueye.is_SetFrameRate(h_cam, ueye.double(f_val), ueye.double())
 
-            # --- ОБНОВЛЕНИЕ ПОЛЗУНКА НАГРУЗКИ ---
             max_exp = 1000.0 / f_val
             load_pct = int(min((e_val / max_exp) * 100, 100))
             cv2.setTrackbarPos('Exp Load %', win_name, load_pct)
@@ -123,6 +147,12 @@ def main():
                     cv2.imwrite(os.path.join(podlojka_dir, "podlojka.jpg"), color_frame)
                     print("🖼️ Подложка сохранена")
 
+                if key in [ord('f'), ord('F'), 1072, 1040]:
+                    ts_full = int(time.time())
+                    fname = os.path.join(save_dir, f"full_frame_{ts_full}.png")
+                    cv2.imwrite(fname, color_frame)
+                    print(f"📸 Кадр сохранен: {fname}")
+
                 if key in [ord('i'), ord('I'), 1096, 1064]:
                     gray = cv2.cvtColor(color_frame, cv2.COLOR_BGR2GRAY)
                     _, mask = cv2.threshold(gray, t_val, 255, cv2.THRESH_BINARY)
@@ -143,13 +173,27 @@ def main():
 
                 if key in [ord('o'), ord('O'), 1097, 1065]:
                     if not show_original:
-                        cv2.namedWindow(orig_win_name, cv2.WINDOW_AUTOSIZE) # AUTOSIZE запрещает растягивание
+                        cv2.namedWindow(orig_win_name, cv2.WINDOW_AUTOSIZE)
                         show_original = True
                         print("📺 Оригинальное окно открыто")
                     else:
                         cv2.destroyWindow(orig_win_name)
                         show_original = False
                         print("📺 Оригинальное окно закрыто")
+
+                # --- НОВЫЙ ФУНКЦИОНАЛ: ВЫДЕЛЕНИЕ ОБЛАСТИ МЫШКОЙ ---
+                if show_original and key in [ord('c'), ord('C'), 1089, 1057]:
+                    print("🖱️ Выделите область в окне ORIGINAL и нажмите ENTER (или ESC для отмены)")
+                    roi = cv2.selectROI(orig_win_name, color_frame, fromCenter=False, showCrosshair=True)
+                    x_roi, y_roi, w_roi, h_roi = roi
+                    if w_roi > 0 and h_roi > 0:
+                        crop = color_frame[y_roi:y_roi+h_roi, x_roi:x_roi+w_roi]
+                        ts_crop = int(time.time())
+                        crop_name = os.path.join(save_dir, f"manual_crop_{ts_crop}.png")
+                        cv2.imwrite(crop_name, crop)
+                        print(f"✂️ Область сохранена: {crop_name}")
+                    else:
+                        print("Отменено")
 
                 if key == ord('q'): break
 
