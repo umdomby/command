@@ -21,27 +21,27 @@ def main():
         "1": (640, 480), "2": (800, 600), "3": (1024, 768),
         "4": (1280, 720), "5": (1920, 1080), "6": (1936, 1216)
     }
-    
+
     print("\n--- picoCam-303C: Настройка ---")
     for k, v in resolutions.items():
         suffix = " (Full HD)" if k == "5" else (" (NATIVE)" if k == "6" else "")
         print(f"{k} - {v[0]}x{v[1]}{suffix}")
-    
+
     res_choice = input("Ваш выбор (1-6) [6]: ") or "6"
     width, height = resolutions.get(res_choice, (1936, 1216))
-    
+
     pos_x = ((SENSOR_WIDTH - width) // 2) & ~1
     pos_y = ((SENSOR_HEIGHT - height) // 2) & ~1
 
     h_cam = ueye.HIDS(0)
     mem_ptr = ueye.c_mem_p()
     mem_id = ueye.int()
-    
+
     save_dir = r"C:\_VIDEO\picoCam-303C-I2D303C-RCA11-BLISTER\png"
     podlojka_dir = r"C:\_VIDEO\picoCam-303C-I2D303C-RCA11-BLISTER\pngp"
     for d in [save_dir, podlojka_dir]:
         if not os.path.exists(d): os.makedirs(d)
-    
+
     try:
         if ueye.is_InitCamera(h_cam, None) != ueye.IS_SUCCESS:
             print("❌ Камера не найдена!")
@@ -58,10 +58,11 @@ def main():
         ueye.is_AllocImageMem(h_cam, width, height, 8, mem_ptr, mem_id)
         ueye.is_SetImageMem(h_cam, mem_ptr, mem_id)
         ueye.is_SetAutoParameter(h_cam, ueye.IS_SET_ENABLE_AUTO_GAIN, ueye.double(0), ueye.double(0))
-        
+
         win_name = 'picoCam - LIVE'
+        orig_win_name = 'ORIGINAL (1:1)'
         cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
-        cv2.resizeWindow(win_name, 480, 640) 
+        cv2.resizeWindow(win_name, 480, 640)
 
         # Применяем дефолтные настройки к трекбарам
         cv2.createTrackbar('Gain', win_name, DEFAULT_GAIN, 100, on_change)
@@ -69,15 +70,16 @@ def main():
         cv2.createTrackbar('FPS', win_name, DEFAULT_FPS, 100, on_change)
         cv2.createTrackbar('Thresh', win_name, DEFAULT_THRESH, 255, on_change)
         cv2.createTrackbar('Exp Load %', win_name, 0, 100, on_change)
-        
+
         ueye.is_CaptureVideo(h_cam, ueye.IS_DONT_WAIT)
 
         print("\n" + "="*50)
         print("🚀 КАМЕРА ГОТОВА")
-        print("S - Подложка | I - Объекты | Q - Выход")
+        print("S - Подложка | I - Объекты | O - Оригинал | Q - Выход")
         print("="*50 + "\n")
 
         prev_time = time.perf_counter()
+        show_original = False
 
         while True:
             g_val = cv2.getTrackbarPos('Gain', win_name)
@@ -97,7 +99,7 @@ def main():
             target_delay = 1.0 / f_val
             while (time.perf_counter() - prev_time) < target_delay:
                 time.sleep(0.001)
-            
+
             real_fps = 1.0 / (time.perf_counter() - prev_time)
             prev_time = time.perf_counter()
 
@@ -105,15 +107,18 @@ def main():
             if data is not None:
                 raw_frame = np.frombuffer(data, dtype=np.uint8).reshape((height, width))
                 color_frame = cv2.cvtColor(raw_frame, cv2.COLOR_BayerRG2BGR)
-                
+
                 cv2.setWindowTitle(win_name, f"picoCam | Real FPS: {real_fps:.1f}")
 
                 view_w = 960
                 view_h = int(height * (960 / width))
                 cv2.imshow(win_name, cv2.resize(color_frame, (view_w, view_h)))
 
+                if show_original:
+                    cv2.imshow(orig_win_name, color_frame)
+
                 key = cv2.waitKey(1) & 0xFF
-                
+
                 if key in [ord('s'), ord('S'), 1099, 1067]:
                     cv2.imwrite(os.path.join(podlojka_dir, "podlojka.jpg"), color_frame)
                     print("🖼️ Подложка сохранена")
@@ -136,9 +141,19 @@ def main():
                             saved += 1
                     print(f"✅ Сохранено объектов: {saved}")
 
+                if key in [ord('o'), ord('O'), 1097, 1065]:
+                    if not show_original:
+                        cv2.namedWindow(orig_win_name, cv2.WINDOW_AUTOSIZE) # AUTOSIZE запрещает растягивание
+                        show_original = True
+                        print("📺 Оригинальное окно открыто")
+                    else:
+                        cv2.destroyWindow(orig_win_name)
+                        show_original = False
+                        print("📺 Оригинальное окно закрыто")
+
                 if key == ord('q'): break
 
-    except Exception: 
+    except Exception:
         traceback.print_exc()
     finally:
         ueye.is_ExitCamera(h_cam)
