@@ -10,30 +10,27 @@ def on_change(val):
     pass
 
 def main():
-    # --- БЛОК НАСТРОЕК ---
+    # --- БЛОК НАСТРОЕК (ТВОИ ОРИГИНАЛЬНЫЕ) ---
     DEFAULT_GAIN = 0
     DEFAULT_EXPOSURE = 9
     DEFAULT_FPS = 100
     DEFAULT_THRESH = 25
-
-    # Настройки нейросети
+    
     MODEL_PATH = r"C:\_VIDEO\picoCam-303C-I2D303C-RCA11-BLISTER\png\best.onnx"
-    TRIGGER_CLASS = "trigger_mark"
-    CONF_THRESHOLD = 0.60 # Планка снижена на 20%
-    # ---------------------
+    TRIGGER_CLASS = "trigger_mark"      # Класс: Ряд в кадре
+    EMPTY_CLASS = "trigger_mark_no"    # Класс: Пустота (нет ряда)
+    
+    CONF_THRESHOLD = 0.90              # Порог срабатывания
+    # ------------------------------------------
 
     SENSOR_WIDTH, SENSOR_HEIGHT = 1936, 1216
-
-    # Твое разрешение
     width, height = 1200, 110
-
-    # Кратность для uEye (обязательно)
+    
     width = width & ~7
     height = height & ~1
     pos_x = ((SENSOR_WIDTH - width) // 2) & ~1
     pos_y = ((SENSOR_HEIGHT - height) // 2) & ~1
 
-    # Загрузка модели
     model = YOLO(MODEL_PATH, task='classify')
 
     h_cam = ueye.HIDS(0)
@@ -61,8 +58,7 @@ def main():
 
         win_name = 'picoCam - YOLO Inspection'
         cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
-        # Масштабируем окно для удобства, так как 110px по высоте — это очень узко
-        cv2.resizeWindow(win_name, 1200, 250)
+        cv2.resizeWindow(win_name, 1200, 300)
 
         cv2.createTrackbar('Gain', win_name, DEFAULT_GAIN, 100, on_change)
         cv2.createTrackbar('Exposure', win_name, DEFAULT_EXPOSURE, 200, on_change)
@@ -71,16 +67,17 @@ def main():
 
         ueye.is_CaptureVideo(h_cam, ueye.IS_DONT_WAIT)
 
+        # ПЕРЕМЕННЫЕ СЧЕТЧИКА
         prev_time = time.perf_counter()
-        is_row_active = False # Флаг для исключения дублей
+        total_rows = 0
+        is_active = False # Флаг: "Сейчас ряд считается активным"
 
         while True:
-            # Читаем параметры из трекбаров (как в твоем оригинале)
+            # Настройки камеры (Твоя база)
             g_val = cv2.getTrackbarPos('Gain', win_name)
             e_val = cv2.getTrackbarPos('Exposure', win_name) or 1
             f_val = cv2.getTrackbarPos('FPS', win_name) or 1
-            t_val = cv2.getTrackbarPos('Thresh', win_name)
-
+            
             ueye.is_SetHardwareGain(h_cam, g_val, ueye.IS_IGNORE_PARAMETER, ueye.IS_IGNORE_PARAMETER, ueye.IS_IGNORE_PARAMETER)
             ueye.is_Exposure(h_cam, ueye.IS_EXPOSURE_CMD_SET_EXPOSURE, ueye.double(e_val), 8)
             ueye.is_SetFrameRate(h_cam, ueye.double(f_val), ueye.double())
@@ -102,31 +99,32 @@ def main():
                 conf = results.probs.top1conf.item()
                 cls_name = results.names[results.probs.top1]
 
-                # Логика "Один ряд — Один вывод"
+                # --- ЛОГИКА ПОДСЧЕТА (TRIGGER_MARK vs TRIGGER_MARK_NO) ---
+                
+                # 1. Если видим РЯД и флаг опущен -> Считаем +1 и поднимаем флаг
                 if cls_name == TRIGGER_CLASS and conf >= CONF_THRESHOLD:
-                    if not is_row_active:
-                        # ВЫВОДИМ В КОНСОЛЬ БЕЗ ДУБЛИРОВАНИЯ
-                        print(f"[{time.strftime('%H:%M:%S')}] ✅ РЯД ОПРЕДЕЛЕН: {cls_name} (Conf: {conf:.2f})")
-                        is_row_active = True
+                    if not is_active:
+                        total_rows += 1
+                        is_active = True
+                        print(f"[{time.strftime('%H:%M:%S')}] ✅ РЯД №{total_rows}")
 
-                # Сброс флага (гистерезис), когда объект уехал
-                elif conf < (CONF_THRESHOLD - 0.1):
-                    is_row_active = False
+                # 2. Если видим ПУСТОТУ (trigger_mark_no) -> Опускаем флаг (сброс)
+                # Это позволит посчитать следующий ряд, когда он появится
+                if cls_name == EMPTY_CLASS and conf >= 0.50:
+                    is_active = False
 
-                # Отрисовка статуса на кадре
-                cv2.setWindowTitle(win_name, f"Inspection | Real FPS: {real_fps:.1f}")
-
-                # Текст для визуализации
-                label = f"{cls_name} {conf:.2f}"
-                color = (0, 255, 0) if is_row_active else (0, 0, 255)
-                cv2.putText(color_frame, label, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
-
-                # Если яркость ниже t_val (твоя логика из оригинала), можно добавить доп. условие
-
+                # Отрисовка
+                color = (0, 255, 0) if is_active else (0, 0, 255)
+                label = f"TOTAL ROWS: {total_rows} | {cls_name} ({conf:.2f})"
+                
+                # Подложка и текст (чтобы было видно на любом фоне)
+                cv2.rectangle(color_frame, (0, 0), (650, 45), (0, 0, 0), -1)
+                cv2.putText(color_frame, label, (10, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
+                
                 cv2.imshow(win_name, color_frame)
+                cv2.setWindowTitle(win_name, f"FPS: {real_fps:.1f} | Active: {is_active}")
 
-                key = cv2.waitKey(1) & 0xFF
-                if key == ord('q'): break
+                if cv2.waitKey(1) & 0xFF == ord('q'): break
 
     except Exception:
         traceback.print_exc()
