@@ -1,0 +1,1 @@
+https://github.com/microsoft/onnxruntime/releases/download/v1.24.4/onnxruntime-win-x64-gpu_cuda13-1.24.4.zip
