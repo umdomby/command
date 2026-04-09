@@ -13,7 +13,7 @@ Visual Studio 2022 Community заново через Visual Studio Installer:
 Убедись, что выбран Desktop development with C++
 Обязательно поставь MSVC v143 - VS 2022 C++ x64/x86 build tools (latest)
 
-```cmd
+```dev_vs2022
 cd C:\_GIT\onnxruntime
 rmdir /s /q build
 
@@ -26,11 +26,34 @@ rmdir /s /q build
   --cuda_home "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v13.2" ^
   --cudnn_home "C:\Program Files\NVIDIA\CUDNN\v9.20" ^
   --cmake_generator "Visual Studio 17 2022" ^
-  --cmake_extra_defines "CMAKE_CUDA_ARCHITECTURES=120" ^
-  --parallel 8 ^
-  --skip_tests ^
-  --nvcc_threads=1
+  --cmake_extra_defines "CMAKE_CUDA_ARCHITECTURES=120" "CMAKE_CXX_FLAGS=/Zc:preprocessor /wd4211 /WX-" "CMAKE_CUDA_FLAGS=-Xcompiler /Zc:preprocessor -Xcompiler /wd4211 -Xcompiler /WX- --Wno-error" ^
+  --parallel 4 ^
+  --skip_tests
 ````
+```dev_vs2022
+.\build.bat --config=Release ^
+  --build_shared_lib --build_csharp --build_nuget ^
+  --use_cuda --cuda_version=13.2 ^
+  --cuda_home "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v13.2" ^
+  --cudnn_home "C:\Program Files\NVIDIA\CUDNN\v9.20" ^
+  --cmake_extra_defines "CMAKE_CUDA_ARCHITECTURES=120" "CMAKE_CXX_FLAGS=/Zc:preprocessor /wd4211 /WX-" "CMAKE_CUDA_FLAGS=-Xcompiler /Zc:preprocessor -Xcompiler /wd4211 -Xcompiler /WX- --Wno-error" ^
+  --disable_contrib_ops ^
+  --skip_tests
+```
+
+```cmd
+.\build.bat --config Release ^
+  --build_shared_lib --build_csharp --build_nuget ^
+  --use_cuda --cuda_version 13.2 ^
+  --cuda_home "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v13.2" ^
+  --cudnn_home "C:\Program Files\NVIDIA\CUDNN\v9.20" ^
+  --cmake_extra_defines "CMAKE_CUDA_ARCHITECTURES=120" ^
+  --cmake_extra_defines "CMAKE_CXX_FLAGS=/Zc:preprocessor /wd4211 /WX-" ^
+  --cmake_extra_defines "CMAKE_CUDA_FLAGS=-Xcompiler /Zc:preprocessor -Xcompiler /wd4211 -Xcompiler /WX- --Wno-error" ^
+  --disable_contrib_ops ^
+  --skip_tests ^
+  --parallel 4
+```
 сделано:`
 set CUDNN_HOME=C:\Program Files\NVIDIA\CUDNN\v9.20
 set CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v13.2
@@ -61,7 +84,33 @@ Nvda.Build.CudaTasks.v13.2.dll
 
 
 
+```
+dumpbin /dependents "C:\Users\user\source\repos\picoCam-303C\picoCam-303C\bin\Debug\net8.0-windows\onnxruntime_providers_cuda.dll"
+Это покажет список конкретных имен DLL, которые она ищет.
+```
+cublasLt64_13.dll
+cublas64_13.dll
+cudnn64_9.dll
 
+### 
+После завершения (теперь это должно занять около 20-30 минут) проверьте папку:
+C:\_GIT\onnxruntime\build\Windows\Release\Release
+
+Там должны лежать:
+
+onnxruntime.dll
+onnxruntime_providers_cuda.dll (самый важный файл для работы на GPU)
+.nupkg файлы (если вы планируете использовать их в C# проекте).
+
+C:\_GIT\onnxruntime\build\Windows\Release\Release
+
+Там должны появиться:
+onnxruntime.dll
+onnxruntime_providers_cuda.dll
+onnxruntime_providers_shared.dll
+А где будет NuGet?
+Поскольку вы добавили флаг --build_nuget, ищите его здесь:
+C:\_GIT\onnxruntime\build\Windows\Release\nuget-artifacts
 
 
 
