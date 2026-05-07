@@ -1,4 +1,7 @@
-FBs-20MCJU-AC + FBs-CMEH Ethernet + магнитный энкодер Hohner 
+FBs-20MCJU-AC + FBs-CMEH Ethernet + 
+магнитный энкодер Hohner - R4096
+WinProladder
+
 Какие приложения под Windows 11 
 Среда разработки
 Официальный сайт https://www.fatek.com/ https://www.fatek.com/en/download.php 
@@ -10,3 +13,6 @@ https://newtech.pk/fatek-software-manuals/
 Ethernet Module Configure Tools (версия V5.0.22) — специальная утилита для настройки IP, веб-сервера, Modbus TCP, e-mail и т.д. для модулей CMEH / CBEH.
 Энкодер подключается к high-speed input'ам PLC (например, на FBs-20MCJU), а счётчики/позиционирование программируются в WinProladder (инструкции HSC, SPD, PLS и т.д.)
 Fatek Ethernet Configuration Tool FATEK EtherConfig release note
+
+
+Install-Package NewLife.Fatek -Version 1.0.2022.1015-beta0141
