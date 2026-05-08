@@ -4,6 +4,12 @@ picoCam-303C I2D303C-RCA11
 192.168.87.2
 255.255.255.0
 
+# Основной IDS
+Install-Package VL.Devices.IDS
+
+# Рекомендуется также:
+Install-Package Emgu.CV.runtime.windows -Version 4.10.0   # уже у тебя есть
+
 pip install pyueye opencv-python numpy
 
 Открой CMD (Командную строку) от имени Администратора.
