@@ -1,0 +1,1 @@
+FBs-CMECAT Configurator - настройка Box  EtherCat Для Controller FBs-20MCJU-AC 
