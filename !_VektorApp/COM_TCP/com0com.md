@@ -1,4 +1,8 @@
 com0com
+
+специальная подписанная цифровая сборка версии 
+https://github.com/vovsoft/com0com
+
 Официальная страница на SourceForge: sourceforge.net/projects/com0com/
 
 Прямая ссылка на раздел файлов: Скачать последнюю версию https://sourceforge.net/projects/com0com/files/com0com/

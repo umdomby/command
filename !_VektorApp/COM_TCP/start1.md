@@ -2,6 +2,10 @@
 IP: 127.0.0.1 
 Порт: 5025
 
+# убрать подпись проверки драйвера
+bcdedit.exe /set loadoptions DDISABLE_INTEGRITY_CHECKS
+bcdedit.exe /set TESTSIGNING ON
+
 # Простой TCP Listener для тестирования
 ```
 $port = 5025                    # ← поменяй, если нужно
