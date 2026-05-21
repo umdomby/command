@@ -1,5 +1,11 @@
 com0com
 
+open C++
+C:\_PROG\com0com-main\com0com-main\source\com0com-3.0.0.0\com0com-3.0.0.0
+C:\_PROG\com0com-main\com0com-main\source\hub4com-2.0.0.0\hub4com-2.0.0.0
+
+
+
 специальная подписанная цифровая сборка версии 
 https://github.com/vovsoft/com0com
 
@@ -27,3 +33,8 @@ VSPE
 Создаёт пары виртуальных портов (COM5 ↔ COM6 и т.д.).
 Есть NuGet-обёртка: Hsu.NullModemEmulator — можно управлять из C# (добавлять/удалять пары программно).
 чтобы драйвер был уже в программе чтобы с нета не скачивал
+
+
+Нужна программа которая будет создавать виртуальные порты и сразу их включать use Ports class чтобы они были видны в других прогрммах.
+можно было выбрать и удалить нужный порт (но не драйвер!)
+https://github.com/vovsoft/com0com

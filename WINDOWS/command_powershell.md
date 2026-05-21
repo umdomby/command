@@ -1,3 +1,7 @@
+ipconfig
+netstat -ano
+route print
+
 mkdir D:\webrtc
 cd D:\webrtc
 cd C:\install
