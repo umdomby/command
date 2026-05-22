@@ -1,1 +1,0 @@
-docker-compose run certbot certonly --manual --preferred-challenges dns -d gamerecords.site

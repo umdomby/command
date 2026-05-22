@@ -1,6 +1,11 @@
 wsl --shutdown 
 wsl -d Ubuntu-24.04
+
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 wsl --install -d Ubuntu-24.04
+
+
 # запуск
 wsl -d Ubuntu-24.04
 # Обновите пакеты:

@@ -1,0 +1,6 @@
+docker exec -it 5dd4024bfd161f051ec49520e75ca9f84a4066870d243f8bb71f5b3941f1971a ls /etc/letsencrypt/live/ardu.site/
+
+docker logs c6da374205b9ab51c25dde1e6e16cfe80ffcc697bd1bbc67ce572d86d9892ae5
+
+
+docker exec -it d0a29119f8182c057a502eb2edce3150551bb47c9010b86a11ad72edd68d75cf nginx -t
