@@ -8,3 +8,4 @@ Papi85AS
 dig s3.ardu.live A
 # или
 nslookup s3.ardu.live
+
