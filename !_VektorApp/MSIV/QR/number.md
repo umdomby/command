@@ -94,4 +94,4 @@ http://10.10.201.253/WEBKIP/hs/KIP/MZIV_Volume/345
 
 http://10.10.201.253/WEBKIP/hs/KIP/MZIV_Volume/349
 
-http://10.10.201.253/WEBKIP/hs/KIP/MZIV_Volume/крист.№1
+http://10.10.201.253/WEBKIP/hs/KIP/MZIV_Volume/крист.№1 или http://10.10.201.253/WEBKIP/hs/KIP/MZIV_Volume/%D0%BA%D1%80%D0%B8%D1%81%D1%82.%E2%84%961  как правильно, примени их для остальных вариантов типа - 232%20ЦКТ

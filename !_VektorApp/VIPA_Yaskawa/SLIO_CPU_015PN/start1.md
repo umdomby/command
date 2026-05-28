@@ -1,3 +1,4 @@
+VIPA_YASKAWA
 SLIO CPU 015PN 015-CEFPR01
 MAC ETH     00-20-D5-15-9F-63
 MAC PG/OP   00-20-D5-15-9F-61
@@ -12,3 +13,6 @@ https://vipausa.com/content/manuals/slio/HB300E_CPU_015-CEFPR01_16-46.pdf
 SPEED7 Studio
 C:\Program Files (x86)\YASKAWA Europe GmbH
 
+
+
+Ошибка возникла из-за несовместимости версии pymodbus. В вашей версии (Python 3.12.10) параметр называется unit, а не slave.
