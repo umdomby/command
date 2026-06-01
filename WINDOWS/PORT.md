@@ -6,3 +6,14 @@ New-NetFirewallRule `
     -Action Allow `
 -Profile Any `
 -Description "Разрешает доступ к MSIV QR Server на порту 5000"
+
+
+
+New-NetFirewallRule `
+    -DisplayName "MSIV QR Server - Port 80" `
+-Direction Inbound `
+    -Protocol TCP `
+-LocalPort 80 `
+    -Action Allow `
+-Profile Any `
+-Description "Разрешает доступ к MSIV QR Server на порту 80"
