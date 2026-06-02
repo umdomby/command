@@ -2,3 +2,8 @@
 SWCLK
 GND
 SWDIO
+
++ 15 (3.3)
++ PA2
++ PA3
++ GND
