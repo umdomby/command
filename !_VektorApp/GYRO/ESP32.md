@@ -7,10 +7,15 @@ GND
 
 
 
-GPIO16 (15)     PA3 ESP RX ← Hover TX
-GPIO17 (16)     PA2 ESP TX → Hover RX
+GPIO16 (15pin на плате)     PA3 ESP RX ← Hover TX
+GPIO17 (16pin на плате)     PA2 ESP TX → Hover RX
 GND             GNDО         бщаяземля
 ESP32-S3        Hoverboard (левый кабель)
+
+
+
+TX (например, GPIO 17)	Передача данных	RX (USART3 RX PB11)
+RX (например, GPIO 16)	Прием данных	TX (USART3 TX PB10)
 
 # команды
 S 60 → оба колеса медленно вперёд

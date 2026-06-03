@@ -1,5 +1,10 @@
 Hoverboard smart balance 10 классических платах от TaoTao
 
+
+# git
+https://github.com/EFeru/hoverboard-firmware-hack-FOC
+
+
 +3.3
 SWCLK
 GND
