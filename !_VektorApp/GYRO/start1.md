@@ -4,6 +4,8 @@ Hoverboard smart balance 10 классических платах от TaoTao
 # git
 https://github.com/EFeru/hoverboard-firmware-hack-FOC
 
+https://pionierland.de/hoverhack/
+
 
 +3.3
 SWCLK
@@ -28,3 +30,13 @@ SWDIO
 конвертер логических уровней (Logic Level Converter 3.3V to 5V).
 
 У конвертера есть две стороны: LV (Low Voltage — низкое напряжение 3.3V) и HV (High Voltage — высокое напряжение 5V).
+
+###
+https://pionierland.de/hoverhack/ я Использую TTL на USART2 3.3 вольта что мне изменить чтобы отправлять комманды на вращения моторов с TTL 115200 нужно ли снижать 115200 
+и производить калибровку, какие команды нужно отправлять именно с TTL ? ты дашь комманды на вращения моторов
+
+у меня TTL RX TX может дашь программу python
+PS C:\Windows\system32> py --
+Python 3.12.10 (tags/v3.12.10:0cc8128, Apr 8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+где пользователь выбирает порт и появляются стрелочки управления и скорость (например 200), и окно для приема данных от колес
