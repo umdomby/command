@@ -1,0 +1,1 @@
+https://genqrcode.com/
