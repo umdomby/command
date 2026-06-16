@@ -3,7 +3,19 @@ dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=
 
 dotnet publish -c Release -r win-x64 --self-contained true /p:PublishAot=true /p:PublishSingleFile=true -o ./publish
 
+# no AOT
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:IncludeAllContentForSelfExtract=true /p:EnableCompressionInSingleFile=true -o ./publish
+
+# AOT
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishAOT=true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:EnableCompressionInSingleFile=true -o ./publish
+## ЭТА
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishAOT=true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:IncludeAllContentForSelfExtract=true /p:EnableCompressionInSingleFile=true -o ./publish
+
 dotnet publish -c Release -r win-x64 --self-contained true
+
+### LOG
+.\picoCam-303C.exe 2>&1 | Out-File -Encoding utf8 error.log
+type error.log
 
 
 EXEC : error Failed to load assembly 'DockPanelSuite'  - я могу заменить 'DockPanelSuite' на более стабильно Native AOT без переписывания кода?
@@ -62,5 +74,21 @@ at System.Resources.ManifestBasedResourceGroveler.GrovelForResourceSet(CultureIn
 
 # AcrylicUI
 Сделай проект на AcrylicUI и чтобы он работал с NativeAOT
+нужно переделать весь проект с DockPanelSuite на AcrylicUI, отнесись внимательно, дай полные изменения не сокращай (чтобы я сам ничего не дописывал),
+дай код полными функциями где нужно заменить, указывай файл где заменить эту функцию или метод.
+И чтобы весь функционал остался прежним - логика программы вообще чтобы не нарушилась!
+я могу изменять строчками одно на другое в целом проекте, указывай что на что мне во всем проекте заминить
 # Krypton.Docking
+мне нужно убрать DockPanelSuite , не нужно визуальное изменения окно и их соранения, удали все что с ним связано, оставь простой интерфейс,
+но чтобы вся логика приложения работала, только визуальное DockPanelSuite
+я могу изменять во всем проекте во всех файлах строчками одно на другое, указывай что на что мне во всем проекте заминить
+
+Я могу быстро заменить DockPanelSuite на простое - чтобы собрать NativeAOT ? я могу изменять во всем проекте во всех файлах строчками одно на другое, указывай что на что мне во всем проекте заминить
+
+нужно в правой стороне в вверху окна (меню) вывести кнопки переключения панелей и выводить их, чтобы логика работы приложения сохранилась
+PanelAIModel.cs"
+PanelCamera.cs"
+PanelConsole.cs"
+PanelSettings.cs"
+PanelTrigger.cs"
 
