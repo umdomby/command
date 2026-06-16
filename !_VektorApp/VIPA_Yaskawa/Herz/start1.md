@@ -1,0 +1,1 @@
+https://www.cospa.ru/upload/iblock/2cd/SIEP-C710617_05%20GA700%20Technical%20Manual.pdf
