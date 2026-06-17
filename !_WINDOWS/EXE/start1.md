@@ -12,10 +12,39 @@ dumpbin /disasm "JoyControl.exe" | more
 
 Официальный сайт NSA с описанием и ссылками:
 https://www.nsa.gov/ghidra/
+
 https://github.com/NationalSecurityAgency/ghidra/releases
+# JDK
+https://adoptium.net/temurin/releases/?version=21
+
 # плагин для .NET Native AOT
 https://github.com/Washi1337/ghidra-nativeaot
 
+
+Пошаговая установка плагина ghidra-nativeaot:
+
+В открытом меню File выбери Install Extensions (как на твоём скриншоте).
+Откроется окно Install Extensions.
+В этом окне нажми кнопку + (Add Extension) в правом верхнем углу.
+Выбери скачанный ZIP-файл плагина:
+ghidra-nativeaot-v1.1.0.zip (или как он у тебя называется).
+
+Нажми OK.
+Поставь галочку напротив появившегося плагина NativeAOT.
+Нажми OK внизу окна.
+Ghidra предложит перезапуститься — нажми Yes.
+
+
+После перезапуска Ghidra:
+
+Открой свой проект.
+Выбери picoCam-303C.exe.
+Сделай Analysis → Clear Analysis (чтобы очистить старый анализ).
+Затем Analysis → Auto Analyze...
+В списке анализаторов найди и включи NativeAOT (или .NET NativeAOT).
+Нажми Analyze.
+
+После этого в Symbol Tree → Classes и Namespaces должно появиться намного больше информации.
 
 # AOT
 dotnet publish -c Release -r win-x64 --self-contained true

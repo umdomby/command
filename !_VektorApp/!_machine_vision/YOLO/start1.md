@@ -1,5 +1,7 @@
 dotnet clean
+dotnet publish -c Release -r win-x64 --self-contained true
 dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true -o ./publish
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishAot=true -o ./publish
 
 dotnet publish -c Release -r win-x64 --self-contained true /p:PublishAot=true /p:PublishSingleFile=true -o ./publish
 
@@ -12,6 +14,8 @@ dotnet publish -c Release -r win-x64 --self-contained true /p:PublishAOT=true /p
 dotnet publish -c Release -r win-x64 --self-contained true /p:PublishAOT=true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:IncludeAllContentForSelfExtract=true /p:EnableCompressionInSingleFile=true -o ./publish
 
 dotnet publish -c Release -r win-x64 --self-contained true
+
+dotnet publish -c Release -r win-x64 --self-contained true --property:PublishSingleFile=true --property:IncludeAllContentForSelfExtract=true
 
 ### LOG
 .\picoCam-303C.exe 2>&1 | Out-File -Encoding utf8 error.log
