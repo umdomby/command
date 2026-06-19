@@ -24,3 +24,5 @@ Samsung Data Migration.
 
 
 Лучший и самый простой выбор на сегодня — Hasleo Disk Clone (она полностью бесплатна, в отличие от платных аналогов) или AOMEI Backupper.
+
+https://www.easyuefi.com/disk-clone/disk-clone-home.html
