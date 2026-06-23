@@ -1,3 +1,35 @@
+C:\Users\user\AppData\Local\MSIV_QR_CLIENT_REAL
+
+dotnet clean
+dotnet publish -c Release -r win-x64 --self-contained true
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true -o ./publish
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishAot=true -o ./publish
+
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishAot=true /p:PublishSingleFile=true -o ./publish
+
+# no AOT
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:IncludeAllContentForSelfExtract=true /p:EnableCompressionInSingleFile=true -o ./publish
+
+# AOT
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishAOT=true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:EnableCompressionInSingleFile=true -o ./publish
+## ЭТА
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishAOT=true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:IncludeAllContentForSelfExtract=true /p:EnableCompressionInSingleFile=true -o ./publish
+
+dotnet publish -c Release -r win-x64 --self-contained true
+
+dotnet publish -c Release -r win-x64 --self-contained true --property:PublishSingleFile=true --property:IncludeAllContentForSelfExtract=true
+
+### LOG
+.\picoCam-303C.exe 2>&1 | Out-File -Encoding utf8 error.log
+type error.log
+
+
+EXEC : error Failed to load assembly 'DockPanelSuite'  - я могу заменить 'DockPanelSuite' на более стабильно Native AOT без переписывания кода?
+
+
+
+
+
 dotnet publish -c Release -r win-x64 --self-contained true
 
 Установи ILSpy или dnSpy или dnSpyEx, → открой JoyControl.exe
